@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!-- 配置mysql 驱动jar包路径.用了绝对路径 -->
+	<classPathEntry location="E:/mavenfiles/org/mybatis/mybatis/3.4.5/mybatis-3.4.5.jar" />
+	<context id="mysql_tables" targetRuntime="MyBatis3">
+		<plugin type="com.maven.web.util.BaseMapperGeneratorPlugin" />
+		<!-- 为了防止生成的代码中有很多注释，比较难看，加入下面的配置控制 -->
+		<commentGenerator type="com.maven.web.util.MyCommentGenerator">
+			<property name="suppressAllComments" value="false" />
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+		<!-- 注释控制完毕 -->
+		<!-- 数据库连接 -->
+		<jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/jrerp?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=UTF-8"
+			userId="root" password="">
+		</jdbcConnection>
+
+		<javaTypeResolver type="com.maven.web.util.MyJavaTypeResolverDefaultImpl">
+			<property name="forceBigDecimals" value="false" />
+
+		</javaTypeResolver>
+
+		<!-- 数据表对应的model 层 -->
+		<javaModelGenerator targetPackage="com.jr.erp.sys.entity"
+			targetProject="F:\materialWorkspace\JRERP\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+			<property name="rootClass" value="com.jr.erp.base.mybatis.BaseEntity" />
+		</javaModelGenerator>
+
+		<!-- sql mapper 隐射配置文件 xml 文件 -->
+		<sqlMapGenerator targetPackage="mapper"
+			targetProject="F:\materialWorkspace\JRERP\src\main\resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!-- 在ibatis2 中是dao层，但在mybatis3中，其实就是mapper接口 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.jr.erp.sys.dao" targetProject="F:\materialWorkspace\JRERP\src\main\java">
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+		<!-- 要对那些数据表进行生成操作，必须要有一个. -->
+		<!-- 
+		<table schema="mybatis" tableName="sys_store" domainObjectName="SysStore" delimitIdentifiers="true"
+			delimitAllColumns="true" enableInsert="true"
+			enableSelectByPrimaryKey="true" enableSelectByExample="true"
+			enableUpdateByPrimaryKey="true" enableDeleteByPrimaryKey="true"
+			enableDeleteByExample="false" enableCountByExample="false"
+			enableUpdateByExample="false" selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+		</table>
+		 -->
+		<table schema="mybatis" tableName="sys_areaInfo" domainObjectName="SysArea" delimitIdentifiers="false">
+			<property name="useActualColumnNames" value="true" />
+		</table>
+		<table schema="mybatis" tableName="sys_store" domainObjectName="SysStore" delimitIdentifiers="false">
+			<property name="useActualColumnNames" value="true" />
+		</table>
+		
+		<table schema="mybatis" tableName="sys_counter" domainObjectName="SysCounter" delimitIdentifiers="false">
+			<property name="useActualColumnNames" value="true" />
+		</table>
+	</context>
+</generatorConfiguration>
