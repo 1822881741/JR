@@ -12,8 +12,6 @@ import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import com.alibaba.druid.support.json.JSONUtils;
-
 /**
  * 通过spring管理redis缓存配置
  * 

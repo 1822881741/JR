@@ -74,5 +74,4 @@
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<import resource="Spring-redis.xml"/>
-	<import resource="Spring-shiro.xml" />  
 </beans>
