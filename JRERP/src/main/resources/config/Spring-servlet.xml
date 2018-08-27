@@ -13,14 +13,14 @@
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
 	<context:component-scan base-package="com.jr.erp.**.controller" />
 	<!-- 注入属性文件 -->
-	<bean id="propertyConfigurer"
+	<!-- bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
 				<value>classpath:/config/spring.properties</value>
 			</list>
 		</property>
-	</bean>
+	</bean-->
 
 	<mvc:annotation-driven>
 		<mvc:message-converters>
@@ -42,53 +42,31 @@
 	<mvc:resources mapping="/js/**" location="/resource" />
 	<mvc:resources mapping="/css/**" location="/resource" />
 
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewNames" value="*.html,*.jsp" />
-		<property name="prefix" value="/WEB-INF/views/" />
+	<!-- 设置freeMarker的配置文件路径 -->    
+    <bean id="freemarkerConfiguration" class="org.springframework.beans.factory.config.PropertiesFactoryBean">    
+        <property name="location" value="classpath:config/freemarker.properties"/>    
+    </bean>  
+      
+    <!-- 配置freeMarker的模板路径 -->    
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">    
+        <property name="freemarkerSettings" ref="freemarkerConfiguration"/>    
+        <property name="templateLoaderPath">    
+            <value>/WEB-INF/ftl/</value>    
+        </property>    
+    </bean>  
+        
+    <!-- 配置freeMarker视图解析器 -->    
+    <bean id="FreeMarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">    
+        <property name="viewClass" value="com.jr.erp.freemarker.controller.FreeMarkerViewUtil"/>    
+        <property name="contentType" value="text/html; charset=utf-8"/>    
+        <property name="cache" value="true"/> 
+        <property name="order" value="0"/> 
+        <property name="suffix" value=".ftl" />
+    </bean>  
+    	<!-- InternalResourceViewResolver在内部调用了RequestDispatcher ，总是会返回视图，因此找不到时不会寻找其他的解析器，因此该解析器一遍放最后 -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp"></property>
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.InternalResourceView" />
 		<property name="order" value="1"></property>
-	</bean>
-	<!-- 定义ViewResolver组件, 实现根据视图标识获取JSP响应 -->
-	<bean id="freemarkerViewResolver"
-		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
-		<property name="viewNames" value="*.ftl" />
-		<property name="contentType" value="text/html; charset=utf-8" />
-		<property name="cache" value="true" />
-		<property name="suffix" value="" />
-		<property name="order" value="0" />
-	</bean>
-	<bean id="freemarkerConfig"
-		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-		<property name="templateLoaderPath">
-			<value>/WEB-INF/ftl/</value>
-		</property>
-		<property name="defaultEncoding">
-			<value>utf-8</value>
-		</property>
-		<property name="freemarkerSettings">
-			<props><!-- 315360000 -->
-				<prop key="template_update_delay">0</prop>
-				<prop key="defaultEncoding">UTF-8</prop>
-				<prop key="url_escaping_charset">UTF-8</prop>
-				<prop key="locale">zh_CN</prop>
-				<prop key="boolean_format">true,false</prop>
-				<prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
-				<prop key="date_format">yyyy-MM-dd</prop>
-				<prop key="time_format">HH:mm:ss</prop>
-				<!-- <prop key="number_format">0.######</prop> -->
-				<prop key="number_format">#</prop>
-				<prop key="whitespace_stripping">true</prop>
-				<prop key="auto_import">
-					<!-- 自动装载，引入Freemarker，用于Freemarker Macro引入 -->
-					/common/config/top.ftl as _top,
-					/common/config/left.ftl as _left
-				</prop>
-			</props>
-		</property>
 	</bean>
 </beans>

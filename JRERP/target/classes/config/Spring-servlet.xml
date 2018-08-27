@@ -13,14 +13,14 @@
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
 	<context:component-scan base-package="com.jr.erp.**.controller" />
 	<!-- 注入属性文件 -->
-	<bean id="propertyConfigurer"
+	<!-- bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
 				<value>classpath:/config/spring.properties</value>
 			</list>
 		</property>
-	</bean>
+	</bean-->
 
 	<mvc:annotation-driven>
 		<mvc:message-converters>
@@ -37,13 +37,36 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
-	<!-- 定义ViewResolver组件, 实现根据视图标识获取JSP响应 -->
-	<mvc:view-resolvers>
-		<mvc:jsp cache-views="false" prefix="/WEB-INF/jsp/" suffix=".jsp" />
-	</mvc:view-resolvers>
-
 	<!-- 静态资源访问，不被DispatcherServlet处理 -->
 	<mvc:resources mapping="/images/**" location="/resource" />
-	<mvc:resources mapping="/js/**" location="/resource"/>
-	<mvc:resources mapping="/css/**" location="/resource"/>
+	<mvc:resources mapping="/js/**" location="/resource" />
+	<mvc:resources mapping="/css/**" location="/resource" />
+
+	<!-- 设置freeMarker的配置文件路径 -->    
+    <bean id="freemarkerConfiguration" class="org.springframework.beans.factory.config.PropertiesFactoryBean">    
+        <property name="location" value="classpath:config/freemarker.properties"/>    
+    </bean>  
+      
+    <!-- 配置freeMarker的模板路径 -->    
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">    
+        <property name="freemarkerSettings" ref="freemarkerConfiguration"/>    
+        <property name="templateLoaderPath">    
+            <value>/WEB-INF/ftl/</value>    
+        </property>    
+    </bean>  
+        
+    <!-- 配置freeMarker视图解析器 -->    
+    <bean id="FreeMarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">    
+        <property name="viewClass" value="com.jr.erp.freemarker.controller.FreeMarkerViewUtil"/>    
+        <property name="contentType" value="text/html; charset=utf-8"/>    
+        <property name="cache" value="true"/> 
+        <property name="order" value="0"/> 
+        <property name="suffix" value=".ftl" />
+    </bean>  
+    	<!-- InternalResourceViewResolver在内部调用了RequestDispatcher ，总是会返回视图，因此找不到时不会寻找其他的解析器，因此该解析器一遍放最后 -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp"></property>
+		<property name="order" value="1"></property>
+	</bean>
 </beans>

@@ -19,7 +19,6 @@
 		<property name="locations">
 			<list>
 				<value>classpath:/config/database.properties</value>
-				<value>classpath:/config/spring.properties</value>
 				<value>classpath:/config/redis.properties</value>
 			</list>
 		</property>
