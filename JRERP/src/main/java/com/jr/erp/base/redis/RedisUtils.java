@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import com.alibaba.fastjson.JSON;
 
 /**
- * Redis工具类
+ * Redis工具类gx
  *
  * @author qcxian
  * @email 
