@@ -273,7 +273,7 @@
 		</dependency>
 		<!-- redis cache related.....end -->
 
-		<!-- dependency>
+		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-core</artifactId>
 			<version>${shiro.version}</version>
@@ -292,7 +292,7 @@
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-spring</artifactId>
 			<version>${shiro.version}</version>
-		</dependency-->
+		</dependency>
 		<!-- freemarker -->
 		 <dependency>
             <groupId>org.freemarker</groupId>
