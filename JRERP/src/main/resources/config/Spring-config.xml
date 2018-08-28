@@ -18,8 +18,8 @@
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<value>classpath:/config/database.properties</value>
-				<value>classpath:/config/redis.properties</value>
+				<value>classpath:/prop/database.properties</value>
+				<value>classpath:/prop/redis.properties</value>
 			</list>
 		</property>
 	</bean>
