@@ -22,6 +22,7 @@
 				<!-- 对静态资源设置匿名访问 -->
 				/resource/** = anon
 				/login = anon
+				/checkLogin = anon
 				<!-- /** = authc 所有url都必须认证通过才可以访问 -->
 				/** = authc
 			</value>
@@ -31,8 +32,25 @@
 	<!-- 安全管理器 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="customRealm" />
+		<property name="sessionManager" ref="sessionManager"></property>
+	</bean>
+	
+	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+		<property name="sessionValidationInterval" value="1800000"/>  <!-- 相隔多久检查一次session的有效性 -->
+        <property name="globalSessionTimeout" value="1800000"/>
+        <property name="deleteInvalidSessions" value="true"/>
+        <property name="sessionValidationSchedulerEnabled" value="true"/><!-- 定时检查失效的session -->
+        <!--<property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>-->
+        <property name="sessionDAO" ref="sessionDAO"/>
+        <!--<property name="sessionIdCookie" ref="simpleCookie"/>-->
+        <property name="sessionIdCookie.name" value="shiro.sesssion"/>
+        <property name="sessionIdCookie.path" value="/"/>
+        <property name="sessionIdCookieEnabled" value="true"/>
 	</bean>
 
+	<bean id="sessionDAO" class="com.jr.erp.base.shiro.RedisSessionDao">
+        <property name="redisTemplate" ref="redisTemplate"></property>
+    </bean>
 	<!-- 自定义 realm -->
 	<bean id="customRealm" class="com.jr.erp.base.shiro.CustomRealm"></bean>
 

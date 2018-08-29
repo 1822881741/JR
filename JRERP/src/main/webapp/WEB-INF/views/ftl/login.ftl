@@ -39,7 +39,7 @@
 			var layer = layui.layer, form = layui.form;
 			 var $ = layui.jquery;
 			 $("#submit").on("click",function(){
-				 window.location.href="index.html";
+				 window.location.href="checkLogin";
 			 })
 		});
 	</script>

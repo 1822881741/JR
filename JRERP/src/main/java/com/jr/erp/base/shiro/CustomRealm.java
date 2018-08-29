@@ -9,6 +9,8 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
+import com.jr.erp.sys.entity.SysStore;
+
 public class CustomRealm extends AuthorizingRealm {
 
 //	@Autowired
@@ -23,7 +25,7 @@ public class CustomRealm extends AuthorizingRealm {
 	@Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         // 获取用户名
-        String userName = (String) token.getPrincipal();
+        System.out.println("==================");
         // 通过用户名获取用户对象
 //        User user = this.userService.findUserByUserName(userName);
 //        
@@ -40,7 +42,8 @@ public class CustomRealm extends AuthorizingRealm {
 //        user.setPermissionList(permissionMap.get("permissionList"));
         
 //        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(null,null,null);
-        SimpleAuthenticationInfo info = null;
+        SysStore store = new SysStore();
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(store,"123456","长桑");;
         
         return info;
     }
@@ -51,7 +54,7 @@ public class CustomRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 //        User user = (User) principals.getPrimaryPrincipal();
-        
+    	System.out.println("========+++++++==========");
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         
         // （目录+菜单+按钮，用于后端权限判断）
