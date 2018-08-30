@@ -6,4 +6,4 @@ import com.jr.erp.base.mybatis.IBaseService;
 /**
  * 系统管理service
  */
-public interface ISysAreaService extends IBaseService<BaseEntity>{}
+public interface ISysAreaInfoService extends IBaseService<BaseEntity>{}

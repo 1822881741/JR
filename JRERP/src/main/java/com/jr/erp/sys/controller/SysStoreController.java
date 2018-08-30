@@ -27,7 +27,7 @@ public class SysStoreController{
 	@RequestMapping(value="/storeList.ftl")
 	public String storeList(Integer id,HttpServletRequest request,Model model)
 	{
-		System.out.println(sysStoreService.selectByString(id));
+//		System.out.println(sysStoreService.selectByString(id));
 //		System.out.println(sysStoreService.selectByStringList());
 //		System.out.println(sysStoreService.selectByKey(id));
 //		List<SysStore> storeList = sysStoreService.selectList();

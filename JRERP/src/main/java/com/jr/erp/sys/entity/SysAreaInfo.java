@@ -2,7 +2,7 @@ package com.jr.erp.sys.entity;
 
 import com.jr.erp.base.mybatis.BaseEntity;
 
-public class SysArea extends BaseEntity {
+public class SysAreaInfo extends BaseEntity {
     /**
      * 上级地区id
      */

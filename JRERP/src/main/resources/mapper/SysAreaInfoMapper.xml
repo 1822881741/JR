@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jr.erp.sys.dao.SysAreaMapper">
-  <resultMap id="BaseResultMap" type="com.jr.erp.sys.entity.SysArea">
-    <result column="id" jdbcType="INTEGER" property="id" />
+<mapper namespace="com.jr.erp.sys.dao.SysAreaInfoMapper">
+  <resultMap id="BaseResultMap" type="com.jr.erp.sys.entity.SysAreaInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="parentId" jdbcType="INTEGER" property="parentId" />
     <result column="areaName" jdbcType="VARCHAR" property="areaName" />
     <result column="areaType" jdbcType="TINYINT" property="areaType" />
@@ -71,7 +71,7 @@
   <sql id="Base_Column_List">
     id, parentId, areaName, areaType, areaCode, createTime, status
   </sql>
-  <select id="selectByExample" parameterType="com.jr.erp.sys.entity.SysAreaExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.jr.erp.sys.entity.SysAreaInfoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -85,13 +85,23 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.jr.erp.sys.entity.SysAreaExample">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_areainfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_areainfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jr.erp.sys.entity.SysAreaInfoExample">
     delete from sys_areainfo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.jr.erp.sys.entity.SysArea">
+  <insert id="insert" parameterType="com.jr.erp.sys.entity.SysAreaInfo">
     insert into sys_areainfo (id, parentId, areaName, 
       areaType, areaCode, createTime, 
       status)
@@ -99,7 +109,7 @@
       #{areaType,jdbcType=TINYINT}, #{areaCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{status,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.jr.erp.sys.entity.SysArea">
+  <insert id="insertSelective" parameterType="com.jr.erp.sys.entity.SysAreaInfo">
     insert into sys_areainfo
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -148,12 +158,6 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.jr.erp.sys.entity.SysAreaExample" resultType="java.lang.Long">
-    select count(*) from sys_areainfo
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
   <update id="updateByExampleSelective" parameterType="map">
     update sys_areainfo
     <set>
@@ -195,5 +199,39 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jr.erp.sys.entity.SysAreaInfo">
+    update sys_areainfo
+    <set>
+      <if test="parentId != null">
+        parentId = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="areaName != null">
+        areaName = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaType != null">
+        areaType = #{areaType,jdbcType=TINYINT},
+      </if>
+      <if test="areaCode != null">
+        areaCode = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jr.erp.sys.entity.SysAreaInfo">
+    update sys_areainfo
+    set parentId = #{parentId,jdbcType=INTEGER},
+      areaName = #{areaName,jdbcType=VARCHAR},
+      areaType = #{areaType,jdbcType=TINYINT},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

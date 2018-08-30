@@ -10,6 +10,7 @@ public class AbstractBaseService<T extends BaseEntity> implements IBaseService<B
 	@Autowired
 	protected BaseMapper<T> mapper;
 
+	
 	@Override
 	@Cacheable("getUserById")
 	public T selectByKey(Integer key) {

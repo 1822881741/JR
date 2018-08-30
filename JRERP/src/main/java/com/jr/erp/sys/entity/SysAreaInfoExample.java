@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SysAreaExample {
+public class SysAreaInfoExample {
     /**
      * sys_areainfo
      */
@@ -24,7 +24,7 @@ public class SysAreaExample {
      *
      * @mbg.generated
      */
-    public SysAreaExample() {
+    public SysAreaInfoExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
