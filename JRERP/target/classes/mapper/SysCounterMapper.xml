@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jr.erp.sys.dao.SysCounterMapper">
   <resultMap id="BaseResultMap" type="com.jr.erp.sys.entity.SysCounter">
-    <result column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="companyNo" jdbcType="VARCHAR" property="companyNo" />
     <result column="storeName" jdbcType="VARCHAR" property="storeName" />
     <result column="storeType" jdbcType="TINYINT" property="storeType" />
@@ -85,6 +85,16 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_counter
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_counter
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="com.jr.erp.sys.entity.SysCounterExample">
     delete from sys_counter
     <if test="_parameter != null">
@@ -148,12 +158,6 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.jr.erp.sys.entity.SysCounterExample" resultType="java.lang.Long">
-    select count(*) from sys_counter
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
   <update id="updateByExampleSelective" parameterType="map">
     update sys_counter
     <set>
@@ -195,5 +199,39 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jr.erp.sys.entity.SysCounter">
+    update sys_counter
+    <set>
+      <if test="companyNo != null">
+        companyNo = #{companyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="storeName != null">
+        storeName = #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeType != null">
+        storeType = #{storeType,jdbcType=TINYINT},
+      </if>
+      <if test="areaCode != null">
+        areaCode = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jr.erp.sys.entity.SysCounter">
+    update sys_counter
+    set companyNo = #{companyNo,jdbcType=VARCHAR},
+      storeName = #{storeName,jdbcType=VARCHAR},
+      storeType = #{storeType,jdbcType=TINYINT},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      createTime = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

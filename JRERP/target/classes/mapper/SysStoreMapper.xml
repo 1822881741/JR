@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jr.erp.sys.dao.SysStoreMapper">
   <resultMap id="BaseResultMap" type="com.jr.erp.sys.entity.SysStore">
-    <result column="id" jdbcType="INTEGER" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="companyNo" jdbcType="VARCHAR" property="companyNo" />
     <result column="shopName" jdbcType="VARCHAR" property="shopName" />
     <result column="address" jdbcType="VARCHAR" property="address" />
@@ -108,6 +108,18 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_store
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_store
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="com.jr.erp.sys.entity.SysStoreExample">
     delete from sys_store
     <if test="_parameter != null">
@@ -185,12 +197,6 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.jr.erp.sys.entity.SysStoreExample" resultType="java.lang.Long">
-    select count(*) from sys_store
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
   <update id="updateByExampleSelective" parameterType="map">
     update sys_store
     <set>
@@ -255,7 +261,57 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <select id="selectList" resultMap="BaseResultMap">
-  	select <include refid="Base_Column_List" /> from sys_store
-  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jr.erp.sys.entity.SysStore">
+    update sys_store
+    <set>
+      <if test="companyNo != null">
+        companyNo = #{companyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null">
+        shopName = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="areaCode != null">
+        areaCode = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jr.erp.sys.entity.SysStore">
+    update sys_store
+    set companyNo = #{companyNo,jdbcType=VARCHAR},
+      shopName = #{shopName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jr.erp.sys.entity.SysStore">
+    update sys_store
+    set companyNo = #{companyNo,jdbcType=VARCHAR},
+      shopName = #{shopName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>
