@@ -20,7 +20,7 @@
 			<div >
 				<div class="layui-form-item">
 					<label class="layadmin-user-login-icon layui-icon layui-icon-username"></label> 
-						<input type="text" name="username" id="LAY-user-login-username" lay-verify="required" placeholder="用户名" class="layui-input">
+						<input type="text" id="username" name="username" id="LAY-user-login-username" lay-verify="required" placeholder="用户名" class="layui-input">
 				</div>
 				<div class="layui-form-item">
 					<label class="layadmin-user-login-icon layui-icon layui-icon-password"></label> 
@@ -38,7 +38,35 @@
 		layui.use([ 'layer', 'form' ], function() {
 			var layer = layui.layer, form = layui.form;
 			 var $ = layui.jquery;
+			 debugger
 			 $("#submit").on("click",function(){
+			 	debugger
+			 	 $.ajax({
+			        	url:"${basePath}/checkLogin?loginNo="+$("#username").val()+"&password="+$("#password").val(),
+			        	type:"post",
+			        	dataType:"json",
+			        	beforeSend:function(){
+			        		layer.msg('开始登录，请注意后台控制台。');
+			        	},
+			        	success:function(result){
+				        	layer.close(load);
+				    		if(result && result.status != 200){
+				    			layer.msg(result.message,function(){});
+				    			$('.password').val('');
+				    			return;
+				    		}else{
+				    			layer.msg('登录成功！');
+				    			setTimeout(function(){
+				    				//登录返回
+					    			window.location.href= result.back_url || "${basePath}/";
+				    			},1000)
+				    		}
+			        	},
+			        	error:function(e){
+			        		console.log(e,e.message);
+			        		layer.msg('请看后台Java控制台，是否报错，确定已经配置数据库和Redis',new Function());
+			        	}
+			        });
 				 window.location.href="checkLogin";
 			 })
 		});

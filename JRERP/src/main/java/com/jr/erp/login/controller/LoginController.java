@@ -8,22 +8,31 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jr.erp.base.utils.RT;
+import com.jr.erp.sys.vo.SysUserVo;
+
+/**
+ * 登陆controller
+ */
 @Controller
 public class LoginController {
 
-	@RequestMapping(value="/login")
-	public String main(){
+	/**
+	 * 跳转到登陆界面
+	 */
+	@RequestMapping(value = "/login")
+	public String login() {
 		return "/login";
 	}
-	
-	@RequestMapping(value="/checkLogin")
-	public String checkLogin(HttpServletRequest request,Model model){
-		
-		System.out.println(SecurityUtils.getSubject().getPrincipal());
+
+	@RequestMapping(value = "/checkLogin")
+	@ResponseBody
+	public RT checkLogin(SysUserVo loginUser, HttpServletRequest request, Model model) {
 		Subject subject = SecurityUtils.getSubject();
-		UsernamePasswordToken token = new UsernamePasswordToken("张三","123456");
+		UsernamePasswordToken token = new UsernamePasswordToken(loginUser.getLoginNo(), loginUser.getPassword());
 		subject.login(token);
-		return null;
+		return RT.error("");
 	}
 }

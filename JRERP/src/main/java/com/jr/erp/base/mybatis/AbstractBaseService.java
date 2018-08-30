@@ -1,7 +1,8 @@
 package com.jr.erp.base.mybatis;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(rollbackFor = Exception.class)
@@ -9,18 +10,6 @@ public class AbstractBaseService<T extends BaseEntity> implements IBaseService<B
 
 	@Autowired
 	protected BaseMapper<T> mapper;
-
-	
-	@Override
-	@Cacheable("getUserById")
-	public T selectByKey(Integer key) {
-		return (T) mapper.selectByPrimaryKey(key);
-	}
-
-	@Override
-	public Integer deleteByKey(Integer key) {
-		return mapper.deleteByPrimaryKey(key);
-	}
 
 	@Override
 	public Integer insert(BaseEntity record) {
@@ -36,4 +25,18 @@ public class AbstractBaseService<T extends BaseEntity> implements IBaseService<B
 		}
 	}
 
+	@Override
+	public BaseEntity selectByPrimaryKey(Integer key) {
+		return (T) mapper.selectByPrimaryKey(key);
+	}
+
+	@Override
+	public List<BaseEntity> selectByExample(Object example) {
+		return (List<BaseEntity>) mapper.selectByExample(example);
+	}
+
+	@Override
+	public Integer deleteByPrimaryKey(Integer key) {
+		return mapper.deleteByPrimaryKey(key);
+	}
 }

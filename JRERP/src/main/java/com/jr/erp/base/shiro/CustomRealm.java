@@ -1,23 +1,28 @@
 package com.jr.erp.base.shiro;
 
+import java.util.List;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.sys.entity.SysStore;
+import com.jr.erp.sys.entity.SysUser;
+import com.jr.erp.sys.entity.SysUserExample;
+import com.jr.erp.sys.service.ISysUserService;
 
 public class CustomRealm extends AuthorizingRealm {
 
-//	@Autowired
-//    private UserService userService;
-//    
-//    @Autowired
-//    private PermissionService permissionService;
+	@Autowired
+    private ISysUserService sysUserService;
     
     /**
      * 认证
@@ -26,24 +31,16 @@ public class CustomRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         // 获取用户名
         System.out.println("==================");
+        UsernamePasswordToken upToken = (UsernamePasswordToken)token;
         // 通过用户名获取用户对象
-//        User user = this.userService.findUserByUserName(userName);
-//        
-//        if (user == null) {
-//            return null;
-//        }
+        SysUserExample example =new SysUserExample();
+        example.createCriteria().andLoginNoEqualTo(upToken.getUsername());
+//        example.createCriteria().andPasswordEqualTo(upToken.getPassword().toString());
+//        sysUserService.selectByPrimaryKey("1131");
+//        List<BaseEntity> result = sysUserService.selectByExample(example);
         
-        // 通过 userId 获取该用户拥有的所有权限，返回值根据自己需求编写，并非固定值。
-//        Map<String,List<Permission>> permissionMap = this.permissionService.getPermissionMapByUserId(user.getId());
-//        
-//        // （目录+菜单，分层级，用于前端 jsp 遍历）
-//        user.setMenuList(permissionMap.get("menuList"));
-//        // （目录+菜单+按钮，用于后端权限判断）
-//        user.setPermissionList(permissionMap.get("permissionList"));
-        
-//        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(null,null,null);
-        SysStore store = new SysStore();
-        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(store,"123456","长桑");;
+        SysUser user =  (SysUser) sysUserService.selectByPrimaryKey(1131);
+        SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user,user.getPassword(),user.getLoginNo());;
         
         return info;
     }
