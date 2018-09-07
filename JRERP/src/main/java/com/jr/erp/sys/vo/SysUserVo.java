@@ -1,10 +1,13 @@
 package com.jr.erp.sys.vo;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class SysUserVo {
 
     /**
      * 登录名
      */
+	@NotEmpty(message="用户名不能为空")
     private String loginNo;
 
     /**

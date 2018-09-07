@@ -26,9 +26,10 @@ public class RedisSessionDao extends EnterpriseCacheSessionDAO {
     private String getKey(String originalKey) {
         return keyPrefix+originalKey;
     }
-    @Override
-    public void update(Session session) throws UnknownSessionException {
-//        log.info("更新seesion,id=[{}]",session.getId().toString());
+    @SuppressWarnings("unchecked")
+	@Override
+    public void doUpdate(Session session) throws UnknownSessionException {
+        log.info("更新seesion,id=[{}]",session.getId().toString());
         try {
             redisTemplate.opsForValue().set(getKey(session.getId().toString()), session,30, TimeUnit.MINUTES);
         } catch (Exception e) {
@@ -36,7 +37,7 @@ public class RedisSessionDao extends EnterpriseCacheSessionDAO {
         }
     }
     @Override
-    public void delete(Session session) {
+    public void doDelete(Session session) {
         log.info("删除seesion,id=[{}]",session.getId().toString());
         try {
             String key=getKey(session.getId().toString());
@@ -49,7 +50,6 @@ public class RedisSessionDao extends EnterpriseCacheSessionDAO {
     @Override
     public Collection<Session> getActiveSessions() {
         log.info("获取存活的session");
-//        System.out.println(redisTemplate.opsForValue().get("shiro_redis_session_manager:*"));
         return Collections.emptySet();
     }
  
@@ -61,25 +61,22 @@ public class RedisSessionDao extends EnterpriseCacheSessionDAO {
         try {
             redisTemplate.opsForValue().set(getKey(session.getId().toString()), session,30,TimeUnit.MINUTES);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error(e.getMessage(),e);
         }
         return sessionId;
     }
  
     @Override
     protected Session doReadSession(Serializable sessionId) {
-//        log.info("获取seesion,id=[{}]",sessionId.toString());
+        log.info("获取seesion,id=[{}]",sessionId.toString());
         Session session = null;
         try {
+//        	String sessionStr =(String) redisTemplate.opsForValue().get(getKey(sessionId.toString()));
+//        	System.out.println(sessionStr.toString());
             session=(Session) redisTemplate.opsForValue().get(getKey(sessionId.toString()));
-//            System.out.println(System.currentTimeMillis()+"-"+session.getLastAccessTime().getTime()+"="+(System.currentTimeMillis()- session.getLastAccessTime().getTime()));
-//            if((System.currentTimeMillis()- session.getLastAccessTime().getTime())>1800000L){//30分钟没登录 过期
-//                System.out.println("删除");
-//                delete(session);
-//                return null;
 //            }
         } catch (Exception e) {
-            log.error(e.getMessage());
+            log.error(e.getMessage(),e);
         }
         return session;
     }

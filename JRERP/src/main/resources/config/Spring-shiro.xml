@@ -14,8 +14,8 @@
 		<!-- 必须设置 -->
 		<property name="securityManager" ref="securityManager" />
 		<!-- 3 个 url 属性为可选设置 -->
-		<property name="loginUrl" value="login" />
-		<property name="successUrl" value="/home.jsp" />
+		<property name="loginUrl" value="/login" />
+		<property name="successUrl" value="/main" />
 		<property name="unauthorizedUrl" value="/unauthorized.jsp" />
 		<property name="filterChainDefinitions">
 			<value>
@@ -31,7 +31,7 @@
 
 	<!-- 安全管理器 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="realm" ref="customRealm" />
+		<property name="realm" ref="userRealm" />
 		<property name="sessionManager" ref="sessionManager"></property>
 	</bean>
 	
@@ -44,7 +44,7 @@
         <property name="sessionDAO" ref="sessionDAO"/>
         <!--<property name="sessionIdCookie" ref="simpleCookie"/>-->
         <property name="sessionIdCookie.name" value="shiro.sesssion"/>
-        <property name="sessionIdCookie.path" value="/"/>
+        <!-- property name="sessionIdCookie.path" value="/"/> -->
         <property name="sessionIdCookieEnabled" value="true"/>
 	</bean>
 
@@ -52,7 +52,7 @@
         <property name="redisTemplate" ref="redisTemplate"></property>
     </bean>
 	<!-- 自定义 realm -->
-	<bean id="customRealm" class="com.jr.erp.base.shiro.CustomRealm"></bean>
+	<bean id="userRealm" class="com.jr.erp.base.shiro.UserRealm"></bean>
 
 	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
