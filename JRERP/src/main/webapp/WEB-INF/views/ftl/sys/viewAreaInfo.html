@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<base href="${basePath}" />
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="resource/layui/css/layui.css" media="all">
+<link rel="stylesheet" href="resource/login/admin.css">
+</head>
+<body>
+	<div class="layui-fluid">
+		<div class="layui-row layui-col-space15">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-header">默认风格</div>
+					<div class="layui-card-body">
+						<table class="layui-hide" id="test"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+				<div class="layui-row layui-col-space15">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-header">默认风格</div>
+					<div class="layui-card-body">
+						<table class="layui-hide" id="test2"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="resource/layui/layui.all.js?v=1" charset="utf-8"></script>
+	<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+	<script>
+		layui.use('table', function() {
+			var table = layui.table;
+			table.render({
+				elem : '#test,#test2',
+				url : 'sysAreaInfo/areaInfoList.do',
+				cols : [ [ {
+					field : 'areaCode',
+					width : 80,
+					title : 'ID',
+					sort : true
+				}, {
+					field : 'areaCode',
+					width : 80,
+					title : '用户名'
+				}, {
+					field : 'areaCode',
+					width : 80,
+					title : '性别',
+					sort : true
+				}, {
+					field : 'areaCode',
+					width : 80,
+					title : '城市'
+				}, {
+					field : 'areaCode',
+					title : '签名',
+					minWidth : 150
+				}, {
+					field : 'areaCode',
+					width : 80,
+					title : '积分',
+					sort : true
+				}, {
+					field : 'areaCode',
+					width : 80,
+					title : '评分',
+					sort : true
+				}, {
+					field : 'areaCode',
+					width : 80,
+					title : '职业'
+				}, {
+					field : 'areaCode',
+					width : 135,
+					title : '财富',
+					sort : true
+				} ] ],
+				page : true,
+				parseData : function(res) { //res 即为原始返回的数据
+					return {
+						"code" : 0, //解析接口状态
+						"msg" : "", //解析提示文本
+						"count" : 10, //解析数据长度
+						"data" : res.data
+					//解析数据列表
+					}
+				}
+			});
+		});
+	</script>
+</body>
+</html>
+

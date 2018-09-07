@@ -1,0 +1,62 @@
+{
+  "@class": "org.apache.shiro.session.mgt.SimpleSession",
+  "id": "78091d0f-cacc-466d-a39e-61316c58916a",
+  "startTimestamp": [
+    "java.util.Date",
+    1535801771236
+  ],
+  "stopTimestamp": null,
+  "lastAccessTime": [
+    "java.util.Date",
+    1535801774912
+  ],
+  "timeout": 1800000,
+  "expired": false,
+  "host": "127.0.0.1",
+  "attributes": {
+    "@class": "java.util.HashMap",
+    "org.apache.shiro.subject.support.DefaultSubjectContext_AUTHENTICATED_SESSION_KEY": true,
+    "who am i": "高小虎1535801774243",
+    "org.apache.shiro.subject.support.DefaultSubjectContext_PRINCIPALS_SESSION_KEY": {
+      "@class": "org.apache.shiro.subject.SimplePrincipalCollection",
+      "empty": false,
+      "realmNames": [
+        "java.util.LinkedHashMap$LinkedKeySet",
+        [
+          "gxh"
+        ]
+      ],
+      "primaryPrincipal": {
+        "@class": "com.jr.erp.sys.entity.SysUser",
+        "id": 1131,
+        "companyNo": "",
+        "createTime": [
+          "java.util.Date",
+          1535674069000
+        ],
+        "loginNo": "gxh",
+        "password": "123",
+        "userType": null,
+        "realName": null,
+        "mobile": null,
+        "img": null,
+        "userSheetNoPrefix": null,
+        "areaCode": "",
+        "status": false,
+        "sex": null,
+        "modifyTime": null,
+        "lastLoginTime": null,
+        "loginType": false
+      }
+    }
+  },
+  "valid": true,
+  "attributeKeys": [
+    "java.util.HashMap$KeySet",
+    [
+      "org.apache.shiro.subject.support.DefaultSubjectContext_AUTHENTICATED_SESSION_KEY",
+      "who am i",
+      "org.apache.shiro.subject.support.DefaultSubjectContext_PRINCIPALS_SESSION_KEY"
+    ]
+  ]
+}
