@@ -33,7 +33,7 @@ public class SysAreaInfoController {
 	
 	/**    
 	 * viewAreaInfo(这里用一句话描述这个方法的作用)    
-	 * 调整到区域页面       
+	 * 调整到区域页面
 	 * @param @param request
 	 * @param @return     
 	 * @return String
