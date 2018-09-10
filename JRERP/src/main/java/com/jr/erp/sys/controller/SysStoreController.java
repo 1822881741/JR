@@ -51,6 +51,22 @@ public class SysStoreController
     }
 
     /**    
+     * editStoreInfo(这里用一句话描述这个方法的作用)    
+     * 跳转到修改门店界面       
+     * @param @param id
+     * @param @param request
+     * @param @param model
+     * @param @return     
+     * @return String
+     * @Exception 异常对象
+    */
+    @RequestMapping(value="editStoreInfo.do")
+    public String editStoreInfo(Integer id,HttpServletRequest request, Model model)
+    {
+        model.addAttribute("id",id);
+        return  "sys/editStoreInfo";
+    }
+    /**    
      * getStoreList(这里用一句话描述这个方法的作用)    
      * 获取门店列表       
      * @param @param request
