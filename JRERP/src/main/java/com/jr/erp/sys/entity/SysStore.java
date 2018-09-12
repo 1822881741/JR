@@ -24,7 +24,7 @@ public class SysStore extends BaseEntity {
     private Integer status;
 
     /**
-     * 区域编码
+     * 地区编码
      */
     private String areaCode;
 
@@ -33,6 +33,16 @@ public class SysStore extends BaseEntity {
      */
     private String remarks;
 
+    /**
+     * 区域编码
+     */
+    private String regionCode;
+    
+    /**
+     * 区域名称
+     */
+    private String regionName;
+    
     /**
      * 门店名称
      * @return shopName 门店名称
