@@ -19,4 +19,6 @@ public interface IBaseService <T extends BaseEntity>{
 	Integer deleteByPrimaryKey(Integer key);
 
 	void merge(T record);
+	
+	void updateByPrimaryKey(T t);
 }

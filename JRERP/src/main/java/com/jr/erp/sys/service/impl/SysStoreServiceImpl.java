@@ -41,12 +41,10 @@ public class SysStoreServiceImpl extends AbstractBaseService<SysStore> implement
     public void saveStore(SysStore store)
     {
         store.setAreaCode("001001002");
-        store.setCreateTime(new Date());
         merge(store);
         SysAreaInfo area = new SysAreaInfo();
         area.setParentId(-1);
         area.setAreaCode("001001002");
-        area.setCreateTime(new Date());
         area.setAreaCode(store.getAreaCode());
         area.setAreaType(2);
         sysAreaServiceImpl.insert(area);
