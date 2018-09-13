@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jr.erp.base.mybatis.BaseEntity;
@@ -60,7 +59,8 @@ public class SysElementController
                 {
                 case "areaInfo":
                     SysAreaInfoExample areaExample = new SysAreaInfoExample();
-                    areaExample.createCriteria().andAreaCodeLike(user.getAreaCode() + "%");
+                    areaExample.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andAreaTypeEqualTo(1)
+                            .andAreaCodeLike(user.getAreaCode() + "%");
                     List<BaseEntity> areaList = sysAreaInfoService.selectByExample(areaExample);
                     data.put("areaInfo", areaList);
                     break;

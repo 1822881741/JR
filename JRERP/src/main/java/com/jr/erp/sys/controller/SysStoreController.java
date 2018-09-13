@@ -8,12 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jr.erp.base.mybatis.BaseEntity;
+import com.jr.erp.base.shiro.ShiroUtils;
+import com.jr.erp.base.utils.BasePageForm;
+import com.jr.erp.base.utils.Ret;
 import com.jr.erp.base.utils.RetPage;
-import com.jr.erp.sys.entity.SysAreaInfoExample;
 import com.jr.erp.sys.entity.SysStore;
+import com.jr.erp.sys.entity.SysStoreExample;
+import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.service.ISysStoreService;
 
 /**     
@@ -47,7 +52,7 @@ public class SysStoreController
     @RequestMapping(value = "/viewStore.do")
     public String viewStore(Integer id, HttpServletRequest request, Model model)
     {
-        return "sys/viewStore";
+        return "sys/store/viewStore";
     }
 
     /**    
@@ -64,31 +69,59 @@ public class SysStoreController
     public String editStoreInfo(Integer id,HttpServletRequest request, Model model)
     {
         model.addAttribute("id",id);
-        return  "sys/editStoreInfo";
+        return  "sys/store/editStoreInfo";
     }
     /**    
-     * getStoreList(这里用一句话描述这个方法的作用)    
+     * getStoreListData(这里用一句话描述这个方法的作用)    
      * 获取门店列表       
      * @param @param request
      * @param @return     
      * @return RetPage
      * @Exception 异常对象
     */
-    @RequestMapping(value = "/getStoreList.do")
+    @RequestMapping(value = "/getStoreListData.do")
     @ResponseBody
-    public RetPage getStoreList(HttpServletRequest request)
+    public RetPage getStoreListData(BasePageForm pageForm,HttpServletRequest request)
     {
-        SysAreaInfoExample exampale = new SysAreaInfoExample();
-        List<BaseEntity> listData = sysStoreService.selectByExample(exampale);
-        return RetPage.ok(listData.size(), listData);
+        SysStoreExample exampale = new SysStoreExample();
+        exampale.setPage(pageForm.getPage());
+        exampale.setLimit(pageForm.getLimit());
+        return sysStoreService.selectPage(exampale);
     }
 
+    /**    
+     * getStoreInfoData(这里用一句话描述这个方法的作用)
+     * 获取门店信息       
+     * @param @param id
+     * @param @param request
+     * @param @param model
+     * @param @return     
+     * @return Ret
+     * @Exception 异常对象
+    */
+    @RequestMapping(value="getStoreInfoData.do")
+    @ResponseBody
+    public Ret getStoreInfoData(@RequestParam(required = true) Integer id, HttpServletRequest request, Model model)
+    {
+        SysStore store = (SysStore) sysStoreService.selectByPrimaryKey(id);
+        return Ret.ok("保存成功", store);
+    }
+    /**    
+     * saveStore(这里用一句话描述这个方法的作用)    
+     * 保存门店       
+     * @param @param store
+     * @param @param request
+     * @param @return     
+     * @return Ret
+     * @Exception 异常对象
+    */
     @RequestMapping(value = "/saveStore.do")
     @ResponseBody
-    public String main()
+    public Ret saveStore(SysStore store,HttpServletRequest request)
     {
-        SysStore store = new SysStore();
-        sysStoreService.insert(store);
-        return "main";
+        SysUser user = ShiroUtils.getSysUser();
+        store.setCompanyNo(user.getCompanyNo());
+        sysStoreService.saveStore(store);
+        return Ret.ok("保存成功");
     }
 }

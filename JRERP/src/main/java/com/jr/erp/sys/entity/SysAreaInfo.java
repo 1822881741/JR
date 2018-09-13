@@ -14,7 +14,7 @@ public class SysAreaInfo extends BaseEntity {
     private String areaName;
 
     /**
-     * 地域的类型：-1组织划分节点；0：公司；1：门店：2：仓库/展柜
+     * 地域的类型：-1组织划分节点；0：公司；1：区域 2：门店：3：仓库/展柜
      */
     private Integer areaType;
 

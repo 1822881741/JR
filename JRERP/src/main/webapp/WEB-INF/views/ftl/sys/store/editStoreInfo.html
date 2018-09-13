@@ -7,8 +7,9 @@
 	<div class="layui-fluid">
 		<div class="layui-row">
 			<div class="layui-card">
-				<div class="layui-form" lay-filter="layuiadmin-app-form-list" id="layuiadmin-app-form-list" style="padding: 20px 30px 0 0;">
+				<div id="storeInfoForm"  lay-filter="storeInfoForm" class="layui-form"  style="padding: 20px 30px 0 0;">
 					<div class="layui-form-item">
+						<input type="hidden" id="id" name="id" value="${id}">
 						<label class="layui-form-label">门店名称</label>
 						<div class="layui-input-inline"> 
 							<input type="text" name="shopName" lay-verify="required" placeholder="请输入用户名" class="layui-input" >
@@ -17,15 +18,9 @@
 					<div class="layui-form-item">
 						<label class="layui-form-label">所属区域</label>
 						<div class="layui-input-inline">
-							 <select id='regionCode' name="regionCode" lay-filter='regionCode'>
+							 <select id='regionCode' name="regionCode" lay-filter='regionCode' lay-verify="required">
 						        <option value="">请选择省</option>
 						      </select>
-						</div>
-					</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">负责人</label>
-						<div class="layui-input-inline">
-							<input type="text" name="author" lay-verify="required" placeholder="请输入负责人" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-form-item">
@@ -49,7 +44,7 @@
 					<div class="layui-form-item">
 						<label class="layui-form-label">说明</label>
 						<div class="layui-input-inline">
-							<textarea name="remarks" lay-verify="required" style="width: 400px; height: 120px;" class="layui-textarea"></textarea>
+							<textarea name="remarks" style="width: 400px; height: 120px;" class="layui-textarea"></textarea>
 						</div>
 					</div>
 					<div class="layui-form-item layui-hide">
@@ -63,18 +58,8 @@
 </body>
 <script type="text/javascript" src="resource/layui/layui.all.js?v=1"></script>
 <script>
-	layui.use('form', function() {
+	!function(){
 		var $ = layui.$, form = layui.form;
-
-		/*form.val('storeInfo', {
-			    "shopName": "贤心" // "name": "value"
-			    ,"address": "123"
-			    ,"interest": 1
-			    ,"like[write]": true //复选框选中状态
-			    ,"close": true //开关状态
-			    ,"sex": "女"
-			    ,"desc": "我爱 layui"
-		})*/
 		var active={
 				initElement:function(){
 					$.ajax({
@@ -85,8 +70,13 @@
 				        data: "elements=areaInfo&elements=storeInfo",
 				        success: function(data) {
 				            if (data.status == '100') {
-				            	$("#regionCode").append("<option>张三</option><option>李四</option>");
-				            	debugger;
+				            	var regionInfo = data.data.areaInfo;
+				            	if(regionInfo){
+				            		for(var i=0;i<regionInfo.length;i++){
+				            			var temp=regionInfo[i];
+						            	$("#regionCode").append("<option value='"+temp.areaCode+"'>"+temp.areaName+"</option>");
+				            		}
+				            	}
 				            	form.render('select')
 				            }else{
 				            	layer.alert("获取基础信息失败");
@@ -95,23 +85,57 @@
 				        error: function() {
 				        }
 				    });
+				},
+				getFormData:function(){
+					var id =$("#id").val();
+					if(id){
+						$.ajax({
+					        type: "POST",
+					        url: "sysStore/getStoreInfoData.do",
+					        dataType: 'json',
+					        async: false,
+					        data: "id="+id,
+					        success: function(data) {
+					            if (data.status == '100') {
+					            	form.val("storeInfoForm", data.data)
+					            }else{
+					            	layer.alert("获取基础信息失败");
+					            }
+					        },
+					        error: function() {
+					        }
+					    });
+					}
 				}
 			}
 		active.initElement();
+		active.getFormData();
 		form.on('submit(submitForm)', function(data) {
 			var field = data.field; //获取提交的字段
 			var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 			//提交 Ajax 成功后，关闭当前弹层并重载表格
-			//$.ajax({});
-			alert(JSON.stringify(field))
-			//parent.layui.table.reload('LAY-app-content-list'); //重载表格
-			//parent.layer.close(index); //再执行关闭 
+			$.ajax({
+		        type: "POST",
+		        url: "sysStore/saveStore.do",
+		        dataType: 'json',
+		        async: false,
+		        data: field,
+		        success: function(data) {
+		            if (data.status == '100') {
+		            	layer.alert("保存成功");
+		            	parent.layui.table.reload('storeList'); //重载表格
+		            	parent.layer.close(index); //再执行关闭 
+		            }else{
+		            	layer.alert("获取基础信息失败");
+		            }
+		        },
+		        error: function() {
+		        }
+		    });
 		});
-	});
-	
-	
-	
-	
+		
+		
+	}();
 </script>
 </html>
 

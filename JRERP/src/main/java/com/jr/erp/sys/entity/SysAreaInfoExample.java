@@ -221,6 +221,76 @@ public class SysAreaInfoExample {
             return (Criteria) this;
         }
 
+        public Criteria andCompanyNoIsNull() {
+            addCriterion("companyNo is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNoIsNotNull() {
+            addCriterion("companyNo is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNoEqualTo(String value) {
+            addCriterion("companyNo =", value, "companyNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNoNotEqualTo(String value) {
+            addCriterion("companyNo <>", value, "companyNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNoGreaterThan(String value) {
+            addCriterion("companyNo >", value, "companyNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNoGreaterThanOrEqualTo(String value) {
+            addCriterion("companyNo >=", value, "companyNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNoLessThan(String value) {
+            addCriterion("companyNo <", value, "companyNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNoLessThanOrEqualTo(String value) {
+            addCriterion("companyNo <=", value, "companyNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNoLike(String value) {
+            addCriterion("companyNo like", value, "companyNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNoNotLike(String value) {
+            addCriterion("companyNo not like", value, "companyNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNoIn(List<String> values) {
+            addCriterion("companyNo in", values, "companyNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNoNotIn(List<String> values) {
+            addCriterion("companyNo not in", values, "companyNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNoBetween(String value1, String value2) {
+            addCriterion("companyNo between", value1, value2, "companyNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNoNotBetween(String value1, String value2) {
+            addCriterion("companyNo not between", value1, value2, "companyNo");
+            return (Criteria) this;
+        }
+
         public Criteria andParentIdIsNull() {
             addCriterion("parentId is null");
             return (Criteria) this;

@@ -22,7 +22,7 @@ public class RetPage {
 	/**
 	 * 数据条数
 	 */
-	private Integer count;
+	private Long count;
 	
 	/**
 	 * 返回结果集
@@ -44,7 +44,7 @@ public class RetPage {
 		return rt;
 	}
 	
-	public static RetPage ok(Integer count,List<BaseEntity> data)
+	public static RetPage ok(Long count,List<BaseEntity> data)
 	{
 		RetPage rt = new RetPage();
 		rt.setCode(0);
@@ -69,11 +69,11 @@ public class RetPage {
 		this.msg = msg;
 	}
 
-	public Integer getCount() {
+	public Long getCount() {
 		return count;
 	}
 
-	public void setCount(Integer count) {
+	public void setCount(Long count) {
 		this.count = count;
 	}
 

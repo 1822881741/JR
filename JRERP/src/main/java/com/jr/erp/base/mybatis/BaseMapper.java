@@ -16,4 +16,6 @@ public interface BaseMapper<T extends BaseEntity> {
 	int updateByPrimaryKey(T record);
 	
 	List<T> selectByExample(Object example);
+	
+	long countByExample(Object example);
 }

@@ -60,6 +60,6 @@ public class SysAreaInfoController {
 	{
 		SysAreaInfoExample exampale = new SysAreaInfoExample();
 		List<BaseEntity> listData = sysAreaInfoService.selectByExample(exampale);
-		return RetPage.ok(listData.size(), listData.subList(0, 10));
+		return RetPage.ok(10L, listData.subList(0, 10));
 	}
 }

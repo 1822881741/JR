@@ -9,6 +9,21 @@ public class SysStore extends BaseEntity {
     private String shopName;
 
     /**
+     * 区域编码
+     */
+    private String areaCode;
+
+    /**
+     * 所属区域
+     */
+    private String regionCode;
+
+    /**
+     * 大区名称
+     */
+    private String regionName;
+
+    /**
      * 地址信息
      */
     private String address;
@@ -19,30 +34,15 @@ public class SysStore extends BaseEntity {
     private String mobile;
 
     /**
-     * 当前状态 0:已删除，1：使用中
-     */
-    private Integer status;
-
-    /**
-     * 地区编码
-     */
-    private String areaCode;
-
-    /**
      * 备注信息
      */
     private String remarks;
 
     /**
-     * 区域编码
+     * 当前状态 0:已删除，1：使用中
      */
-    private String regionCode;
-    
-    /**
-     * 区域名称
-     */
-    private String regionName;
-    
+    private Integer status;
+
     /**
      * 门店名称
      * @return shopName 门店名称
@@ -57,6 +57,54 @@ public class SysStore extends BaseEntity {
      */
     public void setShopName(String shopName) {
         this.shopName = shopName == null ? null : shopName.trim();
+    }
+
+    /**
+     * 区域编码
+     * @return areaCode 区域编码
+     */
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    /**
+     * 区域编码
+     * @param areaCode 区域编码
+     */
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode == null ? null : areaCode.trim();
+    }
+
+    /**
+     * 所属区域
+     * @return regionCode 所属区域
+     */
+    public String getRegionCode() {
+        return regionCode;
+    }
+
+    /**
+     * 所属区域
+     * @param regionCode 所属区域
+     */
+    public void setRegionCode(String regionCode) {
+        this.regionCode = regionCode == null ? null : regionCode.trim();
+    }
+
+    /**
+     * 大区名称
+     * @return regionName 大区名称
+     */
+    public String getRegionName() {
+        return regionName;
+    }
+
+    /**
+     * 大区名称
+     * @param regionName 大区名称
+     */
+    public void setRegionName(String regionName) {
+        this.regionName = regionName == null ? null : regionName.trim();
     }
 
     /**
@@ -92,38 +140,6 @@ public class SysStore extends BaseEntity {
     }
 
     /**
-     * 当前状态 0:已删除，1：使用中
-     * @return status 当前状态 0:已删除，1：使用中
-     */
-    public Integer getStatus() {
-        return status;
-    }
-
-    /**
-     * 当前状态 0:已删除，1：使用中
-     * @param status 当前状态 0:已删除，1：使用中
-     */
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    /**
-     * 区域编码
-     * @return areaCode 区域编码
-     */
-    public String getAreaCode() {
-        return areaCode;
-    }
-
-    /**
-     * 区域编码
-     * @param areaCode 区域编码
-     */
-    public void setAreaCode(String areaCode) {
-        this.areaCode = areaCode == null ? null : areaCode.trim();
-    }
-
-    /**
      * 备注信息
      * @return remarks 备注信息
      */
@@ -137,5 +153,21 @@ public class SysStore extends BaseEntity {
      */
     public void setRemarks(String remarks) {
         this.remarks = remarks == null ? null : remarks.trim();
+    }
+
+    /**
+     * 当前状态 0:已删除，1：使用中
+     * @return status 当前状态 0:已删除，1：使用中
+     */
+    public Integer getStatus() {
+        return status;
+    }
+
+    /**
+     * 当前状态 0:已删除，1：使用中
+     * @param status 当前状态 0:已删除，1：使用中
+     */
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

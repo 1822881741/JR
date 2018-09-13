@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<#include "/header.html" />
+</head>
+<body>
+	<div class="layui-fluid">
+		<div class="layui-row layui-col-space15">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-header">
+						<div class="demoTable">
+							<button id="addStore" class="layui-btn">新增</button>
+						</div>
+					</div>
+					<div class="layui-card-body">
+						<table class="layui-hide" id="storeList" lay-filter="storeList"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="resource/layui/layui.all.js?v=1"></script>
+<script type="text/html" id="tableItemOperator">
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+</script>
+
+<script>
+!function(){
+  		var $ = layui.jquery;
+		var table = layui.table;
+		table.render({
+			elem : '#storeList',
+			url : 'sysStore/getStoreListData.do',
+			defaultToolbar: ['filter', 'exports'],
+			toolbar : '#toolbarDemo',
+			cols : [[
+			         {field : 'id',title:'id'},
+			         {field : 'shopName',title : '门店名称',sort : true}, 
+			         {field : 'mobile',title : '联系电话',sort : true}, 
+			         {field : 'address',title : '地址',sort : true},
+			         {field : 'regionName',title : '所属大区',sort : true},
+			         {field : 'status',title : '状态',sort : true	,templet: function(d){
+				        	 if(d.status == 1){
+				        		 return "启用中";
+				        	 }else{
+				        		 return "<span style='color: #c00;'>已停用</span>";
+				        	 }
+			        	 }
+			         }, 
+			         {field : 'remarks',title : '备注'},
+					 {width:178, align:'center', fixed: 'right', toolbar: '#tableItemOperator'}
+					]],
+			page : true
+			//limit : 2
+		});
+		
+		//注册各种事件
+		var active = {
+			addStore : function(id) {
+				layer.open({
+					type : 2,
+					title : "新增/修改门店",
+					area : ['600px','600px'],
+					shade : 0.8,
+					id : 'lay_storeInfo', //设定一个id，防止重复弹出
+					btn : [ '保存', '取消' ],
+					moveType : 1, //拖拽模式，0或者1
+					content : "sysStore/editStoreInfo.do?id="+id,
+					yes : function(index, layero) {
+						 var submit = layero.find('iframe').contents().find("#submitForm");
+           				 submit.click();
+					}
+				});
+			}
+		}
+		
+		table.on('tool(storeList)', function(obj){
+	      var data = obj.data;
+	       if(obj.event === 'edit'){
+	    	   active.addStore(data.id);
+	      }
+	    });
+			
+		$('#addStore').on('click', function() {
+			active.addStore('');
+		});
+}();
+</script>
+</html>
+
