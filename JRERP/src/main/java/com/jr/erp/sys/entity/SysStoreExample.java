@@ -1,28 +1,15 @@
 package com.jr.erp.sys.entity;
 
+import com.jr.erp.base.mybatis.BaseExample;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SysStoreExample {
-    /**
-     * sys_store
-     */
-    protected String orderByClause;
-
-    /**
-     * sys_store
-     */
-    protected boolean distinct;
-
+public class SysStoreExample extends BaseExample {
     /**
      * sys_store
      */
     protected List<Criteria> oredCriteria;
-
-    private Integer page;
-
-    private Integer limit;
 
     /**
      *
@@ -30,38 +17,6 @@ public class SysStoreExample {
      */
     public SysStoreExample() {
         oredCriteria = new ArrayList<Criteria>();
-    }
-
-    /**
-     *
-     * @mbg.generated
-     */
-    public void setOrderByClause(String orderByClause) {
-        this.orderByClause = orderByClause;
-    }
-
-    /**
-     *
-     * @mbg.generated
-     */
-    public String getOrderByClause() {
-        return orderByClause;
-    }
-
-    /**
-     *
-     * @mbg.generated
-     */
-    public void setDistinct(boolean distinct) {
-        this.distinct = distinct;
-    }
-
-    /**
-     *
-     * @mbg.generated
-     */
-    public boolean isDistinct() {
-        return distinct;
     }
 
     /**
@@ -119,22 +74,6 @@ public class SysStoreExample {
         oredCriteria.clear();
         orderByClause = null;
         distinct = false;
-    }
-
-    public void setPage(Integer page) {
-        this.page = page;
-    }
-
-    public Integer getPage() {
-        return page;
-    }
-
-    public void setLimit(Integer limit) {
-        this.limit = limit;
-    }
-
-    public Integer getLimit() {
-        return limit;
     }
 
     /**

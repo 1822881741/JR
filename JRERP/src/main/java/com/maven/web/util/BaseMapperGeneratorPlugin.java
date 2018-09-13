@@ -1,14 +1,14 @@
 package com.maven.web.util;
+import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
 import org.mybatis.generator.api.dom.java.Field;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
 import org.mybatis.generator.api.dom.java.Interface;
-import org.mybatis.generator.api.dom.java.JavaVisibility;
 import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.Parameter;
 import org.mybatis.generator.api.dom.java.PrimitiveTypeWrapper;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.api.dom.xml.Attribute;
@@ -36,8 +36,7 @@ public class BaseMapperGeneratorPlugin extends PluginAdapter {
 		 */
 		FullyQualifiedJavaType fqjt = new FullyQualifiedJavaType("BaseMapper<"
 				+ introspectedTable.getBaseRecordType()+">");
-		FullyQualifiedJavaType imp = new FullyQualifiedJavaType(
-				"com.jr.erp.base.mybatis.BaseMapper");
+		FullyQualifiedJavaType imp = new FullyQualifiedJavaType("com.jr.erp.base.mybatis.BaseMapper");
 		/**
 		 * 添加 extends MybatisBaseMapper
 		 */
@@ -63,46 +62,35 @@ public class BaseMapperGeneratorPlugin extends PluginAdapter {
 
         PrimitiveTypeWrapper integerWrapper = FullyQualifiedJavaType.getIntInstance().getPrimitiveTypeWrapper();
 
-        Field page = new Field();
-        page.setName("page");
-        page.setVisibility(JavaVisibility.PRIVATE);
-        page.setType(integerWrapper);
-        topLevelClass.addField(page);
+        topLevelClass.addImportedType("com.jr.erp.base.mybatis.BaseExample");
+        topLevelClass.setSuperClass("BaseExample");
 
-        Method setPage = new Method();
-        setPage.setVisibility(JavaVisibility.PUBLIC);
-        setPage.setName("setPage");
-        setPage.addParameter(new Parameter(integerWrapper, "page"));
-        setPage.addBodyLine("this.page = page;");
-        topLevelClass.addMethod(setPage);
+        List<Field> list = topLevelClass.getFields();
+        Iterator<Field> iter = list.iterator();
+        while (iter.hasNext())
+        {
+            Field field = iter.next();
+            if (StringUtils.equals(field.getName(), "orderByClause")
+                    || StringUtils.equals(field.getName(), "distinct"))
+            {
+                iter.remove();
+            }
 
-        Method getPage = new Method();
-        getPage.setVisibility(JavaVisibility.PUBLIC);
-        getPage.setReturnType(integerWrapper);
-        getPage.setName("getPage");
-        getPage.addBodyLine("return page;");
-        topLevelClass.addMethod(getPage);
-
-        Field limit = new Field();
-        limit.setName("limit");
-        limit.setVisibility(JavaVisibility.PRIVATE);
-        limit.setType(integerWrapper);
-        topLevelClass.addField(limit);
-
-        Method setLimit = new Method();
-        setLimit.setVisibility(JavaVisibility.PUBLIC);
-        setLimit.setName("setLimit");
-        setLimit.addParameter(new Parameter(integerWrapper, "limit"));
-        setLimit.addBodyLine("this.limit = limit;");
-        topLevelClass.addMethod(setLimit);
-
-        Method getLimit = new Method();
-        getLimit.setVisibility(JavaVisibility.PUBLIC);
-        getLimit.setReturnType(integerWrapper);
-        getLimit.setName("getLimit");
-        getLimit.addBodyLine("return limit;");
-        topLevelClass.addMethod(getLimit);
-
+        }
+        List<Method> list2 = topLevelClass.getMethods();
+        Iterator<Method> iter2 = list2.iterator();
+        while (iter2.hasNext())
+        {
+            Method field = iter2.next();
+            if (StringUtils.equals(field.getName(), "setOrderByClause")
+                    || StringUtils.equals(field.getName(), "getOrderByClause")
+                    ||StringUtils.equals(field.getName(), "setDistinct")
+                    ||StringUtils.equals(field.getName(), "isDistinct")
+                    )
+            {
+                iter2.remove();
+            }
+        }
         return true;
     }
 

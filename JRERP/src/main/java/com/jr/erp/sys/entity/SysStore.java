@@ -3,9 +3,6 @@ package com.jr.erp.sys.entity;
 import com.jr.erp.base.mybatis.BaseEntity;
 
 public class SysStore extends BaseEntity {
-    
-    private static final long serialVersionUID = -1318101836468638671L;
-
     /**
      * 门店名称
      */
