@@ -28,51 +28,40 @@
 			var table = layui.table;
 			table.render({
 				elem : '#test',
-				url : 'sysAreaInfo/getAreaInfoList.do?test=22',
+				url : 'sysAreaInfo/getAreaInfoList.do',
 				toolbar: '#toolbarDemo',
 				cols : [ [ {
-					field : 'areaCode',
-					width : 80,
-					title : 'ID',
+					field : 'areaName',
+					title : '区域名称',
 					sort : true
 				}, {
-					field : 'areaCode',
-					width : 80,
-					title : '用户名'
+					field : 'areaType',
+					title : '类型',
+					templet: function(d){
+			        	 if(d.areaType == 0){
+			        		 return "总公司";
+			        	 }else if(d.areaType == 1){
+			        		 return "大区";
+			        	 }else if(d.areaType == 2){
+			        		 return "门店";
+			        	 }else if(d.areaType == 3){
+			        		 return "展柜";
+			        	 }
+		        	 }
 				}, {
-					field : 'areaCode',
-					width : 80,
-					title : '性别',
-					sort : true
-				}, {
-					field : 'areaCode',
-					width : 80,
-					title : '城市'
-				}, {
-					field : 'areaCode',
-					title : '签名',
-					minWidth : 150
-				}, {
-					field : 'areaCode',
-					width : 80,
-					title : '积分',
-					sort : true
-				}, {
-					field : 'areaCode',
-					width : 80,
-					title : '评分',
-					sort : true
-				}, {
-					field : 'areaCode',
-					width : 80,
-					title : '职业'
-				}, {
-					field : 'areaCode',
-					width : 135,
-					title : '财富',
+					field : 'status',
+					title : '状态',
+					templet: function(d){
+			        	 if(d.status == 1){
+			        		 return "启用中";
+			        	 }else{
+			        		 return "<span style='color: #c00;'>已停用</span>";
+			        	 }
+		        	 },
 					sort : true
 				} ] ],
-				page : true
+				page : true,
+				limit:1000
 			});
 		});
 	</script>

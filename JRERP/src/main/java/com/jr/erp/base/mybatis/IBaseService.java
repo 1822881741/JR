@@ -21,4 +21,6 @@ public interface IBaseService <T extends BaseEntity>{
 	void merge(T record);
 	
 	void updateByPrimaryKey(T t);
+	
+    void updateByPrimaryKeySelective(T t);
 }

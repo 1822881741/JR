@@ -14,7 +14,7 @@ public class SysAreaInfo extends BaseEntity {
     private String areaName;
 
     /**
-     * 地域的类型：-1组织划分节点；0：公司；1：门店：2：仓库/展柜
+     * 地域的类型：-1组织划分节点；0：公司；1:大区，2：门店：3：仓库/展柜
      */
     private Integer areaType;
 
@@ -61,16 +61,16 @@ public class SysAreaInfo extends BaseEntity {
     }
 
     /**
-     * 地域的类型：-1组织划分节点；0：公司；1：门店：2：仓库/展柜
-     * @return areaType 地域的类型：-1组织划分节点；0：公司；1：门店：2：仓库/展柜
+     * 地域的类型：-1组织划分节点；0：公司；1:大区，2：门店：3：仓库/展柜
+     * @return areaType 地域的类型：-1组织划分节点；0：公司；1:大区，2：门店：3：仓库/展柜
      */
     public Integer getAreaType() {
         return areaType;
     }
 
     /**
-     * 地域的类型：-1组织划分节点；0：公司；1：门店：2：仓库/展柜
-     * @param areaType 地域的类型：-1组织划分节点；0：公司；1：门店：2：仓库/展柜
+     * 地域的类型：-1组织划分节点；0：公司；1:大区，2：门店：3：仓库/展柜
+     * @param areaType 地域的类型：-1组织划分节点；0：公司；1:大区，2：门店：3：仓库/展柜
      */
     public void setAreaType(Integer areaType) {
         this.areaType = areaType;

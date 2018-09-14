@@ -65,4 +65,10 @@ public class AbstractBaseService<T extends BaseEntity> implements IBaseService<B
         t.setUpdateTime(new Date());
         mapper.updateByPrimaryKey((T) t);
     }
+
+    public void updateByPrimaryKeySelective(BaseEntity t)
+    {
+        t.setUpdateTime(new Date());
+        mapper.updateByPrimaryKeySelective((T) t);
+    }
 }

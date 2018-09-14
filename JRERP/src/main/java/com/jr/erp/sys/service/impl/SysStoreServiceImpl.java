@@ -1,13 +1,9 @@
 package com.jr.erp.sys.service.impl;
 
-import java.util.Date;
-
-import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jr.erp.base.mybatis.AbstractBaseService;
-import com.jr.erp.base.redis.RedisUtils;
 import com.jr.erp.sys.dao.SysStoreMapper;
 import com.jr.erp.sys.entity.SysAreaInfo;
 import com.jr.erp.sys.entity.SysStore;
@@ -27,10 +23,6 @@ import com.jr.erp.sys.service.ISysStoreService;
 @Service(value = "sysStoreService")
 public class SysStoreServiceImpl extends AbstractBaseService<SysStore> implements ISysStoreService
 {
-
-    @Autowired
-    private RedisUtils redisUtils;
-
     @Autowired
     private SysStoreMapper sysStoreMapper;
 
@@ -40,62 +32,43 @@ public class SysStoreServiceImpl extends AbstractBaseService<SysStore> implement
     @Override
     public void saveStore(SysStore store)
     {
-        store.setAreaCode("001001002");
-        merge(store);
-        SysAreaInfo area = new SysAreaInfo();
-        area.setParentId(-1);
-        area.setAreaCode("001001002");
-        area.setAreaCode(store.getAreaCode());
-        area.setAreaType(2);
-        sysAreaServiceImpl.insert(area);
-    }
+        if(store.getId()==null)
+        {
+            // 新增
+            SysAreaInfo areaInfo = sysAreaServiceImpl.selectByAreaCode(store.getCompanyNo(), store.getRegionCode());
+            String nextCode = sysAreaServiceImpl.getNextCode(store.getCompanyNo(), store.getRegionCode(), 2);
 
-    // @Override
-    // @Cacheable("getUserById")
-    // public SysStore selectByKey(Integer key) {
-    // SysStore sys = new SysStore();
-    // sys.setId(123);
-    // sys.setCompanyNo("zzzz");
-    // return sys;
-    // }
-    //
-    // @Override
-    // public List<SysStore> selectList() {
-    // SysStoreMapper sysStoreMapper = (SysStoreMapper) this.mapper;
-    // List<SysStore> list = sysStoreMapper.selectList();
-    // System.out.println(list);
-    //
-    //// System.out.println(sysCounterServiceImpl.selectByKey(1));
-    ////
-    ////
-    //// System.out.println(sysAreaServiceImpl.selectByKey(1));
-    // return list;
-    // }
-    //
-    // @Override
-    // @Cacheable(cacheNames="content",keyGenerator="customKeyGenerator")
-    // public SysStore selectByString(Integer id) {
-    // SysStore sys = new SysStore();
-    // sys.setId((int)Math.random()*1000/10);
-    // sys.setCompanyNo("company"+id);
-    // redisUtils.set("gxh123"+id, id);
-    // return sys;
-    // }
-    //
-    // @Override
-    // @Cacheable(value="getAll",key="#id")
-    // public List<SysStore> selectByStringList() {
-    // List<SysStore> list =new ArrayList<SysStore>();
-    // SysStore sys = new SysStore();
-    // sys.setId((int)Math.random()*1000/10);
-    // sys.setCompanyNo("company"+Math.random());
-    // list.add(sys);
-    //
-    // sys = new SysStore();
-    // sys.setId((int)Math.random()*1000/10);
-    // sys.setCompanyNo("company"+Math.random());
-    // list.add(sys);
-    //
-    // return list;
-    // }
+            // 保存门店
+            store.setAreaCode(nextCode);
+            store.setRegionName(areaInfo.getAreaName());
+            insert(store);
+
+            // 保存区域表
+            SysAreaInfo area = new SysAreaInfo();
+            area.setParentId(areaInfo.getId());
+            area.setAreaCode(nextCode);
+            area.setAreaName(store.getShopName());
+            area.setCompanyNo(store.getCompanyNo());
+            area.setAreaType(2);
+            area.setStatus(1);
+            sysAreaServiceImpl.insert(area);
+        }else
+        {
+            SysStore dbStore = (SysStore) this.selectByPrimaryKey(store.getId());
+            SysStore newStore = new SysStore();
+            newStore.setId(store.getId());
+            newStore.setStatus(store.getStatus()==null?0:store.getStatus());
+            newStore.setRemarks(store.getRemarks());
+            newStore.setAddress(store.getAddress());
+            newStore.setMobile(store.getMobile());
+            this.updateByPrimaryKeySelective(newStore);
+
+            
+            SysAreaInfo areaInfo = sysAreaServiceImpl.selectByAreaCode(dbStore.getCompanyNo(), dbStore.getAreaCode());
+            SysAreaInfo newArea = new SysAreaInfo();
+            newArea.setId(areaInfo.getId());
+            newStore.setStatus(store.getStatus()==null?0:store.getStatus());
+            sysAreaServiceImpl.updateByPrimaryKeySelective(areaInfo);
+        }
+    }
 }
