@@ -1,8 +1,7 @@
 package com.jr.erp.sys.entity;
 
-import java.util.Date;
-
 import com.jr.erp.base.mybatis.BaseEntity;
+import java.util.Date;
 
 public class SysUser extends BaseEntity {
     /**

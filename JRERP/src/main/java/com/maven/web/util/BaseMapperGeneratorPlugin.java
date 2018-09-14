@@ -118,6 +118,21 @@ public class BaseMapperGeneratorPlugin extends PluginAdapter {
 
         return true;
     }
-    
-    
+    @Override
+    public boolean sqlMapInsertSelectiveElementGenerated(XmlElement element,
+            IntrospectedTable introspectedTable) {
+        return false;
+    }
+
+    @Override
+    public boolean clientInsertSelectiveMethodGenerated(Method method,
+            Interface interfaze, IntrospectedTable introspectedTable) {
+        return false;
+    }
+
+    @Override
+    public boolean clientInsertSelectiveMethodGenerated(Method method,
+            TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+        return false;
+    }
 }

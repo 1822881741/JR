@@ -3,18 +3,24 @@ package com.jr.erp.base.mybatis;
 public class BaseExample
 {
     /**
-     * sys_store
+     * 排序
      */
     protected String orderByClause;
 
     /**
-     * sys_store
+     * 
      */
     protected boolean distinct;
 
 
+    /**    
+     * 当前页数    
+     */    
     private Integer page;
 
+    /**    
+     * 每页多少条    
+     */    
     private Integer limit;
 
     public String getOrderByClause()

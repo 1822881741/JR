@@ -10,11 +10,11 @@ public interface IBaseService <T extends BaseEntity>{
 
 	Integer insert(T record);
 
-	List<T> selectByExample(Object criteria);
+	List<T> selectByExample(BaseExample criteria);
 	
-	RetPage selectPage(Object criteria);
+	RetPage selectPage(BaseExample criteria);
 	
-	Long countByExample(Object criteria);
+	Long countByExample(BaseExample criteria);
 	
 	Integer deleteByPrimaryKey(Integer key);
 

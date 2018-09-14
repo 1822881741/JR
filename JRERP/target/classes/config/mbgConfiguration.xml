@@ -48,32 +48,31 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 		<!-- 要对那些数据表进行生成操作，必须要有一个. -->
-		<!-- <table schema="mybatis" tableName="sys_store" domainObjectName="SysStore" 
-			delimitIdentifiers="true" delimitAllColumns="true" enableInsert="true" enableSelectByPrimaryKey="true" 
-			enableSelectByExample="true" enableUpdateByPrimaryKey="true" enableDeleteByPrimaryKey="true" 
-			enableDeleteByExample="false" enableCountByExample="false" enableUpdateByExample="false" 
-			selectByExampleQueryId="false"> <property name="useActualColumnNames" value="true" 
-			/> </table> -->
-		<!--table schema="mybatis" tableName="sys_areaInfo"  domainObjectName="SysAreaInfo" delimitIdentifiers="false"
+		<table schema="mybatis" tableName="sys_store" domainObjectName="SysStore"  delimitIdentifiers="false"
 			selectByPrimaryKeyQueryId="true" enableDeleteByPrimaryKey="true"
-			enableCountByExample="false" enableUpdateByPrimaryKey="true" enableUpdateByExample="false">
+			enableCountByExample="true" enableUpdateByPrimaryKey="true" enableUpdateByExample="false">
 			<property name="useActualColumnNames" value="true" />
-		</table-->
+			</table> 
+		<table schema="mybatis" tableName="sys_areaInfo"  domainObjectName="SysAreaInfo"  delimitIdentifiers="false"
+			selectByPrimaryKeyQueryId="true" enableDeleteByPrimaryKey="true"
+			enableCountByExample="true" enableUpdateByPrimaryKey="true" enableUpdateByExample="false" >
+			<property name="useActualColumnNames" value="true" />
+		</table>
 		<table schema="mybatis" tableName="sys_store" domainObjectName="SysStore" delimitIdentifiers="false"
 			selectByPrimaryKeyQueryId="true" enableDeleteByPrimaryKey="true"
 			enableCountByExample="true" enableUpdateByPrimaryKey="true" enableUpdateByExample="false">
 			<property name="useActualColumnNames" value="true" />
 		</table>
 
-		<!--table schema="mybatis" tableName="sys_counter" domainObjectName="SysCounter" delimitIdentifiers="false"
+		<table schema="mybatis" tableName="sys_counter" domainObjectName="SysCounter"  delimitIdentifiers="false"
 			selectByPrimaryKeyQueryId="true" enableDeleteByPrimaryKey="true"
-			enableCountByExample="false" enableUpdateByPrimaryKey="true" >
+			enableCountByExample="true" enableUpdateByPrimaryKey="true" enableUpdateByExample="false">
 			<property name="useActualColumnNames" value="true" />
 		</table>
-		<table schema="mybatis" tableName="sys_user" domainObjectName="SysUser" delimitIdentifiers="false"
+		<table schema="mybatis" tableName="sys_user" domainObjectName="SysUser"  delimitIdentifiers="false"
 			selectByPrimaryKeyQueryId="true" enableDeleteByPrimaryKey="true"
-			enableCountByExample="false" enableUpdateByPrimaryKey="true">
+			enableCountByExample="true" enableUpdateByPrimaryKey="true" enableUpdateByExample="false">
 			<property name="useActualColumnNames" value="true" />
-		</table-->
+		</table>
 	</context>
 </generatorConfiguration>

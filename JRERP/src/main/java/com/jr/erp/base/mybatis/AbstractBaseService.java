@@ -36,7 +36,7 @@ public class AbstractBaseService<T extends BaseEntity> implements IBaseService<B
 	}
 
 	@Override
-	public List<BaseEntity> selectByExample(Object example) {
+	public List<BaseEntity> selectByExample(BaseExample example) {
 		return (List<BaseEntity>) mapper.selectByExample(example);
 	}
 
@@ -46,7 +46,7 @@ public class AbstractBaseService<T extends BaseEntity> implements IBaseService<B
 	}
 
     @Override
-    public RetPage selectPage(Object criteria)
+    public RetPage selectPage(BaseExample criteria)
     {
         List<BaseEntity> data = this.selectByExample(criteria);
         Long count =this.countByExample(criteria);
@@ -54,7 +54,7 @@ public class AbstractBaseService<T extends BaseEntity> implements IBaseService<B
     }
 
     @Override
-    public Long countByExample(Object criteria)
+    public Long countByExample(BaseExample criteria)
     {
         return mapper.countByExample(criteria);
     }

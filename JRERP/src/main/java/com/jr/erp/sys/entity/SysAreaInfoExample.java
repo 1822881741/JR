@@ -1,20 +1,11 @@
 package com.jr.erp.sys.entity;
 
+import com.jr.erp.base.mybatis.BaseExample;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SysAreaInfoExample {
-    /**
-     * sys_areainfo
-     */
-    protected String orderByClause;
-
-    /**
-     * sys_areainfo
-     */
-    protected boolean distinct;
-
+public class SysAreaInfoExample extends BaseExample {
     /**
      * sys_areainfo
      */
@@ -26,38 +17,6 @@ public class SysAreaInfoExample {
      */
     public SysAreaInfoExample() {
         oredCriteria = new ArrayList<Criteria>();
-    }
-
-    /**
-     *
-     * @mbg.generated
-     */
-    public void setOrderByClause(String orderByClause) {
-        this.orderByClause = orderByClause;
-    }
-
-    /**
-     *
-     * @mbg.generated
-     */
-    public String getOrderByClause() {
-        return orderByClause;
-    }
-
-    /**
-     *
-     * @mbg.generated
-     */
-    public void setDistinct(boolean distinct) {
-        this.distinct = distinct;
-    }
-
-    /**
-     *
-     * @mbg.generated
-     */
-    public boolean isDistinct() {
-        return distinct;
     }
 
     /**
