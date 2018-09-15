@@ -3,6 +3,8 @@ package com.jr.erp.sys.entity;
 import com.jr.erp.base.mybatis.BaseEntity;
 
 public class SysAreaInfo extends BaseEntity {
+    private static final long serialVersionUID = 1L;
+
     /**
      * 上级地区id
      */

@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.jr.erp.sys.entity.SysStore">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="companyNo" jdbcType="VARCHAR" property="companyNo" />
-    <result column="shopName" jdbcType="VARCHAR" property="shopName" />
+    <result column="storeName" jdbcType="VARCHAR" property="storeName" />
     <result column="areaCode" jdbcType="VARCHAR" property="areaCode" />
     <result column="regionCode" jdbcType="VARCHAR" property="regionCode" />
     <result column="regionName" jdbcType="VARCHAR" property="regionName" />
@@ -44,7 +44,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, companyNo, shopName, areaCode, regionCode, regionName, address, mobile, remarks, 
+    id, companyNo, storeName, areaCode, regionCode, regionName, address, mobile, remarks, 
     status, createTime
   </sql>
   <select id="selectByExample" parameterType="com.jr.erp.sys.entity.SysStoreExample" resultMap="BaseResultMap">
@@ -83,11 +83,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jr.erp.sys.entity.SysStore">
-    insert into sys_store (id, companyNo, shopName, 
+    insert into sys_store (id, companyNo, storeName, 
       areaCode, regionCode, regionName, 
       address, mobile, remarks, 
       status, createTime)
-    values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{shopName,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{storeName,jdbcType=VARCHAR}, 
       #{areaCode,jdbcType=VARCHAR}, #{regionCode,jdbcType=VARCHAR}, #{regionName,jdbcType=VARCHAR}, 
       #{address,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
       #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP})
@@ -104,8 +104,8 @@
       <if test="companyNo != null">
         companyNo = #{companyNo,jdbcType=VARCHAR},
       </if>
-      <if test="shopName != null">
-        shopName = #{shopName,jdbcType=VARCHAR},
+      <if test="storeName != null">
+        storeName = #{storeName,jdbcType=VARCHAR},
       </if>
       <if test="areaCode != null">
         areaCode = #{areaCode,jdbcType=VARCHAR},
@@ -137,7 +137,7 @@
   <update id="updateByPrimaryKey" parameterType="com.jr.erp.sys.entity.SysStore">
     update sys_store
     set companyNo = #{companyNo,jdbcType=VARCHAR},
-      shopName = #{shopName,jdbcType=VARCHAR},
+      storeName = #{storeName,jdbcType=VARCHAR},
       areaCode = #{areaCode,jdbcType=VARCHAR},
       regionCode = #{regionCode,jdbcType=VARCHAR},
       regionName = #{regionName,jdbcType=VARCHAR},

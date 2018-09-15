@@ -47,7 +47,7 @@ public class SysStoreServiceImpl extends AbstractBaseService<SysStore> implement
             SysAreaInfo area = new SysAreaInfo();
             area.setParentId(areaInfo.getId());
             area.setAreaCode(nextCode);
-            area.setAreaName(store.getShopName());
+            area.setAreaName(store.getStoreName());
             area.setCompanyNo(store.getCompanyNo());
             area.setAreaType(2);
             area.setStatus(1);

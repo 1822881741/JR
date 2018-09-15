@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="com.jr.erp.sys.entity.SysCounter">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="companyNo" jdbcType="VARCHAR" property="companyNo" />
-    <result column="storeName" jdbcType="VARCHAR" property="storeName" />
-    <result column="storeType" jdbcType="TINYINT" property="storeType" />
+    <result column="counterName" jdbcType="VARCHAR" property="counterName" />
+    <result column="counterType" jdbcType="TINYINT" property="counterType" />
     <result column="areaCode" jdbcType="VARCHAR" property="areaCode" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
@@ -40,7 +40,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, companyNo, storeName, storeType, areaCode, status, createTime
+    id, companyNo, counterName, counterType, areaCode, status, createTime
   </sql>
   <select id="selectByExample" parameterType="com.jr.erp.sys.entity.SysCounterExample" resultMap="BaseResultMap">
     select
@@ -78,11 +78,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jr.erp.sys.entity.SysCounter">
-    insert into sys_counter (id, companyNo, storeName, 
-      storeType, areaCode, status, 
+    insert into sys_counter (id, companyNo, counterName, 
+      counterType, areaCode, status, 
       createTime)
-    values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{storeName,jdbcType=VARCHAR}, 
-      #{storeType,jdbcType=TINYINT}, #{areaCode,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+    values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{counterName,jdbcType=VARCHAR}, 
+      #{counterType,jdbcType=TINYINT}, #{areaCode,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
       #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <select id="countByExample" parameterType="com.jr.erp.sys.entity.SysCounterExample" resultType="java.lang.Long">
@@ -97,11 +97,11 @@
       <if test="companyNo != null">
         companyNo = #{companyNo,jdbcType=VARCHAR},
       </if>
-      <if test="storeName != null">
-        storeName = #{storeName,jdbcType=VARCHAR},
+      <if test="counterName != null">
+        counterName = #{counterName,jdbcType=VARCHAR},
       </if>
-      <if test="storeType != null">
-        storeType = #{storeType,jdbcType=TINYINT},
+      <if test="counterType != null">
+        counterType = #{counterType,jdbcType=TINYINT},
       </if>
       <if test="areaCode != null">
         areaCode = #{areaCode,jdbcType=VARCHAR},
@@ -118,8 +118,8 @@
   <update id="updateByPrimaryKey" parameterType="com.jr.erp.sys.entity.SysCounter">
     update sys_counter
     set companyNo = #{companyNo,jdbcType=VARCHAR},
-      storeName = #{storeName,jdbcType=VARCHAR},
-      storeType = #{storeType,jdbcType=TINYINT},
+      counterName = #{counterName,jdbcType=VARCHAR},
+      counterType = #{counterType,jdbcType=TINYINT},
       areaCode = #{areaCode,jdbcType=VARCHAR},
       status = #{status,jdbcType=TINYINT},
       createTime = #{createTime,jdbcType=TIMESTAMP}

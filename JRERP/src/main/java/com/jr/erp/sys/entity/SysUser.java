@@ -4,6 +4,8 @@ import com.jr.erp.base.mybatis.BaseEntity;
 import java.util.Date;
 
 public class SysUser extends BaseEntity {
+    private static final long serialVersionUID = -801978143972542100L;
+
     /**
      * 登录名
      */

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<#include "/header.html" />
+</head>
+<body>
+	<div class="layui-fluid">
+		<div class="layui-row layui-col-space5">
+			<div class="layui-col-xs6 layui-col-sm5 layui-col-md3">
+				<div class="layui-card">
+					<div class="layui-card-header">
+						门店列表
+					</div>
+					<div class="layui-card-body">
+						<table class="layui-hide" id="storeList" lay-filter="storeList"></table>
+					</div>
+				</div>
+			</div>
+			<div class="layui-col-xs6 layui-col-sm7 layui-col-md9">
+				<div class="layui-card">
+					<div class="layui-card-header">
+						<span class="layui-breadcrumb" style="visibility: visible;">
+						  <span id='storeSpan'></span><span lay-separator="">/</span>
+						  <cite>柜台列表</cite>
+						  <input type="hidden" id="currentId">
+						</span>
+					</div>
+					<div class="layui-card-body">
+						<table class="layui-hide" id="counterList" lay-filter="counterList"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="resource/layui/layui.all.js?v=1"></script>
+<script type="text/html" id="tableItemOperator">
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+</script>
+<script type="text/html" id="switchTpl">
+  <input type="checkbox" name="status" value="{{d.id}}" data-code="{{d.areaCode}}" lay-skin="switch" lay-text="启用|禁用" lay-filter="statusChange" {{ d.status == 1 ? 'checked' : '' }}>
+</script>
+<script>
+!function(){
+  		var $ = layui.jquery;
+		var table = layui.table;
+		var form = layui.form;
+		//门店表格控制
+		table.render({
+			elem : '#storeList',
+			height: 'full-100',
+			loading:true,
+			//size:'sm',
+			url : 'sysStore/getStoreListData.do',
+			cols : [[
+			         {field : 'storeName',title : '门店名称'}, 
+			         {field : 'status',title : '状态',templet: function(d){
+				        	 if(d.status == 1){
+				        		 return "启用中";
+				        	 }else{
+				        		 return "<span style='color: #c00;'>已停用</span>";
+				        	 }
+			        	 }
+			         }
+					]],
+			//page : true
+			limit : 10000
+		});
+	   
+		//注册各种事件
+		var active = {
+			addCounter : function(storeId) {
+				layer.open({
+					type : 2,
+					title : "新增/修改柜台",
+					area : ['450px','350px'],
+					shade : 0.8,
+					id : 'lay_storeInfo', //设定一个id，防止重复弹出
+					btn : [ '保存', '取消' ],
+					moveType : 1, //拖拽模式，0或者1
+					content : "sysCounter/addCounterInfo.do?storeId="+storeId,
+					yes : function(index, layero) {
+						 var submit = layero.find('iframe').contents().find("#submitForm");
+           				 submit.click();
+					}
+				});
+			}
+		}
+		
+		//监听行单击事件（单击事件为：rowDouble）
+	   table.on('row(storeList)', function(obj){
+		   var data = obj.data;
+	       obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');
+	       $("#storeSpan").html(data.shopName);
+	   	   //柜台表格控制
+		   table.render({
+				elem : '#counterList',
+				height: 'full-100',
+				loading:true,
+				toolbar: "<div class='layui-btn-container'><button class='layui-btn-primary layui-btn-sm' lay-event='addCounter' lay-data='"+data.id+"'>添加柜台</button></div>",
+				defaultToolbar:['filter','exports'],
+				url : 'sysCounter/getCounterListData.do?areaCode='+data.areaCode,
+				cols : [[
+				         {field : 'counterName',title : '柜台名称',width:180}, 
+				         {field : 'counterType',title : '柜台类型',width:180,templet: function(d){
+					        	 if(d.counterType == 0){
+					        		 return "成品柜台";
+					        	 }else{
+					        		 return "旧料柜台";
+					        	 }
+				        	 }
+				         },
+				         {field:'status', title:'状态', width:120, templet: '#switchTpl', unresize: true}
+						]],
+				limit : 10000
+			});
+	   	   
+	   	   $("#currentId").val(data.id);
+		   table.on('toolbar(counterList)', function(obj,dom){
+			    if(obj.event === 'addCounter'){
+			    	active.addCounter($("#currentId").val());
+			    }
+			});
+	   });
+		
+		form.on('switch(statusChange)', function(obj){
+			var param="id="+this.value+"&status="+(obj.elem.checked?"1":"0")+"&areaCode="+$(this).data("code");
+			$.ajax({
+		        type: "POST",
+		        url: "sysCounter/updateCounter.do",
+		        dataType: 'json',
+		        async: false,
+		        data: param,
+		        success: function(data) {
+		            if (data.status == '100') {
+		            	layer.alert("修改成功");
+		            	table.reload('counterList'); //重载表格
+		            }else{
+		            	layer.alert("获取基础信息失败");
+		            }
+		        },
+		        error: function() {
+		        }
+		    });
+		return false;
+		});
+}();
+</script>
+</html>
+

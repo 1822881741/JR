@@ -250,133 +250,133 @@ public class SysCounterExample extends BaseExample {
             return (Criteria) this;
         }
 
-        public Criteria andStoreNameIsNull() {
-            addCriterion("storeName is null");
+        public Criteria andCounterNameIsNull() {
+            addCriterion("counterName is null");
             return (Criteria) this;
         }
 
-        public Criteria andStoreNameIsNotNull() {
-            addCriterion("storeName is not null");
+        public Criteria andCounterNameIsNotNull() {
+            addCriterion("counterName is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStoreNameEqualTo(String value) {
-            addCriterion("storeName =", value, "storeName");
+        public Criteria andCounterNameEqualTo(String value) {
+            addCriterion("counterName =", value, "counterName");
             return (Criteria) this;
         }
 
-        public Criteria andStoreNameNotEqualTo(String value) {
-            addCriterion("storeName <>", value, "storeName");
+        public Criteria andCounterNameNotEqualTo(String value) {
+            addCriterion("counterName <>", value, "counterName");
             return (Criteria) this;
         }
 
-        public Criteria andStoreNameGreaterThan(String value) {
-            addCriterion("storeName >", value, "storeName");
+        public Criteria andCounterNameGreaterThan(String value) {
+            addCriterion("counterName >", value, "counterName");
             return (Criteria) this;
         }
 
-        public Criteria andStoreNameGreaterThanOrEqualTo(String value) {
-            addCriterion("storeName >=", value, "storeName");
+        public Criteria andCounterNameGreaterThanOrEqualTo(String value) {
+            addCriterion("counterName >=", value, "counterName");
             return (Criteria) this;
         }
 
-        public Criteria andStoreNameLessThan(String value) {
-            addCriterion("storeName <", value, "storeName");
+        public Criteria andCounterNameLessThan(String value) {
+            addCriterion("counterName <", value, "counterName");
             return (Criteria) this;
         }
 
-        public Criteria andStoreNameLessThanOrEqualTo(String value) {
-            addCriterion("storeName <=", value, "storeName");
+        public Criteria andCounterNameLessThanOrEqualTo(String value) {
+            addCriterion("counterName <=", value, "counterName");
             return (Criteria) this;
         }
 
-        public Criteria andStoreNameLike(String value) {
-            addCriterion("storeName like", value, "storeName");
+        public Criteria andCounterNameLike(String value) {
+            addCriterion("counterName like", value, "counterName");
             return (Criteria) this;
         }
 
-        public Criteria andStoreNameNotLike(String value) {
-            addCriterion("storeName not like", value, "storeName");
+        public Criteria andCounterNameNotLike(String value) {
+            addCriterion("counterName not like", value, "counterName");
             return (Criteria) this;
         }
 
-        public Criteria andStoreNameIn(List<String> values) {
-            addCriterion("storeName in", values, "storeName");
+        public Criteria andCounterNameIn(List<String> values) {
+            addCriterion("counterName in", values, "counterName");
             return (Criteria) this;
         }
 
-        public Criteria andStoreNameNotIn(List<String> values) {
-            addCriterion("storeName not in", values, "storeName");
+        public Criteria andCounterNameNotIn(List<String> values) {
+            addCriterion("counterName not in", values, "counterName");
             return (Criteria) this;
         }
 
-        public Criteria andStoreNameBetween(String value1, String value2) {
-            addCriterion("storeName between", value1, value2, "storeName");
+        public Criteria andCounterNameBetween(String value1, String value2) {
+            addCriterion("counterName between", value1, value2, "counterName");
             return (Criteria) this;
         }
 
-        public Criteria andStoreNameNotBetween(String value1, String value2) {
-            addCriterion("storeName not between", value1, value2, "storeName");
+        public Criteria andCounterNameNotBetween(String value1, String value2) {
+            addCriterion("counterName not between", value1, value2, "counterName");
             return (Criteria) this;
         }
 
-        public Criteria andStoreTypeIsNull() {
-            addCriterion("storeType is null");
+        public Criteria andCounterTypeIsNull() {
+            addCriterion("counterType is null");
             return (Criteria) this;
         }
 
-        public Criteria andStoreTypeIsNotNull() {
-            addCriterion("storeType is not null");
+        public Criteria andCounterTypeIsNotNull() {
+            addCriterion("counterType is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStoreTypeEqualTo(Integer value) {
-            addCriterion("storeType =", value, "storeType");
+        public Criteria andCounterTypeEqualTo(Integer value) {
+            addCriterion("counterType =", value, "counterType");
             return (Criteria) this;
         }
 
-        public Criteria andStoreTypeNotEqualTo(Integer value) {
-            addCriterion("storeType <>", value, "storeType");
+        public Criteria andCounterTypeNotEqualTo(Integer value) {
+            addCriterion("counterType <>", value, "counterType");
             return (Criteria) this;
         }
 
-        public Criteria andStoreTypeGreaterThan(Integer value) {
-            addCriterion("storeType >", value, "storeType");
+        public Criteria andCounterTypeGreaterThan(Integer value) {
+            addCriterion("counterType >", value, "counterType");
             return (Criteria) this;
         }
 
-        public Criteria andStoreTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("storeType >=", value, "storeType");
+        public Criteria andCounterTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("counterType >=", value, "counterType");
             return (Criteria) this;
         }
 
-        public Criteria andStoreTypeLessThan(Integer value) {
-            addCriterion("storeType <", value, "storeType");
+        public Criteria andCounterTypeLessThan(Integer value) {
+            addCriterion("counterType <", value, "counterType");
             return (Criteria) this;
         }
 
-        public Criteria andStoreTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("storeType <=", value, "storeType");
+        public Criteria andCounterTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("counterType <=", value, "counterType");
             return (Criteria) this;
         }
 
-        public Criteria andStoreTypeIn(List<Integer> values) {
-            addCriterion("storeType in", values, "storeType");
+        public Criteria andCounterTypeIn(List<Integer> values) {
+            addCriterion("counterType in", values, "counterType");
             return (Criteria) this;
         }
 
-        public Criteria andStoreTypeNotIn(List<Integer> values) {
-            addCriterion("storeType not in", values, "storeType");
+        public Criteria andCounterTypeNotIn(List<Integer> values) {
+            addCriterion("counterType not in", values, "counterType");
             return (Criteria) this;
         }
 
-        public Criteria andStoreTypeBetween(Integer value1, Integer value2) {
-            addCriterion("storeType between", value1, value2, "storeType");
+        public Criteria andCounterTypeBetween(Integer value1, Integer value2) {
+            addCriterion("counterType between", value1, value2, "counterType");
             return (Criteria) this;
         }
 
-        public Criteria andStoreTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("storeType not between", value1, value2, "storeType");
+        public Criteria andCounterTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("counterType not between", value1, value2, "counterType");
             return (Criteria) this;
         }
 

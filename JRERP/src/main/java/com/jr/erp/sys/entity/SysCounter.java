@@ -3,15 +3,18 @@ package com.jr.erp.sys.entity;
 import com.jr.erp.base.mybatis.BaseEntity;
 
 public class SysCounter extends BaseEntity {
+
+    private static final long serialVersionUID = -4809791149910761100L;
+
     /**
      * 仓库名称
      */
-    private String storeName;
+    private String counterName;
 
     /**
      * 分类：0：成品柜台；1：旧料柜台
      */
-    private Integer storeType;
+    private Integer counterType;
 
     /**
      * 区域编码
@@ -25,34 +28,34 @@ public class SysCounter extends BaseEntity {
 
     /**
      * 仓库名称
-     * @return storeName 仓库名称
+     * @return counterName 仓库名称
      */
-    public String getStoreName() {
-        return storeName;
+    public String getCounterName() {
+        return counterName;
     }
 
     /**
      * 仓库名称
-     * @param storeName 仓库名称
+     * @param counterName 仓库名称
      */
-    public void setStoreName(String storeName) {
-        this.storeName = storeName == null ? null : storeName.trim();
+    public void setCounterName(String counterName) {
+        this.counterName = counterName == null ? null : counterName.trim();
     }
 
     /**
      * 分类：0：成品柜台；1：旧料柜台
-     * @return storeType 分类：0：成品柜台；1：旧料柜台
+     * @return counterType 分类：0：成品柜台；1：旧料柜台
      */
-    public Integer getStoreType() {
-        return storeType;
+    public Integer getCounterType() {
+        return counterType;
     }
 
     /**
      * 分类：0：成品柜台；1：旧料柜台
-     * @param storeType 分类：0：成品柜台；1：旧料柜台
+     * @param counterType 分类：0：成品柜台；1：旧料柜台
      */
-    public void setStoreType(Integer storeType) {
-        this.storeType = storeType;
+    public void setCounterType(Integer counterType) {
+        this.counterType = counterType;
     }
 
     /**

@@ -3,10 +3,12 @@ package com.jr.erp.sys.entity;
 import com.jr.erp.base.mybatis.BaseEntity;
 
 public class SysStore extends BaseEntity {
+    private static final long serialVersionUID = -7343026424954500150L;
+
     /**
      * 门店名称
      */
-    private String shopName;
+    private String storeName;
 
     /**
      * 区域编码
@@ -45,18 +47,18 @@ public class SysStore extends BaseEntity {
 
     /**
      * 门店名称
-     * @return shopName 门店名称
+     * @return storeName 门店名称
      */
-    public String getShopName() {
-        return shopName;
+    public String getStoreName() {
+        return storeName;
     }
 
     /**
      * 门店名称
-     * @param shopName 门店名称
+     * @param storeName 门店名称
      */
-    public void setShopName(String shopName) {
-        this.shopName = shopName == null ? null : shopName.trim();
+    public void setStoreName(String storeName) {
+        this.storeName = storeName == null ? null : storeName.trim();
     }
 
     /**
