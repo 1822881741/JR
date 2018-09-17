@@ -3,7 +3,7 @@ package com.jr.erp.base.utils;
 public class Ret {
 
 	/**
-	 * 返回码 100：成功 -100：失败
+	 * 返回码 100：成功 -100：失败 ,200 :成功，有警告warn
 	 */
 	private int status;
 	
@@ -40,6 +40,23 @@ public class Ret {
 		rt.setData(data);
 		return rt;
 	}
+
+    public static Ret warn(String msg)
+    {
+        Ret rt = new Ret();
+        rt.setStatus(200);
+        rt.setMsg(msg);
+        return rt;
+    }
+
+    public static Ret warn(String msg, Object data)
+    {
+        Ret rt = new Ret();
+        rt.setStatus(200);
+        rt.setMsg(msg);
+        rt.setData(data);
+        return rt;
+    }
 	public int getStatus() {
 		return status;
 	}

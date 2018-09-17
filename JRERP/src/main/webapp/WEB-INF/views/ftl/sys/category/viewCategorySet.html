@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<#include "/header.html" />
+<style type="text/css">
+.layui-nav-item a{
+	color: black !important;
+}
+.layui-nav .layui-nav-more{
+	border-style:solid dashed dashed !important;
+	border-color: #000000 transparent transparent !important;
+}
+</style>
+</head>
+<body>
+	<div class="layui-fluid">
+		<div class="layui-row layui-col-space15">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-body">
+						<ul class="layui-nav" style="background-color: #eef0f1 !important;">
+							<li class="layui-nav-item layui-this"><a href="javascript:void(0);">商品信息设置</a>
+								<dl class="layui-nav-child">
+									<dd>
+										<a href="javascript:void(0);" class='categoryMain' data-type='goldName'>金料名</a>
+									</dd>
+									<dd>
+										<a href="javascript:void(0);" class='categoryMain' data-type='jewelName'>宝石名</a>
+									</dd>
+									<dd>
+										<a href="javascript:void(0);" class='categoryMain' data-type='categoryName'>品名</a>
+									</dd>
+									<dd>
+										<a href="javascript:void(0);" class='categoryMain' data-type='goldPercent'>金成色</a>
+									</dd>
+								</dl>
+							</li>
+							<li class="layui-nav-item"><a href="javascript:void(0);" class='categoryMain' data-type='supply'>供应商</a></li>
+							<li class="layui-nav-item"><a href="javascript:void(0);" class='categoryMain' data-type='brandName'>品牌设置</a></li>
+							<li class="layui-nav-item"><a href="javascript:void(0);">钻石属性</a>
+								<dl class="layui-nav-child">
+									<dd>
+										<a href="javascript:void(0);" class='categoryMain' data-type='caratWeight'>钻石规格</a>
+									</dd>
+									<dd>
+										<a href="javascript:void(0);" class='categoryMain' data-type='clarity'>钻石净度</a>
+									</dd>
+									<dd>
+										<a href="javascript:void(0);" class='categoryMain' data-type='color'>钻石颜色</a>
+									</dd>
+									<dd>
+										<a href="javascript:void(0);" class='categoryMain' data-type='cut'>钻石切工</a>
+									</dd>
+									<dd>
+										<a href="javascript:void(0);" class='categoryMain' data-type='caratOther'>其他</a>
+									</dd>
+								</dl>
+							</li>
+							<li class="layui-nav-item"><a href="javascript:void(0);" class='categoryMain' data-type='bargainType'>特价类型</a></li>
+							<li class="layui-nav-item"><a href="javascript:void(0);">统计区间设置</a></li>
+						</ul>
+						<hr/>
+						<fieldset class="layui-elem-field">
+						  <legend  id="breadcrumb"></legend>
+						  <div class="layui-field-box">
+							<div class="layui-card">
+								<div class="layui-card-header">
+									<input type='hidden' id='categoryType'>
+									<button class="layui-btn layui-btn-sm" id="addCategory"><i class="layui-icon layui-icon-add-1"></i> 添加</button>
+									<button class="layui-btn layui-btn-sm" id="deleteCategory"><i class="layui-icon layui-icon-delete"></i> 删除</button>
+								</div>
+								<div class="layui-card-body">
+									<div class="layui-row layui-col-space5" style="max-width: 500px;">
+										<table id="categoryTypeList" lay-filter="categoryTypeList"></table>
+									</div>
+								</div>
+							</div>
+						  </div>
+						</fieldset>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="resource/layui/layui.all.js?v=1"></script>
+<script type="text/html" id="tableItemOperator">
+  <a class="layui-btn layui-btn-sm" lay-event="edit">编辑</a>
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	var categoryType = $($(".categoryMain")[0]).data("type");
+	$("#categoryType").val(categoryType);
+	$("#breadcrumb").html($($(".categoryMain")[0]).html());
+	table = layui.table;
+	table.render({
+		elem : '#categoryTypeList',
+		url : 'sysCategorySet/getCategoryData.do?categoryType='+categoryType,
+		height: 'full-280',
+		cols : [[
+		         {field : 'name',title : '名称',sort : true,width:250},
+		         {title:'操作', align:'center',width:178, toolbar: '#tableItemOperator'}
+				]],
+		page : false
+	});
+	
+	//切换类型
+	$(".categoryMain").on("click",function(){
+		$("#breadcrumb").html($(this).html());
+		var categoryType=$(this).data("type");
+		$("#categoryType").val(categoryType);
+		table.reload("categoryTypeList",{url:'sysCategorySet/getCategoryData.do?categoryType='+categoryType});
+	})
+	
+	table.on('tool(categoryTypeList)', function(obj){
+      var data = obj.data;
+       if(obj.event === 'edit'){
+    	   layer.prompt({ title: '请输入新名称'},function(value, index, elem){
+    		   if(value!=null && value!=''){
+	    		   data.name=value;
+		    	   $.ajax({
+			   	        type: "POST",
+			   	        url: "sysCategorySet/updateCategory.do",
+			   	        dataType: 'json',
+			   	        async: false,
+			   	        data: data,
+			   	        success: function(data) {
+			   	        	if(data.status ==100){
+				   	        	layer.closeAll();
+				   	        	table.reload("categoryTypeList",{url:'sysCategorySet/getCategoryData.do?categoryType='+$("#categoryType").val()});
+			   	        	}else{
+			   	        		layer.msg(data.msg);
+			   	        	}
+			   	        },
+			   	        error: function() {
+			   	        	layer.alert("修改失败");
+			   	        }
+		   	   		});
+    		   }
+    	});
+      }
+	});
+	//新增分类
+	$("#addCategory").on("click",function(){
+		var content="<div class='layui-form padding-10'>"
+			+"<div class='layui-form-item'><div class='layui-input-inline'><textarea id='categoryNames' name='categoryNames' style='width: 400px; height: 300px;' class='layui-textarea'></textarea></div></div>"
+			+"<div class='layui-form-item'><span class='layui-word-aux'>说明：换行可增加多个记录</span></div></div>";
+		layer.open({
+          title:'页面层',
+          type: 1,
+          shadeClose: true,
+          area: ['420px', '480px'],
+          content:content ,
+          btn : [ '保存', '取消' ],
+          yes : function(index, layero) {
+				 var categoryNames = $(layero.find('#categoryNames')[0]).val();
+				 if(categoryNames ==''){
+					 layer.alert("请输入名称");
+				 }else{
+					 var arr = categoryNames.split(new RegExp(/[\n,]/g));
+					 var canUse =[];
+					 for(var i=0;i<arr.length;i++){
+						 if($.trim(arr[i])!=''){
+							 canUse.push($.trim(arr[i]));
+						 }
+					 }
+					 if(canUse.length == 0){
+						 layer.alert("未解析到可用的名称，请重新输入");
+					 }else{
+						 	var ctyArr=[];
+						 	for (var i = 0; i < canUse.length; i++) {
+								ctyArr.push({'categoryType':$("#categoryType").val(),'name':canUse[i]})
+							}
+							$.ajax({
+						        type: "POST",
+						        url: "sysCategorySet/saveCategory.do",
+						        dataType: 'json',
+						        async: false,
+						        contentType:"application/json",
+						        data: JSON.stringify(ctyArr),
+						        success: function(data) {
+						            if (data.status == '100') {
+						            	layer.alert("保存成功",function(){
+							            	layer.closeAll();
+						            	});
+						            }else if(data.status == '200'){
+						            	layer.alert("保存成功，如下数据已经存在：【"+data.data.join()+"】",function(){
+							            	layer.closeAll();
+						            	})
+						            }else{
+						            	layer.alert(data.msg);
+						            }
+						            table.reload("categoryTypeList",{url:'sysCategorySet/getCategoryData.do?categoryType='+$("#categoryType").val()});
+						        },
+						        error: function() {
+						        }
+						    });
+					 }
+				 }
+			}
+	    });
+	})
+});
+</script>
+</html>
+
