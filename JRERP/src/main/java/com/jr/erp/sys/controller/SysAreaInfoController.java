@@ -67,7 +67,6 @@ public class SysAreaInfoController {
         exampale.setPage(pageForm.getPage());
         exampale.setLimit(pageForm.getLimit());
         exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo());
-        RetPage page = sysAreaInfoService.selectPage(exampale);
-        return page;
+        return sysAreaInfoService.selectPage(exampale);
     }
 }
