@@ -21,6 +21,7 @@
 			<value>
 				<!-- 对静态资源设置匿名访问 -->
 				/resource/** = anon
+				/static/** = anon
 				/login = anon
 				/checkLogin = anon
 				<!-- /** = authc 所有url都必须认证通过才可以访问 -->

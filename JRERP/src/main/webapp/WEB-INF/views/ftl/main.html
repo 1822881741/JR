@@ -1,152 +1,255 @@
 <!DOCTYPE html>
-<html>
-<head>
-<base href="${basePath}">
-  <meta charset="utf-8">
-  <title>layuiAdmin</title>
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <link rel="stylesheet" href="${basePath}resource/layui/css/layui.css" media="all">
-  <link rel="stylesheet" href="${basePath}resource/login/admin.css">
-</head>
-<body class="layui-layout-body">
-  <div id="LAY_app">
-    <div class="layui-layout layui-layout-admin">
-      <div class="layui-header">
-        <!-- 头部区域 -->
-        <ul class="layui-nav layui-layout-left">
-          <li class="layui-nav-item layadmin-flexible" lay-unselect>
-            <a href="javascript:;" layadmin-event="flexible" title="侧边伸缩">
-              <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
-            </a>
-          </li>
-          <li class="layui-nav-item" lay-unselect>
-            <a href="javascript:;" layadmin-event="refresh" title="刷新">
-              <i class="layui-icon layui-icon-refresh-3"></i>
-            </a>
-          </li>
-          <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <input type="text" placeholder="商品跟踪....." autocomplete="off" class="layui-input layui-input-search" layadmin-event="serach" lay-action="template/search.html?keywords="> 
-          </li>
-        </ul>
-        <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
-          <li class="layui-nav-item" lay-unselect>
-            <a lay-href="app/message/index.html" layadmin-event="message" lay-text="消息中心" title="消息中心">
-              <i class="layui-icon layui-icon-notice"></i>  
-              <!-- 如果有新消息，则显示小圆点 -->
-              <span class="layui-badge-dot"></span>
-            </a>
-          </li>
-          <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <a href="javascript:;" layadmin-event="theme" title="主题设置">
-              <i class="layui-icon layui-icon-theme"></i>
-            </a>
-          </li>
-          <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <a href="javascript:;" layadmin-event="note" title="便签设置">
-              <i class="layui-icon layui-icon-note"></i>
-            </a>
-          </li>
-          <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <a href="javascript:;" layadmin-event="fullscreen" title="全屏">
-              <i class="layui-icon layui-icon-screen-full"></i>
-            </a>
-          </li>
-          <li class="layui-nav-item" lay-unselect>
-            <a href="javascript:;">
-              <cite>贤心</cite>
-            </a>
-            <dl class="layui-nav-child">
-              <dd><a lay-href="set/user/info.html">基本资料</a></dd>
-              <dd><a lay-href="set/user/password.html">修改密码</a></dd>
-              <hr>
-              <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
-            </dl>
-          </li>
-          <li class="layui-nav-item layui-hide-xs" lay-unselect>
-            <a href="javascript:;" layadmin-event="about"><i class="layui-icon layui-icon-more-vertical"></i></a>
-          </li>
-          <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>
-            <a href="javascript:;" layadmin-event="more"><i class="layui-icon layui-icon-more-vertical"></i></a>
-          </li>
-        </ul>
-      </div>
-      <!-- 侧边菜单 -->
-      <div class="layui-side layui-side-menu">
-        <div class="layui-side-scroll">
-          <div class="layui-logo" lay-href="home/console.html">
-            <span>张三</span>
-          </div>
-          <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
-            <li data-name="set" class="layui-nav-item">
-              <a href="javascript:;" lay-tips="设置" lay-direction="2">
-                <i class="layui-icon layui-icon-set"></i>
-                <cite>基础设置</cite>
-              </a>
-              <dl class="layui-nav-child">
-                <dd class="layui-nav-itemed">
-                  <a href="javascript:;">区域门店设置</a>
-                  <dl class="layui-nav-child">
-                  	<dd><a lay-href="sysAreaInfo/viewAreaInfo.do">区域设置</a></dd>
-                    <dd><a lay-href="sysStore/viewStore.do">门店管理</a></dd>
-                    <dd><a lay-href="sysCounter/viewCounter.do">柜台管理</a></dd>
-                    <dd><a lay-href="sysCounter/counterList.do">人员设置</a></dd>
-                  </dl>
-                </dd>
-                 <dd class="layui-nav-itemed">
-                  <a href="javascript:;">基础信息设置</a>
-                  <dl class="layui-nav-child">
-                  	<dd><a lay-href="sysCategorySet/viewCategorySet.do">基础属性设置</a></dd>
-                  </dl>
-                </dd>
-              </dl>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <!-- 页面标签 -->
-      <div class="layadmin-pagetabs" id="LAY_app_tabs">
-        <div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
-        <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
-        <div class="layui-icon layadmin-tabs-control layui-icon-down">
-          <ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
-            <li class="layui-nav-item" lay-unselect>
-              <a href="javascript:;"></a>
-              <dl class="layui-nav-child layui-anim-fadein">
-                <dd layadmin-event="closeThisTabs"><a href="javascript:;">关闭当前标签页</a></dd>
-                <dd layadmin-event="closeOtherTabs"><a href="javascript:;">关闭其它标签页</a></dd>
-                <dd layadmin-event="closeAllTabs"><a href="javascript:;">关闭全部标签页</a></dd>
-              </dl>
-            </li>
-          </ul>
-        </div>
-        <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
-          <ul class="layui-tab-title" id="LAY_app_tabsheader">
-            <li lay-id="home/console.html" lay-attr="home/console.html" class="layui-this"><i class="layui-icon layui-icon-home"></i></li>
-          </ul>
-        </div>
-      </div>
-      <!-- 主体内容 -->
-      <div class="layui-body" id="LAY_app_body">
-        <div class="layadmin-tabsbody-item layui-show">
-          <iframe src="home/console.html" frameborder="0" class="layadmin-iframe"></iframe>
-        </div>
-      </div>
-      
-      <!-- 辅助元素，一般用于移动设备下遮罩 -->
-      <div class="layadmin-body-shade" layadmin-event="shade"></div>
-    </div>
-  </div>
+<html>	
+	<head>
+		<base href="${basePath}">
+		<meta charset="utf-8">
+		<title> UI框架</title>
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" type="text/css" media="screen" href="static/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="static/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="static/css/smartadmin-production-plugins.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="static/css/smartadmin-production.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="static/css/smartadmin-skins.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="static/css/smartadmin-rtl.min.css"> 
+		<link rel="stylesheet" type="text/css" media="screen" href="static/css/demo.min.css">
+		<link rel="shortcut icon" href="static/img/favicon/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="static/img/favicon/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+		<link rel="stylesheet" href="static/plugins/bootStrap-addTabs/bootstrap.addtabs.css">
+	</head>
+	<body class="smart-style-3">
+		<header id="header">
+			<div id="logo-group">
+				<span id="logo"> <img src="static/img/logo-blue.png" alt="SmartAdmin"> </span>
+				<span id="activity" class="activity-dropdown"> <i class="fa fa-user"></i> <b class="badge"> 21 </b> </span>
+				<div class="ajax-dropdown">
+					<!-- the ID links are fetched via AJAX to the ajax container "ajax-notifications" -->
+					<div class="btn-group btn-group-justified" data-toggle="buttons">
+						<label class="btn btn-default">
+							<input type="radio" name="activity" id="ajax/notify/mail.html">消息 (14) </label>
+						<label class="btn btn-default">
+							<input type="radio" name="activity" id="ajax/notify/notifications.html">通知 (3) </label>
+						<label class="btn btn-default">
+							<input type="radio" name="activity" id="ajax/notify/tasks.html">任务 (4) </label>
+					</div>
+					<div class="ajax-notifications custom-scroll">
+						<div class="alert alert-transparent">
+							<h4>Click a button to show messages here</h4>
+							This blank page message helps protect your privacy, or you can show the first message here automatically.
+						</div>
+						<i class="fa fa-lock fa-4x fa-border"></i>
+					</div>
+					<span> Last updated on: 12/12/2013 9:43AM
+						<button type="button" data-loading-text="<i class='fa fa-refresh fa-spin'></i> Loading..." class="btn btn-xs btn-default pull-right">
+							<i class="fa fa-refresh"></i>
+						</button> </span>
+				</div>
+			</div>
+			<div class="project-context hidden-xs">
+				<span class="project-selector dropdown-toggle" data-toggle="dropdown">最近项目 <i class="fa fa-angle-down"></i></span>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="javascript:void(0);">项目1</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">项目2</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);">项目3</a>
+					</li>
+					<li class="divider"></li>
+					<li>
+						<a href="javascript:void(0);"><i class="fa fa-power-off"></i> 清除</a>
+					</li>
+				</ul>
+			</div>
+			<div class="pull-right">
+				<div id="logout" class="btn-header transparent pull-right">
+					<span> <a href="login.html" title="Sign Out" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i></a> </span>
+				</div>
+				<div id="fullscreen" class="btn-header transparent pull-right">
+					<span> <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i class="fa fa-arrows-alt"></i></a> </span>
+				</div>
+				<div id="hide-menu" class="btn-header pull-right">
+					<span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
+				</div>
+				<div class="header-search pull-right">
+					<input id="search-fld" type="text" name="param" placeholder="请输入...">
+					<button type="submit">
+						<i class="fa fa-search"></i>
+					</button>
+					<a href="javascript:void(0);" id="cancel-search-js" title="Cancel Search"><i class="fa fa-times"></i></a>
+				</div>
+			</div>
 
-  <script src="${basePath}resource/layui/layui.js"></script>
-</body>
-   <script>
-   layui.config({
-	    base: 'resource/layui/' //静态资源所在路径
-	  }).extend({
-	    index: 'index/index' //主入口模块
-	  }).use('index');
+		</header>
+		<!-- END HEADER -->
+		<aside id="left-panel">
+		<span class="minifyme" data-action="minifyMenu"> <i class="fa fa-arrow-circle-left hit"></i> </span>
+			<!-- User info -->
+			<div class="login-info">
+				<span> <!-- User image size is adjusted inside CSS, it should stay as is --> 
+					
+					<a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+						<img src="static/img/avatars/sunny.png" alt="me" class="online" /> 
+						<span>
+							管理员 张三
+						</span>
+						<i class="fa fa-angle-down"></i>
+					</a> 
+					
+				</span>
+			</div>
+			<nav>
+				<ul>
+					<li class="">
+						<a href="#" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">主页</span></a>
+						<ul>
+							<li class="">
+								<a data-addtab="分析" data-url="sysAreaInfo/viewAreaInfo.do"><span class="menu-item-parent">分析</span></a>
+							</li>
+							<li class="">
+								<a data-addtab="市场" data-url="sysStore/viewStore.do"><span class="menu-item-parent">市场</span></a>
+							</li>
+							<li class="">
+								<a data-addtab="市场" data-url="sysCounter/viewCounter.do" ><span class="menu-item-parent">照片墙</span></a>
+							</li>
+							<li class="">
+								<a data-addtab="市2场" data-url="sysCategorySet/viewCategorySet.do" ><span class="menu-item-parent">照片2墙</span></a>
+							</li>
+						</ul>	
+					</li>
+					<li>
+						<a href="ajax/inbox.html"><i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">外框</span> <span class="badge pull-right inbox-badge margin-right-13">14</span></a>
+						<ul>
+							<li>
+								<a href="ajax/inbox.html">内盒 </a>
+							</li>
+							<li>
+								<a href="ajax/inbox-email-view.html">Email 预览 </a>
+							</li>
+							<li>
+								<a href="ajax/inbox-email-compose.html">组合 </a>
+							</li>
+							<li>
+								<a href="ajax/inbox-email-reply.html">回复 </a>
+							</li>
+							<li>
+								<a href="ajax/email-template.html">Email 模板 </a>
+							</li>
+						</ul>	
+					</li>
+				</ul>
+			</nav>
+		</aside>
+		<!-- END NAVIGATION -->
+		
+		<!-- #MAIN PANEL -->
+		<div id="main" role="main">
+			<!-- RIBBON -->
+			<div id="ribbon">
+               <ul class="nav nav-tabs" id="tabs1" role="tablist">
+               </ul>
+			</div>
+			<!-- END RIBBON -->
 
-  </script>
+			<!-- #MAIN CONTENT -->
+			<div id="content">
+               <!-- Nav tabs -->
+               <!-- Tab panes -->
+               <div class="tab-content">
+               </div>
+			</div>
+			<!-- END #MAIN CONTENT -->
+
+		</div>
+		<!-- END #MAIN PANEL -->
+
+		<!-- #PAGE FOOTER -->
+		<div class="page-footer">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<span class="txt-color-white">SmartAdmin 1.9.0 <span class="hidden-xs"> -lication Framework</span> © 2017-2019</span>
+				</div>
+
+				<div class="col-xs-6 col-sm-6 text-right hidden-xs">
+					<div class="txt-color-white inline-block">
+						<i class="txt-color-blueLight hidden-mobile">Last account activity <i class="fa fa-clock-o"></i> <strong>52 mins ago &nbsp;</strong> </i>
+						<div class="btn-group dropup">
+							<button class="btn btn-xs dropdown-toggle bg-color-blue txt-color-white" data-toggle="dropdown">
+								<i class="fa fa-link"></i> <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu pull-right text-left">
+								<li>
+									<div class="padding-5">
+										<p class="txt-color-darken font-sm no-margin">Download Progress</p>
+										<div class="progress progress-micro no-margin">
+											<div class="progress-bar progress-bar-success" style="width: 50%;"></div>
+										</div>
+									</div>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<div class="padding-5">
+										<p class="txt-color-darken font-sm no-margin">Server Load</p>
+										<div class="progress progress-micro no-margin">
+											<div class="progress-bar progress-bar-success" style="width: 20%;"></div>
+										</div>
+									</div>
+								</li>
+								<li class="divider"></li>
+								<li >
+									<div class="padding-5">
+										<p class="txt-color-darken font-sm no-margin">Memory Load <span class="text-danger">*critical*</span></p>
+										<div class="progress progress-micro no-margin">
+											<div class="progress-bar progress-bar-danger" style="width: 70%;"></div>
+										</div>
+									</div>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<div class="padding-5">
+										<button class="btn btn-block btn-default">refresh</button>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="shortcut">
+			<ul>
+				<li>
+					<a href="#ajax/inbox.html" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-envelope fa-4x"></i> <span>Ma打断点il <span class="label pull-right bg-color-darken">14</span></span> </span> </a>
+				</li>
+				<li>
+					<a href="#ajax/calendar.html" class="jarvismetro-tile big-cubes bg-color-orangeDark"> <span class="iconbox"> <i class="fa fa-calendar fa-4x"></i> <span>Calendar</span> </span> </a>
+				</li>
+				<li>
+					<a href="#ajax/gmap-xml.html" class="jarvismetro-tile big-cubes bg-color-purple"> <span class="iconbox"> <i class="fa fa-map-marker fa-4x"></i> <span>Maps</span> </span> </a>
+				</li>
+				<li>
+					<a href="#ajax/invoice.html" class="jarvismetro-tile big-cubes bg-color-blueDark"> <span class="iconbox"> <i class="fa fa-book fa-4x"></i> <span>Invoice <span class="label pull-right bg-color-darken">99</span></span> </span> </a>
+				</li>
+				<li>
+					<a href="#ajax/gallery.html" class="jarvismetro-tile big-cubes bg-color-greenLight"> <span class="iconbox"> <i class="fa fa-picture-o fa-4x"></i> <span>Gallery </span> </span> </a>
+				</li>
+				<li>
+					<a href="#ajax/profile.html" class="jarvismetro-tile big-cubes selected bg-color-pinkDark"> <span class="iconbox"> <i class="fa fa-user fa-4x"></i> <span>My Profile </span> </span> </a>
+				</li>
+			</ul>
+		</div>
+		<script src="static/js/libs/jquery-3.2.1.min.js"></script>
+		<script src="static/js/app.config.js?v="+Math.random()></script>
+		<script src="static/js/bootstrap/bootstrap.min.js"></script>
+		<script src="static/js/smartwidgets/jarvis.widget.min.js"></script>
+		<script src="static/js/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+		<script src="static/js/demo.min.js"></script>
+		<script src="static/js/app.js?v="+Math.random()></script>
+		<script src="static/plugins/bootStrap-addTabs/bootstrap.addtabs.js?v="+Math.random()></script>
+	</body>
+
 </html>

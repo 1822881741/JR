@@ -28,7 +28,7 @@
 	</mvc:annotation-driven>
 	<!-- 静态资源访问，不被DispatcherServlet处理 -->
 	<mvc:resources mapping="/resource/**" location="/resource/"/>  
-
+	<mvc:resources mapping="/static/**" location="/static/"/> 
 	<!-- 设置freeMarker的配置文件路径 -->    
     <bean id="freemarkerConfiguration" class="org.springframework.beans.factory.config.PropertiesFactoryBean">    
         <property name="location" value="classpath:prop/freemarker.properties"/>    

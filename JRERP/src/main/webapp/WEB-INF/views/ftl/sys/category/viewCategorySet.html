@@ -23,34 +23,37 @@
 							<li class="layui-nav-item layui-this"><a href="javascript:void(0);">商品信息设置</a>
 								<dl class="layui-nav-child">
 									<dd>
-										<a href="javascript:void(0);" class='categoryMain' data-type='goldName'>金料名</a>
+										<a href="javascript:void(0);" class='categoryMain' data-type='goldName'>金成色</a>
 									</dd>
 									<dd>
-										<a href="javascript:void(0);" class='categoryMain' data-type='jewelName'>宝石名</a>
+										<a href="javascript:void(0);" class='categoryMain' data-type='jewelName'>石料名</a>
 									</dd>
 									<dd>
 										<a href="javascript:void(0);" class='categoryMain' data-type='categoryName'>品名</a>
 									</dd>
 									<dd>
-										<a href="javascript:void(0);" class='categoryMain' data-type='goldPercent'>金成色</a>
+										<a href="javascript:void(0);" class='categoryMain' data-type='goldPercent'>金含量</a>
 									</dd>
 								</dl>
 							</li>
 							<li class="layui-nav-item"><a href="javascript:void(0);" class='categoryMain' data-type='supply'>供应商</a></li>
 							<li class="layui-nav-item"><a href="javascript:void(0);" class='categoryMain' data-type='brandName'>品牌设置</a></li>
-							<li class="layui-nav-item"><a href="javascript:void(0);">钻石属性</a>
+							<li class="layui-nav-item"><a href="javascript:void(0);">宝石属性</a>
 								<dl class="layui-nav-child">
 									<dd>
-										<a href="javascript:void(0);" class='categoryMain' data-type='caratWeight'>钻石规格</a>
+										<a href="javascript:void(0);" class='categoryMain' data-type='caratWeight'>宝石规格</a>
 									</dd>
 									<dd>
-										<a href="javascript:void(0);" class='categoryMain' data-type='clarity'>钻石净度</a>
+										<a href="javascript:void(0);" class='categoryMain' data-type='clarity'>宝石净度</a>
 									</dd>
 									<dd>
-										<a href="javascript:void(0);" class='categoryMain' data-type='color'>钻石颜色</a>
+										<a href="javascript:void(0);" class='categoryMain' data-type='color'>宝石颜色</a>
 									</dd>
 									<dd>
-										<a href="javascript:void(0);" class='categoryMain' data-type='cut'>钻石切工</a>
+										<a href="javascript:void(0);" class='categoryMain' data-type='cut'>宝石切工</a>
+									</dd>
+									<dd>
+										<a href="javascript:void(0);" class='categoryMain' data-type='shape'>宝状</a>
 									</dd>
 									<dd>
 										<a href="javascript:void(0);" class='categoryMain' data-type='caratOther'>其他</a>
@@ -71,8 +74,10 @@
 									<button class="layui-btn layui-btn-sm" id="deleteCategory"><i class="layui-icon layui-icon-delete"></i> 删除</button>
 								</div>
 								<div class="layui-card-body">
-									<div class="layui-row layui-col-space5" style="max-width: 500px;">
-										<table id="categoryTypeList" lay-filter="categoryTypeList"></table>
+									<div class="layui-row layui-col-space5">
+										<div class="layui-col-md12">
+											<table id="categoryTypeList" lay-filter="categoryTypeList"></table>
+									    </div>
 									</div>
 								</div>
 							</div>
@@ -195,6 +200,7 @@ $(document).ready(function(){
 						            table.reload("categoryTypeList",{url:'sysCategorySet/getCategoryData.do?categoryType='+$("#categoryType").val()});
 						        },
 						        error: function() {
+						        	layer.alert("连接服务器失败，请稍后重试");
 						        }
 						    });
 					 }
@@ -205,4 +211,3 @@ $(document).ready(function(){
 });
 </script>
 </html>
-
