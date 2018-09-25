@@ -47,7 +47,7 @@ public class RetPage {
 	public static RetPage ok(Long count,List<BaseEntity> data)
 	{
 		RetPage rt = new RetPage();
-		rt.setCode(0);
+		rt.setCode(100);
 		rt.setCount(count);
 		rt.setData(data);
 		return rt;

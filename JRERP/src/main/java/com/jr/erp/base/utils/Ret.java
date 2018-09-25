@@ -3,7 +3,7 @@ package com.jr.erp.base.utils;
 public class Ret {
 
 	/**
-	 * 返回码 100：成功 -100：失败 ,200 :成功，有警告warn
+	 * 返回码 100：成功 -100：失败 , 200 :成功，有警告warn
 	 */
 	private int status;
 	
