@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<#include "/header.html" />
+</head>
+<body>
+	<div class="layui-fluid">
+		<div class="layui-row layui-col-space15">
+			<div class="layui-col-md12">
+				<div class="layui-card">
+					<div class="layui-card-body">
+						<div class="layui-tab layui-tab-card" lay-filter="test">
+						  <ul class="layui-tab-title">
+						    <li lay-id="11" class="layui-this">素金</li>
+						    <li lay-id="22" class="">非素</li>
+						    <li lay-id="22" class="">旧料</li>
+						    <li lay-id="22" class="">服务费</li>
+						  </ul>
+						  <div class="layui-tab-content">
+						    <div class="layui-tab-item layui-show">
+						    	<div class="layui-row layui-col-space15">
+						    		<div class="layui-col-md12 layui-col-md-offset11">
+								    	<button class="layui-btn layui-btn-sm addCategory" data-type='gold' data-name='素金'>新增</button>
+						    		</div>
+						    	</div>
+						    	<div class="layui-row layui-col-space15">
+						    		<div class="layui-col-md12 ">
+								    	<table class="layui-hide" id="goldList" lay-filter="goldList"></table>
+						    		</div>
+						    	</div>
+						    </div>
+						    <div class="layui-tab-item">
+						   		<button id="addStore" class="layui-btn">新增</button>
+						    	<table class="layui-hide" id="notGoldList" lay-filter="notGoldList"></table>
+						    </div>
+						    <div class="layui-tab-item">
+						    	<button id="addStore" class="layui-btn">新增</button>
+						    	<table class="layui-hide" id="oldMaterialList" lay-filter="oldMaterialList"></table>
+						    </div>
+						    <div class="layui-tab-item">
+						    	<button id="addStore" class="layui-btn">新增</button>
+						    	<table class="layui-hide" id="serviceFeeList" lay-filter="serviceFeeList"></table>
+						    </div>
+						  </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="resource/layui/layui.all.js?v=1"></script>
+<script type="text/html" id="tableItemOperator">
+  <a class="layui-btn layui-btn-sm" lay-event="edit">编辑</a>
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	table = layui.table;
+	table.render({
+		elem : '#goldList',
+		url : 'sysGoodsCategory/getGoodsCategoryData.do?firstTypePrefix=gold',
+		height: 'full-280',
+		cols : [[
+		         {field : 'systemCode',title : '系统编码',sort : true},
+		         {field : 'assistCode',title : '助记码',sort : true},
+		         {field : 'goodsName',title : '名称',sort : true},
+		         {field : 'firstType',title : '商品大类',sort : true},
+		         {field : 'secondType',title : '商品中类',sort : true},
+		         {field : 'goldName',title : '金料',sort : true},
+		         {field : 'jewelName',title : '石料',sort : true},
+		         {field : 'categoryName',title : '品名',sort : true},
+		         {field : 'goldPercent',title : '金成色',sort : true},
+		         {field : 'factClass',title : '统计类别',sort : true},
+		         {field : 'labelName',title : '标签显示',sort : true},
+		         {field : 'status',title : '状态',sort : true},
+		         {title:'操作', align:'center',toolbar: '#tableItemOperator'}
+				]],
+		page : false
+	});
+	table.render({
+		elem : '#notGoldList',
+		url : 'sysGoodsCategory/getGoodsCategoryData.do?firstTypePrefix=notGold',
+		height: 'full-280',
+		cols : [[
+		         {field : 'systemCode',title : '系统编码',sort : true},
+		         {field : 'assistCode',title : '助记码',sort : true},
+		         {field : 'goodsName',title : '名称',sort : true},
+		         {field : 'firstType',title : '商品大类',sort : true},
+		         {field : 'secondType',title : '商品中类',sort : true},
+		         {field : 'goldName',title : '金料',sort : true},
+		         {field : 'jewelName',title : '石料',sort : true},
+		         {field : 'categoryName',title : '品名',sort : true},
+		         {field : 'goldPercent',title : '金成色',sort : true},
+		         {field : 'factClass',title : '统计类别',sort : true},
+		         {field : 'labelName',title : '标签显示',sort : true},
+		         {field : 'status',title : '状态',sort : true},
+		         {title:'操作', align:'center',toolbar: '#tableItemOperator'}
+				]],
+		page : false
+	});
+	table.render({
+		elem : '#oldMaterialList',
+		url : 'sysGoodsCategory/getGoodsCategoryData.do?firstTypePrefix=oldMaterial',
+		height: 'full-280',
+		cols : [[
+		         {field : 'systemCode',title : '系统编码',sort : true},
+		         {field : 'assistCode',title : '助记码',sort : true},
+		         {field : 'goodsName',title : '名称',sort : true},
+		         {field : 'firstType',title : '商品大类',sort : true},
+		         {field : 'secondType',title : '商品中类',sort : true},
+		         {field : 'goldName',title : '金料',sort : true},
+		         {field : 'jewelName',title : '石料',sort : true},
+		         {field : 'categoryName',title : '品名',sort : true},
+		         {field : 'goldPercent',title : '金成色',sort : true},
+		         {field : 'factClass',title : '统计类别',sort : true},
+		         {field : 'labelName',title : '标签显示',sort : true},
+		         {field : 'status',title : '状态',sort : true},
+		         {title:'操作', align:'center',toolbar: '#tableItemOperator'}
+				]],
+		page : false
+	});
+	table.render({
+		elem : '#serviceFeeList',
+		url : 'sysGoodsCategory/getGoodsCategoryData.do?firstTypePrefix=serviceFee',
+		height: 'full-280',
+		cols : [[
+		         {field : 'systemCode',title : '系统编码',sort : true},
+		         {field : 'assistCode',title : '助记码',sort : true},
+		         {field : 'goodsName',title : '名称',sort : true},
+		         {field : 'firstType',title : '商品大类',sort : true},
+		         {field : 'secondType',title : '商品中类',sort : true},
+		         {field : 'goldName',title : '金料',sort : true},
+		         {field : 'jewelName',title : '石料',sort : true},
+		         {field : 'categoryName',title : '品名',sort : true},
+		         {field : 'goldPercent',title : '金成色',sort : true},
+		         {field : 'factClass',title : '统计类别',sort : true},
+		         {field : 'labelName',title : '标签显示',sort : true},
+		         {field : 'status',title : '状态',sort : true},
+		         {title:'操作', align:'center',toolbar: '#tableItemOperator'}
+				]],
+		page : false
+	});
+	
+	$(".addCategory").on("click",function(){
+		layer.open({
+			type : 2,
+			title : "新增/修改"+$(this).data("name"),
+			area : ['820px','520px'],
+			shade : 0.8,
+			id : 'lay_addCategory', //设定一个id，防止重复弹出
+			btn : [ '保存', '取消' ],
+			moveType : 1, //拖拽模式，0或者1
+			content : "sysGoodsCategory/addGoodsCategory.do?firstTypePrefix="+$(this).data("type"),
+			yes : function(index, layero) {
+				 var submit = layero.find('iframe').contents().find("#submitForm");
+   				 submit.click();
+			}
+		});
+	})
+});
+</script>
+</html>
