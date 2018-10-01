@@ -1,5 +1,6 @@
 package com.jr.erp.sys.element.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,6 +71,32 @@ public class SysElementController
                     List<BaseEntity> storeList = sysAreaInfoService.selectByExample(storeExample);
                     data.put("storeInfo", storeList);
                     break;
+                case "secondType":
+                    Map<String,List<String>> secondTypeMap = new HashMap<String,List<String>>(); 
+                    List<String> gold= new ArrayList<String>();
+                    gold.add("素金");
+                    gold.add("PT950");
+                    secondTypeMap.put("gold", gold);
+                    
+                    
+                    List<String> notGold= new ArrayList<String>();
+                    notGold.add("K金");
+                    notGold.add("镶嵌");
+                    notGold.add("玉器");
+                    secondTypeMap.put("notGold", notGold);
+                    
+                    List<String> materia= new ArrayList<String>();
+                    materia.add("旧黄");
+                    materia.add("旧K");
+                    secondTypeMap.put("materia", materia);
+                    
+                    List<String> serviceFee= new ArrayList<String>();
+                    serviceFee.add("手工费");
+                    serviceFee.add("这个费");
+                    secondTypeMap.put("gold", gold);
+                    
+                    data.put("secondTypeMap", secondTypeMap);
+                    break;    
                 default:
                     break;
                 }

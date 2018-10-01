@@ -74,7 +74,7 @@ public class SysGoodsCategoryController
     public String addGoodsCategory(String firstTypePrefix,HttpServletRequest request,Model model)
     {
         model.addAttribute("firstTypePrefix",firstTypePrefix);
-        return "sys/category/addGoodsCategory"+firstTypePrefix;
+        return "sys/category/addGoodsCategory";
     }
     /**    
      * saveGoodsCategory(这里用一句话描述这个方法的作用)    

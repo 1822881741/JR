@@ -1493,7 +1493,7 @@ var calc_navbar_height = function() {
 		
 			// run form elements
 			runAllForms();
-	
+			$("body").addClass(localStorage.getItem("sm-skin-style"))
 		} else {
 			
 			// is mobile
@@ -1514,7 +1514,7 @@ var calc_navbar_height = function() {
 		
 			// run form elements
 			runAllForms();
-			
+			$("body").addClass(localStorage.getItem("sm-skin-style"))
 		}
 	
 	}

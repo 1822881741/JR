@@ -67,6 +67,7 @@
 	$(document).ready(function(){
 		pageSetUp();
 		//
+		$(body).addClass(localStorage.getItem("sm-skin-style"))
 		$.ajax({
 	        type: "POST",
 	        url: "sysAreaInfo/getAreaInfoList.do",
