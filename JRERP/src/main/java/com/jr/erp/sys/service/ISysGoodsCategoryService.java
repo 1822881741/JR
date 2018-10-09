@@ -1,11 +1,9 @@
 package com.jr.erp.sys.service;
 
-import java.util.List;
-
 import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.mybatis.IBaseService;
+import com.jr.erp.sys.element.dto.SysGoodsCategoryDTO;
 import com.jr.erp.sys.entity.SysCategorySet;
-import com.jr.erp.sys.entity.SysGoodsCategory;
 
 /**
  * 系统管理service
@@ -20,7 +18,7 @@ public interface ISysGoodsCategoryService extends IBaseService<BaseEntity>{
      * @return void
      * @Exception 异常对象
     */
-    void saveCategory(SysGoodsCategory store);
+    void saveCategory(SysGoodsCategoryDTO sysGoodsCategoryDTO);
 
     /**    
      * updateCounter(这里用一句话描述这个方法的作用)    

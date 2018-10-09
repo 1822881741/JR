@@ -12,7 +12,7 @@ import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.base.utils.BasePageForm;
 import com.jr.erp.base.utils.Ret;
 import com.jr.erp.base.utils.RetPage;
-import com.jr.erp.sys.entity.SysGoodsCategory;
+import com.jr.erp.sys.element.dto.SysGoodsCategoryDTO;
 import com.jr.erp.sys.entity.SysGoodsCategoryExample;
 import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.service.ISysGoodsCategoryService;
@@ -87,39 +87,11 @@ public class SysGoodsCategoryController
     */
     @RequestMapping(value = "/saveGoodsCategory.do")
     @ResponseBody
-    public Ret saveGoodsCategory(SysGoodsCategory sysGoodsCategory,HttpServletRequest request)
+    public Ret saveGoodsCategory(SysGoodsCategoryDTO sysGoodsCategoryDTO,HttpServletRequest request)
     {
         SysUser user = ShiroUtils.getSysUser();
-        sysGoodsCategory.setCompanyNo(user.getCompanyNo());
-        sysGoodsCategoryService.saveCategory(sysGoodsCategory);
+        sysGoodsCategoryDTO.setCompanyNo(user.getCompanyNo());
+        sysGoodsCategoryService.saveCategory(sysGoodsCategoryDTO);
         return Ret.ok("保存成功");
     }
-//    
-//    /**    
-//     * updateCounter(这里用一句话描述这个方法的作用)    
-//     * 保存门店       
-//     * @param @param store
-//     * @param @param request
-//     * @param @return     
-//     * @return Ret
-//     * @Exception 异常对象
-//    */
-//    @RequestMapping(value = "/updateCategory.do")
-//    @ResponseBody
-//    public Ret updateCategory(SysCategorySet category,HttpServletRequest request)
-//    {
-//        SysUser user = ShiroUtils.getSysUser();
-//        try
-//        {
-//            category.setCompanyNo(user.getCompanyNo());
-//            sysCategorySetService.updateCategory(category);
-//        } catch (Exception e)
-//        {
-//            if (e instanceof ServiceAccessException)
-//            {
-//                return Ret.error(e.getMessage());
-//            }
-//        }
-//        return Ret.ok("保存成功");
-//    }
 }

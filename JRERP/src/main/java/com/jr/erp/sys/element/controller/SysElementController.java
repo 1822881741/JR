@@ -88,15 +88,63 @@ public class SysElementController
                     List<String> materia= new ArrayList<String>();
                     materia.add("旧黄");
                     materia.add("旧K");
-                    secondTypeMap.put("materia", materia);
+                    secondTypeMap.put("material", materia);
                     
                     List<String> serviceFee= new ArrayList<String>();
                     serviceFee.add("手工费");
                     serviceFee.add("这个费");
-                    secondTypeMap.put("gold", gold);
+                    secondTypeMap.put("serviceFee", gold);
                     
-                    data.put("secondTypeMap", secondTypeMap);
-                    break;    
+                    data.put("secondType", secondTypeMap);
+                    break;   
+                case "goldName":
+                    List<String> goldName= new ArrayList<String>();
+                    goldName.add("千足金");
+                    goldName.add("18K金");
+                    data.put("goldName", goldName);
+                    break;   
+                case "jewelName":
+                    List<String> jewelName= new ArrayList<String>();
+                    jewelName.add("钻石");
+                    jewelName.add("猫眼石");
+                    data.put("jewelName", jewelName);
+                    break;  
+                case "categoryName":
+                    List<String> categoryName= new ArrayList<String>();
+                    categoryName.add("戒指");
+                    categoryName.add("手镯");
+                    data.put("categoryName", categoryName);
+                    break;  
+                case "goldPercent":
+                    List<String> goldPercent= new ArrayList<String>();
+                    goldPercent.add("99%");
+                    goldPercent.add("999%");
+                    data.put("goldPercent", goldPercent);
+                    break;  
+                case "firstClassify":
+                    List<String> firstClassify= new ArrayList<String>();
+                    firstClassify.add("大类1");
+                    firstClassify.add("大类2");
+                    data.put("firstClassify", firstClassify);
+                    break;  
+                case "secondClassify":
+                    List<String> secondClassify= new ArrayList<String>();
+                    secondClassify.add("中类1");
+                    secondClassify.add("中类2");
+                    data.put("secondClassify", secondClassify);
+                    break; 
+                case "thirdClassify":
+                    List<String> thirdClassify= new ArrayList<String>();
+                    thirdClassify.add("小类1");
+                    thirdClassify.add("小类2");
+                    data.put("thirdClassify", thirdClassify);
+                    break; 
+                case "labelTpl":
+                    List<String> labelTpl= new ArrayList<String>();
+                    labelTpl.add("label1");
+                    labelTpl.add("label2");
+                    data.put("labelTpl", labelTpl);
+                    break; 
                 default:
                     break;
                 }
