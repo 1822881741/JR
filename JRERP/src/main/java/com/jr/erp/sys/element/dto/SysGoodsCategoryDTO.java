@@ -22,12 +22,12 @@ public class SysGoodsCategoryDTO {
     /**
      * 商品大类英文
      */
-    private String firstTypePrefix;
+    private String firstType;
 
     /**
      * 商品中类英文
      */
-    private String[] secondTypePrefix;
+    private String[] secondType;
 
     /**
      * 销售方式 1：按折扣 2：按金价
@@ -99,99 +99,14 @@ public class SysGoodsCategoryDTO {
         return companyNo;
     }
 
-    public String getSystemCode()
-    {
-        return systemCode;
-    }
-
-    public String getAssistCode()
-    {
-        return assistCode;
-    }
-
-    public String getGoodsName()
-    {
-        return goodsName;
-    }
-
-    public String getFirstTypePrefix()
-    {
-        return firstTypePrefix;
-    }
-
-    public String[] getSecondTypePrefix()
-    {
-        return secondTypePrefix;
-    }
-
-    public Integer getSaleType()
-    {
-        return saleType;
-    }
-
-    public Integer getCanBarter()
-    {
-        return canBarter;
-    }
-
-    public String[] getGoldName()
-    {
-        return goldName;
-    }
-
-    public String[] getJewelName()
-    {
-        return jewelName;
-    }
-
-    public String[] getCategoryName()
-    {
-        return categoryName;
-    }
-
-    public String[] getGoldPercent()
-    {
-        return goldPercent;
-    }
-
-    public Integer getStatus()
-    {
-        return status;
-    }
-
-    public String getFirstClassify()
-    {
-        return firstClassify;
-    }
-
-    public String getSecondClassify()
-    {
-        return secondClassify;
-    }
-
-    public String getThirdClassify()
-    {
-        return thirdClassify;
-    }
-
-    public String getLabelName()
-    {
-        return labelName;
-    }
-
-    public String getGrfName()
-    {
-        return grfName;
-    }
-
-    public String getRemark()
-    {
-        return remark;
-    }
-
     public void setCompanyNo(String companyNo)
     {
         this.companyNo = companyNo;
+    }
+
+    public String getSystemCode()
+    {
+        return systemCode;
     }
 
     public void setSystemCode(String systemCode)
@@ -199,9 +114,19 @@ public class SysGoodsCategoryDTO {
         this.systemCode = systemCode;
     }
 
+    public String getAssistCode()
+    {
+        return assistCode;
+    }
+
     public void setAssistCode(String assistCode)
     {
         this.assistCode = assistCode;
+    }
+
+    public String getGoodsName()
+    {
+        return goodsName;
     }
 
     public void setGoodsName(String goodsName)
@@ -209,14 +134,29 @@ public class SysGoodsCategoryDTO {
         this.goodsName = goodsName;
     }
 
-    public void setFirstTypePrefix(String firstTypePrefix)
+    public String getFirstType()
     {
-        this.firstTypePrefix = firstTypePrefix;
+        return firstType;
     }
 
-    public void setSecondTypePrefix(String[] secondTypePrefix)
+    public void setFirstType(String firstType)
     {
-        this.secondTypePrefix = secondTypePrefix;
+        this.firstType = firstType;
+    }
+
+    public String[] getSecondType()
+    {
+        return secondType;
+    }
+
+    public void setSecondType(String[] secondType)
+    {
+        this.secondType = secondType;
+    }
+
+    public Integer getSaleType()
+    {
+        return saleType;
     }
 
     public void setSaleType(Integer saleType)
@@ -224,9 +164,19 @@ public class SysGoodsCategoryDTO {
         this.saleType = saleType;
     }
 
+    public Integer getCanBarter()
+    {
+        return canBarter;
+    }
+
     public void setCanBarter(Integer canBarter)
     {
         this.canBarter = canBarter;
+    }
+
+    public String[] getGoldName()
+    {
+        return goldName;
     }
 
     public void setGoldName(String[] goldName)
@@ -234,9 +184,19 @@ public class SysGoodsCategoryDTO {
         this.goldName = goldName;
     }
 
+    public String[] getJewelName()
+    {
+        return jewelName;
+    }
+
     public void setJewelName(String[] jewelName)
     {
         this.jewelName = jewelName;
+    }
+
+    public String[] getCategoryName()
+    {
+        return categoryName;
     }
 
     public void setCategoryName(String[] categoryName)
@@ -244,9 +204,19 @@ public class SysGoodsCategoryDTO {
         this.categoryName = categoryName;
     }
 
+    public String[] getGoldPercent()
+    {
+        return goldPercent;
+    }
+
     public void setGoldPercent(String[] goldPercent)
     {
         this.goldPercent = goldPercent;
+    }
+
+    public Integer getStatus()
+    {
+        return status;
     }
 
     public void setStatus(Integer status)
@@ -254,9 +224,19 @@ public class SysGoodsCategoryDTO {
         this.status = status;
     }
 
+    public String getFirstClassify()
+    {
+        return firstClassify;
+    }
+
     public void setFirstClassify(String firstClassify)
     {
         this.firstClassify = firstClassify;
+    }
+
+    public String getSecondClassify()
+    {
+        return secondClassify;
     }
 
     public void setSecondClassify(String secondClassify)
@@ -264,9 +244,19 @@ public class SysGoodsCategoryDTO {
         this.secondClassify = secondClassify;
     }
 
+    public String getThirdClassify()
+    {
+        return thirdClassify;
+    }
+
     public void setThirdClassify(String thirdClassify)
     {
         this.thirdClassify = thirdClassify;
+    }
+
+    public String getLabelName()
+    {
+        return labelName;
     }
 
     public void setLabelName(String labelName)
@@ -274,9 +264,19 @@ public class SysGoodsCategoryDTO {
         this.labelName = labelName;
     }
 
+    public String getGrfName()
+    {
+        return grfName;
+    }
+
     public void setGrfName(String grfName)
     {
         this.grfName = grfName;
+    }
+
+    public String getRemark()
+    {
+        return remark;
     }
 
     public void setRemark(String remark)

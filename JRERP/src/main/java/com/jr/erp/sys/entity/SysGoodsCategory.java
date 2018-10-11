@@ -4,7 +4,7 @@ import com.jr.erp.base.mybatis.BaseEntity;
 
 public class SysGoodsCategory extends BaseEntity {
     /**
-     * 系统代码（根据商品大类自动产生）
+     * 系统系统代码（根据商品大类自动产生）
      */
     private String systemCode;
 
@@ -14,19 +14,24 @@ public class SysGoodsCategory extends BaseEntity {
     private String assistCode;
 
     /**
-     * 分类名称
+     * 商品名称
      */
     private String goodsName;
 
     /**
-     * 商品大类
+     * 大类名称
+     */
+    private String firstTypeName;
+
+    /**
+     * 大类
      */
     private String firstType;
 
     /**
-     * 商品大类英文
+     * 商品中类名称
      */
-    private String firstTypePrefix;
+    private String secondTypeName;
 
     /**
      * 商品中类
@@ -34,17 +39,7 @@ public class SysGoodsCategory extends BaseEntity {
     private String secondType;
 
     /**
-     * 商品中类英文
-     */
-    private String secondTypePrefix;
-
-    /**
-     * 入库方式 1：一码一货 2：支持一码多货
-     */
-    private Integer incomeType;
-
-    /**
-     * 销售方式 1：按折扣 2：按金价 3：按照系统价格表
+     * 销售方式 1：按折扣 2：按金价 3：按金工石销售
      */
     private Integer saleType;
 
@@ -54,42 +49,42 @@ public class SysGoodsCategory extends BaseEntity {
     private Integer canBarter;
 
     /**
-     * 金类
+     * 金
      */
     private String goldName;
 
     /**
-     * 石类
+     * 石
      */
     private String jewelName;
 
     /**
-     * 品类
+     * 品
      */
     private String categoryName;
 
     /**
-     * 金成色
+     * 成色
      */
     private String goldPercent;
 
     /**
-     * 当前状态 1：使用中，0：禁用
+     * 统计大类
      */
-    private Integer status;
+    private String firstClassify;
 
     /**
-     * 商品分类
+     * 统计中类
      */
-    private String factClass;
+    private String secondClassify;
 
     /**
-     * 统计分类
+     * 统计小类
      */
-    private String statsClass;
+    private String thirdClassify;
 
     /**
-     * 标签显示名称
+     * 标签名称
      */
     private String labelName;
 
@@ -99,21 +94,26 @@ public class SysGoodsCategory extends BaseEntity {
     private String grfName;
 
     /**
+     * 当前状态 1：使用中，0：禁用
+     */
+    private Integer status;
+
+    /**
      * 备注
      */
     private String remark;
 
     /**
-     * 系统代码（根据商品大类自动产生）
-     * @return systemCode 系统代码（根据商品大类自动产生）
+     * 系统系统代码（根据商品大类自动产生）
+     * @return systemCode 系统系统代码（根据商品大类自动产生）
      */
     public String getSystemCode() {
         return systemCode;
     }
 
     /**
-     * 系统代码（根据商品大类自动产生）
-     * @param systemCode 系统代码（根据商品大类自动产生）
+     * 系统系统代码（根据商品大类自动产生）
+     * @param systemCode 系统系统代码（根据商品大类自动产生）
      */
     public void setSystemCode(String systemCode) {
         this.systemCode = systemCode == null ? null : systemCode.trim();
@@ -136,51 +136,67 @@ public class SysGoodsCategory extends BaseEntity {
     }
 
     /**
-     * 分类名称
-     * @return goodsName 分类名称
+     * 商品名称
+     * @return goodsName 商品名称
      */
     public String getGoodsName() {
         return goodsName;
     }
 
     /**
-     * 分类名称
-     * @param goodsName 分类名称
+     * 商品名称
+     * @param goodsName 商品名称
      */
     public void setGoodsName(String goodsName) {
         this.goodsName = goodsName == null ? null : goodsName.trim();
     }
 
     /**
-     * 商品大类
-     * @return firstType 商品大类
+     * 大类名称
+     * @return firstTypeName 大类名称
+     */
+    public String getFirstTypeName() {
+        return firstTypeName;
+    }
+
+    /**
+     * 大类名称
+     * @param firstTypeName 大类名称
+     */
+    public void setFirstTypeName(String firstTypeName) {
+        this.firstTypeName = firstTypeName == null ? null : firstTypeName.trim();
+    }
+
+    /**
+     * 大类
+     * @return firstType 大类
      */
     public String getFirstType() {
         return firstType;
     }
 
     /**
-     * 商品大类
-     * @param firstType 商品大类
+     * 大类
+     * @param firstType 大类
      */
     public void setFirstType(String firstType) {
         this.firstType = firstType == null ? null : firstType.trim();
     }
 
     /**
-     * 商品大类英文
-     * @return firstTypePrefix 商品大类英文
+     * 商品中类名称
+     * @return secondTypeName 商品中类名称
      */
-    public String getFirstTypePrefix() {
-        return firstTypePrefix;
+    public String getSecondTypeName() {
+        return secondTypeName;
     }
 
     /**
-     * 商品大类英文
-     * @param firstTypePrefix 商品大类英文
+     * 商品中类名称
+     * @param secondTypeName 商品中类名称
      */
-    public void setFirstTypePrefix(String firstTypePrefix) {
-        this.firstTypePrefix = firstTypePrefix == null ? null : firstTypePrefix.trim();
+    public void setSecondTypeName(String secondTypeName) {
+        this.secondTypeName = secondTypeName == null ? null : secondTypeName.trim();
     }
 
     /**
@@ -200,48 +216,16 @@ public class SysGoodsCategory extends BaseEntity {
     }
 
     /**
-     * 商品中类英文
-     * @return secondTypePrefix 商品中类英文
-     */
-    public String getSecondTypePrefix() {
-        return secondTypePrefix;
-    }
-
-    /**
-     * 商品中类英文
-     * @param secondTypePrefix 商品中类英文
-     */
-    public void setSecondTypePrefix(String secondTypePrefix) {
-        this.secondTypePrefix = secondTypePrefix == null ? null : secondTypePrefix.trim();
-    }
-
-    /**
-     * 入库方式 1：一码一货 2：支持一码多货
-     * @return incomeType 入库方式 1：一码一货 2：支持一码多货
-     */
-    public Integer getIncomeType() {
-        return incomeType;
-    }
-
-    /**
-     * 入库方式 1：一码一货 2：支持一码多货
-     * @param incomeType 入库方式 1：一码一货 2：支持一码多货
-     */
-    public void setIncomeType(Integer incomeType) {
-        this.incomeType = incomeType;
-    }
-
-    /**
-     * 销售方式 1：按折扣 2：按金价 3：按照系统价格表
-     * @return saleType 销售方式 1：按折扣 2：按金价 3：按照系统价格表
+     * 销售方式 1：按折扣 2：按金价 3：按金工石销售
+     * @return saleType 销售方式 1：按折扣 2：按金价 3：按金工石销售
      */
     public Integer getSaleType() {
         return saleType;
     }
 
     /**
-     * 销售方式 1：按折扣 2：按金价 3：按照系统价格表
-     * @param saleType 销售方式 1：按折扣 2：按金价 3：按照系统价格表
+     * 销售方式 1：按折扣 2：按金价 3：按金工石销售
+     * @param saleType 销售方式 1：按折扣 2：按金价 3：按金工石销售
      */
     public void setSaleType(Integer saleType) {
         this.saleType = saleType;
@@ -264,128 +248,128 @@ public class SysGoodsCategory extends BaseEntity {
     }
 
     /**
-     * 金类
-     * @return goldName 金类
+     * 金
+     * @return goldName 金
      */
     public String getGoldName() {
         return goldName;
     }
 
     /**
-     * 金类
-     * @param goldName 金类
+     * 金
+     * @param goldName 金
      */
     public void setGoldName(String goldName) {
         this.goldName = goldName == null ? null : goldName.trim();
     }
 
     /**
-     * 石类
-     * @return jewelName 石类
+     * 石
+     * @return jewelName 石
      */
     public String getJewelName() {
         return jewelName;
     }
 
     /**
-     * 石类
-     * @param jewelName 石类
+     * 石
+     * @param jewelName 石
      */
     public void setJewelName(String jewelName) {
         this.jewelName = jewelName == null ? null : jewelName.trim();
     }
 
     /**
-     * 品类
-     * @return categoryName 品类
+     * 品
+     * @return categoryName 品
      */
     public String getCategoryName() {
         return categoryName;
     }
 
     /**
-     * 品类
-     * @param categoryName 品类
+     * 品
+     * @param categoryName 品
      */
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName == null ? null : categoryName.trim();
     }
 
     /**
-     * 金成色
-     * @return goldPercent 金成色
+     * 成色
+     * @return goldPercent 成色
      */
     public String getGoldPercent() {
         return goldPercent;
     }
 
     /**
-     * 金成色
-     * @param goldPercent 金成色
+     * 成色
+     * @param goldPercent 成色
      */
     public void setGoldPercent(String goldPercent) {
         this.goldPercent = goldPercent == null ? null : goldPercent.trim();
     }
 
     /**
-     * 当前状态 1：使用中，0：禁用
-     * @return status 当前状态 1：使用中，0：禁用
+     * 统计大类
+     * @return firstClassify 统计大类
      */
-    public Integer getStatus() {
-        return status;
+    public String getFirstClassify() {
+        return firstClassify;
     }
 
     /**
-     * 当前状态 1：使用中，0：禁用
-     * @param status 当前状态 1：使用中，0：禁用
+     * 统计大类
+     * @param firstClassify 统计大类
      */
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setFirstClassify(String firstClassify) {
+        this.firstClassify = firstClassify == null ? null : firstClassify.trim();
     }
 
     /**
-     * 商品分类
-     * @return factClass 商品分类
+     * 统计中类
+     * @return secondClassify 统计中类
      */
-    public String getFactClass() {
-        return factClass;
+    public String getSecondClassify() {
+        return secondClassify;
     }
 
     /**
-     * 商品分类
-     * @param factClass 商品分类
+     * 统计中类
+     * @param secondClassify 统计中类
      */
-    public void setFactClass(String factClass) {
-        this.factClass = factClass == null ? null : factClass.trim();
+    public void setSecondClassify(String secondClassify) {
+        this.secondClassify = secondClassify == null ? null : secondClassify.trim();
     }
 
     /**
-     * 统计分类
-     * @return statsClass 统计分类
+     * 统计小类
+     * @return thirdClassify 统计小类
      */
-    public String getStatsClass() {
-        return statsClass;
+    public String getThirdClassify() {
+        return thirdClassify;
     }
 
     /**
-     * 统计分类
-     * @param statsClass 统计分类
+     * 统计小类
+     * @param thirdClassify 统计小类
      */
-    public void setStatsClass(String statsClass) {
-        this.statsClass = statsClass == null ? null : statsClass.trim();
+    public void setThirdClassify(String thirdClassify) {
+        this.thirdClassify = thirdClassify == null ? null : thirdClassify.trim();
     }
 
     /**
-     * 标签显示名称
-     * @return labelName 标签显示名称
+     * 标签名称
+     * @return labelName 标签名称
      */
     public String getLabelName() {
         return labelName;
     }
 
     /**
-     * 标签显示名称
-     * @param labelName 标签显示名称
+     * 标签名称
+     * @param labelName 标签名称
      */
     public void setLabelName(String labelName) {
         this.labelName = labelName == null ? null : labelName.trim();
@@ -405,6 +389,22 @@ public class SysGoodsCategory extends BaseEntity {
      */
     public void setGrfName(String grfName) {
         this.grfName = grfName == null ? null : grfName.trim();
+    }
+
+    /**
+     * 当前状态 1：使用中，0：禁用
+     * @return status 当前状态 1：使用中，0：禁用
+     */
+    public Integer getStatus() {
+        return status;
+    }
+
+    /**
+     * 当前状态 1：使用中，0：禁用
+     * @param status 当前状态 1：使用中，0：禁用
+     */
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     /**

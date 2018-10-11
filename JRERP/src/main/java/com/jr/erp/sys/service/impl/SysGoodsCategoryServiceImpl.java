@@ -1,9 +1,9 @@
 package com.jr.erp.sys.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.stereotype.Service;
 
@@ -33,51 +33,46 @@ public class SysGoodsCategoryServiceImpl extends AbstractBaseService<SysGoodsCat
     {
         if(sysGoodsCategoryDTO!=null)
         {
-            switch (sysGoodsCategoryDTO.getFirstTypePrefix())
+            switch (sysGoodsCategoryDTO.getFirstType())
             {
             case "gold":
-                if(ArrayUtils.isNotEmpty(sysGoodsCategoryDTO.getSecondTypePrefix()))
+            case "notGold":
+            case "material":
+            case "serviceFee":
+                String[] secondArray= ArrayUtils.isEmpty(sysGoodsCategoryDTO.getSecondType())?new String[]{""}:sysGoodsCategoryDTO.getSecondType();
+                String[] goldArray= ArrayUtils.isEmpty(sysGoodsCategoryDTO.getGoldName())?new String[]{""}:sysGoodsCategoryDTO.getGoldName();
+                String[] jewelArray= ArrayUtils.isEmpty(sysGoodsCategoryDTO.getJewelName())?new String[]{""}:sysGoodsCategoryDTO.getJewelName();
+                String[] categoryArray= ArrayUtils.isEmpty(sysGoodsCategoryDTO.getCategoryName())?new String[]{""}:sysGoodsCategoryDTO.getCategoryName();
+                String[] goldPercentArray= ArrayUtils.isEmpty(sysGoodsCategoryDTO.getGoldPercent())?new String[]{""}:sysGoodsCategoryDTO.getGoldPercent();
+                List<List<String>> recursiveResult = new ArrayList<List<String>>();
+                List<List<String>> dimValue = new ArrayList<List<String>>();
+                dimValue.add(Arrays.asList(secondArray));
+                dimValue.add(Arrays.asList(goldArray));
+                dimValue.add(Arrays.asList(jewelArray));
+                dimValue.add(Arrays.asList(categoryArray));
+                dimValue.add(Arrays.asList(goldPercentArray));
+                recursive(dimValue, recursiveResult, 0, new ArrayList<String>());
+                for (List<String> list : recursiveResult)
                 {
-                    for (String secondType : sysGoodsCategoryDTO.getSecondTypePrefix())
-                    {
-                        if (ArrayUtils.isNotEmpty(sysGoodsCategoryDTO.getGoldName()))
-                        {
-                            for (String goldName : sysGoodsCategoryDTO.getGoldName())
-                            {
-                                if (ArrayUtils.isNotEmpty(sysGoodsCategoryDTO.getJewelName()))
-                                {
-                                    for (String jewelName : sysGoodsCategoryDTO.getJewelName())
-                                    {
-                                        if (ArrayUtils.isNotEmpty(sysGoodsCategoryDTO.getCategoryName()))
-                                        {
-                                            for (String categoryName : sysGoodsCategoryDTO.getCategoryName())
-                                            {
-                                                if (ArrayUtils.isNotEmpty(sysGoodsCategoryDTO.getGoldPercent()))
-                                                {
-                                                    for (String goldPercent : sysGoodsCategoryDTO.getGoldPercent())
-                                                    {
-                                                        
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    SysGoodsCategory temp = new SysGoodsCategory();
+                    temp.setFirstType(sysGoodsCategoryDTO.getFirstType());
+                    temp.setAssistCode(sysGoodsCategoryDTO.getAssistCode());
+                    temp.setCanBarter(sysGoodsCategoryDTO.getCanBarter());
+                    temp.setCompanyNo(sysGoodsCategoryDTO.getCompanyNo());
+                    temp.setSecondType(list.get(0));
+                    temp.setGoodsName(list.get(1) + list.get(2) + list.get(3));
+                    temp.setGoldName(list.get(1));
+                    temp.setJewelName(list.get(2));
+                    temp.setCategoryName(list.get(3));
+                    temp.setGoldPercent(list.get(4));
+                    temp.setFirstClassify(sysGoodsCategoryDTO.getFirstClassify());
+                    temp.setSecondClassify(sysGoodsCategoryDTO.getSecondClassify());
+                    temp.setThirdClassify(sysGoodsCategoryDTO.getThirdClassify());
+                    temp.setLabelName(temp.getGoodsName());
+                    temp.setStatus(1);
+                    this.mapper.insert(temp);
                 }
                 break;
-            case "notGold":
-
-                break;
-            case "material":
-
-                break;
-            case "serviceFee":
-
-                break;
-
             default:
                 break;
             }

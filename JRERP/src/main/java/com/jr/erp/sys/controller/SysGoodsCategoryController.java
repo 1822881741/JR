@@ -61,12 +61,12 @@ public class SysGoodsCategoryController
     */
     @RequestMapping(value = "/getGoodsCategoryData.do")
     @ResponseBody
-    public RetPage getGoodsCategoryData(BasePageForm pageForm,String firstTypePrefix,HttpServletRequest request)
+    public RetPage getGoodsCategoryData(BasePageForm pageForm,String firstType,HttpServletRequest request)
     {
         SysUser user = ShiroUtils.getSysUser();
         SysGoodsCategoryExample exampale = new SysGoodsCategoryExample();
         exampale.setOrderByClause("id desc");
-        exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andFirstTypePrefixEqualTo(firstTypePrefix);
+        exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andFirstTypeEqualTo(firstType);
         return sysGoodsCategoryService.selectPage(exampale);
     }
     

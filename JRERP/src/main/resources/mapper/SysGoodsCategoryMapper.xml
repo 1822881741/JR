@@ -2,29 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jr.erp.sys.dao.SysGoodsCategoryMapper">
   <resultMap id="BaseResultMap" type="com.jr.erp.sys.entity.SysGoodsCategory">
-    <id column="Id" jdbcType="INTEGER" property="id" /> 
+    <id column="Id" jdbcType="INTEGER" property="id" />
     <result column="companyNo" jdbcType="VARCHAR" property="companyNo" />
     <result column="systemCode" jdbcType="VARCHAR" property="systemCode" />
     <result column="assistCode" jdbcType="VARCHAR" property="assistCode" />
     <result column="goodsName" jdbcType="VARCHAR" property="goodsName" />
+    <result column="firstTypeName" jdbcType="VARCHAR" property="firstTypeName" />
     <result column="firstType" jdbcType="VARCHAR" property="firstType" />
-    <result column="firstTypePrefix" jdbcType="VARCHAR" property="firstTypePrefix" />
+    <result column="secondTypeName" jdbcType="VARCHAR" property="secondTypeName" />
     <result column="secondType" jdbcType="VARCHAR" property="secondType" />
-    <result column="secondTypePrefix" jdbcType="VARCHAR" property="secondTypePrefix" />
-    <result column="incomeType" jdbcType="TINYINT" property="incomeType" />
     <result column="saleType" jdbcType="TINYINT" property="saleType" />
     <result column="canBarter" jdbcType="TINYINT" property="canBarter" />
     <result column="goldName" jdbcType="VARCHAR" property="goldName" />
     <result column="jewelName" jdbcType="VARCHAR" property="jewelName" />
     <result column="categoryName" jdbcType="VARCHAR" property="categoryName" />
     <result column="goldPercent" jdbcType="VARCHAR" property="goldPercent" />
-    <result column="status" jdbcType="TINYINT" property="status" />
-    <result column="factClass" jdbcType="VARCHAR" property="factClass" />
-    <result column="statsClass" jdbcType="VARCHAR" property="statsClass" />
+    <result column="firstClassify" jdbcType="VARCHAR" property="firstClassify" />
+    <result column="secondClassify" jdbcType="VARCHAR" property="secondClassify" />
+    <result column="thirdClassify" jdbcType="VARCHAR" property="thirdClassify" />
     <result column="labelName" jdbcType="VARCHAR" property="labelName" />
     <result column="grfName" jdbcType="VARCHAR" property="grfName" />
+    <result column="status" jdbcType="TINYINT" property="status" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -56,9 +55,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    Id, companyNo, systemCode, assistCode, goodsName, firstType, firstTypePrefix, secondType, 
-    secondTypePrefix, incomeType, saleType, canBarter, goldName, jewelName, categoryName, 
-    goldPercent, status, factClass, statsClass, labelName, grfName, remark, createTime
+    Id, companyNo, systemCode, assistCode, goodsName, firstTypeName, firstType, secondTypeName, 
+    secondType, saleType, canBarter, goldName, jewelName, categoryName, goldPercent, 
+    firstClassify, secondClassify, thirdClassify, labelName, grfName, status, remark
   </sql>
   <select id="selectByExample" parameterType="com.jr.erp.sys.entity.SysGoodsCategoryExample" resultMap="BaseResultMap">
     select
@@ -97,21 +96,21 @@
   </delete>
   <insert id="insert" parameterType="com.jr.erp.sys.entity.SysGoodsCategory">
     insert into sys_goods_category (Id, companyNo, systemCode, 
-      assistCode, goodsName, firstType, 
-      firstTypePrefix, secondType, secondTypePrefix, 
-      incomeType, saleType, canBarter, 
-      goldName, jewelName, categoryName, 
-      goldPercent, status, factClass, 
-      statsClass, labelName, grfName, 
-      remark, createTime)
+      assistCode, goodsName, firstTypeName, 
+      firstType, secondTypeName, secondType, 
+      saleType, canBarter, goldName, 
+      jewelName, categoryName, goldPercent, 
+      firstClassify, secondClassify, thirdClassify, 
+      labelName, grfName, status, 
+      remark)
     values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{systemCode,jdbcType=VARCHAR}, 
-      #{assistCode,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, #{firstType,jdbcType=VARCHAR}, 
-      #{firstTypePrefix,jdbcType=VARCHAR}, #{secondType,jdbcType=VARCHAR}, #{secondTypePrefix,jdbcType=VARCHAR}, 
-      #{incomeType,jdbcType=TINYINT}, #{saleType,jdbcType=TINYINT}, #{canBarter,jdbcType=TINYINT}, 
-      #{goldName,jdbcType=VARCHAR}, #{jewelName,jdbcType=VARCHAR}, #{categoryName,jdbcType=VARCHAR}, 
-      #{goldPercent,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{factClass,jdbcType=VARCHAR}, 
-      #{statsClass,jdbcType=VARCHAR}, #{labelName,jdbcType=VARCHAR}, #{grfName,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+      #{assistCode,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, #{firstTypeName,jdbcType=VARCHAR}, 
+      #{firstType,jdbcType=VARCHAR}, #{secondTypeName,jdbcType=VARCHAR}, #{secondType,jdbcType=VARCHAR}, 
+      #{saleType,jdbcType=TINYINT}, #{canBarter,jdbcType=TINYINT}, #{goldName,jdbcType=VARCHAR}, 
+      #{jewelName,jdbcType=VARCHAR}, #{categoryName,jdbcType=VARCHAR}, #{goldPercent,jdbcType=VARCHAR}, 
+      #{firstClassify,jdbcType=VARCHAR}, #{secondClassify,jdbcType=VARCHAR}, #{thirdClassify,jdbcType=VARCHAR}, 
+      #{labelName,jdbcType=VARCHAR}, #{grfName,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{remark,jdbcType=VARCHAR})
   </insert>
   <select id="countByExample" parameterType="com.jr.erp.sys.entity.SysGoodsCategoryExample" resultType="java.lang.Long">
     select count(*) from sys_goods_category
@@ -134,20 +133,17 @@
       <if test="goodsName != null">
         goodsName = #{goodsName,jdbcType=VARCHAR},
       </if>
+      <if test="firstTypeName != null">
+        firstTypeName = #{firstTypeName,jdbcType=VARCHAR},
+      </if>
       <if test="firstType != null">
         firstType = #{firstType,jdbcType=VARCHAR},
       </if>
-      <if test="firstTypePrefix != null">
-        firstTypePrefix = #{firstTypePrefix,jdbcType=VARCHAR},
+      <if test="secondTypeName != null">
+        secondTypeName = #{secondTypeName,jdbcType=VARCHAR},
       </if>
       <if test="secondType != null">
         secondType = #{secondType,jdbcType=VARCHAR},
-      </if>
-      <if test="secondTypePrefix != null">
-        secondTypePrefix = #{secondTypePrefix,jdbcType=VARCHAR},
-      </if>
-      <if test="incomeType != null">
-        incomeType = #{incomeType,jdbcType=TINYINT},
       </if>
       <if test="saleType != null">
         saleType = #{saleType,jdbcType=TINYINT},
@@ -167,14 +163,14 @@
       <if test="goldPercent != null">
         goldPercent = #{goldPercent,jdbcType=VARCHAR},
       </if>
-      <if test="status != null">
-        status = #{status,jdbcType=TINYINT},
+      <if test="firstClassify != null">
+        firstClassify = #{firstClassify,jdbcType=VARCHAR},
       </if>
-      <if test="factClass != null">
-        factClass = #{factClass,jdbcType=VARCHAR},
+      <if test="secondClassify != null">
+        secondClassify = #{secondClassify,jdbcType=VARCHAR},
       </if>
-      <if test="statsClass != null">
-        statsClass = #{statsClass,jdbcType=VARCHAR},
+      <if test="thirdClassify != null">
+        thirdClassify = #{thirdClassify,jdbcType=VARCHAR},
       </if>
       <if test="labelName != null">
         labelName = #{labelName,jdbcType=VARCHAR},
@@ -182,11 +178,11 @@
       <if test="grfName != null">
         grfName = #{grfName,jdbcType=VARCHAR},
       </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        createTime = #{createTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where Id = #{id,jdbcType=INTEGER}
@@ -197,24 +193,23 @@
       systemCode = #{systemCode,jdbcType=VARCHAR},
       assistCode = #{assistCode,jdbcType=VARCHAR},
       goodsName = #{goodsName,jdbcType=VARCHAR},
+      firstTypeName = #{firstTypeName,jdbcType=VARCHAR},
       firstType = #{firstType,jdbcType=VARCHAR},
-      firstTypePrefix = #{firstTypePrefix,jdbcType=VARCHAR},
+      secondTypeName = #{secondTypeName,jdbcType=VARCHAR},
       secondType = #{secondType,jdbcType=VARCHAR},
-      secondTypePrefix = #{secondTypePrefix,jdbcType=VARCHAR},
-      incomeType = #{incomeType,jdbcType=TINYINT},
       saleType = #{saleType,jdbcType=TINYINT},
       canBarter = #{canBarter,jdbcType=TINYINT},
       goldName = #{goldName,jdbcType=VARCHAR},
       jewelName = #{jewelName,jdbcType=VARCHAR},
       categoryName = #{categoryName,jdbcType=VARCHAR},
       goldPercent = #{goldPercent,jdbcType=VARCHAR},
-      status = #{status,jdbcType=TINYINT},
-      factClass = #{factClass,jdbcType=VARCHAR},
-      statsClass = #{statsClass,jdbcType=VARCHAR},
+      firstClassify = #{firstClassify,jdbcType=VARCHAR},
+      secondClassify = #{secondClassify,jdbcType=VARCHAR},
+      thirdClassify = #{thirdClassify,jdbcType=VARCHAR},
       labelName = #{labelName,jdbcType=VARCHAR},
       grfName = #{grfName,jdbcType=VARCHAR},
-      remark = #{remark,jdbcType=VARCHAR},
-      createTime = #{createTime,jdbcType=TIMESTAMP}
+      status = #{status,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

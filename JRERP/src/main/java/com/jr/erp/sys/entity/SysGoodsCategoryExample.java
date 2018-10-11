@@ -2,7 +2,6 @@ package com.jr.erp.sys.entity;
 
 import com.jr.erp.base.mybatis.BaseExample;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class SysGoodsCategoryExample extends BaseExample {
@@ -460,6 +459,76 @@ public class SysGoodsCategoryExample extends BaseExample {
             return (Criteria) this;
         }
 
+        public Criteria andFirstTypeNameIsNull() {
+            addCriterion("firstTypeName is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstTypeNameIsNotNull() {
+            addCriterion("firstTypeName is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstTypeNameEqualTo(String value) {
+            addCriterion("firstTypeName =", value, "firstTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstTypeNameNotEqualTo(String value) {
+            addCriterion("firstTypeName <>", value, "firstTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstTypeNameGreaterThan(String value) {
+            addCriterion("firstTypeName >", value, "firstTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstTypeNameGreaterThanOrEqualTo(String value) {
+            addCriterion("firstTypeName >=", value, "firstTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstTypeNameLessThan(String value) {
+            addCriterion("firstTypeName <", value, "firstTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstTypeNameLessThanOrEqualTo(String value) {
+            addCriterion("firstTypeName <=", value, "firstTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstTypeNameLike(String value) {
+            addCriterion("firstTypeName like", value, "firstTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstTypeNameNotLike(String value) {
+            addCriterion("firstTypeName not like", value, "firstTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstTypeNameIn(List<String> values) {
+            addCriterion("firstTypeName in", values, "firstTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstTypeNameNotIn(List<String> values) {
+            addCriterion("firstTypeName not in", values, "firstTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstTypeNameBetween(String value1, String value2) {
+            addCriterion("firstTypeName between", value1, value2, "firstTypeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFirstTypeNameNotBetween(String value1, String value2) {
+            addCriterion("firstTypeName not between", value1, value2, "firstTypeName");
+            return (Criteria) this;
+        }
+
         public Criteria andFirstTypeIsNull() {
             addCriterion("firstType is null");
             return (Criteria) this;
@@ -530,73 +599,73 @@ public class SysGoodsCategoryExample extends BaseExample {
             return (Criteria) this;
         }
 
-        public Criteria andFirstTypePrefixIsNull() {
-            addCriterion("firstTypePrefix is null");
+        public Criteria andSecondTypeNameIsNull() {
+            addCriterion("secondTypeName is null");
             return (Criteria) this;
         }
 
-        public Criteria andFirstTypePrefixIsNotNull() {
-            addCriterion("firstTypePrefix is not null");
+        public Criteria andSecondTypeNameIsNotNull() {
+            addCriterion("secondTypeName is not null");
             return (Criteria) this;
         }
 
-        public Criteria andFirstTypePrefixEqualTo(String value) {
-            addCriterion("firstTypePrefix =", value, "firstTypePrefix");
+        public Criteria andSecondTypeNameEqualTo(String value) {
+            addCriterion("secondTypeName =", value, "secondTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andFirstTypePrefixNotEqualTo(String value) {
-            addCriterion("firstTypePrefix <>", value, "firstTypePrefix");
+        public Criteria andSecondTypeNameNotEqualTo(String value) {
+            addCriterion("secondTypeName <>", value, "secondTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andFirstTypePrefixGreaterThan(String value) {
-            addCriterion("firstTypePrefix >", value, "firstTypePrefix");
+        public Criteria andSecondTypeNameGreaterThan(String value) {
+            addCriterion("secondTypeName >", value, "secondTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andFirstTypePrefixGreaterThanOrEqualTo(String value) {
-            addCriterion("firstTypePrefix >=", value, "firstTypePrefix");
+        public Criteria andSecondTypeNameGreaterThanOrEqualTo(String value) {
+            addCriterion("secondTypeName >=", value, "secondTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andFirstTypePrefixLessThan(String value) {
-            addCriterion("firstTypePrefix <", value, "firstTypePrefix");
+        public Criteria andSecondTypeNameLessThan(String value) {
+            addCriterion("secondTypeName <", value, "secondTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andFirstTypePrefixLessThanOrEqualTo(String value) {
-            addCriterion("firstTypePrefix <=", value, "firstTypePrefix");
+        public Criteria andSecondTypeNameLessThanOrEqualTo(String value) {
+            addCriterion("secondTypeName <=", value, "secondTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andFirstTypePrefixLike(String value) {
-            addCriterion("firstTypePrefix like", value, "firstTypePrefix");
+        public Criteria andSecondTypeNameLike(String value) {
+            addCriterion("secondTypeName like", value, "secondTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andFirstTypePrefixNotLike(String value) {
-            addCriterion("firstTypePrefix not like", value, "firstTypePrefix");
+        public Criteria andSecondTypeNameNotLike(String value) {
+            addCriterion("secondTypeName not like", value, "secondTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andFirstTypePrefixIn(List<String> values) {
-            addCriterion("firstTypePrefix in", values, "firstTypePrefix");
+        public Criteria andSecondTypeNameIn(List<String> values) {
+            addCriterion("secondTypeName in", values, "secondTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andFirstTypePrefixNotIn(List<String> values) {
-            addCriterion("firstTypePrefix not in", values, "firstTypePrefix");
+        public Criteria andSecondTypeNameNotIn(List<String> values) {
+            addCriterion("secondTypeName not in", values, "secondTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andFirstTypePrefixBetween(String value1, String value2) {
-            addCriterion("firstTypePrefix between", value1, value2, "firstTypePrefix");
+        public Criteria andSecondTypeNameBetween(String value1, String value2) {
+            addCriterion("secondTypeName between", value1, value2, "secondTypeName");
             return (Criteria) this;
         }
 
-        public Criteria andFirstTypePrefixNotBetween(String value1, String value2) {
-            addCriterion("firstTypePrefix not between", value1, value2, "firstTypePrefix");
+        public Criteria andSecondTypeNameNotBetween(String value1, String value2) {
+            addCriterion("secondTypeName not between", value1, value2, "secondTypeName");
             return (Criteria) this;
         }
 
@@ -667,136 +736,6 @@ public class SysGoodsCategoryExample extends BaseExample {
 
         public Criteria andSecondTypeNotBetween(String value1, String value2) {
             addCriterion("secondType not between", value1, value2, "secondType");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondTypePrefixIsNull() {
-            addCriterion("secondTypePrefix is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondTypePrefixIsNotNull() {
-            addCriterion("secondTypePrefix is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondTypePrefixEqualTo(String value) {
-            addCriterion("secondTypePrefix =", value, "secondTypePrefix");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondTypePrefixNotEqualTo(String value) {
-            addCriterion("secondTypePrefix <>", value, "secondTypePrefix");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondTypePrefixGreaterThan(String value) {
-            addCriterion("secondTypePrefix >", value, "secondTypePrefix");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondTypePrefixGreaterThanOrEqualTo(String value) {
-            addCriterion("secondTypePrefix >=", value, "secondTypePrefix");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondTypePrefixLessThan(String value) {
-            addCriterion("secondTypePrefix <", value, "secondTypePrefix");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondTypePrefixLessThanOrEqualTo(String value) {
-            addCriterion("secondTypePrefix <=", value, "secondTypePrefix");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondTypePrefixLike(String value) {
-            addCriterion("secondTypePrefix like", value, "secondTypePrefix");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondTypePrefixNotLike(String value) {
-            addCriterion("secondTypePrefix not like", value, "secondTypePrefix");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondTypePrefixIn(List<String> values) {
-            addCriterion("secondTypePrefix in", values, "secondTypePrefix");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondTypePrefixNotIn(List<String> values) {
-            addCriterion("secondTypePrefix not in", values, "secondTypePrefix");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondTypePrefixBetween(String value1, String value2) {
-            addCriterion("secondTypePrefix between", value1, value2, "secondTypePrefix");
-            return (Criteria) this;
-        }
-
-        public Criteria andSecondTypePrefixNotBetween(String value1, String value2) {
-            addCriterion("secondTypePrefix not between", value1, value2, "secondTypePrefix");
-            return (Criteria) this;
-        }
-
-        public Criteria andIncomeTypeIsNull() {
-            addCriterion("incomeType is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIncomeTypeIsNotNull() {
-            addCriterion("incomeType is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIncomeTypeEqualTo(Integer value) {
-            addCriterion("incomeType =", value, "incomeType");
-            return (Criteria) this;
-        }
-
-        public Criteria andIncomeTypeNotEqualTo(Integer value) {
-            addCriterion("incomeType <>", value, "incomeType");
-            return (Criteria) this;
-        }
-
-        public Criteria andIncomeTypeGreaterThan(Integer value) {
-            addCriterion("incomeType >", value, "incomeType");
-            return (Criteria) this;
-        }
-
-        public Criteria andIncomeTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("incomeType >=", value, "incomeType");
-            return (Criteria) this;
-        }
-
-        public Criteria andIncomeTypeLessThan(Integer value) {
-            addCriterion("incomeType <", value, "incomeType");
-            return (Criteria) this;
-        }
-
-        public Criteria andIncomeTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("incomeType <=", value, "incomeType");
-            return (Criteria) this;
-        }
-
-        public Criteria andIncomeTypeIn(List<Integer> values) {
-            addCriterion("incomeType in", values, "incomeType");
-            return (Criteria) this;
-        }
-
-        public Criteria andIncomeTypeNotIn(List<Integer> values) {
-            addCriterion("incomeType not in", values, "incomeType");
-            return (Criteria) this;
-        }
-
-        public Criteria andIncomeTypeBetween(Integer value1, Integer value2) {
-            addCriterion("incomeType between", value1, value2, "incomeType");
-            return (Criteria) this;
-        }
-
-        public Criteria andIncomeTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("incomeType not between", value1, value2, "incomeType");
             return (Criteria) this;
         }
 
@@ -1200,203 +1139,213 @@ public class SysGoodsCategoryExample extends BaseExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusIsNull() {
-            addCriterion("status is null");
+        public Criteria andFirstClassifyIsNull() {
+            addCriterion("firstClassify is null");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIsNotNull() {
-            addCriterion("status is not null");
+        public Criteria andFirstClassifyIsNotNull() {
+            addCriterion("firstClassify is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStatusEqualTo(Integer value) {
-            addCriterion("status =", value, "status");
+        public Criteria andFirstClassifyEqualTo(String value) {
+            addCriterion("firstClassify =", value, "firstClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotEqualTo(Integer value) {
-            addCriterion("status <>", value, "status");
+        public Criteria andFirstClassifyNotEqualTo(String value) {
+            addCriterion("firstClassify <>", value, "firstClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThan(Integer value) {
-            addCriterion("status >", value, "status");
+        public Criteria andFirstClassifyGreaterThan(String value) {
+            addCriterion("firstClassify >", value, "firstClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
-            addCriterion("status >=", value, "status");
+        public Criteria andFirstClassifyGreaterThanOrEqualTo(String value) {
+            addCriterion("firstClassify >=", value, "firstClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThan(Integer value) {
-            addCriterion("status <", value, "status");
+        public Criteria andFirstClassifyLessThan(String value) {
+            addCriterion("firstClassify <", value, "firstClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThanOrEqualTo(Integer value) {
-            addCriterion("status <=", value, "status");
+        public Criteria andFirstClassifyLessThanOrEqualTo(String value) {
+            addCriterion("firstClassify <=", value, "firstClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIn(List<Integer> values) {
-            addCriterion("status in", values, "status");
+        public Criteria andFirstClassifyLike(String value) {
+            addCriterion("firstClassify like", value, "firstClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotIn(List<Integer> values) {
-            addCriterion("status not in", values, "status");
+        public Criteria andFirstClassifyNotLike(String value) {
+            addCriterion("firstClassify not like", value, "firstClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatusBetween(Integer value1, Integer value2) {
-            addCriterion("status between", value1, value2, "status");
+        public Criteria andFirstClassifyIn(List<String> values) {
+            addCriterion("firstClassify in", values, "firstClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
-            addCriterion("status not between", value1, value2, "status");
+        public Criteria andFirstClassifyNotIn(List<String> values) {
+            addCriterion("firstClassify not in", values, "firstClassify");
             return (Criteria) this;
         }
 
-        public Criteria andFactClassIsNull() {
-            addCriterion("factClass is null");
+        public Criteria andFirstClassifyBetween(String value1, String value2) {
+            addCriterion("firstClassify between", value1, value2, "firstClassify");
             return (Criteria) this;
         }
 
-        public Criteria andFactClassIsNotNull() {
-            addCriterion("factClass is not null");
+        public Criteria andFirstClassifyNotBetween(String value1, String value2) {
+            addCriterion("firstClassify not between", value1, value2, "firstClassify");
             return (Criteria) this;
         }
 
-        public Criteria andFactClassEqualTo(String value) {
-            addCriterion("factClass =", value, "factClass");
+        public Criteria andSecondClassifyIsNull() {
+            addCriterion("secondClassify is null");
             return (Criteria) this;
         }
 
-        public Criteria andFactClassNotEqualTo(String value) {
-            addCriterion("factClass <>", value, "factClass");
+        public Criteria andSecondClassifyIsNotNull() {
+            addCriterion("secondClassify is not null");
             return (Criteria) this;
         }
 
-        public Criteria andFactClassGreaterThan(String value) {
-            addCriterion("factClass >", value, "factClass");
+        public Criteria andSecondClassifyEqualTo(String value) {
+            addCriterion("secondClassify =", value, "secondClassify");
             return (Criteria) this;
         }
 
-        public Criteria andFactClassGreaterThanOrEqualTo(String value) {
-            addCriterion("factClass >=", value, "factClass");
+        public Criteria andSecondClassifyNotEqualTo(String value) {
+            addCriterion("secondClassify <>", value, "secondClassify");
             return (Criteria) this;
         }
 
-        public Criteria andFactClassLessThan(String value) {
-            addCriterion("factClass <", value, "factClass");
+        public Criteria andSecondClassifyGreaterThan(String value) {
+            addCriterion("secondClassify >", value, "secondClassify");
             return (Criteria) this;
         }
 
-        public Criteria andFactClassLessThanOrEqualTo(String value) {
-            addCriterion("factClass <=", value, "factClass");
+        public Criteria andSecondClassifyGreaterThanOrEqualTo(String value) {
+            addCriterion("secondClassify >=", value, "secondClassify");
             return (Criteria) this;
         }
 
-        public Criteria andFactClassLike(String value) {
-            addCriterion("factClass like", value, "factClass");
+        public Criteria andSecondClassifyLessThan(String value) {
+            addCriterion("secondClassify <", value, "secondClassify");
             return (Criteria) this;
         }
 
-        public Criteria andFactClassNotLike(String value) {
-            addCriterion("factClass not like", value, "factClass");
+        public Criteria andSecondClassifyLessThanOrEqualTo(String value) {
+            addCriterion("secondClassify <=", value, "secondClassify");
             return (Criteria) this;
         }
 
-        public Criteria andFactClassIn(List<String> values) {
-            addCriterion("factClass in", values, "factClass");
+        public Criteria andSecondClassifyLike(String value) {
+            addCriterion("secondClassify like", value, "secondClassify");
             return (Criteria) this;
         }
 
-        public Criteria andFactClassNotIn(List<String> values) {
-            addCriterion("factClass not in", values, "factClass");
+        public Criteria andSecondClassifyNotLike(String value) {
+            addCriterion("secondClassify not like", value, "secondClassify");
             return (Criteria) this;
         }
 
-        public Criteria andFactClassBetween(String value1, String value2) {
-            addCriterion("factClass between", value1, value2, "factClass");
+        public Criteria andSecondClassifyIn(List<String> values) {
+            addCriterion("secondClassify in", values, "secondClassify");
             return (Criteria) this;
         }
 
-        public Criteria andFactClassNotBetween(String value1, String value2) {
-            addCriterion("factClass not between", value1, value2, "factClass");
+        public Criteria andSecondClassifyNotIn(List<String> values) {
+            addCriterion("secondClassify not in", values, "secondClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatsClassIsNull() {
-            addCriterion("statsClass is null");
+        public Criteria andSecondClassifyBetween(String value1, String value2) {
+            addCriterion("secondClassify between", value1, value2, "secondClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatsClassIsNotNull() {
-            addCriterion("statsClass is not null");
+        public Criteria andSecondClassifyNotBetween(String value1, String value2) {
+            addCriterion("secondClassify not between", value1, value2, "secondClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatsClassEqualTo(String value) {
-            addCriterion("statsClass =", value, "statsClass");
+        public Criteria andThirdClassifyIsNull() {
+            addCriterion("thirdClassify is null");
             return (Criteria) this;
         }
 
-        public Criteria andStatsClassNotEqualTo(String value) {
-            addCriterion("statsClass <>", value, "statsClass");
+        public Criteria andThirdClassifyIsNotNull() {
+            addCriterion("thirdClassify is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStatsClassGreaterThan(String value) {
-            addCriterion("statsClass >", value, "statsClass");
+        public Criteria andThirdClassifyEqualTo(String value) {
+            addCriterion("thirdClassify =", value, "thirdClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatsClassGreaterThanOrEqualTo(String value) {
-            addCriterion("statsClass >=", value, "statsClass");
+        public Criteria andThirdClassifyNotEqualTo(String value) {
+            addCriterion("thirdClassify <>", value, "thirdClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatsClassLessThan(String value) {
-            addCriterion("statsClass <", value, "statsClass");
+        public Criteria andThirdClassifyGreaterThan(String value) {
+            addCriterion("thirdClassify >", value, "thirdClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatsClassLessThanOrEqualTo(String value) {
-            addCriterion("statsClass <=", value, "statsClass");
+        public Criteria andThirdClassifyGreaterThanOrEqualTo(String value) {
+            addCriterion("thirdClassify >=", value, "thirdClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatsClassLike(String value) {
-            addCriterion("statsClass like", value, "statsClass");
+        public Criteria andThirdClassifyLessThan(String value) {
+            addCriterion("thirdClassify <", value, "thirdClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatsClassNotLike(String value) {
-            addCriterion("statsClass not like", value, "statsClass");
+        public Criteria andThirdClassifyLessThanOrEqualTo(String value) {
+            addCriterion("thirdClassify <=", value, "thirdClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatsClassIn(List<String> values) {
-            addCriterion("statsClass in", values, "statsClass");
+        public Criteria andThirdClassifyLike(String value) {
+            addCriterion("thirdClassify like", value, "thirdClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatsClassNotIn(List<String> values) {
-            addCriterion("statsClass not in", values, "statsClass");
+        public Criteria andThirdClassifyNotLike(String value) {
+            addCriterion("thirdClassify not like", value, "thirdClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatsClassBetween(String value1, String value2) {
-            addCriterion("statsClass between", value1, value2, "statsClass");
+        public Criteria andThirdClassifyIn(List<String> values) {
+            addCriterion("thirdClassify in", values, "thirdClassify");
             return (Criteria) this;
         }
 
-        public Criteria andStatsClassNotBetween(String value1, String value2) {
-            addCriterion("statsClass not between", value1, value2, "statsClass");
+        public Criteria andThirdClassifyNotIn(List<String> values) {
+            addCriterion("thirdClassify not in", values, "thirdClassify");
+            return (Criteria) this;
+        }
+
+        public Criteria andThirdClassifyBetween(String value1, String value2) {
+            addCriterion("thirdClassify between", value1, value2, "thirdClassify");
+            return (Criteria) this;
+        }
+
+        public Criteria andThirdClassifyNotBetween(String value1, String value2) {
+            addCriterion("thirdClassify not between", value1, value2, "thirdClassify");
             return (Criteria) this;
         }
 
@@ -1540,6 +1489,66 @@ public class SysGoodsCategoryExample extends BaseExample {
             return (Criteria) this;
         }
 
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(Integer value) {
+            addCriterion("status =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(Integer value) {
+            addCriterion("status <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(Integer value) {
+            addCriterion("status >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("status >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(Integer value) {
+            addCriterion("status <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("status <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<Integer> values) {
+            addCriterion("status in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<Integer> values) {
+            addCriterion("status not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
+            addCriterion("status between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("status not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
         public Criteria andRemarkIsNull() {
             addCriterion("remark is null");
             return (Criteria) this;
@@ -1607,66 +1616,6 @@ public class SysGoodsCategoryExample extends BaseExample {
 
         public Criteria andRemarkNotBetween(String value1, String value2) {
             addCriterion("remark not between", value1, value2, "remark");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeIsNull() {
-            addCriterion("createTime is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeIsNotNull() {
-            addCriterion("createTime is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeEqualTo(Date value) {
-            addCriterion("createTime =", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeNotEqualTo(Date value) {
-            addCriterion("createTime <>", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeGreaterThan(Date value) {
-            addCriterion("createTime >", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("createTime >=", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeLessThan(Date value) {
-            addCriterion("createTime <", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
-            addCriterion("createTime <=", value, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeIn(List<Date> values) {
-            addCriterion("createTime in", values, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeNotIn(List<Date> values) {
-            addCriterion("createTime not in", values, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeBetween(Date value1, Date value2) {
-            addCriterion("createTime between", value1, value2, "createTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
-            addCriterion("createTime not between", value1, value2, "createTime");
             return (Criteria) this;
         }
     }

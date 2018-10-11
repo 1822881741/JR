@@ -31,7 +31,7 @@
 								<div class="form-group margin-bottom-5 margin-right-5">
 									<label class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label">商品大类：</label>
 									<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-										<select id="firstTypePrefix" name="firstTypePrefix" class="form-control selectpicker show-tick"
+										<select id="firstType" name="firstType" class="form-control selectpicker show-tick"
 											data-live-search="true">
 											<option value="gold">素金</option>
 											<option value="notGold">非素</option>
@@ -45,7 +45,7 @@
 								<div class="form-group margin-bottom-5 margin-right-5">
 									<label class="col-lg-4 col-sm-4 col-xs-4 control-label">商品小类：</label>
 									<div class="col-lg-8 col-sm-8 col-xs-8">
-										<select id="secondTypePrefix" name="secondTypePrefix" multiple="multiple" class="form-control selectpicker show-tick" data-live-search="true">
+										<select id="secondType" name="secondType" multiple="multiple" class="form-control selectpicker show-tick" data-live-search="true">
 										</select>
 									</div>
 								</div>
@@ -171,16 +171,10 @@
 						<div class="row form-body form-horizontal">
 							<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ">
 								<div class="form-group pull-right">
-									<label class="checkbox-inline"> <input type="checkbox" class="checkbox"> <span>名称自动生成</span>
-									</label> <label class="checkbox-inline"> <input type="checkbox"
-										class="checkbox"> <span>可兑换</span>
-									</label> <span class="checkbox-inline"> <span>状态</span> <span
-										class="onoffswitch"> <input type="checkbox"
-											name="start_interval" class="onoffswitch-checkbox" id="st3">
-											<label class="onoffswitch-label" for="st3"> <span
-												class="onoffswitch-inner" data-swchon-text="启用"
-												data-swchoff-text="停用"></span> <span
-												class="onoffswitch-switch"></span>
+									<label class="checkbox-inline"> <input type="checkbox" class="checkbox"> <span>名称自动生成</span> </label> 
+									<label class="checkbox-inline"> <input type="checkbox" class="checkbox"> <span>可兑换</span> </label> 
+									<span class="checkbox-inline"> <span>状态</span> <span class="onoffswitch"> <input type="checkbox" checked name="start_interval" class="onoffswitch-checkbox" id="st3">
+										<label class="onoffswitch-label" for="st3"> <span class="onoffswitch-inner" data-swchon-text="启用" data-swchoff-text="停用"></span> <span class="onoffswitch-switch"></span>
 										</label>
 									</span>
 									</span>
@@ -206,8 +200,8 @@
 		pageSetUp();
 		
 		var elements=loadElements();
-		$("#firstTypePrefix").on("change",function(){
-			$("#secondTypePrefix").html("");
+		$("#firstType").on("change",function(){
+			$("#secondType").html("");
 			var mainType = $(this).val();
 			var list=[];
 			if(mainType == "gold"){
@@ -223,8 +217,8 @@
 			for(var i=0;i<list.length;i++){
 				html+="<option value='"+list[i]+"'>"+list[i]+"</option>";
 			}
-			$("#secondTypePrefix").html(html)
-			$("#secondTypePrefix").selectpicker('refresh');
+			$("#secondType").html(html)
+			$("#secondType").selectpicker('refresh');
 			
 			//设置金石品的属性
 			if(mainType == 'gold'){
@@ -410,7 +404,7 @@
 				$("#thirdClassify").selectpicker('refresh');
 			}
 		})
-		$("#firstTypePrefix").change();
+		$("#firstType").change();
 	});
 	
 	function loadElements(){
