@@ -8,42 +8,45 @@
 	<!-- row -->
 	<div class="row">
 		<article class="col-sm-12 col-md-12 col-lg-12">
-			<div class="jarviswidget" id="wid-id-5" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
-				<header>
-					<h2>Tabs left </h2>
-				</header>
-				<div>
-					<div class="widget-body">
-						<ul id="myTab1" class="nav nav-tabs bordered">
-							<li class="active">
-								<a href="#tab-r1" data-toggle="tab" aria-expanded="true">素金 <span class="badge bg-color-blue txt-color-white">12</span></a>
-							</li>
-							<li>
-								<a href="#tab-r2" data-toggle="tab">非素</a>
-							</li>
-							<li>
-								<a href="#tab-r3" data-toggle="tab">旧料</a>
-							</li>
-							<li>
-								<a href="#tab-r4" data-toggle="tab">服务费</a>
-							</li>
-							<li class="pull-right">
+			<div class="jarviswidget" id="wid-id-5" data-widget-collapsed="false" data-widget-hidden="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-grid="" data-widget-sortable="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false">
+				<header role="heading">
+					<ul class="nav nav-tabs pull-left in">
+						<li class="active">
+							<a data-toggle="tab" class="tabs" href="#tab-gold" aria-expanded="false"><span class="hidden-mobile hidden-tablet"> 素金 </span> </a>
+						</li>
+						<li>
+							<a data-toggle="tab" class="tabs" href="#tab-notGold" aria-expanded="true"><span class="hidden-mobile hidden-tablet"> 非素 </span> </a>
+						</li>
+						<li>
+							<a data-toggle="tab" class="tabs" href="#tab-material" aria-expanded="true"><span class="hidden-mobile hidden-tablet"> 旧料 </span> </a>
+						</li>
+						<li>
+							<a data-toggle="tab" class="tabs" href="#tab-serviceFee" aria-expanded="true"><span class="hidden-mobile hidden-tablet"> 服务费 </span> </a>
+						</li>
+						<li class="pull-right">
 								<div class="widget-toolbar">
 									<a href="javascript:void(0);" id="addBtn" class="btn btn-primary"><i class="fa fa-plus"></i>添加</a>
 								</div>
-							</li>
-						</ul>
-							<div class="tab-content padding-10">
-								<div class="tab-pane active" id="tab-r1">
-									1
-								</div>
-								<div class="tab-pane" id="tab-r2">
-									2
-								</div>
-								<div class="tab-pane" id="tab-r3">
-								3
-								</div>
+						</li>
+					</ul>
+				</header>
+				<div>
+					<div class="widget-body">
+						<div id="content" class="tab-content padding-10">
+							<div class="tab-pane active" id="tab-gold">
+								<table id="jqgrid" class="table table-bordered table-hover table-striped"></table>
+								<div id="pjqgrid"></div>
 							</div>
+							<div class="tab-pane" id=tab-notGold>
+								<table id="jqgrid2" class="table table-bordered table-hover table-striped "></table>
+							</div>
+							<div class="tab-pane" id="tab-material">
+								<table id="jqgrid3" class="table table-bordered table-hover table-striped"></table>
+							</div>
+							<div class="tab-pane" id="tab-serviceFee">
+								<table id="jqgrid4" class="table table-bordered table-hover table-striped"></table>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -57,9 +60,43 @@
 <script src="static/js/smartwidgets/jarvis.widget.min.js"></script>
 <script src="static/js/app.js?v=1"></script>
 <script src="resource/layui/layui.all.js?v=1" charset="utf-8"></script>
+<script src="static/js/plugin/jqgrid/jquery.jqGrid.min.js?v=33" charset="utf-8"></script>
+<script src="static/js/plugin/jqgrid/grid.locale-cn.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		pageSetUp();
+
+		jQuery("#jqgrid").jqGrid({
+			url : 'sysGoodsCategory/getGoodsCategoryData.do?firstType=gold',
+			datatype : "json",
+	        colNames : [ '#', '系统编码', '助记码', '商品名称', '商品小类','销售方式','兑换', '金料', '石料', '品名' ,  '统计大类' , '统计中类', '统计小类', '标签模板', '状态' ],
+	        colModel : [ 
+	                     {name : 'id'}, 
+	                     {name : 'systemCode'}, 
+	                     {name : 'assistCode'}, 
+	                     {name : 'goodsName'},
+		                 {name : 'secondTypeName'},
+	                     {name : 'saleType'}, 
+	                     {name : 'canBarter'}, 
+	                     {name : 'goldName'},
+	                     {name : 'jewelName'},
+	                     {name : 'categoryName'},
+	                     {name : 'firstClassify'},
+	                     {name : 'secondClassify'},
+	                     {name : 'thirdClassify'},
+	                     {name : 'grfName'},
+	                     {name : 'status'}
+	                   ],
+			caption : "商品分类详情",
+			rowNum: -1,
+	        pager : '#pjqgrid',
+	        viewrecords : true,
+	        sortorder : "desc",
+	        loadonce : true,
+			autowidth : true
+		});
+		
+		jQuery("#jqgrid").jqGrid( 'setGridHeight', $(window).height() - 190 );
 		$("#addBtn").on("click",function(){
 			layer.open({
 				skin: 'layui-layer-lan',
@@ -73,9 +110,9 @@
 				content : "sysGoodsCategory/addGoodsCategory.do?firstTypePrefix="+$(this).data("type"),
 				yes : function(index, layero) {
 						 $(layero).find("iframe")[0].contentWindow.submitData();
+						  jQuery("#jqgrid").setGridParam({datatype:'json'}).trigger('reloadGrid');
 				}
 			});
-			
 		})
 	});
 </script>

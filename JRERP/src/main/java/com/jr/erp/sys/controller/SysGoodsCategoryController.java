@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.base.utils.BasePageForm;
 import com.jr.erp.base.utils.Ret;
+import com.jr.erp.base.utils.RetJqGridPage;
 import com.jr.erp.base.utils.RetPage;
 import com.jr.erp.sys.element.dto.SysGoodsCategoryDTO;
 import com.jr.erp.sys.entity.SysGoodsCategoryExample;
@@ -61,13 +62,16 @@ public class SysGoodsCategoryController
     */
     @RequestMapping(value = "/getGoodsCategoryData.do")
     @ResponseBody
-    public RetPage getGoodsCategoryData(BasePageForm pageForm,String firstType,HttpServletRequest request)
+    public RetJqGridPage getGoodsCategoryData(BasePageForm pageForm,String firstType,HttpServletRequest request)
     {
         SysUser user = ShiroUtils.getSysUser();
+        pageForm.setPage(0);
+        pageForm.setLimit(10000);
         SysGoodsCategoryExample exampale = new SysGoodsCategoryExample();
-        exampale.setOrderByClause("id desc");
+        exampale.setOrderByClause("id");
         exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andFirstTypeEqualTo(firstType);
-        return sysGoodsCategoryService.selectPage(exampale);
+        RetPage page = sysGoodsCategoryService.selectPage(exampale);
+        return RetJqGridPage.ok(page.getCount(), page.getData());
     }
     
     @RequestMapping(value = "/addGoodsCategory.do")
