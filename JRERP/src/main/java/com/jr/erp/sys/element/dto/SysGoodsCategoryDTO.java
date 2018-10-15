@@ -2,6 +2,14 @@ package com.jr.erp.sys.element.dto;
 
 public class SysGoodsCategoryDTO {
     
+    /**    
+     * id 修改时使用    
+     */    
+    private Integer id;
+    
+    /**    
+     * 公司编号    
+     */    
     private String companyNo;
     
     /**
@@ -282,5 +290,15 @@ public class SysGoodsCategoryDTO {
     public void setRemark(String remark)
     {
         this.remark = remark;
+    }
+
+    public Integer getId()
+    {
+        return id;
+    }
+
+    public void setId(Integer id)
+    {
+        this.id = id;
     }
 }

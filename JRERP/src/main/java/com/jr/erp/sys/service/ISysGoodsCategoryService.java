@@ -29,4 +29,14 @@ public interface ISysGoodsCategoryService extends IBaseService<BaseEntity>{
     */
     void updateCategory(SysCategorySet store);
 
+    /**    
+     * deleteGoodsCategory(这里用一句话描述这个方法的作用)    
+     * 删除商品分类列表       
+     * @param @param companyNo
+     * @param @param ids     
+     * @return void
+     * @Exception 异常对象
+    */
+    void deleteGoodsCategory(String companyNo, Integer[] ids);
+
 }

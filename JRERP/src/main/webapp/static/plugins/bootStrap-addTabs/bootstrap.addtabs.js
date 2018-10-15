@@ -33,7 +33,7 @@
          * 固定TAB中IFRAME高度,根据需要自己修改
          * @type {Number}
          */
-        height: $(window).height() - 180,
+        height: $(window).height() - 200,
         /**
          * 目标
          * @type {String}

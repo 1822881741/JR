@@ -4,187 +4,174 @@
 <meta charset="utf-8">
 <#include "/header-smart.html" />
 <body >
-	<div id="widget-grid">
-		<div
-			class="jarviswidget  jarviswidget-sortable"
-			id="wid-id-1" data-widget-colorbutton="false"
-			data-widget-editbutton="false" data-widget-togglebutton="false"
-			data-widget-deletebutton="false" data-widget-fullscreenbutton="false"
-			data-widget-custombutton="false" role="widget"
-			style="position: relative; opacity: 1; left: 0px; top: 0px;">
-			<header>
-				<h2>商品档案详情</h2>
-			</header>
-			<div>
-				<div class="widget-body" style="padding-left:10px;">
-					<form id="categoryForm" >
-						<div class="row form-body form-horizontal">
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 no-padding">
-								<div class="form-group margin-bottom-5 margin-right-5">
-									<label class="col-lg-4 col-sm-4 col-xs-4 control-label">系统编码：</label>
-									<div class="col-lg-8 col-sm-8 col-xs-8">
-										<input type="text" id="systemCode" name="systemCode" class="form-control">
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 no-padding">
-								<div class="form-group margin-bottom-5 margin-right-5">
-									<label class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label">商品大类：</label>
-									<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-										<select id="firstType" name="firstType" class="form-control selectpicker show-tick"
-											data-live-search="true">
-											<option value="gold">素金</option>
-											<option value="notGold">非素</option>
-											<option value="material">旧料</option>
-											<option value="serviceFee">服务费</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 no-padding">
-								<div class="form-group margin-bottom-5 margin-right-5">
-									<label class="col-lg-4 col-sm-4 col-xs-4 control-label">商品小类：</label>
-									<div class="col-lg-8 col-sm-8 col-xs-8">
-										<select id="secondType" name="secondType" multiple="multiple" class="form-control selectpicker show-tick" data-live-search="true">
-										</select>
-									</div>
-								</div>
-							</div>
+	<div class="well no-margin">
+		<form id="categoryForm">
+			<div class="row form-body form-horizontal">
+				<div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-4 col-sm-4 control-label">系统编码：</label>
+						<div class="col-lg-8 col-sm-8 col-xs-8">
+							<input type="hidden" id="id" name="id" class="form-control" value="${catetory.id}">
+							<input type="text" id="systemCode" name="systemCode" class="form-control" value="${catetory.systemCode}">
 						</div>
-						<div class="row form-body form-horizontal">
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 no-padding">
-								<div class="form-group margin-bottom-5 margin-right-5">
-									<label class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label">金料名：</label>
-									<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-										<select id="goldName" name="goldName" multiple="multiple" class="form-control selectpicker show-tick" data-live-search="true">
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 no-padding">
-								<div class="form-group margin-bottom-5 margin-right-5">
-									<label class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label">石料名：</label>
-									<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-										<select id="jewelName" name="jewelName" multiple="multiple" class="form-control selectpicker show-tick" data-live-search="true">
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 no-padding">
-								<div class="form-group margin-bottom-5 margin-right-5">
-									<label class="col-lg-4 col-sm-4 col-xs-4 control-label">品名：</label>
-									<div class="col-lg-8 col-sm-8 col-xs-8">
-										<select id="categoryName" name="categoryName" multiple="multiple" class="form-control selectpicker show-tick" data-live-search="true">
-										</select>
-									</div>
-								</div>
-							</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label
+							class="col-lg-4 col-md-4 col-sm-4 control-label">商品大类：</label>
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+							<select id="firstType" name="firstType" class="form-control selectpicker show-tick" data-live-search="true">
+								<option value="gold">素金</option>
+								<option value="notGold">非素</option>
+								<option value="material">旧料</option>
+								<option value="serviceFee">服务费</option>
+							</select>
 						</div>
-						<div class="row form-body form-horizontal">
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 no-padding">
-								<div class="form-group margin-bottom-5 margin-right-5">
-									<label class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label">含金量：</label>
-									<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-										<select id="goldPercent" name="goldPercent" multiple="multiple" class="form-control selectpicker show-tick" data-live-search="true">
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 no-padding">
-								<div class="form-group margin-bottom-5 margin-right-5">
-									<label class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label">商品名称：</label>
-									<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-										<input type="text" id="goodsName" name="goodsName" class="form-control">
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 no-padding">
-								<div class="form-group margin-bottom-5 margin-right-5">
-									<label class="col-lg-4 col-sm-4 col-xs-4 control-label">缩写：</label>
-									<div class="col-lg-8 col-sm-8 col-xs-8">
-										<input type="text" id="assistCode" name="assistCode" class="form-control">
-									</div>
-								</div>
-							</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-4 col-sm-4 control-label">商品小类：</label>
+						<div class="col-lg-8 col-sm-8 col-xs-8">
+							<select id="secondType" name="secondType" class="form-control selectpicker show-tick" data-live-search="true">
+							</select>
 						</div>
-						<div class="row form-body form-horizontal">
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 no-padding">
-								<div class="form-group margin-bottom-5 margin-right-5">
-									<label class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label">统计大类：</label>
-									<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-										<select id="firstClassify" name="firstClassify" class="form-control selectpicker show-tick" data-live-search="true">
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 no-padding">
-								<div class="form-group margin-bottom-5 margin-right-5">
-									<label class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label">统计中类：</label>
-									<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-										<select id="secondClassify" name="secondClassify" class="form-control selectpicker show-tick" data-live-search="true">
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 no-padding">
-								<div class="form-group margin-bottom-5 margin-right-5">
-									<label class="col-lg-4 col-sm-4 col-xs-4 control-label">统计小类：</label>
-									<div class="col-lg-8 col-sm-8 col-xs-8">
-										<select id="thirdClassify" name="thirdClassify" class="form-control selectpicker show-tick" data-live-search="true">
-										</select>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row form-body form-horizontal">
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 no-padding">
-								<div class="form-group margin-bottom-5 margin-right-5">
-									<label class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label">标签名称：</label>
-									<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-										<input type="text" id="labelName" name="labelName" class="form-control">
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 no-padding">
-								<div class="form-group margin-bottom-5 margin-right-5">
-									<label class="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label">标签模板：</label>
-									<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-										<select id="labelTpl" class="form-control selectpicker show-tick" data-live-search="true">
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 no-padding">
-								<div class="form-group margin-bottom-5 margin-right-5">
-									<label class="col-lg-4 col-sm-4 col-xs-4 control-label">备注：</label>
-									<div class="col-lg-8 col-sm-8 col-xs-8">
-										<input type="text" id="remark" name="remark"
-											class="form-control">
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row form-body form-horizontal">
-							<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ">
-								<div class="form-group pull-right">
-									<label class="checkbox-inline"> <input type="checkbox" class="checkbox"> <span>名称自动生成</span> </label> 
-									<label class="checkbox-inline"> <input type="checkbox" class="checkbox"> <span>可兑换</span> </label> 
-									<span class="checkbox-inline"> <span>状态</span> <span class="onoffswitch"> <input type="checkbox" checked name="start_interval" class="onoffswitch-checkbox" id="st3">
-										<label class="onoffswitch-label" for="st3"> <span class="onoffswitch-inner" data-swchon-text="启用" data-swchoff-text="停用"></span> <span class="onoffswitch-switch"></span>
-										</label>
-									</span>
-									</span>
-								</div>
-							</div>
-						</div>
-					</form>
+					</div>
 				</div>
 			</div>
-		</div>
+			<div class="row form-body form-horizontal">
+				<div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label
+							class="col-lg-4 col-md-4 col-sm-4 control-label">金料名：</label>
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+							<select id="goldName" name="goldName" multiple="multiple" class="form-control selectpicker show-tick" data-live-search="true">
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-4 col-md-4 col-sm-4 control-label">石料名：</label>
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+							<select id="jewelName" name="jewelName" multiple="multiple" class="form-control selectpicker show-tick" data-live-search="true">
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-4 col-sm-4 control-label">品名：</label>
+						<div class="col-lg-8 col-sm-8 col-xs-8">
+							<select id="categoryName" name="categoryName" multiple="multiple" class="form-control selectpicker show-tick" data-live-search="true">
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row form-body form-horizontal">
+				<div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-4 col-md-4 col-sm-4 control-label">含金量：</label>
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+							<select id="goldPercent" name="goldPercent" multiple="multiple" class="form-control selectpicker show-tick" data-live-search="true">
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-4 col-md-4 col-sm-4 control-label">商品名称：</label>
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+							<input type="text" id="goodsName" name="goodsName" class="form-control" value="${catetory.goodsName}">
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-4 col-sm-4 control-label">缩写：</label>
+						<div class="col-lg-8 col-sm-8 col-xs-8">
+							<input type="text" id="assistCode" name="assistCode" class="form-control" value="${catetory.assistCode}">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row form-body form-horizontal">
+				<div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-4 col-md-4 col-sm-4 control-label">统计大类：</label>
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+							<select id="firstClassify" name="firstClassify" class="form-control selectpicker show-tick" data-live-search="true">
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-4 col-md-4 col-sm-4 control-label">统计中类：</label>
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+							<select id="secondClassify" name="secondClassify" class="form-control selectpicker show-tick" data-live-search="true">
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-4 col-sm-4 control-label">统计小类：</label>
+						<div class="col-lg-8 col-sm-8 col-xs-8">
+							<select id="thirdClassify" name="thirdClassify" class="form-control selectpicker show-tick" data-live-search="true">
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row form-body form-horizontal">
+				<div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-4 col-md-4 col-sm-4 control-label">标签名称：</label>
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+							<input type="text" id="labelName" name="labelName" class="form-control" value="${catetory.labelName}">
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-4 col-md-4 col-sm-4 control-label">标签模板：</label>
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+							<select id="labelTpl" name="labelTpl" class="form-control selectpicker show-tick" data-live-search="true">
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-4 col-md-4 col-sm-4 control-label">备注：</label>
+						<div class="col-lg-8 col-sm-8 col-xs-8">
+							<input type="text" id="remark" name="remark" class="form-control" value="${catetory.remark}">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row form-body form-horizontal">
+				<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ">
+					<div class="form-group pull-right">
+						<label class="checkbox-inline"> 
+							<input type="checkbox" class="checkbox"> <span>名称自动生成</span>
+						</label> 
+						<label class="checkbox-inline"> 
+							<input type="checkbox" class="checkbox" value="1"  <#if "${catetory.canBarter == 1}">checked</#if> > <span>可兑换</span>
+						</label> 
+						<span class="checkbox-inline"> <span>状态</span> 
+						<span class="onoffswitch"> <input type="checkbox"  <#if "${catetory.status == 1}">checked</#if>  name="start_interval" class="onoffswitch-checkbox" id="st3">
+							<label class="onoffswitch-label" for="st3"> <span class="onoffswitch-inner" data-swchon-text="启用" data-swchoff-text="停用"></span> <span class="onoffswitch-switch"></span>
+							</label>
+						</span>
+						</span>
+					</div>
+				</div>
+			</div>
+		</form>
 	</div>
 </body>
 <script src="static/js/libs/jquery-3.2.1.min.js"></script>
@@ -198,7 +185,6 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		pageSetUp();
-		
 		var elements=loadElements();
 		$("#firstType").on("change",function(){
 			$("#secondType").html("");
@@ -405,7 +391,22 @@
 			}
 		})
 		$("#firstType").change();
+		//初始化页面select
+		initSelect();
 	});
+	
+	function initSelect(){
+		$('#firstType').selectpicker('val', '${catetory.firstType}');
+		$("#secondType").selectpicker('val', '${catetory.secondType}');
+		$("#goldName").selectpicker('val', '${catetory.goldName}');
+		$("#jewelName").selectpicker('val', '${catetory.jewelName}');
+		$("#categoryName").selectpicker('val', '${catetory.categoryName}');
+		$("#goldPercent").selectpicker('val', '${catetory.goldPercent}');
+		$("#firstClassify").selectpicker('val', '${catetory.firstClassify}');
+		$("#secondClassify").selectpicker('val', '${catetory.secondClassify}');
+		$("#thirdClassify").selectpicker('val', '${catetory.thirdClassify}');
+		$("#labelTpl").selectpicker('val', '${catetory.labelTpl}');
+	}
 	
 	function loadElements(){
 		var elements;

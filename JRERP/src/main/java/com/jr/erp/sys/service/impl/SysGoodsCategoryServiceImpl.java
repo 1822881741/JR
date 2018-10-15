@@ -12,6 +12,7 @@ import com.jr.erp.sys.element.dto.SysGoodsCategoryDTO;
 import com.jr.erp.sys.entity.SysCategorySet;
 import com.jr.erp.sys.entity.SysCategorySetExample;
 import com.jr.erp.sys.entity.SysGoodsCategory;
+import com.jr.erp.sys.entity.SysGoodsCategoryExample;
 import com.jr.erp.sys.service.ISysGoodsCategoryService;
 
 /**     
@@ -33,17 +34,42 @@ public class SysGoodsCategoryServiceImpl extends AbstractBaseService<SysGoodsCat
     {
         if(sysGoodsCategoryDTO!=null)
         {
+            String[] secondArray= ArrayUtils.isEmpty(sysGoodsCategoryDTO.getSecondType())?new String[]{""}:sysGoodsCategoryDTO.getSecondType();
+            String[] goldArray= ArrayUtils.isEmpty(sysGoodsCategoryDTO.getGoldName())?new String[]{""}:sysGoodsCategoryDTO.getGoldName();
+            String[] jewelArray= ArrayUtils.isEmpty(sysGoodsCategoryDTO.getJewelName())?new String[]{""}:sysGoodsCategoryDTO.getJewelName();
+            String[] categoryArray= ArrayUtils.isEmpty(sysGoodsCategoryDTO.getCategoryName())?new String[]{""}:sysGoodsCategoryDTO.getCategoryName();
+            String[] goldPercentArray= ArrayUtils.isEmpty(sysGoodsCategoryDTO.getGoldPercent())?new String[]{""}:sysGoodsCategoryDTO.getGoldPercent();
+            if(sysGoodsCategoryDTO.getId() !=null)
+            {
+                SysGoodsCategory temp = new SysGoodsCategory();
+                temp.setId(sysGoodsCategoryDTO.getId());
+                temp.setSystemCode(sysGoodsCategoryDTO.getSystemCode());
+                temp.setCompanyNo(sysGoodsCategoryDTO.getCompanyNo());
+                temp.setFirstType(sysGoodsCategoryDTO.getFirstType());
+                temp.setAssistCode(sysGoodsCategoryDTO.getAssistCode());
+                temp.setCanBarter(sysGoodsCategoryDTO.getCanBarter());
+                temp.setCompanyNo(sysGoodsCategoryDTO.getCompanyNo());
+                temp.setSecondType(secondArray[0]);
+                temp.setGoodsName(sysGoodsCategoryDTO.getGoodsName());
+                temp.setGoldName(goldArray[0]);
+                temp.setJewelName(jewelArray[0]);
+                temp.setCategoryName(categoryArray[0]);
+                temp.setGoldPercent(goldPercentArray[0]);
+                temp.setFirstClassify(sysGoodsCategoryDTO.getFirstClassify());
+                temp.setSecondClassify(sysGoodsCategoryDTO.getSecondClassify());
+                temp.setThirdClassify(sysGoodsCategoryDTO.getThirdClassify());
+                temp.setLabelName(sysGoodsCategoryDTO.getGoodsName());
+                temp.setStatus(1);
+                temp.setRemark(sysGoodsCategoryDTO.getRemark());
+                this.mapper.updateByPrimaryKey(temp);
+                return;
+            }
             switch (sysGoodsCategoryDTO.getFirstType())
             {
             case "gold":
             case "notGold":
             case "material":
             case "serviceFee":
-                String[] secondArray= ArrayUtils.isEmpty(sysGoodsCategoryDTO.getSecondType())?new String[]{""}:sysGoodsCategoryDTO.getSecondType();
-                String[] goldArray= ArrayUtils.isEmpty(sysGoodsCategoryDTO.getGoldName())?new String[]{""}:sysGoodsCategoryDTO.getGoldName();
-                String[] jewelArray= ArrayUtils.isEmpty(sysGoodsCategoryDTO.getJewelName())?new String[]{""}:sysGoodsCategoryDTO.getJewelName();
-                String[] categoryArray= ArrayUtils.isEmpty(sysGoodsCategoryDTO.getCategoryName())?new String[]{""}:sysGoodsCategoryDTO.getCategoryName();
-                String[] goldPercentArray= ArrayUtils.isEmpty(sysGoodsCategoryDTO.getGoldPercent())?new String[]{""}:sysGoodsCategoryDTO.getGoldPercent();
                 List<List<String>> recursiveResult = new ArrayList<List<String>>();
                 List<List<String>> dimValue = new ArrayList<List<String>>();
                 dimValue.add(Arrays.asList(secondArray));
@@ -173,5 +199,12 @@ public class SysGoodsCategoryServiceImpl extends AbstractBaseService<SysGoodsCat
             System.out.println();
         }
 
+    }
+    @Override
+    public void deleteGoodsCategory(String companyNo, Integer[] ids)
+    {
+        SysGoodsCategoryExample example = new SysGoodsCategoryExample();
+        example.createCriteria().andCompanyNoEqualTo(companyNo).andIdIn(Arrays.asList(ids));
+        this.mapper.deleteByExample(example);
     }
 }

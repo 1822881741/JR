@@ -14,6 +14,7 @@ import com.jr.erp.base.utils.Ret;
 import com.jr.erp.base.utils.RetJqGridPage;
 import com.jr.erp.base.utils.RetPage;
 import com.jr.erp.sys.element.dto.SysGoodsCategoryDTO;
+import com.jr.erp.sys.entity.SysGoodsCategory;
 import com.jr.erp.sys.entity.SysGoodsCategoryExample;
 import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.service.ISysGoodsCategoryService;
@@ -74,12 +75,14 @@ public class SysGoodsCategoryController
         return RetJqGridPage.ok(page.getCount(), page.getData());
     }
     
-    @RequestMapping(value = "/addGoodsCategory.do")
-    public String addGoodsCategory(String firstTypePrefix,HttpServletRequest request,Model model)
+    @RequestMapping(value = "/editGoodsCategory.do")
+    public String editGoodsCategory(Integer id,HttpServletRequest request,Model model)
     {
-        model.addAttribute("firstTypePrefix",firstTypePrefix);
+        SysGoodsCategory catetory = (SysGoodsCategory) sysGoodsCategoryService.selectByPrimaryKey(id);
+        model.addAttribute("catetory",catetory);
         return "sys/category/addGoodsCategory";
     }
+    
     /**    
      * saveGoodsCategory(这里用一句话描述这个方法的作用)    
      * 保存商品分类
@@ -96,6 +99,24 @@ public class SysGoodsCategoryController
         SysUser user = ShiroUtils.getSysUser();
         sysGoodsCategoryDTO.setCompanyNo(user.getCompanyNo());
         sysGoodsCategoryService.saveCategory(sysGoodsCategoryDTO);
+        return Ret.ok("保存成功");
+    }
+    
+    /**    
+     * deleteCategory(这里用一句话描述这个方法的作用)    
+     * 删除分类列表       
+     * @param @param ids
+     * @param @param request
+     * @param @return     
+     * @return Ret
+     * @Exception 异常对象
+    */
+    @RequestMapping(value = "/deleteCategory.do")
+    @ResponseBody
+    public Ret deleteCategory(Integer[] ids,HttpServletRequest request)
+    {
+        SysUser user = ShiroUtils.getSysUser();
+        sysGoodsCategoryService.deleteGoodsCategory(user.getCompanyNo(),ids);
         return Ret.ok("保存成功");
     }
 }

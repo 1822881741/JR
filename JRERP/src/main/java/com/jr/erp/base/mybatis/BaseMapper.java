@@ -20,4 +20,6 @@ public interface BaseMapper<T extends BaseEntity> {
 	long countByExample(Object example);
 	
 	void updateByPrimaryKeySelective(T record);
+	
+	void deleteByExample(Object example);
 }
