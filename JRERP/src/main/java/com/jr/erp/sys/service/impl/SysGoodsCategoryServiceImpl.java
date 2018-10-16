@@ -85,6 +85,7 @@ public class SysGoodsCategoryServiceImpl extends AbstractBaseService<SysGoodsCat
                     temp.setFirstType(sysGoodsCategoryDTO.getFirstType());
                     temp.setAssistCode(sysGoodsCategoryDTO.getAssistCode());
                     temp.setCanBarter(sysGoodsCategoryDTO.getCanBarter());
+                    temp.setSaleType(sysGoodsCategoryDTO.getSaleType());
                     temp.setCompanyNo(sysGoodsCategoryDTO.getCompanyNo());
                     temp.setSecondType(list.get(0));
                     temp.setGoodsName(list.get(1) + list.get(2) + list.get(3));
