@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<#include "/header-smart.html" />
+<body>
+<section id="widget-grid">
+	<!-- row -->
+	<div class="row">
+		<article class="col-sm-12 col-md-12 col-lg-12">
+			<div class="jarviswidget" id="wid-id-5" data-widget-collapsed="false" data-widget-hidden="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-grid="" data-widget-sortable="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false">
+				<header role="heading">
+					<ul class="nav nav-tabs pull-left in">
+						<li class="active">
+							<a data-toggle="tab" class="tabs" href="#tab-gold" aria-expanded="false"><span class="hidden-mobile hidden-tablet"> 素金 </span> </a>
+						</li>
+						<li>
+							<a data-toggle="tab" class="tabs" href="#tab-notGold" aria-expanded="true"><span class="hidden-mobile hidden-tablet"> 非素 </span> </a>
+						</li>
+						<li>
+							<a data-toggle="tab" class="tabs" href="#tab-material" aria-expanded="true"><span class="hidden-mobile hidden-tablet"> 旧料 </span> </a>
+						</li>
+						<li>
+							<a data-toggle="tab" class="tabs" href="#tab-serviceFee" aria-expanded="true"><span class="hidden-mobile hidden-tablet"> 服务费 </span> </a>
+						</li>
+					</ul>
+				</header>
+				<div>
+					<div class="widget-body">
+						<div class="widget-body-toolbar">
+							<div class="row">
+								<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="fa fa-search"></i></span>
+										<input class="form-control" id="prepend" placeholder="请输入过滤条件" type="text">
+									</div>
+								</div>
+								<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 text-right">
+									<a href="javascript:void(0);" id="addBtn" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>添加</a>
+								</div>
+							</div>
+						</div>
+						<div class="tab-content">
+							<div class="tab-pane active" id="tab-gold">
+								<table id="jqgrid" class="table table-bordered table-hover table-striped"></table>
+								<div id="pjqgrid"></div>
+							</div>
+							<div class="tab-pane" id=tab-notGold>
+								<table id="jqgrid2" class="table table-bordered table-hover table-striped "></table>
+							</div>
+							<div class="tab-pane" id="tab-material">
+								<table id="jqgrid3" class="table table-bordered table-hover table-striped"></table>
+							</div>
+							<div class="tab-pane" id="tab-serviceFee">
+								<table id="jqgrid4" class="table table-bordered table-hover table-striped"></table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</article>
+	</div>
+</section>
+</body>
+<script src="static/js/libs/jquery-3.2.1.min.js"></script>
+<script src="static/js/app.config.js"></script>
+<script src="static/js/bootstrap/bootstrap.min.js"></script>
+<script src="static/js/smartwidgets/jarvis.widget.min.js"></script>
+<script src="static/js/app.js?v=1"></script>
+<script src="resource/layui/layui.all.js?v=1" charset="utf-8"></script>
+<script src="static/js/plugin/jqgrid/jquery.jqGrid.min.js?v=33" charset="utf-8"></script>
+<script src="static/js/plugin/jqgrid/grid.locale-cn.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		pageSetUp();
+
+		jQuery("#jqgrid").jqGrid({
+			url : 'sysGoodsCategory/getGoodsCategoryData.do?firstType=gold',
+			datatype : "json",
+	        colNames : ['系统编码', '助记码', '商品名称', '商品小类','销售方式','兑换', '金料', '石料', '品名' ,  '统计大类' , '统计中类', '统计小类', '标签模板', '状态' ],
+	        colModel : [ 
+	                     {name : 'systemCode',search:true}, 
+	                     {name : 'assistCode'}, 
+	                     {name : 'goodsName'},
+		                 {name : 'secondTypeName'},
+	                     {name : 'saleType'}, 
+	                     {name : 'canBarter'}, 
+	                     {name : 'goldName'},
+	                     {name : 'jewelName'},
+	                     {name : 'categoryName'},
+	                     {name : 'firstClassify'},
+	                     {name : 'secondClassify'},
+	                     {name : 'thirdClassify'},
+	                     {name : 'grfName'},
+	                     {name : 'status'}
+	                   ],
+			caption : "商品分类详情",
+			rowNum: -1,
+			multiselect : true,
+	        pager : '#pjqgrid',
+	        viewrecords : true,
+	        loadonce : true,
+			autowidth : true,
+			pgbuttons:false,
+			pgtext:false,
+			rownumbers:true,
+			ondblClickRow : function(rowid) { // 双击行
+				alert(rowid);
+			},
+			recordtext:"共{1}记录"
+		}).navGrid('#pjqgrid',{edit:false,add:false,del:false,search:false,refresh:false}).navButtonAdd('#pjqgrid',{  
+			   buttonicon:"ui-icon-trash",   
+			   caption:"",
+			   title:"删除所选记录",
+			   onClickButton: function(){
+				   layer.confirm("确认删除所选行吗？",function(){
+					   var ids = jQuery("#jqgrid").jqGrid('getGridParam', 'selarrrow');
+				   })
+			   },   
+			   position:"first"  
+			})  ;
+		
+		jQuery("#jqgrid").jqGrid( 'setGridHeight', $(window).height() - 250 );
+		
+		
+		// remove classes
+		$(".ui-jqgrid").removeClass("ui-widget ui-widget-content");
+	    $(".ui-jqgrid-view").children().removeClass("ui-widget-header ui-state-default");
+	    $(".ui-jqgrid-labels, .ui-search-toolbar").children().removeClass("ui-state-default ui-th-column ui-th-ltr");
+	    $(".ui-jqgrid-pager").removeClass("ui-state-default");
+	    $(".ui-jqgrid").removeClass("ui-widget-content");
+	    
+	    // add classes
+	    $(".ui-jqgrid-htable").addClass("table table-bordered table-hover");
+	    $(".ui-jqgrid-btable").addClass("table table-bordered table-striped");
+	   
+	   
+	    $(".ui-pg-div").removeClass().addClass("btn btn-sm btn-primary");
+	    $(".ui-icon.ui-icon-plus").removeClass().addClass("fa fa-plus");
+	    $(".ui-icon.ui-icon-pencil").removeClass().addClass("fa fa-pencil");
+	    $(".ui-icon.ui-icon-trash").removeClass().addClass("fa fa-trash-o");
+	    $(".ui-icon.ui-icon-search").removeClass().addClass("fa fa-search");
+	    $(".ui-icon.ui-icon-refresh").removeClass().addClass("fa fa-refresh");
+	    $(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary").addClass("btn-success");
+	    $(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary").addClass("btn-danger");
+	  
+		$( ".ui-icon.ui-icon-seek-prev" ).wrap( "<div class='btn btn-sm btn-default'></div>" );
+		$(".ui-icon.ui-icon-seek-prev").removeClass().addClass("fa fa-backward");
+		
+		$( ".ui-icon.ui-icon-seek-first" ).wrap( "<div class='btn btn-sm btn-default'></div>" );
+	  	$(".ui-icon.ui-icon-seek-first").removeClass().addClass("fa fa-fast-backward");		  	
+
+	  	$( ".ui-icon.ui-icon-seek-next" ).wrap( "<div class='btn btn-sm btn-default'></div>" );
+	  	$(".ui-icon.ui-icon-seek-next").removeClass().addClass("fa fa-forward");
+	  	
+	  	$( ".ui-icon.ui-icon-seek-end" ).wrap( "<div class='btn btn-sm btn-default'></div>" );
+	  	$(".ui-icon.ui-icon-seek-end").removeClass().addClass("fa fa-fast-forward");
+		$("#addBtn").on("click",function(){
+			layer.open({
+				skin: 'layui-layer-lan',
+				type : 2,
+				title : "新增/修改商品分类",
+				area : ['900px','520px'],
+				shade : 0.8,
+				id : 'lay_addCategory', //设定一个id，防止重复弹出
+				btn : [ '保存', '取消' ],
+				moveType : 1, //拖拽模式，0或者1
+				content : "sysGoodsCategory/addGoodsCategory.do?firstTypePrefix="+$(this).data("type"),
+				yes : function(index, layero) {
+						 $(layero).find("iframe")[0].contentWindow.submitData();
+						  jQuery("#jqgrid").setGridParam({datatype:'json'}).trigger('reloadGrid');
+				}
+			});
+		})
+	});
+</script>
+</html>

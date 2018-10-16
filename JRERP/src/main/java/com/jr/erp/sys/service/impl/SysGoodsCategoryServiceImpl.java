@@ -48,6 +48,7 @@ public class SysGoodsCategoryServiceImpl extends AbstractBaseService<SysGoodsCat
                 temp.setFirstType(sysGoodsCategoryDTO.getFirstType());
                 temp.setAssistCode(sysGoodsCategoryDTO.getAssistCode());
                 temp.setCanBarter(sysGoodsCategoryDTO.getCanBarter());
+                temp.setSaleType(sysGoodsCategoryDTO.getSaleType());
                 temp.setCompanyNo(sysGoodsCategoryDTO.getCompanyNo());
                 temp.setSecondType(secondArray[0]);
                 temp.setGoodsName(sysGoodsCategoryDTO.getGoodsName());
@@ -59,7 +60,7 @@ public class SysGoodsCategoryServiceImpl extends AbstractBaseService<SysGoodsCat
                 temp.setSecondClassify(sysGoodsCategoryDTO.getSecondClassify());
                 temp.setThirdClassify(sysGoodsCategoryDTO.getThirdClassify());
                 temp.setLabelName(sysGoodsCategoryDTO.getGoodsName());
-                temp.setStatus(1);
+                temp.setStatus(sysGoodsCategoryDTO.getStatus());
                 temp.setRemark(sysGoodsCategoryDTO.getRemark());
                 this.mapper.updateByPrimaryKey(temp);
                 return;
