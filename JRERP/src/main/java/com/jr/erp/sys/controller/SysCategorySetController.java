@@ -1,6 +1,7 @@
 package com.jr.erp.sys.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import com.jr.erp.base.exception.ServiceAccessException;
 import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.base.utils.BasePageForm;
 import com.jr.erp.base.utils.Ret;
+import com.jr.erp.base.utils.RetJqGridPage;
 import com.jr.erp.base.utils.RetPage;
 import com.jr.erp.sys.entity.SysCategorySet;
 import com.jr.erp.sys.entity.SysCategorySetExample;
@@ -67,7 +69,7 @@ public class SysCategorySetController
     */
     @RequestMapping(value = "/getCategoryData.do")
     @ResponseBody
-    public RetPage getStoreListData(BasePageForm pageForm,String categoryType,HttpServletRequest request)
+    public RetJqGridPage getCategoryData(BasePageForm pageForm,String categoryType,HttpServletRequest request)
     {
         SysUser user = ShiroUtils.getSysUser();
         SysCategorySetExample exampale = new SysCategorySetExample();
@@ -75,7 +77,8 @@ public class SysCategorySetController
 //        exampale.setLimit(pageForm.getLimit());
         exampale.setOrderByClause("id desc");
         exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andCategoryTypeEqualTo(categoryType);
-        return sysCategorySetService.selectPage(exampale);
+        RetPage page = sysCategorySetService.selectPage(exampale);
+        return RetJqGridPage.ok(page.getCount(), page.getData());
     }
     
     /**    
@@ -126,7 +129,37 @@ public class SysCategorySetController
             {
                 return Ret.error(e.getMessage());
             }
+            e.printStackTrace();
         }
         return Ret.ok("保存成功");
+    }
+    
+    /**    
+     * deleteCategory(这里用一句话描述这个方法的作用)    
+     * 删除分类
+     * @param @param ids
+     * @param @return     
+     * @return Ret
+     * @Exception 异常对象
+    */
+    @RequestMapping(value = "/deleteCategorySet.do")
+    @ResponseBody
+    public Ret deleteCategorySet(Integer[] ids,HttpServletRequest request)
+    {
+        SysUser user = ShiroUtils.getSysUser();
+        try
+        {
+            SysCategorySetExample exampale = new SysCategorySetExample();
+            exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andIdIn(Arrays.asList(ids));
+            sysCategorySetService.deleteByExample(exampale);
+        } catch (Exception e)
+        {
+            if (e instanceof ServiceAccessException)
+            {
+                return Ret.error(e.getMessage());
+            }
+            e.printStackTrace();
+        }
+        return Ret.ok("删除成功");
     }
 }

@@ -91,3 +91,44 @@ function getJqgridCategory(type,tableDom,pagerDom) {
 		recordtext : "共{1}记录"
 	}
 }
+
+function getJqgridCategorySet(type,tableDom,pagerDom) {
+	return config = {
+		url : 'sysCategorySet/getCategoryData.do?categoryType='+type,
+		datatype : "json",
+		colNames : [ '操作', '名称','描述' ],
+		colModel : [ {
+			name : 'opera',
+			sortable : false
+		}, {
+			name : 'name'
+		}, {
+			name : 'remarks'
+		} ],
+		caption : false,
+		rowNum : -1,
+		gridComplete : function() {
+			var ids = jQuery("#"+tableDom).jqGrid('getDataIDs');
+			for (var i = 0; i < ids.length; i++) {
+				var cl = ids[i];
+				be = "<button class='btn btn-xs btn-default' data-original-title='Edit Row' data-original-title='Edit Row' onclick=\"edit('"+ cl + "');\"><i class='fa fa-pencil'></i></button>";
+				ca = "<button class='btn btn-xs btn-default' data-original-title='Cancel' onclick=\"deleteRows('"+ cl + "');\"><i class='fa fa-times'></i></button>";
+				jQuery("#jqgrid").jqGrid('setRowData', ids[i], {
+					opera : be + ca
+				});
+			}
+		},
+		multiselect : true,
+		pager : '#'+pagerDom,
+		viewrecords : true,
+		loadonce : true,
+		autowidth : true,
+		pgbuttons : false,
+		pgtext : false,
+		rownumbers : false,
+		ondblClickRow : function(rowid) { // 双击行
+			editCategory(rowid);
+		},
+		recordtext : "共{1}记录"
+	}
+}

@@ -23,4 +23,6 @@ public interface IBaseService <T extends BaseEntity>{
 	void updateByPrimaryKey(T t);
 	
     void updateByPrimaryKeySelective(T t);
+    
+    void deleteByExample(Object example);
 }
