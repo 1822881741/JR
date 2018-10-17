@@ -9,9 +9,6 @@
 		<div class="row no-margin">
 			<article class="col-sm-12 col-md-12 col-lg-12">
 				<div class="jarviswidget" data-widget-collapsed="false" data-widget-hidden="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-grid="" data-widget-sortable="false" data-widget-editbutton="false" data-widget-colorbutton="false"  data-widget-fullscreenbutton="false">
-					<header role="heading">
-						<h2><strong>通用类型</strong> <i id="breadcrumb">Widget</i></h2>	
-					</header>
 					<input type="hidden" id="categoryType" name="categoryType">
 					<div>
 						<div class="widget-body">
@@ -79,8 +76,6 @@ $(document).ready(function(){
 	pageSetUp();
 	var categoryType = $($(".categoryMain")[0]).data("type");
 	$("#categoryType").val(categoryType);
-	$("#breadcrumb").html(">"+$($(".categoryMain")[0]).html());
-	
 	$("#jqgrid").jqGrid(getJqgridCategorySet(categoryType,"jqgrid","pjqgrid")).navGrid('#pjqgrid',{edit:false,add:false,del:false,search:true,refresh:false})
 	  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-trash",caption:"",title:"删除所选记录", position:"first",onClickButton: function(){
 		   var ids = $("#jqgrid").jqGrid('getGridParam', 'selarrrow');
@@ -93,6 +88,7 @@ $(document).ready(function(){
 	   }})
 	  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-plus",caption:"",title:"新增记录",position:"first",onClickButton: function(){add(null);}})
 	  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-refresh",caption:"",title:"刷新",onClickButton: function(){$("#jqgrid").setGridParam({datatype:'json'}).trigger('reloadGrid');},position:"first"});
+	$("#jqgrid").setCaption("属性设置 >>"+$($(".categoryMain")[0]).html());
 	
 	$("#jqgrid").setGridWidth($("#widget-body").width());
 	$("#jqgrid").setGridHeight($(window).height() - 260);
@@ -108,10 +104,10 @@ $(document).ready(function(){
 	
 	//切换类型
 	$(".categoryMain").on("click",function(){
-		$("#breadcrumb").html(">"+$(this).html());
 		var categoryType=$(this).data("type");
 		$("#categoryType").val(categoryType);
 		$("#jqgrid").setGridParam({datatype:'json',url: "sysCategorySet/getCategoryData.do?categoryType="+categoryType}).trigger('reloadGrid');
+		$("#jqgrid").setCaption("属性设置 >>"+$(this).html())
 	})
 });
 function edit(id){

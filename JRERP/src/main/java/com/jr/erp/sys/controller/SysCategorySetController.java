@@ -60,6 +60,20 @@ public class SysCategorySetController
     }
 
     /**    
+     * viewClassify(这里用一句话描述这个方法的作用)    
+     * 查看商品分类       
+     * @param @param request
+     * @param @param model
+     * @param @return     
+     * @return String
+     * @Exception 异常对象
+    */
+    @RequestMapping(value = "/viewClassify.do")
+    public String viewClassify(HttpServletRequest request, Model model)
+    {
+        return "sys/classify/viewClassify";
+    }
+    /**    
      * getStoreListData(这里用一句话描述这个方法的作用)    
      * 获取门店列表       
      * @param @param request
