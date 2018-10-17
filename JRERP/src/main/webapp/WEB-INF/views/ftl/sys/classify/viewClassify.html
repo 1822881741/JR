@@ -4,231 +4,49 @@
 <meta charset="utf-8">
 <#include "/header-smart.html" />
 <body>
-<section id="widget-grid">
-
-	<!-- row -->
-	<div class="row no-margin">
-		<article class="col-sm-12 col-md-12 col-lg-12" >
-			<div class="row">
-				<div class="col-sm-12 col-md-12 col-lg-12">
-				<div class="jarviswidget" id="wid-id-5" data-widget-collapsed="false" data-widget-hidden="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-grid="" data-widget-sortable="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false">
-				<header role="heading">
-					<ul class="nav nav-tabs pull-left in">
-						<li class="active">
-							<a data-toggle="tab" class="tabs" href="#tab-gold" aria-expanded="false"><span class="hidden-mobile hidden-tablet"> 素金 </span> </a>
-						</li>
-						<li>
-							<a data-toggle="tab" class="tabs" href="#tab-notGold" aria-expanded="true"><span class="hidden-mobile hidden-tablet"> 非素 </span> </a>
-						</li>
-						<li>
-							<a data-toggle="tab" class="tabs" href="#tab-material" aria-expanded="true"><span class="hidden-mobile hidden-tablet"> 旧料 </span> </a>
-						</li>
-						<li>
-							<a data-toggle="tab" class="tabs" href="#tab-serviceFee" aria-expanded="true"><span class="hidden-mobile hidden-tablet"> 服务费 </span> </a>
-						</li>
-					</ul>
-				</header>
-				<div>
-					<div class="widget-body">
-					<div class="well">
-						<div id="inbox-content" class="inbox-body no-content-padding">
-
-	<div class="inbox-side-bar">
-
-		<a href="javascript:void(0);" id="compose-mail" class="btn btn-primary btn-block"> <strong>Compose</strong> </a>
-
-		<h6> Folder <a href="javascript:void(0);" rel="tooltip" title="" data-placement="right" data-original-title="Refresh" class="pull-right txt-color-darken"><i class="fa fa-refresh"></i></a></h6>
-
-		<ul class="inbox-menu-lg">
-			<li class="active">
-				<a class="inbox-load" href="javascript:void(0);"> Inbox (14) </a>
-			</li>
-			<li>
-				<a href="javascript:void(0);">Sent</a>
-			</li>
-			<li>
-				<a href="javascript:void(0);">Draft</a>
-			</li>
-			<li>
-				<a href="javascript:void(0);">Trash</a>
-			</li>
-		</ul>
-
-		<h6> Quick Access <a href="javascript:void(0);" rel="tooltip" title="" data-placement="right" data-original-title="Add Another" class="pull-right txt-color-darken"><i class="fa fa-plus"></i></a></h6>
-
-		<ul class="inbox-menu-sm">
-			<li>
-				<a href="javascript:void(0);"> Images (476)</a>
-			</li>
-			<li>
-				<a href="javascript:void(0);">Documents (4)</a>
-			</li>
-		</ul>
-
-		<div class="air air-bottom inbox-space">
-
-			3.5GB of <strong>10GB</strong><a href="javascript:void(0);" rel="tooltip" title="" data-placement="top" data-original-title="Empty Spam" class="pull-right txt-color-darken"><i class="fa fa-trash-o fa-lg"></i></a>
-
-			<div class="progress progress-micro">
-				<div class="progress-bar progress-primary" style="width: 34%;"></div>
-			</div>
-		</div>
-</div>
-</div>
-</div>
-	</div>
-
-	<div class="table-wrap custom-scroll animated fast fadeInRight">
-		<!-- ajax will fill this area -->
-		LOADING...
-
-	</div>
-
-
-</div>
-
+	<section id="widget-grid">
+		<div class="row no-margin">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div class="row">
+					<div class="col-sm-3 col-md-3 col-lg-3">
+						<div id="inbox-content" class="inbox-body no-content-padding" style="height: 500px;">
+							<div class="inbox-side-bar">
+								<a href="javascript:void(0);" id="compose-mail" class="btn btn-primary btn-block"> <strong>商品小类</strong>
+								</a>
+								<ul id="parentType" class="inbox-menu-lg">
+									<li class="active"><a class="inbox-load" href="javascript:void(0);"> 素金</a></li>
+									<li><a href="javascript:void(0);">非素</a></li>
+									<li><a href="javascript:void(0);">旧料</a></li>
+									<li><a href="javascript:void(0);">服务费</a></li>
+								</ul>
+							</div>
+						</div>
 					</div>
-
+					<div class="col-sm-3 col-md-3 col-lg-3">
+						<table id="jqgrid" class="table table-bordered table-hover table-striped "></table>
+						<div id="pjqgrid"></div>
+					</div>
 				</div>
-			</div>
-		</article>
-	</div>
-</section>
+			</article>
+		</div>
+	</section>
 </body>
 <script src="static/js/libs/jquery-3.2.1.min.js"></script>
 <script src="static/js/app.config.js"></script>
 <script src="static/js/bootstrap/bootstrap.min.js"></script>
 <script src="static/js/smartwidgets/jarvis.widget.min.js"></script>
 <script src="static/js/app.js?v=1"></script>
-<script src="resource/layui/layui.all.js?v=1" charset="utf-8"></script>
-<script src="static/js/plugin/jqgrid/jquery.jqGrid.min.js?v=33" charset="utf-8"></script>
+<script src="resource/layui/layui.all.js?v=1"></script>
+<script src="static/js/plugin/jqgrid/jquery.jqGrid.min.js?v=33"></script>
 <script src="static/js/plugin/jqgrid/grid.locale-cn.js"></script>
-<script src="static/zmodel/common/js/jqgridConfig.js?v=4" ></script>
-
+<script src="static/zmodel/common/js/jqgridConfig.js?v=4"></script>
 <script type="text/javascript">
-	$(document).ready(function(){
-		pageSetUp();
-
-		$("#jqgrid").jqGrid(getJqgridCategory("gold","jqgrid","pjqgrid")).navGrid('#pjqgrid',{edit:false,add:false,del:false,search:true,refresh:false})
-			  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-trash",caption:"",title:"删除所选记录", position:"first",onClickButton: function(){
-				   var ids = $("#jqgrid").jqGrid('getGridParam', 'selarrrow');
-				   if(ids != null && ids.length >0){
-					   layer.confirm("确认删除所选行吗？",function(index){
-						   deleteCategory(ids);
-						   layer.close(index);
-					   })
-				   }
-			   }})
-			  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-plus",caption:"",title:"新增记录",position:"first",onClickButton: function(){editCategory(null);}})
-			  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-refresh",caption:"",title:"刷新",onClickButton: function(){$("#jqgrid").setGridParam({datatype:'json'}).trigger('reloadGrid');},position:"first"});
-		
-		$("#jqgrid2").jqGrid(getJqgridCategory("notGold","jqgrid","pjqgrid2")).navGrid('#pjqgrid2',{edit:false,add:false,del:false,search:true,refresh:false})
-				.navButtonAdd('#pjqgrid2',{buttonicon:"ui-icon-trash",caption:"",title:"删除所选记录", position:"first",onClickButton: function(){
-				   var ids = $("#jqgrid2").jqGrid('getGridParam', 'selarrrow');
-				   if(ids != null && ids.length >0){
-					   layer.confirm("确认删除所选行吗？",function(index){
-						   deleteCategory(ids);
-						   layer.close(index);
-					   })
-				   }
-			   }})
-			  .navButtonAdd('#pjqgrid2',{buttonicon:"ui-icon-plus",caption:"",title:"新增记录",position:"first",onClickButton: function(){editCategory(null);}})
-			  .navButtonAdd('#pjqgrid2',{buttonicon:"ui-icon-refresh",caption:"",title:"刷新",onClickButton: function(){$("#jqgrid2").setGridParam({datatype:'json'}).trigger('reloadGrid');},position:"first"});
-		
-		$("#jqgrid3").jqGrid(getJqgridCategory("material","jqgrid","pjqgrid3")).navGrid('#pjqgrid3',{edit:false,add:false,del:false,search:true,refresh:false})
-			  .navButtonAdd('#pjqgrid3',{buttonicon:"ui-icon-trash",caption:"",title:"删除所选记录", position:"first",onClickButton: function(){
-				   var ids = $("#jqgrid3").jqGrid('getGridParam', 'selarrrow');
-				   if(ids != null && ids.length >0){
-					   layer.confirm("确认删除所选行吗？",function(index){
-						   deleteCategory(ids);
-						   layer.close(index);
-					   })
-				   }
-			   }})
-			  .navButtonAdd('#pjqgrid3',{buttonicon:"ui-icon-plus",caption:"",title:"新增记录",position:"first",onClickButton: function(){editCategory(null);}})
-			  .navButtonAdd('#pjqgrid3',{buttonicon:"ui-icon-refresh",caption:"",title:"刷新",onClickButton: function(){$("#jqgrid3").setGridParam({datatype:'json'}).trigger('reloadGrid');},position:"first"});
-
-		$("#jqgrid4").jqGrid(getJqgridCategory("serviceFee","jqgrid","pjqgrid4")).navGrid('#pjqgrid4',{edit:false,add:false,del:false,search:true,refresh:false})
-				.navButtonAdd('#pjqgrid4',{buttonicon:"ui-icon-trash",caption:"",title:"删除所选记录", position:"first",onClickButton: function(){
-				   var ids = $("#jqgrid4").jqGrid('getGridParam', 'selarrrow');
-				   if(ids != null && ids.length >0){
-					   layer.confirm("确认删除所选行吗？",function(index){
-						   deleteCategory(ids);
-						   layer.close(index);
-					   })
-				   }
-			   }})
-			  .navButtonAdd('#pjqgrid4',{buttonicon:"ui-icon-plus",caption:"",title:"新增记录",position:"first",onClickButton: function(){editCategory(null);}})
-			  .navButtonAdd('#pjqgrid4',{buttonicon:"ui-icon-refresh",caption:"",title:"刷新",onClickButton: function(){$("#jqgrid3").setGridParam({datatype:'json'}).trigger('reloadGrid');},position:"first"});	
-		
-		$("#jqgrid").setGridWidth($(".tab-content").width());
-		$("#jqgrid2").setGridWidth($(".tab-content").width());
-		$("#jqgrid3").setGridWidth($(".tab-content").width());
-		$("#jqgrid4").setGridWidth($(".tab-content").width());
-		$("#jqgrid").setGridHeight($(window).height() - 260);
-		$("#jqgrid2").setGridHeight($(window).height() - 260);
-		$("#jqgrid3").setGridHeight($(window).height() - 260);
-		$("#jqgrid4").setGridHeight($(window).height() - 260);
-		
-	    $(".ui-pg-div").removeClass().addClass("btn btn-sm btn-default");
-	    $(".ui-icon.ui-icon-plus").removeClass().addClass("fa fa-plus");
-	    $(".ui-icon.ui-icon-pencil").removeClass().addClass("fa fa-pencil");
-	    $(".ui-icon.ui-icon-trash").removeClass().addClass("fa fa-trash-o");
-	    $(".ui-icon.ui-icon-search").removeClass().addClass("fa fa-search");
-	    $(".ui-icon.ui-icon-refresh").removeClass().addClass("fa fa-refresh");
-	    $(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary");
-	    $(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary");
-	  
-	    
-		$("#addBtn").on("click",function(){
-			editCategory(null);
-		})
-	});
+$(document).ready(function(){
+	$("#parentType").find("li").on("click",function(){
+		$("#parentType").find("li").removeClass("active");
+		$(this).addClass("active")
+	})
 	
-	function editCategory(id){
-		var url="sysGoodsCategory/editGoodsCategory.do";
-		if(id != null){
-			url+="?id="+id;
-		}
-		layer.open({
-			type : 2,
-			title : "新增/修改商品分类",
-			area : ['900px','375px'],
-			shade : 0.8,
-			scrollbar: false,
-			id : 'lay_addCategory', //设定一个id，防止重复弹出
-			btn : [ '保存', '取消' ],
-			moveType : 1, //拖拽模式，0或者1
-			content : url,
-			yes : function(index, layero) {
-				 $(layero).find("iframe")[0].contentWindow.submitData();
-				 $("#jqgrid").setGridParam({datatype:'json'}).trigger('reloadGrid');
-			}
-		});
-	}
-	
-	function deleteCategory(ids){
-		if(ids==null){
-			return;
-		}else{
-			$.ajax({
-		        type: "POST",
-		        url: "sysGoodsCategory/deleteCategory.do?ids="+ids,
-		        dataType: 'json',
-		        async: false,
-		        success: function(data) {
-		            if (data.status == '100') {
-		            	$("#jqgrid").setGridParam({datatype:'json'}).trigger('reloadGrid');
-		            	layer.msg("删除成功");
-		            }else{
-		            	layer.msg("删除失败");
-		            }
-		        },
-		        error: function() {
-		        	layer.alert("连接服务器失败，请稍后重试");
-		        }
-		    });
-		}
-	}
+})
 </script>
 </html>
