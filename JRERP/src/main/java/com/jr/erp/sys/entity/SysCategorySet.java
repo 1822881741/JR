@@ -16,7 +16,7 @@ public class SysCategorySet extends BaseEntity {
     private String name;
 
     /**
-     * 是否是系统类型0：是 ，1不是
+     * 是否是系统类型1：是 ，0不是
      */
     private Integer isSysDef;
 

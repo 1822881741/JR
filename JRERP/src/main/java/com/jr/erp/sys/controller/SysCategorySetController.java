@@ -22,8 +22,11 @@ import com.jr.erp.base.utils.RetJqGridPage;
 import com.jr.erp.base.utils.RetPage;
 import com.jr.erp.sys.entity.SysCategorySet;
 import com.jr.erp.sys.entity.SysCategorySetExample;
+import com.jr.erp.sys.entity.SysClassify;
+import com.jr.erp.sys.entity.SysClassifyExample;
 import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.service.ISysCategorySetService;
+import com.jr.erp.sys.service.ISysClassifyService;
 
 /**     
  * 类名称：SysCategorySetController    
@@ -43,6 +46,8 @@ public class SysCategorySetController
     @Autowired
     private ISysCategorySetService sysCategorySetService;
 
+    @Autowired
+    private ISysClassifyService sysClassifyService;
     /**    
      * viewStore(这里用一句话描述这个方法的作用)    
      * 跳转到门店页面       
@@ -58,21 +63,7 @@ public class SysCategorySetController
     {
         return "sys/category/viewCategorySet";
     }
-
-    /**    
-     * viewClassify(这里用一句话描述这个方法的作用)    
-     * 查看商品分类       
-     * @param @param request
-     * @param @param model
-     * @param @return     
-     * @return String
-     * @Exception 异常对象
-    */
-    @RequestMapping(value = "/viewClassify.do")
-    public String viewClassify(HttpServletRequest request, Model model)
-    {
-        return "sys/classify/viewClassify";
-    }
+    
     /**    
      * getStoreListData(这里用一句话描述这个方法的作用)    
      * 获取门店列表       
@@ -166,6 +157,137 @@ public class SysCategorySetController
             SysCategorySetExample exampale = new SysCategorySetExample();
             exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andIdIn(Arrays.asList(ids));
             sysCategorySetService.deleteByExample(exampale);
+        } catch (Exception e)
+        {
+            if (e instanceof ServiceAccessException)
+            {
+                return Ret.error(e.getMessage());
+            }
+            e.printStackTrace();
+        }
+        return Ret.ok("删除成功");
+    }
+    
+    /**    
+     * viewClassify(这里用一句话描述这个方法的作用)    
+     * 查看商品分类       
+     * @param @param request
+     * @param @param model
+     * @param @return     
+     * @return String
+     * @Exception 异常对象
+    */
+    @RequestMapping(value = "/viewClassify.do")
+    public String viewClassify(HttpServletRequest request, Model model)
+    {
+        return "sys/classify/viewClassify";
+    }
+    
+    /**    
+     * addOrUpdateClassify(这里用一句话描述这个方法的作用)    
+     * 新增修改       
+     * @param @param firstType
+     * @param @param id
+     * @param @param request
+     * @param @param model
+     * @param @return     
+     * @return String
+     * @Exception 异常对象
+    */
+    @RequestMapping(value = "/editClassify.do")
+    public String editClassify(String firstType,Integer id,HttpServletRequest request, Model model)
+    {
+        SysUser user = ShiroUtils.getSysUser();
+        SysClassify classify = new SysClassify();
+        if(id!=null)
+        {
+            classify = (SysClassify) sysClassifyService.selectByPrimaryKey(id);
+        }else
+        {
+            classify.setStatus(1);
+            classify.setFirstType(firstType);
+            switch (firstType)
+            {
+            case "gold":
+                classify.setFirstTypeName("素金");
+                break;
+            case "notGold":
+                classify.setFirstTypeName("非素");
+                break;
+            case "material":
+                classify.setFirstTypeName("旧料");
+                break;
+            case "serviceFee":
+                classify.setFirstTypeName("服务费");
+                break;
+            default:
+                break;
+            }
+        }
+        model.addAttribute("classify",classify);
+        return "sys/classify/editClassify";
+    }
+    
+    /**    
+     * getClassifyData(这里用一句话描述这个方法的作用)    
+     * 获取分页数据       
+     * @param @param pageForm
+     * @param @param firstType
+     * @param @param request
+     * @param @return     
+     * @return RetJqGridPage
+     * @Exception 异常对象
+    */
+    @RequestMapping(value = "/getClassifyData.do")
+    @ResponseBody
+    public RetJqGridPage getClassifyData(BasePageForm pageForm,String firstType,HttpServletRequest request)
+    {
+        SysUser user = ShiroUtils.getSysUser();
+        SysClassifyExample exampale = new SysClassifyExample();
+        exampale.setOrderByClause("id");
+        exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andFirstTypeEqualTo(firstType);
+        RetPage page = sysClassifyService.selectPage(exampale);
+        return RetJqGridPage.ok(page.getCount(), page.getData());
+    }
+    
+    /**    
+     * saveClassify(这里用一句话描述这个方法的作用)    
+     * 保存       
+     * @param @param sysClassify
+     * @param @param request
+     * @param @return     
+     * @return Ret
+     * @Exception 异常对象
+    */
+    @RequestMapping(value = "/saveClassify.do")
+    @ResponseBody
+    public Ret saveClassify(SysClassify sysClassify,HttpServletRequest request)
+    {
+        SysUser user = ShiroUtils.getSysUser();
+        sysClassify.setCompanyNo(user.getCompanyNo());
+        sysClassifyService.saveClassify(sysClassify);
+        return Ret.ok("保存成功");
+    }
+    
+    /**    
+     * deleteClassify(这里用一句话描述这个方法的作用)    
+     * 删除分类       
+     * @param @param ids
+     * @param @param request
+     * @param @return     
+     * @return Ret
+     * @Exception 异常对象
+    */
+    @RequestMapping(value = "/deleteClassify.do")
+    @ResponseBody
+    public Ret deleteClassify(Integer[] ids,HttpServletRequest request)
+    {
+        SysUser user = ShiroUtils.getSysUser();
+        try
+        {
+            SysClassifyExample exampale = new SysClassifyExample();
+            exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andIsSysDefNotEqualTo(1).andIdIn(Arrays.asList(ids));
+            sysClassifyService.deleteByExample(exampale);
         } catch (Exception e)
         {
             if (e instanceof ServiceAccessException)

@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		</javaClientGenerator>
 		
 		<!-- 要对那些数据表进行生成操作，必须要有一个. -->
-		<table schema="mybatis" tableName="sys_goods_category" domainObjectName="SysGoodsCategory"  delimitIdentifiers="false"
+		<table schema="mybatis" tableName="sys_classify" domainObjectName="SysClassify"  delimitIdentifiers="false"
 			selectByPrimaryKeyQueryId="true" enableDeleteByPrimaryKey="true"
 			enableCountByExample="true" enableUpdateByPrimaryKey="true" enableUpdateByExample="false">
 			<property name="useActualColumnNames" value="true" />
