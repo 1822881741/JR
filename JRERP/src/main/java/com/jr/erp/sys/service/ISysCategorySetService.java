@@ -41,4 +41,15 @@ public interface ISysCategorySetService extends IBaseService<BaseEntity>{
      * @Exception 异常对象
     */
     List<String> saveCategory(String companyNo, ArrayList<SysCategorySet> categoryList);
+
+    /**    
+     * getNameList(这里用一句话描述这个方法的作用)    
+     * 获取指定类型的列表       
+     * @param @param companyNo
+     * @param @param element
+     * @param @return     
+     * @return List<String>
+     * @Exception 异常对象
+    */
+    List<String> getNameList(String companyNo, String element);
 }

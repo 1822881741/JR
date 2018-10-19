@@ -32,10 +32,19 @@ public class SysGoodsCategoryDTO {
      */
     private String firstType;
 
+    /**    
+     * 大类名称    
+     */    
+    private String firstTypeName;
     /**
      * 商品中类英文
      */
-    private String[] secondType;
+    private String secondType;
+    
+    /**    
+     * 中类英文名    
+     */    
+    private String secondTypeName;
 
     /**
      * 销售方式 1：按折扣 2：按金价
@@ -102,6 +111,16 @@ public class SysGoodsCategoryDTO {
      */
     private String remark;
 
+    public Integer getId()
+    {
+        return id;
+    }
+
+    public void setId(Integer id)
+    {
+        this.id = id;
+    }
+
     public String getCompanyNo()
     {
         return companyNo;
@@ -152,14 +171,34 @@ public class SysGoodsCategoryDTO {
         this.firstType = firstType;
     }
 
-    public String[] getSecondType()
+    public String getFirstTypeName()
+    {
+        return firstTypeName;
+    }
+
+    public void setFirstTypeName(String firstTypeName)
+    {
+        this.firstTypeName = firstTypeName;
+    }
+
+    public String getSecondType()
     {
         return secondType;
     }
 
-    public void setSecondType(String[] secondType)
+    public void setSecondType(String secondType)
     {
         this.secondType = secondType;
+    }
+
+    public String getSecondTypeName()
+    {
+        return secondTypeName;
+    }
+
+    public void setSecondTypeName(String secondTypeName)
+    {
+        this.secondTypeName = secondTypeName;
     }
 
     public Integer getSaleType()
@@ -290,15 +329,5 @@ public class SysGoodsCategoryDTO {
     public void setRemark(String remark)
     {
         this.remark = remark;
-    }
-
-    public Integer getId()
-    {
-        return id;
-    }
-
-    public void setId(Integer id)
-    {
-        this.id = id;
     }
 }

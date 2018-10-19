@@ -1,9 +1,16 @@
 package com.jr.erp.sys.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import com.jr.erp.base.mybatis.AbstractBaseService;
 import com.jr.erp.sys.entity.SysClassify;
+import com.jr.erp.sys.entity.SysClassifyExample;
 import com.jr.erp.sys.service.ISysClassifyService;
 
 /**     
@@ -24,5 +31,46 @@ public class SysClassifyServiceImpl extends AbstractBaseService<SysClassify> imp
     {
         sysClassify.setIsSysDef(0);
         this.merge(sysClassify);
+    }
+
+    @Override
+    public Map<String, List<SysClassify>> getInUseClassify(String companyNo)
+    {
+        Map<String, List<SysClassify>> map = new HashMap<String, List<SysClassify>>();
+        List<SysClassify> goldList = new ArrayList<SysClassify>();
+        List<SysClassify> notGoldList = new ArrayList<SysClassify>();
+        List<SysClassify> materialList = new ArrayList<SysClassify>();
+        List<SysClassify> serviceFeeList = new ArrayList<SysClassify>();
+        map.put("gold", goldList);
+        map.put("notGold", notGoldList);
+        map.put("material", materialList);
+        map.put("serviceFee", serviceFeeList);
+        SysClassifyExample example = new SysClassifyExample();
+        example.createCriteria().andCompanyNoEqualTo(companyNo).andStatusEqualTo(1);
+        List<SysClassify> allClassify = this.mapper.selectByExample(example);
+        if (CollectionUtils.isNotEmpty(allClassify))
+        {
+            for (SysClassify sysClassify : allClassify)
+            {
+                switch (sysClassify.getFirstType())
+                {
+                case "gold":
+                    goldList.add(sysClassify);
+                    break;
+                case "notGold":
+                    notGoldList.add(sysClassify);
+                    break;
+                case "material":
+                    materialList.add(sysClassify);
+                    break;
+                case "serviceFee":
+                    serviceFeeList.add(sysClassify);
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
+        return map;
     }
 }

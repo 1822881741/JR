@@ -34,7 +34,6 @@ public class SysGoodsCategoryServiceImpl extends AbstractBaseService<SysGoodsCat
     {
         if(sysGoodsCategoryDTO!=null)
         {
-            String[] secondArray= ArrayUtils.isEmpty(sysGoodsCategoryDTO.getSecondType())?new String[]{""}:sysGoodsCategoryDTO.getSecondType();
             String[] goldArray= ArrayUtils.isEmpty(sysGoodsCategoryDTO.getGoldName())?new String[]{""}:sysGoodsCategoryDTO.getGoldName();
             String[] jewelArray= ArrayUtils.isEmpty(sysGoodsCategoryDTO.getJewelName())?new String[]{""}:sysGoodsCategoryDTO.getJewelName();
             String[] categoryArray= ArrayUtils.isEmpty(sysGoodsCategoryDTO.getCategoryName())?new String[]{""}:sysGoodsCategoryDTO.getCategoryName();
@@ -47,10 +46,11 @@ public class SysGoodsCategoryServiceImpl extends AbstractBaseService<SysGoodsCat
                 temp.setCompanyNo(sysGoodsCategoryDTO.getCompanyNo());
                 temp.setFirstType(sysGoodsCategoryDTO.getFirstType());
                 temp.setAssistCode(sysGoodsCategoryDTO.getAssistCode());
-                temp.setCanBarter(sysGoodsCategoryDTO.getCanBarter());
+                temp.setCanBarter(sysGoodsCategoryDTO.getCanBarter()==null?0:sysGoodsCategoryDTO.getCanBarter());
                 temp.setSaleType(sysGoodsCategoryDTO.getSaleType());
                 temp.setCompanyNo(sysGoodsCategoryDTO.getCompanyNo());
-                temp.setSecondType(secondArray[0]);
+                temp.setSecondType(sysGoodsCategoryDTO.getSecondType());
+                temp.setSecondTypeName(sysGoodsCategoryDTO.getSecondTypeName());
                 temp.setGoodsName(sysGoodsCategoryDTO.getGoodsName());
                 temp.setGoldName(goldArray[0]);
                 temp.setJewelName(jewelArray[0]);
@@ -73,7 +73,6 @@ public class SysGoodsCategoryServiceImpl extends AbstractBaseService<SysGoodsCat
             case "serviceFee":
                 List<List<String>> recursiveResult = new ArrayList<List<String>>();
                 List<List<String>> dimValue = new ArrayList<List<String>>();
-                dimValue.add(Arrays.asList(secondArray));
                 dimValue.add(Arrays.asList(goldArray));
                 dimValue.add(Arrays.asList(jewelArray));
                 dimValue.add(Arrays.asList(categoryArray));
@@ -83,22 +82,24 @@ public class SysGoodsCategoryServiceImpl extends AbstractBaseService<SysGoodsCat
                 {
                     SysGoodsCategory temp = new SysGoodsCategory();
                     temp.setFirstType(sysGoodsCategoryDTO.getFirstType());
+                    temp.setFirstTypeName(sysGoodsCategoryDTO.getFirstTypeName());
+                    temp.setSecondType(sysGoodsCategoryDTO.getSecondType());
+                    temp.setSecondTypeName(sysGoodsCategoryDTO.getSecondTypeName());
                     temp.setAssistCode(sysGoodsCategoryDTO.getAssistCode());
-                    temp.setCanBarter(sysGoodsCategoryDTO.getCanBarter());
+                    temp.setCanBarter(sysGoodsCategoryDTO.getCanBarter()==null?0:sysGoodsCategoryDTO.getCanBarter());
                     temp.setSaleType(sysGoodsCategoryDTO.getSaleType());
                     temp.setCompanyNo(sysGoodsCategoryDTO.getCompanyNo());
-                    temp.setSecondType(list.get(0));
-                    temp.setGoodsName(list.get(1) + list.get(2) + list.get(3));
-                    temp.setGoldName(list.get(1));
-                    temp.setJewelName(list.get(2));
-                    temp.setCategoryName(list.get(3));
-                    temp.setGoldPercent(list.get(4));
+                    temp.setGoodsName(list.get(0) + list.get(1) + list.get(2));
+                    temp.setGoldName(list.get(0));
+                    temp.setJewelName(list.get(1));
+                    temp.setCategoryName(list.get(2));
+                    temp.setGoldPercent(list.get(3));
                     temp.setFirstClassify(sysGoodsCategoryDTO.getFirstClassify());
                     temp.setSecondClassify(sysGoodsCategoryDTO.getSecondClassify());
                     temp.setThirdClassify(sysGoodsCategoryDTO.getThirdClassify());
                     temp.setLabelName(temp.getGoodsName());
-                    temp.setStatus(1);
-                    this.mapper.insert(temp);
+                    temp.setStatus(sysGoodsCategoryDTO.getStatus());
+                    this.insert(temp);
                 }
                 break;
             default:
@@ -184,12 +185,7 @@ public class SysGoodsCategoryServiceImpl extends AbstractBaseService<SysGoodsCat
         dimValue.add(list2);
         dimValue.add(list3);
         dimValue.add(list4);
-        List<List<String>> recursiveResult = new ArrayList<List<String>>(); // 递归实现笛卡尔积
-                                                                            // recursive(dimValue,
-                                                                            // recursiveResult,
-                                                                            // 0,
-                                                                            // new
-                                                                            // ArrayList<String>());
+        List<List<String>> recursiveResult = new ArrayList<List<String>>(); 
         recursive(dimValue, recursiveResult, 0, new ArrayList<String>());
         System.out.println("递归实现笛卡尔乘积: 共 " + recursiveResult.size() + " 个结果");
         for (List<String> list : recursiveResult)
@@ -207,6 +203,6 @@ public class SysGoodsCategoryServiceImpl extends AbstractBaseService<SysGoodsCat
     {
         SysGoodsCategoryExample example = new SysGoodsCategoryExample();
         example.createCriteria().andCompanyNoEqualTo(companyNo).andIdIn(Arrays.asList(ids));
-        this.mapper.deleteByExample(example);
+        this.deleteByExample(example);
     }
 }

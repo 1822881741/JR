@@ -79,4 +79,21 @@ public class SysCategorySetServiceImpl extends AbstractBaseService<SysCategorySe
         }
         return exist;
     }
+    @Override
+    public List<String> getNameList(String companyNo, String element)
+    {
+        SysCategorySetExample example = new SysCategorySetExample();
+        example.createCriteria().andCompanyNoEqualTo(companyNo).andCategoryTypeEqualTo(element);
+        List<BaseEntity> list = this.selectByExample(example);
+        List<String> nameList = new ArrayList<String>();
+        if (CollectionUtils.isNotEmpty(list))
+        {
+            for (BaseEntity temp : list)
+            {
+                SysCategorySet set = (SysCategorySet) temp;
+                nameList.add(set.getName());
+            }
+        }
+        return nameList;
+    }
 }

@@ -16,9 +16,13 @@ import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.base.utils.Ret;
 import com.jr.erp.sys.entity.SysAreaInfoExample;
+import com.jr.erp.sys.entity.SysCategorySetExample;
+import com.jr.erp.sys.entity.SysClassify;
 import com.jr.erp.sys.entity.SysStoreExample;
 import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.service.ISysAreaInfoService;
+import com.jr.erp.sys.service.ISysCategorySetService;
+import com.jr.erp.sys.service.ISysClassifyService;
 import com.jr.erp.sys.service.ISysCounterService;
 import com.jr.erp.sys.service.ISysStoreService;
 
@@ -46,6 +50,12 @@ public class SysElementController
     @Autowired
     private ISysCounterService sysCounterService;
     
+    @Autowired
+    private ISysCategorySetService sysCategorySetService;
+    
+    @Autowired
+    private ISysClassifyService sysClassifyService;
+    
     @RequestMapping(value="/getElements.do")
     @ResponseBody
     public Ret getElements(String[] elements,HttpServletRequest request)
@@ -60,8 +70,7 @@ public class SysElementController
                 {
                 case "areaInfo":
                     SysAreaInfoExample areaExample = new SysAreaInfoExample();
-                    areaExample.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andAreaTypeEqualTo(1)
-                            .andAreaCodeLike(user.getAreaCode() + "%");
+                    areaExample.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andAreaTypeEqualTo(1).andAreaCodeLike(user.getAreaCode() + "%");
                     List<BaseEntity> areaList = sysAreaInfoService.selectByExample(areaExample);
                     data.put("areaInfo", areaList);
                     break;
@@ -72,71 +81,35 @@ public class SysElementController
                     data.put("storeInfo", storeList);
                     break;
                 case "secondType":
-                    Map<String,List<String>> secondTypeMap = new HashMap<String,List<String>>(); 
-                    List<String> gold= new ArrayList<String>();
-                    gold.add("素金");
-                    gold.add("PT950");
-                    secondTypeMap.put("gold", gold);
-                    
-                    
-                    List<String> notGold= new ArrayList<String>();
-                    notGold.add("K金");
-                    notGold.add("镶嵌");
-                    notGold.add("玉器");
-                    secondTypeMap.put("notGold", notGold);
-                    
-                    List<String> materia= new ArrayList<String>();
-                    materia.add("旧黄");
-                    materia.add("旧K");
-                    secondTypeMap.put("material", materia);
-                    
-                    List<String> serviceFee= new ArrayList<String>();
-                    serviceFee.add("手工费");
-                    serviceFee.add("这个费");
-                    secondTypeMap.put("serviceFee", gold);
-                    
+                    Map<String,List<SysClassify>> secondTypeMap = sysClassifyService.getInUseClassify(user.getCompanyNo());
                     data.put("secondType", secondTypeMap);
                     break;   
                 case "goldName":
-                    List<String> goldName= new ArrayList<String>();
-                    goldName.add("千足金");
-                    goldName.add("18K金");
+                    List<String> goldName = sysCategorySetService.getNameList(user.getCompanyNo(),element);
                     data.put("goldName", goldName);
                     break;   
                 case "jewelName":
-                    List<String> jewelName= new ArrayList<String>();
-                    jewelName.add("钻石");
-                    jewelName.add("猫眼石");
+                    List<String> jewelName= sysCategorySetService.getNameList(user.getCompanyNo(),element);
                     data.put("jewelName", jewelName);
                     break;  
                 case "categoryName":
-                    List<String> categoryName= new ArrayList<String>();
-                    categoryName.add("戒指");
-                    categoryName.add("手镯");
+                    List<String> categoryName= sysCategorySetService.getNameList(user.getCompanyNo(),element);
                     data.put("categoryName", categoryName);
                     break;  
                 case "goldPercent":
-                    List<String> goldPercent= new ArrayList<String>();
-                    goldPercent.add("99%");
-                    goldPercent.add("999%");
+                    List<String> goldPercent= sysCategorySetService.getNameList(user.getCompanyNo(),element);
                     data.put("goldPercent", goldPercent);
                     break;  
                 case "firstClassify":
-                    List<String> firstClassify= new ArrayList<String>();
-                    firstClassify.add("大类1");
-                    firstClassify.add("大类2");
+                    List<String> firstClassify= sysCategorySetService.getNameList(user.getCompanyNo(),element);
                     data.put("firstClassify", firstClassify);
                     break;  
                 case "secondClassify":
-                    List<String> secondClassify= new ArrayList<String>();
-                    secondClassify.add("中类1");
-                    secondClassify.add("中类2");
+                    List<String> secondClassify= sysCategorySetService.getNameList(user.getCompanyNo(),element);
                     data.put("secondClassify", secondClassify);
                     break; 
                 case "thirdClassify":
-                    List<String> thirdClassify= new ArrayList<String>();
-                    thirdClassify.add("小类1");
-                    thirdClassify.add("小类2");
+                    List<String> thirdClassify= sysCategorySetService.getNameList(user.getCompanyNo(),element);
                     data.put("thirdClassify", thirdClassify);
                     break; 
                 case "labelTpl":

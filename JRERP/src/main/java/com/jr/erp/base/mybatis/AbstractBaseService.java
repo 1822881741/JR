@@ -26,6 +26,7 @@ public class AbstractBaseService<T extends BaseEntity> implements IBaseService<B
 		    record.setUpdateTime(new Date());
 			mapper.updateByPrimaryKey((T) record);
 		} else {
+		    record.setCreateTime(new Date());
 			mapper.insert((T) record);
 		}
 	}
