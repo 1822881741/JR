@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<#include "/header-smart.html" />
+<body>
+	<section id="widget-grid">
+		<!-- row -->
+		<div class="row no-margin">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div class="jarviswidget" id="wid-id-5"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-togglebutton="false" data-widget-deletebutton="false"
+					data-widget-fullscreenbutton="false"
+					data-widget-custombutton="false" data-widget-sortable="false">
+					<div class="widget-body">
+						<div class="widget-body-toolbar no-padding-bottom">
+							<div class="row margin-left-10">
+								<div>
+									<ul class="demo-btns">
+										<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 新增</a></li>
+										<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 打印</a></li>
+										<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 预览</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="row margin-left-10">
+								<form class="form-inline" role="form">
+								<fieldset>
+									<legend class></legend>
+										<div class="row margin-bottom-5">
+								     <div class="form-group col-lg-2 col-md-2 col-sm-2">
+								         <label style="width: 60px;">账22号</label>
+								         <input type="text" id="f1" class="form-control" placeholder="请输入账号"/>
+								     </div>
+								     <div class="form-group col-lg-2 col-md-2 col-sm-2">
+								         <label style="width: 60px;">密码</label>
+								         <input type="password" id="f2" class="form-control" placeholder="请输入密码"/>
+								     </div>
+								     <div class="form-group col-lg-2 col-md-2 col-sm-2">
+								         <label for="f3" style="width: 60px;">邮箱</label>
+								         <input type="email" class="form-control" id="f3" placeholder="请输入邮箱"/>
+								     </div>
+								     <div class="form-group col-lg-2 col-md-2 col-sm-2">
+								         <label for="f4" style="width: 60px;">邮箱秘密</label>
+								         <input type="password" id="f4" placeholder="请输入邮箱密码" class="form-control"/>
+								     </div>
+								     </div>
+								     <div class="row">
+								     <div class="form-group col-lg-2 col-md-2 col-sm-2">
+								         <label for="f1" style="width: 60px;">账号</label>
+								         <input type="text" id="f1" class="form-control" placeholder="请输入账号"/>
+								     </div>
+								     <div class="form-group col-lg-2 col-md-2 col-sm-2">
+								         <label for="f2" style="width: 60px;">密码</label>
+								         <input type="password" id="f2" class="form-control" placeholder="请输入密码"/>
+								     </div>
+								     <div class="form-group col-lg-2 col-md-2 col-sm-2">
+								         <label for="f3" style="width: 60px;">邮箱</label>
+								         <input type="email" class="form-control" id="f3" placeholder="请输入邮箱"/>
+								     </div>
+								     <div class="form-group col-lg-2 col-md-2 col-sm-2">
+								         <label for="f4" style="width: 60px;">邮箱秘密</label>
+								         <input type="password" id="f4" placeholder="请输入邮箱密码" class="form-control"/>
+								     </div>
+								     </div>
+								</fieldset>
+ </form>
+							</div>
+						</div>
+						<div class="custom-scroll table-responsive"
+							style="height: 290px; overflow-y: scroll;"></div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</body>
+<script src="static/js/libs/jquery-3.2.1.min.js"></script>
+<script src="static/js/app.config.js"></script>
+<script src="static/js/bootstrap/bootstrap.min.js"></script>
+<script src="static/js/smartwidgets/jarvis.widget.min.js"></script>
+<script src="static/js/app.js?v=1"></script>
+<script src="resource/layui/layui.all.js?v=1" charset="utf-8"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		pageSetUp();
+	});
+</script>
+</html>
