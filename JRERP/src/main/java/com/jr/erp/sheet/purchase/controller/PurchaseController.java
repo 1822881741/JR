@@ -13,6 +13,7 @@ public class PurchaseController {
     @RequestMapping(value = "/editBill.do")
     public String editBill(HttpServletRequest request, Model model)
     {
+        
         return "bill/purchase/editPurchaseBill";
     }
 }    

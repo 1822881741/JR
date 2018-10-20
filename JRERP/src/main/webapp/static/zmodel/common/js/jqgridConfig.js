@@ -71,7 +71,7 @@ function getJqgridCategory(type,tableDom,pagerDom) {
 		multiselect : true,
 		pager : '#'+pagerDom,
 		viewrecords : true,
-		loadonce : true,
+		loadonce : false,
 		autowidth : true,
 		pgbuttons : false,
 		pgtext : false,
