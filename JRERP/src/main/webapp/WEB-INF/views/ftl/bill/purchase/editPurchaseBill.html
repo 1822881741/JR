@@ -119,9 +119,12 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		pageSetUp();
+		var data = Handsontable.helper.createSpreadsheetData(10, 15);
+		data.push([1,23,4,56,6,7,8,9]);
+		data.push([]);
 		var example = document.getElementById('hot');
 		var hot1 = new Handsontable(example, {
-		  data: Handsontable.helper.createSpreadsheetData(100, 23),
+		  data: data,
 		  height: 400,
 		  stretchH : "all",
 		  width: "100%",
@@ -130,6 +133,21 @@
 		  colHeaders: true,
 		  contextMenu:true,
 		  language:"zh-CN",
+		  columnSummary: [
+		    {
+		      destinationRow: 0,
+		      destinationColumn: 3,
+		      forceNumeric: true,
+		      reversedRowCoords: true,
+		      suppressDataTypeErrors: true,
+		      readOnly: true,
+		      roundFloat: false,
+		      type: 'count',
+		      customFunction: function(endpoint) {
+		         return 100;
+		      }
+		    }
+		  ],
 		  multiColumnSorting: true
 		});
 	});
