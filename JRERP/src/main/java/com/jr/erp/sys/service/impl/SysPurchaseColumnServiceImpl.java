@@ -16,7 +16,7 @@ import com.jr.erp.sys.service.ISysPurchaseColumnService;
  * 修改备注：    
  * @version  1.0    
  */
-@Service(value = "sysStoreService")
+@Service(value = "sysPurchaseColumnService")
 public class SysPurchaseColumnServiceImpl extends AbstractBaseService<SysPurchaseColumn> implements ISysPurchaseColumnService
 {
 }

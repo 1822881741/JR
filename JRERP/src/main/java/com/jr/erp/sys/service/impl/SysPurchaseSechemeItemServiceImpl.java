@@ -16,6 +16,6 @@ import com.jr.erp.sys.service.ISysPurchaseSechemeItemService;
  * 修改备注：    
  * @version  1.0    
  */
-@Service(value = "sysStoreService")
+@Service(value = "sysPurchaseSechemeItemService")
 public class SysPurchaseSechemeItemServiceImpl extends AbstractBaseService<SysPurchaseSechemeItem> implements ISysPurchaseSechemeItemService
 {}
