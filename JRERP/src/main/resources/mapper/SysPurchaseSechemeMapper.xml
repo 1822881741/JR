@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jr.erp.sys.dao.SysPurchaseSechemeMapper">
+  <resultMap id="BaseResultMap" type="com.jr.erp.sys.entity.SysPurchaseSecheme">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="companyNo" jdbcType="VARCHAR" property="companyNo" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="firstType" jdbcType="VARCHAR" property="firstType" />
+    <result column="secondType" jdbcType="VARCHAR" property="secondType" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="createUser" jdbcType="VARCHAR" property="createUser" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="createTime" jdbcType="VARCHAR" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Id, companyNo, name, firstType, secondType, status, createUser, remarks, createTime
+  </sql>
+  <select id="selectByExample" parameterType="com.jr.erp.sys.entity.SysPurchaseSechemeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_purchase_secheme
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="page != null">
+      <if test="limit != null">
+        limit ${(page-1)*limit}, ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_purchase_secheme
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_purchase_secheme
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jr.erp.sys.entity.SysPurchaseSechemeExample">
+    delete from sys_purchase_secheme
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jr.erp.sys.entity.SysPurchaseSecheme">
+    insert into sys_purchase_secheme (Id, companyNo, name, 
+      firstType, secondType, status, 
+      createUser, remarks, createTime
+      )
+    values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{firstType,jdbcType=VARCHAR}, #{secondType,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{createUser,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <select id="countByExample" parameterType="com.jr.erp.sys.entity.SysPurchaseSechemeExample" resultType="java.lang.Long">
+    select count(*) from sys_purchase_secheme
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jr.erp.sys.entity.SysPurchaseSecheme">
+    update sys_purchase_secheme
+    <set>
+      <if test="companyNo != null">
+        companyNo = #{companyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="firstType != null">
+        firstType = #{firstType,jdbcType=VARCHAR},
+      </if>
+      <if test="secondType != null">
+        secondType = #{secondType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createUser != null">
+        createUser = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jr.erp.sys.entity.SysPurchaseSecheme">
+    update sys_purchase_secheme
+    set companyNo = #{companyNo,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      firstType = #{firstType,jdbcType=VARCHAR},
+      secondType = #{secondType,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      createUser = #{createUser,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

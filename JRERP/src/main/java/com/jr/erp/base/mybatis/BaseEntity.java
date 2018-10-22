@@ -42,12 +42,13 @@ public class BaseEntity implements Serializable
     /**
      * 数据生成时间
      */
-    private Date createTime;
+    private String createTime;
 
     /**    
      * 更新时间    
      */    
-    private Date updateTime;
+    private String updateTime;
+    
     public Integer getId()
     {
         return id;
@@ -83,20 +84,29 @@ public class BaseEntity implements Serializable
         this.companyNo = companyNo;
     }
 
-	public Date getCreateTime() {
-		return createTime;
-	}
+    /**
+     * 创建时间
+     * @return createTime 创建时间
+     */
+    public String getCreateTime() {
+        return createTime;
+    }
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+    /**
+     * 创建时间
+     * @param createTime 创建时间
+     */
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime == null ? null : createTime.trim();
+    }
 
-    public Date getUpdateTime()
+
+    public String getUpdateTime()
     {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime)
+    public void setUpdateTime(String updateTime)
     {
         this.updateTime = updateTime;
     }

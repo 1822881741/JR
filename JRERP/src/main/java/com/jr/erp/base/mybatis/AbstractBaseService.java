@@ -1,6 +1,5 @@
 package com.jr.erp.base.mybatis;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +15,17 @@ public class AbstractBaseService<T extends BaseEntity> implements IBaseService<B
 
 	@Override
 	public Integer insert(BaseEntity record) {
-	    record.setCreateTime(new Date());
+	    record.setCreateTime(null);
 		return mapper.insert((T) record);
 	}
 
 	@Override
 	public void merge(BaseEntity record) {
 		if (record.getId() != null) {
-		    record.setUpdateTime(new Date());
+		    record.setUpdateTime(null);
 			mapper.updateByPrimaryKey((T) record);
 		} else {
-		    record.setCreateTime(new Date());
+		    record.setCreateTime(null);
 			mapper.insert((T) record);
 		}
 	}
@@ -63,13 +62,13 @@ public class AbstractBaseService<T extends BaseEntity> implements IBaseService<B
     @Override
     public void updateByPrimaryKey(BaseEntity t)
     {
-        t.setUpdateTime(new Date());
+        t.setUpdateTime(null);
         mapper.updateByPrimaryKey((T) t);
     }
 
     public void updateByPrimaryKeySelective(BaseEntity t)
     {
-        t.setUpdateTime(new Date());
+        t.setUpdateTime(null);
         mapper.updateByPrimaryKeySelective((T) t);
     }
 
