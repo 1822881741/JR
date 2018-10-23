@@ -1,5 +1,7 @@
 package com.jr.erp.sys.entity;
 
+import java.util.List;
+
 import com.jr.erp.base.mybatis.BaseEntity;
 
 public class SysPurchaseSecheme extends BaseEntity {
@@ -33,11 +35,9 @@ public class SysPurchaseSecheme extends BaseEntity {
      */
     private String remarks;
 
-    /**
-     * 创建时间
-     */
-    private String createTime;
 
+    private List<SysPurchaseSechemeItem> itemList;
+    
     /**
      * 策略名称
      * @return name 策略名称
@@ -132,5 +132,15 @@ public class SysPurchaseSecheme extends BaseEntity {
      */
     public void setRemarks(String remarks) {
         this.remarks = remarks == null ? null : remarks.trim();
+    }
+
+    public List<SysPurchaseSechemeItem> getItemList()
+    {
+        return itemList;
+    }
+
+    public void setItemList(List<SysPurchaseSechemeItem> itemList)
+    {
+        this.itemList = itemList;
     }
 }

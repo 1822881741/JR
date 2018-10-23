@@ -174,18 +174,8 @@
 					moveType : 1, //拖拽模式，0或者1
 					content : "purchaseSecheme/editSecheme.do?id=" + id,
 					yes : function(index, layero) {
-						var result = $(layero).find("iframe")[0].contentWindow
-								.submitData();
+						var result = $(layero).find("iframe")[0].contentWindow.submitData();
 						if (result) {
-							$("#jqgrid")
-									.setGridParam(
-											{
-												datatype : 'json',
-												url : "sysCategorySet/getClassifyData.do?firstType="
-														+ $("#parentType")
-																.find(".active")
-																.data("type")
-											}).trigger('reloadGrid');
 						}
 					}
 				});
