@@ -5,14 +5,13 @@
     <id column="Id" jdbcType="INTEGER" property="id" />
     <result column="companyNo" jdbcType="VARCHAR" property="companyNo" />
     <result column="sechemeId" jdbcType="INTEGER" property="sechemeId" />
-    <result column="dbColumnName" jdbcType="VARCHAR" property="dbColumnName" />
-    <result column="beanName" jdbcType="VARCHAR" property="beanName" />
+    <result column="dbColumn" jdbcType="VARCHAR" property="dbColumn" />
+    <result column="beanColumn" jdbcType="VARCHAR" property="beanColumn" />
     <result column="showName" jdbcType="VARCHAR" property="showName" />
     <result column="paramType" jdbcType="TINYINT" property="paramType" />
     <result column="digits" jdbcType="TINYINT" property="digits" />
     <result column="baseClassKey" jdbcType="VARCHAR" property="baseClassKey" />
     <result column="mustColumn" jdbcType="TINYINT" property="mustColumn" />
-    <result column="canShow" jdbcType="TINYINT" property="canShow" />
     <result column="orderColumn" jdbcType="INTEGER" property="orderColumn" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -45,8 +44,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    Id, companyNo, sechemeId, dbColumnName, beanName, showName, paramType, digits, baseClassKey, 
-    mustColumn, canShow, orderColumn
+    Id, companyNo, sechemeId, dbColumn, beanColumn, showName, paramType, digits, baseClassKey, 
+    mustColumn, orderColumn
   </sql>
   <select id="selectByExample" parameterType="com.jr.erp.sys.entity.SysPurchaseSechemeItemExample" resultMap="BaseResultMap">
     select
@@ -85,15 +84,13 @@
   </delete>
   <insert id="insert" parameterType="com.jr.erp.sys.entity.SysPurchaseSechemeItem">
     insert into sys_purchase_secheme_item (Id, companyNo, sechemeId, 
-      dbColumnName, beanName, showName, 
+      dbColumn, beanColumn, showName, 
       paramType, digits, baseClassKey, 
-      mustColumn, canShow, orderColumn
-      )
+      mustColumn, orderColumn)
     values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{sechemeId,jdbcType=INTEGER}, 
-      #{dbColumnName,jdbcType=VARCHAR}, #{beanName,jdbcType=VARCHAR}, #{showName,jdbcType=VARCHAR}, 
+      #{dbColumn,jdbcType=VARCHAR}, #{beanColumn,jdbcType=VARCHAR}, #{showName,jdbcType=VARCHAR}, 
       #{paramType,jdbcType=TINYINT}, #{digits,jdbcType=TINYINT}, #{baseClassKey,jdbcType=VARCHAR}, 
-      #{mustColumn,jdbcType=TINYINT}, #{canShow,jdbcType=TINYINT}, #{orderColumn,jdbcType=INTEGER}
-      )
+      #{mustColumn,jdbcType=TINYINT}, #{orderColumn,jdbcType=INTEGER})
   </insert>
   <select id="countByExample" parameterType="com.jr.erp.sys.entity.SysPurchaseSechemeItemExample" resultType="java.lang.Long">
     select count(*) from sys_purchase_secheme_item
@@ -110,11 +107,11 @@
       <if test="sechemeId != null">
         sechemeId = #{sechemeId,jdbcType=INTEGER},
       </if>
-      <if test="dbColumnName != null">
-        dbColumnName = #{dbColumnName,jdbcType=VARCHAR},
+      <if test="dbColumn != null">
+        dbColumn = #{dbColumn,jdbcType=VARCHAR},
       </if>
-      <if test="beanName != null">
-        beanName = #{beanName,jdbcType=VARCHAR},
+      <if test="beanColumn != null">
+        beanColumn = #{beanColumn,jdbcType=VARCHAR},
       </if>
       <if test="showName != null">
         showName = #{showName,jdbcType=VARCHAR},
@@ -131,9 +128,6 @@
       <if test="mustColumn != null">
         mustColumn = #{mustColumn,jdbcType=TINYINT},
       </if>
-      <if test="canShow != null">
-        canShow = #{canShow,jdbcType=TINYINT},
-      </if>
       <if test="orderColumn != null">
         orderColumn = #{orderColumn,jdbcType=INTEGER},
       </if>
@@ -144,14 +138,13 @@
     update sys_purchase_secheme_item
     set companyNo = #{companyNo,jdbcType=VARCHAR},
       sechemeId = #{sechemeId,jdbcType=INTEGER},
-      dbColumnName = #{dbColumnName,jdbcType=VARCHAR},
-      beanName = #{beanName,jdbcType=VARCHAR},
+      dbColumn = #{dbColumn,jdbcType=VARCHAR},
+      beanColumn = #{beanColumn,jdbcType=VARCHAR},
       showName = #{showName,jdbcType=VARCHAR},
       paramType = #{paramType,jdbcType=TINYINT},
       digits = #{digits,jdbcType=TINYINT},
       baseClassKey = #{baseClassKey,jdbcType=VARCHAR},
       mustColumn = #{mustColumn,jdbcType=TINYINT},
-      canShow = #{canShow,jdbcType=TINYINT},
       orderColumn = #{orderColumn,jdbcType=INTEGER}
     where Id = #{id,jdbcType=INTEGER}
   </update>

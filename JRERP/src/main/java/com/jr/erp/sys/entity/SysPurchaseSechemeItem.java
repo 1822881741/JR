@@ -11,12 +11,12 @@ public class SysPurchaseSechemeItem extends BaseEntity {
     /**
      * 列名称
      */
-    private String dbColumnName;
+    private String dbColumn;
 
     /**
      * 对应的bean的属性
      */
-    private String beanName;
+    private String beanColumn;
 
     /**
      * 显示名称
@@ -44,11 +44,6 @@ public class SysPurchaseSechemeItem extends BaseEntity {
     private Integer mustColumn;
 
     /**
-     * 当为非必选字段时，控制属性是否显示 0：不显示，1：显示
-     */
-    private Integer canShow;
-
-    /**
      * 列顺序号
      */
     private Integer orderColumn;
@@ -71,34 +66,34 @@ public class SysPurchaseSechemeItem extends BaseEntity {
 
     /**
      * 列名称
-     * @return dbColumnName 列名称
+     * @return dbColumn 列名称
      */
-    public String getDbColumnName() {
-        return dbColumnName;
+    public String getDbColumn() {
+        return dbColumn;
     }
 
     /**
      * 列名称
-     * @param dbColumnName 列名称
+     * @param dbColumn 列名称
      */
-    public void setDbColumnName(String dbColumnName) {
-        this.dbColumnName = dbColumnName == null ? null : dbColumnName.trim();
+    public void setDbColumn(String dbColumn) {
+        this.dbColumn = dbColumn == null ? null : dbColumn.trim();
     }
 
     /**
      * 对应的bean的属性
-     * @return beanName 对应的bean的属性
+     * @return beanColumn 对应的bean的属性
      */
-    public String getBeanName() {
-        return beanName;
+    public String getBeanColumn() {
+        return beanColumn;
     }
 
     /**
      * 对应的bean的属性
-     * @param beanName 对应的bean的属性
+     * @param beanColumn 对应的bean的属性
      */
-    public void setBeanName(String beanName) {
-        this.beanName = beanName == null ? null : beanName.trim();
+    public void setBeanColumn(String beanColumn) {
+        this.beanColumn = beanColumn == null ? null : beanColumn.trim();
     }
 
     /**
@@ -179,22 +174,6 @@ public class SysPurchaseSechemeItem extends BaseEntity {
      */
     public void setMustColumn(Integer mustColumn) {
         this.mustColumn = mustColumn;
-    }
-
-    /**
-     * 当为非必选字段时，控制属性是否显示 0：不显示，1：显示
-     * @return canShow 当为非必选字段时，控制属性是否显示 0：不显示，1：显示
-     */
-    public Integer getCanShow() {
-        return canShow;
-    }
-
-    /**
-     * 当为非必选字段时，控制属性是否显示 0：不显示，1：显示
-     * @param canShow 当为非必选字段时，控制属性是否显示 0：不显示，1：显示
-     */
-    public void setCanShow(Integer canShow) {
-        this.canShow = canShow;
     }
 
     /**

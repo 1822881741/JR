@@ -4,8 +4,7 @@
 <meta charset="utf-8">
 <#include "/header-smart.html" />
 <base href="${basePath}">
-<link rel="stylesheet" type="text/css"
-	href="static/plugins/handsontable/handsontable.full.min.css?v=21">
+<link rel="stylesheet" type="text/css" href="static/plugins/handsontable/handsontable.full.min.css?v=21">
 <style type="text/css">
 .htLeft {
 	border-color: red;
@@ -43,19 +42,18 @@
 								</div>
 								<div class="col-sm-8 col-md-8 col-lg-8">
 									<div class="navbar ">
-										<!-- Collect the nav links, forms, and other content for toggling -->
 										<div class="collapse navbar-collapse">
 											<ul class="nav navbar-nav">
-												<li class="dropdown dropdown-large"><a href="#" class="dropdown-toggle" data-toggle="dropdown">导入<b class="caret"></b></a>
-													<ul class="dropdown-menu dropdown-menu-large row">
+												<li class="dropdown dropdown-large"><a href="#" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">导入<b class="caret"></b></a>
+													<ul class="dropdown-menu dropdown-menu-large">
 														<li class="col-sm-8 col-md-8 col-lg-8">
 															<ul>
 																<li class="dropdown-header">可用方案</li>
-																<li><a href="javascript:void(0);">Available glyphs</a></li>
-																<li><a href="javascript:void(0);">Examples</a></li>
-																<li><a href="javascript:void(0);">Disabled menu items</a></li>
-																<li><a href="javascript:void(0);">Disabled menu items</a></li>
-																<li><a href="javascript:void(0);">Disabled menu items</a></li>
+																<#list sechemeList as p>
+																	<#if p.status == 1>
+																		<li><a href="javascript:void(0);" onclick="editScheme(${p.id})" style="width:100px">${p.name} <label><i class="fa  fa-plus-circle" title="添加"></i></label></a></li>
+																	</#if>
+																</#list>
 																<li class="divider"/>
 																<li><a href="javascript:void(0);" onclick="editScheme()"><i class="fa  fa-plus-circle" title="添加"></i> 添加</a></li>
 															</ul>
@@ -63,9 +61,11 @@
 														<li class="col-sm-4 col-md-4 col-lg-4">
 															<ul>
 																<li class="dropdown-header">禁用方案</li>
-																<li><a href="javascript:void(0);">Available glyphs</a></li>
-																<li><a href="javascript:void(0);">Examples</a></li>
-																<li class="dropdown-header">Dropdowns</li>
+																<#list sechemeList as p>
+																	<#if p.status != 1>
+																		<li><a href="javascript:void(0);" onclick="editScheme(${p.id})">${p.name}</a></li>
+																	</#if>
+																</#list>
 															</ul>
 														</li>
 													</ul></li>
@@ -200,7 +200,7 @@
 					id : 'lay_addClassify', //设定一个id，防止重复弹出
 					btn : [ '保存', '取消' ],
 					moveType : 1, //拖拽模式，0或者1
-					content : "purchaseSecheme/editSecheme.do?id=" + id,
+					content : "purchaseSecheme/editSecheme.do?sechemeId=" + id,
 					yes : function(index, layero) {
 						var result = $(layero).find("iframe")[0].contentWindow.submitData();
 						if (result) {

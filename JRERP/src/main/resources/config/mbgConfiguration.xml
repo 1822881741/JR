@@ -49,10 +49,12 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		</javaClientGenerator>
 		
 		<!-- 要对那些数据表进行生成操作，必须要有一个. -->
-		<table schema="mybatis" tableName="sys_purchase_secheme_item" domainObjectName="SysPurchaseSechemeItem"  delimitIdentifiers="false"
+		<table schema="mybatis" tableName="sys_purchase_secheme" domainObjectName="SysPurchaseSecheme"  delimitIdentifiers="false"
 			selectByPrimaryKeyQueryId="true" enableDeleteByPrimaryKey="true"
 			enableCountByExample="true" enableUpdateByPrimaryKey="true" enableUpdateByExample="false">
 			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="MySql" identity="true"/>
+			
 			</table> 
 		<!--table schema="mybatis" tableName="sys_areaInfo"  domainObjectName="SysAreaInfo"  delimitIdentifiers="false"
 			selectByPrimaryKeyQueryId="true" enableDeleteByPrimaryKey="true"

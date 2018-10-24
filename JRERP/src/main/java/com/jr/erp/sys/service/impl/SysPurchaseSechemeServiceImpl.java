@@ -59,6 +59,8 @@ public class SysPurchaseSechemeServiceImpl extends AbstractBaseService<SysPurcha
             this.updateByPrimaryKey(secheme);
         } else
         {
+            secheme.setIsSysDef(0);
+            secheme.setStatus(1);
             this.insert(secheme);
         }
         List<SysPurchaseSechemeItem> itemList = secheme.getItemList();

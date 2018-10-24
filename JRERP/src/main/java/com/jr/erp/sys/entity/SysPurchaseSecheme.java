@@ -35,9 +35,12 @@ public class SysPurchaseSecheme extends BaseEntity {
      */
     private String remarks;
 
+    /**
+     * 是否是系统类型1：是 ，0不是
+     */
+    private Integer isSysDef;
 
     private List<SysPurchaseSechemeItem> itemList;
-    
     /**
      * 策略名称
      * @return name 策略名称
@@ -132,6 +135,22 @@ public class SysPurchaseSecheme extends BaseEntity {
      */
     public void setRemarks(String remarks) {
         this.remarks = remarks == null ? null : remarks.trim();
+    }
+
+    /**
+     * 是否是系统类型1：是 ，0不是
+     * @return isSysDef 是否是系统类型1：是 ，0不是
+     */
+    public Integer getIsSysDef() {
+        return isSysDef;
+    }
+
+    /**
+     * 是否是系统类型1：是 ，0不是
+     * @param isSysDef 是否是系统类型1：是 ，0不是
+     */
+    public void setIsSysDef(Integer isSysDef) {
+        this.isSysDef = isSysDef;
     }
 
     public List<SysPurchaseSechemeItem> getItemList()

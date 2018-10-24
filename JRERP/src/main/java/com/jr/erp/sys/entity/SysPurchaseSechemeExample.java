@@ -659,6 +659,66 @@ public class SysPurchaseSechemeExample extends BaseExample {
             return (Criteria) this;
         }
 
+        public Criteria andIsSysDefIsNull() {
+            addCriterion("isSysDef is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSysDefIsNotNull() {
+            addCriterion("isSysDef is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSysDefEqualTo(Integer value) {
+            addCriterion("isSysDef =", value, "isSysDef");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSysDefNotEqualTo(Integer value) {
+            addCriterion("isSysDef <>", value, "isSysDef");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSysDefGreaterThan(Integer value) {
+            addCriterion("isSysDef >", value, "isSysDef");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSysDefGreaterThanOrEqualTo(Integer value) {
+            addCriterion("isSysDef >=", value, "isSysDef");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSysDefLessThan(Integer value) {
+            addCriterion("isSysDef <", value, "isSysDef");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSysDefLessThanOrEqualTo(Integer value) {
+            addCriterion("isSysDef <=", value, "isSysDef");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSysDefIn(List<Integer> values) {
+            addCriterion("isSysDef in", values, "isSysDef");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSysDefNotIn(List<Integer> values) {
+            addCriterion("isSysDef not in", values, "isSysDef");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSysDefBetween(Integer value1, Integer value2) {
+            addCriterion("isSysDef between", value1, value2, "isSysDef");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsSysDefNotBetween(Integer value1, Integer value2) {
+            addCriterion("isSysDef not between", value1, value2, "isSysDef");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateTimeIsNull() {
             addCriterion("createTime is null");
             return (Criteria) this;

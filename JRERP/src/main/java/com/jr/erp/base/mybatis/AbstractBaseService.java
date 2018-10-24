@@ -2,6 +2,7 @@ package com.jr.erp.base.mybatis;
 
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,17 +16,17 @@ public class AbstractBaseService<T extends BaseEntity> implements IBaseService<B
 
 	@Override
 	public Integer insert(BaseEntity record) {
-	    record.setCreateTime(null);
+	    record.setCreateTime(DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
 		return mapper.insert((T) record);
 	}
 
 	@Override
 	public void merge(BaseEntity record) {
 		if (record.getId() != null) {
-		    record.setUpdateTime(null);
+		    record.setUpdateTime(DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
 			mapper.updateByPrimaryKey((T) record);
 		} else {
-		    record.setCreateTime(null);
+		    record.setCreateTime(DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
 			mapper.insert((T) record);
 		}
 	}
@@ -62,13 +63,13 @@ public class AbstractBaseService<T extends BaseEntity> implements IBaseService<B
     @Override
     public void updateByPrimaryKey(BaseEntity t)
     {
-        t.setUpdateTime(null);
+        t.setUpdateTime(DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
         mapper.updateByPrimaryKey((T) t);
     }
 
     public void updateByPrimaryKeySelective(BaseEntity t)
     {
-        t.setUpdateTime(null);
+        t.setUpdateTime(DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
         mapper.updateByPrimaryKeySelective((T) t);
     }
 

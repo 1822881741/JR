@@ -309,143 +309,143 @@ public class SysPurchaseSechemeItemExample extends BaseExample {
             return (Criteria) this;
         }
 
-        public Criteria andDbColumnNameIsNull() {
-            addCriterion("dbColumnName is null");
+        public Criteria andDbColumnIsNull() {
+            addCriterion("dbColumn is null");
             return (Criteria) this;
         }
 
-        public Criteria andDbColumnNameIsNotNull() {
-            addCriterion("dbColumnName is not null");
+        public Criteria andDbColumnIsNotNull() {
+            addCriterion("dbColumn is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDbColumnNameEqualTo(String value) {
-            addCriterion("dbColumnName =", value, "dbColumnName");
+        public Criteria andDbColumnEqualTo(String value) {
+            addCriterion("dbColumn =", value, "dbColumn");
             return (Criteria) this;
         }
 
-        public Criteria andDbColumnNameNotEqualTo(String value) {
-            addCriterion("dbColumnName <>", value, "dbColumnName");
+        public Criteria andDbColumnNotEqualTo(String value) {
+            addCriterion("dbColumn <>", value, "dbColumn");
             return (Criteria) this;
         }
 
-        public Criteria andDbColumnNameGreaterThan(String value) {
-            addCriterion("dbColumnName >", value, "dbColumnName");
+        public Criteria andDbColumnGreaterThan(String value) {
+            addCriterion("dbColumn >", value, "dbColumn");
             return (Criteria) this;
         }
 
-        public Criteria andDbColumnNameGreaterThanOrEqualTo(String value) {
-            addCriterion("dbColumnName >=", value, "dbColumnName");
+        public Criteria andDbColumnGreaterThanOrEqualTo(String value) {
+            addCriterion("dbColumn >=", value, "dbColumn");
             return (Criteria) this;
         }
 
-        public Criteria andDbColumnNameLessThan(String value) {
-            addCriterion("dbColumnName <", value, "dbColumnName");
+        public Criteria andDbColumnLessThan(String value) {
+            addCriterion("dbColumn <", value, "dbColumn");
             return (Criteria) this;
         }
 
-        public Criteria andDbColumnNameLessThanOrEqualTo(String value) {
-            addCriterion("dbColumnName <=", value, "dbColumnName");
+        public Criteria andDbColumnLessThanOrEqualTo(String value) {
+            addCriterion("dbColumn <=", value, "dbColumn");
             return (Criteria) this;
         }
 
-        public Criteria andDbColumnNameLike(String value) {
-            addCriterion("dbColumnName like", value, "dbColumnName");
+        public Criteria andDbColumnLike(String value) {
+            addCriterion("dbColumn like", value, "dbColumn");
             return (Criteria) this;
         }
 
-        public Criteria andDbColumnNameNotLike(String value) {
-            addCriterion("dbColumnName not like", value, "dbColumnName");
+        public Criteria andDbColumnNotLike(String value) {
+            addCriterion("dbColumn not like", value, "dbColumn");
             return (Criteria) this;
         }
 
-        public Criteria andDbColumnNameIn(List<String> values) {
-            addCriterion("dbColumnName in", values, "dbColumnName");
+        public Criteria andDbColumnIn(List<String> values) {
+            addCriterion("dbColumn in", values, "dbColumn");
             return (Criteria) this;
         }
 
-        public Criteria andDbColumnNameNotIn(List<String> values) {
-            addCriterion("dbColumnName not in", values, "dbColumnName");
+        public Criteria andDbColumnNotIn(List<String> values) {
+            addCriterion("dbColumn not in", values, "dbColumn");
             return (Criteria) this;
         }
 
-        public Criteria andDbColumnNameBetween(String value1, String value2) {
-            addCriterion("dbColumnName between", value1, value2, "dbColumnName");
+        public Criteria andDbColumnBetween(String value1, String value2) {
+            addCriterion("dbColumn between", value1, value2, "dbColumn");
             return (Criteria) this;
         }
 
-        public Criteria andDbColumnNameNotBetween(String value1, String value2) {
-            addCriterion("dbColumnName not between", value1, value2, "dbColumnName");
+        public Criteria andDbColumnNotBetween(String value1, String value2) {
+            addCriterion("dbColumn not between", value1, value2, "dbColumn");
             return (Criteria) this;
         }
 
-        public Criteria andBeanNameIsNull() {
-            addCriterion("beanName is null");
+        public Criteria andBeanColumnIsNull() {
+            addCriterion("beanColumn is null");
             return (Criteria) this;
         }
 
-        public Criteria andBeanNameIsNotNull() {
-            addCriterion("beanName is not null");
+        public Criteria andBeanColumnIsNotNull() {
+            addCriterion("beanColumn is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBeanNameEqualTo(String value) {
-            addCriterion("beanName =", value, "beanName");
+        public Criteria andBeanColumnEqualTo(String value) {
+            addCriterion("beanColumn =", value, "beanColumn");
             return (Criteria) this;
         }
 
-        public Criteria andBeanNameNotEqualTo(String value) {
-            addCriterion("beanName <>", value, "beanName");
+        public Criteria andBeanColumnNotEqualTo(String value) {
+            addCriterion("beanColumn <>", value, "beanColumn");
             return (Criteria) this;
         }
 
-        public Criteria andBeanNameGreaterThan(String value) {
-            addCriterion("beanName >", value, "beanName");
+        public Criteria andBeanColumnGreaterThan(String value) {
+            addCriterion("beanColumn >", value, "beanColumn");
             return (Criteria) this;
         }
 
-        public Criteria andBeanNameGreaterThanOrEqualTo(String value) {
-            addCriterion("beanName >=", value, "beanName");
+        public Criteria andBeanColumnGreaterThanOrEqualTo(String value) {
+            addCriterion("beanColumn >=", value, "beanColumn");
             return (Criteria) this;
         }
 
-        public Criteria andBeanNameLessThan(String value) {
-            addCriterion("beanName <", value, "beanName");
+        public Criteria andBeanColumnLessThan(String value) {
+            addCriterion("beanColumn <", value, "beanColumn");
             return (Criteria) this;
         }
 
-        public Criteria andBeanNameLessThanOrEqualTo(String value) {
-            addCriterion("beanName <=", value, "beanName");
+        public Criteria andBeanColumnLessThanOrEqualTo(String value) {
+            addCriterion("beanColumn <=", value, "beanColumn");
             return (Criteria) this;
         }
 
-        public Criteria andBeanNameLike(String value) {
-            addCriterion("beanName like", value, "beanName");
+        public Criteria andBeanColumnLike(String value) {
+            addCriterion("beanColumn like", value, "beanColumn");
             return (Criteria) this;
         }
 
-        public Criteria andBeanNameNotLike(String value) {
-            addCriterion("beanName not like", value, "beanName");
+        public Criteria andBeanColumnNotLike(String value) {
+            addCriterion("beanColumn not like", value, "beanColumn");
             return (Criteria) this;
         }
 
-        public Criteria andBeanNameIn(List<String> values) {
-            addCriterion("beanName in", values, "beanName");
+        public Criteria andBeanColumnIn(List<String> values) {
+            addCriterion("beanColumn in", values, "beanColumn");
             return (Criteria) this;
         }
 
-        public Criteria andBeanNameNotIn(List<String> values) {
-            addCriterion("beanName not in", values, "beanName");
+        public Criteria andBeanColumnNotIn(List<String> values) {
+            addCriterion("beanColumn not in", values, "beanColumn");
             return (Criteria) this;
         }
 
-        public Criteria andBeanNameBetween(String value1, String value2) {
-            addCriterion("beanName between", value1, value2, "beanName");
+        public Criteria andBeanColumnBetween(String value1, String value2) {
+            addCriterion("beanColumn between", value1, value2, "beanColumn");
             return (Criteria) this;
         }
 
-        public Criteria andBeanNameNotBetween(String value1, String value2) {
-            addCriterion("beanName not between", value1, value2, "beanName");
+        public Criteria andBeanColumnNotBetween(String value1, String value2) {
+            addCriterion("beanColumn not between", value1, value2, "beanColumn");
             return (Criteria) this;
         }
 
@@ -766,66 +766,6 @@ public class SysPurchaseSechemeItemExample extends BaseExample {
 
         public Criteria andMustColumnNotBetween(Integer value1, Integer value2) {
             addCriterion("mustColumn not between", value1, value2, "mustColumn");
-            return (Criteria) this;
-        }
-
-        public Criteria andCanShowIsNull() {
-            addCriterion("canShow is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCanShowIsNotNull() {
-            addCriterion("canShow is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCanShowEqualTo(Integer value) {
-            addCriterion("canShow =", value, "canShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andCanShowNotEqualTo(Integer value) {
-            addCriterion("canShow <>", value, "canShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andCanShowGreaterThan(Integer value) {
-            addCriterion("canShow >", value, "canShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andCanShowGreaterThanOrEqualTo(Integer value) {
-            addCriterion("canShow >=", value, "canShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andCanShowLessThan(Integer value) {
-            addCriterion("canShow <", value, "canShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andCanShowLessThanOrEqualTo(Integer value) {
-            addCriterion("canShow <=", value, "canShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andCanShowIn(List<Integer> values) {
-            addCriterion("canShow in", values, "canShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andCanShowNotIn(List<Integer> values) {
-            addCriterion("canShow not in", values, "canShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andCanShowBetween(Integer value1, Integer value2) {
-            addCriterion("canShow between", value1, value2, "canShow");
-            return (Criteria) this;
-        }
-
-        public Criteria andCanShowNotBetween(Integer value1, Integer value2) {
-            addCriterion("canShow not between", value1, value2, "canShow");
             return (Criteria) this;
         }
 
