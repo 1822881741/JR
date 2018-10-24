@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.base.utils.BasePageForm;
+import com.jr.erp.base.utils.Ret;
 import com.jr.erp.base.utils.RetPage;
 import com.jr.erp.sys.entity.SysAreaInfoExample;
-import com.jr.erp.sys.entity.SysStoreExample;
+import com.jr.erp.sys.entity.SysStore;
 import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.service.ISysAreaInfoService;
 
@@ -68,5 +69,25 @@ public class SysAreaInfoController {
         exampale.setLimit(pageForm.getLimit());
         exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo());
         return sysAreaInfoService.selectPage(exampale);
+    }
+	
+	/**    
+	 * getStoreList(这里用一句话描述这个方法的作用)    
+	 * 获取可用柜台列表       
+	 * @param @param parentAreaCode
+	 * @param @param request
+	 * @param @return     
+	 * @return Ret
+	 * @Exception 异常对象
+	*/
+	@RequestMapping(value="/getStoreList.do")
+    @ResponseBody
+    public Ret getStoreList(String parentAreaCode,HttpServletRequest request)
+    {
+        SysUser user = ShiroUtils.getSysUser();
+        SysAreaInfoExample exampale = new SysAreaInfoExample();
+        exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andAreaCodeLike(parentAreaCode+"%");
+        List<BaseEntity> storeList = sysAreaInfoService.selectByExample(exampale);
+        return Ret.ok("获取成功", storeList);
     }
 }

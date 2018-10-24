@@ -6,13 +6,6 @@
 <base href="${basePath}">
 <link rel="stylesheet" type="text/css" href="static/plugins/handsontable/handsontable.full.min.css?v=21">
 <style type="text/css">
-.htLeft {
-	border-color: red;
-}
-
-.htRight {
-	border-color: red;
-}
 </style>
 <body>
 	<section id="widget-grid">
@@ -51,7 +44,7 @@
 																<li class="dropdown-header">可用方案</li>
 																<#list sechemeList as p>
 																	<#if p.status == 1>
-																		<li><a href="javascript:void(0);" onclick="editScheme(${p.id})" style="width:100px">${p.name} <label><i class="fa  fa-plus-circle" title="添加"></i></label></a></li>
+																		<li><a href="javascript:void(0);" onclick="editScheme(${p.id})" style="width:100px">${p.name}</a></li>
 																	</#if>
 																</#list>
 																<li class="divider"/>
