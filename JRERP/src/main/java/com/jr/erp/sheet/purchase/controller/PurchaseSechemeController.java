@@ -9,12 +9,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.shiro.ShiroUtils;
+import com.jr.erp.base.utils.Ret;
+import com.jr.erp.sys.entity.SysClassify;
+import com.jr.erp.sys.entity.SysClassifyExample;
 import com.jr.erp.sys.entity.SysPurchaseColumnExample;
 import com.jr.erp.sys.entity.SysPurchaseSecheme;
 import com.jr.erp.sys.entity.SysUser;
+import com.jr.erp.sys.service.ISysClassifyService;
 import com.jr.erp.sys.service.ISysPurchaseColumnService;
 import com.jr.erp.sys.service.ISysPurchaseSechemeService;
 
@@ -27,6 +32,9 @@ public class PurchaseSechemeController {
     
     @Autowired
     private ISysPurchaseSechemeService sysPurchaseSechemeService;
+    
+    @Autowired
+    private ISysClassifyService sysClassifyService;
     /**    
      * editSecheme(这里用一句话描述这个方法的作用)    
      * 保持方案       
@@ -51,14 +59,21 @@ public class PurchaseSechemeController {
             model.addAttribute("secheme", secheme);
         }
         
+        SysClassifyExample example2 = new SysClassifyExample();
+        example2.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andStatusEqualTo(1);
+        List<BaseEntity> allClassify = sysClassifyService.selectByExample(example);
+        model.addAttribute("allClassify", allClassify);
+        
         return "bill/secheme/editSecheme";
     }
     
     @RequestMapping(value = "/saveSecheme.do")
-    public String saveSecheme(@RequestBody SysPurchaseSecheme secheme,HttpServletRequest request,Integer sechemeId, Model model)
+    @ResponseBody
+    public Ret saveSecheme(@RequestBody SysPurchaseSecheme secheme,HttpServletRequest request,Integer sechemeId, Model model)
     {
-        System.out.println(secheme);
         SysUser user = ShiroUtils.getSysUser();
-        return "bill/secheme/editSecheme";
+        secheme.setCompanyNo(user.getCompanyNo());
+        sysPurchaseSechemeService.saveSecheme(secheme);
+        return Ret.ok("保存成功");
     }
 }    

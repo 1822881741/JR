@@ -19,7 +19,19 @@
 			</div>
 			<div class="col-lg-6 col-md-6 col-sm-6 no-padding">
 				<div class="form-group margin-bottom-5 margin-right-5">
-					<label class="col-lg-4 col-md-4 col-sm-4 control-label">描述：</label>
+					<label class="col-lg-4 col-sm-4 control-label">所属小类：</label>
+					<div class="col-lg-8 col-sm-8">
+						<select id="secondType" name="secondType" class="form-control">
+							<#list allClassify as c>
+								<option value="${c.secondType}">${c.secondTypeName}</option>
+							</#list>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 no-padding">
+				<div class="form-group margin-bottom-5 margin-right-5">
+					<label class="col-lg-4 col-sm-4 control-label">描述：</label>
 					<div class="col-lg-8 col-md-8 col-sm-8">
 						<input type="text" id="remarks" name="remarks" class="form-control" value="${secheme.remarks}">
 					</div>
@@ -77,9 +89,6 @@
 						</li>
 					</ul>
 				</div>
-				<div class="list-footer">
-					<button class="selected-val" title="获取选择值，输出到控制台">GET</button>
-				</div>
 			</div>
 			</div>
 		</div>
@@ -102,15 +111,14 @@
 			openDrag : true,
 			openDblClick : true
 		});
-
 	});
 	
 	function submitData(){
 		
 		var param={};
-		//param.id=$("#id").val();
-		//param.name=$("#name").val();
-		//param.remarks=$("#remarks").val();
+		param.id=$("#id").val();
+		param.name=$("#name").val();
+		param.remarks=$("#remarks").val();
 		
 		var selectedArr=[];
 		$("#selectedLi").find(".item").each(function(){

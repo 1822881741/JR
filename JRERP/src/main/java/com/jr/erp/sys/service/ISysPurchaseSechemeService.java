@@ -27,4 +27,13 @@ public interface ISysPurchaseSechemeService extends IBaseService<BaseEntity>
     */
     SysPurchaseSecheme getById(Integer sechemeId);
 
+    /**    
+     * saveSecheme(这里用一句话描述这个方法的作用)    
+     * 保存方案成功       
+     * @param @param secheme     
+     * @return void
+     * @Exception 异常对象
+    */
+    void saveSecheme(SysPurchaseSecheme secheme);
+
 }

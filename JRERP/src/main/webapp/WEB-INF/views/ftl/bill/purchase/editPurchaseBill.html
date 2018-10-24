@@ -28,7 +28,7 @@
 					<div class="widget-body">
 						<div class="widget-body-toolbar no-padding-bottom bg-white">
 							<div class="row margin-left-10">
-								<div class="col-sm-6 col-md-6 col-lg-6">
+								<div class="col-sm-4 col-md-4 col-lg-4">
 									<ul class="demo-btns">
 										<li><a href="javascript:void(0);"
 											class="btn btn-sm btn-default"><i
@@ -41,8 +41,37 @@
 												class="fa fa-gear fa-lg"></i> 预览</a></li>
 									</ul>
 								</div>
-								<div class="col-sm-6 col-md-6 col-lg-6">
-									<a class="btn btn-sm btn-default" onclick="editScheme(354)">aaa</a>
+								<div class="col-sm-8 col-md-8 col-lg-8">
+									<div class="navbar ">
+										<!-- Collect the nav links, forms, and other content for toggling -->
+										<div class="collapse navbar-collapse">
+											<ul class="nav navbar-nav">
+												<li class="dropdown dropdown-large"><a href="#" class="dropdown-toggle" data-toggle="dropdown">导入<b class="caret"></b></a>
+													<ul class="dropdown-menu dropdown-menu-large row">
+														<li class="col-sm-8 col-md-8 col-lg-8">
+															<ul>
+																<li class="dropdown-header">可用方案</li>
+																<li><a href="javascript:void(0);">Available glyphs</a></li>
+																<li><a href="javascript:void(0);">Examples</a></li>
+																<li><a href="javascript:void(0);">Disabled menu items</a></li>
+																<li><a href="javascript:void(0);">Disabled menu items</a></li>
+																<li><a href="javascript:void(0);">Disabled menu items</a></li>
+																<li class="divider"/>
+																<li><a href="javascript:void(0);" onclick="editScheme()"><i class="fa  fa-plus-circle" title="添加"></i> 添加</a></li>
+															</ul>
+														</li>
+														<li class="col-sm-4 col-md-4 col-lg-4">
+															<ul>
+																<li class="dropdown-header">禁用方案</li>
+																<li><a href="javascript:void(0);">Available glyphs</a></li>
+																<li><a href="javascript:void(0);">Examples</a></li>
+																<li class="dropdown-header">Dropdowns</li>
+															</ul>
+														</li>
+													</ul></li>
+											</ul>
+										</div>
+									</div>
 								</div>
 							</div>
 							<div class="row margin-left-10">
@@ -162,11 +191,10 @@
 	});
 	function editScheme(id) {
 		//
-		layer
-				.open({
+		layer.open({
 					type : 2,
 					title : "新增/修改商品分类",
-					area : [ '800px', '570px' ],
+					area : [ '800px', '620px' ],
 					shade : 0.8,
 					scrollbar : false,
 					id : 'lay_addClassify', //设定一个id，防止重复弹出

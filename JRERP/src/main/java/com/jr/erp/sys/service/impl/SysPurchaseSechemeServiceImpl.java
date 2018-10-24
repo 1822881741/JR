@@ -47,4 +47,29 @@ public class SysPurchaseSechemeServiceImpl extends AbstractBaseService<SysPurcha
         secheme.setItemList(itemList);
         return secheme;
     }
+
+    @Override
+    public void saveSecheme(SysPurchaseSecheme secheme)
+    {
+        if (secheme.getId() != null)
+        {
+            SysPurchaseSechemeItemExample example = new SysPurchaseSechemeItemExample();
+            example.createCriteria().andCompanyNoEqualTo(secheme.getCompanyNo()).andSechemeIdEqualTo(secheme.getId());
+            sysPurchaseSechemeItemService.deleteByExample(example);
+            this.updateByPrimaryKey(secheme);
+        } else
+        {
+            this.insert(secheme);
+        }
+        List<SysPurchaseSechemeItem> itemList = secheme.getItemList();
+        if (CollectionUtils.isNotEmpty(itemList))
+        {
+            for (SysPurchaseSechemeItem sysPurchaseSechemeItem : itemList)
+            {
+                sysPurchaseSechemeItem.setCompanyNo(secheme.getCompanyNo());
+                sysPurchaseSechemeItem.setSechemeId(secheme.getId());
+                sysPurchaseSechemeItemService.insert(sysPurchaseSechemeItem);
+            }
+        }
+    }
 }
