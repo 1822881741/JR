@@ -45,8 +45,12 @@ public class PurchaseController {
         model.addAttribute("sechemeList",sechemeList);
         
         //供应商列表
-        List<String> supplyList = sysCategorySetService.getNameList(companyNo, "supply");
-        model.addAttribute("supplyList",supplyList);
+        List<String> supplyList = sysCategorySetService.getNameList(companyNo, "supplier");
+        model.addAttribute("supplierList",supplyList);
+        
+        //进货类型
+        List<String> brandNameList = sysCategorySetService.getNameList(companyNo, "brandName");
+        model.addAttribute("brandNameList",brandNameList);
         
         //进货类型
         List<String> purchaseTypeList = sysCategorySetService.getNameList(companyNo, "purchaseType");
@@ -54,7 +58,7 @@ public class PurchaseController {
         
         //进货门店
         SysAreaInfoExample areaExample = new SysAreaInfoExample();
-        areaExample.createCriteria().andCompanyNoEqualTo(companyNo).andAreaCodeLike(user.getAreaCode()).andStatusEqualTo(1).andAreaTypeIn(Arrays.asList(new Integer[]{0,1,2}));
+        areaExample.createCriteria().andCompanyNoEqualTo(companyNo).andAreaCodeLike(user.getAreaCode()+"%").andStatusEqualTo(1).andAreaTypeIn(Arrays.asList(new Integer[]{0,1,2}));
         List<BaseEntity> areaList = sysAreaInfoService.selectByExample(areaExample);
         model.addAttribute("areaList",areaList);
         

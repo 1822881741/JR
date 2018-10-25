@@ -15,7 +15,6 @@ import com.jr.erp.base.utils.BasePageForm;
 import com.jr.erp.base.utils.Ret;
 import com.jr.erp.base.utils.RetPage;
 import com.jr.erp.sys.entity.SysAreaInfoExample;
-import com.jr.erp.sys.entity.SysStore;
 import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.service.ISysAreaInfoService;
 
@@ -86,7 +85,7 @@ public class SysAreaInfoController {
     {
         SysUser user = ShiroUtils.getSysUser();
         SysAreaInfoExample exampale = new SysAreaInfoExample();
-        exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andAreaCodeLike(parentAreaCode+"%");
+        exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andAreaCodeLike(parentAreaCode+"___").andAreaTypeEqualTo(3);
         List<BaseEntity> storeList = sysAreaInfoService.selectByExample(exampale);
         return Ret.ok("获取成功", storeList);
     }

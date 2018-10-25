@@ -18,7 +18,7 @@
 					data-widget-fullscreenbutton="false"
 					data-widget-custombutton="false" data-widget-sortable="false">
 					<div class="widget-body">
-						<div class="widget-body-toolbar no-padding-bottom bg-white">
+						<div class="widget-body-toolbar no-padding-bottom">
 							<div class="row margin-left-10">
 								<div class="col-sm-4 col-md-4 col-lg-4">
 									<ul class="demo-btns">
@@ -34,37 +34,56 @@
 									</ul>
 								</div>
 								<div class="col-sm-8 col-md-8 col-lg-8">
-									<div class="navbar ">
-										<div class="collapse navbar-collapse">
-											<ul class="nav navbar-nav">
-												<li class="dropdown dropdown-large"><a href="#" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">导入<b class="caret"></b></a>
-													<ul class="dropdown-menu dropdown-menu-large">
-														<li class="col-sm-8 col-md-8 col-lg-8">
-															<ul>
-																<li class="dropdown-header">可用方案</li>
-																<#list sechemeList as p>
-																	<#if p.status == 1>
-																		<li><a href="javascript:void(0);" onclick="editScheme(${p.id})" style="width:100px">${p.name}</a></li>
-																	</#if>
-																</#list>
-																<li class="divider"/>
-																<li><a href="javascript:void(0);" onclick="editScheme()"><i class="fa  fa-plus-circle" title="添加"></i> 添加</a></li>
-															</ul>
-														</li>
-														<li class="col-sm-4 col-md-4 col-lg-4">
-															<ul>
-																<li class="dropdown-header">禁用方案</li>
-																<#list sechemeList as p>
-																	<#if p.status != 1>
-																		<li><a href="javascript:void(0);" onclick="editScheme(${p.id})">${p.name}</a></li>
-																	</#if>
-																</#list>
-															</ul>
-														</li>
-													</ul></li>
-											</ul>
-										</div>
+									<a id="activity" class="activity-dropdown btn btn-sm btn-default"  href="javascript:void(0);" style="margin-left: 160px;"><i class="fa fa-gear fa-lg"></i> 导入</a>
+									<div class="ajax-dropdown">
+									<!-- the ID links are fetched via AJAX to the ajax container "ajax-notifications" -->
+									<div class="btn-group btn-group-justified" data-toggle="buttons">
+										<label id="canUseBtn" class="btn btn-default active"> 再用方案 </label>
+										<label id="noUseBtn"class="btn btn-default"> 禁用方案 </label>
 									</div>
+									<!-- notification content -->
+									<div class="ajax-notifications custom-scroll">
+										<ul id="canUseSechemeUL" class="notification-body">
+											<#list sechemeList as p>
+												<#if p.status == 1>
+													<li>
+														<span class="">
+															<a href="javascript:void(0);" class="msg">
+																<img src="static/img/avatars/4.png" class="air air-top-left margin-top-5" width="40" height="40">
+																<span class="from">${p.name} <i class="icon-paperclip"></i></span>
+																<time><button class="btn btn-xs btn-primary" onclick="editScheme(${p.id})" ><i class="fa fa-edit"></i> 编辑</button></time>
+																<span class="subject">${p.secondType}</span>
+																<span class="msg-body">${p.remarks} </span>
+															</a>
+														</span>
+													</li>
+												</#if>
+											</#list>
+										</ul>
+										<ul id="noUseSechemeUL" class="notification-body" style="display: none;">
+											<#list sechemeList as p>
+												<#if p.status != 1>
+													<li>
+														<span class="">
+															<a href="javascript:void(0);" onclick="editScheme(${p.id})" class="msg">
+																<img src="img/avatars/4.png" class="air air-top-left margin-top-5" width="40" height="40">
+																<span class="from">${p.name} <i class="icon-paperclip"></i></span>
+																<time><button class="btn btn-xs btn-primary" onclick="editScheme(${p.id})" ><i class="fa fa-edit"></i> 编辑</button></time>
+																<span class="subject">${p.secondType}</span>
+																<span class="msg-body">${p.remarks} </span>
+															</a>
+														</span>
+													</li>
+												</#if>
+											</#list>
+										</ul>
+									</div>
+									<span id="ajax-dropdown-span"> Last updated on: 12/12/2013 9:43AM
+										<button type="button" class="btn btn-xs btn-default pull-right" onclick="editScheme('')">
+											<i class="fa fa-plus"></i>
+										</button> 
+									</div>
+								</div>
 								</div>
 							</div>
 							<div class="row margin-left-10">
@@ -73,67 +92,68 @@
 										<legend class="no-padding margin-bottom-5"></legend>
 										<div class="row margin-bottom-5">
 											<div class="form-group col-sm-3 col-md-3 col-lg-3">
-												<label for="firstname"
-													class="col-md-4 col-sm-6 control-label">供应商</label>
+												<label class="col-md-4 col-sm-6 control-label">供应商</label>
 												<div class="col-md-8 col-sm-6 no-padding">
-													<input type="text" class="form-control" id="firstname"
-														placeholder="请输入名字">
+													<select id="supplier" name="supplier" class="form-control selectpicker show-tick" data-live-search="true">
+														<#list supplierList as p>
+															<option value='${p}'>${p}</option>
+														</#list>
+													</select>
 												</div>
 											</div>
 											<div class="form-group col-sm-3 col-md-3 col-lg-3">
-												<label for="firstname"
-													class="col-md-4 col-sm-6 control-label">进货类型</label>
+												<label class="col-md-4 col-sm-6 control-label">进货类型</label>
 												<div class="col-md-8 col-sm-6 no-padding">
-													<input type="text" class="form-control" id="firstname"
-														placeholder="请输入名字">
+													<select id="purchaseType" name="purchaseType" class="form-control selectpicker show-tick" data-live-search="true">
+														<#list purchaseTypeList as p>
+															<option value='${p}'>${p}</option>
+														</#list>
+													</select>
 												</div>
 											</div>
 											<div class="form-group col-sm-3 col-md-3 col-lg-3">
-												<label for="firstname"
-													class="col-md-4 col-sm-6 control-label">进货门店</label>
+												<label class="col-md-4 col-sm-6 control-label">进货门店</label>
 												<div class="col-md-8 col-sm-6 no-padding">
-													<input type="text" class="form-control" id="firstname"
-														placeholder="请输入名字">
+													<select id="deptAreaCode" name="deptAreaCode" class="form-control selectpicker show-tick" title="请选择门店/部门" data-live-search="true">
+														<#list areaList as p>
+															<option value='${p.areaCode}' <#if p.areaType == 0>data-icon="fa fa-bank" data-subtext="总公司"</#if> <#if p.areaType == 1>data-icon="fa fa-cubes" data-subtext="区域"</#if> <#if p.areaType == 2>data-icon="fa fa-cab" data-subtext="门店"</#if> >${p.areaName}</option>
+														</#list>
+													</select>
 												</div>
 											</div>
 											<div class="form-group col-sm-3 col-md-3 col-lg-3">
-												<label for="firstname"
-													class="col-md-4 col-sm-6 control-label">进货柜台</label>
+												<label class="col-md-4 col-sm-6 control-label">进货柜台</label>
 												<div class="col-md-8 col-sm-6 no-padding">
-													<input type="text" class="form-control" id="firstname"
-														placeholder="请输入名字">
+													<select id="storeAreaCode" name="storeAreaCode" class="form-control selectpicker show-tick" title="请选择柜台" data-live-search="true">
+													</select>
 												</div>
 											</div>
 											<div class="form-group col-sm-3 col-md-3 col-lg-3">
-												<label for="firstname"
-													class="col-md-4 col-sm-6 control-label">进货日期</label>
+												<label class="col-md-4 col-sm-6 control-label">进货日期</label>
 												<div class="col-md-8 col-sm-6 no-padding">
-													<input type="text" class="form-control" id="firstname"
-														placeholder="请输入名字">
+													<input type="text" class="form-control input-sm" id="sheetDate" name="sheetDate"  onclick="laydate()" >
 												</div>
 											</div>
 											<div class="form-group col-sm-3 col-md-3 col-lg-3">
-												<label for="firstname"
-													class="col-md-4 col-sm-6 control-label">单号</label>
+												<label class="col-md-4 col-sm-6 control-label">单号</label>
 												<div class="col-md-8 col-sm-6 no-padding">
-													<input type="text" class="form-control" id="firstname"
-														placeholder="请输入名字">
+													<input type="text" class="form-control" id="firstname" placeholder="请输入名字">
 												</div>
 											</div>
 											<div class="form-group col-sm-3 col-md-3 col-lg-3">
-												<label for="firstname"
-													class="col-md-4 col-sm-6 control-label">品牌</label>
+												<label class="col-md-4 col-sm-6 control-label">品牌</label>
 												<div class="col-md-8 col-sm-6 no-padding">
-													<input type="text" class="form-control" id="firstname"
-														placeholder="请输入名字">
+													<select id="purchaseType" name="purchaseType" class="form-control selectpicker show-tick" data-live-search="true">
+														<#list brandNameList as p>
+															<option value='${p}'>${p}</option>
+														</#list>
+													</select>
 												</div>
 											</div>
 											<div class="form-group col-sm-3 col-md-3 col-lg-3">
-												<label for="firstname"
-													class="col-md-4 col-sm-6 control-label">备注</label>
+												<label class="col-md-4 col-sm-6 control-label">备注</label>
 												<div class="col-md-8 col-sm-6 no-padding">
-													<input type="text" class="form-control" id="firstname"
-														placeholder="请输入名字">
+													<input type="text" id="remarks" name="remarks" class="form-control"  placeholder="请输入名字">
 												</div>
 											</div>
 										</div>
@@ -144,8 +164,7 @@
 					</div>
 				</div>
 				<div class="well">
-					<div id='hot' class="hot handsontable htRowHeaders htColumnHeaders"
-						style="overflow: hidden;"></div>
+					<div id='hot' class="hot handsontable htRowHeaders htColumnHeaders" style="overflow: hidden;"></div>
 				</div>
 			</article>
 		</div>
@@ -155,12 +174,13 @@
 <script src="static/js/app.config.js"></script>
 <script src="static/js/bootstrap/bootstrap.min.js"></script>
 <script src="static/js/smartwidgets/jarvis.widget.min.js"></script>
-<script src="static/js/app.js?v=1"></script>
-<script src="resource/layui/layui.all.js?v=1" charset="utf-8"></script>
-<script type="text/javascript"
-	src="static/plugins/handsontable/handsontable.full.js?v=3"></script>
-<script type="text/javascript"
-	src="static/plugins/handsontable/languages/zh-CN.js"></script>
+<script src="static/js/app.js?v=2"></script>
+<script src="static/plugins/layer/layer.js"></script>
+<script src="static/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+<script src="static/plugins/bootstrap-select/js/i18n/defaults-zh_CN.min.js"></script>
+<script src="static/plugins/handsontable/handsontable.full.js?v=3"></script>
+<script src="static/plugins/handsontable/languages/zh-CN.js"></script>
+<script src="static/plugins/laydate/laydate.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -181,6 +201,47 @@
 			language : "zh-CN",
 			multiColumnSorting : true
 		});
+		
+		$("#canUseBtn").on("click",function(){
+			$(this).parent().find("label").removeClass("active");
+			$(this).addClass('active');
+			$("#canUseSechemeUL").show();
+			$("#noUseSechemeUL").hide();
+		})
+		$("#noUseBtn").on("click",function(){
+			$(this).parent().find("label").removeClass("active");
+			$(this).addClass('active');
+			$("#canUseSechemeUL").hide();
+			$("#noUseSechemeUL").show();
+		})
+		
+		$("#deptAreaCode").on("change",function(){
+			$("#storeAreaCode").html("");
+			$.ajax({
+		        type: "POST",
+		        url: "sysAreaInfo/getStoreList.do?parentAreaCode="+$(this).val(),
+		        dataType: 'json',
+		        async: false,
+		        success: function(data) {
+		            if (data.status == '100') {
+		            	var storeList=data.data;
+		            	for(var index=0;index<storeList.length;index++){
+		            		var store=storeList[index];
+			            	$("#storeAreaCode").append("<option value='"+store.areaCode+"'>"+store.areaName+"</option>");
+			            	$("#storeAreaCode").selectpicker('refresh');
+		            	}
+		            }else{
+		            	layer.msg("获取柜台失败");
+		            }
+		        },
+		        error: function() {
+		        	layer.alert("连接服务器失败，请稍后重试");
+		        }
+		    });
+		})
+		laydate.render({
+			  elem: '#sheetDate' //指定元素
+			});
 	});
 	function editScheme(id) {
 		//

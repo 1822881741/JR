@@ -359,9 +359,6 @@ var calc_navbar_height = function() {
 		
 				var theUrlVal = $this.next('.ajax-dropdown').find('.btn-group > .active > input').attr('id');
 				
-				//clear memory reference
-				$this = null;
-				theUrlVal = null;
 						
 				e.preventDefault();
 			});
