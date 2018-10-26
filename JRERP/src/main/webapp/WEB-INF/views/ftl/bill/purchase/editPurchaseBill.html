@@ -48,7 +48,7 @@
 												<#if p.status == 1>
 													<li>
 														<span class="">
-															<a href="javascript:void(0);" class="msg">
+															<a href="javascript:void(0);" class="msg" onclick="viewImportBill(${p.id})">
 																<img src="static/img/avatars/4.png" class="air air-top-left margin-top-5" width="40" height="40">
 																<span class="from">${p.name} <i class="icon-paperclip"></i></span>
 																<time><button class="btn btn-xs btn-primary" onclick="editScheme(${p.id})" ><i class="fa fa-edit"></i> 编辑</button></time>
@@ -246,21 +246,41 @@
 	function editScheme(id) {
 		//
 		layer.open({
-					type : 2,
-					title : "新增/修改商品分类",
-					area : [ '800px', '620px' ],
-					shade : 0.8,
-					scrollbar : false,
-					id : 'lay_addClassify', //设定一个id，防止重复弹出
-					btn : [ '保存', '取消' ],
-					moveType : 1, //拖拽模式，0或者1
-					content : "purchaseSecheme/editSecheme.do?sechemeId=" + id,
-					yes : function(index, layero) {
-						var result = $(layero).find("iframe")[0].contentWindow.submitData();
-						if (result) {
-						}
-					}
-				});
+			type : 2,
+			title : "新增/修改商品分类",
+			area : [ '800px', '620px' ],
+			shade : 0.8,
+			scrollbar : false,
+			id : 'lay_addClassify', //设定一个id，防止重复弹出
+			btn : [ '保存', '取消' ],
+			moveType : 1, //拖拽模式，0或者1
+			content : "purchaseSecheme/editSecheme.do?sechemeId=" + id,
+			yes : function(index, layero) {
+				var result = $(layero).find("iframe")[0].contentWindow.submitData();
+				if (result) {
+				}
+			}
+		});
+	}
+	function viewImportBill(id){
+		var index = layer.open({
+			type : 2,
+			title : "新增/修改商品分类",
+			area : [ '800px', '620px' ],
+			shade : 0.8,
+			scrollbar : false,
+			id : 'lay_addClassify', //设定一个id，防止重复弹出
+			btn : [ '保存', '取消' ],
+			moveType : 1, //拖拽模式，0或者1
+			maxmin: true,
+			content : "purchase/viewImportBill.do?sechemeId=" + id,
+			yes : function(index, layero) {
+				var result = $(layero).find("iframe")[0].contentWindow.submitData();
+				if (result) {
+				}
+			}
+		});
+		layer.full(index);
 	}
 </script>
 </html>

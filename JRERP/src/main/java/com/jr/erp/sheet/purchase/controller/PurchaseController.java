@@ -65,5 +65,14 @@ public class PurchaseController {
         return "bill/purchase/editPurchaseBill";
     }
     
+    @RequestMapping(value = "/viewImportBill.do")
+    public String viewImportBill(HttpServletRequest request, Model model)
+    {
+        SysUser user= ShiroUtils.getSysUser();
+        String companyNo=user.getCompanyNo();
+        
+        return "bill/purchase/viewImportBill";
+    }
+    
     
 }    

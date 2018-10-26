@@ -15,15 +15,17 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONObject;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
-import com.jn.erp.common.base.service.IFileUploadService;
+import com.alibaba.fastjson.JSONObject;
+import com.jr.erp.base.service.impl.IFileUploadService;
+import com.jr.erp.base.shiro.ShiroUtils;
 
 
 /** 
@@ -56,26 +58,16 @@ public class FileUploadController
      */
     @ResponseBody
     @RequestMapping(value ={ "/imgUpload.do" })
-    public void fileUpload(String folder, HttpServletRequest request, HttpServletResponse response)
+    public void fileUpload(@RequestParam MultipartFile file,String folder, HttpServletRequest request, HttpServletResponse response)
             throws IOException
     {
         FileUploadOperator operator=null;
+        String companyNo = ShiroUtils.getSysUser().getCompanyNo();
         try
         {
-            MultipartHttpServletRequest fileRequest = (MultipartHttpServletRequest) request;
-            List<MultipartFile> files = fileRequest.getFiles("qqfile");
-            operator =new FileUploadOperator();
+            operator = new FileUploadOperator();
             operator.setFileName("success");
-//            for (MultipartFile myfile : files)
-//            {
-//                operator = fileUploadService.imageUpload(myfile, -1);
-//                String path = myfile.getOriginalFilename();
-//                String fileName = path;
-//                InputStream is = myfile.getInputStream();
-//                // path = FileManager.T_MAIL_ATTACHMENT_PATH + folder +
-//                // File.separator + fileName;
-//                // uploadfiles(path, is);// 上传文件
-//            }
+            fileUploadService.excelFileUpload(file, companyNo);
         } catch (Exception e)
         {
             e.printStackTrace();
