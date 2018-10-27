@@ -13,7 +13,6 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.jr.erp.base.controller.FileUploadOperator;
 
 /**     
  * 类名称：IFileUploadService    

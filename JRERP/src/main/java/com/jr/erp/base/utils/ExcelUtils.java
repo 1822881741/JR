@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -11,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.excel.ExcelReader;
+import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.exception.ExcelAnalysisException;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
@@ -94,4 +97,13 @@ public class ExcelUtils
         }
         return null;
     }
+    
+    public static void writeExcel(OutputStream out,List<List<String>> data){
+        ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLS);
+        //写第一个sheet, sheet1  数据全是List<String> 无模型映射关系
+        Sheet sheet = new Sheet(1);
+        writer.write0(data, sheet);
+        writer.finish();
+    }
+    
 }
