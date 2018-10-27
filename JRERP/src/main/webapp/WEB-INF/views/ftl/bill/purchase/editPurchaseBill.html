@@ -190,7 +190,7 @@
 		data.push([]);
 		var example = document.getElementById('hot');
 		var hot1 = new Handsontable(example, {
-			data : data,
+			data : [['宝马',2017,'black','black'],['宝珠',2018,'blue','blue'],['Chrysler',2019,'yellow','black'],['Volvo',2020,'white','gray']],
 			height : 400,
 			stretchH : "all",
 			width : "100%",
@@ -199,6 +199,29 @@
 			colHeaders : true,
 			contextMenu : true,
 			language : "zh-CN",
+			columns: [
+			          {
+			            type: 'autocomplete',
+			            source: ['宝马', '宝珠', '宝石', 'Suzuki', 'Toyota', 'Volvo'],
+			            strict: false,
+			            filter:true
+			            allowInvalid: false
+			          },
+			          {},
+			          {
+			            type: 'dropdown',
+			            source: ['yellow', 'red', 'orange', 'green', 'blue', 'gray', 'black', 'white', 'purple', 'lime', 'olive', 'cyan'],
+			            strict: true,
+			            allowInvalid: false,
+			            filter:true
+			          },
+			          {
+			            type: 'autocomplete',
+			            source: ['yellow', 'red', 'orange', 'green', 'blue', 'gray', 'black', 'white', 'purple', 'lime', 'olive', 'cyan'],
+			            strict: true,
+			            allowInvalid: true //true is default
+			          }
+			        ],
 			multiColumnSorting : true
 		});
 		
