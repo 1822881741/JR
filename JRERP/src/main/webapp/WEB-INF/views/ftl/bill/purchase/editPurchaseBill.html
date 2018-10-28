@@ -5,6 +5,7 @@
 <#include "/header-smart.html" />
 <base href="${basePath}">
 <link rel="stylesheet" type="text/css" href="static/plugins/handsontable/handsontable.full.min.css?v=21">
+<link href="static/plugins/handsontable-select2/select2.css" rel="stylesheet" />
 <style type="text/css">
 </style>
 <body>
@@ -181,15 +182,18 @@
 <script src="static/plugins/handsontable/languages/zh-CN.js"></script>
 <script src="static/plugins/layer/layer.js"></script>
 <script src="static/plugins/laydate/laydate.js"></script>
-
+<script src="static/plugins/handsontable-select2/select2.js"></script>
+<script src="static/plugins/handsontable-select2/select2-editor.js?v=2"+Math.random()></script>
 <script type="text/javascript">
+var hot1;
+	var optionsList=[{id: 1, text: '+'}, {id: 2, text: '-'}, {id: 3, text: '*'}, {id: 4, text: '/'}];
 	$(document).ready(function() {
 		pageSetUp();
 		var data = Handsontable.helper.createSpreadsheetData(10, 15);
 		data.push([ 1, 23, 4, 56, 6, 7, 8, 9 ]);
 		data.push([]);
 		var example = document.getElementById('hot');
-		var hot1 = new Handsontable(example, {
+		hot1 = new Handsontable(example, {
 			data : [['宝马',2017,'black','black'],['宝珠',2018,'blue','blue'],['Chrysler',2019,'yellow','black'],['Volvo',2020,'white','gray']],
 			height : 400,
 			stretchH : "all",
@@ -204,10 +208,19 @@
 			            type: 'autocomplete',
 			            source: ['宝马', '宝珠', '宝石', 'Suzuki', 'Toyota', 'Volvo'],
 			            strict: false,
-			            filter:true
+			            filter:true,
 			            allowInvalid: false
 			          },
-			          {},
+			          {            
+			          editor: 'select2',
+			          renderer: select2Renderer,
+			          width: '200px',
+			          select2Options: { 
+			          	data: optionsList,
+			            dropdownAutoWidth: false,      
+			            width: 'resolve'
+			          }
+					 },
 			          {
 			            type: 'dropdown',
 			            source: ['yellow', 'red', 'orange', 'green', 'blue', 'gray', 'black', 'white', 'purple', 'lime', 'olive', 'cyan'],
@@ -219,7 +232,7 @@
 			            type: 'autocomplete',
 			            source: ['yellow', 'red', 'orange', 'green', 'blue', 'gray', 'black', 'white', 'purple', 'lime', 'olive', 'cyan'],
 			            strict: true,
-			            allowInvalid: true //true is default
+			            allowInvalid: true 
 			          }
 			        ],
 			multiColumnSorting : true
@@ -266,6 +279,20 @@
 			  elem: '#sheetDate' //指定元素
 			});
 	});
+	
+	function select2Renderer(instance, td, row, col, prop, value, cellProperties)
+	{
+	    var selectedId;
+	    for (var index = 0; index < optionsList.length; index++)
+	    {
+	        if (parseInt(value) === optionsList[index].id)
+	        {
+	            selectedId = optionsList[index].id;
+	            value = optionsList[index].text;            
+	        }
+	    }
+	    Handsontable.renderers.TextRenderer(instance, td, row, col, prop, value, cellProperties);
+	}
 	function editScheme(id) {
 		//
 		layer.open({
