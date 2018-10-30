@@ -118,14 +118,16 @@ public class SysPurchaseSechemeServiceImpl extends AbstractBaseService<SysPurcha
                     tempName.put("id", tempCategory.getId());
                     tempName.put("text", tempCategory.getGoodsName());
                     goodsNameArray.add(tempName);
-
                     // 单独封装一遍值，进行界面的数据校验
                     validateArray.add(tempCategory.getGoodsName());
                 }
                 setInfo.put("editor", "select2");
-                setInfo.put("select2Options","{data: " + goodsNameArray + ",dropdownAutoWidth: true, width: 'resolve'}");
+                JSONObject data=new JSONObject();
+                data.put("dropdownAutoWidth", true);
+                data.put("width", "resolve");
+                data.put("data", goodsNameArray);
+                setInfo.put("select2Options",data);
                 setInfo.put("validateArray", validateArray);
-                //setInfo.put("validator", "nameValidator");
             } else if (StringUtils.equals(importColumnVo.getBeanColumn(), "num"))
             {
                 //setInfo.put("validator", "goodsNumValidator");

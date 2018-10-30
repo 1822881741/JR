@@ -5,7 +5,6 @@
 <#include "/header-smart.html" />
 <link rel="stylesheet" href="static/plugins/layui/css/layui.css" media="all">
 <link rel="stylesheet" type="text/css" href="static/plugins/handsontable/handsontable.full.min.css?v=21">
-<link rel="stylesheet" type="text/css" href="static/plugins/handsontable/main.css?v=21">
 <link href="static/plugins/handsontable-select2/select2.css" rel="stylesheet" />
 <body >
 	<div class="well no-margin">
@@ -84,20 +83,18 @@
 		var hotElement = document.querySelector('#hot');
 		var hotElementContainer = hotElement.parentNode;
 		var hotSettings = {
-		  data: [{}],
+		  data: [{goodsName:'zsd'}],
 		  columns:columnConfig,
 		  stretchH: 'all',
 		  width : "100%",
 		  language : "zh-CN",
 		  autoWrapRow: true,
-		  height: 487,
-		  maxRows: 22,
+		  height: 300,
 		  manualRowResize: true,
 		  manualColumnResize: true,
 		  rowHeaders: true,
 		  manualRowMove: true,
 		  manualColumnMove: true,
-		  contextMenu: true,
 		  filters: true,
 		  dropdownMenu: true,
 		  columnSorting: {
