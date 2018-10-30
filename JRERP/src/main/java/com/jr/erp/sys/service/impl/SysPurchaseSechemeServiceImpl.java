@@ -21,6 +21,7 @@ import com.jr.erp.sys.service.ISysCategorySetService;
 import com.jr.erp.sys.service.ISysGoodsCategoryService;
 import com.jr.erp.sys.service.ISysPurchaseSechemeItemService;
 import com.jr.erp.sys.service.ISysPurchaseSechemeService;
+import com.jr.erp.sys.vo.PurchaseColumnVo;
 
 /**     
  * 类名称：SysStoreServiceImpl    
@@ -89,10 +90,12 @@ public class SysPurchaseSechemeServiceImpl extends AbstractBaseService<SysPurcha
     }
 
     @Override
-    public List<JSONObject> getPurchaseColumnConfig(Integer sechemeId)
+    public PurchaseColumnVo getPurchaseColumnConfig(Integer sechemeId)
     {
+        PurchaseColumnVo vo = new PurchaseColumnVo();
         SysPurchaseSecheme importStrategy = this.getById(sechemeId);
         List<JSONObject> coumnsSetList = new ArrayList<JSONObject>();
+        JSONArray goodsNameArray = new JSONArray();
         for (SysPurchaseSechemeItem importColumnVo : importStrategy.getItemList())
         {
             // 添加列设置
@@ -108,7 +111,7 @@ public class SysPurchaseSechemeServiceImpl extends AbstractBaseService<SysPurcha
                         //.andFirstTypeEqualTo(importStrategy.getFirstType())
                         .andSecondTypeEqualTo(importStrategy.getSecondType());
                 List<BaseEntity> archives = sysGoodsCategoryService.selectByExample(condition);
-                JSONArray goodsNameArray = new JSONArray();
+               
                 List<String> validateArray = new ArrayList<String>();
                 for (BaseEntity temp : archives)
                 {
@@ -164,6 +167,8 @@ public class SysPurchaseSechemeServiceImpl extends AbstractBaseService<SysPurcha
             }
             coumnsSetList.add(setInfo);
         }
-        return coumnsSetList;
+        vo.setColumnConfig(coumnsSetList);
+        vo.setSelect2Option(goodsNameArray);
+        return vo;
     }
 }

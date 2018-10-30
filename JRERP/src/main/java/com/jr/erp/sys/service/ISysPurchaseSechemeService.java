@@ -1,11 +1,9 @@
 package com.jr.erp.sys.service;
 
-import java.util.List;
-
-import com.alibaba.fastjson.JSONObject;
 import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.mybatis.IBaseService;
 import com.jr.erp.sys.entity.SysPurchaseSecheme;
+import com.jr.erp.sys.vo.PurchaseColumnVo;
 
 /**     
  * 类名称：ISysPurchaseSechemeService    
@@ -47,5 +45,5 @@ public interface ISysPurchaseSechemeService extends IBaseService<BaseEntity>
      * @return List<JSONObject>
      * @Exception 异常对象
     */
-    List<JSONObject> getPurchaseColumnConfig(Integer sechemeId);
+    PurchaseColumnVo getPurchaseColumnConfig(Integer sechemeId);
 }
