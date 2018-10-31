@@ -13,12 +13,12 @@ import java.io.File;
 import java.util.List;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.jr.erp.base.exception.ServiceAccessException;
 import com.jr.erp.base.utils.ExcelUtils;
 import com.jr.erp.base.utils.JodaUtils;
 
@@ -79,6 +79,7 @@ public class FileUploadServiceImpl implements IFileUploadService
         } catch (Exception e)
         {
             logger.error("文件上传错误", e);
+            throw e;
         }
         if(false)
         {

@@ -45,8 +45,12 @@
 <script src="static/plugins/handsontable/languages/zh-CN.js"></script>
 <script src="static/plugins/handsontable-select2/select2.js"></script>
 <script src="static/plugins/handsontable-select2/select2-editor.js?v=2"+Math.random()></script>
+<script src="static/zmodel/common/js/htValidate.js?v=2222"></script>
 <script type="text/javascript">
 	var columnConfig=${columnConfig};
+	var optionsList=${select2Option};
+	var htValidate = new htValidate();
+	var hot;
 	$(document).ready(function() {
 		pageSetUp();
 		layui.use('upload', function(){
@@ -68,6 +72,7 @@
 			    },
 			    done: function(res){
 			    	layer.close(loader);
+			    	hot.loadData(res.data);
 			    },
 			    error:function(){
 			    	layer.close(loader);
@@ -80,39 +85,72 @@
 			window.location.href = "purchaseSecheme/downloadTpl.do?sechemeId="+ $("#sechemeId").val();
 		})
 		
+		//替换控件类型
+		for(var i=0;i<columnConfig.length;i++){
+			if(columnConfig[i].data=='goodsName'){
+				columnConfig[i].renderer=customDropdownRenderer;
+			}
+		}
+		//替换校验类型
+		for(var index=0;index< columnConfig.length;index++){
+			debugger
+		   var column = columnConfig[index];
+		  if(column.validator){
+				column.validator = htValidate[column.validator];
+		  };
+	  	}
 		var hotElement = document.querySelector('#hot');
-		var hotElementContainer = hotElement.parentNode;
 		var hotSettings = {
-		  data: [{goodsName:'zsd'}],
+		  data: [{goodsName:'422694'},{goodsName:'422694'}],
 		  columns:columnConfig,
 		  stretchH: 'all',
 		  width : "100%",
 		  language : "zh-CN",
 		  autoWrapRow: true,
-		  height: 300,
-		  manualRowResize: true,
-		  manualColumnResize: true,
+		  height: 450,
 		  rowHeaders: true,
-		  manualRowMove: true,
-		  manualColumnMove: true,
 		  filters: true,
-		  dropdownMenu: true,
-		  columnSorting: {
-		    indicator: true
-		  },
-		  autoColumnSize: {
-		    samplingRatio: 23
-		  }
+		  dropdownMenu: ['filter_by_condition','filter_operators','filter_by_condition2','filter_by_value','filter_action_bar'],
+		  contextMenu: true,
+		  columnSorting:true
 		};
-		var hot = new Handsontable(hotElement, hotSettings);
+		hot = new Handsontable(hotElement, hotSettings);
 	});
 	
-	function goodsNumValidator(value,callback){
-		if (getNumber(value) <= 0) {
-			callback(false);
-		} else {
-			callback(true);
-		}
+	function customDropdownRenderer(instance, td, row, col, prop, value, cellProperties)
+	{
+	    var selectedId;
+	    var value;
+	    for (var index = 0; index < optionsList.length; index++)
+	    {
+	        if (parseInt(value) === optionsList[index].id)
+	        {
+	            selectedId = optionsList[index].id;
+	            value = optionsList[index].text;            
+	        }
+	    }
+	    $('#selectedId').text(selectedId);
+	    $(td).html(value);
+	    return td;
+	}
+	
+	function submitData(){
+		var data = {};
+		data.itemList=hot.getSourceData();
+		$.ajax({
+		   type: "POST",
+		   url: "purchase/saveImportBill.do?sechemeId="+$("#sechemeId").val(),
+		   dataType:'json',
+		   async:false,
+		   data: JSON.stringify(data),
+		   contentType:"application/json",
+		   success: function(data){
+			 	alert("OK")
+		   },
+	       error:function(){ 
+	    	  alert("ERROR")
+		   }
+ 		});
 	}
 </script>
 </html>

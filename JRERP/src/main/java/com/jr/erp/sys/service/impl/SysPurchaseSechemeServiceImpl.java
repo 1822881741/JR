@@ -7,11 +7,13 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jr.erp.base.mybatis.AbstractBaseService;
 import com.jr.erp.base.mybatis.BaseEntity;
+import com.jr.erp.base.service.impl.IFileUploadService;
 import com.jr.erp.sys.entity.SysGoodsCategory;
 import com.jr.erp.sys.entity.SysGoodsCategoryExample;
 import com.jr.erp.sys.entity.SysPurchaseSecheme;
@@ -45,6 +47,7 @@ public class SysPurchaseSechemeServiceImpl extends AbstractBaseService<SysPurcha
     
     @Autowired
     ISysGoodsCategoryService sysGoodsCategoryService;
+    
     @Override
     public SysPurchaseSecheme getById(Integer sechemeId)
     {
@@ -131,16 +134,18 @@ public class SysPurchaseSechemeServiceImpl extends AbstractBaseService<SysPurcha
                 data.put("data", goodsNameArray);
                 setInfo.put("select2Options",data);
                 setInfo.put("validateArray", validateArray);
+                setInfo.put("validator", "categoryValidator");
             } else if (StringUtils.equals(importColumnVo.getBeanColumn(), "num"))
             {
-                //setInfo.put("validator", "goodsNumValidator");
+                setInfo.put("type","numeric");
+                setInfo.put("validator", "integerValidator");
             } else
             {
                 switch (importColumnVo.getParamType())
                 {
                 case 1:
                     setInfo.put("type", "numeric");
-                    setInfo.put("format", "0");
+                    setInfo.put("validator", "integerValidator");
                     break;
                 case 2:
                     setInfo.put("type", "numeric");
