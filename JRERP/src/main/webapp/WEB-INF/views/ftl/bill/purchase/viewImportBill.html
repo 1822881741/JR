@@ -85,15 +85,8 @@
 			window.location.href = "purchaseSecheme/downloadTpl.do?sechemeId="+ $("#sechemeId").val();
 		})
 		
-		//替换控件类型
-		for(var i=0;i<columnConfig.length;i++){
-			if(columnConfig[i].data=='goodsName'){
-				columnConfig[i].renderer=customDropdownRenderer;
-			}
-		}
 		//替换校验类型
 		for(var index=0;index< columnConfig.length;index++){
-			debugger
 		   var column = columnConfig[index];
 		  if(column.validator){
 				column.validator = htValidate[column.validator];
@@ -101,7 +94,7 @@
 	  	}
 		var hotElement = document.querySelector('#hot');
 		var hotSettings = {
-		  data: [{goodsName:'422694'},{goodsName:'422694'}],
+		  data: [{goodsName:'422694'},{goodsName:'422694'},{goodsName:'422694'},{goodsName:'422694'},{goodsName:'422694'},{goodsName:'422694'}],
 		  columns:columnConfig,
 		  stretchH: 'all',
 		  width : "100%",

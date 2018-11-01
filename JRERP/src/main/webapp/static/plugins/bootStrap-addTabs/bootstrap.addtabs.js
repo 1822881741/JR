@@ -442,6 +442,7 @@
         } else if (settings.iframe == true && (opts.ajax == 'false' || !opts.ajax)) { //没有内容，使用IFRAME打开链接
             content.html(
                 $('<iframe>', {
+                	'id':opts.id,
                     'class': 'iframeClass',
                     'height': settings.height,
                     'frameborder': "no",

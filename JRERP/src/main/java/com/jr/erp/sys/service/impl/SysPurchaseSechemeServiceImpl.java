@@ -98,7 +98,6 @@ public class SysPurchaseSechemeServiceImpl extends AbstractBaseService<SysPurcha
         PurchaseColumnVo vo = new PurchaseColumnVo();
         SysPurchaseSecheme importStrategy = this.getById(sechemeId);
         List<JSONObject> coumnsSetList = new ArrayList<JSONObject>();
-        JSONArray goodsNameArray = new JSONArray();
         for (SysPurchaseSechemeItem importColumnVo : importStrategy.getItemList())
         {
             // 添加列设置
@@ -116,25 +115,65 @@ public class SysPurchaseSechemeServiceImpl extends AbstractBaseService<SysPurcha
                 List<BaseEntity> archives = sysGoodsCategoryService.selectByExample(condition);
                
                 List<String> validateArray = new ArrayList<String>();
+                
+                JSONArray smDataArray = new JSONArray();
                 for (BaseEntity temp : archives)
                 {
                     SysGoodsCategory tempCategory =(SysGoodsCategory) temp;
                     // 拼装下拉框中的数据下拉框中值和内容的对应关系
-                    JSONObject tempName = new JSONObject();
-                    tempName.put("id", tempCategory.getId());
-                    tempName.put("text", tempCategory.getGoodsName());
-                    goodsNameArray.add(tempName);
+                    JSONObject smData = new JSONObject();
+                    smData.put("categoryId", tempCategory.getId());
+                    smData.put("goodsName", tempCategory.getGoodsName());
+                    smData.put("goldName", tempCategory.getGoldName());
+                    smData.put("jewelName", tempCategory.getJewelName());
+                    smData.put("categoryName", tempCategory.getCategoryName());
+                    smData.put("goldPercent", tempCategory.getGoldPercent());
+                    smDataArray.add(smData);
                     // 单独封装一遍值，进行界面的数据校验
                     validateArray.add(tempCategory.getGoodsName());
                 }
-                setInfo.put("editor", "select2");
-                JSONObject data=new JSONObject();
-                data.put("dropdownAutoWidth", true);
-                data.put("width", "resolve");
-                data.put("data", goodsNameArray);
-                setInfo.put("select2Options",data);
-                setInfo.put("validateArray", validateArray);
-                setInfo.put("validator", "categoryValidator");
+                setInfo.put("type", "handsontable");
+                JSONObject handConfig = new JSONObject();
+                handConfig.put("data", smDataArray);
+                handConfig.put("width", "500px");
+                handConfig.put("rowHeaders", true);
+                handConfig.put("columnSorting", true);
+                handConfig.put("data", smDataArray);
+                
+                JSONArray columns = new JSONArray();
+                JSONObject j1 = new JSONObject();
+                j1.put("title", "名称");
+                j1.put("data", "goodsName");
+                j1.put("width", "200px");
+                
+                JSONObject j2 = new JSONObject();
+                j2.put("title", "金料");
+                j2.put("data", "goldName");
+                j2.put("width", "150px");
+                
+                JSONObject j3 = new JSONObject();
+                j3.put("title", "石料");
+                j3.put("data", "jewelName");
+                j3.put("width", "150px");
+                
+                JSONObject j4 = new JSONObject();
+                j4.put("title", "品类");
+                j4.put("data", "categoryName");
+                j4.put("width", "150px");
+                
+                JSONObject j5 = new JSONObject();
+                j5.put("title", "成色");
+                j5.put("data", "goldPercent");
+                j5.put("width", "150px");
+                columns.add(j1);
+                columns.add(j2);
+                columns.add(j3);
+                columns.add(j4);
+                columns.add(j5);
+                
+                handConfig.put("columns", columns);
+                handConfig.put("manualColumnResize", true);
+                setInfo.put("handsontable",handConfig);
             } else if (StringUtils.equals(importColumnVo.getBeanColumn(), "num"))
             {
                 setInfo.put("type","numeric");
@@ -173,7 +212,6 @@ public class SysPurchaseSechemeServiceImpl extends AbstractBaseService<SysPurcha
             coumnsSetList.add(setInfo);
         }
         vo.setColumnConfig(coumnsSetList);
-        vo.setSelect2Option(goodsNameArray);
         return vo;
     }
 }
