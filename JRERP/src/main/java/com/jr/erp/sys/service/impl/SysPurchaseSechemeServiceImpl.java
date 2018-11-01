@@ -137,7 +137,7 @@ public class SysPurchaseSechemeServiceImpl extends AbstractBaseService<SysPurcha
                 handConfig.put("data", smDataArray);
                 handConfig.put("width", "500px");
                 handConfig.put("rowHeaders", true);
-                handConfig.put("columnSorting", true);
+                handConfig.put("multiColumnSorting", true);
                 handConfig.put("data", smDataArray);
                 
                 JSONArray columns = new JSONArray();

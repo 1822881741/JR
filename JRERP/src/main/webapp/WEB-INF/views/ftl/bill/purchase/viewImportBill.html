@@ -48,7 +48,6 @@
 <script src="static/zmodel/common/js/htValidate.js?v=2222"></script>
 <script type="text/javascript">
 	var columnConfig=${columnConfig};
-	var optionsList=${select2Option};
 	var htValidate = new htValidate();
 	var hot;
 	$(document).ready(function() {
@@ -100,7 +99,7 @@
 		  width : "100%",
 		  language : "zh-CN",
 		  autoWrapRow: true,
-		  height: 450,
+		  height: 550,
 		  rowHeaders: true,
 		  filters: true,
 		  dropdownMenu: ['filter_by_condition','filter_operators','filter_by_condition2','filter_by_value','filter_action_bar'],
@@ -109,23 +108,6 @@
 		};
 		hot = new Handsontable(hotElement, hotSettings);
 	});
-	
-	function customDropdownRenderer(instance, td, row, col, prop, value, cellProperties)
-	{
-	    var selectedId;
-	    var value;
-	    for (var index = 0; index < optionsList.length; index++)
-	    {
-	        if (parseInt(value) === optionsList[index].id)
-	        {
-	            selectedId = optionsList[index].id;
-	            value = optionsList[index].text;            
-	        }
-	    }
-	    $('#selectedId').text(selectedId);
-	    $(td).html(value);
-	    return td;
-	}
 	
 	function submitData(){
 		var data = {};
