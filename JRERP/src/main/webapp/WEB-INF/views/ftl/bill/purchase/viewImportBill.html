@@ -9,112 +9,129 @@
 <body >
 	<div class="well no-margin">
 	<div class="row">
-							<form id="wizard-1" novalidate="novalidate">
-								<div id="bootstrap-wizard-1" class="col-sm-12">
-									<div class="form-bootstrapWizard">
-										<ul class="bootstrapWizard form-wizard">
-											<li class="active" data-target="#step1">
-												<a href="#tab1" data-toggle="tab"> <span class="step">1</span> <span class="title">选择方案</span> </a>
-											</li>
-											<li data-target="#step2">
-												<a href="#tab2" data-toggle="tab"> <span class="step">2</span> <span class="title">导入文件</span> </a>
-											</li>
-											<li data-target="#step3">
-												<a href="#tab3" data-toggle="tab"> <span class="step">3</span> <span class="title">数据处理</span> </a>
-											</li>
-											<li data-target="#step4">
-												<a href="#tab4" data-toggle="tab"> <span class="step">4</span> <span class="title">Save Form</span> </a>
-											</li>
-										</ul>
-										<div class="clearfix">
+	<form id="wizard-1" novalidate="novalidate">
+		<div id="bootstrap-wizard-1" class="col-sm-12">
+			<div class="form-bootstrapWizard">
+				<ul class="bootstrapWizard form-wizard">
+					<li class="active" data-target="#step1">
+						<a href="#tab1" data-toggle="tab"> <span class="step">1</span> <span class="title">选择方案</span> </a>
+					</li>
+					<li data-target="#step2">
+						<a href="#tab2" data-toggle="tab"> <span class="step">2</span> <span class="title">导入文件</span> </a>
+					</li>
+					<li data-target="#step3">
+						<a href="#tab3" data-toggle="tab"> <span class="step">3</span> <span class="title">数据处理</span> </a>
+					</li>
+					<li data-target="#step4">
+						<a href="#tab4" data-toggle="tab"> <span class="step">4</span> <span class="title">Save Form</span> </a>
+					</li>
+				</ul>
+				<div class="clearfix">
+				</div>
+			</div>
+			<div class="tab-content">
+				<div class="tab-pane active" id="tab1">
+					<br>
+					<h3><strong>Step 1 </strong> - 选择方案</h3>
+					<br>
+					<div class="row">
+						<input type="hidden" id="sechemeId" >
+						<div id="myTabContent1" class="tab-content padding-10">
+							<div class="tab-pane fade in active" id="s1">
+								<#list sechemeList as p>
+									<div class="col-xs-12 col-sm-4 col-md-2">
+										<div class="panel panel-orange" onclick="choseSecheme(this)" data-secheme=${p.id}>
+											<div class="panel-heading">
+												<h3 class="panel-title">${p.name}</h3>
+											</div>
+											<div class="panel-body no-padding text-align-center">
+												<div class="the-price">
+													<h3>
+														<span class="subscript">${p.firstType} >> ${p.secondType}</span>
+													</h3>
+												</div>
+												<table class="table">
+													<tr class="active">
+														<td> 使用范围：</td><td>默认</td>
+													</tr>
+													<tr>
+														<td> 创 建 人：</td><td>${p.createUser}</td>
+													</tr>
+													<tr class="active">
+														<td>创建时间：</td><td>${p.createTime}</td>
+													</tr>
+													<tr>
+														<td colspan="2">${p.remarks}</td>
+													</tr>
+												</table>
+											</div>
 										</div>
 									</div>
-									<div class="tab-content">
-										<div class="tab-pane active" id="tab1">
-											<br>
-											<h3><strong>Step 1 </strong> - 选择方案</h3>
-											<br>
-											<div class="row">
-												<div class="col-sm-6">
-													<div class="form-group">
-														<div class="input-group">
-															<span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-															<input class="form-control input-lg" placeholder="First Name" type="text" name="fname" id="fname">
-
-														</div>
-													</div>
-												</div>
-												<div class="col-sm-6">
-													<div class="form-group">
-														<div class="input-group">
-															<span class="input-group-addon"><i class="fa fa-user fa-lg fa-fw"></i></span>
-															<input class="form-control input-lg" placeholder="Last Name" type="text" name="lname" id="lname">
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="tab-pane" id="tab2">
-											<br>
-											<h3><strong>Step 2</strong> - 导入文件</h3>
-											<br>
-											<div class="row form-body form-horizontal">
-												<div class="col-lg-4 col-md-4 col-sm-4 no-padding">
-													<div class="form-group padding-left-20">
-														<a id="downloadTpl" href="javascript:void(0);" class="btn btn-default btn-sm">下载模板</a>
-													</div>
-												</div>
-												<div class="col-lg-4 col-md-4 col-sm-4 no-padding">
-													<input type="hidden" id="sechemeId" value="${sechemeId}" >
-													<div class="form-group margin-bottom-5 margin-right-5">
-														<div class="layui-upload-drag" id="test10">
-														  <i class="layui-icon"></i>
-														  <p>点击上传，或将文件拖拽到此处</p>
-														  <p id="tips"></p>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="tab-pane" id="tab3">
-											<br>
-											<h3><strong>Step 3</strong> - 数据处理</h3>
-											<br>
-											<div class="form-group">
-												<div class="row">
-													<div id="hot"></div>
-												</div>
-											</div>
-										</div>
-										<div class="tab-pane" id="tab4">
-											<br>
-											<h3><strong>Step 4</strong> - Save Form</h3>
-											<br>
-											<h1 class="text-center text-success"><strong><i class="fa fa-check fa-lg"></i> Complete</strong></h1>
-											<h4 class="text-center">Click next to finish</h4>
-											<br>
-											<br>
-										</div>
-
-										<div class="form-actions">
-											<div class="row">
-												<div class="col-sm-12">
-													<ul class="pager wizard no-margin">
-														<li class="previous disabled">
-															<a href="javascript:void(0);" class="btn  btn-default"> 上一步 </a>
-														</li>
-														<li class="next">
-															<a href="javascript:void(0);" class="btn  txt-color-darken"> 下一步 </a>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-
-									</div>
-								</div>
-							</form>
+								</#list>
+							</div>
 						</div>
+					</div>
+				</div>
+				<div class="tab-pane" id="tab2">
+					<br>
+					<h3><strong>Step 2</strong> - 导入文件</h3>
+					<br>
+					<div class="row form-body form-horizontal">
+						<div class="col-lg-4 col-md-4 col-sm-4 no-padding">
+							<div class="form-group padding-left-20">
+								<a id="downloadTpl" href="javascript:void(0);" class="btn btn-default btn-sm">下载模板</a>
+							</div>
+						</div>
+						<div class="col-lg-8 col-md-8 col-sm-8 no-padding">
+							<div class="form-group margin-bottom-5 margin-right-5">
+								<div class="layui-upload-drag" id="test10">
+								  <i class="layui-icon"></i>
+								  <p>点击上传，或将文件拖拽到此处</p>
+								  <p id="tips"></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" id="tab3">
+					<br>
+					<h3><strong>Step 3</strong> - 数据处理</h3>
+					<br>
+					<div class="form-group">
+						<div class="row">
+							<div id="hot"></div>
+						</div>
+					</div>
+				</div>
+				<div class="tab-pane" id="tab4">
+					<br>
+					<h3><strong>Step 4</strong> - Save Form</h3>
+					<br>
+					<h1 class="text-center text-success"><strong><i class="fa fa-check fa-lg"></i> Complete</strong></h1>
+					<h4 class="text-center">Click next to finish</h4>
+					<br>
+					<br>
+				</div>
+
+				<div class="form-actions">
+					<div class="row">
+						<div class="col-sm-12">
+							<ul class="pager wizard no-margin">
+								<li class="previous disabled">
+									<a href="javascript:void(0);" class="btn  btn-default"> 上一步 </a>
+								</li>
+								<li class="next">
+									<a href="javascript:void(0);" class="btn  txt-color-darken"> 下一步 </a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</form>
+</div>
 	</div>
 </body>
 <script src="static/js/libs/jquery-3.2.1.min.js"></script>
@@ -122,20 +139,16 @@
 <script src="static/js/bootstrap/bootstrap.min.js"></script>
 <script src="static/js/smartwidgets/jarvis.widget.min.js"></script>
 <script src="static/js/app.js?v=1"></script>
-<script src="static/plugins/bootstrap-select/js/bootstrap-select.js"></script>
-<script src="static/plugins/bootstrap-select/js/i18n/defaults-zh_CN.min.js"></script>
 <script src="static/plugins/layer/layer.js"></script>
 <script src="static/plugins/layui/layui.js?v=1" ></script>
 <script src="static/plugins/handsontable/handsontable.full.js?v=3"></script>
 <script src="static/plugins/handsontable/languages/zh-CN.js"></script>
-<script src="static/plugins/handsontable-select2/select2.js"></script>
-<script src="static/plugins/handsontable-select2/select2-editor.js?v=2"+Math.random()></script>
 <script src="static/zmodel/common/js/htValidate.js?v=2222"></script>
 <script src="static/js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
 <script type="text/javascript">
-	var columnConfig=${columnConfig};
 	var htValidate = new htValidate();
 	var hot;
+	var allData;
 	$(document).ready(function() {
 		pageSetUp();
 		layui.use('upload', function(){
@@ -156,8 +169,8 @@
 			      });
 			    },
 			    done: function(res){
+			    	allData=res.data;
 			    	layer.close(loader);
-			    	hot.loadData(res.data);
 			    },
 			    error:function(){
 			    	layer.close(loader);
@@ -169,36 +182,29 @@
 		$("#downloadTpl").on("click",function(){
 			window.location.href = "purchaseSecheme/downloadTpl.do?sechemeId="+ $("#sechemeId").val();
 		})
-		
-		//替换校验类型
-		for(var index=0;index< columnConfig.length;index++){
-		   var column = columnConfig[index];
-		  if(column.validator){
-				column.validator = htValidate[column.validator];
-		  };
-	  	}
-		var hotElement = document.querySelector('#hot');
-		var hotSettings = {
-		  data: [{goodsName:'422694'},{goodsName:'422694'},{goodsName:'422694'},{goodsName:'422694'},{goodsName:'422694'},{goodsName:'422694'}],
-		  columns:columnConfig,
-		  stretchH: 'all',
-		  width : "100%",
-		  language : "zh-CN",
-		  autoWrapRow: true,
-		  height: 550,
-		  rowHeaders: true,
-		  filters: true,
-		  dropdownMenu: ['filter_by_condition','filter_operators','filter_by_condition2','filter_by_value','filter_action_bar'],
-		  contextMenu: true,
-		  columnSorting:true
-		};
+
 		$('#bootstrap-wizard-1').bootstrapWizard({
 			'tabClass' : 'form-wizard',
 			'onNext' : function(tab, navigation, index) {
 				$('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass('complete');
 				$('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step').html('<i class="fa fa-check"></i>');
 				if(index ==2){
-					hot = new Handsontable(hotElement, hotSettings);
+					var hotElement = document.querySelector('#hot');
+					var hotSettings = {
+					  data:allData.itemList,
+					  columns:allData.columnConfig,
+					  stretchH: 'all',
+					  width : "100%",
+					  language : "zh-CN",
+					  autoWrapRow: true,
+					  height: 550,
+					  rowHeaders: true,
+					  filters: true,
+					  dropdownMenu: ['filter_by_condition','filter_operators','filter_by_condition2','filter_by_value','filter_action_bar'],
+					  contextMenu: true,
+					  columnSorting:true
+					};
+				   hot = new Handsontable(hotElement, hotSettings);
 				}
 			}
 		});
@@ -222,6 +228,13 @@
 		   }
  		});
 	}
+	
+	function choseSecheme(obj){
+		$(".choseClass").remove();
+		$(obj).append(" <img src='static/img/ribbon.png' class='ribbon choseClass'>");
+		$("#sechemeId").val($(obj).data("secheme"));
+	}
+	
 </script>
 </html>
 

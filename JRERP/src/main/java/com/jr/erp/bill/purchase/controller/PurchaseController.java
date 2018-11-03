@@ -1,7 +1,9 @@
 package com.jr.erp.bill.purchase.controller;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,11 +57,6 @@ public class PurchaseController {
     {
         SysUser user= ShiroUtils.getSysUser();
         String companyNo=user.getCompanyNo();
-        //获取导入方案列表
-        SysPurchaseSechemeExample example = new SysPurchaseSechemeExample();
-        example.createCriteria().andCompanyNoEqualTo(companyNo);
-        List<BaseEntity> sechemeList = sysPurchaseSechemeService.selectByExample(example);
-        model.addAttribute("sechemeList",sechemeList);
         
         //供应商列表
         List<String> supplyList = sysCategorySetService.getNameList(companyNo, "supplier");
@@ -92,17 +89,19 @@ public class PurchaseController {
      * @Exception 异常对象
     */
     @RequestMapping(value = "/viewImportBill.do")
-    public String viewImportBill(Integer sechemeId,HttpServletRequest request, Model model)
+    public String viewImportBill(HttpServletRequest request, Model model)
     {
         SysUser user = ShiroUtils.getSysUser();
         String companyNo = user.getCompanyNo();
-        model.addAttribute("sechemeId", sechemeId);
-
-        PurchaseColumnVo list = sysPurchaseSechemeService.getPurchaseColumnConfig(sechemeId);
-        model.addAttribute("columnConfig", JSON.toJSONString(list.getColumnConfig()));
-        model.addAttribute("select2Option", JSON.toJSONString(list.getSelect2Option()));
+        
+        //获取导入方案列表
+        SysPurchaseSechemeExample example = new SysPurchaseSechemeExample();
+        example.createCriteria().andCompanyNoEqualTo(companyNo).andStatusEqualTo(1);
+        List<BaseEntity> sechemeList = sysPurchaseSechemeService.selectByExample(example);
+        model.addAttribute("sechemeList",sechemeList);
         return "bill/purchase/viewImportBill";
     }
+    
     
     /**    
      * uploadImportFile(这里用一句话描述这个方法的作用)    
@@ -116,20 +115,42 @@ public class PurchaseController {
      * @Exception 异常对象
     */
     @ResponseBody
-    @RequestMapping(value ={ "/uploadImportFile.do" })
+    @RequestMapping(value ="/uploadImportFile.do")
     public Ret uploadImportFile(@RequestParam MultipartFile file,Integer sechemeId, HttpServletRequest request, HttpServletResponse response)
     {
         SysUser user= ShiroUtils.getSysUser();
         String companyNo=user.getCompanyNo();
         try
         {
+            Map<String,Object> map = new HashMap<String,Object>();
+            PurchaseColumnVo list = sysPurchaseSechemeService.getPurchaseColumnConfig(sechemeId);
             List<JSONObject> itemList = billPurchaseServiceImpl.parseImportExcel(companyNo,sechemeId,file);
-            return Ret.ok("", itemList);
+            map.put("columnConfig", list.getColumnConfig());
+            map.put("itemList", itemList);
+            return Ret.ok("", map);
         } catch (Exception e)
         {
             e.printStackTrace();
             return Ret.error(e.getMessage());
         }
+    }
+    
+    /**    
+     * getSechemConfig(这里用一句话描述这个方法的作用)    
+     * 获取方案配置信息，并渲染       
+     * @param @param sechemeId
+     * @param @param request
+     * @param @param response
+     * @param @return     
+     * @return Ret
+     * @Exception 异常对象
+    */
+    @ResponseBody
+    @RequestMapping(value = "/getSechemConfig.do")
+    public Ret getSechemConfig(Integer sechemeId, HttpServletRequest request, HttpServletResponse response)
+    {
+        PurchaseColumnVo list = sysPurchaseSechemeService.getPurchaseColumnConfig(sechemeId);
+        return Ret.ok("", JSON.toJSONString(list.getColumnConfig()));
     }
     
     @ResponseBody

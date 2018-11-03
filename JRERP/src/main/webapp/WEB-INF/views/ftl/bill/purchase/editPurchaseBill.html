@@ -35,55 +35,7 @@
 									</ul>
 								</div>
 								<div class="col-sm-8 col-md-8 col-lg-8">
-									<a id="activity" class="activity-dropdown btn btn-sm btn-default"  href="javascript:void(0);" style="margin-left: 160px;"><i class="fa fa-gear fa-lg"></i> 导入</a>
-									<div class="ajax-dropdown">
-									<!-- the ID links are fetched via AJAX to the ajax container "ajax-notifications" -->
-									<div class="btn-group btn-group-justified" data-toggle="buttons">
-										<label id="canUseBtn" class="btn btn-default active"> 再用方案 </label>
-										<label id="noUseBtn"class="btn btn-default"> 禁用方案 </label>
-									</div>
-									<!-- notification content -->
-									<div class="ajax-notifications custom-scroll">
-										<ul id="canUseSechemeUL" class="notification-body">
-											<#list sechemeList as p>
-												<#if p.status == 1>
-													<li>
-														<span class="">
-															<a href="javascript:void(0);" class="msg" onclick="viewImportBill(${p.id})">
-																<img src="static/img/avatars/4.png" class="air air-top-left margin-top-5" width="40" height="40">
-																<span class="from">${p.name} <i class="icon-paperclip"></i></span>
-																<time><button class="btn btn-xs btn-primary" onclick="editScheme(${p.id})" ><i class="fa fa-edit"></i> 编辑</button></time>
-																<span class="subject">${p.secondType}</span>
-																<span class="msg-body">${p.remarks} </span>
-															</a>
-														</span>
-													</li>
-												</#if>
-											</#list>
-										</ul>
-										<ul id="noUseSechemeUL" class="notification-body" style="display: none;">
-											<#list sechemeList as p>
-												<#if p.status != 1>
-													<li>
-														<span class="">
-															<a href="javascript:void(0);" onclick="editScheme(${p.id})" class="msg">
-																<img src="img/avatars/4.png" class="air air-top-left margin-top-5" width="40" height="40">
-																<span class="from">${p.name} <i class="icon-paperclip"></i></span>
-																<time><button class="btn btn-xs btn-primary" onclick="editScheme(${p.id})" ><i class="fa fa-edit"></i> 编辑</button></time>
-																<span class="subject">${p.secondType}</span>
-																<span class="msg-body">${p.remarks} </span>
-															</a>
-														</span>
-													</li>
-												</#if>
-											</#list>
-										</ul>
-									</div>
-									<span id="ajax-dropdown-span"> Last updated on: 12/12/2013 9:43AM
-										<button type="button" class="btn btn-xs btn-default pull-right" onclick="editScheme('')">
-											<i class="fa fa-plus"></i>
-										</button> 
-									</div>
+									<a id="activity" class="activity-dropdown btn btn-sm btn-default"  href="javascript:void(0);" style="margin-left: 160px;" onclick="viewImportBill()"><i class="fa fa-gear fa-lg"></i> 导入</a>
 								</div>
 								</div>
 							</div>
@@ -317,7 +269,7 @@ var hot1;
 			shade : 0.8,
 			scrollbar : false,
 			id : 'lay_addClassify', //设定一个id，防止重复弹出
-			btn : [ '保存', '取消' ],
+			btn : false,
 			moveType : 1, //拖拽模式，0或者1
 			maxmin: true,
 			content : "purchase/viewImportBill.do?sechemeId=" + id,
