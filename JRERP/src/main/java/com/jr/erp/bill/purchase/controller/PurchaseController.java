@@ -148,7 +148,7 @@ public class PurchaseController {
     @ResponseBody
     @RequestMapping(value = "/getSechemConfig.do")
     public Ret getSechemConfig(Integer sechemeId, HttpServletRequest request, HttpServletResponse response)
-    {
+    { 
         PurchaseColumnVo list = sysPurchaseSechemeService.getPurchaseColumnConfig(sechemeId);
         return Ret.ok("", JSON.toJSONString(list.getColumnConfig()));
     }
