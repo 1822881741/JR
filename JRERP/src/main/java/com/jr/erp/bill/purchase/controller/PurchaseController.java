@@ -121,7 +121,7 @@ public class PurchaseController {
         SysUser user= ShiroUtils.getSysUser();
         String companyNo=user.getCompanyNo();
         try
-        {
+        { 
             Map<String,Object> map = new HashMap<String,Object>();
             PurchaseColumnVo list = sysPurchaseSechemeService.getPurchaseColumnConfig(sechemeId);
             List<JSONObject> itemList = billPurchaseServiceImpl.parseImportExcel(companyNo,sechemeId,file);
