@@ -12,6 +12,7 @@ package com.jr.erp.base.mybatis;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -109,5 +110,12 @@ public class BaseEntity implements Serializable
     public void setUpdateTime(String updateTime)
     {
         this.updateTime = updateTime;
+    }
+    /**
+     * 创建时间
+     * @param createTime 创建时间
+     */
+    public String getCreateTimeShort() {
+        return StringUtils.isNotEmpty(this.createTime)?this.createTime.substring(0, 11):"";
     }
 }

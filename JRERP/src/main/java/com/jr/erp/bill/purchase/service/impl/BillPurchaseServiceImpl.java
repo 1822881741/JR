@@ -140,7 +140,7 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
     }
 
     @Override
-    public void saveImportBill(BillPurchase billPurchase)
+    public BillPurchase saveImportBill(BillPurchase billPurchase)
     {
         this.insert(billPurchase);
         for (BillPurchaseItem temp : billPurchase.getItemList())
@@ -149,5 +149,6 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
             temp.setCompanyNo(billPurchase.getCompanyNo());
             itemMapper.insert(temp);
         }
+        return billPurchase;
     }
 }

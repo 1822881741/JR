@@ -153,8 +153,19 @@ public class PurchaseController {
         return Ret.ok("", JSON.toJSONString(list.getColumnConfig()));
     }
     
+    /**    
+     * saveImportBill(这里用一句话描述这个方法的作用)    
+     * 保存批量导入
+     * @param @param billPurchase
+     * @param @param sechemeId
+     * @param @param request
+     * @param @param response
+     * @param @return     
+     * @return Ret
+     * @Exception 异常对象
+    */
     @ResponseBody
-    @RequestMapping(value ={ "/saveImportBill.do" })
+    @RequestMapping(value = "/saveImportBill.do")
     public Ret saveImportBill(@RequestBody BillPurchase billPurchase,Integer sechemeId, HttpServletRequest request, HttpServletResponse response)
     {
         SysUser user= ShiroUtils.getSysUser();
@@ -162,8 +173,8 @@ public class PurchaseController {
         try
         {
             billPurchase.setCompanyNo(companyNo);
-            billPurchaseServiceImpl.saveImportBill(billPurchase);
-            return Ret.ok("");
+            BillPurchase newBillPurchase = billPurchaseServiceImpl.saveImportBill(billPurchase);
+            return Ret.ok("",newBillPurchase);
         } catch (Exception e)
         {
             e.printStackTrace();

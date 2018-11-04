@@ -33,6 +33,6 @@ public interface IBillPurchaseService extends IBaseService<BaseEntity>
      * @return void
      * @Exception 异常对象
     */
-    void saveImportBill(BillPurchase billPurchase);
+    BillPurchase saveImportBill(BillPurchase billPurchase);
 
 }

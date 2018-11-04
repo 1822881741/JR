@@ -52,16 +52,16 @@
 												</div>
 												<table class="table">
 													<tr class="active">
-														<td> 使用范围：</td><td>默认</td>
+														<td align="left"> 适用范围：</td><td align="left">默认</td>
 													</tr>
 													<tr>
-														<td> 创 建 人：</td><td>${p.createUser}</td>
+														<td align="left"> 创 建 人：</td><td align="left">${p.createUser}</td>
 													</tr>
 													<tr class="active">
-														<td>创建时间：</td><td>${p.createTime}</td>
+														<td align="left">创建时间：</td><td align="left">${p.createTimeShort}</td>
 													</tr>
 													<tr>
-														<td colspan="2">${p.remarks}</td>
+														<td colspan="2" align="left">${p.remarks}</td>
 													</tr>
 												</table>
 											</div>
@@ -149,8 +149,11 @@
 	var htValidate = new htValidate();
 	var hot;
 	var allData;
+	var parentIndex = parent.layer.getFrameIndex(window.name);
+	var wizard;
 	$(document).ready(function() {
 		pageSetUp();
+		
 		layui.use('upload', function(){
 			var loader=null;
 			//上传文件渲染
@@ -177,13 +180,7 @@
 			    }
 			});
 		})
-		
-		//下载模板
-		$("#downloadTpl").on("click",function(){
-			window.location.href = "purchaseSecheme/downloadTpl.do?sechemeId="+ $("#sechemeId").val();
-		})
-
-		$('#bootstrap-wizard-1').bootstrapWizard({
+		wizard = $('#bootstrap-wizard-1').bootstrapWizard({
 			'tabClass' : 'form-wizard',
 			'onNext' : function(tab, navigation, index) {
 				$('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass('complete');
@@ -194,10 +191,12 @@
 					  data:allData.itemList,
 					  columns:allData.columnConfig,
 					  stretchH: 'all',
+					  colWidths: 100,
 					  width : "100%",
 					  language : "zh-CN",
-					  autoWrapRow: true,
-					  height: 550,
+					  height: 350,
+					  columnHeaderHeight:35,
+					  rowHeights:35,
 					  rowHeaders: true,
 					  filters: true,
 					  dropdownMenu: ['filter_by_condition','filter_operators','filter_by_condition2','filter_by_value','filter_action_bar'],
@@ -205,13 +204,24 @@
 					  columnSorting:true
 					};
 				   hot = new Handsontable(hotElement, hotSettings);
+				}else if(index ==4){
+					var billId  = submitData();
+					if(billId){
+						parent.layer.close(parentIndex); //再执行关闭  
+						parent.reloadData(billId.itemList);
+					}
 				}
 			}
 		});
+		//下载模板
+		$("#downloadTpl").on("click",function(){
+			window.location.href = "purchaseSecheme/downloadTpl.do?sechemeId="+ $("#sechemeId").val();
+		})
 	});
 	
 	function submitData(){
 		var data = {};
+		var billId;
 		data.itemList=hot.getSourceData();
 		$.ajax({
 		   type: "POST",
@@ -222,11 +232,13 @@
 		   contentType:"application/json",
 		   success: function(data){
 			 	alert("OK")
+			 	billId=data.data;
 		   },
 	       error:function(){ 
 	    	  alert("ERROR")
 		   }
  		});
+		return billId;
 	}
 	
 	function choseSecheme(obj){

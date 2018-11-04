@@ -5,7 +5,6 @@
 <#include "/header-smart.html" />
 <base href="${basePath}">
 <link rel="stylesheet" type="text/css" href="static/plugins/handsontable/handsontable.full.min.css?v=21">
-<link href="static/plugins/handsontable-select2/select2.css" rel="stylesheet" />
 <style type="text/css">
 </style>
 <body>
@@ -131,19 +130,119 @@
 <script src="static/plugins/handsontable/languages/zh-CN.js"></script>
 <script src="static/plugins/layer/layer.js"></script>
 <script src="static/plugins/laydate/laydate.js"></script>
-<script src="static/plugins/handsontable-select2/select2.js"></script>
-<script src="static/plugins/handsontable-select2/select2-editor.js?v=2"+Math.random()></script>
 <script type="text/javascript">
 var hot1;
-	var optionsList=[{id: 1, text: '+'}, {id: 2, text: '-'}, {id: 3, text: '*'}, {id: 4, text: '/'}];
+	var columns=[
+		         {"data":'',renderer: operationRender,readOnly: true,title:'操作'},
+		         {"data":"specialOffersFlag", readOnly: true,title:'一口价'},
+		         {"data":"archivesNo",readOnly: true,title:'商品代码'},
+		         {"data":"goodsName",readOnly: true,title:'商品名称',width:180},
+		         {"data":"subGoodsName",readOnly: true,title:'子名称'},
+		         {"data":"barCode",readOnly: true,title:'条码号'},
+		         {"data" :'img', readOnly: true,title:'图片'},
+		         {"data":"certificateNo",readOnly: true,title:'证书号'},
+		         {"data":"giaCertificateNo",readOnly: true,title:'GIA证书号'},
+		         {"data":"oldBarCode",readOnly: true,title:'原条码'},
+		         {"data":"styleNo",readOnly: true,title:'款号'},
+		         {"data":"unitPrice",readOnly: true,title:'单价',type:'numeric',format:'0.00'},
+		         {"data": "num",readOnly: true,title:'数量',sum:true,type:'numeric',format:'0'},
+		         {"data":"goldPrice",readOnly: true,title:'金价',type:'numeric',format:'0.00'},
+		         {"data": "goldWeight",readOnly: true,title:'金重',sum:true,className:'htRight'},
+		         {"data":"totalGoldWeight",readOnly: true,title:'总金重',sum:true,className:'htRight'},
+		         {"data":"oldMaterialLoss",readOnly: true,title:'旧料损耗',type:'numeric',format:'0.000'},
+		         {"data":"netGoldWeight",readOnly: true,title:'净金重',sum:true,className:'htRight'},
+		         {"data":"worksFee4Ke",readOnly: true,title:'工费/克',type:'numeric',format:'0.00'},
+		         {"data":"worksFee4Jian",readOnly: true,title:'工费/件',type:'numeric',format:'0.00'},
+		         {"data":"worksFee4Total",readOnly: true,title:'工费总额',sum:true,type:'numeric'},
+		         {"data":"certificateFee",readOnly: true,title:'证书费',type:'numeric',format:'0.00'},
+		         {"data":"otherFee",readOnly: true,title:'其他费用',type:'numeric',format:'0.00'},
+		         {"data":"fittingsFee",readOnly: true,title:'配件金额',type:'numeric',format:'0.00'},
+		         {"data":"sandBlastFee",readOnly: true,title:'喷砂镶石',type:'numeric',format:'0.00'},
+		         {"data":"costPrice",readOnly: true,title:'成本金额',sum:true,type:'numeric',format:'0.00'},
+		         {"data":"markupRate",readOnly: true,title:'加价率',type:'numeric',format:'0.00'},
+		         {"data":"labelPrice",readOnly: true,title:'标价',className:'htRight'},
+		         {"data":"salePriceAmount",readOnly: true,title:'标价金额',sum:true,className:'htRight'},
+		         {"data":"goodsWeight",readOnly: true,title:'商品总重',sum:true,className:'htRight'},
+		         {"data":"mainType",readOnly: true,title:'核算分类'},
+		         {"data":"shortCut",readOnly: true,title:'手寸'},
+		         {"data":"goodsClassify",readOnly: true,title:'实际分类'},
+		         {"data":"mainStoneClarity",readOnly: true,title:'净度'},
+		         {"data":"mainStoneColor",readOnly: true,title:'颜色'},
+		         {"data":"mainStoneCut",readOnly: true,title:'切工'},
+		         {"data":"mainStoneFluorescent",readOnly: true,title:'荧光'},
+		         {"data":"mainStoneSymmetry",readOnly: true,title:'对称性'},
+		         {"data":"mainStoneBurnished",readOnly: true,title:'抛光'},
+		         {"data":"peiShiCostPrice",readOnly: true,title:'配石成本',sum:true,type:'numeric',format:'0.00'},
+		         {"data":"peiShiRate",readOnly: true,title:'配石倍率',type:'numeric',format:'0.00'},
+		         {"data":"peiShiLabelPrice",readOnly: true,title:'配石标价',sum:true,className:'htRight'},
+		         {"data":"mainStoneName",readOnly: true,title:'主石名称'},
+		         {"data":"mainStoneNo",readOnly: true,title:'主石号'},
+		         {"data": "mainStoneWeight",readOnly: true,title:'主石重',sum:true,className:'htRight'},
+		         {"data":"mainStoneNum",readOnly: true,title:'主石粒数',sum:true,type:'numeric',format:'0'},
+		         {"data":"mainStonePrice",readOnly: true,title:'主石价',type:'numeric',format:'0.00'},
+		         //{"data":"mainStoneSpecifi",readOnly: true,title:'主石规格'},
+		         {"data":"mainStoneMoney",readOnly: true,title:'主石金额',sum:true,type:'numeric',format:'0.00'},
+		         {"data":"subStone1Name",readOnly: true,title:'副石名称'},
+		         {"data":"subStone1No",readOnly: true,title:'副石号'},
+		         {"data":"subStone1Weight",readOnly: true,title:'副石重',sum:true,className:'htRight'},
+		         {"data":"subStone1Num",readOnly: true,title:'副石粒数',sum:true,type:'numeric',format:'0'},
+		         {"data":"subStone1Price",readOnly: true,title:'副石价',type:'numeric',format:'0.00'},
+		         //{"data":"subStone1Specifi",readOnly: true,title:'副石规格'},
+		         {"data":"subStone1Money",readOnly: true,title:'副石金额',type:'numeric',format:'0.00',sum:true},
+		         {"data":"subStone2Name",readOnly: true,title:'副石2名称'},
+		         {"data":"subStone2No",readOnly: true,title:'副石2号'},
+		         {"data":"subStone2Weight",readOnly: true,title:'副石2重',sum:true,className:'htRight'},
+		         {"data":"subStone2Num",readOnly: true,title:'副石2粒数',sum:true,type:'numeric',format:'0'},
+		         {"data":"subStone2Price",readOnly: true,title:'副石2价',type:'numeric',format:'0.00'},
+		         //{"data":"subStone2Specifi",readOnly: true,title:'副石2规格'},
+		         {"data":"subStone2Money",readOnly: true,title:'副石金额2',sum:true,type:'numeric',format:'0.00'},
+		         {"data":"subStone3Name",readOnly: true,title:'副石名称3'},
+		         {"data":"subStone3No",readOnly: true,title:'副石3号'},
+		         {"data":"subStone3Weight",readOnly: true,title:'副石重3',sum:true,className:'htRight'},
+		         {"data":"subStone3Num",readOnly: true,title:'副石粒数3',sum:true,type:'numeric',format:'0'},
+		         {"data":"subStone3Price",readOnly: true,title:'副石价3',type:'numeric',format:'0.00'},
+		         //{"data":"subStone3Specifi",readOnly: true,title:'副石规格3'},
+		         {"data":"subStone3Money",readOnly: true,title:'副石金额3',sum:true,type:'numeric',format:'0.00'},
+		         {"data":"subStone4Name",readOnly: true,title:'副石名称4'},
+		         {"data":"subStone4No",readOnly: true,title:'副石石号4'},
+		         {"data":"subStone4Weight",readOnly: true,title:'副石重4',sum:true,className:'htRight'},
+		         {"data":"subStone4Num",readOnly: true,title:'副石粒数4',type:'numeric',format:'0'},
+		         {"data":"subStone4Price",readOnly: true,title:'副石价4',type:'numeric',format:'0.00'},
+		         //{"data":"subStone4Specifi",readOnly: true,title:'副石规格4'},
+		         {"data":"subStone4Money",readOnly: true,title:'副石金额4',sum:true,type:'numeric',format:'0.00'},
+		         {"data":"subStone5Name",readOnly: true,title:'副石名称5'},
+		         {"data":"subStone5No",readOnly: true,title:'副石石号5'},
+		         {"data":"subStone5Weight",readOnly: true,title:'副石重5',sum:true,className:'htRight'},
+		         {"data":"subStone5Num",readOnly: true,title:'副石粒数5',sum:true,type:'numeric',format:'0'},
+		         {"data":"subStone5Price",readOnly: true,title:'副石价5',type:'numeric',format:'0.00'},
+		         //{"data":"subStone5Specifi",readOnly: true,title:'副石规格5'},
+		         {"data":"subStone5Money",readOnly: true,title:'副石金额5',sum:true,type:'numeric',format:'0.00'},
+		         {"data":"subStone6Name",readOnly: true,title:'副石名称6'},
+		         {"data":"subStone6No",readOnly: true,title:'副石石号6'},
+		         {"data":"subStone6Weight",readOnly: true,title:'副石重6',sum:true,className:'htRight'},
+		         {"data":"subStone6Num",readOnly: true,title:'副石粒数6',sum:true,type:'numeric',format:'0'},
+		         {"data":"subStone6Price",readOnly: true,title:'副石价6',type:'numeric',format:'0.00'},
+		         //{"data":"subStone6Specifi",readOnly: true,title:'副石规格6'},
+		         {"data":"subStone6Money",readOnly: true,title:'副石金额6',sum:true,type:'numeric',format:'0.00'},
+		         {"data":"labelWorkFee4Ke",readOnly: true,title:'标签工费/克',type:'numeric',format:'0.00'},
+		         {"data":"labelWorkFee4Jian",readOnly: true,title:'标签工费/件',type:'numeric',format:'0.00'},
+		         {"data":"archivesFineness",readOnly: true,title:'成色'},
+		         {"data":"archivesStone",readOnly: true,title:'石料'},
+		         {"data":"archivesCategory",readOnly: true,title:'品类'},
+		         {"data":"measurementMode",readOnly: true,title:'计量方式'},
+		         {"data":"maoGoldWeight",readOnly: true,title:'毛金重',sum:true,className:'htRight'},
+		         {"data":"goldLoss",readOnly: true,title:'损耗',type:'numeric',format:'0.00'},
+		         {"data":"style",readOnly: true,title:'款式'},
+		         {"data":"craft",readOnly: true,title:'工艺'},
+		         {"data":"labelRemarks",readOnly: true,title:'标签备注'},
+		         {"data":"remarks",readOnly: true,title:'备注'},
+		         {"data":"sheetDate",readOnly: true,title:'进货日期'},
+		         {"data":"supplierName",readOnly: true,title:'供应商'}];
 	$(document).ready(function() {
 		pageSetUp();
-		var data = Handsontable.helper.createSpreadsheetData(10, 15);
-		data.push([ 1, 23, 4, 56, 6, 7, 8, 9 ]);
-		data.push([]);
 		var example = document.getElementById('hot');
 		hot1 = new Handsontable(example, {
-			data : [['宝马',2017,'black','black'],['宝珠',2018,'blue','blue'],['Chrysler',2019,'yellow','black'],['Volvo',2020,'white','gray']],
+			data : [],
 			height : 400,
 			stretchH : "all",
 			width : "100%",
@@ -152,38 +251,7 @@ var hot1;
 			colHeaders : true,
 			contextMenu : true,
 			language : "zh-CN",
-			columns: [
-			          {
-			            type: 'autocomplete',
-			            source: ['宝马', '宝珠', '宝石', 'Suzuki', 'Toyota', 'Volvo'],
-			            strict: false,
-			            filter:true,
-			            allowInvalid: false
-			          },
-			          {            
-			          editor: 'select2',
-			          renderer: select2Renderer,
-			          width: '200px',
-			          select2Options: { 
-			          	data: optionsList,
-			            dropdownAutoWidth: false,      
-			            width: 'resolve'
-			          }
-					 },
-			          {
-			            type: 'dropdown',
-			            source: ['yellow', 'red', 'orange', 'green', 'blue', 'gray', 'black', 'white', 'purple', 'lime', 'olive', 'cyan'],
-			            strict: true,
-			            allowInvalid: false,
-			            filter:true
-			          },
-			          {
-			            type: 'autocomplete',
-			            source: ['yellow', 'red', 'orange', 'green', 'blue', 'gray', 'black', 'white', 'purple', 'lime', 'olive', 'cyan'],
-			            strict: true,
-			            allowInvalid: true 
-			          }
-			        ],
+			columns: columns,
 			multiColumnSorting : true
 		});
 		
@@ -280,6 +348,17 @@ var hot1;
 			}
 		});
 		layer.full(index);
+	}
+	
+	function reloadData(billId){
+		debugger
+		if(billId){
+			hot1.loadData(billId);
+		}
+	}
+	function operationRender(instance, td,row){
+	
+		return td;
 	}
 </script>
 </html>
