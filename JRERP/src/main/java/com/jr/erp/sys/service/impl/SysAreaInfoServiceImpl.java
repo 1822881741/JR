@@ -9,9 +9,13 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.druid.sql.visitor.functions.Char;
 import com.jr.erp.base.mybatis.AbstractBaseService;
+import com.jr.erp.base.mybatis.BaseEntity;
+import com.jr.erp.base.shiro.ShiroUtils;
+import com.jr.erp.base.utils.TreeUtils;
 import com.jr.erp.sys.dao.SysAreaInfoMapper;
 import com.jr.erp.sys.entity.SysAreaInfo;
 import com.jr.erp.sys.entity.SysAreaInfoExample;
+import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.service.ISysAreaInfoService;
 
 /**
@@ -132,5 +136,18 @@ public class SysAreaInfoServiceImpl extends AbstractBaseService<SysAreaInfo> imp
         }
         int nextCode = Integer.valueOf(maxString) + 1;
         System.out.println(prefix + nextCode);
+    }
+
+    @Override
+    public SysAreaInfo getAreaTree(String companyNo)
+    {
+        SysUser user = ShiroUtils.getSysUser();
+        SysAreaInfoExample exampale = new SysAreaInfoExample();
+        exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo());
+        exampale.setOrderByClause(" id");
+        List<BaseEntity> areaList = this.selectByExample(exampale);
+        SysAreaInfo result = (SysAreaInfo) areaList.get(0);
+        TreeUtils.createTree(areaList, result, "id", "parentId", "itemList");
+        return result;
     }
 }

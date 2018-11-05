@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
 <#include "/header-smart.html" />
 <body>
 	<section id="widget-grid">
@@ -12,10 +10,10 @@
 						<div class="row">
 							<div class="col-sm-3 col-md-3 col-lg-3" style="height: 500px;">
 								<ul id="parentType" class="inbox-menu-lg">
-									<li data-type='gold' class="active"><a href="javascript:void(0);"> ç´ é‡‘</a></li>
-									<li data-type='notGold'><a href="javascript:void(0);" >éç´ </a></li>
-									<li data-type='material'><a href="javascript:void(0);" >æ—§æ–™</a></li>
-									<li data-type='serviceFee'><a href="javascript:void(0);" >æœåŠ¡è´¹</a></li>
+									<li data-type='gold' class="active"><a href="javascript:void(0);"> ËØ½ğ</a></li>
+									<li data-type='notGold'><a href="javascript:void(0);" >·ÇËØ</a></li>
+									<li data-type='material'><a href="javascript:void(0);" >¾ÉÁÏ</a></li>
+									<li data-type='serviceFee'><a href="javascript:void(0);" >·şÎñ·Ñ</a></li>
 								</ul>
 							</div>
 							<div id="tableContent" class="col-sm-9 col-md-9 col-lg-9">
@@ -42,17 +40,17 @@
 $(document).ready(function(){
 	pageSetUp();
 	$("#jqgrid").jqGrid(getJqgridClassify("gold","jqgrid","pjqgrid")).navGrid('#pjqgrid',{edit:false,add:false,del:false,search:true,refresh:false})
-	  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-trash",caption:"",title:"åˆ é™¤æ‰€é€‰è®°å½•", position:"first",onClickButton: function(){
+	  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-trash",caption:"",title:"É¾³ıËùÑ¡¼ÇÂ¼", position:"first",onClickButton: function(){
 		   var ids = $("#jqgrid").jqGrid('getGridParam', 'selarrrow');
 		   if(ids != null && ids.length >0){
-			   layer.confirm("ç¡®è®¤åˆ é™¤æ‰€é€‰è¡Œå—ï¼Ÿ",function(index){
+			   layer.confirm("È·ÈÏÉ¾³ıËùÑ¡ĞĞÂğ£¿",function(index){
 				   deleteCategory(ids);
 				   layer.close(index);
 			   })
 		   }
 	   }})
-	  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-plus",caption:"",title:"æ–°å¢è®°å½•",position:"first",onClickButton: function(){editClassify(null);}})
-	  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-refresh",caption:"",title:"åˆ·æ–°",onClickButton: function(){$("#jqgrid").setGridParam({datatype:'json'}).trigger('reloadGrid');},position:"first"});
+	  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-plus",caption:"",title:"ĞÂÔö¼ÇÂ¼",position:"first",onClickButton: function(){editClassify(null);}})
+	  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-refresh",caption:"",title:"Ë¢ĞÂ",onClickButton: function(){$("#jqgrid").setGridParam({datatype:'json'}).trigger('reloadGrid');},position:"first"});
 	$("#jqgrid").setGridWidth($("#tableContent").width());
 	$("#jqgrid").setGridHeight($(window).height() - 200);
 	
@@ -65,7 +63,7 @@ $(document).ready(function(){
 	$(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary");
 	$(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary");
 	
-	//åˆ‡æ¢ç±»å‹
+	//ÇĞ»»ÀàĞÍ
 	$("#parentType").find("li").on("click",function(){
 		if(!$(this).hasClass("active")){
 			$("#parentType").find("li").removeClass("active");
@@ -83,13 +81,13 @@ $(document).ready(function(){
 		}
 		layer.open({
 			type : 2,
-			title : "æ–°å¢/ä¿®æ”¹å•†å“åˆ†ç±»",
+			title : "ĞÂÔö/ĞŞ¸ÄÉÌÆ··ÖÀà",
 			area : ['550px','570px'],
 			shade : 0.8,
 			scrollbar: false,
-			id : 'lay_addClassify', //è®¾å®šä¸€ä¸ªidï¼Œé˜²æ­¢é‡å¤å¼¹å‡º
-			btn : [ 'ä¿å­˜', 'å–æ¶ˆ' ],
-			moveType : 1, //æ‹–æ‹½æ¨¡å¼ï¼Œ0æˆ–è€…1
+			id : 'lay_addClassify', //Éè¶¨Ò»¸öid£¬·ÀÖ¹ÖØ¸´µ¯³ö
+			btn : [ '±£´æ', 'È¡Ïû' ],
+			moveType : 1, //ÍÏ×§Ä£Ê½£¬0»òÕß1
 			content : url,
 			yes : function(index, layero) {
 				 var result = $(layero).find("iframe")[0].contentWindow.submitData();
@@ -112,13 +110,13 @@ $(document).ready(function(){
 		        success: function(data) {
 		            if (data.status == '100') {
 		            	$("#jqgrid").setGridParam({datatype:'json'}).trigger('reloadGrid');
-		            	layer.msg("åˆ é™¤æˆåŠŸ");
+		            	layer.msg("É¾³ı³É¹¦");
 		            }else{
-		            	layer.msg("åˆ é™¤å¤±è´¥");
+		            	layer.msg("É¾³ıÊ§°Ü");
 		            }
 		        },
 		        error: function() {
-		        	layer.alert("è¿æ¥æœåŠ¡å™¨å¤±è´¥ï¼Œè¯·ç¨åé‡è¯•");
+		        	layer.alert("Á¬½Ó·şÎñÆ÷Ê§°Ü£¬ÇëÉÔºóÖØÊÔ");
 		        }
 		    });
 		}

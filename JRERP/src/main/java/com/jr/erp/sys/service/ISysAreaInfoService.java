@@ -88,4 +88,14 @@ public interface ISysAreaInfoService extends IBaseService<BaseEntity>{
      * @Exception 异常对象
     */
     String getNextCode(String companyNo,String parentAreaCode,Integer areaType);
+    
+    /**    
+     * getAreaTree(这里用一句话描述这个方法的作用)    
+     * 获取区域的树形结构体       
+     * @param @param companyNo
+     * @param @return     
+     * @return SysAreaInfo
+     * @Exception 异常对象
+    */
+    SysAreaInfo getAreaTree(String companyNo);
 }

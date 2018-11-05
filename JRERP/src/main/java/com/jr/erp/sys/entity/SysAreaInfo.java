@@ -1,5 +1,7 @@
 package com.jr.erp.sys.entity;
 
+import java.util.List;
+
 import com.jr.erp.base.mybatis.BaseEntity;
 
 public class SysAreaInfo extends BaseEntity {
@@ -30,6 +32,7 @@ public class SysAreaInfo extends BaseEntity {
      */
     private Integer status;
 
+    private List<SysAreaInfo> itemList;
     /**
      * 上级地区id
      * @return parentId 上级地区id
@@ -108,5 +111,15 @@ public class SysAreaInfo extends BaseEntity {
      */
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public List<SysAreaInfo> getItemList()
+    {
+        return itemList;
+    }
+
+    public void setItemList(List<SysAreaInfo> itemList)
+    {
+        this.itemList = itemList;
     }
 }
