@@ -23,7 +23,7 @@
 								<ul>
 									<#list areaStru.itemList as rogin>
 										<li>
-											<span class="label label-default"><i class="fa fa-lg fa-plus-circle icon-minus-sign"></i> 类型 ：区域  &nbsp;&nbsp; 状态 ：${rogin.status} &nbsp;&nbsp; 名称 ：${rogin.areaName}</span>
+											<span class="label label-success"><i class="fa fa-lg fa-plus-circle icon-minus-sign"></i> 类型 ：区域  &nbsp;&nbsp; 状态 ：${rogin.status} &nbsp;&nbsp; 名称 ：${rogin.areaName}</span>
 											<ul>
 											<#list rogin.itemList as store>
 												<li>
@@ -31,7 +31,7 @@
 													<ul>
 													<#list store.itemList as counter>
 														<li>
-															<span><i class="fa fa-clock-o"></i>类型 ：展柜 &nbsp;&nbsp;状态 ：${counter.status}&nbsp;&nbsp;   ${counter.areaName}</span>
+															<span ><i class="fa fa-clock-o"></i>类型 ：展柜 &nbsp;&nbsp;状态 ：${counter.status}&nbsp;&nbsp;   ${counter.areaName}</span>
 														</li>
 													</#list>
 													</ul>
