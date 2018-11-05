@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.base.utils.BasePageForm;
 import com.jr.erp.base.utils.Ret;
+import com.jr.erp.base.utils.RetJqGridPage;
 import com.jr.erp.base.utils.RetPage;
 import com.jr.erp.sys.entity.SysStore;
 import com.jr.erp.sys.entity.SysStoreExample;
@@ -78,12 +79,13 @@ public class SysStoreController
     */
     @RequestMapping(value = "/getStoreListData.do")
     @ResponseBody
-    public RetPage getStoreListData(BasePageForm pageForm,HttpServletRequest request)
+    public RetJqGridPage getStoreListData(BasePageForm pageForm,HttpServletRequest request)
     {
         SysStoreExample exampale = new SysStoreExample();
         exampale.setPage(pageForm.getPage());
         exampale.setLimit(pageForm.getLimit());
-        return sysStoreService.selectPage(exampale);
+        RetPage page = sysStoreService.selectPage(exampale);
+        return RetJqGridPage.ok(page.getCount(), page.getData());
     }
 
     /**    

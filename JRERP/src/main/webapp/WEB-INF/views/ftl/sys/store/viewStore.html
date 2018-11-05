@@ -25,7 +25,7 @@
 <script src="static/plugins/layer/layer.js"></script>
 <script src="static/js/plugin/jqgrid/jquery.jqGrid.min.js?v=33" charset="utf-8"></script>
 <script src="static/js/plugin/jqgrid/grid.locale-cn.js"></script>
-<script src="static/zmodel/common/js/jqgridConfig.js?v=1222"></script>
+<script src="static/zmodel/common/js/jqgridConfig.js?v=1"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		pageSetUp();
@@ -40,17 +40,11 @@
 				   })
 			   }
 		   }})
-		  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-plus",caption:"",title:"新增记录",position:"first",onClickButton: function(){editCategory(null);}})
+		  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-plus",caption:"",title:"新增记录",position:"first",onClickButton: function(){addStore('');}})
 		  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-refresh",caption:"",title:"刷新",onClickButton: function(){$("#jqgrid").setGridParam({datatype:'json'}).trigger('reloadGrid');},position:"first"});
 	
-		$("#jqgrid").setGridWidth($(".tab-content").width());
-		$("#jqgrid2").setGridWidth($(".tab-content").width());
-		$("#jqgrid3").setGridWidth($(".tab-content").width());
-		$("#jqgrid4").setGridWidth($(".tab-content").width());
-		$("#jqgrid").setGridHeight($(window).height() - 260);
-		$("#jqgrid2").setGridHeight($(window).height() - 260);
-		$("#jqgrid3").setGridHeight($(window).height() - 260);
-		$("#jqgrid4").setGridHeight($(window).height() - 260);
+		$("#jqgrid").setGridWidth($(".jarviswidget").width()-26);
+		$("#jqgrid").setGridHeight($(window).height()-170);
 		
 	    $(".ui-pg-div").removeClass().addClass("btn btn-sm btn-default");
 	    $(".ui-icon.ui-icon-plus").removeClass().addClass("fa fa-plus");
@@ -61,5 +55,22 @@
 	    $(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary");
 	    $(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary");
 	});
+	
+	function addStore(id) {
+		layer.open({
+			type : 2,
+			title : "新增/修改门店",
+			area : ['550px','520px'],
+			shade : 0.8,
+			id : 'lay_storeInfo', //设定一个id，防止重复弹出
+			btn : [ '保存', '取消' ],
+			moveType : 1, //拖拽模式，0或者1
+			content : "sysStore/editStoreInfo.do?id="+id,
+			yes : function(index, layero) {
+				 var submit = layero.find('iframe').contents().find("#submitForm");
+   				 submit.click();
+			}
+		});
+	}
 </script>
 </html>
