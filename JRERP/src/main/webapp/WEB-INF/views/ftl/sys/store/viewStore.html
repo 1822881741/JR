@@ -1,94 +1,65 @@
 <!DOCTYPE html>
 <html>
-<head>
 <meta charset="utf-8">
-<#include "/header.html" />
-</head>
+<#include "/header-smart.html" />
 <body>
-	<div class="layui-fluid">
-		<div class="layui-row layui-col-space15">
-			<div class="layui-col-md12">
-				<div class="layui-card">
-					<div class="layui-card-header">
-						<div class="demoTable">
-							<button id="addStore" class="layui-btn">新增</button>
-						</div>
-					</div>
-					<div class="layui-card-body">
-						<table class="layui-hide" id="storeList" lay-filter="storeList"></table>
-					</div>
+	<div class="row no-margin">
+		<article class="col-sm-12">
+			<div class="jarviswidget jarviswidget-color-blueDark"
+				data-widget-colorbutton="false" data-widget-editbutton="false"
+				data-widget-togglebutton="false" data-widget-deletebutton="false"
+				data-widget-fullscreenbutton="false"
+				data-widget-custombutton="false" data-widget-sortable="false">
+				<div>
+					<table id="jqgrid" class="table table-bordered table-hover table-striped"></table>
+					<div id="pjqgrid"></div>
 				</div>
 			</div>
-		</div>
+		</article>
 	</div>
 </body>
-<script type="text/javascript" src="resource/layui/layui.all.js?v=1"></script>
-<script type="text/html" id="tableItemOperator">
-  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-</script>
-
-<script>
-!function(){
-  		var $ = layui.jquery;
-		var table = layui.table;
+<script src="static/js/libs/jquery-3.2.1.min.js"></script>
+<script src="static/js/app.config.js"></script>
+<script src="static/js/bootstrap/bootstrap.min.js"></script>
+<script src="static/js/app.js?v=1"></script>
+<script src="static/plugins/layer/layer.js"></script>
+<script src="static/js/plugin/jqgrid/jquery.jqGrid.min.js?v=33" charset="utf-8"></script>
+<script src="static/js/plugin/jqgrid/grid.locale-cn.js"></script>
+<script src="static/zmodel/common/js/jqgridConfig.js?v=1222"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		pageSetUp();
 		
-		table.render({
-			elem : '#storeList',
-			url : 'sysStore/getStoreListData.do',
-			defaultToolbar: ['filter', 'exports'],
-			toolbar : '#toolbarDemo',
-			cols : [[
-			         {field : 'id',title:'id'},
-			         {field : 'shopName',title : '门店名称',sort : true}, 
-			         {field : 'mobile',title : '联系电话',sort : true}, 
-			         {field : 'address',title : '地址',sort : true},
-			         {field : 'regionName',title : '所属大区',sort : true},
-			         {field : 'status',title : '状态',sort : true	,templet: function(d){
-				        	 if(d.status == 1){
-				        		 return "启用中";
-				        	 }else{
-				        		 return "<span style='color: #c00;'>已停用</span>";
-				        	 }
-			        	 }
-			         }, 
-			         {field : 'remarks',title : '备注'},
-					 {width:178, align:'center', fixed: 'right', toolbar: '#tableItemOperator'}
-					]],
-			page : true
-			//limit : 2
-		});
+		$("#jqgrid").jqGrid(getStoreList("jqgrid","pjqgrid")).navGrid('#pjqgrid',{edit:false,add:false,del:false,search:true,refresh:false})
+		  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-trash",caption:"",title:"删除所选记录", position:"first",onClickButton: function(){
+			   var ids = $("#jqgrid").jqGrid('getGridParam', 'selarrrow');
+			   if(ids != null && ids.length >0){
+				   layer.confirm("确认删除所选行吗？",function(index){
+					   deleteCategory(ids);
+					   layer.close(index);
+				   })
+			   }
+		   }})
+		  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-plus",caption:"",title:"新增记录",position:"first",onClickButton: function(){editCategory(null);}})
+		  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-refresh",caption:"",title:"刷新",onClickButton: function(){$("#jqgrid").setGridParam({datatype:'json'}).trigger('reloadGrid');},position:"first"});
+	
+		$("#jqgrid").setGridWidth($(".tab-content").width());
+		$("#jqgrid2").setGridWidth($(".tab-content").width());
+		$("#jqgrid3").setGridWidth($(".tab-content").width());
+		$("#jqgrid4").setGridWidth($(".tab-content").width());
+		$("#jqgrid").setGridHeight($(window).height() - 260);
+		$("#jqgrid2").setGridHeight($(window).height() - 260);
+		$("#jqgrid3").setGridHeight($(window).height() - 260);
+		$("#jqgrid4").setGridHeight($(window).height() - 260);
 		
-		//注册各种事件
-		var active = {
-			addStore : function(id) {
-				layer.open({
-					type : 2,
-					title : "新增/修改门店",
-					area : ['550px','520px'],
-					shade : 0.8,
-					id : 'lay_storeInfo', //设定一个id，防止重复弹出
-					btn : [ '保存', '取消' ],
-					moveType : 1, //拖拽模式，0或者1
-					content : "sysStore/editStoreInfo.do?id="+id,
-					yes : function(index, layero) {
-						 var submit = layero.find('iframe').contents().find("#submitForm");
-           				 submit.click();
-					}
-				});
-			}
-		}
-		
-		table.on('tool(storeList)', function(obj){
-	      var data = obj.data;
-	       if(obj.event === 'edit'){
-	    	   active.addStore(data.id);
-	      }
-	    });
-			
-		$('#addStore').on('click', function() {
-			active.addStore('');
-		});
-}();
+	    $(".ui-pg-div").removeClass().addClass("btn btn-sm btn-default");
+	    $(".ui-icon.ui-icon-plus").removeClass().addClass("fa fa-plus");
+	    $(".ui-icon.ui-icon-pencil").removeClass().addClass("fa fa-pencil");
+	    $(".ui-icon.ui-icon-trash").removeClass().addClass("fa fa-trash-o");
+	    $(".ui-icon.ui-icon-search").removeClass().addClass("fa fa-search");
+	    $(".ui-icon.ui-icon-refresh").removeClass().addClass("fa fa-refresh");
+	    $(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary");
+	    $(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary");
+	});
 </script>
 </html>
-
