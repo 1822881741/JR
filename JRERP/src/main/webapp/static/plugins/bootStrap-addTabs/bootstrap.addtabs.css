@@ -16,8 +16,8 @@
 }
 
 .nav-tabs {position: relative;}
-.nav-tabs li{position: relative;}
-.nav-tabs li a{position: relative;border-top-left-radius:10px;border-top-right-radius:10px;border: 1px solid #ddd}
+.nav-tabs li{position: relative;margin-right: 5px;}
+.nav-tabs li a{position: relative;border-top-left-radius:15px;border-top-right-radius:15px;border: 1px solid #ddd}
 
 .iframeClass {
     z-index: 1;
