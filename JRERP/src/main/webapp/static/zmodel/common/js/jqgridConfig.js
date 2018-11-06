@@ -251,3 +251,54 @@ function getStoreList(tableDom,pagerDom) {
 		recordtext : "共{1}记录"
 	}
 }
+
+function getCounterList(tableDom,pagerDom) {
+	return config = {
+		url : 'sysCounter/getCounterListData.do',
+		datatype : "json",
+		colNames : [ '操作', '柜台名称', '柜台类型','状态', '备注' ],
+		colModel : [ {
+			name : 'opera',
+			width:50,
+			sortable : false,formatter : function(cellValue, options, rowObject) {
+				var html="<button class='btn btn-xs btn-default' data-original-title='Edit Row' onclick=\"editCounter('" + rowObject.id + "');\"><i class='fa fa-pencil'></i></button>";
+				return html;
+			}
+		}, {
+			name : 'counterName'
+		}, {
+			name : 'counterType',
+			formatter : function(cellValue, options, rowObject) {
+				if (cellValue == 0) {
+					return "成品柜台";
+				} else {
+					return "旧料柜台";
+				}
+			}
+		}, {
+			name : 'status',
+			formatter : function(cellValue, options, rowObject) {
+				if (cellValue == 1) {
+					return "在用";
+				} else {
+					return "停用";
+				}
+			}
+		}, {
+			name : 'remarks'
+		} ],
+		caption : "柜台列表详情",
+		rowNum : -1,
+		multiselect : true,
+		pager : '#'+pagerDom,
+		viewrecords : true,
+		loadonce : true,
+		autowidth : true,
+		pgbuttons : false,
+		pgtext : false,
+		rownumbers : false,
+		ondblClickRow : function(rowid) { // 双击行
+		},
+		recordtext : "共{1}记录"
+	}
+}

@@ -66,4 +66,8 @@ public class ShiroUtils {
 	public static String getCompanyNo(){
 	    return getSysUser().getCompanyNo();
 	}
+	
+	public static String getUserAreaCode(){
+        return getSysUser().getAreaCode();
+    }
 }

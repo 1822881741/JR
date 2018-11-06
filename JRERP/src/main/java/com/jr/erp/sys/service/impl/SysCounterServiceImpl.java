@@ -31,9 +31,9 @@ public class SysCounterServiceImpl extends AbstractBaseService<SysCounter> imple
     @Autowired
     ISysAreaInfoService sysAreaService;
     @Override
-    public void saveCounter(SysCounter counter, Integer storeId)
+    public void saveCounter(SysCounter counter, String pAreaCode)
     {
-        SysStore store = (SysStore) sysStoreService.selectByPrimaryKey(storeId);
+        SysStore store = (SysStore) sysStoreService.selectByPrimaryKey(counter.getId());
         if (store != null)
         {
             SysAreaInfo parentArea = sysAreaService.selectByAreaCode(store.getCompanyNo(), store.getAreaCode());
@@ -50,6 +50,9 @@ public class SysCounterServiceImpl extends AbstractBaseService<SysCounter> imple
             area.setAreaType(3);
             area.setStatus(counter.getStatus());
             sysAreaService.insert(area);
+        }else
+        {
+            //
         }
     }
     @Override

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<#include "/header-smart.html" />
+<body>
+	<div class="well no-margin">
+		<form id="categoryForm">
+			<div class="row form-body form-horizontal">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-3 col-sm-3 col-xs-3 control-label text-right">柜台名称：</label>
+						<div class="col-lg-6 col-sm-6 col-xs-6">
+							<input type="hidden" id="id" name="id" value="${counter.id}">
+							<input type="hidden" id="pAreaCode" name="id" value="${pAreaCode}">
+							<input type="text" id="counterName" name="counterName" class="form-control" value="${counter.counterName}">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row form-body form-horizontal">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-3 col-sm-3 col-xs-3 control-label text-right">柜台类型：</label>
+						<div class="col-lg-6 col-sm-6 col-xs-6">
+							  <select name="counterType" class="form-control">
+						        <option value="">请选择类型</option>
+						        <option value="0" <#if counter.counterType == 0> selected </#if>>成品柜台</option>
+						        <option value="1" <#if counter.counterType != 0> selected </#if>>旧料柜台</option>
+						      </select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row form-body form-horizontal">				
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-3 col-sm-3 col-xs-3 control-label text-right">使用状态：</label>
+						<div class="col-lg-6 col-sm-6 col-xs-6">
+							<label class="radio radio-inline">
+								<input type="radio" class="radiobox style-0" name="status" value="1" <#if counter.status == 1> checked </#if> >
+								<span>再用</span> 
+							</label>
+							<label class="radio radio-inline">
+								<input type="radio" class="radiobox style-3" name="status" value="0" <#if counter.status != 1> checked </#if>>
+								<span>停用</span>  
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row form-body form-horizontal">						
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-3 col-sm-3 col-xs-3 control-label text-right">说明：</label>
+						<div class="col-lg-9 col-sm-9 col-xs-9">
+							<input type="text" id="remarks" name="remarks" class="form-control" value="${counter.remarks}">
+						</div>
+					</div>
+				</div>			
+			</div>
+		</form>
+	</div>
+</body>
+<script type="text/javascript" src="resource/layui/layui.all.js?v=1"></script>
+<script>
+	function submitData(){
+		$.ajax({
+	        type: "POST",
+	        url: "sysCounter/saveCounter.do",
+	        dataType: 'json',
+	        async: false,
+	        data: $("#categoryForm").serialize(),
+	        success: function(data) {
+	            if (data.status == '100') {
+	            	layer.alert("保存成功");
+	            	parent.layui.table.reload('counterList'); //重载表格
+	            	parent.layer.close(index); //再执行关闭 
+	            }else{
+	            	layer.alert("获取基础信息失败");
+	            }
+	        },
+	        error: function() {
+	        }
+	    });
+	}
+</script>
+</html>
+

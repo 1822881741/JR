@@ -1,151 +1,140 @@
 <!DOCTYPE html>
 <html>
-<head>
 <meta charset="utf-8">
-<#include "/header.html" />
+<#include "/header-smart.html" />
 </head>
 <body>
-	<div class="layui-fluid">
-		<div class="layui-row layui-col-space5">
-			<div class="layui-col-xs6 layui-col-sm5 layui-col-md3">
-				<div class="layui-card">
-					<div class="layui-card-header">
-						门店列表
-					</div>
-					<div class="layui-card-body">
-						<table class="layui-hide" id="storeList" lay-filter="storeList"></table>
+	<div class="row no-margin">
+		<article class="col-sm-12">
+			<div class="jarviswidget jarviswidget-color-blueDark"
+				data-widget-colorbutton="false" data-widget-editbutton="false"
+				data-widget-togglebutton="false" data-widget-deletebutton="false"
+				data-widget-fullscreenbutton="false"
+				data-widget-custombutton="false" data-widget-sortable="false">
+				<div>
+					<div class="row">
+						<div class="col-sm-3">
+							<input type="hidden" id="selectedCode" >
+							<div class="well no-padding">
+								<div class="table-responsive ">
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>名称</th>
+												<th>类型</th>
+												<th>状态</th>
+											</tr>
+										</thead>
+										<tbody id="storeTbody">
+											<#list areaList as p>
+												<tr ondblclick="showCounter(this,'${p.areaCode}')" data-code='${p.areaCode }'>
+													<td>${p_index +1}</td>
+													<td>${p.areaName}</td>
+													<td><#if p.areaType == 0> 总公司 </#if>
+														<#if p.areaType == 1> 区域 </#if>
+														<#if p.areaType == 2> 门店 </#if>
+													</td>
+													<td>
+														<#if p.areaType == 1> 再用 </#if>
+														<#if p.areaType != 1> 停用 </#if>
+													</td>
+												</tr>
+											</#list>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-9">
+							<div id="jqgridWell" class="well no-padding">
+								<table id="jqgrid" class="table table-bordered table-hover table-striped"></table>
+								<div id="pjqgrid"></div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="layui-col-xs6 layui-col-sm7 layui-col-md9">
-				<div class="layui-card">
-					<div class="layui-card-header">
-						<span class="layui-breadcrumb" style="visibility: visible;">
-						  <span id='storeSpan'></span><span lay-separator="">/</span>
-						  <cite>柜台列表</cite>
-						  <input type="hidden" id="currentId">
-						</span>
-					</div>
-					<div class="layui-card-body">
-						<table class="layui-hide" id="counterList" lay-filter="counterList"></table>
-					</div>
-				</div>
-			</div>
-		</div>
+		</article>
 	</div>
+
 </body>
-<script type="text/javascript" src="resource/layui/layui.all.js?v=1"></script>
-<script type="text/html" id="tableItemOperator">
-  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-</script>
-<script type="text/html" id="switchTpl">
-  <input type="checkbox" name="status" value="{{d.id}}" data-code="{{d.areaCode}}" lay-skin="switch" lay-text="启用|禁用" lay-filter="statusChange" {{ d.status == 1 ? 'checked' : '' }}>
-</script>
+<script src="static/js/libs/jquery-3.2.1.min.js"></script>
+<script src="static/js/app.config.js"></script>
+<script src="static/js/bootstrap/bootstrap.min.js"></script>
+<script src="static/js/app.js?v=1"></script>
+<script src="static/plugins/layer/layer.js"></script>
+<script src="static/js/plugin/jqgrid/jquery.jqGrid.min.js?v=33" charset="utf-8"></script>
+<script src="static/js/plugin/jqgrid/grid.locale-cn.js"></script>
+<script src="static/zmodel/common/js/jqgridConfig.js?v=1"></script>
 <script>
-!function(){
-  		var $ = layui.jquery;
-		var table = layui.table;
-		var form = layui.form;
-		//门店表格控制
-		table.render({
-			elem : '#storeList',
-			height: 'full-100',
-			loading:true,
-			//size:'sm',
-			url : 'sysStore/getStoreListData.do',
-			cols : [[
-			         {field : 'storeName',title : '门店名称'}, 
-			         {field : 'status',title : '状态',templet: function(d){
-				        	 if(d.status == 1){
-				        		 return "启用中";
-				        	 }else{
-				        		 return "<span style='color: #c00;'>已停用</span>";
-				        	 }
-			        	 }
-			         }
-					]],
-			//page : true
-			limit : 10000
-		});
-	   
-		//注册各种事件
-		var active = {
-			addCounter : function(storeId) {
-				layer.open({
-					type : 2,
-					title : "新增/修改柜台",
-					area : ['450px','350px'],
-					shade : 0.8,
-					id : 'lay_storeInfo', //设定一个id，防止重复弹出
-					btn : [ '保存', '取消' ],
-					moveType : 1, //拖拽模式，0或者1
-					content : "sysCounter/addCounterInfo.do?storeId="+storeId,
-					yes : function(index, layero) {
-						 var submit = layero.find('iframe').contents().find("#submitForm");
-           				 submit.click();
-					}
-				});
-			}
+$(document).ready(function() {
+	pageSetUp();
+	
+	$("#jqgrid").jqGrid(getCounterList("jqgrid","pjqgrid")).navGrid('#pjqgrid',{edit:false,add:false,del:false,search:true,refresh:false})
+	  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-plus",caption:"",title:"新增记录",position:"first",onClickButton: function(){editCounter('');}})
+	  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-refresh",caption:"",title:"刷新",onClickButton: function(){$("#jqgrid").setGridParam({datatype:'json'}).trigger('reloadGrid');},position:"first"});
+
+	$("#jqgrid").setGridWidth($("jqgridWell").width()-40);
+	$("#jqgrid").setGridHeight($("#content", parent.document).height()-190);
+	
+	
+	// remove classes
+	$(".ui-jqgrid").removeClass("ui-widget ui-widget-content");
+  	$(".ui-jqgrid-view").children().removeClass("ui-widget-header ui-state-default");
+  	$(".ui-jqgrid-labels, .ui-search-toolbar").children().removeClass("ui-state-default ui-th-column ui-th-ltr");
+  	$(".ui-jqgrid-pager").removeClass("ui-state-default");
+  	$(".ui-jqgrid").removeClass("ui-widget-content");
+  
+  // add classes
+  	$(".ui-jqgrid-htable").addClass("table table-bordered table-hover");
+  	$(".ui-jqgrid-btable").addClass("table table-bordered table-striped");
+ 
+ 
+	$(".ui-pg-div").removeClass().addClass("btn btn-sm btn-default");
+	$(".ui-icon.ui-icon-plus").removeClass().addClass("fa fa-plus");
+	$(".ui-icon.ui-icon-pencil").removeClass().addClass("fa fa-pencil");
+	$(".ui-icon.ui-icon-trash").removeClass().addClass("fa fa-trash-o");
+	$(".ui-icon.ui-icon-search").removeClass().addClass("fa fa-search");
+	$(".ui-icon.ui-icon-refresh").removeClass().addClass("fa fa-refresh");
+	$(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary");
+	$(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary");
+ 	
+	
+	$(window).on("resize",function(){
+		$("#jqgrid").jqGrid( 'setGridWidth', $("jqgridWell").width()-40);
+	})
+});
+function showCounter(row,pAreaCode){
+	$("tbody").find("tr").removeClass("success");
+	$(row).addClass("success");
+	$("#selectedCode").val($(row).data("code"));
+	$("#jqgrid").setGridParam({datatype:'json',url: "sysCounter/getCounterListData.do?pAreaCode="+pAreaCode}).trigger('reloadGrid');
+}
+function editCounter(storeId){
+	var code = $("#selectedCode").val();
+	if(code == ''){
+		layer.alert("请选择所属门店");
+		return;
+	}
+	layer.open({
+		type : 2,
+		title : "新增/修改柜台",
+		area : ['450px','350px'],
+		shade : 0.8,
+		id : 'lay_storeInfo', //设定一个id，防止重复弹出
+		btn : [ '保存', '取消' ],
+		moveType : 1, //拖拽模式，0或者1
+		content : "sysCounter/editCounter.do?storeId="+storeId+"&pAreaCode="+code,
+		yes : function(index, layero) {
+			 var result = $(layero).find("iframe")[0].contentWindow.submitData();
+			 if(result){
+				 $("#jqgrid").setGridParam({datatype:'json'}).trigger('reloadGrid');
+				 layer.close(index);
+			 }
 		}
-		
-		//监听行单击事件（单击事件为：rowDouble）
-	   table.on('row(storeList)', function(obj){
-		   var data = obj.data;
-	       obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');
-	       $("#storeSpan").html(data.shopName);
-	   	   //柜台表格控制
-		   table.render({
-				elem : '#counterList',
-				height: 'full-100',
-				loading:true,
-				toolbar: "<div class='layui-btn-container'><button class='layui-btn-primary layui-btn-sm' lay-event='addCounter' lay-data='"+data.id+"'>添加柜台</button></div>",
-				defaultToolbar:['filter','exports'],
-				url : 'sysCounter/getCounterListData.do?areaCode='+data.areaCode,
-				cols : [[
-				         {field : 'counterName',title : '柜台名称',width:180}, 
-				         {field : 'counterType',title : '柜台类型',width:180,templet: function(d){
-					        	 if(d.counterType == 0){
-					        		 return "成品柜台";
-					        	 }else{
-					        		 return "旧料柜台";
-					        	 }
-				        	 }
-				         },
-				         {field:'status', title:'状态', width:120, templet: '#switchTpl', unresize: true}
-						]],
-				limit : 10000
-			});
-	   	   
-	   	   $("#currentId").val(data.id);
-		   table.on('toolbar(counterList)', function(obj,dom){
-			    if(obj.event === 'addCounter'){
-			    	active.addCounter($("#currentId").val());
-			    }
-			});
-	   });
-		
-		form.on('switch(statusChange)', function(obj){
-			var param="id="+this.value+"&status="+(obj.elem.checked?"1":"0")+"&areaCode="+$(this).data("code");
-			$.ajax({
-		        type: "POST",
-		        url: "sysCounter/updateCounter.do",
-		        dataType: 'json',
-		        async: false,
-		        data: param,
-		        success: function(data) {
-		            if (data.status == '100') {
-		            	layer.alert("修改成功");
-		            	table.reload('counterList'); //重载表格
-		            }else{
-		            	layer.alert("获取基础信息失败");
-		            }
-		        },
-		        error: function() {
-		        }
-		    });
-		return false;
-		});
-}();
+	});
+}
 </script>
 </html>
 

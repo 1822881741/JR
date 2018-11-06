@@ -1,20 +1,27 @@
 package com.jr.erp.sys.controller;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.shiro.ShiroUtils;
-import com.jr.erp.base.utils.BasePageForm;
 import com.jr.erp.base.utils.Ret;
-import com.jr.erp.base.utils.RetPage;
+import com.jr.erp.base.utils.RetJqGridPage;
+import com.jr.erp.sys.entity.SysAreaInfoExample;
 import com.jr.erp.sys.entity.SysCounter;
 import com.jr.erp.sys.entity.SysCounterExample;
 import com.jr.erp.sys.entity.SysUser;
+import com.jr.erp.sys.service.ISysAreaInfoService;
 import com.jr.erp.sys.service.ISysCounterService;
 
 /**     
@@ -34,6 +41,9 @@ public class SysCounterController
 
     @Autowired
     private ISysCounterService sysCounterService;
+    
+    @Autowired
+    private ISysAreaInfoService sysAreaService;
 
     /**    
      * viewStore(这里用一句话描述这个方法的作用)    
@@ -48,6 +58,11 @@ public class SysCounterController
     @RequestMapping(value = "/viewCounter.do")
     public String viewStore(HttpServletRequest request, Model model)
     {
+        SysAreaInfoExample example = new SysAreaInfoExample();
+        example.createCriteria().andCompanyNoEqualTo(ShiroUtils.getCompanyNo()).andAreaCodeLike(ShiroUtils.getUserAreaCode() +"%").andAreaTypeIn(Arrays.asList(new Integer[]{0,1,2}));
+        example.setOrderByClause(" areaCode ");
+        List<BaseEntity> areaList=  sysAreaService.selectByExample(example);
+        model.addAttribute("areaList", areaList);
         return "sys/counter/viewCounter";
     }
 
@@ -61,14 +76,19 @@ public class SysCounterController
     */
     @RequestMapping(value = "/getCounterListData.do")
     @ResponseBody
-    public RetPage getStoreListData(BasePageForm pageForm,String areaCode,HttpServletRequest request)
+    public RetJqGridPage getStoreListData(String pAreaCode,String areaCode,HttpServletRequest request)
     {
-        SysUser user  =ShiroUtils.getSysUser();
-        SysCounterExample exampale = new SysCounterExample();
-        exampale.setPage(pageForm.getPage());
-        exampale.setLimit(pageForm.getLimit());
-        exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andAreaCodeLike(areaCode+"%");
-        return sysCounterService.selectPage(exampale);
+        if(StringUtils.isNotEmpty(pAreaCode))
+        {
+            SysCounterExample exampale = new SysCounterExample();
+            exampale.createCriteria().andCompanyNoEqualTo(ShiroUtils.getCompanyNo()).andAreaCodeLike(pAreaCode +"___");
+            List<BaseEntity> counterList = sysCounterService.selectByExample(exampale);
+            return RetJqGridPage.ok(new Long(counterList.size()), counterList);
+        }
+        else
+        {
+            return RetJqGridPage.ok(0L, null);
+        }
     }
     
     /**    
@@ -81,11 +101,22 @@ public class SysCounterController
      * @return String
      * @Exception 异常对象
     */
-    @RequestMapping(value="addCounterInfo.do")
-    public String editCounterInfo(Integer storeId,HttpServletRequest request, Model model)
+    @RequestMapping(value="editCounter.do")
+    public String editCounter(Integer storeId,String  pAreaCode,HttpServletRequest request, Model model)
     {
-        model.addAttribute("storeId",storeId);
-        return  "sys/counter/editCounterInfo";
+        SysCounter counter=null;
+        if(storeId!=null)
+        {
+            counter = (SysCounter)sysCounterService.selectByPrimaryKey(storeId);
+        }else
+        {
+            counter = new SysCounter();
+            counter.setCounterType(0);
+            counter.setStatus(1);
+        }
+        model.addAttribute("counter",counter);
+        model.addAttribute("pAreaCode",pAreaCode);
+        return  "sys/counter/editCounter";
     }
 
     /**    
@@ -99,11 +130,11 @@ public class SysCounterController
     */
     @RequestMapping(value = "/saveCounter.do")
     @ResponseBody
-    public Ret saveCounter(SysCounter store,Integer storeId,HttpServletRequest request)
+    public Ret saveCounter(SysCounter store,String pAreaCode,HttpServletRequest request)
     {
         SysUser user = ShiroUtils.getSysUser();
         store.setCompanyNo(user.getCompanyNo());
-        sysCounterService.saveCounter(store,storeId);
+        sysCounterService.saveCounter(store,pAreaCode);
         return Ret.ok("保存成功");
     }
     

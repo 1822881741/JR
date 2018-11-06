@@ -17,7 +17,7 @@ public interface ISysCounterService extends IBaseService<BaseEntity>{
      * @return void
      * @Exception 异常对象
     */
-    void saveCounter(SysCounter store, Integer storeId);
+    void saveCounter(SysCounter store, String pAreaCode);
 
     /**    
      * updateCounter(这里用一句话描述这个方法的作用)    
