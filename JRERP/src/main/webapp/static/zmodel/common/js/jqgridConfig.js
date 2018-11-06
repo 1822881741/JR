@@ -199,9 +199,10 @@ function getStoreList(tableDom,pagerDom) {
 	return config = {
 		url : 'sysStore/getStoreListData.do',
 		datatype : "json",
-		colNames : [ '操作', '门店名称', '联系电话', '地址', '所属大区', '状态', '备注' ],
+		colNames : [ '操作', '门店名称', '联系电话', '地址', '区域', '门店类型','状态', '备注' ],
 		colModel : [ {
 			name : 'opera',
+			width:50,
 			sortable : false,formatter : function(cellValue, options, rowObject) {
 				var html="<button class='btn btn-xs btn-default' data-original-title='Edit Row' onclick=\"addStore('" + rowObject.id + "');\"><i class='fa fa-pencil'></i></button>";
 				return html;
@@ -217,10 +218,19 @@ function getStoreList(tableDom,pagerDom) {
 		}, {
 			name : 'status',
 			formatter : function(cellValue, options, rowObject) {
-				if (status == 1) {
+				if (cellValue == 1) {
 					return "在用";
 				} else {
 					return "停用";
+				}
+			}
+		},{
+			name : 'storeType',
+			formatter : function(cellValue, options, rowObject) {
+				if (cellValue == 0) {
+					return "直营店";
+				} else {
+					return "加盟店";
 				}
 			}
 		}, {

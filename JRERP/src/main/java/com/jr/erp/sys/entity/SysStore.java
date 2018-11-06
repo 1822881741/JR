@@ -3,8 +3,6 @@ package com.jr.erp.sys.entity;
 import com.jr.erp.base.mybatis.BaseEntity;
 
 public class SysStore extends BaseEntity {
-    private static final long serialVersionUID = -7343026424954500150L;
-
     /**
      * 门店名称
      */
@@ -19,6 +17,11 @@ public class SysStore extends BaseEntity {
      * 所属区域
      */
     private String regionCode;
+
+    /**
+     * 0：直营店 1：加盟店
+     */
+    private Integer storeType;
 
     /**
      * 大区名称
@@ -91,6 +94,22 @@ public class SysStore extends BaseEntity {
      */
     public void setRegionCode(String regionCode) {
         this.regionCode = regionCode == null ? null : regionCode.trim();
+    }
+
+    /**
+     * 0：直营店 1：加盟店
+     * @return storeType 0：直营店 1：加盟店
+     */
+    public Integer getStoreType() {
+        return storeType;
+    }
+
+    /**
+     * 0：直营店 1：加盟店
+     * @param storeType 0：直营店 1：加盟店
+     */
+    public void setStoreType(Integer storeType) {
+        this.storeType = storeType;
     }
 
     /**

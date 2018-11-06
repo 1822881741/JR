@@ -1,5 +1,7 @@
 package com.jr.erp.sys.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.base.utils.BasePageForm;
 import com.jr.erp.base.utils.Ret;
 import com.jr.erp.base.utils.RetJqGridPage;
 import com.jr.erp.base.utils.RetPage;
+import com.jr.erp.sys.entity.SysAreaInfoExample;
 import com.jr.erp.sys.entity.SysStore;
 import com.jr.erp.sys.entity.SysStoreExample;
 import com.jr.erp.sys.entity.SysUser;
+import com.jr.erp.sys.service.ISysAreaInfoService;
 import com.jr.erp.sys.service.ISysStoreService;
 
 /**     
@@ -37,6 +42,8 @@ public class SysStoreController
     @Autowired
     private ISysStoreService sysStoreService;
 
+    @Autowired
+    private ISysAreaInfoService sysAreaService;
     /**    
      * viewStore(这里用一句话描述这个方法的作用)    
      * 跳转到门店页面       
@@ -66,7 +73,24 @@ public class SysStoreController
     @RequestMapping(value="editStoreInfo.do")
     public String editStoreInfo(Integer id,HttpServletRequest request, Model model)
     {
-        model.addAttribute("id",id);
+        SysStore storeInfo = null;
+        if(id==null)
+        {
+            storeInfo = new SysStore();
+            storeInfo.setStoreType(0);
+            storeInfo.setStatus(1);
+            
+        }else
+        {
+            storeInfo = (SysStore) sysStoreService.selectByPrimaryKey(id);
+        }
+        model.addAttribute("storeInfo",storeInfo);
+        
+        SysAreaInfoExample example = new SysAreaInfoExample();
+        example.createCriteria().andCompanyNoEqualTo(ShiroUtils.getCompanyNo()).andAreaTypeEqualTo(1);
+        List<BaseEntity> regionList =  sysAreaService.selectByExample(example);
+        model.addAttribute("regionList",regionList);
+        
         return  "sys/store/editStoreInfo";
     }
     /**    

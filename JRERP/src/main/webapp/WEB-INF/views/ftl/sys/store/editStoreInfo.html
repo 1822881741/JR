@@ -2,140 +2,137 @@
 <html>
 <head>
 <meta charset="utf-8">
-<#include "/header.html" />
+<#include "/header-smart.html" />
 <body>
-	<div class="layui-fluid">
-		<div class="layui-row">
-			<div class="layui-card">
-				<div id="storeInfoForm"  lay-filter="storeInfoForm" class="layui-form"  style="padding: 20px 30px 0 0;">
-					<div class="layui-form-item">
-						<input type="hidden" id="id" name="id" value="${id}">
-						<label class="layui-form-label">门店名称</label>
-						<div class="layui-input-inline"> 
-							<input type="text" name="storeName" lay-verify="required" placeholder="门店名称" class="layui-input" >
+	<div class="well no-margin">
+		<form id="categoryForm">
+			<div class="row form-body form-horizontal">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-3 col-sm-3 col-xs-3 control-label text-right">门店名称：</label>
+						<div class="col-lg-6 col-sm-6 col-xs-6">
+							<input type="hidden" id="id" name="id" value="${storeInfo.id}">
+							<input type="text" id="storeName" name="storeName" class="form-control" value="${storeInfo.storeName}">
 						</div>
 					</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">所属区域</label>
-						<div class="layui-input-inline">
-							 <select id='regionCode' name="regionCode" lay-filter='regionCode' lay-verify="required">
-						        <option value="">请选择省</option>
-						      </select>
-						</div>
-					</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">电话</label>
-						<div class="layui-input-inline">
-							<input type="text" name="mobile" lay-verify="required|phone" placeholder="请输入联系电话" class="layui-input">
-						</div>
-					</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">地址</label>
-						<div class="layui-input-block">
-							<input type="text" name="address" placeholder="请输入门店地址" class="layui-input">
-						</div>
-					</div>					
-					<div class="layui-form-item">
-						<label class="layui-form-label">状态</label>
-						<div class="layui-input-inline">
-							<input type="checkbox" name="status" lay-skin="switch" value="1" lay-text="启用|停用" checked>
-						</div>
-					</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">说明</label>
-						<div class="layui-input-inline">
-							<textarea name="remarks" style="width: 400px; height: 120px;" class="layui-textarea"></textarea>
-						</div>
-					</div>
-					<div class="layui-form-item layui-hide">
-				      <input type="button" lay-submit lay-filter="submitForm" id="submitForm" value="确认添加">
-				      <input type="button" lay-submit lay-filter="layuiadmin-app-form-edit" id="layuiadmin-app-form-edit" value="确认编辑">
-				    </div>
 				</div>
 			</div>
-		</div>
+			<div class="row form-body form-horizontal">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-3 col-sm-3 col-xs-3 control-label text-right">所属区域：</label>
+						<div class="col-lg-6 col-sm-6 col-xs-6">
+							<select id="regionCode" name="regionCode" class="form-control">
+								<option value='' ></option>
+								<#list regionList as p>
+									<option value='${p.areaCode}' <#if storeInfo.regionCode == p.areaCode> selected </#if> >${p.areaName}</option>
+								</#list>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row form-body form-horizontal">				
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-3 col-sm-3 col-xs-3 control-label text-right">门店类型：</label>
+						<div class="col-lg-6 col-sm-6 col-xs-6">
+							<label class="radio radio-inline">
+								<input type="radio" class="radiobox style-0" name="storeType"  value="0" <#if storeInfo.storeType == 0> checked </#if> >
+								<span>直营店</span> 
+							</label>
+							<label class="radio radio-inline">
+								<input type="radio" class="radiobox style-0" name="storeType" value="1" <#if storeInfo.storeType != 0> checked </#if> >
+								<span>加盟店</span>  
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row form-body form-horizontal">									
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-3 col-sm-3 col-xs-3 control-label text-right">联系电话：</label>
+						<div class="col-lg-6 col-sm-6 col-xs-6">
+							<input type="text" id="mobile" name="mobile" class="form-control" value="${storeInfo.mobile}">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row form-body form-horizontal">				
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-3 col-sm-3 col-xs-3 control-label text-right">联系地址：</label>
+						<div class="col-lg-6 col-sm-6 col-xs-6">
+							<input type="text" id="address" name="address" class="form-control" value="${storeInfo.address}">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row form-body form-horizontal">				
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-3 col-sm-3 col-xs-3 control-label text-right">使用状态：</label>
+						<div class="col-lg-6 col-sm-6 col-xs-6">
+							<label class="radio radio-inline">
+								<input type="radio" class="radiobox style-0" name="status" value="1" <#if storeInfo.status == 1> checked </#if> >
+								<span>再用</span> 
+							</label>
+							<label class="radio radio-inline">
+								<input type="radio" class="radiobox style-3" name="status" value="0" <#if storeInfo.status != 1> checked </#if>>
+								<span>停用</span>  
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row form-body form-horizontal">						
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="form-group margin-bottom-5 margin-right-5">
+						<label class="col-lg-3 col-sm-3 col-xs-3 control-label text-right">说明：</label>
+						<div class="col-lg-9 col-sm-9 col-xs-9">
+							<input type="text" id="remarks" name="remarks" class="form-control" value="${storeInfo.remarks}">
+						</div>
+					</div>
+				</div>			
+			</div>
+		</form>
 	</div>
 </body>
-<script type="text/javascript" src="resource/layui/layui.all.js?v=1"></script>
+</body>
+<script src="static/js/libs/jquery-3.2.1.min.js"></script>
+<script src="static/js/app.config.js"></script>
+<script src="static/js/bootstrap/bootstrap.min.js"></script>
+<script src="static/js/app.js?v=1"></script>
+<script src="static/plugins/layer/layer.js"></script>
 <script>
-	!function(){
-		var $ = layui.$, form = layui.form;
-		var active={
-				initElement:function(){
-					$.ajax({
-				        type: "POST",
-				        url: "sysElement/getElements.do",
-				        dataType: 'json',
-				        async: false,
-				        data: "elements=areaInfo&elements=storeInfo",
-				        success: function(data) {
-				            if (data.status == '100') {
-				            	var regionInfo = data.data.areaInfo;
-				            	if(regionInfo){
-				            		for(var i=0;i<regionInfo.length;i++){
-				            			var temp=regionInfo[i];
-						            	$("#regionCode").append("<option value='"+temp.areaCode+"'>"+temp.areaName+"</option>");
-				            		}
-				            	}
-				            	form.render('select')
-				            }else{
-				            	layer.alert("获取基础信息失败");
-				            }
-				        },
-				        error: function() {
-				        }
-				    });
-				},
-				getFormData:function(){
-					var id =$("#id").val();
-					if(id){
-						$.ajax({
-					        type: "POST",
-					        url: "sysStore/getStoreInfoData.do",
-					        dataType: 'json',
-					        async: false,
-					        data: "id="+id,
-					        success: function(data) {
-					            if (data.status == '100') {
-					            	form.val("storeInfoForm", data.data)
-					            }else{
-					            	layer.alert("获取基础信息失败");
-					            }
-					        },
-					        error: function() {
-					        }
-					    });
-					}
-				}
-			}
-		active.initElement();
-		active.getFormData();
-		form.on('submit(submitForm)', function(data) {
-			var field = data.field; //获取提交的字段
-			var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-			//提交 Ajax 成功后，关闭当前弹层并重载表格
-			$.ajax({
-		        type: "POST",
-		        url: "sysStore/saveStore.do",
-		        dataType: 'json',
-		        async: false,
-		        data: field,
-		        success: function(data) {
-		            if (data.status == '100') {
-		            	layer.alert("保存成功");
-		            	parent.layui.table.reload('storeList'); //重载表格
-		            	parent.layer.close(index); //再执行关闭 
-		            }else{
-		            	layer.alert("获取基础信息失败");
-		            }
-		        },
-		        error: function() {
-		        }
-		    });
-		});
-		
-		
-	}();
+$(document).ready(function() {
+	pageSetUp();
+})
+
+function submitData(){
+	var result=false;
+	var param = $("#categoryForm").serialize();
+	$.ajax({
+        type: "POST",
+        url: "sysStore/saveStore.do",
+        dataType: 'json',
+        data: param,
+        async: false,
+        success: function(data) {
+            if (data.status == '100') {
+            	result=true;
+            }else{
+            	layer.msg("保存失败");
+            }
+        },
+        error: function() {
+        	layer.alert("连接服务器失败，请稍后重试");
+        }
+    });
+	return result;
+}
+
 </script>
 </html>
 

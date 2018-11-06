@@ -63,4 +63,7 @@ public class ShiroUtils {
 //		return kaptcha.toString();
 //	}
 
+	public static String getCompanyNo(){
+	    return getSysUser().getCompanyNo();
+	}
 }

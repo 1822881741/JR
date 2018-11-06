@@ -7,12 +7,13 @@
     <result column="storeName" jdbcType="VARCHAR" property="storeName" />
     <result column="areaCode" jdbcType="VARCHAR" property="areaCode" />
     <result column="regionCode" jdbcType="VARCHAR" property="regionCode" />
+    <result column="storeType" jdbcType="TINYINT" property="storeType" />
     <result column="regionName" jdbcType="VARCHAR" property="regionName" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="mobile" jdbcType="VARCHAR" property="mobile" />
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
     <result column="status" jdbcType="TINYINT" property="status" />
-    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="createTime" jdbcType="VARCHAR" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -44,8 +45,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, companyNo, storeName, areaCode, regionCode, regionName, address, mobile, remarks, 
-    status, createTime
+    id, companyNo, storeName, areaCode, regionCode, storeType, regionName, address, mobile, 
+    remarks, status, createTime
   </sql>
   <select id="selectByExample" parameterType="com.jr.erp.sys.entity.SysStoreExample" resultMap="BaseResultMap">
     select
@@ -84,13 +85,15 @@
   </delete>
   <insert id="insert" parameterType="com.jr.erp.sys.entity.SysStore">
     insert into sys_store (id, companyNo, storeName, 
-      areaCode, regionCode, regionName, 
-      address, mobile, remarks, 
-      status, createTime)
+      areaCode, regionCode, storeType, 
+      regionName, address, mobile, 
+      remarks, status, createTime
+      )
     values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{storeName,jdbcType=VARCHAR}, 
-      #{areaCode,jdbcType=VARCHAR}, #{regionCode,jdbcType=VARCHAR}, #{regionName,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
-      #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP})
+      #{areaCode,jdbcType=VARCHAR}, #{regionCode,jdbcType=VARCHAR}, #{storeType,jdbcType=TINYINT}, 
+      #{regionName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=VARCHAR}
+      )
   </insert>
   <select id="countByExample" parameterType="com.jr.erp.sys.entity.SysStoreExample" resultType="java.lang.Long">
     select count(*) from sys_store
@@ -113,6 +116,9 @@
       <if test="regionCode != null">
         regionCode = #{regionCode,jdbcType=VARCHAR},
       </if>
+      <if test="storeType != null">
+        storeType = #{storeType,jdbcType=TINYINT},
+      </if>
       <if test="regionName != null">
         regionName = #{regionName,jdbcType=VARCHAR},
       </if>
@@ -129,7 +135,7 @@
         status = #{status,jdbcType=TINYINT},
       </if>
       <if test="createTime != null">
-        createTime = #{createTime,jdbcType=TIMESTAMP},
+        createTime = #{createTime,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -140,12 +146,13 @@
       storeName = #{storeName,jdbcType=VARCHAR},
       areaCode = #{areaCode,jdbcType=VARCHAR},
       regionCode = #{regionCode,jdbcType=VARCHAR},
+      storeType = #{storeType,jdbcType=TINYINT},
       regionName = #{regionName,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       mobile = #{mobile,jdbcType=VARCHAR},
       remarks = #{remarks,jdbcType=VARCHAR},
       status = #{status,jdbcType=TINYINT},
-      createTime = #{createTime,jdbcType=TIMESTAMP}
+      createTime = #{createTime,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

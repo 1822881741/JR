@@ -25,7 +25,7 @@
 <script src="static/plugins/layer/layer.js"></script>
 <script src="static/js/plugin/jqgrid/jquery.jqGrid.min.js?v=33" charset="utf-8"></script>
 <script src="static/js/plugin/jqgrid/grid.locale-cn.js"></script>
-<script src="static/zmodel/common/js/jqgridConfig.js?v=12"></script>
+<script src="static/zmodel/common/js/jqgridConfig.js?v=1"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		pageSetUp();
@@ -69,15 +69,18 @@
 		layer.open({
 			type : 2,
 			title : "新增/修改门店",
-			area : ['550px','520px'],
+			area : ['550px','390px'],
 			shade : 0.8,
 			id : 'lay_storeInfo', //设定一个id，防止重复弹出
 			btn : [ '保存', '取消' ],
 			moveType : 1, //拖拽模式，0或者1
 			content : "sysStore/editStoreInfo.do?id="+id,
 			yes : function(index, layero) {
-				 var submit = layero.find('iframe').contents().find("#submitForm");
-   				 submit.click();
+				 var result = $(layero).find("iframe")[0].contentWindow.submitData();
+   				 if(result){
+   					 $("#jqgrid").setGridParam({datatype:'json'}).trigger('reloadGrid');
+   					 layer.close(index);
+   				 }
 			}
 		});
 	}

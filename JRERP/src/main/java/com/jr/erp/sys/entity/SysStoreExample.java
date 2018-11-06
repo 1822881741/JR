@@ -2,7 +2,6 @@ package com.jr.erp.sys.entity;
 
 import com.jr.erp.base.mybatis.BaseExample;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class SysStoreExample extends BaseExample {
@@ -460,6 +459,66 @@ public class SysStoreExample extends BaseExample {
             return (Criteria) this;
         }
 
+        public Criteria andStoreTypeIsNull() {
+            addCriterion("storeType is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreTypeIsNotNull() {
+            addCriterion("storeType is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreTypeEqualTo(Integer value) {
+            addCriterion("storeType =", value, "storeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreTypeNotEqualTo(Integer value) {
+            addCriterion("storeType <>", value, "storeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreTypeGreaterThan(Integer value) {
+            addCriterion("storeType >", value, "storeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("storeType >=", value, "storeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreTypeLessThan(Integer value) {
+            addCriterion("storeType <", value, "storeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("storeType <=", value, "storeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreTypeIn(List<Integer> values) {
+            addCriterion("storeType in", values, "storeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreTypeNotIn(List<Integer> values) {
+            addCriterion("storeType not in", values, "storeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreTypeBetween(Integer value1, Integer value2) {
+            addCriterion("storeType between", value1, value2, "storeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andStoreTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("storeType not between", value1, value2, "storeType");
+            return (Criteria) this;
+        }
+
         public Criteria andRegionNameIsNull() {
             addCriterion("regionName is null");
             return (Criteria) this;
@@ -810,52 +869,62 @@ public class SysStoreExample extends BaseExample {
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeEqualTo(Date value) {
+        public Criteria andCreateTimeEqualTo(String value) {
             addCriterion("createTime =", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotEqualTo(Date value) {
+        public Criteria andCreateTimeNotEqualTo(String value) {
             addCriterion("createTime <>", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeGreaterThan(Date value) {
+        public Criteria andCreateTimeGreaterThan(String value) {
             addCriterion("createTime >", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
+        public Criteria andCreateTimeGreaterThanOrEqualTo(String value) {
             addCriterion("createTime >=", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeLessThan(Date value) {
+        public Criteria andCreateTimeLessThan(String value) {
             addCriterion("createTime <", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
+        public Criteria andCreateTimeLessThanOrEqualTo(String value) {
             addCriterion("createTime <=", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeIn(List<Date> values) {
+        public Criteria andCreateTimeLike(String value) {
+            addCriterion("createTime like", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotLike(String value) {
+            addCriterion("createTime not like", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIn(List<String> values) {
             addCriterion("createTime in", values, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotIn(List<Date> values) {
+        public Criteria andCreateTimeNotIn(List<String> values) {
             addCriterion("createTime not in", values, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeBetween(Date value1, Date value2) {
+        public Criteria andCreateTimeBetween(String value1, String value2) {
             addCriterion("createTime between", value1, value2, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
+        public Criteria andCreateTimeNotBetween(String value1, String value2) {
             addCriterion("createTime not between", value1, value2, "createTime");
             return (Criteria) this;
         }
