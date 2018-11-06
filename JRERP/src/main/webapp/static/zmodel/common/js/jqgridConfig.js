@@ -71,7 +71,7 @@ function getJqgridCategory(type,tableDom,pagerDom) {
 		multiselect : true,
 		pager : '#'+pagerDom,
 		viewrecords : true,
-		loadonce : false,
+		loadonce : true,
 		autowidth : true,
 		pgbuttons : false,
 		pgtext : false,
@@ -204,7 +204,6 @@ function getStoreList(tableDom,pagerDom) {
 			name : 'opera',
 			sortable : false,formatter : function(cellValue, options, rowObject) {
 				var html="<button class='btn btn-xs btn-default' data-original-title='Edit Row' onclick=\"addStore('" + rowObject.id + "');\"><i class='fa fa-pencil'></i></button>";
-				html += "<button class='btn btn-xs btn-default' data-original-title='Cancel' onclick=\"deleteCategory('" + rowObject.id + "');\"><i class='fa fa-times'></i></button>";
 				return html;
 			}
 		}, {
@@ -232,7 +231,7 @@ function getStoreList(tableDom,pagerDom) {
 		multiselect : true,
 		pager : '#'+pagerDom,
 		viewrecords : true,
-		loadonce : false,
+		loadonce : true,
 		autowidth : true,
 		pgbuttons : false,
 		pgtext : false,
