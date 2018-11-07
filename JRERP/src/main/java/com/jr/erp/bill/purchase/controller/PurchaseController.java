@@ -29,8 +29,8 @@ import com.jr.erp.sys.entity.SysAreaInfoExample;
 import com.jr.erp.sys.entity.SysPurchaseSechemeExample;
 import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.service.ISysAreaInfoService;
-import com.jr.erp.sys.service.ISysCategorySetService;
 import com.jr.erp.sys.service.ISysPurchaseSechemeService;
+import com.jr.erp.sys.set.service.IBaseTypeService;
 import com.jr.erp.sys.vo.PurchaseColumnVo;
 
 @Controller
@@ -41,7 +41,7 @@ public class PurchaseController {
     private ISysPurchaseSechemeService sysPurchaseSechemeService;
     
     @Autowired
-    private ISysCategorySetService sysCategorySetService;
+    private IBaseTypeService baseTypeService;
     
     @Autowired
     private ISysAreaInfoService sysAreaInfoService;
@@ -59,15 +59,15 @@ public class PurchaseController {
         String companyNo=user.getCompanyNo();
         
         //供应商列表
-        List<String> supplyList = sysCategorySetService.getNameList(companyNo, "supplier");
+        List<String> supplyList = baseTypeService.getNameList(companyNo, "supplier");
         model.addAttribute("supplierList",supplyList);
         
         //进货类型
-        List<String> brandNameList = sysCategorySetService.getNameList(companyNo, "brandName");
+        List<String> brandNameList = baseTypeService.getNameList(companyNo, "brandName");
         model.addAttribute("brandNameList",brandNameList);
         
         //进货类型
-        List<String> purchaseTypeList = sysCategorySetService.getNameList(companyNo, "purchaseType");
+        List<String> purchaseTypeList = baseTypeService.getNameList(companyNo, "purchaseType");
         model.addAttribute("purchaseTypeList",purchaseTypeList);
         
         //进货门店

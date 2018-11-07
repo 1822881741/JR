@@ -9,7 +9,7 @@
 		<div class="row no-margin">
 			<article class="col-sm-12 col-md-12 col-lg-12">
 				<div class="jarviswidget" data-widget-collapsed="false" data-widget-hidden="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-grid="" data-widget-sortable="false" data-widget-editbutton="false" data-widget-colorbutton="false"  data-widget-fullscreenbutton="false">
-					<input type="hidden" id="categoryType" name="categoryType">
+					<input type="hidden" id="typeName" name="typeName">
 					<div>
 						<div class="widget-body">
 							<div class="widget-body-toolbar">
@@ -57,7 +57,7 @@
 									</div>
 								</div>
 							</div>
-							<div>
+							<div id="jqgridWell">
 								<table id="jqgrid" class="table table-bordered table-hover table-striped "></table>
 								<div id="pjqgrid"></div>
 							</div>
@@ -76,15 +76,15 @@
 <script src="resource/layui/layui.all.js?v=1" charset="utf-8"></script>
 <script src="static/js/plugin/jqgrid/jquery.jqGrid.min.js?v=2" charset="utf-8"></script>
 <script src="static/js/plugin/jqgrid/grid.locale-cn.js"></script>
-<script src="static/zmodel/common/js/jqgridConfig.js?v=23" ></script>
+<script src="static/zmodel/common/js/jqgridConfig.js?v=223" ></script>
 <script type="text/javascript" src="resource/layui/layui.all.js?v=1"></script>
 
 <script type="text/javascript">
 $(document).ready(function(){
 	pageSetUp();
-	var categoryType = $($(".categoryMain")[0]).data("type");
-	$("#categoryType").val(categoryType);
-	$("#jqgrid").jqGrid(getJqgridCategorySet(categoryType,"jqgrid","pjqgrid")).navGrid('#pjqgrid',{edit:false,add:false,del:false,search:true,refresh:false})
+	var typeName = $($(".categoryMain")[0]).data("type");
+	$("#typeName").val(typeName);
+	$("#jqgrid").jqGrid(getBaseType(typeName,"jqgrid","pjqgrid")).navGrid('#pjqgrid',{edit:false,add:false,del:false,search:true,refresh:false})
 	  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-trash",caption:"",title:"删除所选记录", position:"first",onClickButton: function(){
 		   var ids = $("#jqgrid").jqGrid('getGridParam', 'selarrrow');
 		   if(ids != null && ids.length >0){
@@ -98,8 +98,8 @@ $(document).ready(function(){
 	  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-refresh",caption:"",title:"刷新",onClickButton: function(){$("#jqgrid").setGridParam({datatype:'json'}).trigger('reloadGrid');},position:"first"});
 	$("#jqgrid").setCaption("属性设置 >>"+$($(".categoryMain")[0]).html());
 	
-	$("#jqgrid").setGridWidth($("#widget-body").width());
-	$("#jqgrid").setGridHeight($(window).height() - 260);
+	$("#jqgrid").setGridWidth($("jqgridWell").width()-40);
+	$("#jqgrid").setGridHeight($("#content", parent.document).height()-260);
 		
 	$(".ui-pg-div").removeClass().addClass("btn btn-sm btn-default");
 	$(".ui-icon.ui-icon-plus").removeClass().addClass("fa fa-plus");
@@ -114,8 +114,12 @@ $(document).ready(function(){
 	$(".categoryMain").on("click",function(){
 		var categoryType=$(this).data("type");
 		$("#categoryType").val(categoryType);
-		$("#jqgrid").setGridParam({datatype:'json',url: "sysCategorySet/getCategoryData.do?categoryType="+categoryType}).trigger('reloadGrid');
+		$("#jqgrid").setGridParam({datatype:'json',url: "baseType/getBaseTypeData.do?typeName="+$("#typeName").val()}).trigger('reloadGrid');
 		$("#jqgrid").setCaption("属性设置 >>"+$(this).html())
+	})
+	
+	$(window).on("resize",function(){
+		$("#jqgrid").jqGrid( 'setGridWidth', $("jqgridWell").width()-40);
 	})
 });
 function edit(id){
@@ -123,14 +127,15 @@ function edit(id){
 		   if(value!=null && value!=''){
 	    	   $.ajax({
 		   	        type: "POST",
-		   	        url: "sysCategorySet/updateCategory.do",
+		   	        url: "baseType/updateBaseType.do",
 		   	        dataType: 'json',
 		   	        async: false,
-		   	        data: {"id":id,"name":value,"categoryType":$("#categoryType").val()},
+		   	        data: {"id":id,"name":value,"typeName":$("#typeName").val()},
 		   	        success: function(data) {
 		   	        	if(data.status ==100){
+		   	        		layer.close(index);
 			   	        	layer.msg("保存成功");
-			   	        	$("#jqgrid").setGridParam({datatype:'json',url: "sysCategorySet/getCategoryData.do?categoryType="+categoryType}).trigger('reloadGrid');
+			   	        	$("#jqgrid").setGridParam({datatype:'json',url: "baseType/getBaseTypeData.do?typeName="+$("#typeName").val()}).trigger('reloadGrid');
 		   	        	}else{
 		   	        		layer.msg(data.msg);
 		   	        	}
@@ -144,7 +149,7 @@ function edit(id){
 }
 function add(){
 	var content="<div class='layui-form padding-10'>"
-		+"<div class='layui-form-item'><div class='layui-input-inline'><textarea id='categoryNames' name='categoryNames' style='width: 400px; height: 300px;' class='layui-textarea'></textarea></div></div>"
+		+"<div class='layui-form-item'><div class='layui-input-inline'><textarea id='typeNames' name='typeNames' style='width: 400px; height: 300px;' class='layui-textarea'></textarea></div></div>"
 		+"<div class='layui-form-item'><span class='layui-word-aux'>说明：换行可增加多个记录</span></div></div>";
 	layer.open({
       title:'页面层',
@@ -154,11 +159,11 @@ function add(){
       content:content ,
       btn : [ '保存', '取消' ],
       yes : function(index, layero) {
-			 var categoryNames = $(layero.find('#categoryNames')[0]).val();
-			 if(categoryNames ==''){
+			 var typeNames = $(layero.find('#typeNames')[0]).val();
+			 if(typeNames ==''){
 				 layer.alert("请输入名称");
 			 }else{
-				 var arr = categoryNames.split(new RegExp(/[\n,]/g));
+				 var arr = typeNames.split(new RegExp(/[\n,]/g));
 				 var canUse =[];
 				 for(var i=0;i<arr.length;i++){
 					 if($.trim(arr[i])!=''){
@@ -170,11 +175,11 @@ function add(){
 				 }else{
 					 	var ctyArr=[];
 					 	for (var i = 0; i < canUse.length; i++) {
-							ctyArr.push({'categoryType':$("#categoryType").val(),'name':canUse[i]})
+							ctyArr.push({'typeName':$("#typeName").val(),'name':canUse[i]})
 						}
 						$.ajax({
 					        type: "POST",
-					        url: "sysCategorySet/saveCategory.do",
+					        url: "baseType/saveBaseType.do",
 					        dataType: 'json',
 					        async: false,
 					        contentType:"application/json",
@@ -190,7 +195,7 @@ function add(){
 					            }else{
 					            	layer.alert(data.msg);
 					            }
-					            $("#jqgrid").setGridParam({datatype:'json',url: "sysCategorySet/getCategoryData.do?categoryType="+categoryType}).trigger('reloadGrid');
+					            $("#jqgrid").setGridParam({datatype:'json',url: "baseType/getBaseTypeData.do?typeName="+$("#typeName").val()}).trigger('reloadGrid');
 					        },
 					        error: function() {
 					        	layer.alert("连接服务器失败，请稍后重试");
@@ -207,7 +212,7 @@ function deleteRows(ids){
 	}else{
 		$.ajax({
 	        type: "POST",
-	        url: "sysCategorySet/deleteCategorySet.do?ids="+ids,
+	        url: "baseType/deleteBaseType.do?ids="+ids,
 	        dataType: 'json',
 	        async: false,
 	        success: function(data) {

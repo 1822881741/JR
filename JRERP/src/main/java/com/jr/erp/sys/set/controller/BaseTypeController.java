@@ -1,4 +1,4 @@
-package com.jr.erp.sys.controller;
+package com.jr.erp.sys.set.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,16 +20,16 @@ import com.jr.erp.base.utils.BasePageForm;
 import com.jr.erp.base.utils.Ret;
 import com.jr.erp.base.utils.RetJqGridPage;
 import com.jr.erp.base.utils.RetPage;
-import com.jr.erp.sys.entity.SysCategorySet;
-import com.jr.erp.sys.entity.SysCategorySetExample;
 import com.jr.erp.sys.entity.SysClassify;
 import com.jr.erp.sys.entity.SysClassifyExample;
 import com.jr.erp.sys.entity.SysUser;
-import com.jr.erp.sys.service.ISysCategorySetService;
 import com.jr.erp.sys.service.ISysClassifyService;
+import com.jr.erp.sys.set.entity.BaseType;
+import com.jr.erp.sys.set.entity.BaseTypeExample;
+import com.jr.erp.sys.set.service.IBaseTypeService;
 
 /**     
- * 类名称：SysCategorySetController    
+ * 类名称：BaseTypeController    
  * 类描述：通用类型    
  * 创建人：Administrator    
  * 创建时间：2018年9月17日 上午10:19:59    
@@ -39,29 +39,29 @@ import com.jr.erp.sys.service.ISysClassifyService;
  * @version  1.0    
  */
 @Controller
-@RequestMapping("/sysCategorySet")
-public class SysCategorySetController
+@RequestMapping("/baseType")
+public class BaseTypeController
 {
 
     @Autowired
-    private ISysCategorySetService sysCategorySetService;
+    private IBaseTypeService baseTypeService;
 
     @Autowired
     private ISysClassifyService sysClassifyService;
+    
     /**    
-     * viewStore(这里用一句话描述这个方法的作用)    
-     * 跳转到门店页面       
-     * @param @param id
+     * viewBaseType(这里用一句话描述这个方法的作用)    
+     * 跳转到基础类型页面       
      * @param @param request
      * @param @param model
      * @param @return     
      * @return String
      * @Exception 异常对象
     */
-    @RequestMapping(value = "/viewCategorySet.do")
-    public String viewCommonType(HttpServletRequest request, Model model)
+    @RequestMapping(value = "/viewBaseType.do")
+    public String viewBaseType(HttpServletRequest request, Model model)
     {
-        return "sys/category/viewCategorySet";
+        return "sys/baseType/viewBaseType";
     }
     
     /**    
@@ -72,17 +72,15 @@ public class SysCategorySetController
      * @return RetPage
      * @Exception 异常对象
     */
-    @RequestMapping(value = "/getCategoryData.do")
+    @RequestMapping(value = "/getBaseTypeData.do")
     @ResponseBody
-    public RetJqGridPage getCategoryData(BasePageForm pageForm,String categoryType,HttpServletRequest request)
+    public RetJqGridPage getBaseTypeData(BasePageForm pageForm,String typeName,HttpServletRequest request)
     {
         SysUser user = ShiroUtils.getSysUser();
-        SysCategorySetExample exampale = new SysCategorySetExample();
-//        exampale.setPage(pageForm.getPage());
-//        exampale.setLimit(pageForm.getLimit());
+        BaseTypeExample exampale = new BaseTypeExample();
         exampale.setOrderByClause("id desc");
-        exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andCategoryTypeEqualTo(categoryType);
-        RetPage page = sysCategorySetService.selectPage(exampale);
+        exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andTypeNameEqualTo(typeName);
+        RetPage page = baseTypeService.selectPage(exampale);
         return RetJqGridPage.ok(page.getCount(), page.getData());
     }
     
@@ -95,12 +93,12 @@ public class SysCategorySetController
      * @return Ret
      * @Exception 异常对象
     */
-    @RequestMapping(value = "/saveCategory.do")
+    @RequestMapping(value = "/saveBaseType.do")
     @ResponseBody
-    public Ret saveCategory(@RequestBody ArrayList<SysCategorySet> categoryList,HttpServletRequest request)
+    public Ret saveBaseType(@RequestBody ArrayList<BaseType> categoryList,HttpServletRequest request)
     {
         SysUser user = ShiroUtils.getSysUser();
-        List<String> existList = sysCategorySetService.saveCategory(user.getCompanyNo(), categoryList);
+        List<String> existList = baseTypeService.saveBaseType(user.getCompanyNo(), categoryList);
         if (CollectionUtils.isNotEmpty(existList))
         {
             return Ret.warn("保存成功。", existList);
@@ -119,15 +117,15 @@ public class SysCategorySetController
      * @return Ret
      * @Exception 异常对象
     */
-    @RequestMapping(value = "/updateCategory.do")
+    @RequestMapping(value = "/updateBaseType.do")
     @ResponseBody
-    public Ret updateCategory(SysCategorySet category,HttpServletRequest request)
+    public Ret updateBaseType(BaseType category,HttpServletRequest request)
     {
         SysUser user = ShiroUtils.getSysUser();
         try
         {
             category.setCompanyNo(user.getCompanyNo());
-            sysCategorySetService.updateCategory(category);
+            baseTypeService.updateBaseType(category);
         } catch (Exception e)
         {
             if (e instanceof ServiceAccessException)
@@ -147,16 +145,16 @@ public class SysCategorySetController
      * @return Ret
      * @Exception 异常对象
     */
-    @RequestMapping(value = "/deleteCategorySet.do")
+    @RequestMapping(value = "/deleteBaseType.do")
     @ResponseBody
-    public Ret deleteCategorySet(Integer[] ids,HttpServletRequest request)
+    public Ret deleteBaseType(Integer[] ids,HttpServletRequest request)
     {
         SysUser user = ShiroUtils.getSysUser();
         try
         {
-            SysCategorySetExample exampale = new SysCategorySetExample();
+            BaseTypeExample exampale = new BaseTypeExample();
             exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andIdIn(Arrays.asList(ids));
-            sysCategorySetService.deleteByExample(exampale);
+            baseTypeService.deleteByExample(exampale);
         } catch (Exception e)
         {
             if (e instanceof ServiceAccessException)

@@ -16,15 +16,14 @@ import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.base.utils.Ret;
 import com.jr.erp.sys.entity.SysAreaInfoExample;
-import com.jr.erp.sys.entity.SysCategorySetExample;
 import com.jr.erp.sys.entity.SysClassify;
 import com.jr.erp.sys.entity.SysStoreExample;
 import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.service.ISysAreaInfoService;
-import com.jr.erp.sys.service.ISysCategorySetService;
 import com.jr.erp.sys.service.ISysClassifyService;
 import com.jr.erp.sys.service.ISysCounterService;
 import com.jr.erp.sys.service.ISysStoreService;
+import com.jr.erp.sys.set.service.IBaseTypeService;
 
 /**     
  * 类名称：SysElementController    
@@ -51,7 +50,7 @@ public class SysElementController
     private ISysCounterService sysCounterService;
     
     @Autowired
-    private ISysCategorySetService sysCategorySetService;
+    private IBaseTypeService baseTypeService;
     
     @Autowired
     private ISysClassifyService sysClassifyService;
@@ -85,31 +84,31 @@ public class SysElementController
                     data.put("secondType", secondTypeMap);
                     break;   
                 case "goldName":
-                    List<String> goldName = sysCategorySetService.getNameList(user.getCompanyNo(),element);
+                    List<String> goldName = baseTypeService.getNameList(user.getCompanyNo(),element);
                     data.put("goldName", goldName);
                     break;   
                 case "jewelName":
-                    List<String> jewelName= sysCategorySetService.getNameList(user.getCompanyNo(),element);
+                    List<String> jewelName= baseTypeService.getNameList(user.getCompanyNo(),element);
                     data.put("jewelName", jewelName);
                     break;  
                 case "categoryName":
-                    List<String> categoryName= sysCategorySetService.getNameList(user.getCompanyNo(),element);
+                    List<String> categoryName= baseTypeService.getNameList(user.getCompanyNo(),element);
                     data.put("categoryName", categoryName);
                     break;  
                 case "goldPercent":
-                    List<String> goldPercent= sysCategorySetService.getNameList(user.getCompanyNo(),element);
+                    List<String> goldPercent= baseTypeService.getNameList(user.getCompanyNo(),element);
                     data.put("goldPercent", goldPercent);
                     break;  
                 case "firstClassify":
-                    List<String> firstClassify= sysCategorySetService.getNameList(user.getCompanyNo(),element);
+                    List<String> firstClassify= baseTypeService.getNameList(user.getCompanyNo(),element);
                     data.put("firstClassify", firstClassify);
                     break;  
                 case "secondClassify":
-                    List<String> secondClassify= sysCategorySetService.getNameList(user.getCompanyNo(),element);
+                    List<String> secondClassify= baseTypeService.getNameList(user.getCompanyNo(),element);
                     data.put("secondClassify", secondClassify);
                     break; 
                 case "thirdClassify":
-                    List<String> thirdClassify= sysCategorySetService.getNameList(user.getCompanyNo(),element);
+                    List<String> thirdClassify= baseTypeService.getNameList(user.getCompanyNo(),element);
                     data.put("thirdClassify", thirdClassify);
                     break; 
                 case "labelTpl":

@@ -1,16 +1,16 @@
-package com.jr.erp.sys.service;
+package com.jr.erp.sys.set.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.mybatis.IBaseService;
-import com.jr.erp.sys.entity.SysCategorySet;
+import com.jr.erp.sys.set.entity.BaseType;
 
 /**
  * 系统管理service
  */
-public interface ISysCategorySetService extends IBaseService<BaseEntity>{
+public interface IBaseTypeService extends IBaseService<BaseEntity>{
 
     /**    
      * saveCounter(这里用一句话描述这个方法的作用)    
@@ -20,7 +20,7 @@ public interface ISysCategorySetService extends IBaseService<BaseEntity>{
      * @return void
      * @Exception 异常对象
     */
-    void saveCategory(SysCategorySet store);
+    void saveBaseType(BaseType store);
 
     /**    
      * updateCounter(这里用一句话描述这个方法的作用)    
@@ -29,7 +29,7 @@ public interface ISysCategorySetService extends IBaseService<BaseEntity>{
      * @return void
      * @Exception 异常对象
     */
-    void updateCategory(SysCategorySet store);
+    void updateBaseType(BaseType store);
 
     /**    
      * saveCategory(这里用一句话描述这个方法的作用)    
@@ -40,7 +40,7 @@ public interface ISysCategorySetService extends IBaseService<BaseEntity>{
      * @return List<String>
      * @Exception 异常对象
     */
-    List<String> saveCategory(String companyNo, ArrayList<SysCategorySet> categoryList);
+    List<String> saveBaseType(String companyNo, ArrayList<BaseType> categoryList);
 
     /**    
      * getNameList(这里用一句话描述这个方法的作用)    

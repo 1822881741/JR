@@ -1,4 +1,4 @@
-package com.jr.erp.sys.service.impl;
+package com.jr.erp.sys.set.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import com.jr.erp.base.exception.ServiceAccessException;
 import com.jr.erp.base.mybatis.AbstractBaseService;
 import com.jr.erp.base.mybatis.BaseEntity;
-import com.jr.erp.sys.entity.SysCategorySet;
-import com.jr.erp.sys.entity.SysCategorySetExample;
-import com.jr.erp.sys.service.ISysCategorySetService;
+import com.jr.erp.sys.set.entity.BaseType;
+import com.jr.erp.sys.set.entity.BaseTypeExample;
+import com.jr.erp.sys.set.service.IBaseTypeService;
 
 /**     
  * 类名称：SysCounterServiceImpl    
@@ -24,23 +24,21 @@ import com.jr.erp.sys.service.ISysCategorySetService;
  * 修改备注：    
  * @version  1.0    
  */
-@Service(value = "sysCategorySetService")
-public class SysCategorySetServiceImpl extends AbstractBaseService<SysCategorySet> implements ISysCategorySetService
+@Service(value = "baseTypeService")
+public class BaseTypeServiceImpl extends AbstractBaseService<BaseType> implements IBaseTypeService
 {
     
-    @Autowired
-    ISysCategorySetService sysCategorySetService;
     @Override
-    public void saveCategory(SysCategorySet counter)
+    public void saveBaseType(BaseType counter)
     {
         this.insert(counter);
     }
     @Override
-    public void updateCategory(SysCategorySet counter)
+    public void updateBaseType(BaseType counter)
     {
-        SysCategorySetExample example = new SysCategorySetExample();
-        example.createCriteria().andCompanyNoEqualTo(counter.getCompanyNo()).andCategoryTypeEqualTo(counter.getCategoryType()).andNameEqualTo(counter.getName());
-        List<BaseEntity> list = sysCategorySetService.selectByExample(example);
+        BaseTypeExample example = new BaseTypeExample();
+        example.createCriteria().andCompanyNoEqualTo(counter.getCompanyNo()).andTypeNameEqualTo(counter.getTypeName()).andNameEqualTo(counter.getName());
+        List<BaseEntity> list = this.selectByExample(example);
         if (CollectionUtils.isNotEmpty(list))
         {
             for (BaseEntity baseEntity : list)
@@ -51,22 +49,22 @@ public class SysCategorySetServiceImpl extends AbstractBaseService<SysCategorySe
                 }
             }
         }
-        SysCategorySet newCategory = new SysCategorySet();
+        BaseType newCategory = new BaseType();
         newCategory.setId(counter.getId());
         newCategory.setName(counter.getName());
         this.updateByPrimaryKeySelective(newCategory);
     }
     @Override
-    public List<String> saveCategory(String companyNo, ArrayList<SysCategorySet> categoryList)
+    public List<String> saveBaseType(String companyNo, ArrayList<BaseType> categoryList)
     {
         List<String> exist = new ArrayList<String>();
         if (CollectionUtils.isNotEmpty(categoryList))
         {
-            for (SysCategorySet sysCategorySet : categoryList)
+            for (BaseType sysCategorySet : categoryList)
             {
-                SysCategorySetExample example = new SysCategorySetExample();
-                example.createCriteria().andCompanyNoEqualTo(companyNo).andCategoryTypeEqualTo(sysCategorySet.getCategoryType()).andNameEqualTo(sysCategorySet.getName());
-                if (CollectionUtils.isNotEmpty(sysCategorySetService.selectByExample(example)))
+                BaseTypeExample example = new BaseTypeExample();
+                example.createCriteria().andCompanyNoEqualTo(companyNo).andTypeNameEqualTo(sysCategorySet.getTypeName()).andNameEqualTo(sysCategorySet.getName());
+                if (CollectionUtils.isNotEmpty(this.selectByExample(example)))
                 {
                     exist.add(sysCategorySet.getName());
                 } else
@@ -82,15 +80,15 @@ public class SysCategorySetServiceImpl extends AbstractBaseService<SysCategorySe
     @Override
     public List<String> getNameList(String companyNo, String element)
     {
-        SysCategorySetExample example = new SysCategorySetExample();
-        example.createCriteria().andCompanyNoEqualTo(companyNo).andCategoryTypeEqualTo(element);
+        BaseTypeExample example = new BaseTypeExample();
+        example.createCriteria().andCompanyNoEqualTo(companyNo).andTypeNameEqualTo(element);
         List<BaseEntity> list = this.selectByExample(example);
         List<String> nameList = new ArrayList<String>();
         if (CollectionUtils.isNotEmpty(list))
         {
             for (BaseEntity temp : list)
             {
-                SysCategorySet set = (SysCategorySet) temp;
+                BaseType set = (BaseType) temp;
                 nameList.add(set.getName());
             }
         }

@@ -1,14 +1,12 @@
-package com.jr.erp.sys.entity;
+package com.jr.erp.sys.set.entity;
 
 import com.jr.erp.base.mybatis.BaseEntity;
 
-public class SysCategorySet extends BaseEntity {
-    private static final long serialVersionUID = 1959071855187674614L;
-
+public class BaseType extends BaseEntity {
     /**
      * 主分类
      */
-    private String categoryType;
+    private String typeName;
 
     /**
      * 显示名称
@@ -16,7 +14,7 @@ public class SysCategorySet extends BaseEntity {
     private String name;
 
     /**
-     * 是否是系统类型1：是 ，0不是
+     * 是否是系统类型0：是 ，1不是
      */
     private Integer isSysDef;
 
@@ -32,18 +30,18 @@ public class SysCategorySet extends BaseEntity {
 
     /**
      * 主分类
-     * @return categoryType 主分类
+     * @return typeName 主分类
      */
-    public String getCategoryType() {
-        return categoryType;
+    public String getTypeName() {
+        return typeName;
     }
 
     /**
      * 主分类
-     * @param categoryType 主分类
+     * @param typeName 主分类
      */
-    public void setCategoryType(String categoryType) {
-        this.categoryType = categoryType == null ? null : categoryType.trim();
+    public void setTypeName(String typeName) {
+        this.typeName = typeName == null ? null : typeName.trim();
     }
 
     /**
@@ -63,8 +61,8 @@ public class SysCategorySet extends BaseEntity {
     }
 
     /**
-     * 是否是系统类型 0 不是 ，1是
-     * @return isSysDef 是否是系统类型 0 不是 ，1是
+     * 是否是系统类型0：是 ，1不是
+     * @return isSysDef 是否是系统类型0：是 ，1不是
      */
     public Integer getIsSysDef() {
         return isSysDef;

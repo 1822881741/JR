@@ -7,22 +7,20 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jr.erp.base.mybatis.AbstractBaseService;
 import com.jr.erp.base.mybatis.BaseEntity;
-import com.jr.erp.base.service.impl.IFileUploadService;
 import com.jr.erp.sys.entity.SysGoodsCategory;
 import com.jr.erp.sys.entity.SysGoodsCategoryExample;
 import com.jr.erp.sys.entity.SysPurchaseSecheme;
 import com.jr.erp.sys.entity.SysPurchaseSechemeItem;
 import com.jr.erp.sys.entity.SysPurchaseSechemeItemExample;
-import com.jr.erp.sys.service.ISysCategorySetService;
 import com.jr.erp.sys.service.ISysGoodsCategoryService;
 import com.jr.erp.sys.service.ISysPurchaseSechemeItemService;
 import com.jr.erp.sys.service.ISysPurchaseSechemeService;
+import com.jr.erp.sys.set.service.IBaseTypeService;
 import com.jr.erp.sys.vo.PurchaseColumnVo;
 
 /**     
@@ -43,7 +41,7 @@ public class SysPurchaseSechemeServiceImpl extends AbstractBaseService<SysPurcha
     ISysPurchaseSechemeItemService sysPurchaseSechemeItemService; 
     
     @Autowired
-    ISysCategorySetService sysCategorySetService;
+    IBaseTypeService baseTypeService;
     
     @Autowired
     ISysGoodsCategoryService sysGoodsCategoryService;
@@ -199,7 +197,7 @@ public class SysPurchaseSechemeServiceImpl extends AbstractBaseService<SysPurcha
                 case 3:
                     // 普通的通用类型使用简单select即可
                     String key = importColumnVo.getBaseClassKey();
-                    List<String> nameList = sysCategorySetService.getNameList(importStrategy.getCompanyNo(), key);
+                    List<String> nameList = baseTypeService.getNameList(importStrategy.getCompanyNo(), key);
                     nameList.add(0, "");
                     setInfo.put("type", "dropdown");
                     setInfo.put("source", nameList);

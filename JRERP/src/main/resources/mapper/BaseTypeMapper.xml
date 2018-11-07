@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jr.erp.sys.dao.SysCategorySetMapper">
-  <resultMap id="BaseResultMap" type="com.jr.erp.sys.entity.SysCategorySet">
+<mapper namespace="com.jr.erp.sys.set.dao.BaseTypeMapper">
+  <resultMap id="BaseResultMap" type="com.jr.erp.sys.set.entity.BaseType">
     <id column="Id" jdbcType="INTEGER" property="id" />
     <result column="companyNo" jdbcType="VARCHAR" property="companyNo" />
-    <result column="categoryType" jdbcType="VARCHAR" property="categoryType" />
+    <result column="typeName" jdbcType="VARCHAR" property="typeName" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="isSysDef" jdbcType="TINYINT" property="isSysDef" />
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
@@ -40,15 +40,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    Id, companyNo, categoryType, name, isSysDef, remarks, seq
+    Id, companyNo, typeName, name, isSysDef, remarks, seq
   </sql>
-  <select id="selectByExample" parameterType="com.jr.erp.sys.entity.SysCategorySetExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.jr.erp.sys.set.entity.BaseTypeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from sys_category_set
+    from st_base_type
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -64,41 +64,41 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from sys_category_set
+    from st_base_type
     where Id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from sys_category_set
+    delete from st_base_type
     where Id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.jr.erp.sys.entity.SysCategorySetExample">
-    delete from sys_category_set
+  <delete id="deleteByExample" parameterType="com.jr.erp.sys.set.entity.BaseTypeExample">
+    delete from st_base_type
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.jr.erp.sys.entity.SysCategorySet">
-    insert into sys_category_set (Id, companyNo, categoryType, 
+  <insert id="insert" parameterType="com.jr.erp.sys.set.entity.BaseType">
+    insert into st_base_type (Id, companyNo, typeName, 
       name, isSysDef, remarks, 
       seq)
-    values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{categoryType,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{typeName,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{isSysDef,jdbcType=TINYINT}, #{remarks,jdbcType=VARCHAR}, 
       #{seq,jdbcType=INTEGER})
   </insert>
-  <select id="countByExample" parameterType="com.jr.erp.sys.entity.SysCategorySetExample" resultType="java.lang.Long">
-    select count(*) from sys_category_set
+  <select id="countByExample" parameterType="com.jr.erp.sys.set.entity.BaseTypeExample" resultType="java.lang.Long">
+    select count(*) from st_base_type
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jr.erp.sys.entity.SysCategorySet">
-    update sys_category_set
+  <update id="updateByPrimaryKeySelective" parameterType="com.jr.erp.sys.set.entity.BaseType">
+    update st_base_type
     <set>
       <if test="companyNo != null">
         companyNo = #{companyNo,jdbcType=VARCHAR},
       </if>
-      <if test="categoryType != null">
-        categoryType = #{categoryType,jdbcType=VARCHAR},
+      <if test="typeName != null">
+        typeName = #{typeName,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
@@ -115,10 +115,10 @@
     </set>
     where Id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jr.erp.sys.entity.SysCategorySet">
-    update sys_category_set
+  <update id="updateByPrimaryKey" parameterType="com.jr.erp.sys.set.entity.BaseType">
+    update st_base_type
     set companyNo = #{companyNo,jdbcType=VARCHAR},
-      categoryType = #{categoryType,jdbcType=VARCHAR},
+      typeName = #{typeName,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       isSysDef = #{isSysDef,jdbcType=TINYINT},
       remarks = #{remarks,jdbcType=VARCHAR},

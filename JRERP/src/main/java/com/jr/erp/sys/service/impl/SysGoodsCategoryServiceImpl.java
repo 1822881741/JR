@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.jr.erp.base.mybatis.AbstractBaseService;
 import com.jr.erp.sys.element.dto.SysGoodsCategoryDTO;
-import com.jr.erp.sys.entity.SysCategorySet;
-import com.jr.erp.sys.entity.SysCategorySetExample;
 import com.jr.erp.sys.entity.SysGoodsCategory;
 import com.jr.erp.sys.entity.SysGoodsCategoryExample;
 import com.jr.erp.sys.service.ISysGoodsCategoryService;
+import com.jr.erp.sys.set.entity.BaseType;
+import com.jr.erp.sys.set.entity.BaseTypeExample;
 
 /**     
  * 类名称：SysCounterServiceImpl    
@@ -110,17 +110,6 @@ public class SysGoodsCategoryServiceImpl extends AbstractBaseService<SysGoodsCat
         
 //        this.insert(counter);
     }
-    @Override
-    public void updateCategory(SysCategorySet counter)
-    {
-        SysCategorySetExample example = new SysCategorySetExample();
-        example.createCriteria().andCompanyNoEqualTo(counter.getCompanyNo()).andCategoryTypeEqualTo(counter.getCategoryType()).andNameEqualTo(counter.getName());
-        SysCategorySet newCategory = new SysCategorySet();
-        newCategory.setId(counter.getId());
-        newCategory.setName(counter.getName());
-        this.updateByPrimaryKeySelective(newCategory);
-    }
-    
     /**    
      * recursive(这里用一句话描述这个方法的作用)    
      * 获取笛卡尔积       

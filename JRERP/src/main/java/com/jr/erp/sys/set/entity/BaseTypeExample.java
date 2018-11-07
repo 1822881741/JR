@@ -1,12 +1,12 @@
-package com.jr.erp.sys.entity;
+package com.jr.erp.sys.set.entity;
 
 import com.jr.erp.base.mybatis.BaseExample;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SysCategorySetExample extends BaseExample {
+public class BaseTypeExample extends BaseExample {
     /**
-     * sys_category_set
+     * st_base_type
      */
     protected List<Criteria> oredCriteria;
 
@@ -14,7 +14,7 @@ public class SysCategorySetExample extends BaseExample {
      *
      * @mbg.generated
      */
-    public SysCategorySetExample() {
+    public BaseTypeExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -76,7 +76,7 @@ public class SysCategorySetExample extends BaseExample {
     }
 
     /**
-     * sys_category_set null
+     * st_base_type null
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -249,73 +249,73 @@ public class SysCategorySetExample extends BaseExample {
             return (Criteria) this;
         }
 
-        public Criteria andCategoryTypeIsNull() {
-            addCriterion("categoryType is null");
+        public Criteria andTypeNameIsNull() {
+            addCriterion("typeName is null");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryTypeIsNotNull() {
-            addCriterion("categoryType is not null");
+        public Criteria andTypeNameIsNotNull() {
+            addCriterion("typeName is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryTypeEqualTo(String value) {
-            addCriterion("categoryType =", value, "categoryType");
+        public Criteria andTypeNameEqualTo(String value) {
+            addCriterion("typeName =", value, "typeName");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryTypeNotEqualTo(String value) {
-            addCriterion("categoryType <>", value, "categoryType");
+        public Criteria andTypeNameNotEqualTo(String value) {
+            addCriterion("typeName <>", value, "typeName");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryTypeGreaterThan(String value) {
-            addCriterion("categoryType >", value, "categoryType");
+        public Criteria andTypeNameGreaterThan(String value) {
+            addCriterion("typeName >", value, "typeName");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryTypeGreaterThanOrEqualTo(String value) {
-            addCriterion("categoryType >=", value, "categoryType");
+        public Criteria andTypeNameGreaterThanOrEqualTo(String value) {
+            addCriterion("typeName >=", value, "typeName");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryTypeLessThan(String value) {
-            addCriterion("categoryType <", value, "categoryType");
+        public Criteria andTypeNameLessThan(String value) {
+            addCriterion("typeName <", value, "typeName");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryTypeLessThanOrEqualTo(String value) {
-            addCriterion("categoryType <=", value, "categoryType");
+        public Criteria andTypeNameLessThanOrEqualTo(String value) {
+            addCriterion("typeName <=", value, "typeName");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryTypeLike(String value) {
-            addCriterion("categoryType like", value, "categoryType");
+        public Criteria andTypeNameLike(String value) {
+            addCriterion("typeName like", value, "typeName");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryTypeNotLike(String value) {
-            addCriterion("categoryType not like", value, "categoryType");
+        public Criteria andTypeNameNotLike(String value) {
+            addCriterion("typeName not like", value, "typeName");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryTypeIn(List<String> values) {
-            addCriterion("categoryType in", values, "categoryType");
+        public Criteria andTypeNameIn(List<String> values) {
+            addCriterion("typeName in", values, "typeName");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryTypeNotIn(List<String> values) {
-            addCriterion("categoryType not in", values, "categoryType");
+        public Criteria andTypeNameNotIn(List<String> values) {
+            addCriterion("typeName not in", values, "typeName");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryTypeBetween(String value1, String value2) {
-            addCriterion("categoryType between", value1, value2, "categoryType");
+        public Criteria andTypeNameBetween(String value1, String value2) {
+            addCriterion("typeName between", value1, value2, "typeName");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryTypeNotBetween(String value1, String value2) {
-            addCriterion("categoryType not between", value1, value2, "categoryType");
+        public Criteria andTypeNameNotBetween(String value1, String value2) {
+            addCriterion("typeName not between", value1, value2, "typeName");
             return (Criteria) this;
         }
 
@@ -581,7 +581,7 @@ public class SysCategorySetExample extends BaseExample {
     }
 
     /**
-     * sys_category_set
+     * st_base_type
      */
     public static class Criteria extends GeneratedCriteria {
 
@@ -591,7 +591,7 @@ public class SysCategorySetExample extends BaseExample {
     }
 
     /**
-     * sys_category_set null
+     * st_base_type null
      */
     public static class Criterion {
         private String condition;

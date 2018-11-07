@@ -83,9 +83,9 @@ function getJqgridCategory(type,tableDom,pagerDom) {
 	}
 }
 
-function getJqgridCategorySet(type,tableDom,pagerDom) {
+function getBaseType(type,tableDom,pagerDom) {
 	return config = {
-		url : 'sysCategorySet/getCategoryData.do?categoryType='+type,
+		url : 'baseType/getBaseTypeData.do?typeName='+type,
 		datatype : "json",
 		colNames : [ '操作', '名称','描述' ],
 		colModel : [ {
