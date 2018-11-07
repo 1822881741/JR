@@ -120,7 +120,7 @@ function editCounter(storeId){
 	layer.open({
 		type : 2,
 		title : "新增/修改柜台",
-		area : ['450px','350px'],
+		area : ['450px','280px'],
 		shade : 0.8,
 		id : 'lay_storeInfo', //设定一个id，防止重复弹出
 		btn : [ '保存', '取消' ],
@@ -129,7 +129,7 @@ function editCounter(storeId){
 		yes : function(index, layero) {
 			 var result = $(layero).find("iframe")[0].contentWindow.submitData();
 			 if(result){
-				 $("#jqgrid").setGridParam({datatype:'json'}).trigger('reloadGrid');
+				 $("#jqgrid").setGridParam({datatype:'json',url: "sysCounter/getCounterListData.do?pAreaCode="+code}).trigger('reloadGrid');
 				 layer.close(index);
 			 }
 		}

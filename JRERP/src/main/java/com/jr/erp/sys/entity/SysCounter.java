@@ -3,9 +3,6 @@ package com.jr.erp.sys.entity;
 import com.jr.erp.base.mybatis.BaseEntity;
 
 public class SysCounter extends BaseEntity {
-
-    private static final long serialVersionUID = -4809791149910761100L;
-
     /**
      * 仓库名称
      */
@@ -25,6 +22,11 @@ public class SysCounter extends BaseEntity {
      * 当前状态 0:停用，1：使用中
      */
     private Integer status;
+
+    /**
+     * 
+     */
+    private String remarks;
 
     /**
      * 仓库名称
@@ -88,5 +90,21 @@ public class SysCounter extends BaseEntity {
      */
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    /**
+     * 
+     * @return remarks 
+     */
+    public String getRemarks() {
+        return remarks;
+    }
+
+    /**
+     * 
+     * @param remarks 
+     */
+    public void setRemarks(String remarks) {
+        this.remarks = remarks == null ? null : remarks.trim();
     }
 }

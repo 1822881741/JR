@@ -33,26 +33,32 @@ public class SysCounterServiceImpl extends AbstractBaseService<SysCounter> imple
     @Override
     public void saveCounter(SysCounter counter, String pAreaCode)
     {
-        SysStore store = (SysStore) sysStoreService.selectByPrimaryKey(counter.getId());
-        if (store != null)
+        if (counter.getId() != null)
         {
-            SysAreaInfo parentArea = sysAreaService.selectByAreaCode(store.getCompanyNo(), store.getAreaCode());
-            String areaCode = sysAreaService.getNextCode(store.getCompanyNo(), store.getAreaCode(), 3);
-            counter.setAreaCode(areaCode);
-            this.insert(counter);
-            
+            // 修改柜台
+            SysAreaInfo areaInfo = sysAreaService.selectByAreaCode(counter.getCompanyNo(), counter.getAreaCode());
+            areaInfo.setStatus(counter.getStatus());
+            areaInfo.setAreaName(counter.getCounterName());
+            sysAreaService.updateByPrimaryKey(areaInfo);
+            this.updateByPrimaryKey(counter);
+        } else
+        {
+            SysAreaInfo areaInfo = sysAreaService.selectByAreaCode(counter.getCompanyNo(), pAreaCode);
+            String newAreaCode = sysAreaService.getNextCode(counter.getCompanyNo(), pAreaCode, 3);
+
             // 保存区域表
             SysAreaInfo area = new SysAreaInfo();
-            area.setParentId(parentArea.getId());
-            area.setAreaCode(areaCode);
-            area.setAreaName(store.getStoreName());
-            area.setCompanyNo(store.getCompanyNo());
+            area.setParentId(areaInfo.getId());
+            area.setAreaCode(newAreaCode);
+            area.setAreaName(counter.getCounterName());
+            area.setCompanyNo(counter.getCompanyNo());
             area.setAreaType(3);
             area.setStatus(counter.getStatus());
             sysAreaService.insert(area);
-        }else
-        {
-            //
+
+            // 新增柜台
+            counter.setAreaCode(newAreaCode);
+            this.insert(counter);
         }
     }
     @Override

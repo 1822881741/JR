@@ -10,7 +10,7 @@
 				data-widget-togglebutton="false" data-widget-deletebutton="false"
 				data-widget-fullscreenbutton="false"
 				data-widget-custombutton="false" data-widget-sortable="false">
-				<div>
+				<div id='jqgridWell'>
 					<table id="jqgrid" class="table table-bordered table-hover table-striped"></table>
 					<div id="pjqgrid"></div>
 				</div>
@@ -34,7 +34,7 @@
 		  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-plus",caption:"",title:"新增记录",position:"first",onClickButton: function(){addStore('');}})
 		  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-refresh",caption:"",title:"刷新",onClickButton: function(){$("#jqgrid").setGridParam({datatype:'json'}).trigger('reloadGrid');},position:"first"});
 	
-		$("#jqgrid").setGridWidth($("#content", parent.document).width()-40);
+		$("#jqgrid").setGridWidth($("#jqgridWell").width());
 		$("#jqgrid").setGridHeight($("#content", parent.document).height()-190);
 		
 		
@@ -61,7 +61,7 @@
 	   	
 		
 		$(window).on("resize",function(){
-			$("#jqgrid").jqGrid( 'setGridWidth', $("#content", parent.document).width()-40);
+			$("#jqgrid").jqGrid( 'setGridWidth', $("#jqgridWell").width());
 		})
 	});
 	
