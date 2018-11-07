@@ -98,7 +98,7 @@ $(document).ready(function(){
 	  .navButtonAdd('#pjqgrid',{buttonicon:"ui-icon-refresh",caption:"",title:"刷新",onClickButton: function(){$("#jqgrid").setGridParam({datatype:'json'}).trigger('reloadGrid');},position:"first"});
 	$("#jqgrid").setCaption("属性设置 >>"+$($(".categoryMain")[0]).html());
 	
-	$("#jqgrid").setGridWidth($("jqgridWell").width()-40);
+	$("#jqgrid").setGridWidth($("#jqgridWell").width());
 	$("#jqgrid").setGridHeight($("#content", parent.document).height()-260);
 		
 	$(".ui-pg-div").removeClass().addClass("btn btn-sm btn-default");
@@ -119,7 +119,7 @@ $(document).ready(function(){
 	})
 	
 	$(window).on("resize",function(){
-		$("#jqgrid").jqGrid( 'setGridWidth', $("jqgridWell").width()-40);
+		$("#jqgrid").jqGrid( 'setGridWidth', $("#jqgridWell").width());
 	})
 });
 function edit(id){
