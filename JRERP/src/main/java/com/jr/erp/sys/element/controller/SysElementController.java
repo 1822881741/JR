@@ -16,14 +16,14 @@ import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.base.utils.Ret;
 import com.jr.erp.sys.entity.SysAreaInfoExample;
-import com.jr.erp.sys.entity.SysClassify;
 import com.jr.erp.sys.entity.SysStoreExample;
 import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.service.ISysAreaInfoService;
-import com.jr.erp.sys.service.ISysClassifyService;
 import com.jr.erp.sys.service.ISysCounterService;
 import com.jr.erp.sys.service.ISysStoreService;
+import com.jr.erp.sys.set.entity.GoodsGroup;
 import com.jr.erp.sys.set.service.IBaseTypeService;
+import com.jr.erp.sys.set.service.IGoodsGroupService;
 
 /**     
  * 类名称：SysElementController    
@@ -53,7 +53,7 @@ public class SysElementController
     private IBaseTypeService baseTypeService;
     
     @Autowired
-    private ISysClassifyService sysClassifyService;
+    private IGoodsGroupService goodsGroupService;
     
     @RequestMapping(value="/getElements.do")
     @ResponseBody
@@ -80,7 +80,7 @@ public class SysElementController
                     data.put("storeInfo", storeList);
                     break;
                 case "secondType":
-                    Map<String,List<SysClassify>> secondTypeMap = sysClassifyService.getInUseClassify(user.getCompanyNo());
+                    Map<String,List<GoodsGroup>> secondTypeMap = goodsGroupService.getInUseClassify(user.getCompanyNo());
                     data.put("secondType", secondTypeMap);
                     break;   
                 case "goldName":

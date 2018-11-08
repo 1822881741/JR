@@ -26,15 +26,15 @@ import com.alibaba.excel.support.ExcelTypeEnum;
 import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.base.utils.Ret;
-import com.jr.erp.sys.entity.SysClassifyExample;
 import com.jr.erp.sys.entity.SysPurchaseColumn;
 import com.jr.erp.sys.entity.SysPurchaseColumnExample;
 import com.jr.erp.sys.entity.SysPurchaseSecheme;
 import com.jr.erp.sys.entity.SysPurchaseSechemeItem;
 import com.jr.erp.sys.entity.SysUser;
-import com.jr.erp.sys.service.ISysClassifyService;
 import com.jr.erp.sys.service.ISysPurchaseColumnService;
 import com.jr.erp.sys.service.ISysPurchaseSechemeService;
+import com.jr.erp.sys.set.entity.GoodsGroupExample;
+import com.jr.erp.sys.set.service.IGoodsGroupService;
 
 @Controller
 @RequestMapping("/purchaseSecheme")
@@ -47,7 +47,7 @@ public class PurchaseSechemeController {
     private ISysPurchaseSechemeService sysPurchaseSechemeService;
     
     @Autowired
-    private ISysClassifyService sysClassifyService;
+    private IGoodsGroupService sysClassifyService;
     /**    
      * editSecheme(这里用一句话描述这个方法的作用)    
      * 保持方案       
@@ -88,7 +88,7 @@ public class PurchaseSechemeController {
         }
         model.addAttribute("allColumn", allColumn);
         
-        SysClassifyExample example2 = new SysClassifyExample();
+        GoodsGroupExample example2 = new GoodsGroupExample();
         example2.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andStatusEqualTo(1);
         List<BaseEntity> allClassify = sysClassifyService.selectByExample(example);
         model.addAttribute("allClassify", allClassify);

@@ -1,0 +1,1 @@
+	var data=[{"barcode":"1001","goodsName":"zds","num":1},{"barcode":"1001","goodsName":"zds","num":1},{"barcode":"1001","goodsName":"zds","num":1}]

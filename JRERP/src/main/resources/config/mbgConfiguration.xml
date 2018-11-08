@@ -55,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 			<generatedKey column="id" sqlStatement="MySql" identity="true"/>
 			
 			</table--> 
-		<table schema="mybatis" tableName="st_base_type"  domainObjectName="BaseType"  delimitIdentifiers="false"
+		<table schema="mybatis" tableName="st_goodsGroup"  domainObjectName="GoodsGroup"  delimitIdentifiers="false"
 			selectByPrimaryKeyQueryId="true" enableDeleteByPrimaryKey="true"
 			enableCountByExample="true" enableUpdateByPrimaryKey="true" enableUpdateByExample="false" >
 			<property name="useActualColumnNames" value="true" />

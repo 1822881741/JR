@@ -125,9 +125,9 @@ function getBaseType(type,tableDom,pagerDom) {
 		recordtext : "共{1}记录"
 	}
 }
-function getJqgridClassify(type,tableDom,pagerDom) {
+function getJqgridGoodsGroup(type,tableDom,pagerDom) {
 	return config = {
-		url : 'sysCategorySet/getClassifyData.do?firstType='+type,
+		url : 'goodsGroup/getGoodsGroupData.do?firstType='+type,
 		datatype : "json",
 		colNames : [ '操作', '大类名称', '小类名称', '销售方式', '兑换', '状态','描述' ],
 		colModel : [ {
