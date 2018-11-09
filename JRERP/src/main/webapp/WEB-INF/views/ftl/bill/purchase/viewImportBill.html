@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <#include "/header-smart.html" />
 <link rel="stylesheet" href="static/plugins/layui/css/layui.css" media="all">
-<link rel="stylesheet" type="text/css" href="static/plugins/handsontable/handsontable.full.min.css?v=21">
 <link href="static/plugins/handsontable-select2/select2.css" rel="stylesheet" />
+<link rel="stylesheet" href="static/plugins/webix/codebase/webix.css?v=6.0.7" type="text/css" charset="utf-8">
+<link rel="stylesheet" href="static/plugins/webix/codebase/skins/mini.min.css" type="text/css" charset="utf-8">
 <body >
 	<div class="well no-margin">
 	<div class="row">
@@ -43,6 +44,7 @@
 										<div class="panel panel-orange" onclick="choseSecheme(this)" data-secheme=${p.id}>
 											<div class="panel-heading">
 												<h3 class="panel-title">${p.name}</h3>
+												
 											</div>
 											<div class="panel-body no-padding text-align-center">
 												<div class="the-price">
@@ -83,13 +85,8 @@
 							</div>
 						</div>
 						<div class="col-lg-8 col-md-8 col-sm-8 no-padding">
-							<div class="form-group margin-bottom-5 margin-right-5">
-								<div class="layui-upload-drag" id="test10">
-								  <i class="layui-icon"></i>
-								  <p>点击上传，或将文件拖拽到此处</p>
-								  <p id="tips"></p>
-								</div>
-							</div>
+							
+							
 						</div>
 					</div>
 				</div>
@@ -98,9 +95,7 @@
 					<h3><strong>Step 3</strong> - 数据处理</h3>
 					<br>
 					<div class="form-group">
-						<div class="row">
-							<div id="hot"></div>
-						</div>
+						<div id="testA" style="height: 300px;width: 400px;">ssssssssssssss</div>
 					</div>
 				</div>
 				<div class="tab-pane" id="tab4">
@@ -141,10 +136,10 @@
 <script src="static/js/app.js?v=1"></script>
 <script src="static/plugins/layer/layer.js"></script>
 <script src="static/plugins/layui/layui.js?v=1" ></script>
-<script src="static/plugins/handsontable/handsontable.full.js?v=3"></script>
-<script src="static/plugins/handsontable/languages/zh-CN.js"></script>
 <script src="static/zmodel/common/js/htValidate.js?v=2222"></script>
 <script src="static/js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+<script src="static/plugins/webix/codebase/webix.js?v=6.0.7"></script>
+<script src="static/plugins/data.js?v=22"></script>
 <script type="text/javascript">
 	var htValidate = new htValidate();
 	var hot;
@@ -186,25 +181,7 @@
 				$('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).addClass('complete');
 				$('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step').html('<i class="fa fa-check"></i>');
 				if(index ==2){
-					var hotElement = document.querySelector('#hot');
-					var hotSettings = {
-					  data:allData.itemList,
-					  columns:allData.columnConfig,
-					  stretchH: 'all',
-					  colWidths: 100,
-					  width : "100%",
-					  language : "zh-CN",
-					  height: 350,
-					  columnHeaderHeight:35,
-					  rowHeights:35,
-					  rowHeaders: true,
-					  filters: true,
-					  dropdownMenu: ['filter_by_condition','filter_operators','filter_by_condition2','filter_by_value','filter_action_bar'],
-					  contextMenu: true,
-					  columnSorting:true
-					};
-				   hot = new Handsontable(hotElement, hotSettings);
-				}else if(index ==4){
+				}else if(index ==1){
 					var billId  = submitData();
 					if(billId){
 						parent.layer.close(parentIndex); //再执行关闭  
@@ -221,24 +198,8 @@
 	
 	function submitData(){
 		var data = {};
-		var billId;
-		data.itemList=hot.getSourceData();
-		$.ajax({
-		   type: "POST",
-		   url: "purchase/saveImportBill.do?sechemeId="+$("#sechemeId").val(),
-		   dataType:'json',
-		   async:false,
-		   data: JSON.stringify(data),
-		   contentType:"application/json",
-		   success: function(data){
-			 	alert("OK")
-			 	billId=data.data;
-		   },
-	       error:function(){ 
-	    	  alert("ERROR")
-		   }
- 		});
-		return billId;
+	
+		return false;
 	}
 	
 	function choseSecheme(obj){
@@ -246,7 +207,27 @@
 		$(obj).append(" <img src='static/img/ribbon.png' class='ribbon choseClass'>");
 		$("#sechemeId").val($(obj).data("secheme"));
 	}
-	
 </script>
+	<script type="text/javascript" charset="utf-8">
+	grid = webix.ui({
+		container:"testA",
+		view:"datatable",
+		css:"webix_header_border",
+		leftSplit:2,
+		columns:[{"id":"goodsClassify","header":"实际分类","width":100,footer:{text:"Total:"}},{"id":"oldBarCode","header":"原条码","width":100,sort:"int","width": 100,footer:{ content:"summColumn" }},{"id":"goldWeight","header":"金重",sort:"string","width":100,sort:"int","width": 100,footer:{ content:"summColumn" }},{"id":"num","header":"数量","format":"0","width":100},{"id":"goodsName","header":"商品名称","width":100},{"id":"unitPrice","header":"单价","width":100},{"id":"subGoodsName","header":"子名称","width":100},{"id":"costPrice","header":"成本金额","width":100},{"id":"markupRate","header":"加价率","width":100},{"id":"salePriceAmount","header":"标价金额","width":100},{"id":"labelPrice","header":"标价","width":100},{"id":"certificateNo","header":"证书号","width":100},{"id":"archivesNo","header":"商品代码","width":100},{"id":"giaCertificateNo","header":"GIA证书号","width":100},{"id":"styleNo","header":"款号","width":100},{"id":"specialOffersFlag","header":"特价标识","width":100},{"id":"goldPrice","header":"金价","width":100},{"id":"totalGoldWeight","header":"总金重","width":100},{"id":"netGoldWeight","header":"净金重","width":100},{"id":"worksFee4Ke","header":"工费/克","width":100},{"id":"worksFee4Jian","header":"工费/件","width":100},{"id":"worksFee4Total","header":"工费总额","width":100},{"id":"certificateFee","header":"证书费","width":100},{"id":"otherFee","header":"其他费用","width":100},{"id":"fittingsFee","header":"配件金额","width":100},{"id":"oldMaterialLoss","header":"旧料损耗","format":"0.000","width":100},{"id":"sandBlastFee","header":"喷砂镶石","width":100},{"id":"goodsWeight","header":"商品总重","width":100},{"id":"archivesCategory","header":"品类","width":100},{"id":"mainType","header":"核算分类","width":100},{"id":"shortCut","header":"手寸","width":100},{"id":"mainStoneClarity","header":"净度","width":100},{"id":"mainStoneColor","header":"颜色","width":100},{"id":"mainStoneCut","header":"切工","width":100},{"id":"mainStoneFluorescent","header":"荧光","width":100},{"id":"mainStoneSymmetry","header":"对称性","width":100},{"id":"mainStoneBurnished","header":"抛光","width":100},{"id":"peiShiCostPrice","header":"配石成本","width":100},{"id":"peiShiRate","header":"配石倍率","width":100},{"id":"peiShiLabelPrice","header":"配石标价","width":100},{"id":"mainStoneName","header":"主石名称","width":100},{"id":"mainStoneNo","header":"主石号","width":100},{"id":"mainStoneWeight","header":"主石重","width":100},{"id":"mainStoneNum","header":"主石粒数","format":"0","width":100},{"id":"mainStonePrice","header":"主石价","width":100},{"id":"mainStoneMoney","header":"主石金额","width":100},{"id":"subStone1Name","header":"副石名称","width":100},{"id":"subStone1No","header":"副石号","width":100},{"id":"subStone1Weight","header":"副石重","width":100},{"id":"subStone1Num","header":"副石粒数","format":"0","width":100},{"id":"subStone1Price","header":"副石价","width":100},{"id":"subStone1Money","header":"副石金额","width":100},{"id":"subStone2Name","header":"副石2名称","width":100},{"id":"subStone2No","header":"副石2号","width":100},{"id":"subStone2Weight","header":"副石2重","width":100},{"id":"subStone2Num","header":"副石2粒数","format":"0","width":100},{"id":"subStone2Price","header":"副石2价","width":100},{"id":"subStone2Money","header":"副石金额2","width":100},{"id":"subStone3Name","header":"副石名称3","width":100},{"id":"subStone3No","header":"副石3号","width":100},{"id":"subStone3Weight","header":"副石重3","width":100},{"id":"subStone3Num","header":"副石粒数3","format":"0","width":100},{"id":"subStone3Price","header":"副石价3","width":100},{"id":"subStone3Money","header":"副石金额3","width":100},{"id":"labelWorkFee4Ke","header":"标签工费/克","width":100},{"id":"labelWorkFee4Jian","header":"标签工费/件","width":100},{"id":"archivesFineness","header":"成色","width":100},{"id":"archivesStone","header":"石料","width":100},{"id":"measurementMode","header":"计量方式","width":100},{"id":"maoGoldWeight","header":"毛金重","width":100},{"id":"goldLoss","header":"损耗","width":100},{"id":"style","header":"款式","width":100},{"id":"craft","header":"工艺","width":100},{"id":"labelRemarks","header":"标签备注","width":100}],
+		footer:true,
+		select:"cell",
+		clipboard:true,
+		footer:true,
+		data:[{},{},{},{}],
+		height:350,
+		on:{
+		    "onItemClick":function(id, e, trg){
+		    	debugger;
+		        webix.message("Click on row: " + id.row+", column: " + id.column);}
+			}
+	})
+	grid.adjust();
+	</script>
 </html>
 
