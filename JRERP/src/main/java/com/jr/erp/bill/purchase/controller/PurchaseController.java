@@ -136,24 +136,6 @@ public class PurchaseController {
     }
     
     /**    
-     * getSechemConfig(这里用一句话描述这个方法的作用)    
-     * 获取方案配置信息，并渲染       
-     * @param @param sechemeId
-     * @param @param request
-     * @param @param response
-     * @param @return     
-     * @return Ret
-     * @Exception 异常对象
-    */
-    @ResponseBody
-    @RequestMapping(value = "/getSechemConfig.do")
-    public Ret getSechemConfig(Integer sechemeId, HttpServletRequest request, HttpServletResponse response)
-    { 
-        PurchaseColumnVo list = sysPurchaseSechemeService.getPurchaseColumnConfig(sechemeId);
-        return Ret.ok("", JSON.toJSONString(list.getColumnConfig()));
-    }
-    
-    /**    
      * saveImportBill(这里用一句话描述这个方法的作用)    
      * 保存批量导入
      * @param @param billPurchase

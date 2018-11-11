@@ -96,39 +96,31 @@ public class SysPurchaseSechemeServiceImpl extends AbstractBaseService<SysPurcha
         PurchaseColumnVo vo = new PurchaseColumnVo();
         SysPurchaseSecheme importStrategy = this.getById(sechemeId);
         List<JSONObject> coumnsSetList = new ArrayList<JSONObject>();
+        JSONObject rowNo = new JSONObject();
+        rowNo.put("id", "rowNo");
+        rowNo.put("header", "#");
+        rowNo.put("css", "header");
+        rowNo.put("width", 50);
+        coumnsSetList.add(rowNo);
         for (SysPurchaseSechemeItem importColumnVo : importStrategy.getItemList())
         {
             // 添加列设置
             JSONObject setInfo = new JSONObject();
-            setInfo.put("data", importColumnVo.getBeanColumn());
-            setInfo.put("title", importColumnVo.getShowName());
+            setInfo.put("id", importColumnVo.getBeanColumn());
+            setInfo.put("header", importColumnVo.getShowName());
 
             // 商品名称需要特殊处理,并将商品名称用select2的js控件进行渲染
             if (StringUtils.equals(importColumnVo.getBeanColumn(), "goodsName"))
             {
                 SysGoodsCategoryExample condition = new SysGoodsCategoryExample();
-                condition.createCriteria().andCompanyNoEqualTo(importStrategy.getCompanyNo())
-                        //.andFirstTypeEqualTo(importStrategy.getFirstType())
-                        .andSecondTypeEqualTo(importStrategy.getSecondType());
+                condition.createCriteria().andCompanyNoEqualTo(importStrategy.getCompanyNo()).andSecondTypeEqualTo(importStrategy.getSecondType());
                 List<BaseEntity> archives = sysGoodsCategoryService.selectByExample(condition);
                
-                List<String> validateArray = new ArrayList<String>();
-                
                 JSONArray smDataArray = new JSONArray();
                 for (BaseEntity temp : archives)
                 {
                     SysGoodsCategory tempCategory =(SysGoodsCategory) temp;
-                    // 拼装下拉框中的数据下拉框中值和内容的对应关系
-                    JSONObject smData = new JSONObject();
-                    smData.put("categoryId", tempCategory.getId());
-                    smData.put("goodsName", tempCategory.getGoodsName());
-                    smData.put("goldName", tempCategory.getGoldName());
-                    smData.put("jewelName", tempCategory.getJewelName());
-                    smData.put("categoryName", tempCategory.getCategoryName());
-                    smData.put("goldPercent", tempCategory.getGoldPercent());
-                    smDataArray.add(smData);
                     // 单独封装一遍值，进行界面的数据校验
-                    validateArray.add(tempCategory.getGoodsName());
                 }
                 setInfo.put("type", "handsontable");
                 JSONObject handConfig = new JSONObject();
@@ -172,38 +164,54 @@ public class SysPurchaseSechemeServiceImpl extends AbstractBaseService<SysPurcha
                 handConfig.put("columns", columns);
                 handConfig.put("manualColumnResize", true);
                 setInfo.put("handsontable",handConfig);
-            } else if (StringUtils.equals(importColumnVo.getBeanColumn(), "num"))
-            {
-                setInfo.put("type","numeric");
-                setInfo.put("validator", "integerValidator");
-            } else
+            }else
             {
                 switch (importColumnVo.getParamType())
                 {
                 case 1:
-                    setInfo.put("type", "numeric");
-                    setInfo.put("validator", "integerValidator");
+                    setInfo.put("editor", "text");
+                    setInfo.put("intFormat","111111");
+                    setInfo.put("sort", "int");
                     break;
                 case 2:
-                    setInfo.put("type", "numeric");
-                    if (null != importColumnVo.getDigits())
+                    setInfo.put("editor", "text");
+                    switch (importColumnVo.getDigits())
                     {
-                        setInfo.put("format", "0." + "0000000000".substring(0, importColumnVo.getDigits()));
-                    } else
-                    {
-                        setInfo.put("format", "0.00");
+                    case 1:
+                        setInfo.put("numberFormat","1111.0");
+                        break;
+                    case 3:
+                        setInfo.put("numberFormat","1111.000");
+                        break;
+                    case 4:
+                        setInfo.put("numberFormat","1111.0000");
+                        break;
+                    default:
+                        setInfo.put("numberFormat","1111.00");
+                        break;
                     }
+                    setInfo.put("sort", "int");
                     break;
                 case 3:
                     // 普通的通用类型使用简单select即可
                     String key = importColumnVo.getBaseClassKey();
                     List<String> nameList = baseTypeService.getNameList(importStrategy.getCompanyNo(), key);
                     nameList.add(0, "");
-                    setInfo.put("type", "dropdown");
-                    setInfo.put("source", nameList);
+                    JSONArray ja = new JSONArray();
+                    for (String tmp : nameList)
+                    {
+                        JSONObject jb= new JSONObject();
+                        jb.put("id", tmp);
+                        jb.put("value", tmp);
+                        ja.add(jb);
+                    }
+                    setInfo.put("editor", "richselect");
+                    setInfo.put("collection", ja);
+                    setInfo.put("sort", "string");
                     break;
                 default:
-                    setInfo.put("type", "text");
+                    setInfo.put("editor", "text");
+                    setInfo.put("sort", "string");
                     break;
                 }
             }

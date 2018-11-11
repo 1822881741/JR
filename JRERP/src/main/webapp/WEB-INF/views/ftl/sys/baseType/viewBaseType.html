@@ -44,6 +44,7 @@
 												</ul>
 											</li>
 											<li><a href="javascript:void(0);" class='categoryMain' data-type='bargainType'>特价类型</a></li>
+											<li><a href="javascript:void(0);" class='categoryMain' data-type='style'>款式</a></li>
 											<li><a href="javascript:void(0);">统计区间设置</a></li>
 											<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">单据类型<span class="caret"></span></a>
 												<ul class="dropdown-menu" role="menu">
@@ -114,7 +115,7 @@ $(document).ready(function(){
 	$(".categoryMain").on("click",function(){
 		var categoryType=$(this).data("type");
 		$("#categoryType").val(categoryType);
-		$("#jqgrid").setGridParam({datatype:'json',url: "baseType/getBaseTypeData.do?typeName="+$("#typeName").val()}).trigger('reloadGrid');
+		$("#jqgrid").setGridParam({datatype:'json',url: "baseType/getBaseTypeData.do?typeName="+categoryType}).trigger('reloadGrid');
 		$("#jqgrid").setCaption("属性设置 >>"+$(this).html())
 	})
 	
