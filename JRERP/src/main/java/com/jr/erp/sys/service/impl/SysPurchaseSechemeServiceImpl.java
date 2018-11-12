@@ -123,7 +123,7 @@ public class SysPurchaseSechemeServiceImpl extends AbstractBaseService<SysPurcha
                     JSONObject jb= new JSONObject();
                     jb.put("id", tempCategory.getId());
                     jb.put("value", tempCategory.getGoodsName());
-                    smDataArray.add(jb);
+                    smDataArray.add(jb); 
                     // 单独封装一遍值，进行界面的数据校验
                 }
                 setInfo.put("editor", "richselect");

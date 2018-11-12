@@ -182,7 +182,7 @@ public class BillPurchaseItem extends BaseEntity {
     /**
      * 损耗百分比
      */
-    private Double goldLoss;
+    private Double goldLoss; 
 
     /**
      * 毛金重：加上损耗的金重；镶嵌类在计算成本时使用到
