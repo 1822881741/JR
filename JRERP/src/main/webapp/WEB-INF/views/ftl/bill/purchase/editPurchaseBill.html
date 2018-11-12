@@ -43,6 +43,7 @@
 									</div>
 									<div class="col-sm-8 col-md-8 col-lg-8">
 										<a id="activity" class="activity-dropdown btn btn-sm btn-default"  href="javascript:void(0);" style="margin-left: 160px;" onclick="viewImportBill()"><i class="fa fa-gear fa-lg"></i> 导入</a>
+										<a id="activity" class="activity-dropdown btn btn-sm btn-default"  href="javascript:void(0);" style="margin-left: 160px;" onclick="editScheme('')"><i class="fa fa-gear fa-lg"></i> 新增</a>
 									</div>
 								</div>
 								<hr class="simple margin-5">
@@ -138,6 +139,7 @@
 <script src="static/plugins/data.js?v=12"></script>
 <script type="text/javascript">
 	var hot1;
+	var grid;
 	$(document).ready(function() {
 		pageSetUp();
 		
@@ -224,7 +226,8 @@
 	
 	function reloadData(billId){
 		if(billId){
-			hot1.loadData(billId);
+			grid.clearAll();
+			grid.parse(billId);
 		}
 	}
 	function operationRender(instance, td,row){
@@ -238,16 +241,87 @@
 			container:"testA",
 			view:"datatable", css:"webix_header_border",
 			leftSplit:1,
-			columns:[{"id":"index",header:'#',sort:"int",css:"header",width:50,readonly:true},
-			{"id":"goodsClassify",header:"实际分类",editor:"text","width":100,footer:{text:"Total:"} ,"editor":"text"},{"id":"oldBarCode","header":"原条码",editor:"text","width":100,template:function(obj, common, value, config){
-             return "zsdf";},sort:"int","width": 100,footer:{ content:"summColumn" }},{"id":"goldWeight","header":"金重",sort:"string","width":100,sort:"int","width": 100,footer:{ content:"summColumn" }},{"id":"num","header":"数量",footer:{ content:"summColumn" },"format":"0","width":100},{"id":"goodsName",header:["商品名称"],"width":100,sort:'string'},{"id":"unitPrice","header":"单价","width":100},{"id":"subGoodsName","header":"子名称","width":100},{"id":"costPrice","header":"成本金额","width":100},{"id":"markupRate","header":"加价率","width":100},{"id":"salePriceAmount","header":"标价金额","width":100},{"id":"labelPrice","header":"标价","width":100},{"id":"certificateNo","header":"证书号","width":100},{"id":"archivesNo","header":"商品代码","width":100},{"id":"giaCertificateNo","header":"GIA证书号","width":100},{"id":"styleNo","header":"款号","width":100},{"id":"specialOffersFlag","header":"特价标识","width":100},{"id":"goldPrice","header":"金价","width":100},{"id":"totalGoldWeight","header":"总金重","width":100},{"id":"netGoldWeight","header":"净金重","width":100},{"id":"worksFee4Ke","header":"工费/克","width":100},{"id":"worksFee4Jian","header":"工费/件","width":100},{"id":"worksFee4Total","header":"工费总额","width":100},{"id":"certificateFee","header":"证书费","width":100},{"id":"otherFee","header":"其他费用","width":100},{"id":"fittingsFee","header":"配件金额","width":100},{"id":"oldMaterialLoss","header":"旧料损耗","format":"0.000","width":100},{"id":"sandBlastFee","header":"喷砂镶石","width":100},{"id":"goodsWeight","header":"商品总重","width":100},{"id":"archivesCategory","header":"品类","width":100},{"id":"mainType","header":"核算分类","width":100},{"id":"shortCut","header":"手寸","width":100},{"id":"mainStoneClarity","header":"净度","width":100},{"id":"mainStoneColor","header":"颜色","width":100},{"id":"mainStoneCut","header":"切工","width":100},{"id":"mainStoneFluorescent","header":"荧光","width":100},{"id":"mainStoneSymmetry","header":"对称性","width":100},{"id":"mainStoneBurnished","header":"抛光","width":100},{"id":"peiShiCostPrice","header":"配石成本","width":100},{"id":"peiShiRate","header":"配石倍率","width":100},{"id":"peiShiLabelPrice","header":"配石标价","width":100},{"id":"mainStoneName","header":"主石名称","width":100},{"id":"mainStoneNo","header":"主石号","width":100},{"id":"mainStoneWeight","header":"主石重","width":100},{"id":"mainStoneNum","header":"主石粒数","format":"0","width":100},{"id":"mainStonePrice","header":"主石价","width":100},{"id":"mainStoneMoney","header":"主石金额","width":100},{"id":"subStone1Name","header":"副石名称","width":100},{"id":"subStone1No","header":"副石号","width":100},{"id":"subStone1Weight","header":"副石重","width":100},{"id":"subStone1Num","header":"副石粒数","format":"0","width":100},{"id":"subStone1Price","header":"副石价","width":100},{"id":"subStone1Money","header":"副石金额","width":100},{"id":"subStone2Name","header":"副石2名称","width":100},{"id":"subStone2No","header":"副石2号","width":100},{"id":"subStone2Weight","header":"副石2重","width":100},{"id":"subStone2Num","header":"副石2粒数","format":"0","width":100},{"id":"subStone2Price","header":"副石2价","width":100},{"id":"subStone2Money","header":"副石金额2","width":100},{"id":"subStone3Name","header":"副石名称3","width":100},{"id":"subStone3No","header":"副石3号","width":100},{"id":"subStone3Weight","header":"副石重3","width":100},{"id":"subStone3Num","header":"副石粒数3","format":"0","width":100},{"id":"subStone3Price","header":"副石价3","width":100},{"id":"subStone3Money","header":"副石金额3","width":100},{"id":"labelWorkFee4Ke","header":"标签工费/克","width":100},{"id":"labelWorkFee4Jian","header":"标签工费/件","width":100},{"id":"archivesFineness","header":"成色","width":100},{"id":"archivesStone","header":"石料","width":100},{"id":"measurementMode","header":"计量方式","width":100},{"id":"maoGoldWeight","header":"毛金重","width":100},{"id":"goldLoss","header":"损耗","width":100},{"id":"style","header":"款式","width":100},{"id":"craft","header":"工艺","width":100},{"id":"labelRemarks","header":"标签备注","width":100}],
+			columns:[
+			        {"id":"index",header:'#',sort:"int",css:"header",width:50,readonly:true},
+					{"id":"goodsClassify",header:"实际分类",footer:{text:"Total:"}},
+					{"id":"oldBarCode","header":"原条码",sort:"string"},
+             		{"id":"goldWeight","header":"金重",sort:"string",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"num","header":"数量",footer:{ content:"summColumn" },sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"goodsName",header:["商品名称"],sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"unitPrice","header":"单价",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"subGoodsName","header":"子名称",sort:"string"},
+             		{"id":"costPrice","header":"成本金额",sort:"string"},
+             		{"id":"markupRate","header":"加价率",sort:"string"},
+             		{"id":"salePriceAmount","header":"标价金额",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"labelPrice","header":"标价",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"certificateNo","header":"证书号",sort:"string"},
+             		{"id":"archivesNo","header":"商品代码",sort:"string"},
+             		{"id":"giaCertificateNo","header":"GIA证书号",sort:"string"},
+             		{"id":"styleNo","header":"款号",sort:"string"},
+             		{"id":"specialOffersFlag","header":"特价标识",sort:"string"},
+             		{"id":"goldPrice","header":"金价",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"totalGoldWeight","header":"总金重",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"netGoldWeight","header":"净金重",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"worksFee4Ke","header":"工费/克"},
+             		{"id":"worksFee4Jian","header":"工费/件"},
+             		{"id":"worksFee4Total","header":"工费总额",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"certificateFee","header":"证书费",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"otherFee","header":"其他费用",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"fittingsFee","header":"配件金额",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"oldMaterialLoss","header":"旧料损耗","format":"0.000"},
+             		{"id":"sandBlastFee","header":"喷砂镶石",sort:"string"},
+             		{"id":"goodsWeight","header":"商品总重",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"archivesCategory","header":"品类",sort:"string"},
+             		{"id":"mainType","header":"核算分类",sort:"string"},
+             		{"id":"shortCut","header":"手寸",sort:"string"},
+             		{"id":"mainStoneClarity","header":"净度",sort:"string"},
+             		{"id":"mainStoneColor","header":"颜色",sort:"string"},
+             		{"id":"mainStoneCut","header":"切工",sort:"string"},
+             		{"id":"mainStoneFluorescent","header":"荧光",sort:"string"},
+             		{"id":"mainStoneSymmetry","header":"对称性",sort:"string"},
+             		{"id":"mainStoneBurnished","header":"抛光",sort:"string"},
+             		{"id":"peiShiCostPrice","header":"配石成本",sort:"string"},
+             		{"id":"peiShiRate","header":"配石倍率",sort:"int"},
+             		{"id":"peiShiLabelPrice","header":"配石标价",sort:"int"},
+             		{"id":"mainStoneName","header":"主石名称",sort:"string"},
+             		{"id":"mainStoneNo","header":"主石号",sort:"string"},
+             		{"id":"mainStoneWeight","header":"主石重",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"mainStoneNum","header":"主石粒数",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"mainStonePrice","header":"主石价",sort:"int"},
+             		{"id":"mainStoneMoney","header":"主石金额",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"subStone1Name","header":"副石名称",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"subStone1No","header":"副石号",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"subStone1Weight","header":"副石重",sort:"string"},
+             		{"id":"subStone1Num","header":"副石粒数",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"subStone1Price","header":"副石价",sort:"int"},
+             		{"id":"subStone1Money","header":"副石金额",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"subStone2Name","header":"副石2名称",sort:"int"},
+             		{"id":"subStone2No","header":"副石2号",sort:"int"},
+             		{"id":"subStone2Weight","header":"副石2重",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"subStone2Num","header":"副石2粒数",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"subStone2Price","header":"副石2价",sort:"int"},
+             		{"id":"subStone2Money","header":"副石金额2",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"subStone3Name","header":"副石名称3",sort:"int"},
+             		{"id":"subStone3No","header":"副石3号",sort:"int"},
+             		{"id":"subStone3Weight","header":"副石重3"},
+             		{"id":"subStone3Num","header":"副石粒数3",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"subStone3Price","header":"副石价3",sort:"int"},
+             		{"id":"subStone3Money","header":"副石金额3",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"labelWorkFee4Ke","header":"标签工费/克",sort:"int"},
+             		{"id":"labelWorkFee4Jian","header":"标签工费/件",sort:"int"},
+             		{"id":"archivesFineness","header":"成色",sort:"string"},
+             		{"id":"archivesStone","header":"石料",sort:"string"},
+             		{"id":"measurementMode","header":"计量方式",sort:"string"},
+             		{"id":"maoGoldWeight","header":"毛金重",sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"goldLoss","header":"损耗",sort:"string"},
+             		{"id":"style","header":"款式",sort:"string"},
+             		{"id":"craft","header":"工艺",sort:"string"},
+             		{"id":"labelRemarks","header":"标签备注",sort:"string"}
+             	],
 			footer:true,
 			clipboard:true,
 			footer:true,
-			data:data,
-			editable:true,
 			resizeColumn:true,
-    		resizeRow:true,
     		height:300,
 			dragColumn:true,
 			select: "cell", 
