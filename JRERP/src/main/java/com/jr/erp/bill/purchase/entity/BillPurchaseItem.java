@@ -182,7 +182,7 @@ public class BillPurchaseItem extends BaseEntity {
     /**
      * 损耗百分比
      */
-    private Integer goldLoss;
+    private Double goldLoss;
 
     /**
      * 毛金重：加上损耗的金重；镶嵌类在计算成本时使用到
@@ -1363,7 +1363,7 @@ public class BillPurchaseItem extends BaseEntity {
      * 损耗百分比
      * @return goldLoss 损耗百分比
      */
-    public Integer getGoldLoss() {
+    public Double getGoldLoss() {
         return goldLoss;
     }
 
@@ -1371,7 +1371,7 @@ public class BillPurchaseItem extends BaseEntity {
      * 损耗百分比
      * @param goldLoss 损耗百分比
      */
-    public void setGoldLoss(Integer goldLoss) {
+    public void setGoldLoss(Double goldLoss) {
         this.goldLoss = goldLoss;
     }
 

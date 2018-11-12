@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="static/plugins/layui/css/layui.css" media="all">
 <link href="static/plugins/handsontable-select2/select2.css" rel="stylesheet" />
 <link rel="stylesheet" href="static/plugins/webix/codebase/webix.css?v=6.0.7" type="text/css" charset="utf-8">
-<link rel="stylesheet" href="static/plugins/webix/codebase/skins/mini.min.css" type="text/css" charset="utf-8">
+<link rel="stylesheet" href="static/plugins/webix/codebase/skins/flat.min.css" type="text/css" charset="utf-8">
 <style>
     .myhover{
         background: #F4F5F9;
@@ -161,7 +161,6 @@
 	var wizard;
 	$(document).ready(function() {
 		pageSetUp();
-		
 		layui.use('upload', function(){
 			var loader=null;
 			//上传文件渲染
@@ -213,7 +212,12 @@
 	function submitData(){
 		var data = {};
 		var billId;
-		data.itemList=hot.getSourceData();
+		var dataArr = grid.serialize();
+		for(var index=0;index<dataArr.length;index++){
+			delete dataArr[index].id;
+			delete dataArr[index].msg;
+		}
+		data.itemList=dataArr;
 		$.ajax({
 		   type: "POST",
 		   url: "purchase/saveImportBill.do?sechemeId="+$("#sechemeId").val(),
@@ -236,13 +240,16 @@
 		$(obj).append(" <img src='static/img/ribbon.png' class='ribbon choseClass'>");
 		$("#sechemeId").val($(obj).data("secheme"));
 	}
+	function numRules(value){ return value > 0; }
+	function goodsNameRules(value){ return !(value==null || value=='');}
 	function generalTable(){
 		if(grid){
 			grid.$view.remove();
 		}
 		grid = webix.ui({
 			container:"testA",
-			view:"datatable", css:"webix_header_border",
+			view:"datatable", 
+			css:"webix_header_border",
 			leftSplit:1,
 			columns:allData.columnConfig,
 			footer:true,
@@ -251,24 +258,29 @@
 			footer:true,
 			data:allData.itemList,
 			height:350,
+			resizeColumn:true,
 			editable:true,
 			dragColumn:true,
 			select: "cell", 
 			hover:"myhover",
-			multiselect: true, blockselect: true,
+			multiselect: true, 
+			blockselect: true,
+			ready:function(){
+				this.validate();
+			},
 			on:{
 			    "onItemClick":function(id, e, trg){
-			     },
-		        "data->onStoreUpdated":function(){
-					this.data.each(function(obj, i){
-						obj.rowNo = i+1;
-					})
+			        //webix.message("Click on row: " + id.row+", column: " + id.column);
+			        },
+			     "data->onStoreUpdated":function(){
+						this.data.each(function(obj, i){
+							obj.rowNo = i+1;
+						})
+					}
 				}
-			}
 		})
 		grid.define("width", $("#bootstrap-wizard-1").width()-30);
 		grid.resize();
 	}
 </script>
 </html>
-

@@ -120,74 +120,39 @@ public class SysPurchaseSechemeServiceImpl extends AbstractBaseService<SysPurcha
                 for (BaseEntity temp : archives)
                 {
                     SysGoodsCategory tempCategory =(SysGoodsCategory) temp;
+                    JSONObject jb= new JSONObject();
+                    jb.put("id", tempCategory.getId());
+                    jb.put("value", tempCategory.getGoodsName());
+                    smDataArray.add(jb);
                     // 单独封装一遍值，进行界面的数据校验
                 }
-                setInfo.put("type", "handsontable");
-                JSONObject handConfig = new JSONObject();
-                handConfig.put("data", smDataArray);
-                handConfig.put("width", "500px");
-                handConfig.put("rowHeaders", true);
-                handConfig.put("multiColumnSorting", true);
-                handConfig.put("data", smDataArray);
-                
-                JSONArray columns = new JSONArray();
-                JSONObject j1 = new JSONObject();
-                j1.put("title", "名称");
-                j1.put("data", "goodsName");
-                j1.put("width", "200px");
-                
-                JSONObject j2 = new JSONObject();
-                j2.put("title", "金料");
-                j2.put("data", "goldName");
-                j2.put("width", "150px");
-                
-                JSONObject j3 = new JSONObject();
-                j3.put("title", "石料");
-                j3.put("data", "jewelName");
-                j3.put("width", "150px");
-                
-                JSONObject j4 = new JSONObject();
-                j4.put("title", "品类");
-                j4.put("data", "categoryName");
-                j4.put("width", "150px");
-                
-                JSONObject j5 = new JSONObject();
-                j5.put("title", "成色");
-                j5.put("data", "goldPercent");
-                j5.put("width", "150px");
-                columns.add(j1);
-                columns.add(j2);
-                columns.add(j3);
-                columns.add(j4);
-                columns.add(j5);
-                
-                handConfig.put("columns", columns);
-                handConfig.put("manualColumnResize", true);
-                setInfo.put("handsontable",handConfig);
+                setInfo.put("editor", "richselect");
+                setInfo.put("collection", smDataArray);
+                setInfo.put("sort", "string");
             }else
             {
                 switch (importColumnVo.getParamType())
                 {
                 case 1:
                     setInfo.put("editor", "text");
-                    setInfo.put("intFormat","111111");
+                    setInfo.put("numberFormat","111111111");
                     setInfo.put("sort", "int");
                     break;
                 case 2:
                     setInfo.put("editor", "text");
                     switch (importColumnVo.getDigits())
                     {
+                    case 0:
+                        setInfo.put("numberFormat","111111111.111");
+                        break;
                     case 1:
-                        setInfo.put("numberFormat","1111.0");
+                        setInfo.put("numberFormat","111111111.111");
                         break;
                     case 3:
-                        setInfo.put("numberFormat","1111.000");
-                        break;
-                    case 4:
-                        setInfo.put("numberFormat","1111.0000");
+                        setInfo.put("numberFormat","111111111.111");
                         break;
                     default:
-                        setInfo.put("numberFormat","1111.00");
+                        setInfo.put("numberFormat","111111111.111");
                         break;
                     }
                     setInfo.put("sort", "int");

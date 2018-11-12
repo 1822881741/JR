@@ -132,6 +132,7 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
                     {
                         jsonObject.put("msg", "解析行失败，请确认excel格式是否正确，或选择的策略是否正确");
                         goodsListVo.add(jsonObject);
+                        e.printStackTrace();
                     }
                 }
             }
