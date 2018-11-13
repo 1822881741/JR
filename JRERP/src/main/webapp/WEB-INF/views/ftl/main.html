@@ -256,5 +256,9 @@
 		{
 			$.addtabs.add({id:'edit-scheme'+id,url:"http://www.baidu.com",title:'修改方案'});
 		}
+		var winHeight=$(window.parent.document).height()-100;
+		$(window).on("resize",function(){
+			winHeight=$(window.parent.document).height()-100;
+		})
 	</script>
 </html>

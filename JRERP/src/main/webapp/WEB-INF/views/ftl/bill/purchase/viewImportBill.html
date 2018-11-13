@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="static/plugins/layui/css/layui.css" media="all">
 <link href="static/plugins/handsontable-select2/select2.css" rel="stylesheet" />
 <link rel="stylesheet" href="static/plugins/webix/codebase/webix.css?v=6.0.7" type="text/css" charset="utf-8">
-<link rel="stylesheet" href="static/plugins/webix/codebase/skins/flat.min.css" type="text/css" charset="utf-8">
 <style>
     .myhover{
         background: #F4F5F9;
@@ -30,9 +29,6 @@
 					</li>
 					<li data-target="#step3">
 						<a href="#tab3" data-toggle="tab"> <span class="step">3</span> <span class="title">数据处理</span> </a>
-					</li>
-					<li data-target="#step4">
-						<a href="#tab4" data-toggle="tab"> <span class="step">4</span> <span class="title">Save Form</span> </a>
 					</li>
 				</ul>
 				<div class="clearfix">
@@ -97,7 +93,12 @@
 								<div class="layui-upload-drag" id="test10">
 								  <i class="layui-icon"></i>
 								  <p>点击上传，或将文件拖拽到此处</p>
-								  <p id="tips"></p>
+								  <div id="tips" style="display: none;">
+								  	<br>
+									<h1 class="text-center text-success"><strong><i class="fa fa-check fa-lg"></i> 上传完成</strong></h1>
+									<h4 class="text-center">上传文件成功</h4>
+									<br>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -111,16 +112,6 @@
 						<div id="testA"></div>
 					</div>
 				</div>
-				<div class="tab-pane" id="tab4">
-					<br>
-					<h3><strong>Step 4</strong> - Save Form</h3>
-					<br>
-					<h1 class="text-center text-success"><strong><i class="fa fa-check fa-lg"></i> Complete</strong></h1>
-					<h4 class="text-center">Click next to finish</h4>
-					<br>
-					<br>
-				</div>
-
 				<div class="form-actions">
 					<div class="row">
 						<div class="col-sm-12">
@@ -128,7 +119,7 @@
 								<li class="previous disabled">
 									<a href="javascript:void(0);" class="btn  btn-default"> 上一步 </a>
 								</li>
-								<li class="next">
+								<li id="nextStep" class="next">
 									<a href="javascript:void(0);" class="btn  txt-color-darken"> 下一步 </a>
 								</li>
 							</ul>
@@ -175,7 +166,7 @@
 				  });
 			      //预读本地文件示例，不支持ie8
 			      obj.preview(function(index, file, result){
-			        $('#tips').html(file.name); //图片链接（base64）
+			        $('#tips').show(); //图片链接（base64）
 			      });
 			    },
 			    done: function(res){
@@ -194,13 +185,19 @@
 				$('#bootstrap-wizard-1').find('.form-wizard').children('li').eq(index - 1).find('.step').html('<i class="fa fa-check"></i>');
 				if(index ==2){
 					generalTable();
-				}else if(index ==4){
-					var billId  = submitData();
-					if(billId){
-						parent.layer.close(parentIndex); //再执行关闭  
-						parent.reloadData(billId.itemList);
+				}else if(index ==3){
+					//数据校验
+					if(!grid.validate()){
+						layer.msg("输入不合法，请修改后重新保存");
+						return false;
 					}
+					layer.confirm("确定要保存导入信息吗？",function(){
+						submitData();
+					})
 				}
+			},
+			'onTabClick':function(){
+				return false;
 			}
 		});
 		//下载模板
@@ -211,13 +208,18 @@
 	
 	function submitData(){
 		var data = {};
-		var billId;
+		var billForm = $(parent.$.find("#billForm")).serializeArray();
+		for(var index=0;index<billForm.length;index++){
+			var tmp=billForm[index];
+			data[tmp.name]=tmp.value;
+		}
 		var dataArr = grid.serialize();
 		for(var index=0;index<dataArr.length;index++){
 			delete dataArr[index].id;
 			delete dataArr[index].msg;
 		}
 		data.itemList=dataArr;
+		var billInfo;
 		$.ajax({
 		   type: "POST",
 		   url: "purchase/saveImportBill.do?sechemeId="+$("#sechemeId").val(),
@@ -226,13 +228,16 @@
 		   data: JSON.stringify(data),
 		   contentType:"application/json",
 		   success: function(data){
-			 	billId=data.data;
+			   billInfo=data.data;
 		   },
 	       error:function(){ 
 	    	  alert("ERROR")
 		   }
  		});
-		return billId;
+		if(billInfo){
+			parent.reloadData(billInfo);
+			parent.layer.close(parentIndex); //再执行关闭  
+		}
 	}
 	
 	function choseSecheme(obj){
@@ -265,6 +270,10 @@
 			hover:"myhover",
 			multiselect: true, 
 			blockselect: true,
+			rules:{
+				"num":numRules,
+				"goodsName":goodsNameRules
+			},
 			ready:function(){
 				this.validate();
 			},
@@ -282,5 +291,7 @@
 		grid.define("width", $("#bootstrap-wizard-1").width()-30);
 		grid.resize();
 	}
+	
+	
 </script>
 </html>

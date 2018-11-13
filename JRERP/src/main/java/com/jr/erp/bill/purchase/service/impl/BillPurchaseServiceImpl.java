@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -151,5 +153,12 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
             itemMapper.insert(temp);
         }
         return billPurchase;
+    }
+
+    @Override
+    public void saveBillAudit(BillPurchase billPurchase)
+    {
+        billPurchase.setCreateTime(DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
+        this.updateByPrimaryKey(billPurchase);
     }
 }

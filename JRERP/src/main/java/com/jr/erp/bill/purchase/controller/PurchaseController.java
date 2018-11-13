@@ -163,4 +163,22 @@ public class PurchaseController {
             return Ret.error(e.getMessage());
         }
     }
+    
+    /**    
+     * saveBillAudit(这里用一句话描述这个方法的作用)    
+     * 保存成功       
+     * @param @param billPurchase
+     * @param @param request
+     * @param @param response
+     * @param @return     
+     * @return Ret
+     * @Exception 异常对象
+    */
+    @ResponseBody
+    @RequestMapping(value = "/saveBillAudit.do")
+    public Ret saveBillAudit(BillPurchase billPurchase,HttpServletRequest request, HttpServletResponse response){
+        billPurchase.setCompanyNo(ShiroUtils.getCompanyNo());
+        billPurchaseServiceImpl.saveBillAudit(billPurchase);
+        return Ret.ok("保存成功");
+    }
 }    

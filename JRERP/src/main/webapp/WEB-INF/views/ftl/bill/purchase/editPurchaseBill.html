@@ -30,15 +30,10 @@
 								<div class="row margin-left-10">
 									<div class="col-sm-4 col-md-4 col-lg-4">
 										<ul class="demo-btns">
-											<li><a href="javascript:void(0);"
-												class="btn btn-sm btn-default"><i
-													class="fa fa-gear fa-lg"></i> 新增</a></li>
-											<li><a href="javascript:void(0);"
-												class="btn btn-sm btn-default"><i
-													class="fa fa-gear fa-lg"></i> 打印</a></li>
-											<li><a href="javascript:void(0);"
-												class="btn btn-sm btn-default"><i
-													class="fa fa-gear fa-lg"></i> 预览</a></li>
+											<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 新增</a></li>
+											<li><a id="saveAudit" href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 保存</a></li>
+											<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 打印</a></li>
+											<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 预览</a></li>
 										</ul>
 									</div>
 									<div class="col-sm-8 col-md-8 col-lg-8">
@@ -47,12 +42,13 @@
 									</div>
 								</div>
 								<hr class="simple margin-5">
-								<form class="form-horizontal" role="form">
+								<form id="billForm" class="form-horizontal" role="form">
+									<input type="hidden" id="id" name="id">
 									<div class="row margin-bottom-5">
 										<div class="form-group col-sm-3 col-md-3 col-lg-3">
 					 					   <label class="col-md-4 col-sm-6 control-label">供应商</label>
 											<div class="col-md-8 col-sm-6 no-padding">
-												<select id="supplier" name="supplier" class="form-control selectpicker show-tick" data-live-search="true">
+												<select id="supplier" name="supplier" data-validate="required" class="form-control selectpicker show-tick" data-live-search="true">
 													<#list supplierList as p>
 														<option value='${p}'>${p}</option>
 													</#list>
@@ -62,7 +58,7 @@
 										<div class="form-group col-sm-3 col-md-3 col-lg-3">
 											<label class="col-md-4 col-sm-6 control-label">进货类型</label>
 											<div class="col-md-8 col-sm-6 no-padding">
-												<select id="purchaseType" name="purchaseType" class="form-control selectpicker show-tick" data-live-search="true">
+												<select id="purchaseType" name="purchaseType" data-validate="required" class="form-control selectpicker show-tick" data-live-search="true">
 													<#list purchaseTypeList as p>
 														<option value='${p}'>${p}</option>
 													</#list>
@@ -72,7 +68,7 @@
 										<div class="form-group col-sm-3 col-md-3 col-lg-3">
 											<label class="col-md-4 col-sm-6 control-label">进货门店</label>
 											<div class="col-md-8 col-sm-6 no-padding">
-												<select id="deptAreaCode" name="deptAreaCode" class="form-control selectpicker show-tick" title="请选择门店/部门" data-live-search="true">
+												<select id="deptAreaCode" name="deptAreaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择门店/部门" data-live-search="true">
 													<#list areaList as p>
 														<option value='${p.areaCode}' <#if p.areaType == 0>data-icon="fa fa-bank" data-subtext="总公司"</#if> <#if p.areaType == 1>data-icon="fa fa-cubes" data-subtext="区域"</#if> <#if p.areaType == 2>data-icon="fa fa-cab" data-subtext="门店"</#if> >${p.areaName}</option>
 													</#list>
@@ -82,26 +78,26 @@
 										<div class="form-group col-sm-3 col-md-3 col-lg-3">
 											<label class="col-md-4 col-sm-6 control-label">进货柜台</label>
 											<div class="col-md-8 col-sm-6 no-padding">
-												<select id="storeAreaCode" name="storeAreaCode" class="form-control selectpicker show-tick" title="请选择柜台" data-live-search="true">
+												<select id="storeAreaCode" name="storeAreaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择柜台" data-live-search="true">
 												</select>
 											</div>
 										</div>
 										<div class="form-group col-sm-3 col-md-3 col-lg-3">
 											<label class="col-md-4 col-sm-6 control-label">进货日期</label>
 											<div class="col-md-8 col-sm-6 no-padding">
-												<input type="text" class="form-control input-sm" id="sheetDate" name="sheetDate"  onclick="laydate()" >
+												<input type="text" class="form-control input-sm"  data-validate="required" id="sheetDate" name="sheetDate"  onclick="laydate()" >
 											</div>
 										</div>
 										<div class="form-group col-sm-3 col-md-3 col-lg-3">
 											<label class="col-md-4 col-sm-6 control-label">单号</label>
 											<div class="col-md-8 col-sm-6 no-padding">
-												<input type="text" class="form-control" id="firstname" placeholder="请输入名字">
+												<input type="text" class="form-control" id="billNo" name="billNo"  data-validate="required"  placeholder="请输入名字">
 											</div>
 										</div>
 										<div class="form-group col-sm-3 col-md-3 col-lg-3">
 											<label class="col-md-4 col-sm-6 control-label">品牌</label>
 											<div class="col-md-8 col-sm-6 no-padding">
-												<select id="purchaseType" name="purchaseType" class="form-control selectpicker show-tick" data-live-search="true">
+												<select id="brandName" name="brandName"  data-validate="required" class="form-control selectpicker show-tick" data-live-search="true">
 													<#list brandNameList as p>
 														<option value='${p}'>${p}</option>
 													</#list>
@@ -117,7 +113,6 @@
 									</div>
 								</form>
 							</div>
-							<div id="formA" ></div>
 							<div id="testA"></div>
 						</div>
 					</div>
@@ -136,7 +131,7 @@
 <script src="static/plugins/layer/layer.js"></script>
 <script src="static/plugins/laydate/laydate.js"></script>
 <script src="static/plugins/webix/codebase/webix.js?v=6.0.7"></script>
-<script src="static/plugins/data.js?v=12"></script>
+<script src="static/zmodel/common/js/validate.js?v=1"></script>
 <script type="text/javascript">
 	var hot1;
 	var grid;
@@ -182,10 +177,45 @@
 		})
 		laydate.render({
 			  elem: '#sheetDate' //指定元素
-			});
+		});
+		
+		$("#saveAudit").on("click",function(){
+			if(!validateForm("billForm")){
+				return;
+			}else{
+				saveBillAudit();
+			}
+		})
 	});
+	
+	function saveBillAudit(){
+		var billInfo = $("#billForm").serialize();
+		$.ajax({
+	        type: "POST",
+	        url: "purchase/saveBillAudit.do",
+	        dataType: 'json',
+	        data:billInfo,
+	        async: false,
+	        success: function(data) {
+	            if (data.status == '100') {
+	            	var storeList=data.data;
+	            	for(var index=0;index<storeList.length;index++){
+	            		var store=storeList[index];
+		            	$("#storeAreaCode").append("<option value='"+store.areaCode+"'>"+store.areaName+"</option>");
+		            	$("#storeAreaCode").selectpicker('refresh');
+	            	}
+	            }else{
+	            	layer.msg("获取柜台失败");
+	            }
+	        },
+	        error: function() {
+	        	layer.alert("连接服务器失败，请稍后重试");
+	        }
+	    });
+		
+	}
+	
 	function editScheme(id) {
-		//
 		layer.open({
 			type : 2,
 			title : "新增/修改商品分类",
@@ -224,10 +254,11 @@
 		layer.full(index);
 	}
 	
-	function reloadData(billId){
-		if(billId){
+	function reloadData(billInfo){
+		if(billInfo){
 			grid.clearAll();
-			grid.parse(billId);
+			grid.parse(billInfo.itemList);
+			$("#id").val(billInfo.id);
 		}
 	}
 	function operationRender(instance, td,row){
@@ -322,7 +353,7 @@
 			clipboard:true,
 			footer:true,
 			resizeColumn:true,
-    		height:300,
+    		height:parent.winHeight-320,
 			dragColumn:true,
 			select: "cell", 
 			multiselect: true, 
@@ -339,7 +370,9 @@
 					}
 				}
 		})
-		webix.event(window, "resize", function(){ grid.adjust(); })
+		webix.event(window, "resize", function(){
+			grid.define("width", $("#bootstrap-wizard-1").width()-30);
+			grid.adjust(); })
 		});	
 	</script>
 </html>

@@ -119,7 +119,7 @@ public class BillPurchase extends BaseEntity {
     /**
      * 单据日期：在保存单个商品时首次使用的是单的日期，在保存单的时候使用的是单的日期+当前时分秒
      */
-    private Date sheetDate;
+    private String sheetDate;
 
     /**
      * 进货退货标记：1：进货；-1:退货
@@ -583,7 +583,7 @@ public class BillPurchase extends BaseEntity {
      * 单据日期：在保存单个商品时首次使用的是单的日期，在保存单的时候使用的是单的日期+当前时分秒
      * @return sheetDate 单据日期：在保存单个商品时首次使用的是单的日期，在保存单的时候使用的是单的日期+当前时分秒
      */
-    public Date getSheetDate() {
+    public String getSheetDate() {
         return sheetDate;
     }
 
@@ -591,7 +591,7 @@ public class BillPurchase extends BaseEntity {
      * 单据日期：在保存单个商品时首次使用的是单的日期，在保存单的时候使用的是单的日期+当前时分秒
      * @param sheetDate 单据日期：在保存单个商品时首次使用的是单的日期，在保存单的时候使用的是单的日期+当前时分秒
      */
-    public void setSheetDate(Date sheetDate) {
+    public void setSheetDate(String sheetDate) {
         this.sheetDate = sheetDate;
     }
 

@@ -35,4 +35,13 @@ public interface IBillPurchaseService extends IBaseService<BaseEntity>
     */
     BillPurchase saveImportBill(BillPurchase billPurchase);
 
+    /**    
+     * saveBillAudit(这里用一句话描述这个方法的作用)    
+     * 保存单据，产生库存       
+     * @param @param billPurchase     
+     * @return void
+     * @Exception 异常对象
+    */
+    void saveBillAudit(BillPurchase billPurchase);
+
 }
