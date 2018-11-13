@@ -229,6 +229,7 @@
 			yes : function(index, layero) {
 				var result = $(layero).find("iframe")[0].contentWindow.submitData();
 				if (result) {
+					
 				}
 			}
 		});
@@ -355,7 +356,7 @@
 			resizeColumn:true,
     		height:parent.winHeight-320,
 			dragColumn:true,
-			select: "cell", 
+			select: "row", 
 			multiselect: true, 
 			blockselect: true,
 			hover:"myhover",
