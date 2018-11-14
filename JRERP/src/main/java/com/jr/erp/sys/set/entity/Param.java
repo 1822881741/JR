@@ -6,12 +6,22 @@ public class Param extends BaseEntity {
     /**
      * 
      */
-    private String deptAreaCode;
+    private String areaCode;
+
+    /**
+     * 所属模块
+     */
+    private String module;
 
     /**
      * 参数名称
      */
     private String paramName;
+
+    /**
+     * 是否必填项 0：不是，1：是
+     */
+    private Integer mustSet;
 
     /**
      * 状态值,1为选中,0为没选中
@@ -24,29 +34,53 @@ public class Param extends BaseEntity {
     private String paramValue;
 
     /**
-     * 参数类型
-     */
-    private String paramType;
-
-    /**
      * 备注信息，也可用于界面显示
      */
     private String remarks;
 
-    /**
-     * 
-     * @return deptAreaCode 
-     */
-    public String getDeptAreaCode() {
-        return deptAreaCode;
+    public Param()
+    {
+        super();
+    }
+    public Param(String module, String paramName, String paramValue, String remarks)
+    {
+        super();
+        this.module=module;
+        this.paramName=paramName;
+        this.paramValue=paramValue;
+        this.remarks=remarks;
     }
 
     /**
      * 
-     * @param deptAreaCode 
+     * @return areaCode 
      */
-    public void setDeptAreaCode(String deptAreaCode) {
-        this.deptAreaCode = deptAreaCode == null ? null : deptAreaCode.trim();
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    /**
+     * 
+     * @param areaCode 
+     */
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode == null ? null : areaCode.trim();
+    }
+
+    /**
+     * 所属模块
+     * @return module 所属模块
+     */
+    public String getModule() {
+        return module;
+    }
+
+    /**
+     * 所属模块
+     * @param module 所属模块
+     */
+    public void setModule(String module) {
+        this.module = module == null ? null : module.trim();
     }
 
     /**
@@ -66,16 +100,32 @@ public class Param extends BaseEntity {
     }
 
     /**
-     * 状态值,1为选中,2为没选中
-     * @return status 状态值,1为选中,2为没选中
+     * 是否必填项
+     * @return mustSet 是否必填项
+     */
+    public Integer getMustSet() {
+        return mustSet;
+    }
+
+    /**
+     * 是否必填项
+     * @param mustSet 是否必填项
+     */
+    public void setMustSet(Integer mustSet) {
+        this.mustSet = mustSet;
+    }
+
+    /**
+     * 状态值,1为选中,0为没选中
+     * @return status 状态值,1为选中,0为没选中
      */
     public Integer getStatus() {
         return status;
     }
 
     /**
-     * 状态值,1为选中,2为没选中
-     * @param status 状态值,1为选中,2为没选中
+     * 状态值,1为选中,0为没选中
+     * @param status 状态值,1为选中,0为没选中
      */
     public void setStatus(Integer status) {
         this.status = status;
@@ -95,22 +145,6 @@ public class Param extends BaseEntity {
      */
     public void setParamValue(String paramValue) {
         this.paramValue = paramValue == null ? null : paramValue.trim();
-    }
-
-    /**
-     * 参数类型
-     * @return paramType 参数类型
-     */
-    public String getParamType() {
-        return paramType;
-    }
-
-    /**
-     * 参数类型
-     * @param paramType 参数类型
-     */
-    public void setParamType(String paramType) {
-        this.paramType = paramType == null ? null : paramType.trim();
     }
 
     /**

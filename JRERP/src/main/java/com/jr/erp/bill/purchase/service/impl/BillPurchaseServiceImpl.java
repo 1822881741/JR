@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,7 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.alibaba.fastjson.JSONObject;
 import com.jr.erp.base.mybatis.AbstractBaseService;
 import com.jr.erp.base.service.impl.IFileUploadService;
+import com.jr.erp.base.utils.JodaUtils;
 import com.jr.erp.bill.purchase.dao.BillPurchaseItemMapper;
+import com.jr.erp.bill.purchase.dao.BillPurchaseMapper;
 import com.jr.erp.bill.purchase.entity.BillPurchase;
 import com.jr.erp.bill.purchase.entity.BillPurchaseItem;
 import com.jr.erp.bill.purchase.service.IBillPurchaseService;
@@ -29,6 +29,8 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
 
     @Autowired
     private  BillPurchaseItemMapper itemMapper;
+    @Autowired
+    private BillPurchaseMapper billPurchaseMapper;
     
     @Autowired
     ISysPurchaseSechemeService sysPurchaseSechemeService;
@@ -158,7 +160,6 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
     @Override
     public void saveBillAudit(BillPurchase billPurchase)
     {
-        billPurchase.setCreateTime(DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
         this.updateByPrimaryKey(billPurchase);
     }
 }

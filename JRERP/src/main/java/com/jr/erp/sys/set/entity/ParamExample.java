@@ -249,73 +249,143 @@ public class ParamExample extends BaseExample {
             return (Criteria) this;
         }
 
-        public Criteria andDeptAreaCodeIsNull() {
-            addCriterion("deptAreaCode is null");
+        public Criteria andAreaCodeIsNull() {
+            addCriterion("areaCode is null");
             return (Criteria) this;
         }
 
-        public Criteria andDeptAreaCodeIsNotNull() {
-            addCriterion("deptAreaCode is not null");
+        public Criteria andAreaCodeIsNotNull() {
+            addCriterion("areaCode is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDeptAreaCodeEqualTo(String value) {
-            addCriterion("deptAreaCode =", value, "deptAreaCode");
+        public Criteria andAreaCodeEqualTo(String value) {
+            addCriterion("areaCode =", value, "areaCode");
             return (Criteria) this;
         }
 
-        public Criteria andDeptAreaCodeNotEqualTo(String value) {
-            addCriterion("deptAreaCode <>", value, "deptAreaCode");
+        public Criteria andAreaCodeNotEqualTo(String value) {
+            addCriterion("areaCode <>", value, "areaCode");
             return (Criteria) this;
         }
 
-        public Criteria andDeptAreaCodeGreaterThan(String value) {
-            addCriterion("deptAreaCode >", value, "deptAreaCode");
+        public Criteria andAreaCodeGreaterThan(String value) {
+            addCriterion("areaCode >", value, "areaCode");
             return (Criteria) this;
         }
 
-        public Criteria andDeptAreaCodeGreaterThanOrEqualTo(String value) {
-            addCriterion("deptAreaCode >=", value, "deptAreaCode");
+        public Criteria andAreaCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("areaCode >=", value, "areaCode");
             return (Criteria) this;
         }
 
-        public Criteria andDeptAreaCodeLessThan(String value) {
-            addCriterion("deptAreaCode <", value, "deptAreaCode");
+        public Criteria andAreaCodeLessThan(String value) {
+            addCriterion("areaCode <", value, "areaCode");
             return (Criteria) this;
         }
 
-        public Criteria andDeptAreaCodeLessThanOrEqualTo(String value) {
-            addCriterion("deptAreaCode <=", value, "deptAreaCode");
+        public Criteria andAreaCodeLessThanOrEqualTo(String value) {
+            addCriterion("areaCode <=", value, "areaCode");
             return (Criteria) this;
         }
 
-        public Criteria andDeptAreaCodeLike(String value) {
-            addCriterion("deptAreaCode like", value, "deptAreaCode");
+        public Criteria andAreaCodeLike(String value) {
+            addCriterion("areaCode like", value, "areaCode");
             return (Criteria) this;
         }
 
-        public Criteria andDeptAreaCodeNotLike(String value) {
-            addCriterion("deptAreaCode not like", value, "deptAreaCode");
+        public Criteria andAreaCodeNotLike(String value) {
+            addCriterion("areaCode not like", value, "areaCode");
             return (Criteria) this;
         }
 
-        public Criteria andDeptAreaCodeIn(List<String> values) {
-            addCriterion("deptAreaCode in", values, "deptAreaCode");
+        public Criteria andAreaCodeIn(List<String> values) {
+            addCriterion("areaCode in", values, "areaCode");
             return (Criteria) this;
         }
 
-        public Criteria andDeptAreaCodeNotIn(List<String> values) {
-            addCriterion("deptAreaCode not in", values, "deptAreaCode");
+        public Criteria andAreaCodeNotIn(List<String> values) {
+            addCriterion("areaCode not in", values, "areaCode");
             return (Criteria) this;
         }
 
-        public Criteria andDeptAreaCodeBetween(String value1, String value2) {
-            addCriterion("deptAreaCode between", value1, value2, "deptAreaCode");
+        public Criteria andAreaCodeBetween(String value1, String value2) {
+            addCriterion("areaCode between", value1, value2, "areaCode");
             return (Criteria) this;
         }
 
-        public Criteria andDeptAreaCodeNotBetween(String value1, String value2) {
-            addCriterion("deptAreaCode not between", value1, value2, "deptAreaCode");
+        public Criteria andAreaCodeNotBetween(String value1, String value2) {
+            addCriterion("areaCode not between", value1, value2, "areaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andModuleIsNull() {
+            addCriterion("module is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andModuleIsNotNull() {
+            addCriterion("module is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andModuleEqualTo(String value) {
+            addCriterion("module =", value, "module");
+            return (Criteria) this;
+        }
+
+        public Criteria andModuleNotEqualTo(String value) {
+            addCriterion("module <>", value, "module");
+            return (Criteria) this;
+        }
+
+        public Criteria andModuleGreaterThan(String value) {
+            addCriterion("module >", value, "module");
+            return (Criteria) this;
+        }
+
+        public Criteria andModuleGreaterThanOrEqualTo(String value) {
+            addCriterion("module >=", value, "module");
+            return (Criteria) this;
+        }
+
+        public Criteria andModuleLessThan(String value) {
+            addCriterion("module <", value, "module");
+            return (Criteria) this;
+        }
+
+        public Criteria andModuleLessThanOrEqualTo(String value) {
+            addCriterion("module <=", value, "module");
+            return (Criteria) this;
+        }
+
+        public Criteria andModuleLike(String value) {
+            addCriterion("module like", value, "module");
+            return (Criteria) this;
+        }
+
+        public Criteria andModuleNotLike(String value) {
+            addCriterion("module not like", value, "module");
+            return (Criteria) this;
+        }
+
+        public Criteria andModuleIn(List<String> values) {
+            addCriterion("module in", values, "module");
+            return (Criteria) this;
+        }
+
+        public Criteria andModuleNotIn(List<String> values) {
+            addCriterion("module not in", values, "module");
+            return (Criteria) this;
+        }
+
+        public Criteria andModuleBetween(String value1, String value2) {
+            addCriterion("module between", value1, value2, "module");
+            return (Criteria) this;
+        }
+
+        public Criteria andModuleNotBetween(String value1, String value2) {
+            addCriterion("module not between", value1, value2, "module");
             return (Criteria) this;
         }
 
@@ -386,6 +456,66 @@ public class ParamExample extends BaseExample {
 
         public Criteria andParamNameNotBetween(String value1, String value2) {
             addCriterion("paramName not between", value1, value2, "paramName");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustSetIsNull() {
+            addCriterion("mustSet is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustSetIsNotNull() {
+            addCriterion("mustSet is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustSetEqualTo(Integer value) {
+            addCriterion("mustSet =", value, "mustSet");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustSetNotEqualTo(Integer value) {
+            addCriterion("mustSet <>", value, "mustSet");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustSetGreaterThan(Integer value) {
+            addCriterion("mustSet >", value, "mustSet");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustSetGreaterThanOrEqualTo(Integer value) {
+            addCriterion("mustSet >=", value, "mustSet");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustSetLessThan(Integer value) {
+            addCriterion("mustSet <", value, "mustSet");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustSetLessThanOrEqualTo(Integer value) {
+            addCriterion("mustSet <=", value, "mustSet");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustSetIn(List<Integer> values) {
+            addCriterion("mustSet in", values, "mustSet");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustSetNotIn(List<Integer> values) {
+            addCriterion("mustSet not in", values, "mustSet");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustSetBetween(Integer value1, Integer value2) {
+            addCriterion("mustSet between", value1, value2, "mustSet");
+            return (Criteria) this;
+        }
+
+        public Criteria andMustSetNotBetween(Integer value1, Integer value2) {
+            addCriterion("mustSet not between", value1, value2, "mustSet");
             return (Criteria) this;
         }
 
@@ -516,76 +646,6 @@ public class ParamExample extends BaseExample {
 
         public Criteria andParamValueNotBetween(String value1, String value2) {
             addCriterion("paramValue not between", value1, value2, "paramValue");
-            return (Criteria) this;
-        }
-
-        public Criteria andParamTypeIsNull() {
-            addCriterion("paramType is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andParamTypeIsNotNull() {
-            addCriterion("paramType is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andParamTypeEqualTo(String value) {
-            addCriterion("paramType =", value, "paramType");
-            return (Criteria) this;
-        }
-
-        public Criteria andParamTypeNotEqualTo(String value) {
-            addCriterion("paramType <>", value, "paramType");
-            return (Criteria) this;
-        }
-
-        public Criteria andParamTypeGreaterThan(String value) {
-            addCriterion("paramType >", value, "paramType");
-            return (Criteria) this;
-        }
-
-        public Criteria andParamTypeGreaterThanOrEqualTo(String value) {
-            addCriterion("paramType >=", value, "paramType");
-            return (Criteria) this;
-        }
-
-        public Criteria andParamTypeLessThan(String value) {
-            addCriterion("paramType <", value, "paramType");
-            return (Criteria) this;
-        }
-
-        public Criteria andParamTypeLessThanOrEqualTo(String value) {
-            addCriterion("paramType <=", value, "paramType");
-            return (Criteria) this;
-        }
-
-        public Criteria andParamTypeLike(String value) {
-            addCriterion("paramType like", value, "paramType");
-            return (Criteria) this;
-        }
-
-        public Criteria andParamTypeNotLike(String value) {
-            addCriterion("paramType not like", value, "paramType");
-            return (Criteria) this;
-        }
-
-        public Criteria andParamTypeIn(List<String> values) {
-            addCriterion("paramType in", values, "paramType");
-            return (Criteria) this;
-        }
-
-        public Criteria andParamTypeNotIn(List<String> values) {
-            addCriterion("paramType not in", values, "paramType");
-            return (Criteria) this;
-        }
-
-        public Criteria andParamTypeBetween(String value1, String value2) {
-            addCriterion("paramType between", value1, value2, "paramType");
-            return (Criteria) this;
-        }
-
-        public Criteria andParamTypeNotBetween(String value1, String value2) {
-            addCriterion("paramType not between", value1, value2, "paramType");
             return (Criteria) this;
         }
 

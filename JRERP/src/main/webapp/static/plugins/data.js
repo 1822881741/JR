@@ -1,1 +1,1 @@
-var data=[{"barcode":"1001","goodsName":"zds1","num":1,"zpe":123},{},{},{},{},{},{},{},{},{},{"barcode":"1001","goodsName":"zds2","num":1},{"barcode":"1001","goodsName":"zds3","num":1},{}];
+var data=[{id:1,"barcode":"1001","goodsName":"zds1","num":1,"zpe":123},{id:2,"barcode":"1002","goodsName":"zds2","num":1},{id:3,"barcode":"1003","goodsName":"zds3","num":1}];

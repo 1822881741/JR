@@ -11,3 +11,8 @@ https://www.cnblogs.com/moonlightL/p/8126910.html
 
 
 http://www.17sucai.com/pins/demo-show?id=28810
+
+
+产生单号方法
+@Select({"select billNo from bill_purchase where companyNo=#{companyNo} and billNo like CONCAT(#{billNoLike},'%') order by billNo desc limit 0,1"})
+    String selectMaxBillNo(@Param("companyNo") String companyNo,@Param("billNoLike") String billNoLike);

@@ -2,6 +2,7 @@ package com.jr.erp.bill.purchase.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Select;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
@@ -43,5 +44,4 @@ public interface IBillPurchaseService extends IBaseService<BaseEntity>
      * @Exception 异常对象
     */
     void saveBillAudit(BillPurchase billPurchase);
-
 }

@@ -1,5 +1,7 @@
 package com.jr.erp.sys.set.service.impl;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 import com.jr.erp.base.mybatis.AbstractBaseService;
@@ -19,5 +21,38 @@ import com.jr.erp.sys.set.service.IParamService;
 @Service(value = "paramService")
 public class ParamServiceImpl extends AbstractBaseService<Param> implements IParamService
 {
-    
+
+    @Override
+    public void updateBillFlowParam(String companyNo, String areaCode, String module, Map<String, Object> paramMap)
+    {
+        if (paramMap != null)
+        {
+            switch (module)
+            {
+            case "purchase":
+                Param param = new Param();
+                param.setAreaCode(areaCode);
+                param.setCompanyNo(companyNo);
+                param.setModule(module);
+                param.setMustSet(1);
+                param.setParamName("isAudit");
+                param.setParamValue(paramMap.get("isAudit").toString());
+                param.setRemarks("是否需要审核");
+                this.insert(param);
+
+                Param param2 = new Param();
+                param2.setAreaCode(areaCode);
+                param2.setCompanyNo(companyNo);
+                param2.setModule(module);
+                param2.setMustSet(1);
+                param2.setParamName("isAransit");
+                param2.setParamValue(paramMap.get("isAransit").toString());
+                param2.setRemarks("进货是否开启在途");
+                this.insert(param2);
+                break;
+            default:
+                break;
+            }
+        }
+    }
 }

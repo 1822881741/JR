@@ -19,7 +19,7 @@
 		<!-- row -->
 		<div class="row no-margin">
 			<article class="col-sm-12 col-md-12 col-lg-12">
-				<div class="jarviswidget" id="wid-id-5"
+				<div class="jarviswidget no-margin-bottom" id="wid-id-5"
 					data-widget-colorbutton="false" data-widget-editbutton="false"
 					data-widget-togglebutton="false" data-widget-deletebutton="false"
 					data-widget-fullscreenbutton="false"
@@ -132,6 +132,7 @@
 <script src="static/plugins/laydate/laydate.js"></script>
 <script src="static/plugins/webix/codebase/webix.js?v=6.0.7"></script>
 <script src="static/zmodel/common/js/validate.js?v=1"></script>
+<script src="static/plugins/data.js?v=4224"></script>
 <script type="text/javascript">
 	var hot1;
 	var grid;
@@ -180,38 +181,113 @@
 		});
 		
 		$("#saveAudit").on("click",function(){
-			if(!validateForm("billForm")){
-				return;
-			}else{
-				saveBillAudit();
-			}
+			saveBillAudit();
 		})
 	});
 	
-	function saveBillAudit(){
-		var billInfo = $("#billForm").serialize();
+	function checkBillFlow(){
+		var result=false;
 		$.ajax({
 	        type: "POST",
-	        url: "purchase/saveBillAudit.do",
+	        url: "param/checkBillFlow.do",
 	        dataType: 'json',
-	        data:billInfo,
+	        data:"module=purchase&areaCode="+$("#deptAreaCode").val(),
 	        async: false,
 	        success: function(data) {
 	            if (data.status == '100') {
-	            	var storeList=data.data;
-	            	for(var index=0;index<storeList.length;index++){
-	            		var store=storeList[index];
-		            	$("#storeAreaCode").append("<option value='"+store.areaCode+"'>"+store.areaName+"</option>");
-		            	$("#storeAreaCode").selectpicker('refresh');
-	            	}
+	            	result=true;
 	            }else{
-	            	layer.msg("获取柜台失败");
+	            	result=false
+	            	var paramList=data.data;
+	            	var paramArr=[];
+	            	for(var i=0;i<paramList.length;i++){
+	            		paramArr.push({view:"checkbox", labelRight:paramList[i].remarks, value:paramList[i].paramValue ,name:paramList[i].paramName})
+	            	}
+	            	paramArr.push({ view:"button", value: "保存", click:function(){
+    					$.ajax({
+    				        type: "POST",
+    				        url: "param/updateBillFlowParam.do?module=purchase&areaCode="+$("#deptAreaCode").val(),
+    				        dataType: 'json',
+    				        async: false,
+    				        contentType:"application/json",
+    				        data:JSON.stringify(this.getParentView().getValues()),
+    				        success: function(data) {
+    				            if (data.status == '100') {
+    				            	$$('win2').close();
+    				            	layer.msg("保存成功，请再次保存")
+    				            }else{
+    				            	layer.msg("获取柜台失败");
+    				            }
+    				        },
+    				        error: function() {
+    				        	layer.alert("连接服务器失败，请稍后重试");
+    				        }
+    				    });
+    				}});
+	            	var form=webix.ui({
+	                    view:"window",
+	                    id:"win2",
+	                    width:300,
+	                    position:"center",
+	                    modal:true,
+	                    head:{
+	    					view:"toolbar", margin:-4, cols:[
+	    						{view:"label", label: "尚未设置进货流程，来设置下吧" },
+	    						{ view:"icon", icon:"mdi mdi-close", click: function(){
+	    							$$('win2').close();
+	    						}}
+	    					]
+	    				},
+	                    body:{
+	            			view:"form",
+	            			borderless:true,
+	            			elements: paramArr,
+	            			elementsConfig:{
+	            				labelPosition:"top",
+	            			}
+	            		}
+	                });
+	            	 $$("win2").getBody().clear();
+	            	 form.show();
+	                 $$("win2").getBody().focus();
 	            }
 	        },
 	        error: function() {
 	        	layer.alert("连接服务器失败，请稍后重试");
 	        }
 	    });
+		return result;
+	}
+	function saveBillAudit(){
+		if(!validateForm("billForm")){
+			return;
+		}else{
+			if(checkBillFlow()){
+				var billInfo = $("#billForm").serialize();
+				$.ajax({
+			        type: "POST",
+			        url: "purchase/saveBillAudit.do",
+			        dataType: 'json',
+			        data:billInfo,
+			        async: false,
+			        success: function(data) {
+			            if (data.status == '100') {
+			            	var storeList=data.data;
+			            	for(var index=0;index<storeList.length;index++){
+			            		var store=storeList[index];
+				            	$("#storeAreaCode").append("<option value='"+store.areaCode+"'>"+store.areaName+"</option>");
+				            	$("#storeAreaCode").selectpicker('refresh');
+			            	}
+			            }else{
+			            	layer.msg("获取柜台失败");
+			            }
+			        },
+			        error: function() {
+			        	layer.alert("连接服务器失败，请稍后重试");
+			        }
+			    });
+			};
+		}
 		
 	}
 	
@@ -267,19 +343,22 @@
 	}
 </script>
 	<script type="text/javascript" charset="utf-8">
-	
+	var context;
 	webix.ready(function(){
 		grid = webix.ui({
 			container:"testA",
-			view:"datatable", css:"webix_header_border",
+			view:"datatable", 
+			id:"list1",
+			css:"webix_header_border",
 			leftSplit:1,
 			columns:[
 			        {"id":"index",header:'#',sort:"int",css:"header",width:50,readonly:true},
+			        {"id":"id",header:"id",footer:{text:"Total:"}},
 					{"id":"goodsClassify",header:"实际分类",footer:{text:"Total:"}},
-					{"id":"oldBarCode","header":"原条码",sort:"string"},
+					{"id":"barcode","header":"原条码",sort:"string"},
              		{"id":"goldWeight","header":"金重",sort:"string",sort:"int",footer:{ content:"summColumn" }},
              		{"id":"num","header":"数量",footer:{ content:"summColumn" },sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"goodsName",header:["商品名称"],sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"goodsName",header:["商品名称"],sort:"string",footer:{ content:"summColumn" }},
              		{"id":"unitPrice","header":"单价",sort:"int",footer:{ content:"summColumn" }},
              		{"id":"subGoodsName","header":"子名称",sort:"string"},
              		{"id":"costPrice","header":"成本金额",sort:"string"},
@@ -354,12 +433,13 @@
 			clipboard:true,
 			footer:true,
 			resizeColumn:true,
-    		height:parent.winHeight-320,
+    		height:parent.winHeight-290,
 			dragColumn:true,
 			select: "row", 
 			multiselect: true, 
 			blockselect: true,
 			hover:"myhover",
+			data:data,
 			on:{
 			    "onItemClick":function(id, e, trg){
 			        //webix.message("Click on row: " + id.row+", column: " + id.column);
@@ -371,6 +451,21 @@
 					}
 				}
 		})
+		
+		 context=webix.ui({
+	        view:"contextmenu",
+		    id:"cmenu",
+	        data:["Add","Rename","Delete",{ $template:"Separator" },"Info"],
+	        on:{
+	            onItemClick:function(id){
+	                var context = this.getContext();
+	                var list = context.obj;
+	                var listId = context.id;
+	                webix.message("List item: <i>"+grid.getItem(listId).goodsName+"</i> <br/>Context menu item: <i>"+this.getItem(id).value+"</i>");
+	            }
+	        }
+	    });
+		context.attachTo(grid);
 		webix.event(window, "resize", function(){
 			grid.define("width", $("#bootstrap-wizard-1").width()-30);
 			grid.adjust(); })

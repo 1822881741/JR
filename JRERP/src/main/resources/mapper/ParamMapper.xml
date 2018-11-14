@@ -4,11 +4,12 @@
   <resultMap id="BaseResultMap" type="com.jr.erp.sys.set.entity.Param">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="companyNo" jdbcType="VARCHAR" property="companyNo" />
-    <result column="deptAreaCode" jdbcType="VARCHAR" property="deptAreaCode" />
+    <result column="areaCode" jdbcType="VARCHAR" property="areaCode" />
+    <result column="module" jdbcType="VARCHAR" property="module" />
     <result column="paramName" jdbcType="VARCHAR" property="paramName" />
+    <result column="mustSet" jdbcType="TINYINT" property="mustSet" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="paramValue" jdbcType="VARCHAR" property="paramValue" />
-    <result column="paramType" jdbcType="VARCHAR" property="paramType" />
     <result column="remarks" jdbcType="VARCHAR" property="remarks" />
     <result column="createTime" jdbcType="VARCHAR" property="createTime" />
     <result column="updateTime" jdbcType="VARCHAR" property="updateTime" />
@@ -43,8 +44,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, companyNo, deptAreaCode, paramName, status, paramValue, paramType, remarks, createTime, 
-    updateTime
+    id, companyNo, areaCode, module, paramName, mustSet, status, paramValue, remarks, 
+    createTime, updateTime
   </sql>
   <select id="selectByExample" parameterType="com.jr.erp.sys.set.entity.ParamExample" resultMap="BaseResultMap">
     select
@@ -82,14 +83,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jr.erp.sys.set.entity.Param">
-    insert into st_param (id, companyNo, deptAreaCode, 
-      paramName, status, paramValue, 
-      paramType, remarks, createTime, 
-      updateTime)
-    values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{deptAreaCode,jdbcType=VARCHAR}, 
-      #{paramName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{paramValue,jdbcType=VARCHAR}, 
-      #{paramType,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=VARCHAR})
+    insert into st_param (id, companyNo, areaCode, 
+      module, paramName, mustSet, 
+      status, paramValue, remarks, 
+      createTime, updateTime)
+    values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, 
+      #{module,jdbcType=VARCHAR}, #{paramName,jdbcType=VARCHAR}, #{mustSet,jdbcType=TINYINT}, 
+      #{status,jdbcType=INTEGER}, #{paramValue,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR})
   </insert>
   <select id="countByExample" parameterType="com.jr.erp.sys.set.entity.ParamExample" resultType="java.lang.Long">
     select count(*) from st_param
@@ -103,20 +104,23 @@
       <if test="companyNo != null">
         companyNo = #{companyNo,jdbcType=VARCHAR},
       </if>
-      <if test="deptAreaCode != null">
-        deptAreaCode = #{deptAreaCode,jdbcType=VARCHAR},
+      <if test="areaCode != null">
+        areaCode = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="module != null">
+        module = #{module,jdbcType=VARCHAR},
       </if>
       <if test="paramName != null">
         paramName = #{paramName,jdbcType=VARCHAR},
+      </if>
+      <if test="mustSet != null">
+        mustSet = #{mustSet,jdbcType=TINYINT},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
       <if test="paramValue != null">
         paramValue = #{paramValue,jdbcType=VARCHAR},
-      </if>
-      <if test="paramType != null">
-        paramType = #{paramType,jdbcType=VARCHAR},
       </if>
       <if test="remarks != null">
         remarks = #{remarks,jdbcType=VARCHAR},
@@ -133,11 +137,12 @@
   <update id="updateByPrimaryKey" parameterType="com.jr.erp.sys.set.entity.Param">
     update st_param
     set companyNo = #{companyNo,jdbcType=VARCHAR},
-      deptAreaCode = #{deptAreaCode,jdbcType=VARCHAR},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
+      module = #{module,jdbcType=VARCHAR},
       paramName = #{paramName,jdbcType=VARCHAR},
+      mustSet = #{mustSet,jdbcType=TINYINT},
       status = #{status,jdbcType=INTEGER},
       paramValue = #{paramValue,jdbcType=VARCHAR},
-      paramType = #{paramType,jdbcType=VARCHAR},
       remarks = #{remarks,jdbcType=VARCHAR},
       createTime = #{createTime,jdbcType=VARCHAR},
       updateTime = #{updateTime,jdbcType=VARCHAR}

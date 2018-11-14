@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.service.impl.IFileUploadService;
@@ -31,6 +30,7 @@ import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.service.ISysAreaInfoService;
 import com.jr.erp.sys.service.ISysPurchaseSechemeService;
 import com.jr.erp.sys.set.service.IBaseTypeService;
+import com.jr.erp.sys.utils.service.IBillNoGeneratorService;
 import com.jr.erp.sys.vo.PurchaseColumnVo;
 
 @Controller
@@ -52,6 +52,8 @@ public class PurchaseController {
     @Autowired
     IBillPurchaseService billPurchaseServiceImpl;
     
+    @Autowired
+    IBillNoGeneratorService billNoGeneratorService;
     @RequestMapping(value = "/editBill.do")
     public String editBill(HttpServletRequest request, Model model)
     {
@@ -76,6 +78,7 @@ public class PurchaseController {
         List<BaseEntity> areaList = sysAreaInfoService.selectByExample(areaExample);
         model.addAttribute("areaList",areaList);
         
+        System.out.println("==============="+billNoGeneratorService.getNextBillNo(ShiroUtils.getCompanyNo(),1,ShiroUtils.getSysUser().getUserSheetNoPrefix()));
         return "bill/purchase/editPurchaseBill";
     }
     

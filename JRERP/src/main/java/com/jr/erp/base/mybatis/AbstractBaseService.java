@@ -6,6 +6,7 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jr.erp.base.utils.JodaUtils;
 import com.jr.erp.base.utils.RetPage;
 
 @Transactional(rollbackFor = Exception.class)
@@ -16,17 +17,17 @@ public class AbstractBaseService<T extends BaseEntity> implements IBaseService<B
 
 	@Override
 	public Integer insert(BaseEntity record) {
-	    record.setCreateTime(DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
+	    record.setCreateTime(JodaUtils.getFullDate());
 		return mapper.insert((T) record);
 	}
 
 	@Override
 	public void merge(BaseEntity record) {
 		if (record.getId() != null) {
-		    record.setUpdateTime(DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
+		    record.setUpdateTime(JodaUtils.getFullDate());
 			mapper.updateByPrimaryKey((T) record);
 		} else {
-		    record.setCreateTime(DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
+		    record.setCreateTime(JodaUtils.getFullDate());
 			mapper.insert((T) record);
 		}
 	}
@@ -63,13 +64,13 @@ public class AbstractBaseService<T extends BaseEntity> implements IBaseService<B
     @Override
     public void updateByPrimaryKey(BaseEntity t)
     {
-        t.setUpdateTime(DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
+        t.setUpdateTime(JodaUtils.getFullDate());
         mapper.updateByPrimaryKey((T) t);
     }
 
     public void updateByPrimaryKeySelective(BaseEntity t)
     {
-        t.setUpdateTime(DateTime.now().toString("yyyy-MM-dd HH:mm:ss"));
+        t.setUpdateTime(JodaUtils.getFullDate());
         mapper.updateByPrimaryKeySelective((T) t);
     }
 
