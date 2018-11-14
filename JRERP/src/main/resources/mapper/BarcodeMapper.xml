@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jr.erp.sys.set.dao.BarcodeMapper">
+  <resultMap id="BaseResultMap" type="com.jr.erp.sys.set.entity.Barcode">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="companyNo" jdbcType="VARCHAR" property="companyNo" />
+    <result column="userId" jdbcType="INTEGER" property="userId" />
+    <result column="userPerfixNo" jdbcType="CHAR" property="userPerfixNo" />
+    <result column="barCode" jdbcType="VARCHAR" property="barCode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, companyNo, userId, userPerfixNo, barCode
+  </sql>
+  <select id="selectByExample" parameterType="com.jr.erp.sys.set.entity.BarcodeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from st_barcode
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="page != null">
+      <if test="limit != null">
+        limit ${(page-1)*limit}, ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from st_barcode
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from st_barcode
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jr.erp.sys.set.entity.BarcodeExample">
+    delete from st_barcode
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jr.erp.sys.set.entity.Barcode">
+    insert into st_barcode (id, companyNo, userId, 
+      userPerfixNo, barCode)
+    values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{userPerfixNo,jdbcType=CHAR}, #{barCode,jdbcType=VARCHAR})
+  </insert>
+  <select id="countByExample" parameterType="com.jr.erp.sys.set.entity.BarcodeExample" resultType="java.lang.Long">
+    select count(*) from st_barcode
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jr.erp.sys.set.entity.Barcode">
+    update st_barcode
+    <set>
+      <if test="companyNo != null">
+        companyNo = #{companyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        userId = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userPerfixNo != null">
+        userPerfixNo = #{userPerfixNo,jdbcType=CHAR},
+      </if>
+      <if test="barCode != null">
+        barCode = #{barCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jr.erp.sys.set.entity.Barcode">
+    update st_barcode
+    set companyNo = #{companyNo,jdbcType=VARCHAR},
+      userId = #{userId,jdbcType=INTEGER},
+      userPerfixNo = #{userPerfixNo,jdbcType=CHAR},
+      barCode = #{barCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
