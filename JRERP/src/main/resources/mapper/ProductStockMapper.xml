@@ -1,0 +1,882 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jr.erp.bus.stock.dao.ProductStockMapper">
+  <resultMap id="BaseResultMap" type="com.jr.erp.bus.stock.entity.ProductStock">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="companyNo" jdbcType="VARCHAR" property="companyNo" />
+    <result column="supplierNo" jdbcType="VARCHAR" property="supplierNo" />
+    <result column="supplierName" jdbcType="VARCHAR" property="supplierName" />
+    <result column="barCode" jdbcType="VARCHAR" property="barCode" />
+    <result column="oldBarCode" jdbcType="VARCHAR" property="oldBarCode" />
+    <result column="subGoodsName" jdbcType="VARCHAR" property="subGoodsName" />
+    <result column="certificateNo" jdbcType="VARCHAR" property="certificateNo" />
+    <result column="giaCertificateNo" jdbcType="VARCHAR" property="giaCertificateNo" />
+    <result column="style" jdbcType="VARCHAR" property="style" />
+    <result column="styleNo" jdbcType="VARCHAR" property="styleNo" />
+    <result column="shortCut" jdbcType="VARCHAR" property="shortCut" />
+    <result column="craft" jdbcType="VARCHAR" property="craft" />
+    <result column="measurementMode" jdbcType="VARCHAR" property="measurementMode" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="deptAreaCode" jdbcType="VARCHAR" property="deptAreaCode" />
+    <result column="deptAreaName" jdbcType="VARCHAR" property="deptAreaName" />
+    <result column="storeId" jdbcType="INTEGER" property="storeId" />
+    <result column="storeName" jdbcType="VARCHAR" property="storeName" />
+    <result column="specialOffersFlag" jdbcType="VARCHAR" property="specialOffersFlag" />
+    <result column="daiXiaoFlag" jdbcType="BIT" property="daiXiaoFlag" />
+    <result column="zaiTuFlag" jdbcType="BIT" property="zaiTuFlag" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="goldWeight" jdbcType="DOUBLE" property="goldWeight" />
+    <result column="goldLoss" jdbcType="TINYINT" property="goldLoss" />
+    <result column="maoGoldWeight" jdbcType="DOUBLE" property="maoGoldWeight" />
+    <result column="totalGoldWeight" jdbcType="DOUBLE" property="totalGoldWeight" />
+    <result column="goodsWeight" jdbcType="DOUBLE" property="goodsWeight" />
+    <result column="goldPrice" jdbcType="DOUBLE" property="goldPrice" />
+    <result column="worksFee4Ke" jdbcType="DOUBLE" property="worksFee4Ke" />
+    <result column="worksFee4Jian" jdbcType="DOUBLE" property="worksFee4Jian" />
+    <result column="certificateFee" jdbcType="DOUBLE" property="certificateFee" />
+    <result column="fittingsFee" jdbcType="DOUBLE" property="fittingsFee" />
+    <result column="sandBlastFee" jdbcType="DOUBLE" property="sandBlastFee" />
+    <result column="otherFee" jdbcType="DOUBLE" property="otherFee" />
+    <result column="unitPrice" jdbcType="DOUBLE" property="unitPrice" />
+    <result column="goldCostPrice" jdbcType="DOUBLE" property="goldCostPrice" />
+    <result column="costPrice" jdbcType="DOUBLE" property="costPrice" />
+    <result column="markupRate" jdbcType="DOUBLE" property="markupRate" />
+    <result column="labelPrice" jdbcType="DOUBLE" property="labelPrice" />
+    <result column="salePriceAmount" jdbcType="DOUBLE" property="salePriceAmount" />
+    <result column="labelWorkFee" jdbcType="DOUBLE" property="labelWorkFee" />
+    <result column="labelWorkFee4Ke" jdbcType="DOUBLE" property="labelWorkFee4Ke" />
+    <result column="labelWorkFee4Jian" jdbcType="DOUBLE" property="labelWorkFee4Jian" />
+    <result column="labelRemarks" jdbcType="VARCHAR" property="labelRemarks" />
+    <result column="archivesId" jdbcType="INTEGER" property="archivesId" />
+    <result column="archivesNo" jdbcType="VARCHAR" property="archivesNo" />
+    <result column="goodsName" jdbcType="VARCHAR" property="goodsName" />
+    <result column="goodsNameEn" jdbcType="VARCHAR" property="goodsNameEn" />
+    <result column="archivesFineness" jdbcType="VARCHAR" property="archivesFineness" />
+    <result column="archivesStone" jdbcType="VARCHAR" property="archivesStone" />
+    <result column="archivesCategory" jdbcType="VARCHAR" property="archivesCategory" />
+    <result column="mainType" jdbcType="VARCHAR" property="mainType" />
+    <result column="mainTypePrefix" jdbcType="VARCHAR" property="mainTypePrefix" />
+    <result column="goodsClassify" jdbcType="VARCHAR" property="goodsClassify" />
+    <result column="costClassify" jdbcType="VARCHAR" property="costClassify" />
+    <result column="statsClassify" jdbcType="VARCHAR" property="statsClassify" />
+    <result column="mainStoneCut" jdbcType="VARCHAR" property="mainStoneCut" />
+    <result column="mainStoneColor" jdbcType="VARCHAR" property="mainStoneColor" />
+    <result column="mainStoneClarity" jdbcType="VARCHAR" property="mainStoneClarity" />
+    <result column="mainStoneFluorescent" jdbcType="VARCHAR" property="mainStoneFluorescent" />
+    <result column="mainStoneBurnished" jdbcType="VARCHAR" property="mainStoneBurnished" />
+    <result column="mainStoneSymmetry" jdbcType="VARCHAR" property="mainStoneSymmetry" />
+    <result column="mainStoneName" jdbcType="VARCHAR" property="mainStoneName" />
+    <result column="mainStoneNo" jdbcType="VARCHAR" property="mainStoneNo" />
+    <result column="mainStoneSpecifi" jdbcType="VARCHAR" property="mainStoneSpecifi" />
+    <result column="mainStoneNum" jdbcType="INTEGER" property="mainStoneNum" />
+    <result column="mainStoneWeight" jdbcType="DOUBLE" property="mainStoneWeight" />
+    <result column="mainStonePrice" jdbcType="DOUBLE" property="mainStonePrice" />
+    <result column="mainStoneMoney" jdbcType="DOUBLE" property="mainStoneMoney" />
+    <result column="subStone1Name" jdbcType="VARCHAR" property="subStone1Name" />
+    <result column="subStone1No" jdbcType="VARCHAR" property="subStone1No" />
+    <result column="subStone1Specifi" jdbcType="VARCHAR" property="subStone1Specifi" />
+    <result column="subStone1Num" jdbcType="INTEGER" property="subStone1Num" />
+    <result column="subStone1Weight" jdbcType="DOUBLE" property="subStone1Weight" />
+    <result column="subStone1Price" jdbcType="DOUBLE" property="subStone1Price" />
+    <result column="subStone1Money" jdbcType="DOUBLE" property="subStone1Money" />
+    <result column="subStone2Name" jdbcType="VARCHAR" property="subStone2Name" />
+    <result column="subStone2No" jdbcType="VARCHAR" property="subStone2No" />
+    <result column="subStone2Specifi" jdbcType="VARCHAR" property="subStone2Specifi" />
+    <result column="subStone2Num" jdbcType="INTEGER" property="subStone2Num" />
+    <result column="subStone2Weight" jdbcType="DOUBLE" property="subStone2Weight" />
+    <result column="subStone2Price" jdbcType="DOUBLE" property="subStone2Price" />
+    <result column="subStone2Money" jdbcType="DOUBLE" property="subStone2Money" />
+    <result column="subStone3Name" jdbcType="VARCHAR" property="subStone3Name" />
+    <result column="subStone3No" jdbcType="VARCHAR" property="subStone3No" />
+    <result column="subStone3Specifi" jdbcType="VARCHAR" property="subStone3Specifi" />
+    <result column="subStone3Num" jdbcType="INTEGER" property="subStone3Num" />
+    <result column="subStone3Weight" jdbcType="DOUBLE" property="subStone3Weight" />
+    <result column="subStone3Price" jdbcType="DOUBLE" property="subStone3Price" />
+    <result column="subStone3Money" jdbcType="DOUBLE" property="subStone3Money" />
+    <result column="subStone4Name" jdbcType="VARCHAR" property="subStone4Name" />
+    <result column="subStone4No" jdbcType="VARCHAR" property="subStone4No" />
+    <result column="subStone4Specifi" jdbcType="VARCHAR" property="subStone4Specifi" />
+    <result column="subStone4Num" jdbcType="INTEGER" property="subStone4Num" />
+    <result column="subStone4Weight" jdbcType="DOUBLE" property="subStone4Weight" />
+    <result column="subStone4Price" jdbcType="DOUBLE" property="subStone4Price" />
+    <result column="subStone4Money" jdbcType="DOUBLE" property="subStone4Money" />
+    <result column="subStone5Name" jdbcType="VARCHAR" property="subStone5Name" />
+    <result column="subStone5No" jdbcType="VARCHAR" property="subStone5No" />
+    <result column="subStone5Specifi" jdbcType="VARCHAR" property="subStone5Specifi" />
+    <result column="subStone5Num" jdbcType="INTEGER" property="subStone5Num" />
+    <result column="subStone5Weight" jdbcType="DOUBLE" property="subStone5Weight" />
+    <result column="subStone5Price" jdbcType="DOUBLE" property="subStone5Price" />
+    <result column="subStone5Money" jdbcType="DOUBLE" property="subStone5Money" />
+    <result column="subStone6Name" jdbcType="VARCHAR" property="subStone6Name" />
+    <result column="subStone6No" jdbcType="VARCHAR" property="subStone6No" />
+    <result column="subStone6Specifi" jdbcType="VARCHAR" property="subStone6Specifi" />
+    <result column="subStone6Num" jdbcType="INTEGER" property="subStone6Num" />
+    <result column="subStone6Weight" jdbcType="DOUBLE" property="subStone6Weight" />
+    <result column="subStone6Price" jdbcType="DOUBLE" property="subStone6Price" />
+    <result column="subStone6Money" jdbcType="DOUBLE" property="subStone6Money" />
+    <result column="peiShiCostPrice" jdbcType="DOUBLE" property="peiShiCostPrice" />
+    <result column="peiShiRate" jdbcType="DOUBLE" property="peiShiRate" />
+    <result column="peiShiLabelPrice" jdbcType="DOUBLE" property="peiShiLabelPrice" />
+    <result column="netGoldWeight" jdbcType="DOUBLE" property="netGoldWeight" />
+    <result column="oldMaterialQuality" jdbcType="DOUBLE" property="oldMaterialQuality" />
+    <result column="oldMaterialLoss" jdbcType="DOUBLE" property="oldMaterialLoss" />
+    <result column="areaCode" jdbcType="VARCHAR" property="areaCode" />
+    <result column="dataTime" jdbcType="TIMESTAMP" property="dataTime" />
+    <result column="xuNiCostPrice" jdbcType="DOUBLE" property="xuNiCostPrice" />
+    <result column="oldOrnamentsFlag" jdbcType="BIT" property="oldOrnamentsFlag" />
+    <result column="oldLabelPrice" jdbcType="DOUBLE" property="oldLabelPrice" />
+    <result column="zaiTuNum" jdbcType="INTEGER" property="zaiTuNum" />
+    <result column="receiveNum" jdbcType="INTEGER" property="receiveNum" />
+    <result column="receiveUserId" jdbcType="INTEGER" property="receiveUserId" />
+    <result column="receiveUserName" jdbcType="VARCHAR" property="receiveUserName" />
+    <result column="chengPinFlag" jdbcType="BIT" property="chengPinFlag" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="grfName" jdbcType="VARCHAR" property="grfName" />
+    <result column="brandName" jdbcType="VARCHAR" property="brandName" />
+    <result column="priceRange" jdbcType="VARCHAR" property="priceRange" />
+    <result column="goldRange" jdbcType="VARCHAR" property="goldRange" />
+    <result column="stoneRange" jdbcType="VARCHAR" property="stoneRange" />
+    <result column="dhFlag" jdbcType="BIT" property="dhFlag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, companyNo, supplierNo, supplierName, barCode, oldBarCode, subGoodsName, certificateNo, 
+    giaCertificateNo, style, styleNo, shortCut, craft, measurementMode, img, remarks, 
+    deptAreaCode, deptAreaName, storeId, storeName, specialOffersFlag, daiXiaoFlag, zaiTuFlag, 
+    num, goldWeight, goldLoss, maoGoldWeight, totalGoldWeight, goodsWeight, goldPrice, 
+    worksFee4Ke, worksFee4Jian, certificateFee, fittingsFee, sandBlastFee, otherFee, 
+    unitPrice, goldCostPrice, costPrice, markupRate, labelPrice, salePriceAmount, labelWorkFee, 
+    labelWorkFee4Ke, labelWorkFee4Jian, labelRemarks, archivesId, archivesNo, goodsName, 
+    goodsNameEn, archivesFineness, archivesStone, archivesCategory, mainType, mainTypePrefix, 
+    goodsClassify, costClassify, statsClassify, mainStoneCut, mainStoneColor, mainStoneClarity, 
+    mainStoneFluorescent, mainStoneBurnished, mainStoneSymmetry, mainStoneName, mainStoneNo, 
+    mainStoneSpecifi, mainStoneNum, mainStoneWeight, mainStonePrice, mainStoneMoney, 
+    subStone1Name, subStone1No, subStone1Specifi, subStone1Num, subStone1Weight, subStone1Price, 
+    subStone1Money, subStone2Name, subStone2No, subStone2Specifi, subStone2Num, subStone2Weight, 
+    subStone2Price, subStone2Money, subStone3Name, subStone3No, subStone3Specifi, subStone3Num, 
+    subStone3Weight, subStone3Price, subStone3Money, subStone4Name, subStone4No, subStone4Specifi, 
+    subStone4Num, subStone4Weight, subStone4Price, subStone4Money, subStone5Name, subStone5No, 
+    subStone5Specifi, subStone5Num, subStone5Weight, subStone5Price, subStone5Money, 
+    subStone6Name, subStone6No, subStone6Specifi, subStone6Num, subStone6Weight, subStone6Price, 
+    subStone6Money, peiShiCostPrice, peiShiRate, peiShiLabelPrice, netGoldWeight, oldMaterialQuality, 
+    oldMaterialLoss, areaCode, dataTime, xuNiCostPrice, oldOrnamentsFlag, oldLabelPrice, 
+    zaiTuNum, receiveNum, receiveUserId, receiveUserName, chengPinFlag, createTime, grfName, 
+    brandName, priceRange, goldRange, stoneRange, dhFlag
+  </sql>
+  <select id="selectByExample" parameterType="com.jr.erp.bus.stock.entity.ProductStockExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bus_product_stock
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="page != null">
+      <if test="limit != null">
+        limit ${(page-1)*limit}, ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from bus_product_stock
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bus_product_stock
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jr.erp.bus.stock.entity.ProductStockExample">
+    delete from bus_product_stock
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jr.erp.bus.stock.entity.ProductStock">
+    insert into bus_product_stock (id, companyNo, supplierNo, 
+      supplierName, barCode, oldBarCode, 
+      subGoodsName, certificateNo, giaCertificateNo, 
+      style, styleNo, shortCut, 
+      craft, measurementMode, img, 
+      remarks, deptAreaCode, deptAreaName, 
+      storeId, storeName, specialOffersFlag, 
+      daiXiaoFlag, zaiTuFlag, num, 
+      goldWeight, goldLoss, maoGoldWeight, 
+      totalGoldWeight, goodsWeight, goldPrice, 
+      worksFee4Ke, worksFee4Jian, certificateFee, 
+      fittingsFee, sandBlastFee, otherFee, 
+      unitPrice, goldCostPrice, costPrice, 
+      markupRate, labelPrice, salePriceAmount, 
+      labelWorkFee, labelWorkFee4Ke, labelWorkFee4Jian, 
+      labelRemarks, archivesId, archivesNo, 
+      goodsName, goodsNameEn, archivesFineness, 
+      archivesStone, archivesCategory, mainType, 
+      mainTypePrefix, goodsClassify, costClassify, 
+      statsClassify, mainStoneCut, mainStoneColor, 
+      mainStoneClarity, mainStoneFluorescent, 
+      mainStoneBurnished, mainStoneSymmetry, 
+      mainStoneName, mainStoneNo, mainStoneSpecifi, 
+      mainStoneNum, mainStoneWeight, mainStonePrice, 
+      mainStoneMoney, subStone1Name, subStone1No, 
+      subStone1Specifi, subStone1Num, subStone1Weight, 
+      subStone1Price, subStone1Money, subStone2Name, 
+      subStone2No, subStone2Specifi, subStone2Num, 
+      subStone2Weight, subStone2Price, subStone2Money, 
+      subStone3Name, subStone3No, subStone3Specifi, 
+      subStone3Num, subStone3Weight, subStone3Price, 
+      subStone3Money, subStone4Name, subStone4No, 
+      subStone4Specifi, subStone4Num, subStone4Weight, 
+      subStone4Price, subStone4Money, subStone5Name, 
+      subStone5No, subStone5Specifi, subStone5Num, 
+      subStone5Weight, subStone5Price, subStone5Money, 
+      subStone6Name, subStone6No, subStone6Specifi, 
+      subStone6Num, subStone6Weight, subStone6Price, 
+      subStone6Money, peiShiCostPrice, peiShiRate, 
+      peiShiLabelPrice, netGoldWeight, oldMaterialQuality, 
+      oldMaterialLoss, areaCode, dataTime, 
+      xuNiCostPrice, oldOrnamentsFlag, oldLabelPrice, 
+      zaiTuNum, receiveNum, receiveUserId, 
+      receiveUserName, chengPinFlag, createTime, 
+      grfName, brandName, priceRange, 
+      goldRange, stoneRange, dhFlag
+      )
+    values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{supplierNo,jdbcType=VARCHAR}, 
+      #{supplierName,jdbcType=VARCHAR}, #{barCode,jdbcType=VARCHAR}, #{oldBarCode,jdbcType=VARCHAR}, 
+      #{subGoodsName,jdbcType=VARCHAR}, #{certificateNo,jdbcType=VARCHAR}, #{giaCertificateNo,jdbcType=VARCHAR}, 
+      #{style,jdbcType=VARCHAR}, #{styleNo,jdbcType=VARCHAR}, #{shortCut,jdbcType=VARCHAR}, 
+      #{craft,jdbcType=VARCHAR}, #{measurementMode,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR}, #{deptAreaCode,jdbcType=VARCHAR}, #{deptAreaName,jdbcType=VARCHAR}, 
+      #{storeId,jdbcType=INTEGER}, #{storeName,jdbcType=VARCHAR}, #{specialOffersFlag,jdbcType=VARCHAR}, 
+      #{daiXiaoFlag,jdbcType=BIT}, #{zaiTuFlag,jdbcType=BIT}, #{num,jdbcType=INTEGER}, 
+      #{goldWeight,jdbcType=DOUBLE}, #{goldLoss,jdbcType=TINYINT}, #{maoGoldWeight,jdbcType=DOUBLE}, 
+      #{totalGoldWeight,jdbcType=DOUBLE}, #{goodsWeight,jdbcType=DOUBLE}, #{goldPrice,jdbcType=DOUBLE}, 
+      #{worksFee4Ke,jdbcType=DOUBLE}, #{worksFee4Jian,jdbcType=DOUBLE}, #{certificateFee,jdbcType=DOUBLE}, 
+      #{fittingsFee,jdbcType=DOUBLE}, #{sandBlastFee,jdbcType=DOUBLE}, #{otherFee,jdbcType=DOUBLE}, 
+      #{unitPrice,jdbcType=DOUBLE}, #{goldCostPrice,jdbcType=DOUBLE}, #{costPrice,jdbcType=DOUBLE}, 
+      #{markupRate,jdbcType=DOUBLE}, #{labelPrice,jdbcType=DOUBLE}, #{salePriceAmount,jdbcType=DOUBLE}, 
+      #{labelWorkFee,jdbcType=DOUBLE}, #{labelWorkFee4Ke,jdbcType=DOUBLE}, #{labelWorkFee4Jian,jdbcType=DOUBLE}, 
+      #{labelRemarks,jdbcType=VARCHAR}, #{archivesId,jdbcType=INTEGER}, #{archivesNo,jdbcType=VARCHAR}, 
+      #{goodsName,jdbcType=VARCHAR}, #{goodsNameEn,jdbcType=VARCHAR}, #{archivesFineness,jdbcType=VARCHAR}, 
+      #{archivesStone,jdbcType=VARCHAR}, #{archivesCategory,jdbcType=VARCHAR}, #{mainType,jdbcType=VARCHAR}, 
+      #{mainTypePrefix,jdbcType=VARCHAR}, #{goodsClassify,jdbcType=VARCHAR}, #{costClassify,jdbcType=VARCHAR}, 
+      #{statsClassify,jdbcType=VARCHAR}, #{mainStoneCut,jdbcType=VARCHAR}, #{mainStoneColor,jdbcType=VARCHAR}, 
+      #{mainStoneClarity,jdbcType=VARCHAR}, #{mainStoneFluorescent,jdbcType=VARCHAR}, 
+      #{mainStoneBurnished,jdbcType=VARCHAR}, #{mainStoneSymmetry,jdbcType=VARCHAR}, 
+      #{mainStoneName,jdbcType=VARCHAR}, #{mainStoneNo,jdbcType=VARCHAR}, #{mainStoneSpecifi,jdbcType=VARCHAR}, 
+      #{mainStoneNum,jdbcType=INTEGER}, #{mainStoneWeight,jdbcType=DOUBLE}, #{mainStonePrice,jdbcType=DOUBLE}, 
+      #{mainStoneMoney,jdbcType=DOUBLE}, #{subStone1Name,jdbcType=VARCHAR}, #{subStone1No,jdbcType=VARCHAR}, 
+      #{subStone1Specifi,jdbcType=VARCHAR}, #{subStone1Num,jdbcType=INTEGER}, #{subStone1Weight,jdbcType=DOUBLE}, 
+      #{subStone1Price,jdbcType=DOUBLE}, #{subStone1Money,jdbcType=DOUBLE}, #{subStone2Name,jdbcType=VARCHAR}, 
+      #{subStone2No,jdbcType=VARCHAR}, #{subStone2Specifi,jdbcType=VARCHAR}, #{subStone2Num,jdbcType=INTEGER}, 
+      #{subStone2Weight,jdbcType=DOUBLE}, #{subStone2Price,jdbcType=DOUBLE}, #{subStone2Money,jdbcType=DOUBLE}, 
+      #{subStone3Name,jdbcType=VARCHAR}, #{subStone3No,jdbcType=VARCHAR}, #{subStone3Specifi,jdbcType=VARCHAR}, 
+      #{subStone3Num,jdbcType=INTEGER}, #{subStone3Weight,jdbcType=DOUBLE}, #{subStone3Price,jdbcType=DOUBLE}, 
+      #{subStone3Money,jdbcType=DOUBLE}, #{subStone4Name,jdbcType=VARCHAR}, #{subStone4No,jdbcType=VARCHAR}, 
+      #{subStone4Specifi,jdbcType=VARCHAR}, #{subStone4Num,jdbcType=INTEGER}, #{subStone4Weight,jdbcType=DOUBLE}, 
+      #{subStone4Price,jdbcType=DOUBLE}, #{subStone4Money,jdbcType=DOUBLE}, #{subStone5Name,jdbcType=VARCHAR}, 
+      #{subStone5No,jdbcType=VARCHAR}, #{subStone5Specifi,jdbcType=VARCHAR}, #{subStone5Num,jdbcType=INTEGER}, 
+      #{subStone5Weight,jdbcType=DOUBLE}, #{subStone5Price,jdbcType=DOUBLE}, #{subStone5Money,jdbcType=DOUBLE}, 
+      #{subStone6Name,jdbcType=VARCHAR}, #{subStone6No,jdbcType=VARCHAR}, #{subStone6Specifi,jdbcType=VARCHAR}, 
+      #{subStone6Num,jdbcType=INTEGER}, #{subStone6Weight,jdbcType=DOUBLE}, #{subStone6Price,jdbcType=DOUBLE}, 
+      #{subStone6Money,jdbcType=DOUBLE}, #{peiShiCostPrice,jdbcType=DOUBLE}, #{peiShiRate,jdbcType=DOUBLE}, 
+      #{peiShiLabelPrice,jdbcType=DOUBLE}, #{netGoldWeight,jdbcType=DOUBLE}, #{oldMaterialQuality,jdbcType=DOUBLE}, 
+      #{oldMaterialLoss,jdbcType=DOUBLE}, #{areaCode,jdbcType=VARCHAR}, #{dataTime,jdbcType=TIMESTAMP}, 
+      #{xuNiCostPrice,jdbcType=DOUBLE}, #{oldOrnamentsFlag,jdbcType=BIT}, #{oldLabelPrice,jdbcType=DOUBLE}, 
+      #{zaiTuNum,jdbcType=INTEGER}, #{receiveNum,jdbcType=INTEGER}, #{receiveUserId,jdbcType=INTEGER}, 
+      #{receiveUserName,jdbcType=VARCHAR}, #{chengPinFlag,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{grfName,jdbcType=VARCHAR}, #{brandName,jdbcType=VARCHAR}, #{priceRange,jdbcType=VARCHAR}, 
+      #{goldRange,jdbcType=VARCHAR}, #{stoneRange,jdbcType=VARCHAR}, #{dhFlag,jdbcType=BIT}
+      )
+  </insert>
+  <select id="countByExample" parameterType="com.jr.erp.bus.stock.entity.ProductStockExample" resultType="java.lang.Long">
+    select count(*) from bus_product_stock
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jr.erp.bus.stock.entity.ProductStock">
+    update bus_product_stock
+    <set>
+      <if test="companyNo != null">
+        companyNo = #{companyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierNo != null">
+        supplierNo = #{supplierNo,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierName != null">
+        supplierName = #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="barCode != null">
+        barCode = #{barCode,jdbcType=VARCHAR},
+      </if>
+      <if test="oldBarCode != null">
+        oldBarCode = #{oldBarCode,jdbcType=VARCHAR},
+      </if>
+      <if test="subGoodsName != null">
+        subGoodsName = #{subGoodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateNo != null">
+        certificateNo = #{certificateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="giaCertificateNo != null">
+        giaCertificateNo = #{giaCertificateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="style != null">
+        style = #{style,jdbcType=VARCHAR},
+      </if>
+      <if test="styleNo != null">
+        styleNo = #{styleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="shortCut != null">
+        shortCut = #{shortCut,jdbcType=VARCHAR},
+      </if>
+      <if test="craft != null">
+        craft = #{craft,jdbcType=VARCHAR},
+      </if>
+      <if test="measurementMode != null">
+        measurementMode = #{measurementMode,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="deptAreaCode != null">
+        deptAreaCode = #{deptAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptAreaName != null">
+        deptAreaName = #{deptAreaName,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null">
+        storeId = #{storeId,jdbcType=INTEGER},
+      </if>
+      <if test="storeName != null">
+        storeName = #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="specialOffersFlag != null">
+        specialOffersFlag = #{specialOffersFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="daiXiaoFlag != null">
+        daiXiaoFlag = #{daiXiaoFlag,jdbcType=BIT},
+      </if>
+      <if test="zaiTuFlag != null">
+        zaiTuFlag = #{zaiTuFlag,jdbcType=BIT},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="goldWeight != null">
+        goldWeight = #{goldWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="goldLoss != null">
+        goldLoss = #{goldLoss,jdbcType=TINYINT},
+      </if>
+      <if test="maoGoldWeight != null">
+        maoGoldWeight = #{maoGoldWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="totalGoldWeight != null">
+        totalGoldWeight = #{totalGoldWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsWeight != null">
+        goodsWeight = #{goodsWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="goldPrice != null">
+        goldPrice = #{goldPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="worksFee4Ke != null">
+        worksFee4Ke = #{worksFee4Ke,jdbcType=DOUBLE},
+      </if>
+      <if test="worksFee4Jian != null">
+        worksFee4Jian = #{worksFee4Jian,jdbcType=DOUBLE},
+      </if>
+      <if test="certificateFee != null">
+        certificateFee = #{certificateFee,jdbcType=DOUBLE},
+      </if>
+      <if test="fittingsFee != null">
+        fittingsFee = #{fittingsFee,jdbcType=DOUBLE},
+      </if>
+      <if test="sandBlastFee != null">
+        sandBlastFee = #{sandBlastFee,jdbcType=DOUBLE},
+      </if>
+      <if test="otherFee != null">
+        otherFee = #{otherFee,jdbcType=DOUBLE},
+      </if>
+      <if test="unitPrice != null">
+        unitPrice = #{unitPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="goldCostPrice != null">
+        goldCostPrice = #{goldCostPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="costPrice != null">
+        costPrice = #{costPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="markupRate != null">
+        markupRate = #{markupRate,jdbcType=DOUBLE},
+      </if>
+      <if test="labelPrice != null">
+        labelPrice = #{labelPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="salePriceAmount != null">
+        salePriceAmount = #{salePriceAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="labelWorkFee != null">
+        labelWorkFee = #{labelWorkFee,jdbcType=DOUBLE},
+      </if>
+      <if test="labelWorkFee4Ke != null">
+        labelWorkFee4Ke = #{labelWorkFee4Ke,jdbcType=DOUBLE},
+      </if>
+      <if test="labelWorkFee4Jian != null">
+        labelWorkFee4Jian = #{labelWorkFee4Jian,jdbcType=DOUBLE},
+      </if>
+      <if test="labelRemarks != null">
+        labelRemarks = #{labelRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="archivesId != null">
+        archivesId = #{archivesId,jdbcType=INTEGER},
+      </if>
+      <if test="archivesNo != null">
+        archivesNo = #{archivesNo,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsName != null">
+        goodsName = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsNameEn != null">
+        goodsNameEn = #{goodsNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="archivesFineness != null">
+        archivesFineness = #{archivesFineness,jdbcType=VARCHAR},
+      </if>
+      <if test="archivesStone != null">
+        archivesStone = #{archivesStone,jdbcType=VARCHAR},
+      </if>
+      <if test="archivesCategory != null">
+        archivesCategory = #{archivesCategory,jdbcType=VARCHAR},
+      </if>
+      <if test="mainType != null">
+        mainType = #{mainType,jdbcType=VARCHAR},
+      </if>
+      <if test="mainTypePrefix != null">
+        mainTypePrefix = #{mainTypePrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsClassify != null">
+        goodsClassify = #{goodsClassify,jdbcType=VARCHAR},
+      </if>
+      <if test="costClassify != null">
+        costClassify = #{costClassify,jdbcType=VARCHAR},
+      </if>
+      <if test="statsClassify != null">
+        statsClassify = #{statsClassify,jdbcType=VARCHAR},
+      </if>
+      <if test="mainStoneCut != null">
+        mainStoneCut = #{mainStoneCut,jdbcType=VARCHAR},
+      </if>
+      <if test="mainStoneColor != null">
+        mainStoneColor = #{mainStoneColor,jdbcType=VARCHAR},
+      </if>
+      <if test="mainStoneClarity != null">
+        mainStoneClarity = #{mainStoneClarity,jdbcType=VARCHAR},
+      </if>
+      <if test="mainStoneFluorescent != null">
+        mainStoneFluorescent = #{mainStoneFluorescent,jdbcType=VARCHAR},
+      </if>
+      <if test="mainStoneBurnished != null">
+        mainStoneBurnished = #{mainStoneBurnished,jdbcType=VARCHAR},
+      </if>
+      <if test="mainStoneSymmetry != null">
+        mainStoneSymmetry = #{mainStoneSymmetry,jdbcType=VARCHAR},
+      </if>
+      <if test="mainStoneName != null">
+        mainStoneName = #{mainStoneName,jdbcType=VARCHAR},
+      </if>
+      <if test="mainStoneNo != null">
+        mainStoneNo = #{mainStoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mainStoneSpecifi != null">
+        mainStoneSpecifi = #{mainStoneSpecifi,jdbcType=VARCHAR},
+      </if>
+      <if test="mainStoneNum != null">
+        mainStoneNum = #{mainStoneNum,jdbcType=INTEGER},
+      </if>
+      <if test="mainStoneWeight != null">
+        mainStoneWeight = #{mainStoneWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="mainStonePrice != null">
+        mainStonePrice = #{mainStonePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="mainStoneMoney != null">
+        mainStoneMoney = #{mainStoneMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="subStone1Name != null">
+        subStone1Name = #{subStone1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="subStone1No != null">
+        subStone1No = #{subStone1No,jdbcType=VARCHAR},
+      </if>
+      <if test="subStone1Specifi != null">
+        subStone1Specifi = #{subStone1Specifi,jdbcType=VARCHAR},
+      </if>
+      <if test="subStone1Num != null">
+        subStone1Num = #{subStone1Num,jdbcType=INTEGER},
+      </if>
+      <if test="subStone1Weight != null">
+        subStone1Weight = #{subStone1Weight,jdbcType=DOUBLE},
+      </if>
+      <if test="subStone1Price != null">
+        subStone1Price = #{subStone1Price,jdbcType=DOUBLE},
+      </if>
+      <if test="subStone1Money != null">
+        subStone1Money = #{subStone1Money,jdbcType=DOUBLE},
+      </if>
+      <if test="subStone2Name != null">
+        subStone2Name = #{subStone2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="subStone2No != null">
+        subStone2No = #{subStone2No,jdbcType=VARCHAR},
+      </if>
+      <if test="subStone2Specifi != null">
+        subStone2Specifi = #{subStone2Specifi,jdbcType=VARCHAR},
+      </if>
+      <if test="subStone2Num != null">
+        subStone2Num = #{subStone2Num,jdbcType=INTEGER},
+      </if>
+      <if test="subStone2Weight != null">
+        subStone2Weight = #{subStone2Weight,jdbcType=DOUBLE},
+      </if>
+      <if test="subStone2Price != null">
+        subStone2Price = #{subStone2Price,jdbcType=DOUBLE},
+      </if>
+      <if test="subStone2Money != null">
+        subStone2Money = #{subStone2Money,jdbcType=DOUBLE},
+      </if>
+      <if test="subStone3Name != null">
+        subStone3Name = #{subStone3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="subStone3No != null">
+        subStone3No = #{subStone3No,jdbcType=VARCHAR},
+      </if>
+      <if test="subStone3Specifi != null">
+        subStone3Specifi = #{subStone3Specifi,jdbcType=VARCHAR},
+      </if>
+      <if test="subStone3Num != null">
+        subStone3Num = #{subStone3Num,jdbcType=INTEGER},
+      </if>
+      <if test="subStone3Weight != null">
+        subStone3Weight = #{subStone3Weight,jdbcType=DOUBLE},
+      </if>
+      <if test="subStone3Price != null">
+        subStone3Price = #{subStone3Price,jdbcType=DOUBLE},
+      </if>
+      <if test="subStone3Money != null">
+        subStone3Money = #{subStone3Money,jdbcType=DOUBLE},
+      </if>
+      <if test="subStone4Name != null">
+        subStone4Name = #{subStone4Name,jdbcType=VARCHAR},
+      </if>
+      <if test="subStone4No != null">
+        subStone4No = #{subStone4No,jdbcType=VARCHAR},
+      </if>
+      <if test="subStone4Specifi != null">
+        subStone4Specifi = #{subStone4Specifi,jdbcType=VARCHAR},
+      </if>
+      <if test="subStone4Num != null">
+        subStone4Num = #{subStone4Num,jdbcType=INTEGER},
+      </if>
+      <if test="subStone4Weight != null">
+        subStone4Weight = #{subStone4Weight,jdbcType=DOUBLE},
+      </if>
+      <if test="subStone4Price != null">
+        subStone4Price = #{subStone4Price,jdbcType=DOUBLE},
+      </if>
+      <if test="subStone4Money != null">
+        subStone4Money = #{subStone4Money,jdbcType=DOUBLE},
+      </if>
+      <if test="subStone5Name != null">
+        subStone5Name = #{subStone5Name,jdbcType=VARCHAR},
+      </if>
+      <if test="subStone5No != null">
+        subStone5No = #{subStone5No,jdbcType=VARCHAR},
+      </if>
+      <if test="subStone5Specifi != null">
+        subStone5Specifi = #{subStone5Specifi,jdbcType=VARCHAR},
+      </if>
+      <if test="subStone5Num != null">
+        subStone5Num = #{subStone5Num,jdbcType=INTEGER},
+      </if>
+      <if test="subStone5Weight != null">
+        subStone5Weight = #{subStone5Weight,jdbcType=DOUBLE},
+      </if>
+      <if test="subStone5Price != null">
+        subStone5Price = #{subStone5Price,jdbcType=DOUBLE},
+      </if>
+      <if test="subStone5Money != null">
+        subStone5Money = #{subStone5Money,jdbcType=DOUBLE},
+      </if>
+      <if test="subStone6Name != null">
+        subStone6Name = #{subStone6Name,jdbcType=VARCHAR},
+      </if>
+      <if test="subStone6No != null">
+        subStone6No = #{subStone6No,jdbcType=VARCHAR},
+      </if>
+      <if test="subStone6Specifi != null">
+        subStone6Specifi = #{subStone6Specifi,jdbcType=VARCHAR},
+      </if>
+      <if test="subStone6Num != null">
+        subStone6Num = #{subStone6Num,jdbcType=INTEGER},
+      </if>
+      <if test="subStone6Weight != null">
+        subStone6Weight = #{subStone6Weight,jdbcType=DOUBLE},
+      </if>
+      <if test="subStone6Price != null">
+        subStone6Price = #{subStone6Price,jdbcType=DOUBLE},
+      </if>
+      <if test="subStone6Money != null">
+        subStone6Money = #{subStone6Money,jdbcType=DOUBLE},
+      </if>
+      <if test="peiShiCostPrice != null">
+        peiShiCostPrice = #{peiShiCostPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="peiShiRate != null">
+        peiShiRate = #{peiShiRate,jdbcType=DOUBLE},
+      </if>
+      <if test="peiShiLabelPrice != null">
+        peiShiLabelPrice = #{peiShiLabelPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="netGoldWeight != null">
+        netGoldWeight = #{netGoldWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="oldMaterialQuality != null">
+        oldMaterialQuality = #{oldMaterialQuality,jdbcType=DOUBLE},
+      </if>
+      <if test="oldMaterialLoss != null">
+        oldMaterialLoss = #{oldMaterialLoss,jdbcType=DOUBLE},
+      </if>
+      <if test="areaCode != null">
+        areaCode = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dataTime != null">
+        dataTime = #{dataTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xuNiCostPrice != null">
+        xuNiCostPrice = #{xuNiCostPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="oldOrnamentsFlag != null">
+        oldOrnamentsFlag = #{oldOrnamentsFlag,jdbcType=BIT},
+      </if>
+      <if test="oldLabelPrice != null">
+        oldLabelPrice = #{oldLabelPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="zaiTuNum != null">
+        zaiTuNum = #{zaiTuNum,jdbcType=INTEGER},
+      </if>
+      <if test="receiveNum != null">
+        receiveNum = #{receiveNum,jdbcType=INTEGER},
+      </if>
+      <if test="receiveUserId != null">
+        receiveUserId = #{receiveUserId,jdbcType=INTEGER},
+      </if>
+      <if test="receiveUserName != null">
+        receiveUserName = #{receiveUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="chengPinFlag != null">
+        chengPinFlag = #{chengPinFlag,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="grfName != null">
+        grfName = #{grfName,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null">
+        brandName = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="priceRange != null">
+        priceRange = #{priceRange,jdbcType=VARCHAR},
+      </if>
+      <if test="goldRange != null">
+        goldRange = #{goldRange,jdbcType=VARCHAR},
+      </if>
+      <if test="stoneRange != null">
+        stoneRange = #{stoneRange,jdbcType=VARCHAR},
+      </if>
+      <if test="dhFlag != null">
+        dhFlag = #{dhFlag,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jr.erp.bus.stock.entity.ProductStock">
+    update bus_product_stock
+    set companyNo = #{companyNo,jdbcType=VARCHAR},
+      supplierNo = #{supplierNo,jdbcType=VARCHAR},
+      supplierName = #{supplierName,jdbcType=VARCHAR},
+      barCode = #{barCode,jdbcType=VARCHAR},
+      oldBarCode = #{oldBarCode,jdbcType=VARCHAR},
+      subGoodsName = #{subGoodsName,jdbcType=VARCHAR},
+      certificateNo = #{certificateNo,jdbcType=VARCHAR},
+      giaCertificateNo = #{giaCertificateNo,jdbcType=VARCHAR},
+      style = #{style,jdbcType=VARCHAR},
+      styleNo = #{styleNo,jdbcType=VARCHAR},
+      shortCut = #{shortCut,jdbcType=VARCHAR},
+      craft = #{craft,jdbcType=VARCHAR},
+      measurementMode = #{measurementMode,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      deptAreaCode = #{deptAreaCode,jdbcType=VARCHAR},
+      deptAreaName = #{deptAreaName,jdbcType=VARCHAR},
+      storeId = #{storeId,jdbcType=INTEGER},
+      storeName = #{storeName,jdbcType=VARCHAR},
+      specialOffersFlag = #{specialOffersFlag,jdbcType=VARCHAR},
+      daiXiaoFlag = #{daiXiaoFlag,jdbcType=BIT},
+      zaiTuFlag = #{zaiTuFlag,jdbcType=BIT},
+      num = #{num,jdbcType=INTEGER},
+      goldWeight = #{goldWeight,jdbcType=DOUBLE},
+      goldLoss = #{goldLoss,jdbcType=TINYINT},
+      maoGoldWeight = #{maoGoldWeight,jdbcType=DOUBLE},
+      totalGoldWeight = #{totalGoldWeight,jdbcType=DOUBLE},
+      goodsWeight = #{goodsWeight,jdbcType=DOUBLE},
+      goldPrice = #{goldPrice,jdbcType=DOUBLE},
+      worksFee4Ke = #{worksFee4Ke,jdbcType=DOUBLE},
+      worksFee4Jian = #{worksFee4Jian,jdbcType=DOUBLE},
+      certificateFee = #{certificateFee,jdbcType=DOUBLE},
+      fittingsFee = #{fittingsFee,jdbcType=DOUBLE},
+      sandBlastFee = #{sandBlastFee,jdbcType=DOUBLE},
+      otherFee = #{otherFee,jdbcType=DOUBLE},
+      unitPrice = #{unitPrice,jdbcType=DOUBLE},
+      goldCostPrice = #{goldCostPrice,jdbcType=DOUBLE},
+      costPrice = #{costPrice,jdbcType=DOUBLE},
+      markupRate = #{markupRate,jdbcType=DOUBLE},
+      labelPrice = #{labelPrice,jdbcType=DOUBLE},
+      salePriceAmount = #{salePriceAmount,jdbcType=DOUBLE},
+      labelWorkFee = #{labelWorkFee,jdbcType=DOUBLE},
+      labelWorkFee4Ke = #{labelWorkFee4Ke,jdbcType=DOUBLE},
+      labelWorkFee4Jian = #{labelWorkFee4Jian,jdbcType=DOUBLE},
+      labelRemarks = #{labelRemarks,jdbcType=VARCHAR},
+      archivesId = #{archivesId,jdbcType=INTEGER},
+      archivesNo = #{archivesNo,jdbcType=VARCHAR},
+      goodsName = #{goodsName,jdbcType=VARCHAR},
+      goodsNameEn = #{goodsNameEn,jdbcType=VARCHAR},
+      archivesFineness = #{archivesFineness,jdbcType=VARCHAR},
+      archivesStone = #{archivesStone,jdbcType=VARCHAR},
+      archivesCategory = #{archivesCategory,jdbcType=VARCHAR},
+      mainType = #{mainType,jdbcType=VARCHAR},
+      mainTypePrefix = #{mainTypePrefix,jdbcType=VARCHAR},
+      goodsClassify = #{goodsClassify,jdbcType=VARCHAR},
+      costClassify = #{costClassify,jdbcType=VARCHAR},
+      statsClassify = #{statsClassify,jdbcType=VARCHAR},
+      mainStoneCut = #{mainStoneCut,jdbcType=VARCHAR},
+      mainStoneColor = #{mainStoneColor,jdbcType=VARCHAR},
+      mainStoneClarity = #{mainStoneClarity,jdbcType=VARCHAR},
+      mainStoneFluorescent = #{mainStoneFluorescent,jdbcType=VARCHAR},
+      mainStoneBurnished = #{mainStoneBurnished,jdbcType=VARCHAR},
+      mainStoneSymmetry = #{mainStoneSymmetry,jdbcType=VARCHAR},
+      mainStoneName = #{mainStoneName,jdbcType=VARCHAR},
+      mainStoneNo = #{mainStoneNo,jdbcType=VARCHAR},
+      mainStoneSpecifi = #{mainStoneSpecifi,jdbcType=VARCHAR},
+      mainStoneNum = #{mainStoneNum,jdbcType=INTEGER},
+      mainStoneWeight = #{mainStoneWeight,jdbcType=DOUBLE},
+      mainStonePrice = #{mainStonePrice,jdbcType=DOUBLE},
+      mainStoneMoney = #{mainStoneMoney,jdbcType=DOUBLE},
+      subStone1Name = #{subStone1Name,jdbcType=VARCHAR},
+      subStone1No = #{subStone1No,jdbcType=VARCHAR},
+      subStone1Specifi = #{subStone1Specifi,jdbcType=VARCHAR},
+      subStone1Num = #{subStone1Num,jdbcType=INTEGER},
+      subStone1Weight = #{subStone1Weight,jdbcType=DOUBLE},
+      subStone1Price = #{subStone1Price,jdbcType=DOUBLE},
+      subStone1Money = #{subStone1Money,jdbcType=DOUBLE},
+      subStone2Name = #{subStone2Name,jdbcType=VARCHAR},
+      subStone2No = #{subStone2No,jdbcType=VARCHAR},
+      subStone2Specifi = #{subStone2Specifi,jdbcType=VARCHAR},
+      subStone2Num = #{subStone2Num,jdbcType=INTEGER},
+      subStone2Weight = #{subStone2Weight,jdbcType=DOUBLE},
+      subStone2Price = #{subStone2Price,jdbcType=DOUBLE},
+      subStone2Money = #{subStone2Money,jdbcType=DOUBLE},
+      subStone3Name = #{subStone3Name,jdbcType=VARCHAR},
+      subStone3No = #{subStone3No,jdbcType=VARCHAR},
+      subStone3Specifi = #{subStone3Specifi,jdbcType=VARCHAR},
+      subStone3Num = #{subStone3Num,jdbcType=INTEGER},
+      subStone3Weight = #{subStone3Weight,jdbcType=DOUBLE},
+      subStone3Price = #{subStone3Price,jdbcType=DOUBLE},
+      subStone3Money = #{subStone3Money,jdbcType=DOUBLE},
+      subStone4Name = #{subStone4Name,jdbcType=VARCHAR},
+      subStone4No = #{subStone4No,jdbcType=VARCHAR},
+      subStone4Specifi = #{subStone4Specifi,jdbcType=VARCHAR},
+      subStone4Num = #{subStone4Num,jdbcType=INTEGER},
+      subStone4Weight = #{subStone4Weight,jdbcType=DOUBLE},
+      subStone4Price = #{subStone4Price,jdbcType=DOUBLE},
+      subStone4Money = #{subStone4Money,jdbcType=DOUBLE},
+      subStone5Name = #{subStone5Name,jdbcType=VARCHAR},
+      subStone5No = #{subStone5No,jdbcType=VARCHAR},
+      subStone5Specifi = #{subStone5Specifi,jdbcType=VARCHAR},
+      subStone5Num = #{subStone5Num,jdbcType=INTEGER},
+      subStone5Weight = #{subStone5Weight,jdbcType=DOUBLE},
+      subStone5Price = #{subStone5Price,jdbcType=DOUBLE},
+      subStone5Money = #{subStone5Money,jdbcType=DOUBLE},
+      subStone6Name = #{subStone6Name,jdbcType=VARCHAR},
+      subStone6No = #{subStone6No,jdbcType=VARCHAR},
+      subStone6Specifi = #{subStone6Specifi,jdbcType=VARCHAR},
+      subStone6Num = #{subStone6Num,jdbcType=INTEGER},
+      subStone6Weight = #{subStone6Weight,jdbcType=DOUBLE},
+      subStone6Price = #{subStone6Price,jdbcType=DOUBLE},
+      subStone6Money = #{subStone6Money,jdbcType=DOUBLE},
+      peiShiCostPrice = #{peiShiCostPrice,jdbcType=DOUBLE},
+      peiShiRate = #{peiShiRate,jdbcType=DOUBLE},
+      peiShiLabelPrice = #{peiShiLabelPrice,jdbcType=DOUBLE},
+      netGoldWeight = #{netGoldWeight,jdbcType=DOUBLE},
+      oldMaterialQuality = #{oldMaterialQuality,jdbcType=DOUBLE},
+      oldMaterialLoss = #{oldMaterialLoss,jdbcType=DOUBLE},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
+      dataTime = #{dataTime,jdbcType=TIMESTAMP},
+      xuNiCostPrice = #{xuNiCostPrice,jdbcType=DOUBLE},
+      oldOrnamentsFlag = #{oldOrnamentsFlag,jdbcType=BIT},
+      oldLabelPrice = #{oldLabelPrice,jdbcType=DOUBLE},
+      zaiTuNum = #{zaiTuNum,jdbcType=INTEGER},
+      receiveNum = #{receiveNum,jdbcType=INTEGER},
+      receiveUserId = #{receiveUserId,jdbcType=INTEGER},
+      receiveUserName = #{receiveUserName,jdbcType=VARCHAR},
+      chengPinFlag = #{chengPinFlag,jdbcType=BIT},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      grfName = #{grfName,jdbcType=VARCHAR},
+      brandName = #{brandName,jdbcType=VARCHAR},
+      priceRange = #{priceRange,jdbcType=VARCHAR},
+      goldRange = #{goldRange,jdbcType=VARCHAR},
+      stoneRange = #{stoneRange,jdbcType=VARCHAR},
+      dhFlag = #{dhFlag,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

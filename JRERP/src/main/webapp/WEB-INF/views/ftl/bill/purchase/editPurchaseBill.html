@@ -132,7 +132,7 @@
 <script src="static/plugins/laydate/laydate.js"></script>
 <script src="static/plugins/webix/codebase/webix.js?v=6.0.7"></script>
 <script src="static/zmodel/common/js/validate.js?v=1"></script>
-<script src="static/plugins/data.js?v=4224"></script>
+<script src="static/plugins/data.js?v=42"></script>
 <script type="text/javascript">
 	var hot1;
 	var grid;
@@ -349,15 +349,16 @@
 			container:"testA",
 			view:"datatable", 
 			id:"list1",
-			css:"webix_header_border",
+			css:"webix_header_border webix_footer_border",
 			leftSplit:1,
+			headermenu:true,
 			columns:[
 			        {"id":"index",header:'#',sort:"int",css:"header",width:50,readonly:true},
 			        {"id":"id",header:"id",footer:{text:"Total:"}},
 					{"id":"goodsClassify",header:"实际分类",footer:{text:"Total:"}},
 					{"id":"barcode","header":"原条码",sort:"string"},
              		{"id":"goldWeight","header":"金重",sort:"string",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"num","header":"数量",footer:{ content:"summColumn" },sort:"int",footer:{ content:"summColumn" }},
+             		{"id":"num","header":"数量",footer:{ content:"summColumn" },sort:"int",footer:{ content:"summColumn"}, fillspace:4},
              		{"id":"goodsName",header:["商品名称"],sort:"string",footer:{ content:"summColumn" }},
              		{"id":"unitPrice","header":"单价",sort:"int",footer:{ content:"summColumn" }},
              		{"id":"subGoodsName","header":"子名称",sort:"string"},

@@ -13,15 +13,17 @@ import org.springframework.web.multipart.MultipartFile;
 import com.alibaba.fastjson.JSONObject;
 import com.jr.erp.base.mybatis.AbstractBaseService;
 import com.jr.erp.base.service.impl.IFileUploadService;
-import com.jr.erp.base.utils.JodaUtils;
 import com.jr.erp.bill.purchase.dao.BillPurchaseItemMapper;
-import com.jr.erp.bill.purchase.dao.BillPurchaseMapper;
 import com.jr.erp.bill.purchase.entity.BillPurchase;
 import com.jr.erp.bill.purchase.entity.BillPurchaseItem;
+import com.jr.erp.bill.purchase.entity.BillPurchaseItemExample;
 import com.jr.erp.bill.purchase.service.IBillPurchaseService;
+import com.jr.erp.bus.stock.service.IProductStockService;
 import com.jr.erp.sys.entity.SysPurchaseSecheme;
 import com.jr.erp.sys.entity.SysPurchaseSechemeItem;
 import com.jr.erp.sys.service.ISysPurchaseSechemeService;
+import com.jr.erp.sys.set.entity.Param;
+import com.jr.erp.sys.set.service.IParamService;
 
 @Service(value="billPurchaseServiceImpl")
 public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> implements IBillPurchaseService
@@ -29,14 +31,18 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
 
     @Autowired
     private  BillPurchaseItemMapper itemMapper;
-    @Autowired
-    private BillPurchaseMapper billPurchaseMapper;
     
     @Autowired
     ISysPurchaseSechemeService sysPurchaseSechemeService;
     
     @Autowired
     IFileUploadService fileUploadService;
+    
+    @Autowired
+    IParamService paramService;
+    
+    @Autowired
+    IProductStockService productStockService;
     
     @Override
     public List<JSONObject> parseImportExcel(String companyNo, Integer sechemeId, MultipartFile file)
@@ -89,7 +95,8 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
                                 // 整数类型
                                 if (item.getParamType() == 1)
                                 {
-                                    resultObj = (int)NumberUtils.toDouble(excelColumnData);
+                                   
+                                    resultObj =  NumberUtils.isNumber(excelColumnData)?(int)NumberUtils.toDouble(excelColumnData):0;
                                 }
                                 // double类型
                                 else if (item.getParamType() == 2)
@@ -99,7 +106,7 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
                                     {
                                         if(StringUtils.isNotEmpty(excelColumnData))
                                         {
-                                            _value = Double.valueOf(excelColumnData);
+                                            _value = NumberUtils.isNumber(excelColumnData)?NumberUtils.toDouble(excelColumnData):0;
                                         }
                                     } catch (Exception e)
                                     {
@@ -160,6 +167,24 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
     @Override
     public void saveBillAudit(BillPurchase billPurchase)
     {
+        Param param= paramService.getParam(billPurchase.getCompanyNo(),billPurchase.getAreaCode(),"purchase","isAudit");
+        
+//        this.updateBillInfo(billPurchase);
+//        
+//        this.updateBillSummary(billPurchase.getId());
+
+        BillPurchaseItemExample itemExample = new BillPurchaseItemExample();
+        itemExample.createCriteria().andCompanyNoEqualTo(billPurchase.getCompanyNo()).andBillIdEqualTo(billPurchase.getId());
+        List<BillPurchaseItem> itemList = (List) itemMapper.selectByExample(itemExample);
+        
+        //进入在途仓库
+        if(StringUtils.equals(param.getParamValue() , "1"))
+        {
+            String counterCode = billPurchase.getAreaCode()+"001";
+            productStockService.addPurchaseStock(billPurchase, counterCode, 10);
+            // TODO websocket 发送信息到首页
+        }
+        
         this.updateByPrimaryKey(billPurchase);
     }
 }

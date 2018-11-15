@@ -1,1 +1,1 @@
-var data=[{id:1,"barcode":"1001","goodsName":"zds1","num":1,"zpe":123},{id:2,"barcode":"1002","goodsName":"zds2","num":1},{id:3,"barcode":"1003","goodsName":"zds3","num":1}];
+var data=[{id:1,"barcode":"1001","goodsName":"zds1","num":67879.23,"zpe":67879.23},{num:511495},{num:3129.352},{num:2.1303},{},{},{},{},{},{id:2,"barcode":"1002","goodsName":"zds2","num":533848},{id:3,"barcode":"1003","goodsName":"zds3","num":164558}];

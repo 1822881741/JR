@@ -1,11 +1,15 @@
 package com.jr.erp.sys.set.service.impl;
 
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import com.jr.erp.base.mybatis.AbstractBaseService;
+import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.sys.set.entity.Param;
+import com.jr.erp.sys.set.entity.ParamExample;
 import com.jr.erp.sys.set.service.IParamService;
 
 /**     
@@ -54,5 +58,13 @@ public class ParamServiceImpl extends AbstractBaseService<Param> implements IPar
                 break;
             }
         }
+    }
+
+    @Override
+    public Param getParam(String companyNo, String areaCode, String module, String paramName)
+    {
+        ParamExample example = new ParamExample();
+        example.createCriteria().andCompanyNoEqualTo(companyNo).andAreaCodeEqualTo(areaCode).andModuleEqualTo(module).andParamNameEqualTo(paramName);
+        return CollectionUtils.isEmpty(this.selectByExample(example))?null:(Param)this.selectByExample(example).get(0);
     }
 }

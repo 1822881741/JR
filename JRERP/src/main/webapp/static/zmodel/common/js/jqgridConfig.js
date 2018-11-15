@@ -271,8 +271,10 @@ function getCounterList(tableDom,pagerDom) {
 			formatter : function(cellValue, options, rowObject) {
 				if (cellValue == 0) {
 					return "成品柜台";
-				} else {
+				} else if(cellValue ==1){
 					return "旧料柜台";
+				}else {
+					return "在途柜台";
 				}
 			}
 		}, {

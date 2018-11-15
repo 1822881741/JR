@@ -53,7 +53,7 @@ public class SysCounter extends BaseEntity {
     }
 
     /**
-     * 分类：0：成品柜台；1：旧料柜台
+     * 分类：0：成品柜台；1：旧料柜台 2:在途仓
      * @param counterType 分类：0：成品柜台；1：旧料柜台
      */
     public void setCounterType(Integer counterType) {

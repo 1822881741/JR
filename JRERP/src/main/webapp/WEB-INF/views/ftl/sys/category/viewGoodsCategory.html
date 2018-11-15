@@ -135,6 +135,12 @@
 	    $(".ui-icon.ui-icon-disk").removeClass().addClass("fa fa-save").parent(".btn-primary").removeClass("btn-primary");
 	    $(".ui-icon.ui-icon-cancel").removeClass().addClass("fa fa-times").parent(".btn-primary").removeClass("btn-primary");
 	  
+	    $(window).on( "resize", function(){
+	    	$("#jqgrid").setGridHeight(parent.winHeight- 260);
+			$("#jqgrid2").setGridHeight(parent.winHeight - 260);
+			$("#jqgrid3").setGridHeight(parent.winHeight - 260);
+			$("#jqgrid4").setGridHeight(parent.winHeight - 260);
+		});	
 	    
 		$("#addBtn").on("click",function(){
 			editCategory(null);

@@ -4,10 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jr.erp.base.mybatis.AbstractBaseService;
+import com.jr.erp.base.utils.JodaUtils;
 import com.jr.erp.sys.dao.SysStoreMapper;
 import com.jr.erp.sys.entity.SysAreaInfo;
+import com.jr.erp.sys.entity.SysCounter;
 import com.jr.erp.sys.entity.SysStore;
 import com.jr.erp.sys.service.ISysAreaInfoService;
+import com.jr.erp.sys.service.ISysCounterService;
 import com.jr.erp.sys.service.ISysStoreService;
 
 /**     
@@ -29,6 +32,8 @@ public class SysStoreServiceImpl extends AbstractBaseService<SysStore> implement
     @Autowired
     private ISysAreaInfoService sysAreaServiceImpl;
 
+    @Autowired
+    private ISysCounterService sysCounterService;
     @Override
     public void saveStore(SysStore store)
     {
@@ -52,6 +57,27 @@ public class SysStoreServiceImpl extends AbstractBaseService<SysStore> implement
             area.setAreaType(2);
             area.setStatus(1);
             sysAreaServiceImpl.insert(area);
+            
+            //默认创建在途仓库
+            SysAreaInfo onWayArea = new SysAreaInfo();
+            onWayArea.setParentId(area.getId());
+            onWayArea.setAreaCode(nextCode+"000");
+            onWayArea.setAreaName(store.getStoreName()+"在途仓");
+            onWayArea.setCompanyNo(store.getCompanyNo());
+            onWayArea.setAreaType(3);
+            onWayArea.setStatus(1);
+            sysAreaServiceImpl.insert(onWayArea);
+            
+            SysCounter onWayCounter = new SysCounter();
+            onWayCounter.setAreaCode(nextCode+"000");
+            onWayCounter.setCompanyNo(store.getCompanyNo());
+            onWayCounter.setCounterName(store.getStoreName()+"在途仓");
+            onWayCounter.setCounterType(2);
+            onWayCounter.setCreateTime(JodaUtils.getFullDate());
+            onWayCounter.setRemarks("在途仓，自动创建");
+            onWayCounter.setStatus(1);
+            sysCounterService.insert(onWayCounter);
+            
         }else
         {
             SysStore dbStore = (SysStore) this.selectByPrimaryKey(store.getId());
