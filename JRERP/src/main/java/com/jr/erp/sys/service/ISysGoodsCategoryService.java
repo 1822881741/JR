@@ -3,7 +3,7 @@ package com.jr.erp.sys.service;
 import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.mybatis.IBaseService;
 import com.jr.erp.sys.element.dto.SysGoodsCategoryDTO;
-import com.jr.erp.sys.set.entity.BaseType;
+import com.jr.erp.sys.set.base.entity.BaseType;
 
 /**
  * 系统管理service

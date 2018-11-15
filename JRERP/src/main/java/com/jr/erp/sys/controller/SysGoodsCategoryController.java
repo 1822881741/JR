@@ -14,10 +14,10 @@ import com.jr.erp.base.utils.Ret;
 import com.jr.erp.base.utils.RetJqGridPage;
 import com.jr.erp.base.utils.RetPage;
 import com.jr.erp.sys.element.dto.SysGoodsCategoryDTO;
-import com.jr.erp.sys.entity.SysGoodsCategory;
-import com.jr.erp.sys.entity.SysGoodsCategoryExample;
 import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.service.ISysGoodsCategoryService;
+import com.jr.erp.sys.set.base.entity.SysGoodsCategory;
+import com.jr.erp.sys.set.base.entity.SysGoodsCategoryExample;
 
 /**     
  * 类名称：SysCategoryController    

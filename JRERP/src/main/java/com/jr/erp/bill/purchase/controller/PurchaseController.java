@@ -25,11 +25,11 @@ import com.jr.erp.base.utils.Ret;
 import com.jr.erp.bill.purchase.entity.BillPurchase;
 import com.jr.erp.bill.purchase.service.IBillPurchaseService;
 import com.jr.erp.sys.entity.SysAreaInfoExample;
-import com.jr.erp.sys.entity.SysPurchaseSechemeExample;
 import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.service.ISysAreaInfoService;
-import com.jr.erp.sys.service.ISysPurchaseSechemeService;
-import com.jr.erp.sys.set.service.IBaseTypeService;
+import com.jr.erp.sys.set.base.service.IBaseTypeService;
+import com.jr.erp.sys.set.purchase.entity.PurchaseSechemeExample;
+import com.jr.erp.sys.set.purchase.service.IPurchaseSechemeService;
 import com.jr.erp.sys.utils.service.IBillNoGeneratorService;
 import com.jr.erp.sys.vo.PurchaseColumnVo;
 
@@ -38,7 +38,7 @@ import com.jr.erp.sys.vo.PurchaseColumnVo;
 public class PurchaseController {    
     
     @Autowired
-    private ISysPurchaseSechemeService sysPurchaseSechemeService;
+    private IPurchaseSechemeService sysPurchaseSechemeService;
     
     @Autowired
     private IBaseTypeService baseTypeService;
@@ -98,7 +98,7 @@ public class PurchaseController {
         String companyNo = user.getCompanyNo();
         
         //获取导入方案列表
-        SysPurchaseSechemeExample example = new SysPurchaseSechemeExample();
+        PurchaseSechemeExample example = new PurchaseSechemeExample();
         example.createCriteria().andCompanyNoEqualTo(companyNo).andStatusEqualTo(1);
         List<BaseEntity> sechemeList = sysPurchaseSechemeService.selectByExample(example);
         model.addAttribute("sechemeList",sechemeList);

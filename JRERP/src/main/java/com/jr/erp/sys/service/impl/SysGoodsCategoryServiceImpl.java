@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.jr.erp.base.mybatis.AbstractBaseService;
 import com.jr.erp.sys.element.dto.SysGoodsCategoryDTO;
-import com.jr.erp.sys.entity.SysGoodsCategory;
-import com.jr.erp.sys.entity.SysGoodsCategoryExample;
 import com.jr.erp.sys.service.ISysGoodsCategoryService;
-import com.jr.erp.sys.set.entity.BaseType;
-import com.jr.erp.sys.set.entity.BaseTypeExample;
+import com.jr.erp.sys.set.base.entity.BaseType;
+import com.jr.erp.sys.set.base.entity.BaseTypeExample;
+import com.jr.erp.sys.set.base.entity.SysGoodsCategory;
+import com.jr.erp.sys.set.base.entity.SysGoodsCategoryExample;
 
 /**     
  * 类名称：SysCounterServiceImpl    

@@ -19,11 +19,11 @@ import com.jr.erp.bill.purchase.entity.BillPurchaseItem;
 import com.jr.erp.bill.purchase.entity.BillPurchaseItemExample;
 import com.jr.erp.bill.purchase.service.IBillPurchaseService;
 import com.jr.erp.bus.stock.service.IProductStockService;
-import com.jr.erp.sys.entity.SysPurchaseSecheme;
-import com.jr.erp.sys.entity.SysPurchaseSechemeItem;
-import com.jr.erp.sys.service.ISysPurchaseSechemeService;
-import com.jr.erp.sys.set.entity.Param;
-import com.jr.erp.sys.set.service.IParamService;
+import com.jr.erp.sys.set.base.entity.Param;
+import com.jr.erp.sys.set.base.service.IParamService;
+import com.jr.erp.sys.set.purchase.entity.PurchaseSecheme;
+import com.jr.erp.sys.set.purchase.entity.PurchaseSechemeItem;
+import com.jr.erp.sys.set.purchase.service.IPurchaseSechemeService;
 
 @Service(value="billPurchaseServiceImpl")
 public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> implements IBillPurchaseService
@@ -33,7 +33,7 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
     private  BillPurchaseItemMapper itemMapper;
     
     @Autowired
-    ISysPurchaseSechemeService sysPurchaseSechemeService;
+    IPurchaseSechemeService sysPurchaseSechemeService;
     
     @Autowired
     IFileUploadService fileUploadService;
@@ -62,8 +62,8 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
     private List<JSONObject> convertExcelData(List<List<String>> result, Integer sechemeId)
     {
         List<JSONObject> goodsListVo = new ArrayList<JSONObject>();
-        SysPurchaseSecheme secheme = sysPurchaseSechemeService.getById(sechemeId);
-        List<SysPurchaseSechemeItem>  itemList= secheme.getItemList();
+        PurchaseSecheme secheme = sysPurchaseSechemeService.getById(sechemeId);
+        List<PurchaseSechemeItem>  itemList= secheme.getItemList();
         // 如果是石料属性
         if (CollectionUtils.isNotEmpty(result))
         {
@@ -81,7 +81,7 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
                     try
                     {
                         // 循环方案中设置的所有列
-                        for (SysPurchaseSechemeItem item : itemList)
+                        for (PurchaseSechemeItem item : itemList)
                         {
                             Integer orderIndex = item.getOrderColumn();
                             if (orderIndex != null && orderIndex != 0)

@@ -21,9 +21,9 @@ import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.service.ISysAreaInfoService;
 import com.jr.erp.sys.service.ISysCounterService;
 import com.jr.erp.sys.service.ISysStoreService;
-import com.jr.erp.sys.set.entity.GoodsGroup;
-import com.jr.erp.sys.set.service.IBaseTypeService;
-import com.jr.erp.sys.set.service.IGoodsGroupService;
+import com.jr.erp.sys.set.base.entity.GoodsGroup;
+import com.jr.erp.sys.set.base.service.IBaseTypeService;
+import com.jr.erp.sys.set.base.service.IGoodsGroupService;
 
 /**     
  * 类名称：SysElementController    
