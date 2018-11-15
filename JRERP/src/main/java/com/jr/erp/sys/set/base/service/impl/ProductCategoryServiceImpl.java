@@ -1,4 +1,4 @@
-package com.jr.erp.sys.service.impl;
+package com.jr.erp.sys.set.base.service.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,11 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.jr.erp.base.mybatis.AbstractBaseService;
 import com.jr.erp.sys.element.dto.SysGoodsCategoryDTO;
-import com.jr.erp.sys.service.ISysGoodsCategoryService;
-import com.jr.erp.sys.set.base.entity.BaseType;
-import com.jr.erp.sys.set.base.entity.BaseTypeExample;
-import com.jr.erp.sys.set.base.entity.SysGoodsCategory;
-import com.jr.erp.sys.set.base.entity.SysGoodsCategoryExample;
+import com.jr.erp.sys.set.base.entity.ProductCategory;
+import com.jr.erp.sys.set.base.entity.ProductCategoryExample;
+import com.jr.erp.sys.set.base.service.IProductCategoryService;
 
 /**     
  * 类名称：SysCounterServiceImpl    
@@ -26,7 +24,7 @@ import com.jr.erp.sys.set.base.entity.SysGoodsCategoryExample;
  * @version  1.0    
  */
 @Service(value = "sysGoodsCategoryService")
-public class SysGoodsCategoryServiceImpl extends AbstractBaseService<SysGoodsCategory> implements ISysGoodsCategoryService
+public class ProductCategoryServiceImpl extends AbstractBaseService<ProductCategory> implements IProductCategoryService
 {
  
     @Override
@@ -40,7 +38,7 @@ public class SysGoodsCategoryServiceImpl extends AbstractBaseService<SysGoodsCat
             String[] goldPercentArray= ArrayUtils.isEmpty(sysGoodsCategoryDTO.getGoldPercent())?new String[]{""}:sysGoodsCategoryDTO.getGoldPercent();
             if(sysGoodsCategoryDTO.getId() !=null)
             {
-                SysGoodsCategory temp = new SysGoodsCategory();
+                ProductCategory temp = new ProductCategory();
                 temp.setId(sysGoodsCategoryDTO.getId());
                 temp.setSystemCode(sysGoodsCategoryDTO.getSystemCode());
                 temp.setCompanyNo(sysGoodsCategoryDTO.getCompanyNo());
@@ -80,7 +78,7 @@ public class SysGoodsCategoryServiceImpl extends AbstractBaseService<SysGoodsCat
                 recursive(dimValue, recursiveResult, 0, new ArrayList<String>());
                 for (List<String> list : recursiveResult)
                 {
-                    SysGoodsCategory temp = new SysGoodsCategory();
+                    ProductCategory temp = new ProductCategory();
                     temp.setFirstType(sysGoodsCategoryDTO.getFirstType());
                     temp.setFirstTypeName(sysGoodsCategoryDTO.getFirstTypeName());
                     temp.setSecondType(sysGoodsCategoryDTO.getSecondType());
@@ -190,7 +188,7 @@ public class SysGoodsCategoryServiceImpl extends AbstractBaseService<SysGoodsCat
     @Override
     public void deleteGoodsCategory(String companyNo, Integer[] ids)
     {
-        SysGoodsCategoryExample example = new SysGoodsCategoryExample();
+        ProductCategoryExample example = new ProductCategoryExample();
         example.createCriteria().andCompanyNoEqualTo(companyNo).andIdIn(Arrays.asList(ids));
         this.deleteByExample(example);
     }

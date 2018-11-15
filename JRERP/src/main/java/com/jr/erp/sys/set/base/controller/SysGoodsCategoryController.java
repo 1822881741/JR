@@ -1,4 +1,4 @@
-package com.jr.erp.sys.controller;
+package com.jr.erp.sys.set.base.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,9 +15,9 @@ import com.jr.erp.base.utils.RetJqGridPage;
 import com.jr.erp.base.utils.RetPage;
 import com.jr.erp.sys.element.dto.SysGoodsCategoryDTO;
 import com.jr.erp.sys.entity.SysUser;
-import com.jr.erp.sys.service.ISysGoodsCategoryService;
-import com.jr.erp.sys.set.base.entity.SysGoodsCategory;
-import com.jr.erp.sys.set.base.entity.SysGoodsCategoryExample;
+import com.jr.erp.sys.set.base.entity.ProductCategory;
+import com.jr.erp.sys.set.base.entity.ProductGroupExample;
+import com.jr.erp.sys.set.base.service.IProductCategoryService;
 
 /**     
  * 类名称：SysCategoryController    
@@ -35,7 +35,7 @@ public class SysGoodsCategoryController
 {
 
     @Autowired
-    private ISysGoodsCategoryService sysGoodsCategoryService;
+    private IProductCategoryService sysGoodsCategoryService;
 
     /**    
      * viewStore(这里用一句话描述这个方法的作用)    
@@ -68,7 +68,7 @@ public class SysGoodsCategoryController
         SysUser user = ShiroUtils.getSysUser();
         pageForm.setPage(0);
         pageForm.setLimit(10000);
-        SysGoodsCategoryExample exampale = new SysGoodsCategoryExample();
+        ProductGroupExample exampale = new ProductGroupExample();
         exampale.setOrderByClause("id");
         exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andFirstTypeEqualTo(firstType);
         RetPage page = sysGoodsCategoryService.selectPage(exampale);
@@ -78,7 +78,7 @@ public class SysGoodsCategoryController
     @RequestMapping(value = "/editGoodsCategory.do")
     public String editGoodsCategory(Integer id,HttpServletRequest request,Model model)
     {
-        SysGoodsCategory catetory = (SysGoodsCategory) sysGoodsCategoryService.selectByPrimaryKey(id);
+        ProductCategory catetory = (ProductCategory) sysGoodsCategoryService.selectByPrimaryKey(id);
         model.addAttribute("catetory",catetory);
         return "sys/category/addGoodsCategory";
     }

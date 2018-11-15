@@ -23,10 +23,7 @@ import com.jr.erp.base.utils.RetPage;
 import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.set.base.entity.BaseType;
 import com.jr.erp.sys.set.base.entity.BaseTypeExample;
-import com.jr.erp.sys.set.base.entity.GoodsGroup;
-import com.jr.erp.sys.set.base.entity.GoodsGroupExample;
 import com.jr.erp.sys.set.base.service.IBaseTypeService;
-import com.jr.erp.sys.set.base.service.IGoodsGroupService;
 
 /**     
  * 类名称：BaseTypeController    

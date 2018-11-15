@@ -21,9 +21,9 @@ import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.service.ISysAreaInfoService;
 import com.jr.erp.sys.service.ISysCounterService;
 import com.jr.erp.sys.service.ISysStoreService;
-import com.jr.erp.sys.set.base.entity.GoodsGroup;
+import com.jr.erp.sys.set.base.entity.ProductGroup;
 import com.jr.erp.sys.set.base.service.IBaseTypeService;
-import com.jr.erp.sys.set.base.service.IGoodsGroupService;
+import com.jr.erp.sys.set.base.service.IProductGroupService;
 
 /**     
  * 类名称：SysElementController    
@@ -53,7 +53,7 @@ public class SysElementController
     private IBaseTypeService baseTypeService;
     
     @Autowired
-    private IGoodsGroupService goodsGroupService;
+    private IProductGroupService goodsGroupService;
     
     @RequestMapping(value="/getElements.do")
     @ResponseBody
@@ -80,7 +80,7 @@ public class SysElementController
                     data.put("storeInfo", storeList);
                     break;
                 case "secondType":
-                    Map<String,List<GoodsGroup>> secondTypeMap = goodsGroupService.getInUseClassify(user.getCompanyNo());
+                    Map<String,List<ProductGroup>> secondTypeMap = goodsGroupService.getInUseClassify(user.getCompanyNo());
                     data.put("secondType", secondTypeMap);
                     break;   
                 case "goldName":

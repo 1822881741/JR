@@ -27,14 +27,14 @@ import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.base.utils.Ret;
 import com.jr.erp.sys.entity.SysUser;
-import com.jr.erp.sys.set.base.entity.GoodsGroupExample;
-import com.jr.erp.sys.set.base.service.IGoodsGroupService;
+import com.jr.erp.sys.set.base.entity.ProductGroupExample;
+import com.jr.erp.sys.set.base.service.IProductGroupService;
 import com.jr.erp.sys.set.purchase.entity.PurchaseColumn;
 import com.jr.erp.sys.set.purchase.entity.PurchaseColumnExample;
 import com.jr.erp.sys.set.purchase.entity.PurchaseSecheme;
 import com.jr.erp.sys.set.purchase.entity.PurchaseSechemeItem;
-import com.jr.erp.sys.set.purchase.service.IPurchaseSechemeService;
 import com.jr.erp.sys.set.purchase.service.IPurchaseColumnService;
+import com.jr.erp.sys.set.purchase.service.IPurchaseSechemeService;
 
 @Controller
 @RequestMapping("/purchaseSecheme")
@@ -47,7 +47,7 @@ public class PurchaseSechemeController {
     private IPurchaseSechemeService PurchaseSechemeService;
     
     @Autowired
-    private IGoodsGroupService sysClassifyService;
+    private IProductGroupService sysClassifyService;
     /**    
      * editSecheme(这里用一句话描述这个方法的作用)    
      * 保持方案       
@@ -88,7 +88,7 @@ public class PurchaseSechemeController {
         }
         model.addAttribute("allColumn", allColumn);
         
-        GoodsGroupExample example2 = new GoodsGroupExample();
+        ProductGroupExample example2 = new ProductGroupExample();
         example2.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andStatusEqualTo(1);
         List<BaseEntity> allClassify = sysClassifyService.selectByExample(example);
         model.addAttribute("allClassify", allClassify);

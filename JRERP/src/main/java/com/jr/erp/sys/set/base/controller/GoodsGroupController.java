@@ -17,9 +17,9 @@ import com.jr.erp.base.utils.Ret;
 import com.jr.erp.base.utils.RetJqGridPage;
 import com.jr.erp.base.utils.RetPage;
 import com.jr.erp.sys.entity.SysUser;
-import com.jr.erp.sys.set.base.entity.GoodsGroup;
-import com.jr.erp.sys.set.base.entity.GoodsGroupExample;
-import com.jr.erp.sys.set.base.service.IGoodsGroupService;
+import com.jr.erp.sys.set.base.entity.ProductGroup;
+import com.jr.erp.sys.set.base.entity.ProductGroupExample;
+import com.jr.erp.sys.set.base.service.IProductGroupService;
 
 /**     
  * 类名称：GoodsGroupController    
@@ -37,7 +37,7 @@ public class GoodsGroupController
 {
 
     @Autowired
-    private IGoodsGroupService goodsGroupService;
+    private IProductGroupService goodsGroupService;
     
     /**    
      * viewClassify(这里用一句话描述这个方法的作用)    
@@ -69,10 +69,10 @@ public class GoodsGroupController
     public String editGoodsGroup(String firstType,Integer id,HttpServletRequest request, Model model)
     {
         SysUser user = ShiroUtils.getSysUser();
-        GoodsGroup classify = new GoodsGroup();
+        ProductGroup classify = new ProductGroup();
         if(id!=null)
         {
-            classify = (GoodsGroup) goodsGroupService.selectByPrimaryKey(id);
+            classify = (ProductGroup) goodsGroupService.selectByPrimaryKey(id);
         }else
         {
             classify.setStatus(1);
@@ -114,7 +114,7 @@ public class GoodsGroupController
     public RetJqGridPage getGoodsGroupData(BasePageForm pageForm,String firstType,HttpServletRequest request)
     {
         SysUser user = ShiroUtils.getSysUser();
-        GoodsGroupExample exampale = new GoodsGroupExample();
+        ProductGroupExample exampale = new ProductGroupExample();
         exampale.setOrderByClause("id");
         exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andFirstTypeEqualTo(firstType);
         RetPage page = goodsGroupService.selectPage(exampale);
@@ -132,7 +132,7 @@ public class GoodsGroupController
     */
     @RequestMapping(value = "/saveGoodsGroup.do")
     @ResponseBody
-    public Ret saveGoodsGroup(GoodsGroup goodsGroup,HttpServletRequest request)
+    public Ret saveGoodsGroup(ProductGroup goodsGroup,HttpServletRequest request)
     {
         SysUser user = ShiroUtils.getSysUser();
         goodsGroup.setCompanyNo(user.getCompanyNo());
@@ -156,7 +156,7 @@ public class GoodsGroupController
         SysUser user = ShiroUtils.getSysUser();
         try
         {
-            GoodsGroupExample exampale = new GoodsGroupExample();
+            ProductGroupExample exampale = new ProductGroupExample();
             exampale.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andIsSysDefNotEqualTo(1).andIdIn(Arrays.asList(ids));
             goodsGroupService.deleteByExample(exampale);
         } catch (Exception e)

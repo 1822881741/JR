@@ -17,7 +17,7 @@ import com.jr.erp.sys.service.ISysStoreService;
  * 类名称：SysStoreServiceImpl    
  * 类描述：  门店service  
  * 创建人：Administrator    
- * 创建时间：2018年9月13日 下午12:38:12    
+ * 创建时间：2018年9月13日 下午12:38:12     
  * 修改人：Administrator    
  * 修改时间：2018年9月13日 下午12:38:12    
  * 修改备注：    

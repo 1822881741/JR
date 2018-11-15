@@ -5,12 +5,12 @@ import java.util.Map;
 
 import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.mybatis.IBaseService;
-import com.jr.erp.sys.set.base.entity.GoodsGroup;
+import com.jr.erp.sys.set.base.entity.ProductGroup;
 
 /**
  * 系统管理service
  */
-public interface IGoodsGroupService extends IBaseService<BaseEntity>{
+public interface IProductGroupService extends IBaseService<BaseEntity>{
 
     /**    
      * saveClassify(这里用一句话描述这个方法的作用)    
@@ -21,7 +21,7 @@ public interface IGoodsGroupService extends IBaseService<BaseEntity>{
      * @return List<String>
      * @Exception 异常对象
     */
-    void saveClassify(GoodsGroup sysClassify);
+    void saveClassify(ProductGroup sysClassify);
 
     /**    
      * getInUseClassify(这里用一句话描述这个方法的作用)    
@@ -31,5 +31,5 @@ public interface IGoodsGroupService extends IBaseService<BaseEntity>{
      * @return Map<String,List<SysClassify>>
      * @Exception 异常对象
     */
-    Map<String, List<GoodsGroup>> getInUseClassify(String companyNo);
+    Map<String, List<ProductGroup>> getInUseClassify(String companyNo);
 }

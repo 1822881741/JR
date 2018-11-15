@@ -1,4 +1,4 @@
-package com.jr.erp.sys.service;
+package com.jr.erp.sys.set.base.service;
 
 import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.mybatis.IBaseService;
@@ -8,7 +8,7 @@ import com.jr.erp.sys.set.base.entity.BaseType;
 /**
  * 系统管理service
  */
-public interface ISysGoodsCategoryService extends IBaseService<BaseEntity>{
+public interface IProductCategoryService extends IBaseService<BaseEntity>{
 
     /**    
      * saveCounter(这里用一句话描述这个方法的作用)    

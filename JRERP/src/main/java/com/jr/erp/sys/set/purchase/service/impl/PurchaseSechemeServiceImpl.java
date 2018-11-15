@@ -12,10 +12,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jr.erp.base.mybatis.AbstractBaseService;
 import com.jr.erp.base.mybatis.BaseEntity;
-import com.jr.erp.sys.service.ISysGoodsCategoryService;
-import com.jr.erp.sys.set.base.entity.SysGoodsCategory;
-import com.jr.erp.sys.set.base.entity.SysGoodsCategoryExample;
+import com.jr.erp.sys.set.base.entity.ProductCategory;
+import com.jr.erp.sys.set.base.entity.ProductCategoryExample;
 import com.jr.erp.sys.set.base.service.IBaseTypeService;
+import com.jr.erp.sys.set.base.service.IProductCategoryService;
 import com.jr.erp.sys.set.purchase.entity.PurchaseSecheme;
 import com.jr.erp.sys.set.purchase.entity.PurchaseSechemeItem;
 import com.jr.erp.sys.set.purchase.entity.PurchaseSechemeItemExample;
@@ -44,7 +44,7 @@ public class PurchaseSechemeServiceImpl extends AbstractBaseService<PurchaseSech
     IBaseTypeService baseTypeService;
     
     @Autowired
-    ISysGoodsCategoryService sysGoodsCategoryService;
+    IProductCategoryService sysGoodsCategoryService;
     
     @Override
     public PurchaseSecheme getById(Integer sechemeId)
@@ -112,14 +112,14 @@ public class PurchaseSechemeServiceImpl extends AbstractBaseService<PurchaseSech
             // 商品名称需要特殊处理,并将商品名称用select2的js控件进行渲染
             if (StringUtils.equals(importColumnVo.getBeanColumn(), "goodsName"))
             {
-                SysGoodsCategoryExample condition = new SysGoodsCategoryExample();
+                ProductCategoryExample condition = new ProductCategoryExample();
                 condition.createCriteria().andCompanyNoEqualTo(importStrategy.getCompanyNo()).andSecondTypeEqualTo(importStrategy.getSecondType());
                 List<BaseEntity> archives = sysGoodsCategoryService.selectByExample(condition);
                
                 JSONArray smDataArray = new JSONArray();
                 for (BaseEntity temp : archives)
                 {
-                    SysGoodsCategory tempCategory =(SysGoodsCategory) temp;
+                    ProductCategory tempCategory =(ProductCategory) temp;
                     JSONObject jb= new JSONObject();
                     jb.put("id", tempCategory.getId());
                     jb.put("value", tempCategory.getGoodsName());
