@@ -39,7 +39,7 @@ import com.jr.erp.sys.set.purchase.service.IPurchaseSechemeService;
 @Controller
 @RequestMapping("/purchaseSecheme")
 public class PurchaseSechemeController {    
-    
+     
     @Autowired
     private IPurchaseColumnService sysPurchaseColumnService;
     
