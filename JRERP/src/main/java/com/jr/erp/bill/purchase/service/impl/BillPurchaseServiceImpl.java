@@ -1,7 +1,10 @@
 package com.jr.erp.bill.purchase.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -13,11 +16,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.alibaba.fastjson.JSONObject;
 import com.jr.erp.base.mybatis.AbstractBaseService;
 import com.jr.erp.base.service.impl.IFileUploadService;
+import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.bill.purchase.dao.BillPurchaseItemMapper;
 import com.jr.erp.bill.purchase.entity.BillPurchase;
+import com.jr.erp.bill.purchase.entity.BillPurchaseExample;
 import com.jr.erp.bill.purchase.entity.BillPurchaseItem;
 import com.jr.erp.bill.purchase.entity.BillPurchaseItemExample;
 import com.jr.erp.bill.purchase.service.IBillPurchaseService;
+import com.jr.erp.bill.utils.Contance;
 import com.jr.erp.bus.stock.service.IProductStockService;
 import com.jr.erp.sys.set.base.entity.Param;
 import com.jr.erp.sys.set.base.service.IParamService;
@@ -191,5 +197,57 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
         }
         
         this.updateByPrimaryKey(billPurchase);
+    }
+
+    @Override
+    public Map<String, Object> getDesktopBill()
+    {
+        BillPurchaseExample example = new BillPurchaseExample();
+        example.setOrderByClause(" billStatus, billDate");
+        example.createCriteria().andCompanyNoEqualTo(ShiroUtils.getCompanyNo())
+                .andCreateUserIdEqualTo(ShiroUtils.getUserId()).andBillTypeEqualTo(1)
+                .andBillStatusIn(Arrays.asList(new Integer[]
+        { 0, 10, 15, 20, 25 }));
+        List<BillPurchase> billList = (List) this.selectByExample(example);
+        Map<String,Object> map = new HashMap<String,Object>();
+        List<BillPurchase> noSave = new ArrayList<BillPurchase>();
+        List<BillPurchase> waiting = new ArrayList<BillPurchase>();
+        List<BillPurchase> reject = new ArrayList<BillPurchase>();
+        for (BillPurchase billPurchase : billList)
+        {
+            switch (billPurchase.getBillStatus())
+            {
+            case Contance.BILL_STATUS_NEW:
+                noSave.add(billPurchase);
+                break;
+            case Contance.BILL_STATUS_AUDIT_WAIT:
+            case Contance.BILL_STATUS_ONWAY_WAIT:
+                waiting.add(billPurchase);
+                break;
+            case Contance.BILL_STATUS_AUDIT_REJECT:
+            case Contance.BILL_STATUS_ONWAY_REJECT:
+                reject.add(billPurchase);
+                break;
+            default:
+                break;
+            }
+        }
+        
+        map.put("noSave", noSave);
+        map.put("waiting", waiting);
+        map.put("reject", reject);
+        map.put("totalNum", billList.size());
+        return map;
+    }
+
+    @Override
+    public BillPurchase getBillWithItem(Integer id)
+    {
+        BillPurchase billPurchase = (BillPurchase) this.selectByPrimaryKey(id);
+        BillPurchaseItemExample example = new BillPurchaseItemExample();
+        example.createCriteria().andCompanyNoEqualTo(billPurchase.getCompanyNo()).andBillIdEqualTo(billPurchase.getId());
+        List<BillPurchaseItem> itemList = itemMapper.selectByExample(example);
+        billPurchase.setItemList(itemList);
+        return billPurchase;
     }
 }

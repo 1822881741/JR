@@ -1,6 +1,7 @@
 package com.jr.erp.bill.purchase.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Select;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,4 +45,23 @@ public interface IBillPurchaseService extends IBaseService<BaseEntity>
      * @Exception 异常对象
     */
     void saveBillAudit(BillPurchase billPurchase);
+
+    /**    
+     * getDesktopBill(这里用一句话描述这个方法的作用)    
+     * 获取桌面展示的单据列表       
+     * @param @return     
+     * @return Map<String,List<BillPurchase>>
+     * @Exception 异常对象
+    */
+    Map<String, Object> getDesktopBill();
+
+    /**    
+     * getBillWithItem(这里用一句话描述这个方法的作用)    
+     * 获得带有明细的进货单
+     * @param @param id
+     * @param @return     
+     * @return BillPurchase
+     * @Exception 异常对象
+    */
+    BillPurchase getBillWithItem(Integer id);
 }

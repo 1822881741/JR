@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.service.impl.IFileUploadService;
@@ -51,12 +52,12 @@ public class PurchaseController {
     IFileUploadService fileUploadService;
     
     @Autowired
-    IBillPurchaseService billPurchaseServiceImpl;
+    IBillPurchaseService billPurchaseService;
     
     @Autowired
     IBillNoGeneratorService billNoGeneratorService;
     @RequestMapping(value = "/editBill.do")
-    public String editBill(HttpServletRequest request, Model model)
+    public String editBill(Integer id,HttpServletRequest request, Model model)
     {
         SysUser user= ShiroUtils.getSysUser();
         String companyNo=user.getCompanyNo();
@@ -79,11 +80,26 @@ public class PurchaseController {
         List<BaseEntity> areaList = sysAreaInfoService.selectByExample(areaExample);
         model.addAttribute("areaList",areaList);
         
-        BillPurchase purchase = new BillPurchase();
-        purchase.setBillDate(JodaUtils.getShortDate());
-        purchase.setBillNo(billNoGeneratorService.getNextBillNo(ShiroUtils.getCompanyNo(),1,ShiroUtils.getSysUser().getUserSheetNoPrefix()));
+        if(id!=null)
+        {
+            BillPurchase purchase = (BillPurchase) billPurchaseService.getBillWithItem(id);
+            model.addAttribute("billPurchase",purchase);
+            System.out.println(JSONArray.toJSON(purchase.getItemList()).toString());
+            model.addAttribute("itemListData",JSONArray.toJSON(purchase.getItemList()).toString());
+        }else
+        {
+            //自动创建一个新的
+            BillPurchase purchase = new BillPurchase();
+            purchase.setBillDate(JodaUtils.getShortDate());
+            purchase.setBillNo(billNoGeneratorService.getNextBillNo(ShiroUtils.getCompanyNo(),1,ShiroUtils.getSysUser().getUserSheetNoPrefix()));
+            model.addAttribute("billPurchase",purchase);
+            model.addAttribute("itemListData","[]");
+        }
         
-        model.addAttribute("billPurchase",purchase);
+        //获取各种状态的单据
+        Map<String,Object> desktopMap = billPurchaseService.getDesktopBill();
+        model.addAttribute("desktopMap",desktopMap);
+        
         return "bill/purchase/editPurchaseBill";
     }
     
@@ -132,7 +148,7 @@ public class PurchaseController {
         { 
             Map<String,Object> map = new HashMap<String,Object>();
             PurchaseColumnVo list = sysPurchaseSechemeService.getPurchaseColumnConfig(sechemeId);
-            List<JSONObject> itemList = billPurchaseServiceImpl.parseImportExcel(companyNo,sechemeId,file);
+            List<JSONObject> itemList = billPurchaseService.parseImportExcel(companyNo,sechemeId,file);
             map.put("columnConfig", list.getColumnConfig());
             map.put("itemList", itemList);
             return Ret.ok("", map);
@@ -163,7 +179,7 @@ public class PurchaseController {
         try
         {
             billPurchase.setCompanyNo(companyNo);
-            BillPurchase newBillPurchase = billPurchaseServiceImpl.saveImportBill(billPurchase);
+            BillPurchase newBillPurchase = billPurchaseService.saveImportBill(billPurchase);
             return Ret.ok("",newBillPurchase);
         } catch (Exception e)
         {
@@ -186,7 +202,7 @@ public class PurchaseController {
     @RequestMapping(value = "/saveBillAudit.do")
     public Ret saveBillAudit(BillPurchase billPurchase,HttpServletRequest request, HttpServletResponse response){
         billPurchase.setCompanyNo(ShiroUtils.getCompanyNo());
-        billPurchaseServiceImpl.saveBillAudit(billPurchase);
+        billPurchaseService.saveBillAudit(billPurchase);
         return Ret.ok("保存成功");
     }
 }    

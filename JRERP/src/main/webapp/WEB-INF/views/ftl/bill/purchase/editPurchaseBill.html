@@ -32,56 +32,65 @@
 										<ul class="demo-btns">
 											<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 新增</a></li>
 											<li><a id="saveAudit" href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 保存</a></li>
-											<li><a href="javascript:void(0);" id="activity" class="activity-dropdown btn  btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 未完成 <em class="badge bg-color-red">23</em></a>
+											<li><a href="javascript:void(0);" id="activity" class="activity-dropdown btn  btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 未完成 <em class="badge bg-color-red">${desktopMap.totalNum}</em></a>
 												<div class="ajax-dropdown">
 													<div class="btn-group btn-group-justified" >
-														<label class="btn btn-default" data-id='noSave' onclick="alert(3)">未完成(5)</label>
-														<label class="btn btn-default" data-id='waitAudit' onclick="showDropdown(this)">待审核 (3)</label>
-														<label class="btn btn-default" data-id='onWay' onclick="showDropdown(this)">在途 (4)</label>
+														<label class="btn btn-default active" data-id='noSave' onclick="showDropdown(this)">未完成(${desktopMap["noSave"]?size})</label>
+														<label class="btn btn-default" data-id='waiting' onclick="showDropdown(this)">待审核 (${desktopMap["waiting"]?size})</label>
+														<label class="btn btn-default" data-id='reject' onclick="showDropdown(this)">驳回 (${desktopMap["reject"]?size})</label>
 													</div>
 													<div class="ajax-notifications custom-scroll">
-														<div class="alert alert-transparent no-margin no-padding">
+														<div class="alert alert-transparent no-margin ">
 															<ul id='noSave' class="notification-body">
+																<#list desktopMap["noSave"] as tmp>
 																<li>
-																	<span class=" unread">
-																		<em class="badge padding-5 no-border-radius bg-color-blueLight pull-left margin-right-5">
-																			<i class="fa fa-user fa-fw fa-2x"></i>
+																	<span class="unread">
+																		<em class="badge padding-5 no-border-radius bg-color-yellow pull-left margin-right-5">
+																			<i class="fa fa-edit fa-fw fa-2x"></i>
 																		</em>
 																		<span>
-																			 2 new users2222 just signed up! <span class="text-primary">martin.luther</span> and <span class="text-primary">kevin.reliey</span>
+																			 ${tmp.billNo} <span class="text-primary">${tmp.totalNum}</span> and <span class="text-primary">kevin.reliey</span>
 																			 <br>
-																			 <span class="pull-right font-xs text-muted"><i>1 min ago...</i></span>
+																			 <span class="font-xs text-muted"><i>${tmp.billDate}</i></span>
+																			 <button class="btn btn-xs btn-primary pull-right" onclick="continueEdit(${tmp.id})">编辑</button>
 																		</span>
 																	</span>
 																</li>
+																</#list>
 															</ul>
-															<ul id='waitAudit' class="notification-body">
+															<ul id='waiting' class="notification-body" style="display: none;">
+																<#list desktopMap["waiting"] as tmp>
 																<li>
-																	<span class=" unread">
-																		<em class="badge padding-5 no-border-radius bg-color-blueLight pull-left margin-right-5">
-																			<i class="fa fa-user fa-fw fa-2x"></i>
+																	<span class="unread">
+																		<em class="badge padding-5 no-border-radius bg-color-green pull-left margin-right-5">
+																			<i class="fa fa-send fa-fw fa-2x"></i>
 																		</em>
 																		<span>
-																			 2 new users just signed up! <span class="text-primary">martin.luther</span> and <span class="text-primary">kevin.reliey</span>
+																			 ${tmp.billNo} <span class="text-primary">${tmp.totalNum}</span> and <span class="text-primary">kevin.reliey</span>
 																			 <br>
-																			 <span class="pull-right font-xs text-muted"><i>1 min ago...</i></span>
+																			 <span class="font-xs text-muted"><i>${tmp.billDate}</i></span>
+																			 <button class="btn btn-xs btn-primary pull-right" onclick="continueEdit(${tmp.id})">查看</button>
 																		</span>
 																	</span>
 																</li>
+																</#list>
 															</ul>
-															<ul id='onWay' class="notification-body">
+															<ul id='reject' class="notification-body" style="display: none;">
+																<#list desktopMap["reject"] as tmp>
 																<li>
-																	<span class=" unread">
-																		<em class="badge padding-5 no-border-radius bg-color-blueLight pull-left margin-right-5">
-																			<i class="fa fa-user fa-fw fa-2x"></i>
+																	<span class="unread">
+																		<em class="badge padding-5 no-border-radius bg-color-red pull-left margin-right-5">
+																			<i class="fa fa-warning fa-fw fa-2x"></i>
 																		</em>
 																		<span>
-																			 2 new users just signed up! <span class="text-primary">martin.luther</span> and <span class="text-primary">kevin.reliey</span>
+																			 ${tmp.billNo} <span class="text-primary">${tmp.totalNum}</span> and <span class="text-primary">kevin.reliey</span>
 																			 <br>
-																			 <span class="pull-right font-xs text-muted"><i>1 min ago...</i></span>
+																			 <span class="font-xs text-muted"><i>${tmp.billDate}</i></span>
+																			 <button class="btn btn-xs btn-primary pull-right" onclick="continueEdit(${tmp.id})">查看</button>
 																		</span>
 																	</span>
 																</li>
+																</#list>
 															</ul>																														
 														</div>
 													</div>
@@ -194,20 +203,6 @@
 	var grid;
 	$(document).ready(function() {
 		pageSetUp();
-		
-		$("#canUseBtn").on("click",function(){
-			$(this).parent().find("label").removeClass("active");
-			$(this).addClass('active');
-			$("#canUseSechemeUL").show();
-			$("#noUseSechemeUL").hide();
-		})
-		$("#noUseBtn").on("click",function(){
-			$(this).parent().find("label").removeClass("active");
-			$(this).addClass('active');
-			$("#canUseSechemeUL").hide();
-			$("#noUseSechemeUL").show();
-		})
-		
 		$("#areaCode").on("change",function(){
 			$("#counterAreaCode").html("");
 			$.ajax({
@@ -242,11 +237,10 @@
 	});
 	
 	function showDropdown(obj){
-		alert(3)
-		$(obj).parent.find("label").removeClass("active");
+		$(obj).parent().find("label").removeClass("active");
 		$(obj).addClass('active');
 		$(".notification-body").hide();
-		$("#"+$(obj).attr("id")).show();
+		$("#"+$(obj).data("id")).show();
 	}
 	
 	function checkBillFlow(){
@@ -405,6 +399,9 @@
 	function operationRender(instance, td,row){
 		return td;
 	}
+	function continueEdit(id){
+		window.location.href="purchase/editBill.do?id="+id;
+	}
 </script>
 	<script type="text/javascript" charset="utf-8">
 	var context;
@@ -422,7 +419,7 @@
 					{"id":"goodsClassify",header:"实际分类",footer:{text:"Total:"}},
 					{"id":"barcode","header":"原条码",sort:"string"},
              		{"id":"goldWeight","header":"金重",sort:"string",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"num","header":"数量",footer:{ content:"summColumn" },sort:"int",footer:{ content:"summColumn"}, fillspace:4},
+             		{"id":"num","header":"数量",footer:{ content:"summColumn" },sort:"int"},
              		{"id":"goodsName",header:["商品名称"],sort:"string",footer:{ content:"summColumn" }},
              		{"id":"unitPrice","header":"单价",sort:"int",footer:{ content:"summColumn" }},
              		{"id":"subGoodsName","header":"子名称",sort:"string"},
@@ -503,8 +500,8 @@
 			select: "row", 
 			multiselect: true, 
 			blockselect: true,
+			data:${itemListData},
 			hover:"myhover",
-			data:data,
 			on:{
 			    "onItemClick":function(id, e, trg){
 			        //webix.message("Click on row: " + id.row+", column: " + id.column);
