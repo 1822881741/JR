@@ -161,7 +161,12 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
             temp.setCompanyNo(billPurchase.getCompanyNo());
             itemMapper.insert(temp);
         }
-        return billPurchase;
+        BillPurchase newPurchase = (BillPurchase) this.selectByPrimaryKey(billPurchase.getId());
+        BillPurchaseItemExample example = new BillPurchaseItemExample();
+        example.createCriteria().andCompanyNoEqualTo(billPurchase.getCompanyNo()).andBillIdEqualTo(billPurchase.getId());
+        List<BillPurchaseItem> itemList = itemMapper.selectByExample(example);
+        newPurchase.setItemList(itemList);
+        return newPurchase;
     }
 
     @Override

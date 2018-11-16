@@ -249,73 +249,73 @@ public class ProductCategoryExample extends BaseExample {
             return (Criteria) this;
         }
 
-        public Criteria andSystemCodeIsNull() {
-            addCriterion("systemCode is null");
+        public Criteria andSysCodeIsNull() {
+            addCriterion("sysCode is null");
             return (Criteria) this;
         }
 
-        public Criteria andSystemCodeIsNotNull() {
-            addCriterion("systemCode is not null");
+        public Criteria andSysCodeIsNotNull() {
+            addCriterion("sysCode is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSystemCodeEqualTo(String value) {
-            addCriterion("systemCode =", value, "systemCode");
+        public Criteria andSysCodeEqualTo(String value) {
+            addCriterion("sysCode =", value, "sysCode");
             return (Criteria) this;
         }
 
-        public Criteria andSystemCodeNotEqualTo(String value) {
-            addCriterion("systemCode <>", value, "systemCode");
+        public Criteria andSysCodeNotEqualTo(String value) {
+            addCriterion("sysCode <>", value, "sysCode");
             return (Criteria) this;
         }
 
-        public Criteria andSystemCodeGreaterThan(String value) {
-            addCriterion("systemCode >", value, "systemCode");
+        public Criteria andSysCodeGreaterThan(String value) {
+            addCriterion("sysCode >", value, "sysCode");
             return (Criteria) this;
         }
 
-        public Criteria andSystemCodeGreaterThanOrEqualTo(String value) {
-            addCriterion("systemCode >=", value, "systemCode");
+        public Criteria andSysCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("sysCode >=", value, "sysCode");
             return (Criteria) this;
         }
 
-        public Criteria andSystemCodeLessThan(String value) {
-            addCriterion("systemCode <", value, "systemCode");
+        public Criteria andSysCodeLessThan(String value) {
+            addCriterion("sysCode <", value, "sysCode");
             return (Criteria) this;
         }
 
-        public Criteria andSystemCodeLessThanOrEqualTo(String value) {
-            addCriterion("systemCode <=", value, "systemCode");
+        public Criteria andSysCodeLessThanOrEqualTo(String value) {
+            addCriterion("sysCode <=", value, "sysCode");
             return (Criteria) this;
         }
 
-        public Criteria andSystemCodeLike(String value) {
-            addCriterion("systemCode like", value, "systemCode");
+        public Criteria andSysCodeLike(String value) {
+            addCriterion("sysCode like", value, "sysCode");
             return (Criteria) this;
         }
 
-        public Criteria andSystemCodeNotLike(String value) {
-            addCriterion("systemCode not like", value, "systemCode");
+        public Criteria andSysCodeNotLike(String value) {
+            addCriterion("sysCode not like", value, "sysCode");
             return (Criteria) this;
         }
 
-        public Criteria andSystemCodeIn(List<String> values) {
-            addCriterion("systemCode in", values, "systemCode");
+        public Criteria andSysCodeIn(List<String> values) {
+            addCriterion("sysCode in", values, "sysCode");
             return (Criteria) this;
         }
 
-        public Criteria andSystemCodeNotIn(List<String> values) {
-            addCriterion("systemCode not in", values, "systemCode");
+        public Criteria andSysCodeNotIn(List<String> values) {
+            addCriterion("sysCode not in", values, "sysCode");
             return (Criteria) this;
         }
 
-        public Criteria andSystemCodeBetween(String value1, String value2) {
-            addCriterion("systemCode between", value1, value2, "systemCode");
+        public Criteria andSysCodeBetween(String value1, String value2) {
+            addCriterion("sysCode between", value1, value2, "sysCode");
             return (Criteria) this;
         }
 
-        public Criteria andSystemCodeNotBetween(String value1, String value2) {
-            addCriterion("systemCode not between", value1, value2, "systemCode");
+        public Criteria andSysCodeNotBetween(String value1, String value2) {
+            addCriterion("sysCode not between", value1, value2, "sysCode");
             return (Criteria) this;
         }
 
@@ -389,73 +389,73 @@ public class ProductCategoryExample extends BaseExample {
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNameIsNull() {
-            addCriterion("goodsName is null");
+        public Criteria andProductNameIsNull() {
+            addCriterion("productName is null");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNameIsNotNull() {
-            addCriterion("goodsName is not null");
+        public Criteria andProductNameIsNotNull() {
+            addCriterion("productName is not null");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNameEqualTo(String value) {
-            addCriterion("goodsName =", value, "goodsName");
+        public Criteria andProductNameEqualTo(String value) {
+            addCriterion("productName =", value, "productName");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNameNotEqualTo(String value) {
-            addCriterion("goodsName <>", value, "goodsName");
+        public Criteria andProductNameNotEqualTo(String value) {
+            addCriterion("productName <>", value, "productName");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNameGreaterThan(String value) {
-            addCriterion("goodsName >", value, "goodsName");
+        public Criteria andProductNameGreaterThan(String value) {
+            addCriterion("productName >", value, "productName");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNameGreaterThanOrEqualTo(String value) {
-            addCriterion("goodsName >=", value, "goodsName");
+        public Criteria andProductNameGreaterThanOrEqualTo(String value) {
+            addCriterion("productName >=", value, "productName");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNameLessThan(String value) {
-            addCriterion("goodsName <", value, "goodsName");
+        public Criteria andProductNameLessThan(String value) {
+            addCriterion("productName <", value, "productName");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNameLessThanOrEqualTo(String value) {
-            addCriterion("goodsName <=", value, "goodsName");
+        public Criteria andProductNameLessThanOrEqualTo(String value) {
+            addCriterion("productName <=", value, "productName");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNameLike(String value) {
-            addCriterion("goodsName like", value, "goodsName");
+        public Criteria andProductNameLike(String value) {
+            addCriterion("productName like", value, "productName");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNameNotLike(String value) {
-            addCriterion("goodsName not like", value, "goodsName");
+        public Criteria andProductNameNotLike(String value) {
+            addCriterion("productName not like", value, "productName");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNameIn(List<String> values) {
-            addCriterion("goodsName in", values, "goodsName");
+        public Criteria andProductNameIn(List<String> values) {
+            addCriterion("productName in", values, "productName");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNameNotIn(List<String> values) {
-            addCriterion("goodsName not in", values, "goodsName");
+        public Criteria andProductNameNotIn(List<String> values) {
+            addCriterion("productName not in", values, "productName");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNameBetween(String value1, String value2) {
-            addCriterion("goodsName between", value1, value2, "goodsName");
+        public Criteria andProductNameBetween(String value1, String value2) {
+            addCriterion("productName between", value1, value2, "productName");
             return (Criteria) this;
         }
 
-        public Criteria andGoodsNameNotBetween(String value1, String value2) {
-            addCriterion("goodsName not between", value1, value2, "goodsName");
+        public Criteria andProductNameNotBetween(String value1, String value2) {
+            addCriterion("productName not between", value1, value2, "productName");
             return (Criteria) this;
         }
 

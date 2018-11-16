@@ -110,7 +110,7 @@ public class PurchaseSechemeServiceImpl extends AbstractBaseService<PurchaseSech
             setInfo.put("header", importColumnVo.getShowName());
 
             // 商品名称需要特殊处理,并将商品名称用select2的js控件进行渲染
-            if (StringUtils.equals(importColumnVo.getBeanColumn(), "goodsName"))
+            if (StringUtils.equals(importColumnVo.getBeanColumn(), "productName"))
             {
                 ProductCategoryExample condition = new ProductCategoryExample();
                 condition.createCriteria().andCompanyNoEqualTo(importStrategy.getCompanyNo()).andSecondTypeEqualTo(importStrategy.getSecondType());
@@ -122,7 +122,7 @@ public class PurchaseSechemeServiceImpl extends AbstractBaseService<PurchaseSech
                     ProductCategory tempCategory =(ProductCategory) temp;
                     JSONObject jb= new JSONObject();
                     jb.put("id", tempCategory.getId());
-                    jb.put("value", tempCategory.getGoodsName());
+                    jb.put("value", tempCategory.getProductName());
                     smDataArray.add(jb);
                     // 单独封装一遍值，进行界面的数据校验
                 }

@@ -17,7 +17,7 @@ function getJqgridCategory(type,tableDom,pagerDom) {
 		}, {
 			name : 'assistCode'
 		}, {
-			name : 'goodsName'
+			name : 'productName'
 		}, {
 			name : 'secondTypeName'
 		}, {

@@ -40,7 +40,7 @@ public class ProductCategoryServiceImpl extends AbstractBaseService<ProductCateg
             {
                 ProductCategory temp = new ProductCategory();
                 temp.setId(sysGoodsCategoryDTO.getId());
-                temp.setSystemCode(sysGoodsCategoryDTO.getSystemCode());
+                temp.setSysCode(sysGoodsCategoryDTO.getSysCode());
                 temp.setCompanyNo(sysGoodsCategoryDTO.getCompanyNo());
                 temp.setFirstType(sysGoodsCategoryDTO.getFirstType());
                 temp.setAssistCode(sysGoodsCategoryDTO.getAssistCode());
@@ -49,7 +49,7 @@ public class ProductCategoryServiceImpl extends AbstractBaseService<ProductCateg
                 temp.setCompanyNo(sysGoodsCategoryDTO.getCompanyNo());
                 temp.setSecondType(sysGoodsCategoryDTO.getSecondType());
                 temp.setSecondTypeName(sysGoodsCategoryDTO.getSecondTypeName());
-                temp.setGoodsName(sysGoodsCategoryDTO.getGoodsName());
+                temp.setProductName(sysGoodsCategoryDTO.getProductName());
                 temp.setGoldName(goldArray[0]);
                 temp.setJewelName(jewelArray[0]);
                 temp.setCategoryName(categoryArray[0]);
@@ -57,7 +57,7 @@ public class ProductCategoryServiceImpl extends AbstractBaseService<ProductCateg
                 temp.setFirstClassify(sysGoodsCategoryDTO.getFirstClassify());
                 temp.setSecondClassify(sysGoodsCategoryDTO.getSecondClassify());
                 temp.setThirdClassify(sysGoodsCategoryDTO.getThirdClassify());
-                temp.setLabelName(sysGoodsCategoryDTO.getGoodsName());
+                temp.setLabelName(sysGoodsCategoryDTO.getProductName());
                 temp.setStatus(sysGoodsCategoryDTO.getStatus());
                 temp.setRemark(sysGoodsCategoryDTO.getRemark());
                 this.mapper.updateByPrimaryKey(temp);
@@ -87,7 +87,7 @@ public class ProductCategoryServiceImpl extends AbstractBaseService<ProductCateg
                     temp.setCanBarter(sysGoodsCategoryDTO.getCanBarter()==null?0:sysGoodsCategoryDTO.getCanBarter());
                     temp.setSaleType(sysGoodsCategoryDTO.getSaleType());
                     temp.setCompanyNo(sysGoodsCategoryDTO.getCompanyNo());
-                    temp.setGoodsName(list.get(0) + list.get(1) + list.get(2));
+                    temp.setProductName(list.get(0) + list.get(1) + list.get(2));
                     temp.setGoldName(list.get(0));
                     temp.setJewelName(list.get(1));
                     temp.setCategoryName(list.get(2));
@@ -95,7 +95,7 @@ public class ProductCategoryServiceImpl extends AbstractBaseService<ProductCateg
                     temp.setFirstClassify(sysGoodsCategoryDTO.getFirstClassify());
                     temp.setSecondClassify(sysGoodsCategoryDTO.getSecondClassify());
                     temp.setThirdClassify(sysGoodsCategoryDTO.getThirdClassify());
-                    temp.setLabelName(temp.getGoodsName());
+                    temp.setLabelName(temp.getProductName());
                     temp.setStatus(sysGoodsCategoryDTO.getStatus());
                     this.insert(temp);
                 }

@@ -6,7 +6,7 @@ public class ProductCategory extends BaseEntity {
     /**
      * 系统代码（根据商品大类自动产生）
      */
-    private String systemCode;
+    private String sysCode;
 
     /**
      * 助记码
@@ -16,7 +16,7 @@ public class ProductCategory extends BaseEntity {
     /**
      * 分类名称
      */
-    private String goodsName;
+    private String productName;
 
     /**
      * 商品大类
@@ -105,18 +105,18 @@ public class ProductCategory extends BaseEntity {
 
     /**
      * 系统代码（根据商品大类自动产生）
-     * @return systemCode 系统代码（根据商品大类自动产生）
+     * @return sysCode 系统代码（根据商品大类自动产生）
      */
-    public String getSystemCode() {
-        return systemCode;
+    public String getSysCode() {
+        return sysCode;
     }
 
     /**
      * 系统代码（根据商品大类自动产生）
-     * @param systemCode 系统代码（根据商品大类自动产生）
+     * @param sysCode 系统代码（根据商品大类自动产生）
      */
-    public void setSystemCode(String systemCode) {
-        this.systemCode = systemCode == null ? null : systemCode.trim();
+    public void setSysCode(String sysCode) {
+        this.sysCode = sysCode == null ? null : sysCode.trim();
     }
 
     /**
@@ -137,18 +137,18 @@ public class ProductCategory extends BaseEntity {
 
     /**
      * 分类名称
-     * @return goodsName 分类名称
+     * @return productName 分类名称
      */
-    public String getGoodsName() {
-        return goodsName;
+    public String getProductName() {
+        return productName;
     }
 
     /**
      * 分类名称
-     * @param goodsName 分类名称
+     * @param productName 分类名称
      */
-    public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName == null ? null : goodsName.trim();
+    public void setProductName(String productName) {
+        this.productName = productName == null ? null : productName.trim();
     }
 
     /**

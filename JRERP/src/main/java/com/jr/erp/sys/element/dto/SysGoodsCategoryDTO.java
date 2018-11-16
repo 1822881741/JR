@@ -15,7 +15,7 @@ public class SysGoodsCategoryDTO {
     /**
      * 系统代码（根据商品大类自动产生）
      */
-    private String systemCode;
+    private String sysCode;
 
     /**
      * 助记码
@@ -25,7 +25,7 @@ public class SysGoodsCategoryDTO {
     /**
      * 分类名称
      */
-    private String goodsName;
+    private String productName;
 
     /**
      * 商品大类英文
@@ -131,14 +131,14 @@ public class SysGoodsCategoryDTO {
         this.companyNo = companyNo;
     }
 
-    public String getSystemCode()
+    public String getSysCode()
     {
-        return systemCode;
+        return sysCode;
     }
 
-    public void setSystemCode(String systemCode)
+    public void setSysCode(String sysCode)
     {
-        this.systemCode = systemCode;
+        this.sysCode = sysCode;
     }
 
     public String getAssistCode()
@@ -151,14 +151,14 @@ public class SysGoodsCategoryDTO {
         this.assistCode = assistCode;
     }
 
-    public String getGoodsName()
+    public String getProductName()
     {
-        return goodsName;
+        return productName;
     }
 
-    public void setGoodsName(String goodsName)
+    public void setProductName(String productName)
     {
-        this.goodsName = goodsName;
+        this.productName = productName;
     }
 
     public String getFirstType()

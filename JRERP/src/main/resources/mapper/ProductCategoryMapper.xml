@@ -4,9 +4,9 @@
   <resultMap id="BaseResultMap" type="com.jr.erp.sys.set.base.entity.ProductCategory">
     <id column="Id" jdbcType="INTEGER" property="id" />
     <result column="companyNo" jdbcType="VARCHAR" property="companyNo" />
-    <result column="systemCode" jdbcType="VARCHAR" property="systemCode" />
+    <result column="sysCode" jdbcType="VARCHAR" property="sysCode" />
     <result column="assistCode" jdbcType="VARCHAR" property="assistCode" />
-    <result column="goodsName" jdbcType="VARCHAR" property="goodsName" />
+    <result column="productName" jdbcType="VARCHAR" property="productName" />
     <result column="firstTypeName" jdbcType="VARCHAR" property="firstTypeName" />
     <result column="firstType" jdbcType="VARCHAR" property="firstType" />
     <result column="secondTypeName" jdbcType="VARCHAR" property="secondTypeName" />
@@ -56,7 +56,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    Id, companyNo, systemCode, assistCode, goodsName, firstTypeName, firstType, secondTypeName, 
+    Id, companyNo, sysCode, assistCode, productName, firstTypeName, firstType, secondTypeName, 
     secondType, saleType, canBarter, goldName, jewelName, categoryName, goldPercent, 
     firstClassify, secondClassify, thirdClassify, labelName, grfName, status, remark, 
     createTime
@@ -97,22 +97,25 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jr.erp.sys.set.base.entity.ProductCategory">
-    insert into st_product_category (Id, companyNo, systemCode, 
-      assistCode, goodsName, firstTypeName, 
-      firstType, secondTypeName, secondType, 
-      saleType, canBarter, goldName, 
-      jewelName, categoryName, goldPercent, 
-      firstClassify, secondClassify, thirdClassify, 
-      labelName, grfName, status, 
-      remark, createTime)
-    values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{systemCode,jdbcType=VARCHAR}, 
-      #{assistCode,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, #{firstTypeName,jdbcType=VARCHAR}, 
-      #{firstType,jdbcType=VARCHAR}, #{secondTypeName,jdbcType=VARCHAR}, #{secondType,jdbcType=VARCHAR}, 
-      #{saleType,jdbcType=TINYINT}, #{canBarter,jdbcType=TINYINT}, #{goldName,jdbcType=VARCHAR}, 
-      #{jewelName,jdbcType=VARCHAR}, #{categoryName,jdbcType=VARCHAR}, #{goldPercent,jdbcType=VARCHAR}, 
-      #{firstClassify,jdbcType=VARCHAR}, #{secondClassify,jdbcType=VARCHAR}, #{thirdClassify,jdbcType=VARCHAR}, 
-      #{labelName,jdbcType=VARCHAR}, #{grfName,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
-      #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR})
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into st_product_category (companyNo, sysCode, assistCode, 
+      productName, firstTypeName, firstType, 
+      secondTypeName, secondType, saleType, 
+      canBarter, goldName, jewelName, 
+      categoryName, goldPercent, firstClassify, 
+      secondClassify, thirdClassify, labelName, 
+      grfName, status, remark, 
+      createTime)
+    values (#{companyNo,jdbcType=VARCHAR}, #{sysCode,jdbcType=VARCHAR}, #{assistCode,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{firstTypeName,jdbcType=VARCHAR}, #{firstType,jdbcType=VARCHAR}, 
+      #{secondTypeName,jdbcType=VARCHAR}, #{secondType,jdbcType=VARCHAR}, #{saleType,jdbcType=TINYINT}, 
+      #{canBarter,jdbcType=TINYINT}, #{goldName,jdbcType=VARCHAR}, #{jewelName,jdbcType=VARCHAR}, 
+      #{categoryName,jdbcType=VARCHAR}, #{goldPercent,jdbcType=VARCHAR}, #{firstClassify,jdbcType=VARCHAR}, 
+      #{secondClassify,jdbcType=VARCHAR}, #{thirdClassify,jdbcType=VARCHAR}, #{labelName,jdbcType=VARCHAR}, 
+      #{grfName,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{remark,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR})
   </insert>
   <select id="countByExample" parameterType="com.jr.erp.sys.set.base.entity.ProductCategoryExample" resultType="java.lang.Long">
     select count(*) from st_product_category
@@ -126,14 +129,14 @@
       <if test="companyNo != null">
         companyNo = #{companyNo,jdbcType=VARCHAR},
       </if>
-      <if test="systemCode != null">
-        systemCode = #{systemCode,jdbcType=VARCHAR},
+      <if test="sysCode != null">
+        sysCode = #{sysCode,jdbcType=VARCHAR},
       </if>
       <if test="assistCode != null">
         assistCode = #{assistCode,jdbcType=VARCHAR},
       </if>
-      <if test="goodsName != null">
-        goodsName = #{goodsName,jdbcType=VARCHAR},
+      <if test="productName != null">
+        productName = #{productName,jdbcType=VARCHAR},
       </if>
       <if test="firstTypeName != null">
         firstTypeName = #{firstTypeName,jdbcType=VARCHAR},
@@ -195,9 +198,9 @@
   <update id="updateByPrimaryKey" parameterType="com.jr.erp.sys.set.base.entity.ProductCategory">
     update st_product_category
     set companyNo = #{companyNo,jdbcType=VARCHAR},
-      systemCode = #{systemCode,jdbcType=VARCHAR},
+      sysCode = #{sysCode,jdbcType=VARCHAR},
       assistCode = #{assistCode,jdbcType=VARCHAR},
-      goodsName = #{goodsName,jdbcType=VARCHAR},
+      productName = #{productName,jdbcType=VARCHAR},
       firstTypeName = #{firstTypeName,jdbcType=VARCHAR},
       firstType = #{firstType,jdbcType=VARCHAR},
       secondTypeName = #{secondTypeName,jdbcType=VARCHAR},

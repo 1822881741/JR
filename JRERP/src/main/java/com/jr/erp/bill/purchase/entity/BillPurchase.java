@@ -7,79 +7,74 @@ import com.jr.erp.base.mybatis.BaseEntity;
 
 public class BillPurchase extends BaseEntity {
     /**
-     * 原始单号ID：旧料回收退货时，标记对应的收料单id
+     * 
      */
-    private Integer orgSheetId;
+    private String sysBillNo;
 
     /**
      * 单号
      */
-    private String sheetNo;
-
-    /**
-     * 原单号
-     */
-    private String oldSheetNo;
-
-    /**
-     * 供应商编号
-     */
-    private String supplierNo;
+    private String billNo;
 
     /**
      * 供应商名称
      */
-    private String supplierName;
+    private String supplier;
 
     /**
      * 顾客名称：旧料单或旧饰回收才有
      */
-    private String customerName;
+    private String custName;
 
     /**
      * 客户电话：旧料单或旧饰回收才有
      */
-    private String customerPhone;
+    private String cusMobile;
 
     /**
      * 业务员ID
      */
-    private Integer saleManId;
+    private Integer employeeId;
 
     /**
      * 业务员名
      */
-    private String salesmanName;
+    private String employeeName;
 
     /**
-     * 购销方式：从通用类型中选择：方式设置中
+     * 采购类型
      */
-    private String purchaseSaleMode;
+    private String purchaseType;
 
     /**
-     * 单据类型：1：进货；2:进货退回；3：收购：4：兑换.......
+     * 单据日期
      */
-    private Integer sheetType;
+    private String billDate;
 
     /**
-     * 部门地区码：公司节点或者门店节点的地区码（地区表）
+     * 单据类型：1：进货；2:进货退回
      */
-    private String deptAreaCode;
+    private Integer billType;
 
     /**
-     *  部门地区名称：公司节点或者门店节点的地区名称（地区表）
+     * 进货部门
      */
-    private String deptAreaName;
+    private String areaCode;
 
     /**
-     * 仓库ID
+     * 进货部门
      */
-    private Integer storeId;
+    private String areaName;
 
     /**
-     * 仓库名称
+     * 进货柜台
      */
-    private String storeName;
+    private String counterAreaCode;
+
+    /**
+     * 进货柜台
+     */
+    private String counterAreaName;
 
     /**
      * 建单人ID
@@ -97,29 +92,24 @@ public class BillPurchase extends BaseEntity {
     private Integer totalNum;
 
     /**
-     * 总金重
-     */
-    private Double totalGoldWeight;
-
-    /**
-     * 总成本金额
-     */
-    private Double costPrice;
-
-    /**
      * 总标价金额
      */
-    private Double totalSalePriceAmount;
+    private Double totalLabelPrice;
+
+    /**
+     * 
+     */
+    private Double totalCost;
+
+    /**
+     * 总工费
+     */
+    private Double totalWorkFee;
 
     /**
      * 主石重：镶嵌类的才统计
      */
-    private Double totalMainStoneWeight;
-
-    /**
-     * 单据日期：在保存单个商品时首次使用的是单的日期，在保存单的时候使用的是单的日期+当前时分秒
-     */
-    private String sheetDate;
+    private Double totaJewelWeight;
 
     /**
      * 进货退货标记：1：进货；-1:退货
@@ -127,19 +117,9 @@ public class BillPurchase extends BaseEntity {
     private Integer jtFlag;
 
     /**
-     * 0未保存；1已经保存
+     * 进货在途状态：0：新建状态；10：待审核  15 ：审核驳回  20：待接受  25：接收驳回  100：全部完成
      */
-    private Boolean saveFlag;
-
-    /**
-     * 代销标记：0不是代销；1是代销商品
-     */
-    private Boolean daiXiaoFlag;
-
-    /**
-     * 在途标记：0：不是在途；1：商品在途
-     */
-    private Boolean zaiTuFlag;
+    private Integer billStatus;
 
     /**
      * 品牌名称
@@ -147,44 +127,14 @@ public class BillPurchase extends BaseEntity {
     private String brandName;
 
     /**
-     * 数据权限地域码
+     * 1:手工录入 2：导入
      */
-    private String areaCode;
-
-    /**
-     * 是否是批量导入的单:0不是；1：是
-     */
-    private Boolean importFlag;
-
-    /**
-     * 进货在途状态：0：新建状态；1：在途；2：接收中；3：接收完成；4：整单打回
-     */
-    private Integer sheetStatus;
+    private Boolean inType;
 
     /**
      * 接收时间：在途的调拨单的接收时间
      */
     private Date receiveTime;
-
-    /**
-     * 批次：进货在途单打回之后再次提交要区分不同的批次（更新流转记录时间的时候用得到）
-     */
-    private Integer piCi;
-
-    /**
-     * 数据生成时间
-     */
-    private Date createTime;
-
-    /**
-     * 是否供应商和日期混合入库
-     */
-    private Integer blendFlag;
-
-    /**
-     * 审核状态:0:默认初始值;10:无需审核直接过;11:审核中；12：审核通过；13：审核驳回
-     */
-    private Integer auditStatus;
 
     /**
      * 提交审核的人ID
@@ -214,7 +164,7 @@ public class BillPurchase extends BaseEntity {
     /**
      * 审核时间，审核通过或驳回时间
      */
-    private Date auditTime;
+    private String auditTime;
 
     /**
      * 审核备注信息
@@ -228,243 +178,227 @@ public class BillPurchase extends BaseEntity {
 
     private List<BillPurchaseItem> itemList;
     /**
-     * 原始单号ID：旧料回收退货时，标记对应的收料单id
-     * @return orgSheetId 原始单号ID：旧料回收退货时，标记对应的收料单id
+     * 
+     * @return sysBillNo 
      */
-    public Integer getOrgSheetId() {
-        return orgSheetId;
+    public String getSysBillNo() {
+        return sysBillNo;
     }
 
     /**
-     * 原始单号ID：旧料回收退货时，标记对应的收料单id
-     * @param orgSheetId 原始单号ID：旧料回收退货时，标记对应的收料单id
+     * 
+     * @param sysBillNo 
      */
-    public void setOrgSheetId(Integer orgSheetId) {
-        this.orgSheetId = orgSheetId;
-    }
-
-    /**
-     * 单号
-     * @return sheetNo 单号
-     */
-    public String getSheetNo() {
-        return sheetNo;
+    public void setSysBillNo(String sysBillNo) {
+        this.sysBillNo = sysBillNo == null ? null : sysBillNo.trim();
     }
 
     /**
      * 单号
-     * @param sheetNo 单号
+     * @return billNo 单号
      */
-    public void setSheetNo(String sheetNo) {
-        this.sheetNo = sheetNo == null ? null : sheetNo.trim();
+    public String getBillNo() {
+        return billNo;
     }
 
     /**
-     * 原单号
-     * @return oldSheetNo 原单号
+     * 单号
+     * @param billNo 单号
      */
-    public String getOldSheetNo() {
-        return oldSheetNo;
-    }
-
-    /**
-     * 原单号
-     * @param oldSheetNo 原单号
-     */
-    public void setOldSheetNo(String oldSheetNo) {
-        this.oldSheetNo = oldSheetNo == null ? null : oldSheetNo.trim();
-    }
-
-    /**
-     * 供应商编号
-     * @return supplierNo 供应商编号
-     */
-    public String getSupplierNo() {
-        return supplierNo;
-    }
-
-    /**
-     * 供应商编号
-     * @param supplierNo 供应商编号
-     */
-    public void setSupplierNo(String supplierNo) {
-        this.supplierNo = supplierNo == null ? null : supplierNo.trim();
+    public void setBillNo(String billNo) {
+        this.billNo = billNo == null ? null : billNo.trim();
     }
 
     /**
      * 供应商名称
-     * @return supplierName 供应商名称
+     * @return supplier 供应商名称
      */
-    public String getSupplierName() {
-        return supplierName;
+    public String getSupplier() {
+        return supplier;
     }
 
     /**
      * 供应商名称
-     * @param supplierName 供应商名称
+     * @param supplier 供应商名称
      */
-    public void setSupplierName(String supplierName) {
-        this.supplierName = supplierName == null ? null : supplierName.trim();
+    public void setSupplier(String supplier) {
+        this.supplier = supplier == null ? null : supplier.trim();
     }
 
     /**
      * 顾客名称：旧料单或旧饰回收才有
-     * @return customerName 顾客名称：旧料单或旧饰回收才有
+     * @return custName 顾客名称：旧料单或旧饰回收才有
      */
-    public String getCustomerName() {
-        return customerName;
+    public String getCustName() {
+        return custName;
     }
 
     /**
      * 顾客名称：旧料单或旧饰回收才有
-     * @param customerName 顾客名称：旧料单或旧饰回收才有
+     * @param custName 顾客名称：旧料单或旧饰回收才有
      */
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName == null ? null : customerName.trim();
+    public void setCustName(String custName) {
+        this.custName = custName == null ? null : custName.trim();
     }
 
     /**
      * 客户电话：旧料单或旧饰回收才有
-     * @return customerPhone 客户电话：旧料单或旧饰回收才有
+     * @return cusMobile 客户电话：旧料单或旧饰回收才有
      */
-    public String getCustomerPhone() {
-        return customerPhone;
+    public String getCusMobile() {
+        return cusMobile;
     }
 
     /**
      * 客户电话：旧料单或旧饰回收才有
-     * @param customerPhone 客户电话：旧料单或旧饰回收才有
+     * @param cusMobile 客户电话：旧料单或旧饰回收才有
      */
-    public void setCustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone == null ? null : customerPhone.trim();
+    public void setCusMobile(String cusMobile) {
+        this.cusMobile = cusMobile == null ? null : cusMobile.trim();
     }
 
     /**
      * 业务员ID
-     * @return saleManId 业务员ID
+     * @return employeeId 业务员ID
      */
-    public Integer getSaleManId() {
-        return saleManId;
+    public Integer getEmployeeId() {
+        return employeeId;
     }
 
     /**
      * 业务员ID
-     * @param saleManId 业务员ID
+     * @param employeeId 业务员ID
      */
-    public void setSaleManId(Integer saleManId) {
-        this.saleManId = saleManId;
+    public void setEmployeeId(Integer employeeId) {
+        this.employeeId = employeeId;
     }
 
     /**
      * 业务员名
-     * @return salesmanName 业务员名
+     * @return employeeName 业务员名
      */
-    public String getSalesmanName() {
-        return salesmanName;
+    public String getEmployeeName() {
+        return employeeName;
     }
 
     /**
      * 业务员名
-     * @param salesmanName 业务员名
+     * @param employeeName 业务员名
      */
-    public void setSalesmanName(String salesmanName) {
-        this.salesmanName = salesmanName == null ? null : salesmanName.trim();
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName == null ? null : employeeName.trim();
     }
 
     /**
-     * 购销方式：从通用类型中选择：方式设置中
-     * @return purchaseSaleMode 购销方式：从通用类型中选择：方式设置中
+     * 采购类型
+     * @return purchaseType 采购类型
      */
-    public String getPurchaseSaleMode() {
-        return purchaseSaleMode;
+    public String getPurchaseType() {
+        return purchaseType;
     }
 
     /**
-     * 购销方式：从通用类型中选择：方式设置中
-     * @param purchaseSaleMode 购销方式：从通用类型中选择：方式设置中
+     * 采购类型
+     * @param purchaseType 采购类型
      */
-    public void setPurchaseSaleMode(String purchaseSaleMode) {
-        this.purchaseSaleMode = purchaseSaleMode == null ? null : purchaseSaleMode.trim();
+    public void setPurchaseType(String purchaseType) {
+        this.purchaseType = purchaseType == null ? null : purchaseType.trim();
     }
 
     /**
-     * 单据类型：1：进货；2:进货退回；3：收购：4：兑换.......
-     * @return sheetType 单据类型：1：进货；2:进货退回；3：收购：4：兑换.......
+     * 单据日期
+     * @return billDate 单据日期
      */
-    public Integer getSheetType() {
-        return sheetType;
+    public String getBillDate() {
+        return billDate;
     }
 
     /**
-     * 单据类型：1：进货；2:进货退回；3：收购：4：兑换.......
-     * @param sheetType 单据类型：1：进货；2:进货退回；3：收购：4：兑换.......
+     * 单据日期
+     * @param billDate 单据日期
      */
-    public void setSheetType(Integer sheetType) {
-        this.sheetType = sheetType;
+    public void setBillDate(String billDate) {
+        this.billDate = billDate == null ? null : billDate.trim();
     }
 
     /**
-     * 部门地区码：公司节点或者门店节点的地区码（地区表）
-     * @return deptAreaCode 部门地区码：公司节点或者门店节点的地区码（地区表）
+     * 单据类型：1：进货；2:进货退回
+     * @return billType 单据类型：1：进货；2:进货退回
      */
-    public String getDeptAreaCode() {
-        return deptAreaCode;
+    public Integer getBillType() {
+        return billType;
     }
 
     /**
-     * 部门地区码：公司节点或者门店节点的地区码（地区表）
-     * @param deptAreaCode 部门地区码：公司节点或者门店节点的地区码（地区表）
+     * 单据类型：1：进货；2:进货退回
+     * @param billType 单据类型：1：进货；2:进货退回
      */
-    public void setDeptAreaCode(String deptAreaCode) {
-        this.deptAreaCode = deptAreaCode == null ? null : deptAreaCode.trim();
+    public void setBillType(Integer billType) {
+        this.billType = billType;
     }
 
     /**
-     *  部门地区名称：公司节点或者门店节点的地区名称（地区表）
-     * @return deptAreaName  部门地区名称：公司节点或者门店节点的地区名称（地区表）
+     * 进货部门
+     * @return areaCode 进货部门
      */
-    public String getDeptAreaName() {
-        return deptAreaName;
+    public String getAreaCode() {
+        return areaCode;
     }
 
     /**
-     *  部门地区名称：公司节点或者门店节点的地区名称（地区表）
-     * @param deptAreaName  部门地区名称：公司节点或者门店节点的地区名称（地区表）
+     * 进货部门
+     * @param areaCode 进货部门
      */
-    public void setDeptAreaName(String deptAreaName) {
-        this.deptAreaName = deptAreaName == null ? null : deptAreaName.trim();
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode == null ? null : areaCode.trim();
     }
 
     /**
-     * 仓库ID
-     * @return storeId 仓库ID
+     * 进货部门
+     * @return areaName 进货部门
      */
-    public Integer getStoreId() {
-        return storeId;
+    public String getAreaName() {
+        return areaName;
     }
 
     /**
-     * 仓库ID
-     * @param storeId 仓库ID
+     * 进货部门
+     * @param areaName 进货部门
      */
-    public void setStoreId(Integer storeId) {
-        this.storeId = storeId;
+    public void setAreaName(String areaName) {
+        this.areaName = areaName == null ? null : areaName.trim();
     }
 
     /**
-     * 仓库名称
-     * @return storeName 仓库名称
+     * 进货柜台
+     * @return counterAreaCode 进货柜台
      */
-    public String getStoreName() {
-        return storeName;
+    public String getCounterAreaCode() {
+        return counterAreaCode;
     }
 
     /**
-     * 仓库名称
-     * @param storeName 仓库名称
+     * 进货柜台
+     * @param counterAreaCode 进货柜台
      */
-    public void setStoreName(String storeName) {
-        this.storeName = storeName == null ? null : storeName.trim();
+    public void setCounterAreaCode(String counterAreaCode) {
+        this.counterAreaCode = counterAreaCode == null ? null : counterAreaCode.trim();
+    }
+
+    /**
+     * 进货柜台
+     * @return counterAreaName 进货柜台
+     */
+    public String getCounterAreaName() {
+        return counterAreaName;
+    }
+
+    /**
+     * 进货柜台
+     * @param counterAreaName 进货柜台
+     */
+    public void setCounterAreaName(String counterAreaName) {
+        this.counterAreaName = counterAreaName == null ? null : counterAreaName.trim();
     }
 
     /**
@@ -516,83 +450,67 @@ public class BillPurchase extends BaseEntity {
     }
 
     /**
-     * 总金重
-     * @return totalGoldWeight 总金重
+     * 总标价金额
+     * @return totalLabelPrice 总标价金额
      */
-    public Double getTotalGoldWeight() {
-        return totalGoldWeight;
-    }
-
-    /**
-     * 总金重
-     * @param totalGoldWeight 总金重
-     */
-    public void setTotalGoldWeight(Double totalGoldWeight) {
-        this.totalGoldWeight = totalGoldWeight;
-    }
-
-    /**
-     * 总成本金额
-     * @return costPrice 总成本金额
-     */
-    public Double getCostPrice() {
-        return costPrice;
-    }
-
-    /**
-     * 总成本金额
-     * @param costPrice 总成本金额
-     */
-    public void setCostPrice(Double costPrice) {
-        this.costPrice = costPrice;
+    public Double getTotalLabelPrice() {
+        return totalLabelPrice;
     }
 
     /**
      * 总标价金额
-     * @return totalSalePriceAmount 总标价金额
+     * @param totalLabelPrice 总标价金额
      */
-    public Double getTotalSalePriceAmount() {
-        return totalSalePriceAmount;
+    public void setTotalLabelPrice(Double totalLabelPrice) {
+        this.totalLabelPrice = totalLabelPrice;
     }
 
     /**
-     * 总标价金额
-     * @param totalSalePriceAmount 总标价金额
+     * 
+     * @return totalCost 
      */
-    public void setTotalSalePriceAmount(Double totalSalePriceAmount) {
-        this.totalSalePriceAmount = totalSalePriceAmount;
+    public Double getTotalCost() {
+        return totalCost;
+    }
+
+    /**
+     * 
+     * @param totalCost 
+     */
+    public void setTotalCost(Double totalCost) {
+        this.totalCost = totalCost;
+    }
+
+    /**
+     * 总工费
+     * @return totalWorkFee 总工费
+     */
+    public Double getTotalWorkFee() {
+        return totalWorkFee;
+    }
+
+    /**
+     * 总工费
+     * @param totalWorkFee 总工费
+     */
+    public void setTotalWorkFee(Double totalWorkFee) {
+        this.totalWorkFee = totalWorkFee;
     }
 
     /**
      * 主石重：镶嵌类的才统计
-     * @return totalMainStoneWeight 主石重：镶嵌类的才统计
+     * @return totaJewelWeight 主石重：镶嵌类的才统计
      */
-    public Double getTotalMainStoneWeight() {
-        return totalMainStoneWeight;
+    public Double getTotaJewelWeight() {
+        return totaJewelWeight;
     }
 
     /**
      * 主石重：镶嵌类的才统计
-     * @param totalMainStoneWeight 主石重：镶嵌类的才统计
+     * @param totaJewelWeight 主石重：镶嵌类的才统计
      */
-    public void setTotalMainStoneWeight(Double totalMainStoneWeight) {
-        this.totalMainStoneWeight = totalMainStoneWeight;
-    }
-
-    /**
-     * 单据日期：在保存单个商品时首次使用的是单的日期，在保存单的时候使用的是单的日期+当前时分秒
-     * @return sheetDate 单据日期：在保存单个商品时首次使用的是单的日期，在保存单的时候使用的是单的日期+当前时分秒
-     */
-    public String getSheetDate() {
-        return sheetDate;
-    }
-
-    /**
-     * 单据日期：在保存单个商品时首次使用的是单的日期，在保存单的时候使用的是单的日期+当前时分秒
-     * @param sheetDate 单据日期：在保存单个商品时首次使用的是单的日期，在保存单的时候使用的是单的日期+当前时分秒
-     */
-    public void setSheetDate(String sheetDate) {
-        this.sheetDate = sheetDate;
+    public void setTotaJewelWeight(Double totaJewelWeight) {
+        this.totaJewelWeight = totaJewelWeight;
     }
 
     /**
@@ -612,51 +530,19 @@ public class BillPurchase extends BaseEntity {
     }
 
     /**
-     * 0未保存；1已经保存
-     * @return saveFlag 0未保存；1已经保存
+     * 进货在途状态：0：新建状态；10：待审核  15 ：审核驳回  20：待接受  25：接收驳回  100：全部完成
+     * @return billStatus 进货在途状态：0：新建状态；10：待审核  15 ：审核驳回  20：待接受  25：接收驳回  100：全部完成
      */
-    public Boolean getSaveFlag() {
-        return saveFlag;
+    public Integer getBillStatus() {
+        return billStatus;
     }
 
     /**
-     * 0未保存；1已经保存
-     * @param saveFlag 0未保存；1已经保存
+     * 进货在途状态：0：新建状态；10：待审核  15 ：审核驳回  20：待接受  25：接收驳回  100：全部完成
+     * @param billStatus 进货在途状态：0：新建状态；10：待审核  15 ：审核驳回  20：待接受  25：接收驳回  100：全部完成
      */
-    public void setSaveFlag(Boolean saveFlag) {
-        this.saveFlag = saveFlag;
-    }
-
-    /**
-     * 代销标记：0不是代销；1是代销商品
-     * @return daiXiaoFlag 代销标记：0不是代销；1是代销商品
-     */
-    public Boolean getDaiXiaoFlag() {
-        return daiXiaoFlag;
-    }
-
-    /**
-     * 代销标记：0不是代销；1是代销商品
-     * @param daiXiaoFlag 代销标记：0不是代销；1是代销商品
-     */
-    public void setDaiXiaoFlag(Boolean daiXiaoFlag) {
-        this.daiXiaoFlag = daiXiaoFlag;
-    }
-
-    /**
-     * 在途标记：0：不是在途；1：商品在途
-     * @return zaiTuFlag 在途标记：0：不是在途；1：商品在途
-     */
-    public Boolean getZaiTuFlag() {
-        return zaiTuFlag;
-    }
-
-    /**
-     * 在途标记：0：不是在途；1：商品在途
-     * @param zaiTuFlag 在途标记：0：不是在途；1：商品在途
-     */
-    public void setZaiTuFlag(Boolean zaiTuFlag) {
-        this.zaiTuFlag = zaiTuFlag;
+    public void setBillStatus(Integer billStatus) {
+        this.billStatus = billStatus;
     }
 
     /**
@@ -676,51 +562,19 @@ public class BillPurchase extends BaseEntity {
     }
 
     /**
-     * 数据权限地域码
-     * @return areaCode 数据权限地域码
+     * 1:手工录入 2：导入
+     * @return inType 1:手工录入 2：导入
      */
-    public String getAreaCode() {
-        return areaCode;
+    public Boolean getInType() {
+        return inType;
     }
 
     /**
-     * 数据权限地域码
-     * @param areaCode 数据权限地域码
+     * 1:手工录入 2：导入
+     * @param inType 1:手工录入 2：导入
      */
-    public void setAreaCode(String areaCode) {
-        this.areaCode = areaCode == null ? null : areaCode.trim();
-    }
-
-    /**
-     * 是否是批量导入的单:0不是；1：是
-     * @return importFlag 是否是批量导入的单:0不是；1：是
-     */
-    public Boolean getImportFlag() {
-        return importFlag;
-    }
-
-    /**
-     * 是否是批量导入的单:0不是；1：是
-     * @param importFlag 是否是批量导入的单:0不是；1：是
-     */
-    public void setImportFlag(Boolean importFlag) {
-        this.importFlag = importFlag;
-    }
-
-    /**
-     * 进货在途状态：0：新建状态；1：在途；2：接收中；3：接收完成；4：整单打回
-     * @return sheetStatus 进货在途状态：0：新建状态；1：在途；2：接收中；3：接收完成；4：整单打回
-     */
-    public Integer getSheetStatus() {
-        return sheetStatus;
-    }
-
-    /**
-     * 进货在途状态：0：新建状态；1：在途；2：接收中；3：接收完成；4：整单打回
-     * @param sheetStatus 进货在途状态：0：新建状态；1：在途；2：接收中；3：接收完成；4：整单打回
-     */
-    public void setSheetStatus(Integer sheetStatus) {
-        this.sheetStatus = sheetStatus;
+    public void setInType(Boolean inType) {
+        this.inType = inType;
     }
 
     /**
@@ -737,53 +591,6 @@ public class BillPurchase extends BaseEntity {
      */
     public void setReceiveTime(Date receiveTime) {
         this.receiveTime = receiveTime;
-    }
-
-    /**
-     * 批次：进货在途单打回之后再次提交要区分不同的批次（更新流转记录时间的时候用得到）
-     * @return piCi 批次：进货在途单打回之后再次提交要区分不同的批次（更新流转记录时间的时候用得到）
-     */
-    public Integer getPiCi() {
-        return piCi;
-    }
-
-    /**
-     * 批次：进货在途单打回之后再次提交要区分不同的批次（更新流转记录时间的时候用得到）
-     * @param piCi 批次：进货在途单打回之后再次提交要区分不同的批次（更新流转记录时间的时候用得到）
-     */
-    public void setPiCi(Integer piCi) {
-        this.piCi = piCi;
-    }
-    /**
-     * 是否供应商和日期混合入库
-     * @return blendFlag 是否供应商和日期混合入库
-     */
-    public Integer getBlendFlag() {
-        return blendFlag;
-    }
-
-    /**
-     * 是否供应商和日期混合入库
-     * @param blendFlag 是否供应商和日期混合入库
-     */
-    public void setBlendFlag(Integer blendFlag) {
-        this.blendFlag = blendFlag;
-    }
-
-    /**
-     * 审核状态:0:默认初始值;10:无需审核直接过;11:审核中；12：审核通过；13：审核驳回
-     * @return auditStatus 审核状态:0:默认初始值;10:无需审核直接过;11:审核中；12：审核通过；13：审核驳回
-     */
-    public Integer getAuditStatus() {
-        return auditStatus;
-    }
-
-    /**
-     * 审核状态:0:默认初始值;10:无需审核直接过;11:审核中；12：审核通过；13：审核驳回
-     * @param auditStatus 审核状态:0:默认初始值;10:无需审核直接过;11:审核中；12：审核通过；13：审核驳回
-     */
-    public void setAuditStatus(Integer auditStatus) {
-        this.auditStatus = auditStatus;
     }
 
     /**
@@ -870,7 +677,7 @@ public class BillPurchase extends BaseEntity {
      * 审核时间，审核通过或驳回时间
      * @return auditTime 审核时间，审核通过或驳回时间
      */
-    public Date getAuditTime() {
+    public String getAuditTime() {
         return auditTime;
     }
 
@@ -878,8 +685,8 @@ public class BillPurchase extends BaseEntity {
      * 审核时间，审核通过或驳回时间
      * @param auditTime 审核时间，审核通过或驳回时间
      */
-    public void setAuditTime(Date auditTime) {
-        this.auditTime = auditTime;
+    public void setAuditTime(String auditTime) {
+        this.auditTime = auditTime == null ? null : auditTime.trim();
     }
 
     /**
