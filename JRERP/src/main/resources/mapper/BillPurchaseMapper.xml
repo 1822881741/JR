@@ -3,53 +3,42 @@
 <mapper namespace="com.jr.erp.bill.purchase.dao.BillPurchaseMapper">
   <resultMap id="BaseResultMap" type="com.jr.erp.bill.purchase.entity.BillPurchase">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="orgSheetId" jdbcType="INTEGER" property="orgSheetId" />
     <result column="companyNo" jdbcType="VARCHAR" property="companyNo" />
-    <result column="sheetNo" jdbcType="VARCHAR" property="sheetNo" />
-    <result column="oldSheetNo" jdbcType="VARCHAR" property="oldSheetNo" />
-    <result column="supplierNo" jdbcType="VARCHAR" property="supplierNo" />
-    <result column="supplierName" jdbcType="VARCHAR" property="supplierName" />
-    <result column="customerName" jdbcType="VARCHAR" property="customerName" />
-    <result column="customerPhone" jdbcType="VARCHAR" property="customerPhone" />
-    <result column="saleManId" jdbcType="INTEGER" property="saleManId" />
-    <result column="salesmanName" jdbcType="VARCHAR" property="salesmanName" />
-    <result column="purchaseSaleMode" jdbcType="VARCHAR" property="purchaseSaleMode" />
-    <result column="sheetType" jdbcType="TINYINT" property="sheetType" />
-    <result column="deptAreaCode" jdbcType="VARCHAR" property="deptAreaCode" />
-    <result column="deptAreaName" jdbcType="VARCHAR" property="deptAreaName" />
-    <result column="storeId" jdbcType="INTEGER" property="storeId" />
-    <result column="storeName" jdbcType="VARCHAR" property="storeName" />
+    <result column="sysBillNo" jdbcType="VARCHAR" property="sysBillNo" />
+    <result column="billNo" jdbcType="VARCHAR" property="billNo" />
+    <result column="supplier" jdbcType="VARCHAR" property="supplier" />
+    <result column="custName" jdbcType="VARCHAR" property="custName" />
+    <result column="cusMobile" jdbcType="VARCHAR" property="cusMobile" />
+    <result column="employeeId" jdbcType="INTEGER" property="employeeId" />
+    <result column="employeeName" jdbcType="VARCHAR" property="employeeName" />
+    <result column="purchaseType" jdbcType="VARCHAR" property="purchaseType" />
+    <result column="billDate" jdbcType="VARCHAR" property="billDate" />
+    <result column="billType" jdbcType="TINYINT" property="billType" />
+    <result column="areaCode" jdbcType="VARCHAR" property="areaCode" />
+    <result column="areaName" jdbcType="VARCHAR" property="areaName" />
+    <result column="counterAreaCode" jdbcType="VARCHAR" property="counterAreaCode" />
+    <result column="counterAreaName" jdbcType="VARCHAR" property="counterAreaName" />
     <result column="createUserId" jdbcType="INTEGER" property="createUserId" />
     <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
     <result column="totalNum" jdbcType="INTEGER" property="totalNum" />
-    <result column="totalGoldWeight" jdbcType="DOUBLE" property="totalGoldWeight" />
-    <result column="costPrice" jdbcType="DOUBLE" property="costPrice" />
-    <result column="totalSalePriceAmount" jdbcType="DOUBLE" property="totalSalePriceAmount" />
-    <result column="totalMainStoneWeight" jdbcType="DOUBLE" property="totalMainStoneWeight" />
-    <result column="sheetDate" jdbcType="DATE" property="sheetDate" />
+    <result column="totalLabelPrice" jdbcType="DOUBLE" property="totalLabelPrice" />
+    <result column="totalCost" jdbcType="DOUBLE" property="totalCost" />
+    <result column="totalWorkFee" jdbcType="DOUBLE" property="totalWorkFee" />
+    <result column="totaJewelWeight" jdbcType="DOUBLE" property="totaJewelWeight" />
     <result column="jtFlag" jdbcType="TINYINT" property="jtFlag" />
-    <result column="saveFlag" jdbcType="BIT" property="saveFlag" />
-    <result column="daiXiaoFlag" jdbcType="BIT" property="daiXiaoFlag" />
-    <result column="zaiTuFlag" jdbcType="BIT" property="zaiTuFlag" />
+    <result column="billStatus" jdbcType="TINYINT" property="billStatus" />
     <result column="brandName" jdbcType="VARCHAR" property="brandName" />
-    <result column="areaCode" jdbcType="VARCHAR" property="areaCode" />
-    <result column="importFlag" jdbcType="BIT" property="importFlag" />
-    <result column="sheetStatus" jdbcType="INTEGER" property="sheetStatus" />
+    <result column="inType" jdbcType="BIT" property="inType" />
     <result column="receiveTime" jdbcType="TIMESTAMP" property="receiveTime" />
-    <result column="piCi" jdbcType="INTEGER" property="piCi" />
-    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="blendFlag" jdbcType="INTEGER" property="blendFlag" />
-    <result column="auditStatus" jdbcType="INTEGER" property="auditStatus" />
+    <result column="createTime" jdbcType="VARCHAR" property="createTime" />
     <result column="submitAuditUserId" jdbcType="INTEGER" property="submitAuditUserId" />
     <result column="submitAuditUserName" jdbcType="VARCHAR" property="submitAuditUserName" />
     <result column="submitAuditTime" jdbcType="TIMESTAMP" property="submitAuditTime" />
     <result column="auditUserId" jdbcType="INTEGER" property="auditUserId" />
     <result column="auditUserName" jdbcType="VARCHAR" property="auditUserName" />
-    <result column="auditTime" jdbcType="TIMESTAMP" property="auditTime" />
+    <result column="auditTime" jdbcType="VARCHAR" property="auditTime" />
     <result column="auditMsg" jdbcType="VARCHAR" property="auditMsg" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.jr.erp.bill.purchase.entity.BillPurchase">
-    <result column="remarks" jdbcType="LONGVARCHAR" property="remarks" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -81,33 +70,13 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, orgSheetId, companyNo, sheetNo, oldSheetNo, supplierNo, supplierName, customerName, 
-    customerPhone, saleManId, salesmanName, purchaseSaleMode, sheetType, deptAreaCode, 
-    deptAreaName, storeId, storeName, createUserId, createUserName, totalNum, totalGoldWeight, 
-    costPrice, totalSalePriceAmount, totalMainStoneWeight, sheetDate, jtFlag, saveFlag, 
-    daiXiaoFlag, zaiTuFlag, brandName, areaCode, importFlag, sheetStatus, receiveTime, 
-    piCi, createTime, blendFlag, auditStatus, submitAuditUserId, submitAuditUserName, 
-    submitAuditTime, auditUserId, auditUserName, auditTime, auditMsg
+    id, companyNo, sysBillNo, billNo, supplier, custName, cusMobile, employeeId, employeeName, 
+    purchaseType, billDate, billType, areaCode, areaName, counterAreaCode, counterAreaName, 
+    createUserId, createUserName, totalNum, totalLabelPrice, totalCost, totalWorkFee, 
+    totaJewelWeight, jtFlag, billStatus, brandName, inType, receiveTime, createTime, 
+    submitAuditUserId, submitAuditUserName, submitAuditTime, auditUserId, auditUserName, 
+    auditTime, auditMsg, remarks
   </sql>
-  <sql id="Blob_Column_List">
-    remarks
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.jr.erp.bill.purchase.entity.BillPurchaseExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from bill_purchase
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="com.jr.erp.bill.purchase.entity.BillPurchaseExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -127,11 +96,9 @@
       </if>
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 'true' as QUERYID,
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from bill_purchase
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -149,38 +116,32 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into bill_purchase (orgSheetId, companyNo, sheetNo, 
-      oldSheetNo, supplierNo, supplierName, 
-      customerName, customerPhone, saleManId, 
-      salesmanName, purchaseSaleMode, sheetType, 
-      deptAreaCode, deptAreaName, storeId, 
-      storeName, createUserId, createUserName, 
-      totalNum, totalGoldWeight, costPrice, 
-      totalSalePriceAmount, totalMainStoneWeight, 
-      sheetDate, jtFlag, saveFlag, 
-      daiXiaoFlag, zaiTuFlag, brandName, 
-      areaCode, importFlag, sheetStatus, 
-      receiveTime, piCi, createTime, 
-      blendFlag, auditStatus, submitAuditUserId, 
-      submitAuditUserName, submitAuditTime, 
-      auditUserId, auditUserName, auditTime, 
-      auditMsg, remarks)
-    values (#{orgSheetId,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{sheetNo,jdbcType=VARCHAR}, 
-      #{oldSheetNo,jdbcType=VARCHAR}, #{supplierNo,jdbcType=VARCHAR}, #{supplierName,jdbcType=VARCHAR}, 
-      #{customerName,jdbcType=VARCHAR}, #{customerPhone,jdbcType=VARCHAR}, #{saleManId,jdbcType=INTEGER}, 
-      #{salesmanName,jdbcType=VARCHAR}, #{purchaseSaleMode,jdbcType=VARCHAR}, #{sheetType,jdbcType=TINYINT}, 
-      #{deptAreaCode,jdbcType=VARCHAR}, #{deptAreaName,jdbcType=VARCHAR}, #{storeId,jdbcType=INTEGER}, 
-      #{storeName,jdbcType=VARCHAR}, #{createUserId,jdbcType=INTEGER}, #{createUserName,jdbcType=VARCHAR}, 
-      #{totalNum,jdbcType=INTEGER}, #{totalGoldWeight,jdbcType=DOUBLE}, #{costPrice,jdbcType=DOUBLE}, 
-      #{totalSalePriceAmount,jdbcType=DOUBLE}, #{totalMainStoneWeight,jdbcType=DOUBLE}, 
-      #{sheetDate,jdbcType=DATE}, #{jtFlag,jdbcType=TINYINT}, #{saveFlag,jdbcType=BIT}, 
-      #{daiXiaoFlag,jdbcType=BIT}, #{zaiTuFlag,jdbcType=BIT}, #{brandName,jdbcType=VARCHAR}, 
-      #{areaCode,jdbcType=VARCHAR}, #{importFlag,jdbcType=BIT}, #{sheetStatus,jdbcType=INTEGER}, 
-      #{receiveTime,jdbcType=TIMESTAMP}, #{piCi,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{blendFlag,jdbcType=INTEGER}, #{auditStatus,jdbcType=INTEGER}, #{submitAuditUserId,jdbcType=INTEGER}, 
-      #{submitAuditUserName,jdbcType=VARCHAR}, #{submitAuditTime,jdbcType=TIMESTAMP}, 
-      #{auditUserId,jdbcType=INTEGER}, #{auditUserName,jdbcType=VARCHAR}, #{auditTime,jdbcType=TIMESTAMP}, 
-      #{auditMsg,jdbcType=VARCHAR}, #{remarks,jdbcType=LONGVARCHAR})
+    insert into bill_purchase (companyNo, sysBillNo, billNo, 
+      supplier, custName, cusMobile, 
+      employeeId, employeeName, purchaseType, 
+      billDate, billType, areaCode, 
+      areaName, counterAreaCode, counterAreaName, 
+      createUserId, createUserName, totalNum, 
+      totalLabelPrice, totalCost, totalWorkFee, 
+      totaJewelWeight, jtFlag, billStatus, 
+      brandName, inType, receiveTime, 
+      createTime, submitAuditUserId, submitAuditUserName, 
+      submitAuditTime, auditUserId, auditUserName, 
+      auditTime, auditMsg, remarks
+      )
+    values (#{companyNo,jdbcType=VARCHAR}, #{sysBillNo,jdbcType=VARCHAR}, #{billNo,jdbcType=VARCHAR}, 
+      #{supplier,jdbcType=VARCHAR}, #{custName,jdbcType=VARCHAR}, #{cusMobile,jdbcType=VARCHAR}, 
+      #{employeeId,jdbcType=INTEGER}, #{employeeName,jdbcType=VARCHAR}, #{purchaseType,jdbcType=VARCHAR}, 
+      #{billDate,jdbcType=VARCHAR}, #{billType,jdbcType=TINYINT}, #{areaCode,jdbcType=VARCHAR}, 
+      #{areaName,jdbcType=VARCHAR}, #{counterAreaCode,jdbcType=VARCHAR}, #{counterAreaName,jdbcType=VARCHAR}, 
+      #{createUserId,jdbcType=INTEGER}, #{createUserName,jdbcType=VARCHAR}, #{totalNum,jdbcType=INTEGER}, 
+      #{totalLabelPrice,jdbcType=DOUBLE}, #{totalCost,jdbcType=DOUBLE}, #{totalWorkFee,jdbcType=DOUBLE}, 
+      #{totaJewelWeight,jdbcType=DOUBLE}, #{jtFlag,jdbcType=TINYINT}, #{billStatus,jdbcType=TINYINT}, 
+      #{brandName,jdbcType=VARCHAR}, #{inType,jdbcType=BIT}, #{receiveTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=VARCHAR}, #{submitAuditUserId,jdbcType=INTEGER}, #{submitAuditUserName,jdbcType=VARCHAR}, 
+      #{submitAuditTime,jdbcType=TIMESTAMP}, #{auditUserId,jdbcType=INTEGER}, #{auditUserName,jdbcType=VARCHAR}, 
+      #{auditTime,jdbcType=VARCHAR}, #{auditMsg,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}
+      )
   </insert>
   <select id="countByExample" parameterType="com.jr.erp.bill.purchase.entity.BillPurchaseExample" resultType="java.lang.Long">
     select count(*) from bill_purchase
@@ -191,53 +152,50 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.jr.erp.bill.purchase.entity.BillPurchase">
     update bill_purchase
     <set>
-      <if test="orgSheetId != null">
-        orgSheetId = #{orgSheetId,jdbcType=INTEGER},
-      </if>
       <if test="companyNo != null">
         companyNo = #{companyNo,jdbcType=VARCHAR},
       </if>
-      <if test="sheetNo != null">
-        sheetNo = #{sheetNo,jdbcType=VARCHAR},
+      <if test="sysBillNo != null">
+        sysBillNo = #{sysBillNo,jdbcType=VARCHAR},
       </if>
-      <if test="oldSheetNo != null">
-        oldSheetNo = #{oldSheetNo,jdbcType=VARCHAR},
+      <if test="billNo != null">
+        billNo = #{billNo,jdbcType=VARCHAR},
       </if>
-      <if test="supplierNo != null">
-        supplierNo = #{supplierNo,jdbcType=VARCHAR},
+      <if test="supplier != null">
+        supplier = #{supplier,jdbcType=VARCHAR},
       </if>
-      <if test="supplierName != null">
-        supplierName = #{supplierName,jdbcType=VARCHAR},
+      <if test="custName != null">
+        custName = #{custName,jdbcType=VARCHAR},
       </if>
-      <if test="customerName != null">
-        customerName = #{customerName,jdbcType=VARCHAR},
+      <if test="cusMobile != null">
+        cusMobile = #{cusMobile,jdbcType=VARCHAR},
       </if>
-      <if test="customerPhone != null">
-        customerPhone = #{customerPhone,jdbcType=VARCHAR},
+      <if test="employeeId != null">
+        employeeId = #{employeeId,jdbcType=INTEGER},
       </if>
-      <if test="saleManId != null">
-        saleManId = #{saleManId,jdbcType=INTEGER},
+      <if test="employeeName != null">
+        employeeName = #{employeeName,jdbcType=VARCHAR},
       </if>
-      <if test="salesmanName != null">
-        salesmanName = #{salesmanName,jdbcType=VARCHAR},
+      <if test="purchaseType != null">
+        purchaseType = #{purchaseType,jdbcType=VARCHAR},
       </if>
-      <if test="purchaseSaleMode != null">
-        purchaseSaleMode = #{purchaseSaleMode,jdbcType=VARCHAR},
+      <if test="billDate != null">
+        billDate = #{billDate,jdbcType=VARCHAR},
       </if>
-      <if test="sheetType != null">
-        sheetType = #{sheetType,jdbcType=TINYINT},
+      <if test="billType != null">
+        billType = #{billType,jdbcType=TINYINT},
       </if>
-      <if test="deptAreaCode != null">
-        deptAreaCode = #{deptAreaCode,jdbcType=VARCHAR},
+      <if test="areaCode != null">
+        areaCode = #{areaCode,jdbcType=VARCHAR},
       </if>
-      <if test="deptAreaName != null">
-        deptAreaName = #{deptAreaName,jdbcType=VARCHAR},
+      <if test="areaName != null">
+        areaName = #{areaName,jdbcType=VARCHAR},
       </if>
-      <if test="storeId != null">
-        storeId = #{storeId,jdbcType=INTEGER},
+      <if test="counterAreaCode != null">
+        counterAreaCode = #{counterAreaCode,jdbcType=VARCHAR},
       </if>
-      <if test="storeName != null">
-        storeName = #{storeName,jdbcType=VARCHAR},
+      <if test="counterAreaName != null">
+        counterAreaName = #{counterAreaName,jdbcType=VARCHAR},
       </if>
       <if test="createUserId != null">
         createUserId = #{createUserId,jdbcType=INTEGER},
@@ -248,59 +206,35 @@
       <if test="totalNum != null">
         totalNum = #{totalNum,jdbcType=INTEGER},
       </if>
-      <if test="totalGoldWeight != null">
-        totalGoldWeight = #{totalGoldWeight,jdbcType=DOUBLE},
+      <if test="totalLabelPrice != null">
+        totalLabelPrice = #{totalLabelPrice,jdbcType=DOUBLE},
       </if>
-      <if test="costPrice != null">
-        costPrice = #{costPrice,jdbcType=DOUBLE},
+      <if test="totalCost != null">
+        totalCost = #{totalCost,jdbcType=DOUBLE},
       </if>
-      <if test="totalSalePriceAmount != null">
-        totalSalePriceAmount = #{totalSalePriceAmount,jdbcType=DOUBLE},
+      <if test="totalWorkFee != null">
+        totalWorkFee = #{totalWorkFee,jdbcType=DOUBLE},
       </if>
-      <if test="totalMainStoneWeight != null">
-        totalMainStoneWeight = #{totalMainStoneWeight,jdbcType=DOUBLE},
-      </if>
-      <if test="sheetDate != null">
-        sheetDate = #{sheetDate,jdbcType=DATE},
+      <if test="totaJewelWeight != null">
+        totaJewelWeight = #{totaJewelWeight,jdbcType=DOUBLE},
       </if>
       <if test="jtFlag != null">
         jtFlag = #{jtFlag,jdbcType=TINYINT},
       </if>
-      <if test="saveFlag != null">
-        saveFlag = #{saveFlag,jdbcType=BIT},
-      </if>
-      <if test="daiXiaoFlag != null">
-        daiXiaoFlag = #{daiXiaoFlag,jdbcType=BIT},
-      </if>
-      <if test="zaiTuFlag != null">
-        zaiTuFlag = #{zaiTuFlag,jdbcType=BIT},
+      <if test="billStatus != null">
+        billStatus = #{billStatus,jdbcType=TINYINT},
       </if>
       <if test="brandName != null">
         brandName = #{brandName,jdbcType=VARCHAR},
       </if>
-      <if test="areaCode != null">
-        areaCode = #{areaCode,jdbcType=VARCHAR},
-      </if>
-      <if test="importFlag != null">
-        importFlag = #{importFlag,jdbcType=BIT},
-      </if>
-      <if test="sheetStatus != null">
-        sheetStatus = #{sheetStatus,jdbcType=INTEGER},
+      <if test="inType != null">
+        inType = #{inType,jdbcType=BIT},
       </if>
       <if test="receiveTime != null">
         receiveTime = #{receiveTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="piCi != null">
-        piCi = #{piCi,jdbcType=INTEGER},
-      </if>
       <if test="createTime != null">
-        createTime = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="blendFlag != null">
-        blendFlag = #{blendFlag,jdbcType=INTEGER},
-      </if>
-      <if test="auditStatus != null">
-        auditStatus = #{auditStatus,jdbcType=INTEGER},
+        createTime = #{createTime,jdbcType=VARCHAR},
       </if>
       <if test="submitAuditUserId != null">
         submitAuditUserId = #{submitAuditUserId,jdbcType=INTEGER},
@@ -318,112 +252,55 @@
         auditUserName = #{auditUserName,jdbcType=VARCHAR},
       </if>
       <if test="auditTime != null">
-        auditTime = #{auditTime,jdbcType=TIMESTAMP},
+        auditTime = #{auditTime,jdbcType=VARCHAR},
       </if>
       <if test="auditMsg != null">
         auditMsg = #{auditMsg,jdbcType=VARCHAR},
       </if>
       <if test="remarks != null">
-        remarks = #{remarks,jdbcType=LONGVARCHAR},
+        remarks = #{remarks,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jr.erp.bill.purchase.entity.BillPurchase">
-    update bill_purchase
-    set orgSheetId = #{orgSheetId,jdbcType=INTEGER},
-      companyNo = #{companyNo,jdbcType=VARCHAR},
-      sheetNo = #{sheetNo,jdbcType=VARCHAR},
-      oldSheetNo = #{oldSheetNo,jdbcType=VARCHAR},
-      supplierNo = #{supplierNo,jdbcType=VARCHAR},
-      supplierName = #{supplierName,jdbcType=VARCHAR},
-      customerName = #{customerName,jdbcType=VARCHAR},
-      customerPhone = #{customerPhone,jdbcType=VARCHAR},
-      saleManId = #{saleManId,jdbcType=INTEGER},
-      salesmanName = #{salesmanName,jdbcType=VARCHAR},
-      purchaseSaleMode = #{purchaseSaleMode,jdbcType=VARCHAR},
-      sheetType = #{sheetType,jdbcType=TINYINT},
-      deptAreaCode = #{deptAreaCode,jdbcType=VARCHAR},
-      deptAreaName = #{deptAreaName,jdbcType=VARCHAR},
-      storeId = #{storeId,jdbcType=INTEGER},
-      storeName = #{storeName,jdbcType=VARCHAR},
-      createUserId = #{createUserId,jdbcType=INTEGER},
-      createUserName = #{createUserName,jdbcType=VARCHAR},
-      totalNum = #{totalNum,jdbcType=INTEGER},
-      totalGoldWeight = #{totalGoldWeight,jdbcType=DOUBLE},
-      costPrice = #{costPrice,jdbcType=DOUBLE},
-      totalSalePriceAmount = #{totalSalePriceAmount,jdbcType=DOUBLE},
-      totalMainStoneWeight = #{totalMainStoneWeight,jdbcType=DOUBLE},
-      sheetDate = #{sheetDate,jdbcType=DATE},
-      jtFlag = #{jtFlag,jdbcType=TINYINT},
-      saveFlag = #{saveFlag,jdbcType=BIT},
-      daiXiaoFlag = #{daiXiaoFlag,jdbcType=BIT},
-      zaiTuFlag = #{zaiTuFlag,jdbcType=BIT},
-      brandName = #{brandName,jdbcType=VARCHAR},
-      areaCode = #{areaCode,jdbcType=VARCHAR},
-      importFlag = #{importFlag,jdbcType=BIT},
-      sheetStatus = #{sheetStatus,jdbcType=INTEGER},
-      receiveTime = #{receiveTime,jdbcType=TIMESTAMP},
-      piCi = #{piCi,jdbcType=INTEGER},
-      createTime = #{createTime,jdbcType=TIMESTAMP},
-      blendFlag = #{blendFlag,jdbcType=INTEGER},
-      auditStatus = #{auditStatus,jdbcType=INTEGER},
-      submitAuditUserId = #{submitAuditUserId,jdbcType=INTEGER},
-      submitAuditUserName = #{submitAuditUserName,jdbcType=VARCHAR},
-      submitAuditTime = #{submitAuditTime,jdbcType=TIMESTAMP},
-      auditUserId = #{auditUserId,jdbcType=INTEGER},
-      auditUserName = #{auditUserName,jdbcType=VARCHAR},
-      auditTime = #{auditTime,jdbcType=TIMESTAMP},
-      auditMsg = #{auditMsg,jdbcType=VARCHAR},
-      remarks = #{remarks,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
   <update id="updateByPrimaryKey" parameterType="com.jr.erp.bill.purchase.entity.BillPurchase">
     update bill_purchase
-    set orgSheetId = #{orgSheetId,jdbcType=INTEGER},
-      companyNo = #{companyNo,jdbcType=VARCHAR},
-      sheetNo = #{sheetNo,jdbcType=VARCHAR},
-      oldSheetNo = #{oldSheetNo,jdbcType=VARCHAR},
-      supplierNo = #{supplierNo,jdbcType=VARCHAR},
-      supplierName = #{supplierName,jdbcType=VARCHAR},
-      customerName = #{customerName,jdbcType=VARCHAR},
-      customerPhone = #{customerPhone,jdbcType=VARCHAR},
-      saleManId = #{saleManId,jdbcType=INTEGER},
-      salesmanName = #{salesmanName,jdbcType=VARCHAR},
-      purchaseSaleMode = #{purchaseSaleMode,jdbcType=VARCHAR},
-      sheetType = #{sheetType,jdbcType=TINYINT},
-      deptAreaCode = #{deptAreaCode,jdbcType=VARCHAR},
-      deptAreaName = #{deptAreaName,jdbcType=VARCHAR},
-      storeId = #{storeId,jdbcType=INTEGER},
-      storeName = #{storeName,jdbcType=VARCHAR},
+    set companyNo = #{companyNo,jdbcType=VARCHAR},
+      sysBillNo = #{sysBillNo,jdbcType=VARCHAR},
+      billNo = #{billNo,jdbcType=VARCHAR},
+      supplier = #{supplier,jdbcType=VARCHAR},
+      custName = #{custName,jdbcType=VARCHAR},
+      cusMobile = #{cusMobile,jdbcType=VARCHAR},
+      employeeId = #{employeeId,jdbcType=INTEGER},
+      employeeName = #{employeeName,jdbcType=VARCHAR},
+      purchaseType = #{purchaseType,jdbcType=VARCHAR},
+      billDate = #{billDate,jdbcType=VARCHAR},
+      billType = #{billType,jdbcType=TINYINT},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
+      areaName = #{areaName,jdbcType=VARCHAR},
+      counterAreaCode = #{counterAreaCode,jdbcType=VARCHAR},
+      counterAreaName = #{counterAreaName,jdbcType=VARCHAR},
       createUserId = #{createUserId,jdbcType=INTEGER},
       createUserName = #{createUserName,jdbcType=VARCHAR},
       totalNum = #{totalNum,jdbcType=INTEGER},
-      totalGoldWeight = #{totalGoldWeight,jdbcType=DOUBLE},
-      costPrice = #{costPrice,jdbcType=DOUBLE},
-      totalSalePriceAmount = #{totalSalePriceAmount,jdbcType=DOUBLE},
-      totalMainStoneWeight = #{totalMainStoneWeight,jdbcType=DOUBLE},
-      sheetDate = #{sheetDate,jdbcType=DATE},
+      totalLabelPrice = #{totalLabelPrice,jdbcType=DOUBLE},
+      totalCost = #{totalCost,jdbcType=DOUBLE},
+      totalWorkFee = #{totalWorkFee,jdbcType=DOUBLE},
+      totaJewelWeight = #{totaJewelWeight,jdbcType=DOUBLE},
       jtFlag = #{jtFlag,jdbcType=TINYINT},
-      saveFlag = #{saveFlag,jdbcType=BIT},
-      daiXiaoFlag = #{daiXiaoFlag,jdbcType=BIT},
-      zaiTuFlag = #{zaiTuFlag,jdbcType=BIT},
+      billStatus = #{billStatus,jdbcType=TINYINT},
       brandName = #{brandName,jdbcType=VARCHAR},
-      areaCode = #{areaCode,jdbcType=VARCHAR},
-      importFlag = #{importFlag,jdbcType=BIT},
-      sheetStatus = #{sheetStatus,jdbcType=INTEGER},
+      inType = #{inType,jdbcType=BIT},
       receiveTime = #{receiveTime,jdbcType=TIMESTAMP},
-      piCi = #{piCi,jdbcType=INTEGER},
-      createTime = #{createTime,jdbcType=TIMESTAMP},
-      blendFlag = #{blendFlag,jdbcType=INTEGER},
-      auditStatus = #{auditStatus,jdbcType=INTEGER},
+      createTime = #{createTime,jdbcType=VARCHAR},
       submitAuditUserId = #{submitAuditUserId,jdbcType=INTEGER},
       submitAuditUserName = #{submitAuditUserName,jdbcType=VARCHAR},
       submitAuditTime = #{submitAuditTime,jdbcType=TIMESTAMP},
       auditUserId = #{auditUserId,jdbcType=INTEGER},
       auditUserName = #{auditUserName,jdbcType=VARCHAR},
-      auditTime = #{auditTime,jdbcType=TIMESTAMP},
-      auditMsg = #{auditMsg,jdbcType=VARCHAR}
+      auditTime = #{auditTime,jdbcType=VARCHAR},
+      auditMsg = #{auditMsg,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -21,6 +21,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.service.impl.IFileUploadService;
 import com.jr.erp.base.shiro.ShiroUtils;
+import com.jr.erp.base.utils.JodaUtils;
 import com.jr.erp.base.utils.Ret;
 import com.jr.erp.bill.purchase.entity.BillPurchase;
 import com.jr.erp.bill.purchase.service.IBillPurchaseService;
@@ -78,7 +79,11 @@ public class PurchaseController {
         List<BaseEntity> areaList = sysAreaInfoService.selectByExample(areaExample);
         model.addAttribute("areaList",areaList);
         
-        System.out.println("==============="+billNoGeneratorService.getNextBillNo(ShiroUtils.getCompanyNo(),1,ShiroUtils.getSysUser().getUserSheetNoPrefix()));
+        BillPurchase purchase = new BillPurchase();
+        purchase.setBillDate(JodaUtils.getShortDate());
+        purchase.setBillNo(billNoGeneratorService.getNextBillNo(ShiroUtils.getCompanyNo(),1,ShiroUtils.getSysUser().getUserSheetNoPrefix()));
+        
+        model.addAttribute("billPurchase",purchase);
         return "bill/purchase/editPurchaseBill";
     }
     
