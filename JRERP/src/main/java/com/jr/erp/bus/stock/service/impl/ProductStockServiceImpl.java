@@ -1,9 +1,13 @@
 package com.jr.erp.bus.stock.service.impl;
 
+import java.lang.reflect.InvocationTargetException;
+
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.jr.erp.base.mybatis.AbstractBaseService;
 import com.jr.erp.bill.purchase.entity.BillPurchase;
+import com.jr.erp.bill.purchase.entity.BillPurchaseItem;
 import com.jr.erp.bus.stock.entity.ProductStock;
 import com.jr.erp.bus.stock.service.IProductStockService;
 
@@ -22,8 +26,20 @@ public class ProductStockServiceImpl extends AbstractBaseService<ProductStock> i
 {
 
     @Override
-    public void addPurchaseStock(BillPurchase billPurchase, String counterCode, Integer status)
+    public void addPurchaseStock(BillPurchase billPurchase, String counterCode)
     {
-        
+        for (BillPurchaseItem item : billPurchase.getItemList())
+        {
+            ProductStock stock = new ProductStock() ;
+            try
+            {
+                BeanUtils.copyProperties(stock, item);
+            } catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            this.insert(stock);
+            
+        }
     }
 }

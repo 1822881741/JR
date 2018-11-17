@@ -25,5 +25,5 @@ public interface IProductStockService extends IBaseService<BaseEntity>{
      * @return void
      * @Exception 异常对象
     */
-    void addPurchaseStock(BillPurchase billPurchase,String counterCode,Integer status);
+    void addPurchaseStock(BillPurchase billPurchase,String counterCode);
 }

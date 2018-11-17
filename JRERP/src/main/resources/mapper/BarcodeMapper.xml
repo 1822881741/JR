@@ -5,8 +5,8 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="companyNo" jdbcType="VARCHAR" property="companyNo" />
     <result column="userId" jdbcType="INTEGER" property="userId" />
-    <result column="userPerfixNo" jdbcType="CHAR" property="userPerfixNo" />
-    <result column="barCode" jdbcType="VARCHAR" property="barCode" />
+    <result column="prefix" jdbcType="CHAR" property="prefix" />
+    <result column="barcode" jdbcType="VARCHAR" property="barcode" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -38,7 +38,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, companyNo, userId, userPerfixNo, barCode
+    id, companyNo, userId, prefix, barcode
   </sql>
   <select id="selectByExample" parameterType="com.jr.erp.sys.set.base.entity.BarcodeExample" resultMap="BaseResultMap">
     select
@@ -77,9 +77,9 @@
   </delete>
   <insert id="insert" parameterType="com.jr.erp.sys.set.base.entity.Barcode">
     insert into st_barcode (id, companyNo, userId, 
-      userPerfixNo, barCode)
+      prefix, barcode)
     values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
-      #{userPerfixNo,jdbcType=CHAR}, #{barCode,jdbcType=VARCHAR})
+      #{prefix,jdbcType=CHAR}, #{barcode,jdbcType=VARCHAR})
   </insert>
   <select id="countByExample" parameterType="com.jr.erp.sys.set.base.entity.BarcodeExample" resultType="java.lang.Long">
     select count(*) from st_barcode
@@ -96,11 +96,11 @@
       <if test="userId != null">
         userId = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="userPerfixNo != null">
-        userPerfixNo = #{userPerfixNo,jdbcType=CHAR},
+      <if test="prefix != null">
+        prefix = #{prefix,jdbcType=CHAR},
       </if>
-      <if test="barCode != null">
-        barCode = #{barCode,jdbcType=VARCHAR},
+      <if test="barcode != null">
+        barcode = #{barcode,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -109,8 +109,8 @@
     update st_barcode
     set companyNo = #{companyNo,jdbcType=VARCHAR},
       userId = #{userId,jdbcType=INTEGER},
-      userPerfixNo = #{userPerfixNo,jdbcType=CHAR},
-      barCode = #{barCode,jdbcType=VARCHAR}
+      prefix = #{prefix,jdbcType=CHAR},
+      barcode = #{barcode,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

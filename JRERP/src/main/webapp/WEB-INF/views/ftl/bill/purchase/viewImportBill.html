@@ -213,6 +213,8 @@
 			var tmp=billForm[index];
 			data[tmp.name]=tmp.value;
 		}
+		data.areaName= $(parent.$.find("#areaCode")).find(":selected").html();
+		data.counterAreaName= $(parent.$.find("#counterAreaCode")).find(":selected").html()
 		var dataArr = grid.serialize();
 		for(var index=0;index<dataArr.length;index++){
 			delete dataArr[index].id;

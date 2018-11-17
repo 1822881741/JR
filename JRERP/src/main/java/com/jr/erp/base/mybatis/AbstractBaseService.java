@@ -2,12 +2,12 @@ package com.jr.erp.base.mybatis;
 
 import java.util.List;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jr.erp.base.utils.JodaUtils;
 import com.jr.erp.base.utils.RetPage;
+import com.jr.erp.bill.utils.Constance;
 
 @Transactional(rollbackFor = Exception.class)
 public class AbstractBaseService<T extends BaseEntity> implements IBaseService<BaseEntity> {
@@ -78,5 +78,44 @@ public class AbstractBaseService<T extends BaseEntity> implements IBaseService<B
     public void deleteByExample(Object example)
     {
         mapper.deleteByExample(example);
+    }
+
+    @Override
+    public String selectMaxBillNo(String tableName, String companyNo, String prefix)
+    {
+        return mapper.selectMaxBillNo(tableName, companyNo, prefix);
+    }
+    
+    public String getBillCanEdit(String tableName, String companyNo, Integer id)
+    {
+        Integer billStatus = mapper.selectBillStatus(tableName, companyNo, id);
+        if(billStatus!=null)
+        {
+            switch (billStatus)
+            {
+            case Constance.BILL_STATUS_AUDIT_WAIT:
+            case Constance.BILL_STATUS_ONWAY_WAIT:
+            case Constance.BILL_STATUS_FINISH:
+                return "改单状态为["+billStatus+"],不允许修改";
+            case Constance.BILL_STATUS_AUDIT_REJECT:
+            case Constance.BILL_STATUS_ONWAY_REJECT:
+            case Constance.BILL_STATUS_NEW:
+            default:
+                break;
+            }
+        }
+        return null;
+    }
+    
+    public boolean getBillExist(String tableName, String companyNo, Integer id)
+    {
+        int count = mapper.getBillExist(tableName, companyNo, id);
+        if(count == 1)
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
     }
 }

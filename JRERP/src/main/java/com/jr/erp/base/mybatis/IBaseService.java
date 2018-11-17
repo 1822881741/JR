@@ -25,4 +25,10 @@ public interface IBaseService <T extends BaseEntity>{
     void updateByPrimaryKeySelective(T t);
     
     void deleteByExample(Object example);
+    
+    String selectMaxBillNo(String tableName,String companyNo,String prefix);
+    
+    String getBillCanEdit(String tableName,String companyNo,Integer id);
+    
+    boolean getBillExist(String tableName, String companyNo, Integer id);
 }

@@ -70,4 +70,9 @@ public class ShiroUtils {
 	public static String getUserAreaCode(){
         return getSysUser().getAreaCode();
     }
+	
+	public static String getPrefix()
+	{
+	    return getSysUser().getUserSheetNoPrefix();
+	}
 }

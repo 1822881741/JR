@@ -40,7 +40,7 @@
 														<label class="btn btn-default" data-id='reject' onclick="showDropdown(this)">驳回 (${desktopMap["reject"]?size})</label>
 													</div>
 													<div class="ajax-notifications custom-scroll">
-														<div class="alert alert-transparent no-margin ">
+														<div class="alert alert-transparent no-margin no-padding">
 															<ul id='noSave' class="notification-body">
 																<#list desktopMap["noSave"] as tmp>
 																<li>
@@ -108,14 +108,15 @@
 								
 								<hr class="simple margin-5">
 								<form id="billForm" class="form-horizontal" role="form">
-									<input type="hidden" id="id" name="id">
+									<input type="hidden" id="id" name="id" value="${billPurchase.id}">
+									<input type="hidden" id="sysBillNo" name="sysBillNo" value="${billPurchase.sysBillNo}">
 									<div class="row margin-bottom-5">
 										<div class="form-group col-sm-3 col-md-3 col-lg-3">
 					 					   <label class="col-md-4 col-sm-6 control-label">供应商</label>
 											<div class="col-md-8 col-sm-6 no-padding">
 												<select id="supplier" name="supplier" data-validate="required" class="form-control selectpicker show-tick" data-live-search="true">
 													<#list supplierList as p>
-														<option value='${p}'>${p}</option>
+														<option value='${p}' <#if p == billPurchase.supplier> selected </#if>>${p}</option>
 													</#list>
 												</select>
 											</div>
@@ -125,7 +126,7 @@
 											<div class="col-md-8 col-sm-6 no-padding">
 												<select id="purchaseType" name="purchaseType" data-validate="required" class="form-control selectpicker show-tick" data-live-search="true">
 													<#list purchaseTypeList as p>
-														<option value='${p}'>${p}</option>
+														<option value='${p}' <#if p == billPurchase.purchaseType> selected </#if>>${p}</option>
 													</#list>
 												</select>
 											</div>
@@ -135,7 +136,7 @@
 											<div class="col-md-8 col-sm-6 no-padding">
 												<select id="areaCode" name="areaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择门店/部门" data-live-search="true">
 													<#list areaList as p>
-														<option value='${p.areaCode}' <#if p.areaType == 0>data-icon="fa fa-bank" data-subtext="总公司"</#if> <#if p.areaType == 1>data-icon="fa fa-cubes" data-subtext="区域"</#if> <#if p.areaType == 2>data-icon="fa fa-cab" data-subtext="门店"</#if> >${p.areaName}</option>
+														<option value='${p.areaCode}' <#if p.areaType == 0>data-icon="fa fa-bank" data-subtext="总公司"</#if> <#if p.areaType == 1>data-icon="fa fa-cubes" data-subtext="区域"</#if> <#if p.areaType == 2>data-icon="fa fa-cab" data-subtext="门店"</#if> <#if p.areaCode == billPurchase.areaCode> selected </#if> >${p.areaName}</option>
 													</#list>
 												</select>
 											</div>
@@ -164,7 +165,7 @@
 											<div class="col-md-8 col-sm-6 no-padding">
 												<select id="brandName" name="brandName"  data-validate="required" class="form-control selectpicker show-tick" data-live-search="true">
 													<#list brandNameList as p>
-														<option value='${p}'>${p}</option>
+														<option value='${p}' <#if p == billPurchase.brandName> selected </#if> >${p}</option>
 													</#list>
 												</select>
 											</div>
@@ -190,14 +191,13 @@
 <script src="static/js/app.config.js"></script>
 <script src="static/js/bootstrap/bootstrap.min.js"></script>
 <script src="static/js/smartwidgets/jarvis.widget.min.js"></script>
-<script src="static/js/app.js?v=2"></script>
+<script src="static/js/app.js?v=3"></script>
 <script src="static/plugins/bootstrap-select/js/bootstrap-select.js"></script>
 <script src="static/plugins/bootstrap-select/js/i18n/defaults-zh_CN.min.js"></script>
 <script src="static/plugins/layer/layer.js"></script>
 <script src="static/plugins/laydate/laydate.js"></script>
 <script src="static/plugins/webix/codebase/webix.js?v=6.0.7"></script>
 <script src="static/zmodel/common/js/validate.js?v=1"></script>
-<script src="static/plugins/data.js?v=42"></script>
 <script type="text/javascript">
 	var hot1;
 	var grid;
@@ -227,10 +227,8 @@
 		        }
 		    });
 		})
-		laydate.render({
-			  elem: '#sheetDate' //指定元素
-		});
-		
+		$("#areaCode").change();
+		$("#counterAreaCode").selectpicker('val',"${billPurchase.counterAreaCode}");
 		$("#saveAudit").on("click",function(){
 			saveBillAudit();
 		})
@@ -249,7 +247,7 @@
 	        type: "POST",
 	        url: "param/checkBillFlow.do",
 	        dataType: 'json',
-	        data:"module=purchase&areaCode="+$("#deptAreaCode").val(),
+	        data:"module=purchase&areaCode="+$("#areaCode").val(),
 	        async: false,
 	        success: function(data) {
 	            if (data.status == '100') {
@@ -264,7 +262,7 @@
 	            	paramArr.push({ view:"button", value: "保存", click:function(){
     					$.ajax({
     				        type: "POST",
-    				        url: "param/updateBillFlowParam.do?module=purchase&areaCode="+$("#deptAreaCode").val(),
+    				        url: "param/updateBillFlowParam.do?module=purchase&areaCode="+$("#areaCode").val(),
     				        dataType: 'json',
     				        async: false,
     				        contentType:"application/json",
@@ -322,6 +320,8 @@
 		}else{
 			if(checkBillFlow()){
 				var billInfo = $("#billForm").serialize();
+				billInfo+="&areaName="+$("#areaCode").find(":selected").html();
+				billInfo+="&counterAreaCode="+$("#counterAreaCode").find(":selected").html()
 				$.ajax({
 			        type: "POST",
 			        url: "purchase/saveBillAudit.do",
@@ -330,14 +330,9 @@
 			        async: false,
 			        success: function(data) {
 			            if (data.status == '100') {
-			            	var storeList=data.data;
-			            	for(var index=0;index<storeList.length;index++){
-			            		var store=storeList[index];
-				            	$("#storeAreaCode").append("<option value='"+store.areaCode+"'>"+store.areaName+"</option>");
-				            	$("#storeAreaCode").selectpicker('refresh');
-			            	}
+			            	layer.msg("保存成功！");
 			            }else{
-			            	layer.msg("获取柜台失败");
+			            	layer.msg(data.msg);
 			            }
 			        },
 			        error: function() {
@@ -410,86 +405,118 @@
 			container:"testA",
 			view:"datatable", 
 			id:"list1",
-			css:"webix_header_border webix_footer_border",
+			css:"webix_header_border webix_body_border webix_footer_border",
 			leftSplit:1,
 			headermenu:true,
 			columns:[
-			        {"id":"index",header:'#',sort:"int",css:"header",width:50,readonly:true},
-			        {"id":"id",header:"id",footer:{text:"Total:"}},
-					{"id":"goodsClassify",header:"实际分类",footer:{text:"Total:"}},
-					{"id":"barcode","header":"原条码",sort:"string"},
-             		{"id":"goldWeight","header":"金重",sort:"string",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"num","header":"数量",footer:{ content:"summColumn" },sort:"int"},
-             		{"id":"goodsName",header:["商品名称"],sort:"string",footer:{ content:"summColumn" }},
-             		{"id":"unitPrice","header":"单价",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"subGoodsName","header":"子名称",sort:"string"},
-             		{"id":"costPrice","header":"成本金额",sort:"string"},
-             		{"id":"markupRate","header":"加价率",sort:"string"},
-             		{"id":"salePriceAmount","header":"标价金额",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"labelPrice","header":"标价",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"certificateNo","header":"证书号",sort:"string"},
-             		{"id":"archivesNo","header":"商品代码",sort:"string"},
-             		{"id":"giaCertificateNo","header":"GIA证书号",sort:"string"},
-             		{"id":"styleNo","header":"款号",sort:"string"},
-             		{"id":"specialOffersFlag","header":"特价标识",sort:"string"},
-             		{"id":"goldPrice","header":"金价",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"totalGoldWeight","header":"总金重",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"netGoldWeight","header":"净金重",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"worksFee4Ke","header":"工费/克"},
-             		{"id":"worksFee4Jian","header":"工费/件"},
-             		{"id":"worksFee4Total","header":"工费总额",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"certificateFee","header":"证书费",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"otherFee","header":"其他费用",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"fittingsFee","header":"配件金额",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"oldMaterialLoss","header":"旧料损耗","format":"0.000"},
-             		{"id":"sandBlastFee","header":"喷砂镶石",sort:"string"},
-             		{"id":"goodsWeight","header":"商品总重",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"archivesCategory","header":"品类",sort:"string"},
-             		{"id":"mainType","header":"核算分类",sort:"string"},
-             		{"id":"shortCut","header":"手寸",sort:"string"},
-             		{"id":"mainStoneClarity","header":"净度",sort:"string"},
-             		{"id":"mainStoneColor","header":"颜色",sort:"string"},
-             		{"id":"mainStoneCut","header":"切工",sort:"string"},
-             		{"id":"mainStoneFluorescent","header":"荧光",sort:"string"},
-             		{"id":"mainStoneSymmetry","header":"对称性",sort:"string"},
-             		{"id":"mainStoneBurnished","header":"抛光",sort:"string"},
-             		{"id":"peiShiCostPrice","header":"配石成本",sort:"string"},
-             		{"id":"peiShiRate","header":"配石倍率",sort:"int"},
-             		{"id":"peiShiLabelPrice","header":"配石标价",sort:"int"},
-             		{"id":"mainStoneName","header":"主石名称",sort:"string"},
-             		{"id":"mainStoneNo","header":"主石号",sort:"string"},
-             		{"id":"mainStoneWeight","header":"主石重",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"mainStoneNum","header":"主石粒数",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"mainStonePrice","header":"主石价",sort:"int"},
-             		{"id":"mainStoneMoney","header":"主石金额",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"subStone1Name","header":"副石名称",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"subStone1No","header":"副石号",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"subStone1Weight","header":"副石重",sort:"string"},
-             		{"id":"subStone1Num","header":"副石粒数",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"subStone1Price","header":"副石价",sort:"int"},
-             		{"id":"subStone1Money","header":"副石金额",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"subStone2Name","header":"副石2名称",sort:"int"},
-             		{"id":"subStone2No","header":"副石2号",sort:"int"},
-             		{"id":"subStone2Weight","header":"副石2重",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"subStone2Num","header":"副石2粒数",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"subStone2Price","header":"副石2价",sort:"int"},
-             		{"id":"subStone2Money","header":"副石金额2",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"subStone3Name","header":"副石名称3",sort:"int"},
-             		{"id":"subStone3No","header":"副石3号",sort:"int"},
-             		{"id":"subStone3Weight","header":"副石重3"},
-             		{"id":"subStone3Num","header":"副石粒数3",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"subStone3Price","header":"副石价3",sort:"int"},
-             		{"id":"subStone3Money","header":"副石金额3",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"labelWorkFee4Ke","header":"标签工费/克",sort:"int"},
-             		{"id":"labelWorkFee4Jian","header":"标签工费/件",sort:"int"},
-             		{"id":"archivesFineness","header":"成色",sort:"string"},
-             		{"id":"archivesStone","header":"石料",sort:"string"},
-             		{"id":"measurementMode","header":"计量方式",sort:"string"},
-             		{"id":"maoGoldWeight","header":"毛金重",sort:"int",footer:{ content:"summColumn" }},
-             		{"id":"goldLoss","header":"损耗",sort:"string"},
-             		{"id":"style","header":"款式",sort:"string"},
-             		{"id":"craft","header":"工艺",sort:"string"},
-             		{"id":"labelRemarks","header":"标签备注",sort:"string"}
+			        {id:"rowNo",header:'#',sort:"int",css:"header",width:50},
+			        {id:"barcode",sort:"string",header:"条码"},
+			        {id:"oldBarcode",sort:"string",header:"原条码"},
+			        {id:"productName",sort:"string",header:"商品名称"},
+			        {id:"supplier",sort:"string",header:"供应商名称"},
+			        {id:"brandName",sort:"string",header:"品牌名称"},
+			        {id:"subName",sort:"string",header:"商品子名称"},
+			        {id:"certificateNo",sort:"string",header:"证书号"},
+			        {id:"giaCertificateNo",sort:"string",header:"GIA证书号"},
+			        {id:"style",sort:"string",header:"款式"},
+			        {id:"comStyleNo",sort:"string",header:"公司款号"},
+			        {id:"facStyleNo",sort:"string",header:"工厂款号"},
+			        {id:"handInch",sort:"string",header:"手寸"},
+			        {id:"craft",sort:"string",header:"工艺"},
+			        {id:"img",sort:"string",header:"图片路径"},
+			        {id:"remarks",sort:"string",header:"商品备注信息"},
+			        {id:"bargainName",sort:"string",header:"特价标记"},
+			        {id:"num",sort:"int",header:"数量",footer:{ content:"summColumn" }},
+			        {id:"netGoldWeight",sort:"int",header:"净金重",footer:{ content:"summColumn" }},
+			        {id:"goldLoss",sort:"int",header:"金损"},
+			        {id:"goldPurity",sort:"int",header:"金成色"},
+			        {id:"goldWeight",sort:"int",header:"金重",footer:{ content:"summColumn" }},
+			        {id:"goldPrice",sort:"int",header:"金价"},
+			        {id:"goldMoney",sort:"int",header:"金料额",footer:{ content:"summColumn" }},
+			        {id:"productWeight",sort:"int",header:"货重",footer:{ content:"summColumn" }},
+			        {id:"workFeeKe",sort:"int",header:"克工费"},
+			        {id:"workFeeJian",sort:"int",header:"件工费"},
+			        {id:"workFeeSum",sort:"int",header:"总工费",footer:{ content:"summColumn" }},
+			        {id:"certificateFee",sort:"int",header:"证书费",footer:{ content:"summColumn" }},
+			        {id:"fittingName",sort:"string",header:"配件名称"},
+			        {id:"fittingNum",sort:"string",header:"配件数",footer:{ content:"summColumn" }},
+			        {id:"fittingFee",sort:"int",header:"配件金额",footer:{ content:"summColumn" }},
+			        {id:"sandBlastFee",sort:"int",header:"喷砂镶石费",footer:{ content:"summColumn" }},
+			        {id:"otherFee",sort:"int",header:"其他费用",footer:{ content:"summColumn" }},
+			        {id:"unitPrice",sort:"int",header:"成本单价"},
+			        {id:"costPrice",sort:"int",header:"成本金额",footer:{ content:"summColumn" }},
+			        {id:"labelWorkFeeKe",sort:"int",header:"标签克工费"},
+			        {id:"labelWorkFeeJian",sort:"int",header:"标签件工费"},
+			        {id:"labelWorkFeeSum",sort:"int",header:"标签工费",footer:{ content:"summColumn" }},
+			        {id:"labelRate",sort:"int",header:"加价率"},
+			        {id:"labelPrice",sort:"int",header:"标签价",footer:{ content:"summColumn" }},
+			        {id:"labelPriceSum",sort:"int",header:"标价金额",footer:{ content:"summColumn" }},
+			        {id:"labelRemarks",sort:"string",header:"标签备注"},
+			        {id:"sysCode",sort:"string",header:"商品编码"},
+			        {id:"goldName",sort:"string",header:"金料名"},
+			        {id:"jewelName",sort:"string",header:"石头"},
+			        {id:"categoryName",sort:"string",header:"品名"},
+			        {id:"firstType",sort:"string",header:"大类名称"},
+			        {id:"secondType",sort:"string",header:"中类"},
+			        {id:"productClassify",sort:"string",header:"实际分类"},
+			        {id:"firstClassify",sort:"string",header:"商品分组"},
+			        {id:"secondClassify",sort:"string",header:"统计分类2"},
+			        {id:"labelName",sort:"string",header:"标签显示名称"},
+			        {id:"grfName",sort:"string",header:"模板名称"},
+			        {id:"thirdClassify",sort:"string",header:"统计分类3"},
+			        {id:"mJewelCut",sort:"string",header:"切工"},
+			        {id:"mJewelColor",sort:"string",header:"颜色"},
+			        {id:"mJewelClarity",sort:"string",header:"净度"},
+			        {id:"mJewelFluorescent",sort:"string",header:"荧光"},
+			        {id:"mJewelBurnished",sort:"string",header:"抛光度"},
+			        {id:"mJewelShape",sort:"string",header:"形状"},
+			        {id:"mJewelName",sort:"string",header:"主石名"},
+			        {id:"mJewelNo",sort:"string",header:"主石石号"},
+			        {id:"mJewelSpecifi",sort:"string",header:"主石规格"},
+			        {id:"mJewelNum",sort:"int",header:"主石数",footer:{ content:"summColumn" }},
+			        {id:"mJewelWeight",sort:"int",header:"主石重",footer:{ content:"summColumn" }},
+			        {id:"mJewelPrice",sort:"int",header:"主石价"},
+			        {id:"mJewelFee",sort:"int",header:"主石额",footer:{ content:"summColumn" }},
+			        {id:"sJewel1Name",sort:"string",header:"副石1名"},
+			        {id:"sJewel1No",sort:"string",header:"副石1石号"},
+			        {id:"sJewel1Specifi",sort:"string",header:"副石1规格"},
+			        {id:"sJewel1Num",sort:"int",header:"副石1数",footer:{ content:"summColumn" }},
+			        {id:"sJewel1Weight",sort:"int",header:"副石1重",footer:{ content:"summColumn" }},
+			        {id:"sJewel1Price",sort:"int",header:"副石1价"},
+			        {id:"sJewel1Fee",sort:"int",header:"副石1额",footer:{ content:"summColumn" }},
+			        {id:"sJewel2Name",sort:"string",header:"副石2名"},
+			        {id:"sJewel2No",sort:"string",header:"副石2石号"},
+			        {id:"sJewel2Specifi",sort:"string",header:"副石2规格"},
+			        {id:"sJewel2Num",sort:"int",header:"副石2数",footer:{ content:"summColumn" }},
+			        {id:"sJewel2Weight",sort:"int",header:"副石2重",footer:{ content:"summColumn" }},
+			        {id:"sJewel2Price",sort:"int",header:"副石2价"},
+			        {id:"sJewel2Fee",sort:"int",header:"副石2额",footer:{ content:"summColumn" }},
+			        {id:"sJewel3Name",sort:"string",header:"副石3名"},
+			        {id:"sJewel3No",sort:"string",header:"副石3石号"},
+			        {id:"sJewel3Specifi",sort:"string",header:"副石3规格"},
+			        {id:"sJewel3Num",sort:"int",header:"副石3数",footer:{ content:"summColumn" }},
+			        {id:"sJewel3Weight",sort:"int",header:"副石3重",footer:{ content:"summColumn" }},
+			        {id:"sJewel3Price",sort:"int",header:"副石3价"},
+			        {id:"sJewel3Fee",sort:"int",header:"副石3额",footer:{ content:"summColumn" }},
+			        {id:"sJewel4Name",sort:"string",header:"副石4名"},
+			        {id:"sJewel4No",sort:"string",header:"副石4石号"},
+			        {id:"sJewel4Specifi",sort:"string",header:"副石4规格"},
+			        {id:"sJewel4Num",sort:"int",header:"副石4数",footer:{ content:"summColumn" }},
+			        {id:"sJewel4Weight",sort:"int",header:"副石4重",footer:{ content:"summColumn" }},
+			        {id:"sJewel4Price",sort:"int",header:"副石4价"},
+			        {id:"sJewel4Fee",sort:"int",header:"副石4额",footer:{ content:"summColumn" }},
+			        {id:"sJewel5Name",sort:"string",header:"副石5名"},
+			        {id:"sJewel5No",sort:"string",header:"副石5石号"},
+			        {id:"sJewel5Specifi",sort:"string",header:"副石5规格"},
+			        {id:"sJewel5Num",sort:"int",header:"副石5数",footer:{ content:"summColumn" }},
+			        {id:"sJewel5Weight",sort:"int",header:"副石5重",footer:{ content:"summColumn" }},
+			        {id:"sJewel5Price",sort:"int",header:"副石5价"},
+			        {id:"sJewel5Fee",sort:"int",header:"副石5额",footer:{ content:"summColumn" }},
+			        {id:"priceRange",sort:"string",header:"价格区间"},
+			        {id:"goldRange",sort:"string",header:"金重区间"},
+			        {id:"costRange",sort:"string",header:"成本区间"},
+			        {id:"colorRange",sort:"string",header:"颜色区间"},
+			        {id:"clarityRange",sort:"string",header:"净度区间"}
              	],
 			footer:true,
 			clipboard:true,

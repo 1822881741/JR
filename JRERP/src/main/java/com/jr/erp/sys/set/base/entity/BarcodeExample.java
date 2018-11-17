@@ -309,143 +309,143 @@ public class BarcodeExample extends BaseExample {
             return (Criteria) this;
         }
 
-        public Criteria andUserPerfixNoIsNull() {
-            addCriterion("userPerfixNo is null");
+        public Criteria andPrefixIsNull() {
+            addCriterion("prefix is null");
             return (Criteria) this;
         }
 
-        public Criteria andUserPerfixNoIsNotNull() {
-            addCriterion("userPerfixNo is not null");
+        public Criteria andPrefixIsNotNull() {
+            addCriterion("prefix is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUserPerfixNoEqualTo(String value) {
-            addCriterion("userPerfixNo =", value, "userPerfixNo");
+        public Criteria andPrefixEqualTo(String value) {
+            addCriterion("prefix =", value, "prefix");
             return (Criteria) this;
         }
 
-        public Criteria andUserPerfixNoNotEqualTo(String value) {
-            addCriterion("userPerfixNo <>", value, "userPerfixNo");
+        public Criteria andPrefixNotEqualTo(String value) {
+            addCriterion("prefix <>", value, "prefix");
             return (Criteria) this;
         }
 
-        public Criteria andUserPerfixNoGreaterThan(String value) {
-            addCriterion("userPerfixNo >", value, "userPerfixNo");
+        public Criteria andPrefixGreaterThan(String value) {
+            addCriterion("prefix >", value, "prefix");
             return (Criteria) this;
         }
 
-        public Criteria andUserPerfixNoGreaterThanOrEqualTo(String value) {
-            addCriterion("userPerfixNo >=", value, "userPerfixNo");
+        public Criteria andPrefixGreaterThanOrEqualTo(String value) {
+            addCriterion("prefix >=", value, "prefix");
             return (Criteria) this;
         }
 
-        public Criteria andUserPerfixNoLessThan(String value) {
-            addCriterion("userPerfixNo <", value, "userPerfixNo");
+        public Criteria andPrefixLessThan(String value) {
+            addCriterion("prefix <", value, "prefix");
             return (Criteria) this;
         }
 
-        public Criteria andUserPerfixNoLessThanOrEqualTo(String value) {
-            addCriterion("userPerfixNo <=", value, "userPerfixNo");
+        public Criteria andPrefixLessThanOrEqualTo(String value) {
+            addCriterion("prefix <=", value, "prefix");
             return (Criteria) this;
         }
 
-        public Criteria andUserPerfixNoLike(String value) {
-            addCriterion("userPerfixNo like", value, "userPerfixNo");
+        public Criteria andPrefixLike(String value) {
+            addCriterion("prefix like", value, "prefix");
             return (Criteria) this;
         }
 
-        public Criteria andUserPerfixNoNotLike(String value) {
-            addCriterion("userPerfixNo not like", value, "userPerfixNo");
+        public Criteria andPrefixNotLike(String value) {
+            addCriterion("prefix not like", value, "prefix");
             return (Criteria) this;
         }
 
-        public Criteria andUserPerfixNoIn(List<String> values) {
-            addCriterion("userPerfixNo in", values, "userPerfixNo");
+        public Criteria andPrefixIn(List<String> values) {
+            addCriterion("prefix in", values, "prefix");
             return (Criteria) this;
         }
 
-        public Criteria andUserPerfixNoNotIn(List<String> values) {
-            addCriterion("userPerfixNo not in", values, "userPerfixNo");
+        public Criteria andPrefixNotIn(List<String> values) {
+            addCriterion("prefix not in", values, "prefix");
             return (Criteria) this;
         }
 
-        public Criteria andUserPerfixNoBetween(String value1, String value2) {
-            addCriterion("userPerfixNo between", value1, value2, "userPerfixNo");
+        public Criteria andPrefixBetween(String value1, String value2) {
+            addCriterion("prefix between", value1, value2, "prefix");
             return (Criteria) this;
         }
 
-        public Criteria andUserPerfixNoNotBetween(String value1, String value2) {
-            addCriterion("userPerfixNo not between", value1, value2, "userPerfixNo");
+        public Criteria andPrefixNotBetween(String value1, String value2) {
+            addCriterion("prefix not between", value1, value2, "prefix");
             return (Criteria) this;
         }
 
-        public Criteria andBarCodeIsNull() {
-            addCriterion("barCode is null");
+        public Criteria andBarcodeIsNull() {
+            addCriterion("barcode is null");
             return (Criteria) this;
         }
 
-        public Criteria andBarCodeIsNotNull() {
-            addCriterion("barCode is not null");
+        public Criteria andBarcodeIsNotNull() {
+            addCriterion("barcode is not null");
             return (Criteria) this;
         }
 
-        public Criteria andBarCodeEqualTo(String value) {
-            addCriterion("barCode =", value, "barCode");
+        public Criteria andBarcodeEqualTo(String value) {
+            addCriterion("barcode =", value, "barcode");
             return (Criteria) this;
         }
 
-        public Criteria andBarCodeNotEqualTo(String value) {
-            addCriterion("barCode <>", value, "barCode");
+        public Criteria andBarcodeNotEqualTo(String value) {
+            addCriterion("barcode <>", value, "barcode");
             return (Criteria) this;
         }
 
-        public Criteria andBarCodeGreaterThan(String value) {
-            addCriterion("barCode >", value, "barCode");
+        public Criteria andBarcodeGreaterThan(String value) {
+            addCriterion("barcode >", value, "barcode");
             return (Criteria) this;
         }
 
-        public Criteria andBarCodeGreaterThanOrEqualTo(String value) {
-            addCriterion("barCode >=", value, "barCode");
+        public Criteria andBarcodeGreaterThanOrEqualTo(String value) {
+            addCriterion("barcode >=", value, "barcode");
             return (Criteria) this;
         }
 
-        public Criteria andBarCodeLessThan(String value) {
-            addCriterion("barCode <", value, "barCode");
+        public Criteria andBarcodeLessThan(String value) {
+            addCriterion("barcode <", value, "barcode");
             return (Criteria) this;
         }
 
-        public Criteria andBarCodeLessThanOrEqualTo(String value) {
-            addCriterion("barCode <=", value, "barCode");
+        public Criteria andBarcodeLessThanOrEqualTo(String value) {
+            addCriterion("barcode <=", value, "barcode");
             return (Criteria) this;
         }
 
-        public Criteria andBarCodeLike(String value) {
-            addCriterion("barCode like", value, "barCode");
+        public Criteria andBarcodeLike(String value) {
+            addCriterion("barcode like", value, "barcode");
             return (Criteria) this;
         }
 
-        public Criteria andBarCodeNotLike(String value) {
-            addCriterion("barCode not like", value, "barCode");
+        public Criteria andBarcodeNotLike(String value) {
+            addCriterion("barcode not like", value, "barcode");
             return (Criteria) this;
         }
 
-        public Criteria andBarCodeIn(List<String> values) {
-            addCriterion("barCode in", values, "barCode");
+        public Criteria andBarcodeIn(List<String> values) {
+            addCriterion("barcode in", values, "barcode");
             return (Criteria) this;
         }
 
-        public Criteria andBarCodeNotIn(List<String> values) {
-            addCriterion("barCode not in", values, "barCode");
+        public Criteria andBarcodeNotIn(List<String> values) {
+            addCriterion("barcode not in", values, "barcode");
             return (Criteria) this;
         }
 
-        public Criteria andBarCodeBetween(String value1, String value2) {
-            addCriterion("barCode between", value1, value2, "barCode");
+        public Criteria andBarcodeBetween(String value1, String value2) {
+            addCriterion("barcode between", value1, value2, "barcode");
             return (Criteria) this;
         }
 
-        public Criteria andBarCodeNotBetween(String value1, String value2) {
-            addCriterion("barCode not between", value1, value2, "barCode");
+        public Criteria andBarcodeNotBetween(String value1, String value2) {
+            addCriterion("barcode not between", value1, value2, "barcode");
             return (Criteria) this;
         }
     }

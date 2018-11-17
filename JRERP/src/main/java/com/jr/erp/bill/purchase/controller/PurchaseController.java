@@ -29,6 +29,7 @@ import com.jr.erp.bill.purchase.service.IBillPurchaseService;
 import com.jr.erp.sys.entity.SysAreaInfoExample;
 import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.service.ISysAreaInfoService;
+import com.jr.erp.sys.set.base.service.IBarcodeService;
 import com.jr.erp.sys.set.base.service.IBaseTypeService;
 import com.jr.erp.sys.set.purchase.entity.PurchaseSechemeExample;
 import com.jr.erp.sys.set.purchase.service.IPurchaseSechemeService;
@@ -56,6 +57,7 @@ public class PurchaseController {
     
     @Autowired
     IBillNoGeneratorService billNoGeneratorService;
+    
     @RequestMapping(value = "/editBill.do")
     public String editBill(Integer id,HttpServletRequest request, Model model)
     {
@@ -90,7 +92,8 @@ public class PurchaseController {
             //自动创建一个新的
             BillPurchase purchase = new BillPurchase();
             purchase.setBillDate(JodaUtils.getShortDate());
-            purchase.setBillNo(billNoGeneratorService.getNextBillNo(ShiroUtils.getCompanyNo(),1,ShiroUtils.getSysUser().getUserSheetNoPrefix()));
+            purchase.setSysBillNo(billNoGeneratorService.getNextBillNo(ShiroUtils.getCompanyNo(),1,ShiroUtils.getSysUser().getUserSheetNoPrefix()));
+            purchase.setBillNo(purchase.getSysBillNo());
             model.addAttribute("billPurchase",purchase);
             model.addAttribute("itemListData","[]");
         }
@@ -200,8 +203,16 @@ public class PurchaseController {
     @ResponseBody
     @RequestMapping(value = "/saveBillAudit.do")
     public Ret saveBillAudit(BillPurchase billPurchase,HttpServletRequest request, HttpServletResponse response){
-        billPurchase.setCompanyNo(ShiroUtils.getCompanyNo());
-        billPurchaseService.saveBillAudit(billPurchase);
-        return Ret.ok("保存成功");
+        SysUser user= ShiroUtils.getSysUser();
+        try
+        {
+            billPurchase.setCompanyNo(ShiroUtils.getCompanyNo());
+            billPurchaseService.saveBillAudit(billPurchase);
+            return Ret.ok("保存成功");
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return Ret.error(e.getMessage());
+        }
     }
 }    

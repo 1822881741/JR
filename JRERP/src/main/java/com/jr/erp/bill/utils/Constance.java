@@ -1,7 +1,10 @@
 package com.jr.erp.bill.utils;
 
-public class Contance
+public class Constance
 {
+    // 单据类型 1：进货
+    public static final int BILL_TYPE_PURCHASE=1;
+    public static final int BILL_TYPE_PURCHAS_RETURN=1;
 
     //0：新建状态；10：待审核  15 ：审核驳回  20：待接受  25：接收驳回  100：全部完成
     public static final int BILL_STATUS_NEW = 0;

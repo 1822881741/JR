@@ -36,7 +36,7 @@ public class BillNoGeneratorServiceImpl implements IBillNoGeneratorService
         {
         case 1:
             prefix = "J" + userPrefix + JodaUtils.getBillNoDate();
-            maxBillNo = billPurchaseMapper.selectMaxBillNo(companyNo, prefix);
+            maxBillNo = billPurchaseMapper.selectMaxBillNo("bill_purchase",companyNo, prefix);
             break;
         default:
             break;

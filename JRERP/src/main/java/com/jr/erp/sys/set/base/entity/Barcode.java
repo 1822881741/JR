@@ -11,12 +11,12 @@ public class Barcode extends BaseEntity {
     /**
      * 用户单据编号2为，对应用户表中单据简码
      */
-    private String userPerfixNo;
+    private String prefix;
 
     /**
      * 
      */
-    private String barCode;
+    private String barcode;
 
     /**
      * 用户ID
@@ -36,33 +36,33 @@ public class Barcode extends BaseEntity {
 
     /**
      * 用户单据编号2为，对应用户表中单据简码
-     * @return userPerfixNo 用户单据编号2为，对应用户表中单据简码
+     * @return prefix 用户单据编号2为，对应用户表中单据简码
      */
-    public String getUserPerfixNo() {
-        return userPerfixNo;
+    public String getPrefix() {
+        return prefix;
     }
 
     /**
      * 用户单据编号2为，对应用户表中单据简码
-     * @param userPerfixNo 用户单据编号2为，对应用户表中单据简码
+     * @param prefix 用户单据编号2为，对应用户表中单据简码
      */
-    public void setUserPerfixNo(String userPerfixNo) {
-        this.userPerfixNo = userPerfixNo == null ? null : userPerfixNo.trim();
+    public void setPrefix(String prefix) {
+        this.prefix = prefix == null ? null : prefix.trim();
     }
 
     /**
      * 
-     * @return barCode 
+     * @return barcode 
      */
-    public String getBarCode() {
-        return barCode;
+    public String getBarcode() {
+        return barcode;
     }
 
     /**
      * 
-     * @param barCode 
+     * @param barcode 
      */
-    public void setBarCode(String barCode) {
-        this.barCode = barCode == null ? null : barCode.trim();
+    public void setBarcode(String barcode) {
+        this.barcode = barcode == null ? null : barcode.trim();
     }
 }

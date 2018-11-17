@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jr.erp.sys.set.base.dao.ParamMapper">
-  <resultMap id="BaseResultMap" type="com.jr.erp.sys.set.base.entity.Barcode">
+  <resultMap id="BaseResultMap" type="com.jr.erp.sys.set.base.entity.Param">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="companyNo" jdbcType="VARCHAR" property="companyNo" />
     <result column="areaCode" jdbcType="VARCHAR" property="areaCode" />
@@ -47,7 +47,7 @@
     id, companyNo, areaCode, module, paramName, mustSet, status, paramValue, remarks, 
     createTime, updateTime
   </sql>
-  <select id="selectByExample" parameterType="com.jr.erp.sys.set.base.entity.BarcodeExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.jr.erp.sys.set.base.entity.ParamExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -76,13 +76,13 @@
     delete from st_param
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.jr.erp.sys.set.base.entity.BarcodeExample">
+  <delete id="deleteByExample" parameterType="com.jr.erp.sys.set.base.entity.ParamExample">
     delete from st_param
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.jr.erp.sys.set.base.entity.Barcode">
+  <insert id="insert" parameterType="com.jr.erp.sys.set.base.entity.Param">
     insert into st_param (id, companyNo, areaCode, 
       module, paramName, mustSet, 
       status, paramValue, remarks, 
@@ -92,13 +92,13 @@
       #{status,jdbcType=INTEGER}, #{paramValue,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR})
   </insert>
-  <select id="countByExample" parameterType="com.jr.erp.sys.set.base.entity.BarcodeExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.jr.erp.sys.set.base.entity.ParamExample" resultType="java.lang.Long">
     select count(*) from st_param
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jr.erp.sys.set.base.entity.Barcode">
+  <update id="updateByPrimaryKeySelective" parameterType="com.jr.erp.sys.set.base.entity.Param">
     update st_param
     <set>
       <if test="companyNo != null">
@@ -134,7 +134,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jr.erp.sys.set.base.entity.Barcode">
+  <update id="updateByPrimaryKey" parameterType="com.jr.erp.sys.set.base.entity.Param">
     update st_param
     set companyNo = #{companyNo,jdbcType=VARCHAR},
       areaCode = #{areaCode,jdbcType=VARCHAR},
