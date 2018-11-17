@@ -2559,52 +2559,52 @@ public class BillPurchaseItemExample extends BaseExample {
             return (Criteria) this;
         }
 
-        public Criteria andGoldLossEqualTo(Integer value) {
+        public Criteria andGoldLossEqualTo(Double value) {
             addCriterion("goldLoss =", value, "goldLoss");
             return (Criteria) this;
         }
 
-        public Criteria andGoldLossNotEqualTo(Integer value) {
+        public Criteria andGoldLossNotEqualTo(Double value) {
             addCriterion("goldLoss <>", value, "goldLoss");
             return (Criteria) this;
         }
 
-        public Criteria andGoldLossGreaterThan(Integer value) {
+        public Criteria andGoldLossGreaterThan(Double value) {
             addCriterion("goldLoss >", value, "goldLoss");
             return (Criteria) this;
         }
 
-        public Criteria andGoldLossGreaterThanOrEqualTo(Integer value) {
+        public Criteria andGoldLossGreaterThanOrEqualTo(Double value) {
             addCriterion("goldLoss >=", value, "goldLoss");
             return (Criteria) this;
         }
 
-        public Criteria andGoldLossLessThan(Integer value) {
+        public Criteria andGoldLossLessThan(Double value) {
             addCriterion("goldLoss <", value, "goldLoss");
             return (Criteria) this;
         }
 
-        public Criteria andGoldLossLessThanOrEqualTo(Integer value) {
+        public Criteria andGoldLossLessThanOrEqualTo(Double value) {
             addCriterion("goldLoss <=", value, "goldLoss");
             return (Criteria) this;
         }
 
-        public Criteria andGoldLossIn(List<Integer> values) {
+        public Criteria andGoldLossIn(List<Double> values) {
             addCriterion("goldLoss in", values, "goldLoss");
             return (Criteria) this;
         }
 
-        public Criteria andGoldLossNotIn(List<Integer> values) {
+        public Criteria andGoldLossNotIn(List<Double> values) {
             addCriterion("goldLoss not in", values, "goldLoss");
             return (Criteria) this;
         }
 
-        public Criteria andGoldLossBetween(Integer value1, Integer value2) {
+        public Criteria andGoldLossBetween(Double value1, Double value2) {
             addCriterion("goldLoss between", value1, value2, "goldLoss");
             return (Criteria) this;
         }
 
-        public Criteria andGoldLossNotBetween(Integer value1, Integer value2) {
+        public Criteria andGoldLossNotBetween(Double value1, Double value2) {
             addCriterion("goldLoss not between", value1, value2, "goldLoss");
             return (Criteria) this;
         }

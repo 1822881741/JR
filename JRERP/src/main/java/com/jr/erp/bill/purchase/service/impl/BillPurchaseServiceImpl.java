@@ -221,14 +221,32 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
         List<BillPurchaseItem> itemList = (List) itemMapper.selectByExample(itemExample);
 
         // 修改单据状态
-
         if (StringUtils.equals(isAransit.getParamValue(), "1"))
         {
             // 需要审核
             billPurchase.setBillStatus(Constance.BILL_STATUS_AUDIT_WAIT);
             processBillAndItem(billPurchase, itemList);
             this.updateByPrimaryKeySelective(billPurchase);
-
+            //修改明细中的信息，与主单一致
+            BillPurchaseItemExample itemExample = new BillPurchaseItemExample();
+            itemExample.createCriteria().
+            tmp.setAreaCode(billPurchase.getAreaCode());
+            tmp.setAreaName(billPurchase.getAreaName());
+            tmp.setCounterAreaCode(billPurchase.getCounterAreaCode());
+            tmp.setCounterAreaName(billPurchase.getCounterAreaName());
+            tmp.setCompanyNo(billPurchase.getCompanyNo());
+            tmp.setBillDate(billPurchase.getBillDate());
+            tmp.setBillNo(billPurchase.getBillNo());
+            tmp.setSysBillNo(billPurchase.getSysBillNo());
+            tmp.setPurchaseType(billPurchase.getPurchaseType());
+            tmp.setSupplier(billPurchase.getSupplier());
+            tmp.setBrandName(billPurchase.getBrandName());
+            tmp.setEmployeeId(billPurchase.getEmployeeId());
+            tmp.setEmployeeName(billPurchase.getEmployeeName());
+            tmp.setCreateUserId(billPurchase.getCreateUserId());
+            tmp.setCreateUserName(billPurchase.getCreateUserName());
+            tmp.setBillType(billPurchase.getBillType());
+            itemMapper.updateByExampleSelective(map);
         } else
         {
             // 不需要审核

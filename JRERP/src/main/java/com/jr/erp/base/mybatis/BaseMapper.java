@@ -1,6 +1,7 @@
 package com.jr.erp.base.mybatis;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -20,6 +21,8 @@ public interface BaseMapper<T extends BaseEntity>
 
     void updateByPrimaryKeySelective(T record);
 
+    void updateByExampleSelective(Map map);
+    
     T selectByPrimaryKey(Integer pk);
 
     List<T> selectByExample(Object example);

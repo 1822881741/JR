@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		</javaTypeResolver>
 
 		<!-- 数据表对应的model 层 -->
-		<javaModelGenerator targetPackage="com.jr.erp.sys.set.base.entity"
+		<javaModelGenerator targetPackage="com.jr.erp.bill.purchase.entity"
 			targetProject="G:\gitworkspace\JR\JRERP\src\main\java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
@@ -43,30 +43,17 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 
 		<!-- 在ibatis2 中是dao层，但在mybatis3中，其实就是mapper接口 -->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.jr.erp.sys.set.base.dao" targetProject="G:\gitworkspace\JR\JRERP\src\main\java">
+			targetPackage="com.jr.erp.bill.purchase.dao" targetProject="G:\gitworkspace\JR\JRERP\src\main\java">
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 		
 		<!-- 要对那些数据表进行生成操作，必须要有一个. -->
-		<!-- table schema="mybatis" tableName="bill_purchase_item" domainObjectName="BillPurchaseItem"  delimitIdentifiers="false"
+		<table schema="mybatis" tableName="bill_purchase_item" domainObjectName="BillPurchaseItem"  delimitIdentifiers="false"
 			selectByPrimaryKeyQueryId="true" enableDeleteByPrimaryKey="true"
-			enableCountByExample="true" enableUpdateByPrimaryKey="true" enableUpdateByExample="false">
+			enableCountByExample="true" enableUpdateByPrimaryKey="true" enableUpdateByExample="true" >
 			<property name="useActualColumnNames" value="true" />
 			<generatedKey column="id" sqlStatement="MySql" identity="true"/>
 			
 			</table> 
-		<table schema="mybatis" tableName="bill_purchase"  domainObjectName="BillPurchase"  delimitIdentifiers="false"
-			selectByPrimaryKeyQueryId="true" enableDeleteByPrimaryKey="true"
-			enableCountByExample="true" enableUpdateByPrimaryKey="true" enableUpdateByExample="false" >
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="MySql" identity="true"/>
-		</table-->
-		
-		<table schema="mybatis" tableName="st_barcode"  domainObjectName="Barcode"  delimitIdentifiers="false"
-			selectByPrimaryKeyQueryId="true" enableDeleteByPrimaryKey="true"
-			enableCountByExample="true" enableUpdateByPrimaryKey="true" enableUpdateByExample="false" >
-			<property name="useActualColumnNames" value="true" />
-			<!-- generatedKey column="id" sqlStatement="MySql" identity="true"/-->
-		</table>
 	</context>
 </generatorConfiguration>
