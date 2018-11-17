@@ -84,7 +84,6 @@ public class PurchaseController {
         {
             BillPurchase purchase = (BillPurchase) billPurchaseService.getBillWithItem(id);
             model.addAttribute("billPurchase",purchase);
-            System.out.println(JSONArray.toJSON(purchase.getItemList()).toString());
             model.addAttribute("itemListData",JSONArray.toJSON(purchase.getItemList()).toString());
         }else
         {
