@@ -44,7 +44,7 @@
 						<div id="myTabContent1" class="tab-content padding-10">
 							<div class="tab-pane fade in active" id="s1">
 								<#list sechemeList as p>
-									<div class="col-xs-12 col-sm-4 col-md-2">
+									<div class="col-xs-6 col-sm-4 col-md-2">
 										<div class="panel panel-orange" onclick="choseSecheme(this)" data-secheme=${p.id}>
 											<div class="panel-heading">
 												<h3 class="panel-title">${p.name}</h3>
@@ -59,15 +59,6 @@
 												<table class="table">
 													<tr class="active">
 														<td align="left"> 适用范围：</td><td align="left">默认</td>
-													</tr>
-													<tr>
-														<td align="left"> 创 建 人：</td><td align="left">${p.createUser}</td>
-													</tr>
-													<tr class="active">
-														<td align="left">创建时间：</td><td align="left">${p.createTimeShort}</td>
-													</tr>
-													<tr>
-														<td colspan="2" align="left">${p.remarks}</td>
 													</tr>
 												</table>
 											</div>
@@ -221,6 +212,7 @@
 			delete dataArr[index].msg;
 		}
 		data.itemList=dataArr;
+		alert(JSON.stringify(data))
 		var billInfo;
 		$.ajax({
 		   type: "POST",
@@ -264,7 +256,7 @@
 			clipboard:true,
 			footer:true,
 			data:allData.itemList,
-			height:350,
+			height:200,
 			resizeColumn:true,
 			editable:true,
 			dragColumn:true,

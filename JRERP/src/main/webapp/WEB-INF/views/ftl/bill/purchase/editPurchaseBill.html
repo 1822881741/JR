@@ -321,7 +321,7 @@
 			if(checkBillFlow()){
 				var billInfo = $("#billForm").serialize();
 				billInfo+="&areaName="+$("#areaCode").find(":selected").html();
-				billInfo+="&counterAreaCode="+$("#counterAreaCode").find(":selected").html()
+				billInfo+="&counterAreaName="+$("#counterAreaCode").find(":selected").html()
 				$.ajax({
 			        type: "POST",
 			        url: "purchase/saveBillAudit.do",

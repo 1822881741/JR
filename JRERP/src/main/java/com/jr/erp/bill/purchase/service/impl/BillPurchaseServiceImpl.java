@@ -220,6 +220,31 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
                 .andBillIdEqualTo(billPurchase.getId());
         List<BillPurchaseItem> itemList = (List) itemMapper.selectByExample(itemExample);
 
+        //同步单据信息到明细中
+        // 修改明细中的信息，与主单一致
+        BillPurchaseItemExample example = new BillPurchaseItemExample();
+        example.createCriteria().andCompanyNoEqualTo(billPurchase.getCompanyNo()).andBillIdEqualTo(billPurchase.getId());
+        BillPurchaseItem recordTpl = new BillPurchaseItem();
+        recordTpl.setAreaCode(billPurchase.getAreaCode());
+        recordTpl.setAreaName(billPurchase.getAreaName());
+        recordTpl.setCounterAreaCode(billPurchase.getCounterAreaCode());
+        recordTpl.setCounterAreaName(billPurchase.getCounterAreaName());
+        recordTpl.setCompanyNo(billPurchase.getCompanyNo());
+        recordTpl.setBillDate(billPurchase.getBillDate());
+        recordTpl.setBillNo(billPurchase.getBillNo());
+        recordTpl.setSysBillNo(billPurchase.getSysBillNo());
+        recordTpl.setPurchaseType(billPurchase.getPurchaseType());
+        recordTpl.setSupplier(billPurchase.getSupplier());
+        recordTpl.setBrandName(billPurchase.getBrandName());
+        recordTpl.setEmployeeId(billPurchase.getEmployeeId());
+        recordTpl.setEmployeeName(billPurchase.getEmployeeName());
+        recordTpl.setCreateUserId(billPurchase.getCreateUserId());
+        recordTpl.setCreateUserName(billPurchase.getCreateUserName());
+        recordTpl.setBillType(billPurchase.getBillType());
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("record", recordTpl);
+        map.put("example", example);
+        itemMapper.updateByExampleSelective(map);
         // 修改单据状态
         if (StringUtils.equals(isAransit.getParamValue(), "1"))
         {
@@ -227,26 +252,7 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
             billPurchase.setBillStatus(Constance.BILL_STATUS_AUDIT_WAIT);
             processBillAndItem(billPurchase, itemList);
             this.updateByPrimaryKeySelective(billPurchase);
-            //修改明细中的信息，与主单一致
-            BillPurchaseItemExample itemExample = new BillPurchaseItemExample();
-            itemExample.createCriteria().
-            tmp.setAreaCode(billPurchase.getAreaCode());
-            tmp.setAreaName(billPurchase.getAreaName());
-            tmp.setCounterAreaCode(billPurchase.getCounterAreaCode());
-            tmp.setCounterAreaName(billPurchase.getCounterAreaName());
-            tmp.setCompanyNo(billPurchase.getCompanyNo());
-            tmp.setBillDate(billPurchase.getBillDate());
-            tmp.setBillNo(billPurchase.getBillNo());
-            tmp.setSysBillNo(billPurchase.getSysBillNo());
-            tmp.setPurchaseType(billPurchase.getPurchaseType());
-            tmp.setSupplier(billPurchase.getSupplier());
-            tmp.setBrandName(billPurchase.getBrandName());
-            tmp.setEmployeeId(billPurchase.getEmployeeId());
-            tmp.setEmployeeName(billPurchase.getEmployeeName());
-            tmp.setCreateUserId(billPurchase.getCreateUserId());
-            tmp.setCreateUserName(billPurchase.getCreateUserName());
-            tmp.setBillType(billPurchase.getBillType());
-            itemMapper.updateByExampleSelective(map);
+          
         } else
         {
             // 不需要审核
