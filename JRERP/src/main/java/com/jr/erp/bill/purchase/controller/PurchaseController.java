@@ -58,8 +58,8 @@ public class PurchaseController {
     @Autowired
     IBillNoGeneratorService billNoGeneratorService;
     
-    @RequestMapping(value = "/editBill.do")
-    public String editBill(Integer id,HttpServletRequest request, Model model)
+    @RequestMapping(value = "/editPurchaseBill.do")
+    public String editPurchaseBill(Integer id,HttpServletRequest request, Model model)
     {
         SysUser user= ShiroUtils.getSysUser();
         String companyNo=user.getCompanyNo();

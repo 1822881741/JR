@@ -93,7 +93,7 @@ public class PurchaseSechemeController {
         List<BaseEntity> allClassify = sysClassifyService.selectByExample(example);
         model.addAttribute("allClassify", allClassify);
         
-        return "bill/secheme/editSecheme";
+        return "sys/secheme/editSecheme";
     }
     
     @RequestMapping(value = "/saveSecheme.do")

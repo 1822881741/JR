@@ -19,12 +19,12 @@
 		<!-- row -->
 		<div class="row no-margin">
 			<article class="col-sm-12 col-md-12 col-lg-12">
-				<div class="jarviswidget no-margin-bottom" id="wid-id-5"
+				<div class="jarviswidget no-margin-top" id="wid-id-5"
 					data-widget-colorbutton="false" data-widget-editbutton="false"
 					data-widget-togglebutton="false" data-widget-deletebutton="false"
 					data-widget-fullscreenbutton="false"
 					data-widget-custombutton="false" data-widget-sortable="false">
-					<div>
+					<div class="padding-top-5">
 						<div class="widget-body">
 							<div class="row">
 								<div class="row margin-left-10">
@@ -395,7 +395,7 @@
 		return td;
 	}
 	function continueEdit(id){
-		window.location.href="purchase/editBill.do?id="+id;
+		window.location.href="purchase/editPurchaseBill.do?id="+id;
 	}
 </script>
 	<script type="text/javascript" charset="utf-8">
@@ -407,12 +407,17 @@
 			id:"list1",
 			css:"webix_header_border webix_body_border webix_footer_border",
 			leftSplit:1,
-			headermenu:true,
+			headermenu:{
+				width:250,
+				autoheight:false,
+				scroll:true
+			},
 			columns:[
 			        {id:"rowNo",header:'#',sort:"int",css:"header",width:50},
-			        {id:"barcode",sort:"string",header:"条码"},
+			        {id:"id",header:'id',hidden:true},
+			        {id:"barcode",sort:"string",header:["条码",{ content:"multiSelectFilter" }] , width:120, css:{ "text-align": "center" }, tooltip: "", editor:"text"},
 			        {id:"oldBarcode",sort:"string",header:"原条码"},
-			        {id:"productName",sort:"string",header:"商品名称"},
+			        {id:"productName",sort:"string",header:["商品名称",{ content:"multiSelectFilter" }] , width:120, css:{ "text-align": "center" }, tooltip: "2222", editor:"text"},
 			        {id:"supplier",sort:"string",header:"供应商名称"},
 			        {id:"brandName",sort:"string",header:"品牌名称"},
 			        {id:"subName",sort:"string",header:"商品子名称"},
