@@ -110,8 +110,8 @@
 								<form id="billForm" class="form-horizontal" role="form">
 									<input type="hidden" id="id" name="id" value="${billPurchase.id}">
 									<input type="hidden" id="sysBillNo" name="sysBillNo" value="${billPurchase.sysBillNo}">
-									<div class="row margin-bottom-5">
-										<div class="form-group col-sm-3 col-md-3 col-lg-3 margin-bottom-5">
+									<div class="row no-margin margin-bottom-5">
+										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
 					 					   <label class="col-md-4 col-sm-6 control-label">供应商</label>
 											<div class="col-md-8 col-sm-6 no-padding">
 												<select id="supplier" name="supplier" data-validate="required" class="form-control selectpicker show-tick" data-live-search="true">
@@ -121,7 +121,7 @@
 												</select>
 											</div>
 										</div>
-										<div class="form-group col-sm-3 col-md-3 col-lg-3 margin-bottom-5">
+										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
 											<label class="col-md-4 col-sm-6 control-label">进货类型</label>
 											<div class="col-md-8 col-sm-6 no-padding">
 												<select id="purchaseType" name="purchaseType" data-validate="required" class="form-control selectpicker show-tick" data-live-search="true">
@@ -131,7 +131,7 @@
 												</select>
 											</div>
 										</div>
-										<div class="form-group col-sm-3 col-md-3 col-lg-3 margin-bottom-5">
+										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
 											<label class="col-md-4 col-sm-6 control-label">进货门店</label>
 											<div class="col-md-8 col-sm-6 no-padding">
 												<select id="areaCode" name="areaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择门店/部门" data-live-search="true">
@@ -141,26 +141,28 @@
 												</select>
 											</div>
 										</div>
-										<div class="form-group col-sm-3 col-md-3 col-lg-3 margin-bottom-5">
+										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
 											<label class="col-md-4 col-sm-6 control-label">进货柜台</label>
 											<div class="col-md-8 col-sm-6 no-padding">
 												<select id="counterAreaCode" name="counterAreaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择柜台" data-live-search="true">
 												</select>
 											</div>
 										</div>
-										<div class="form-group col-sm-3 col-md-3 col-lg-3 margin-bottom-5">
+									</div>
+									<div class="row no-margin margin-bottom-5">
+										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
 											<label class="col-md-4 col-sm-6 control-label">进货日期</label>
 											<div class="col-md-8 col-sm-6 no-padding">
 												<input type="text" class="form-control input-sm"  data-validate="required" id="billDate" name="billDate" value="${billPurchase.billDate}">
 											</div>
 										</div>
-										<div class="form-group col-sm-3 col-md-3 col-lg-3 margin-bottom-5">
+										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
 											<label class="col-md-4 col-sm-6 control-label">单号</label>
 											<div class="col-md-8 col-sm-6 no-padding">
 												<input type="text" class="form-control" id="billNo" name="billNo"  data-validate="required"  value="${billPurchase.billNo}" placeholder="请输入名字">
 											</div>
 										</div>
-										<div class="form-group col-sm-3 col-md-3 col-lg-3 margin-bottom-5">
+										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
 											<label class="col-md-4 col-sm-6 control-label">品牌</label>
 											<div class="col-md-8 col-sm-6 no-padding">
 												<select id="brandName" name="brandName"  data-validate="required" class="form-control selectpicker show-tick" data-live-search="true">
@@ -170,7 +172,7 @@
 												</select>
 											</div>
 										</div>
-										<div class="form-group col-sm-3 col-md-3 col-lg-3 margin-bottom-5">
+										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
 											<label class="col-md-4 col-sm-6 control-label">备注</label>
 											<div class="col-md-8 col-sm-6 no-padding">
 												<input type="text" id="remarks" name="remarks" class="form-control"  placeholder="请输入名字" value="${billPurchase.remarks}" >
