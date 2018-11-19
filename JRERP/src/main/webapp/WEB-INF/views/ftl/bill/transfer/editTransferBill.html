@@ -5,7 +5,8 @@
 <#include "/header-smart.html" />
 <base href="${basePath}">
 <link rel="stylesheet" href="static/plugins/webix/codebase/webix.css?v=6.0.7" type="text/css" charset="utf-8">
-<!--link rel="stylesheet" type="text/css" href="static/plugins/webix/codebase/skins/mini.min.css"-->
+<link rel="stylesheet" href="static/plugins/webix/querybuilder/querybuilder.css" type="text/css" charset="utf-8">
+<link rel="stylesheet" href="static/plugins/webix/querybuilder/skins/compact.css" type="text/css" charset="utf-8">
 <style>
     .myhover{
         background: #F4F5F9;
@@ -100,16 +101,12 @@
 											<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 预览</a></li>
 										</ul>
 									</div>
-									<div class="col-sm-6 col-md-6 col-lg-6">
-										<a class="btn btn-sm btn-default"  href="javascript:void(0);" style="margin-left: 160px;" onclick="viewImportBill()"><i class="fa fa-gear fa-lg"></i> 导入</a>
-										<a class="btn btn-sm btn-default"  href="javascript:void(0);" style="margin-left: 160px;" onclick="editScheme('')"><i class="fa fa-gear fa-lg"></i> 新增</a>
-									</div>
 								</div>
 								<hr class="simple margin-5">
 								<form id="billForm" class="form-horizontal" role="form">
 									<input type="hidden" id="id" name="id" value="${billPurchase.id}">
 									<input type="hidden" id="sysBillNo" name="sysBillNo" value="${billPurchase.sysBillNo}">
-									<div class="row no-margin margin-bottom-5">
+									<div class="row no-margin margin-bottom-5 padding-right-5">
 										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
 											<label class="col-md-4 col-sm-6 control-label">调出门店</label>
 											<div class="col-md-8 col-sm-6 no-padding">
@@ -130,7 +127,7 @@
 										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
 											<label class="col-md-4 col-sm-6 control-label">调拨日期</label>
 											<div class="col-md-8 col-sm-6 no-padding">
-												<input type="text" class="form-control input-sm"  data-validate="required" id="billDate" name="billDate" value="${billPurchase.billDate}">
+												<input type="text" class="form-control"  data-validate="required" id="billDate" name="billDate" value="${billPurchase.billDate}">
 											</div>
 										</div>
 										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
@@ -140,11 +137,11 @@
 											</div>
 										</div>										
 									</div>
-									<div class="row no-margin margin-bottom-5">
+									<div class="row no-margin margin-bottom-5 padding-right-5">
 										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
 											<label class="col-md-4 col-sm-6 control-label">调入门店</label>
 											<div class="col-md-8 col-sm-6 no-padding">
-												<select id="areaCode" name="areaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择门店/部门" data-live-search="true">
+												<select id="inAreaCode" name="inAreaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择门店/部门" data-live-search="true">
 													<#list areaList as p>
 														<option value='${p.areaCode}' <#if p.areaType == 0>data-icon="fa fa-bank" data-subtext="总公司"</#if> <#if p.areaType == 1>data-icon="fa fa-cubes" data-subtext="区域"</#if> <#if p.areaType == 2>data-icon="fa fa-cab" data-subtext="门店"</#if> <#if p.areaCode == billPurchase.areaCode> selected </#if> >${p.areaName}</option>
 													</#list>
@@ -154,7 +151,7 @@
 										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
 											<label class="col-md-4 col-sm-6 control-label">调入柜台</label>
 											<div class="col-md-8 col-sm-6 no-padding">
-												<select id="counterAreaCode" name="counterAreaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择柜台" data-live-search="true">
+												<select id="inCounterAreaCode" name="inCounterAreaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择柜台" data-live-search="true">
 												</select>
 											</div>
 										</div>
@@ -176,13 +173,13 @@
 												<div class="input-group">
 													<input type="text" class="form-control">
 													<div class="input-group-btn">
-														<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="-1">导入</button>
+														<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="-1">导入 <i class="fa fa-angle-down"></i></button>
 														<ul class="dropdown-menu pull-right" role="menu">
-															<li><a href="javascript:void(0);">Action</a></li>
-															<li><a href="javascript:void(0);">Another action</a></li>
-															<li><a href="javascript:void(0);">Something else here</a></li>
+															<li><a href="javascript:void(0);">按柜台导入</a></li>
+															<li><a href="javascript:void(0);">按入库单导入</a></li>
+															<li><a href="javascript:void(0);" onclick="showQueryBuilder()">按条件导入</a></li>
 															<li class="divider"></li>
-															<li><a href="javascript:void(0);">Cancel</a></li>
+															<li><a href="javascript:void(0);">按输入导入</a></li>
 														</ul>
 													</div>
 												</div>
@@ -205,18 +202,23 @@
 <script src="static/js/smartwidgets/jarvis.widget.min.js"></script>
 <script src="static/js/app.js?v=3"></script>
 <script src="static/plugins/bootstrap-select/js/bootstrap-select.js"></script>
-<script src="static/plugins/bootstrap-select/js/i18n/defaults-zh_CN.min.js"></script>
 <script src="static/plugins/layer/layer.js"></script>
 <script src="static/plugins/laydate/laydate.js"></script>
 <script src="static/plugins/webix/codebase/webix.js?v=6.0.7"></script>
+<script src="static/plugins/webix/querybuilder/querybuilder.js"></script>
 <script src="static/zmodel/common/js/validate.js?v=1"></script>
 <script type="text/javascript">
 	var hot1;
 	var grid;
 	$(document).ready(function() {
 		pageSetUp();
-		$("#areaCode").on("change",function(){
-			$("#counterAreaCode").html("");
+		$("#areaCode,#inAreaCode").on("change",function(){
+			var tmp = $(this).attr("id");
+			if(tmp =='counterAreaCode'){
+				$("#counterAreaCode").html("");
+			}else{
+				$("#inCounterAreaCode").html("");
+			}
 			$.ajax({
 		        type: "POST",
 		        url: "sysAreaInfo/getStoreList.do?parentAreaCode="+$(this).val(),
@@ -225,10 +227,18 @@
 		        success: function(data) {
 		            if (data.status == '100') {
 		            	var storeList=data.data;
-		            	for(var index=0;index<storeList.length;index++){
-		            		var store=storeList[index];
-			            	$("#counterAreaCode").append("<option value='"+store.areaCode+"'>"+store.areaName+"</option>");
-			            	$("#counterAreaCode").selectpicker('refresh');
+		            	if(tmp == 'areaCode'){
+			            	for(var index=0;index<storeList.length;index++){
+			            		var store=storeList[index];
+				            	$("#counterAreaCode").append("<option value='"+store.areaCode+"'>"+store.areaName+"</option>");
+			            	}
+				            $("#counterAreaCode").selectpicker('refresh');
+		            	}else{
+		            		for(var index=0;index<storeList.length;index++){
+			            		var store=storeList[index];
+				            	$("#inCounterAreaCode").append("<option value='"+store.areaCode+"'>"+store.areaName+"</option>");
+			            	}
+				            $("#inCounterAreaCode").selectpicker('refresh');
 		            	}
 		            }else{
 		            	layer.msg("获取柜台失败");
@@ -355,47 +365,6 @@
 		}
 		
 	}
-	
-	function editScheme(id) {
-		layer.open({
-			type : 2,
-			title : "新增/修改商品分类",
-			area : [ '800px', '620px' ],
-			shade : 0.8,
-			scrollbar : false,
-			id : 'lay_addClassify', //设定一个id，防止重复弹出
-			btn : [ '保存', '取消' ],
-			moveType : 1, //拖拽模式，0或者1
-			content : "purchaseSecheme/editSecheme.do?sechemeId=" + id,
-			yes : function(index, layero) {
-				var result = $(layero).find("iframe")[0].contentWindow.submitData();
-				if (result) {
-					
-				}
-			}
-		});
-	}
-	function viewImportBill(id){
-		var index = layer.open({
-			type : 2,
-			title : "新增/修改商品分类",
-			area : [ '700px', '620px' ],
-			shade : 0.8,
-			scrollbar : false,
-			id : 'lay_addClassify', //设定一个id，防止重复弹出
-			btn : false,
-			moveType : 1, //拖拽模式，0或者1
-			maxmin: true,
-			content : "purchase/viewImportBill.do?sechemeId=" + id,
-			yes : function(index, layero) {
-				var result = $(layero).find("iframe")[0].contentWindow.submitData();
-				if (result) {
-				}
-			}
-		});
-		layer.full(index);
-	}
-	
 	function reloadData(billInfo){
 		if(billInfo){
 			grid.clearAll();
@@ -403,13 +372,38 @@
 			$("#id").val(billInfo.id);
 		}
 	}
-	function operationRender(instance, td,row){
-		return td;
-	}
 	function continueEdit(id){
 		window.location.href="purchase/editPurchaseBill.do?id="+id;
 	}
-</script>
+	function showQueryBuilder(){
+		var qb = {
+				view: "querybuilder",
+				id: "querybuilder",
+				fields: [
+					{ id:"fname", value:"First Name", type:"string" },
+					{ id:"lname", value:"Last Name",  type:"string" },
+					{ id:"age",  value:"Age", type:"number" },
+					{ id:"bdate",  value:"Birth Date", type:"date" }
+				],
+				maxLevel: 4
+			};
+		webix.ui({
+			view:"window",
+			position:"center",
+			height:400,
+		    width:800,
+		    move:true,
+			resize: true,
+		    head:"This window can be moved",
+		    body:{
+        		view:"scrollview", body:{
+        			rows:[qb
+        			]
+        		}
+        	}
+		}).show();
+	}
+	</script>
 	<script type="text/javascript" charset="utf-8">
 	var context;
 	webix.ready(function(){
