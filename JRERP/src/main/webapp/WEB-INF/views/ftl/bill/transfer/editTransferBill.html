@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<#include "/header-smart.html" />
+<base href="${basePath}">
+<link rel="stylesheet" href="static/plugins/webix/codebase/webix.css?v=6.0.7" type="text/css" charset="utf-8">
+<!--link rel="stylesheet" type="text/css" href="static/plugins/webix/codebase/skins/mini.min.css"-->
+<style>
+    .myhover{
+        background: #F4F5F9;
+    }
+     .header{
+            background-color: #edf7fe;
+        }
+</style>
+<body>
+	<section id="widget-grid">
+		<!-- row -->
+		<div class="row no-margin">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div class="jarviswidget no-margin-top" id="wid-id-5"
+					data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-togglebutton="false" data-widget-deletebutton="false"
+					data-widget-fullscreenbutton="false"
+					data-widget-custombutton="false" data-widget-sortable="false">
+					<div class="padding-top-5">
+						<div class="widget-body">
+							<div class="row">
+								<div class="row margin-left-10">
+									<div class="col-sm-6 col-md-6 col-lg-6">
+										<ul class="demo-btns" style="height: 30px;">
+											<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 新增</a></li>
+											<li><a id="saveAudit" href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 保存</a></li>
+											<li><a href="javascript:void(0);" id="activity" class="activity-dropdown btn  btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 未完成 <em class="badge bg-color-red">${desktopMap.totalNum}</em></a>
+												<div class="ajax-dropdown">
+													<div class="btn-group btn-group-justified" >
+														<label class="btn btn-default active" data-id='noSave' onclick="showDropdown(this)">未完成(${desktopMap["noSave"]?size})</label>
+														<label class="btn btn-default" data-id='waiting' onclick="showDropdown(this)">待审核 (${desktopMap["waiting"]?size})</label>
+														<label class="btn btn-default" data-id='reject' onclick="showDropdown(this)">驳回 (${desktopMap["reject"]?size})</label>
+													</div>
+													<div class="ajax-notifications custom-scroll">
+														<div class="alert alert-transparent no-margin no-padding">
+															<ul id='noSave' class="notification-body">
+																<#list desktopMap["noSave"] as tmp>
+																<li>
+																	<span class="unread">
+																		<em class="badge padding-5 no-border-radius bg-color-yellow pull-left margin-right-5">
+																			<i class="fa fa-edit fa-fw fa-2x"></i>
+																		</em>
+																		<span>
+																			 ${tmp.billNo} <span class="text-primary">${tmp.totalNum}</span> and <span class="text-primary">kevin.reliey</span>
+																			 <br>
+																			 <span class="font-xs text-muted"><i>${tmp.billDate}</i></span>
+																			 <button class="btn btn-xs btn-primary pull-right" onclick="continueEdit(${tmp.id})">编辑</button>
+																		</span>
+																	</span>
+																</li>
+																</#list>
+															</ul>
+															<ul id='waiting' class="notification-body" style="display: none;">
+																<#list desktopMap["waiting"] as tmp>
+																<li>
+																	<span class="unread">
+																		<em class="badge padding-5 no-border-radius bg-color-green pull-left margin-right-5">
+																			<i class="fa fa-send fa-fw fa-2x"></i>
+																		</em>
+																		<span>
+																			 ${tmp.billNo} <span class="text-primary">${tmp.totalNum}</span> and <span class="text-primary">kevin.reliey</span>
+																			 <br>
+																			 <span class="font-xs text-muted"><i>${tmp.billDate}</i></span>
+																			 <button class="btn btn-xs btn-primary pull-right" onclick="continueEdit(${tmp.id})">查看</button>
+																		</span>
+																	</span>
+																</li>
+																</#list>
+															</ul>
+															<ul id='reject' class="notification-body" style="display: none;">
+																<#list desktopMap["reject"] as tmp>
+																<li>
+																	<span class="unread">
+																		<em class="badge padding-5 no-border-radius bg-color-red pull-left margin-right-5">
+																			<i class="fa fa-warning fa-fw fa-2x"></i>
+																		</em>
+																		<span>
+																			 ${tmp.billNo} <span class="text-primary">${tmp.totalNum}</span> and <span class="text-primary">kevin.reliey</span>
+																			 <br>
+																			 <span class="font-xs text-muted"><i>${tmp.billDate}</i></span>
+																			 <button class="btn btn-xs btn-primary pull-right" onclick="continueEdit(${tmp.id})">查看</button>
+																		</span>
+																	</span>
+																</li>
+																</#list>
+															</ul>																														
+														</div>
+													</div>
+												</div>
+											</li>
+											<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 打印</a></li>
+											<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 预览</a></li>
+										</ul>
+									</div>
+									<div class="col-sm-6 col-md-6 col-lg-6">
+										<a class="btn btn-sm btn-default"  href="javascript:void(0);" style="margin-left: 160px;" onclick="viewImportBill()"><i class="fa fa-gear fa-lg"></i> 导入</a>
+										<a class="btn btn-sm btn-default"  href="javascript:void(0);" style="margin-left: 160px;" onclick="editScheme('')"><i class="fa fa-gear fa-lg"></i> 新增</a>
+									</div>
+								</div>
+								<hr class="simple margin-5">
+								<form id="billForm" class="form-horizontal" role="form">
+									<input type="hidden" id="id" name="id" value="${billPurchase.id}">
+									<input type="hidden" id="sysBillNo" name="sysBillNo" value="${billPurchase.sysBillNo}">
+									<div class="row no-margin margin-bottom-5">
+										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
+											<label class="col-md-4 col-sm-6 control-label">调出门店</label>
+											<div class="col-md-8 col-sm-6 no-padding">
+												<select id="areaCode" name="areaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择门店/部门" data-live-search="true">
+													<#list areaList as p>
+														<option value='${p.areaCode}' <#if p.areaType == 0>data-icon="fa fa-bank" data-subtext="总公司"</#if> <#if p.areaType == 1>data-icon="fa fa-cubes" data-subtext="区域"</#if> <#if p.areaType == 2>data-icon="fa fa-cab" data-subtext="门店"</#if> <#if p.areaCode == billPurchase.areaCode> selected </#if> >${p.areaName}</option>
+													</#list>
+												</select>
+											</div>
+										</div>
+										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
+											<label class="col-md-4 col-sm-6 control-label">调出柜台</label>
+											<div class="col-md-8 col-sm-6 no-padding">
+												<select id="counterAreaCode" name="counterAreaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择柜台" data-live-search="true">
+												</select>
+											</div>
+										</div>
+										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
+											<label class="col-md-4 col-sm-6 control-label">调拨日期</label>
+											<div class="col-md-8 col-sm-6 no-padding">
+												<input type="text" class="form-control input-sm"  data-validate="required" id="billDate" name="billDate" value="${billPurchase.billDate}">
+											</div>
+										</div>
+										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
+											<label class="col-md-4 col-sm-6 control-label">调拨单号</label>
+											<div class="col-md-8 col-sm-6 no-padding">
+												<input type="text" class="form-control" id="billNo" name="billNo"  data-validate="required"  value="${billPurchase.billNo}" placeholder="请输入名字">
+											</div>
+										</div>										
+									</div>
+									<div class="row no-margin margin-bottom-5">
+										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
+											<label class="col-md-4 col-sm-6 control-label">调入门店</label>
+											<div class="col-md-8 col-sm-6 no-padding">
+												<select id="areaCode" name="areaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择门店/部门" data-live-search="true">
+													<#list areaList as p>
+														<option value='${p.areaCode}' <#if p.areaType == 0>data-icon="fa fa-bank" data-subtext="总公司"</#if> <#if p.areaType == 1>data-icon="fa fa-cubes" data-subtext="区域"</#if> <#if p.areaType == 2>data-icon="fa fa-cab" data-subtext="门店"</#if> <#if p.areaCode == billPurchase.areaCode> selected </#if> >${p.areaName}</option>
+													</#list>
+												</select>
+											</div>
+										</div>
+										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
+											<label class="col-md-4 col-sm-6 control-label">调入柜台</label>
+											<div class="col-md-8 col-sm-6 no-padding">
+												<select id="counterAreaCode" name="counterAreaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择柜台" data-live-search="true">
+												</select>
+											</div>
+										</div>
+										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
+											<label class="col-md-4 col-sm-6 control-label">备注</label>
+											<div class="col-md-8 col-sm-6 no-padding">
+												<input type="text" id="remarks" name="remarks" class="form-control"  placeholder="请输入名字" value="${billPurchase.remarks}" >
+											</div>
+										</div>
+										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
+											<label class="col-md-4 col-sm-6 control-label">品牌</label>
+											<div class="col-md-8 col-sm-6 no-padding">
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+							<div id="testA"></div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</body>
+<script src="static/js/libs/jquery-3.2.1.min.js"></script>
+<script src="static/js/app.config.js"></script>
+<script src="static/js/bootstrap/bootstrap.min.js"></script>
+<script src="static/js/smartwidgets/jarvis.widget.min.js"></script>
+<script src="static/js/app.js?v=3"></script>
+<script src="static/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+<script src="static/plugins/bootstrap-select/js/i18n/defaults-zh_CN.min.js"></script>
+<script src="static/plugins/layer/layer.js"></script>
+<script src="static/plugins/laydate/laydate.js"></script>
+<script src="static/plugins/webix/codebase/webix.js?v=6.0.7"></script>
+<script src="static/zmodel/common/js/validate.js?v=1"></script>
+<script type="text/javascript">
+	var hot1;
+	var grid;
+	$(document).ready(function() {
+		pageSetUp();
+		$("#areaCode").on("change",function(){
+			$("#counterAreaCode").html("");
+			$.ajax({
+		        type: "POST",
+		        url: "sysAreaInfo/getStoreList.do?parentAreaCode="+$(this).val(),
+		        dataType: 'json',
+		        async: false,
+		        success: function(data) {
+		            if (data.status == '100') {
+		            	var storeList=data.data;
+		            	for(var index=0;index<storeList.length;index++){
+		            		var store=storeList[index];
+			            	$("#counterAreaCode").append("<option value='"+store.areaCode+"'>"+store.areaName+"</option>");
+			            	$("#counterAreaCode").selectpicker('refresh');
+		            	}
+		            }else{
+		            	layer.msg("获取柜台失败");
+		            }
+		        },
+		        error: function() {
+		        	layer.alert("连接服务器失败，请稍后重试");
+		        }
+		    });
+		})
+		$("#areaCode").change();
+		$("#counterAreaCode").selectpicker('val',"${billPurchase.counterAreaCode}");
+		$("#saveAudit").on("click",function(){
+			saveBillAudit();
+		})
+	});
+	
+	function showDropdown(obj){
+		$(obj).parent().find("label").removeClass("active");
+		$(obj).addClass('active');
+		$(".notification-body").hide();
+		$("#"+$(obj).data("id")).show();
+	}
+	
+	function checkBillFlow(){
+		var result=false;
+		$.ajax({
+	        type: "POST",
+	        url: "param/checkBillFlow.do",
+	        dataType: 'json',
+	        data:"module=purchase&areaCode="+$("#areaCode").val(),
+	        async: false,
+	        success: function(data) {
+	            if (data.status == '100') {
+	            	result=true;
+	            }else{
+	            	result=false
+	            	var paramList=data.data;
+	            	var paramArr=[];
+	            	for(var i=0;i<paramList.length;i++){
+	            		paramArr.push({view:"checkbox", labelRight:paramList[i].remarks, value:paramList[i].paramValue ,name:paramList[i].paramName})
+	            	}
+	            	paramArr.push({ view:"button", value: "保存", click:function(){
+    					$.ajax({
+    				        type: "POST",
+    				        url: "param/updateBillFlowParam.do?module=purchase&areaCode="+$("#areaCode").val(),
+    				        dataType: 'json',
+    				        async: false,
+    				        contentType:"application/json",
+    				        data:JSON.stringify(this.getParentView().getValues()),
+    				        success: function(data) {
+    				            if (data.status == '100') {
+    				            	$$('win2').close();
+    				            	layer.msg("保存成功，请再次保存")
+    				            }else{
+    				            	layer.msg("获取柜台失败");
+    				            }
+    				        },
+    				        error: function() {
+    				        	layer.alert("连接服务器失败，请稍后重试");
+    				        }
+    				    });
+    				}});
+	            	var form=webix.ui({
+	                    view:"window",
+	                    id:"win2",
+	                    width:300,
+	                    position:"center",
+	                    modal:true,
+	                    head:{
+	    					view:"toolbar", margin:-4, cols:[
+	    						{view:"label", label: "尚未设置进货流程，来设置下吧" },
+	    						{ view:"icon", icon:"mdi mdi-close", click: function(){
+	    							$$('win2').close();
+	    						}}
+	    					]
+	    				},
+	                    body:{
+	            			view:"form",
+	            			borderless:true,
+	            			elements: paramArr,
+	            			elementsConfig:{
+	            				labelPosition:"top",
+	            			}
+	            		}
+	                });
+	            	 $$("win2").getBody().clear();
+	            	 form.show();
+	                 $$("win2").getBody().focus();
+	            }
+	        },
+	        error: function() {
+	        	layer.alert("连接服务器失败，请稍后重试");
+	        }
+	    });
+		return result;
+	}
+	function saveBillAudit(){
+		if(!validateForm("billForm")){
+			return;
+		}else{
+			if(checkBillFlow()){
+				var billInfo = $("#billForm").serialize();
+				billInfo+="&areaName="+$("#areaCode").find(":selected").html();
+				billInfo+="&counterAreaName="+$("#counterAreaCode").find(":selected").html()
+				$.ajax({
+			        type: "POST",
+			        url: "purchase/saveBillAudit.do",
+			        dataType: 'json',
+			        data:billInfo,
+			        async: false,
+			        success: function(data) {
+			            if (data.status == '100') {
+			            	layer.msg("保存成功！");
+			            }else{
+			            	layer.msg(data.msg);
+			            }
+			        },
+			        error: function() {
+			        	layer.alert("连接服务器失败，请稍后重试");
+			        }
+			    });
+			};
+		}
+		
+	}
+	
+	function editScheme(id) {
+		layer.open({
+			type : 2,
+			title : "新增/修改商品分类",
+			area : [ '800px', '620px' ],
+			shade : 0.8,
+			scrollbar : false,
+			id : 'lay_addClassify', //设定一个id，防止重复弹出
+			btn : [ '保存', '取消' ],
+			moveType : 1, //拖拽模式，0或者1
+			content : "purchaseSecheme/editSecheme.do?sechemeId=" + id,
+			yes : function(index, layero) {
+				var result = $(layero).find("iframe")[0].contentWindow.submitData();
+				if (result) {
+					
+				}
+			}
+		});
+	}
+	function viewImportBill(id){
+		var index = layer.open({
+			type : 2,
+			title : "新增/修改商品分类",
+			area : [ '700px', '620px' ],
+			shade : 0.8,
+			scrollbar : false,
+			id : 'lay_addClassify', //设定一个id，防止重复弹出
+			btn : false,
+			moveType : 1, //拖拽模式，0或者1
+			maxmin: true,
+			content : "purchase/viewImportBill.do?sechemeId=" + id,
+			yes : function(index, layero) {
+				var result = $(layero).find("iframe")[0].contentWindow.submitData();
+				if (result) {
+				}
+			}
+		});
+		layer.full(index);
+	}
+	
+	function reloadData(billInfo){
+		if(billInfo){
+			grid.clearAll();
+			grid.parse(billInfo.itemList);
+			$("#id").val(billInfo.id);
+		}
+	}
+	function operationRender(instance, td,row){
+		return td;
+	}
+	function continueEdit(id){
+		window.location.href="purchase/editPurchaseBill.do?id="+id;
+	}
+</script>
+	<script type="text/javascript" charset="utf-8">
+	var context;
+	webix.ready(function(){
+		grid = webix.ui({
+			container:"testA",
+			view:"datatable", 
+			id:"list1",
+			css:"webix_header_border webix_body_border webix_footer_border",
+			leftSplit:1,
+			headermenu:{
+				width:250,
+				autoheight:false,
+				scroll:true
+			},
+			columns:[
+			        {id:"rowNo",header:'#',sort:"int",css:"header",width:50},
+			        {id:"id",header:'id',hidden:true},
+			        {id:"barcode",sort:"string",header:["条码",{ content:"multiSelectFilter" }] , width:120, css:{ "text-align": "center" }, tooltip: "", editor:"text"},
+			        {id:"oldBarcode",sort:"string",header:"原条码"},
+			        {id:"productName",sort:"string",header:["商品名称",{ content:"multiSelectFilter" }] , width:120, css:{ "text-align": "center" }, tooltip: "2222", editor:"text"},
+			        {id:"supplier",sort:"string",header:"供应商名称"},
+			        {id:"brandName",sort:"string",header:"品牌名称"},
+			        {id:"subName",sort:"string",header:"商品子名称"},
+			        {id:"certificateNo",sort:"string",header:"证书号"},
+			        {id:"giaCertificateNo",sort:"string",header:"GIA证书号"},
+			        {id:"style",sort:"string",header:"款式"},
+			        {id:"comStyleNo",sort:"string",header:"公司款号"},
+			        {id:"facStyleNo",sort:"string",header:"工厂款号"},
+			        {id:"handInch",sort:"string",header:"手寸"},
+			        {id:"craft",sort:"string",header:"工艺"},
+			        {id:"img",sort:"string",header:"图片路径"},
+			        {id:"remarks",sort:"string",header:"商品备注信息"},
+			        {id:"bargainName",sort:"string",header:"特价标记"},
+			        {id:"num",sort:"int",header:"数量",footer:{ content:"summColumn" }},
+			        {id:"netGoldWeight",sort:"int",header:"净金重",footer:{ content:"summColumn" }},
+			        {id:"goldLoss",sort:"int",header:"金损"},
+			        {id:"goldPurity",sort:"int",header:"金成色"},
+			        {id:"goldWeight",sort:"int",header:"金重",footer:{ content:"summColumn" }},
+			        {id:"goldPrice",sort:"int",header:"金价"},
+			        {id:"goldMoney",sort:"int",header:"金料额",footer:{ content:"summColumn" }},
+			        {id:"productWeight",sort:"int",header:"货重",footer:{ content:"summColumn" }},
+			        {id:"workFeeKe",sort:"int",header:"克工费"},
+			        {id:"workFeeJian",sort:"int",header:"件工费"},
+			        {id:"workFeeSum",sort:"int",header:"总工费",footer:{ content:"summColumn" }},
+			        {id:"certificateFee",sort:"int",header:"证书费",footer:{ content:"summColumn" }},
+			        {id:"fittingName",sort:"string",header:"配件名称"},
+			        {id:"fittingNum",sort:"string",header:"配件数",footer:{ content:"summColumn" }},
+			        {id:"fittingFee",sort:"int",header:"配件金额",footer:{ content:"summColumn" }},
+			        {id:"sandBlastFee",sort:"int",header:"喷砂镶石费",footer:{ content:"summColumn" }},
+			        {id:"otherFee",sort:"int",header:"其他费用",footer:{ content:"summColumn" }},
+			        {id:"unitPrice",sort:"int",header:"成本单价"},
+			        {id:"costPrice",sort:"int",header:"成本金额",footer:{ content:"summColumn" }},
+			        {id:"labelWorkFeeKe",sort:"int",header:"标签克工费"},
+			        {id:"labelWorkFeeJian",sort:"int",header:"标签件工费"},
+			        {id:"labelWorkFeeSum",sort:"int",header:"标签工费",footer:{ content:"summColumn" }},
+			        {id:"labelRate",sort:"int",header:"加价率"},
+			        {id:"labelPrice",sort:"int",header:"标签价",footer:{ content:"summColumn" }},
+			        {id:"labelPriceSum",sort:"int",header:"标价金额",footer:{ content:"summColumn" }},
+			        {id:"labelRemarks",sort:"string",header:"标签备注"},
+			        {id:"sysCode",sort:"string",header:"商品编码"},
+			        {id:"goldName",sort:"string",header:"金料名"},
+			        {id:"jewelName",sort:"string",header:"石头"},
+			        {id:"categoryName",sort:"string",header:"品名"},
+			        {id:"firstType",sort:"string",header:"大类名称"},
+			        {id:"secondType",sort:"string",header:"中类"},
+			        {id:"productClassify",sort:"string",header:"实际分类"},
+			        {id:"firstClassify",sort:"string",header:"商品分组"},
+			        {id:"secondClassify",sort:"string",header:"统计分类2"},
+			        {id:"labelName",sort:"string",header:"标签显示名称"},
+			        {id:"grfName",sort:"string",header:"模板名称"},
+			        {id:"thirdClassify",sort:"string",header:"统计分类3"},
+			        {id:"mJewelCut",sort:"string",header:"切工"},
+			        {id:"mJewelColor",sort:"string",header:"颜色"},
+			        {id:"mJewelClarity",sort:"string",header:"净度"},
+			        {id:"mJewelFluorescent",sort:"string",header:"荧光"},
+			        {id:"mJewelBurnished",sort:"string",header:"抛光度"},
+			        {id:"mJewelShape",sort:"string",header:"形状"},
+			        {id:"mJewelName",sort:"string",header:"主石名"},
+			        {id:"mJewelNo",sort:"string",header:"主石石号"},
+			        {id:"mJewelSpecifi",sort:"string",header:"主石规格"},
+			        {id:"mJewelNum",sort:"int",header:"主石数",footer:{ content:"summColumn" }},
+			        {id:"mJewelWeight",sort:"int",header:"主石重",footer:{ content:"summColumn" }},
+			        {id:"mJewelPrice",sort:"int",header:"主石价"},
+			        {id:"mJewelFee",sort:"int",header:"主石额",footer:{ content:"summColumn" }},
+			        {id:"sJewel1Name",sort:"string",header:"副石1名"},
+			        {id:"sJewel1No",sort:"string",header:"副石1石号"},
+			        {id:"sJewel1Specifi",sort:"string",header:"副石1规格"},
+			        {id:"sJewel1Num",sort:"int",header:"副石1数",footer:{ content:"summColumn" }},
+			        {id:"sJewel1Weight",sort:"int",header:"副石1重",footer:{ content:"summColumn" }},
+			        {id:"sJewel1Price",sort:"int",header:"副石1价"},
+			        {id:"sJewel1Fee",sort:"int",header:"副石1额",footer:{ content:"summColumn" }},
+			        {id:"sJewel2Name",sort:"string",header:"副石2名"},
+			        {id:"sJewel2No",sort:"string",header:"副石2石号"},
+			        {id:"sJewel2Specifi",sort:"string",header:"副石2规格"},
+			        {id:"sJewel2Num",sort:"int",header:"副石2数",footer:{ content:"summColumn" }},
+			        {id:"sJewel2Weight",sort:"int",header:"副石2重",footer:{ content:"summColumn" }},
+			        {id:"sJewel2Price",sort:"int",header:"副石2价"},
+			        {id:"sJewel2Fee",sort:"int",header:"副石2额",footer:{ content:"summColumn" }},
+			        {id:"sJewel3Name",sort:"string",header:"副石3名"},
+			        {id:"sJewel3No",sort:"string",header:"副石3石号"},
+			        {id:"sJewel3Specifi",sort:"string",header:"副石3规格"},
+			        {id:"sJewel3Num",sort:"int",header:"副石3数",footer:{ content:"summColumn" }},
+			        {id:"sJewel3Weight",sort:"int",header:"副石3重",footer:{ content:"summColumn" }},
+			        {id:"sJewel3Price",sort:"int",header:"副石3价"},
+			        {id:"sJewel3Fee",sort:"int",header:"副石3额",footer:{ content:"summColumn" }},
+			        {id:"sJewel4Name",sort:"string",header:"副石4名"},
+			        {id:"sJewel4No",sort:"string",header:"副石4石号"},
+			        {id:"sJewel4Specifi",sort:"string",header:"副石4规格"},
+			        {id:"sJewel4Num",sort:"int",header:"副石4数",footer:{ content:"summColumn" }},
+			        {id:"sJewel4Weight",sort:"int",header:"副石4重",footer:{ content:"summColumn" }},
+			        {id:"sJewel4Price",sort:"int",header:"副石4价"},
+			        {id:"sJewel4Fee",sort:"int",header:"副石4额",footer:{ content:"summColumn" }},
+			        {id:"sJewel5Name",sort:"string",header:"副石5名"},
+			        {id:"sJewel5No",sort:"string",header:"副石5石号"},
+			        {id:"sJewel5Specifi",sort:"string",header:"副石5规格"},
+			        {id:"sJewel5Num",sort:"int",header:"副石5数",footer:{ content:"summColumn" }},
+			        {id:"sJewel5Weight",sort:"int",header:"副石5重",footer:{ content:"summColumn" }},
+			        {id:"sJewel5Price",sort:"int",header:"副石5价"},
+			        {id:"sJewel5Fee",sort:"int",header:"副石5额",footer:{ content:"summColumn" }},
+			        {id:"priceRange",sort:"string",header:"价格区间"},
+			        {id:"goldRange",sort:"string",header:"金重区间"},
+			        {id:"costRange",sort:"string",header:"成本区间"},
+			        {id:"colorRange",sort:"string",header:"颜色区间"},
+			        {id:"clarityRange",sort:"string",header:"净度区间"}
+             	],
+			footer:true,
+			clipboard:true,
+			footer:true,
+			resizeColumn:true,
+    		height:parent.winHeight-300,
+			dragColumn:true,
+			select: "row", 
+			multiselect: true, 
+			blockselect: true,
+			data:${itemListData},
+			hover:"myhover",
+			on:{
+			    "onItemClick":function(id, e, trg){
+			        //webix.message("Click on row: " + id.row+", column: " + id.column);
+			        },
+			     "data->onStoreUpdated":function(){
+						this.data.each(function(obj, i){
+							obj.rowNo = i+1;
+						})
+					}
+				}
+		})
+		
+		 context=webix.ui({
+	        view:"contextmenu",
+		    id:"cmenu",
+	        data:["Add","Rename","Delete",{ $template:"Separator" },"Info"],
+	        on:{
+	            onItemClick:function(id){
+	                var context = this.getContext();
+	                var list = context.obj;
+	                var listId = context.id;
+	                webix.message("List item: <i>"+grid.getItem(listId).goodsName+"</i> <br/>Context menu item: <i>"+this.getItem(id).value+"</i>");
+	            }
+	        }
+	    });
+		context.attachTo(grid);
+		webix.event(window, "resize", function(){
+			grid.define("width", $("#bootstrap-wizard-1").width()-30);
+			grid.adjust(); })
+		});	
+	</script>
+</html>

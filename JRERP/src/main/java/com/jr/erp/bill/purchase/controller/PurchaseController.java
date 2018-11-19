@@ -29,7 +29,6 @@ import com.jr.erp.bill.purchase.service.IBillPurchaseService;
 import com.jr.erp.sys.entity.SysAreaInfoExample;
 import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.service.ISysAreaInfoService;
-import com.jr.erp.sys.set.base.service.IBarcodeService;
 import com.jr.erp.sys.set.base.service.IBaseTypeService;
 import com.jr.erp.sys.set.purchase.entity.PurchaseSechemeExample;
 import com.jr.erp.sys.set.purchase.service.IPurchaseSechemeService;
