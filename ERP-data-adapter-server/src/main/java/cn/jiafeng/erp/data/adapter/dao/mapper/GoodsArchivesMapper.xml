@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.jiafeng.erp.data.adapter.dao.GoodsArchivesMapper">
+
+    <resultMap id="GoodsArchivesMap" type="cn.jiafeng.erp.data.adapter.dao.entity.GoodsArchives">
+        <result property="id" column="Id"/>
+        <result property="companyNo" column="companyNo"/>
+        <result property="systemCode" column="systemCode"/>
+        <result property="name" column="name"/>
+        <result property="mainType" column="mainType"/>
+        <result property="mainTypePrefix" column="mainTypePrefix"/>
+        <result property="goldType" column="goldType"/>
+        <result property="stoneType" column="stoneType"/>
+        <result property="categoryType" column="categoryType"/>
+        <result property="status" column="status"/>
+        <result property="assistCode" column="assistCode"/>
+        <result property="remark" column="remark"/>
+        <result property="createTime" column="createTime"/>
+        <result property="aliasName" column="aliasName"/>
+        <result property="goodsClassify" column="goodsClassify"/>
+        <result property="statsClassify" column="statsClassify"/>
+        <result property="costClassify" column="costClassify"/>
+        <result property="extClassify1" column="extClassify1"/>
+        <result property="extClassify2" column="extClassify2"/>
+        <result property="grfName" column="grfName"/>
+        <result property="giftTag" column="giftTag"/>
+        <result property="labelPrice" column="labelPrice"/>
+    </resultMap>
+    
+    <sql id="columns">
+        <![CDATA[
+        Id, companyNo, systemCode, name, mainType, mainTypePrefix, goldType, stoneType, categoryType, status, assistCode, remark, createTime, aliasName, goodsClassify, statsClassify, costClassify, extClassify1, extClassify2, grfName, giftTag, labelPrice
+        ]]>
+    </sql>
+    
+    <sql id="where">
+        <where>
+           <if test="id != null">
+                AND Id = #{id}
+            </if>
+           <if test="companyNo != null">
+                AND companyNo = #{companyNo}
+            </if>
+           <if test="systemCode != null">
+                AND systemCode = #{systemCode}
+            </if>
+           <if test="name != null">
+                AND name = #{name}
+            </if>
+           <if test="mainType != null">
+                AND mainType = #{mainType}
+            </if>
+           <if test="mainTypePrefix != null">
+                AND mainTypePrefix = #{mainTypePrefix}
+            </if>
+           <if test="goldType != null">
+                AND goldType = #{goldType}
+            </if>
+           <if test="stoneType != null">
+                AND stoneType = #{stoneType}
+            </if>
+           <if test="categoryType != null">
+                AND categoryType = #{categoryType}
+            </if>
+           <if test="status != null">
+                AND status = #{status}
+            </if>
+           <if test="assistCode != null">
+                AND assistCode = #{assistCode}
+            </if>
+           <if test="remark != null">
+                AND remark = #{remark}
+            </if>
+           <if test="createTime != null">
+                AND createTime = #{createTime}
+            </if>
+           <if test="aliasName != null">
+                AND aliasName = #{aliasName}
+            </if>
+           <if test="goodsClassify != null">
+                AND goodsClassify = #{goodsClassify}
+            </if>
+           <if test="statsClassify != null">
+                AND statsClassify = #{statsClassify}
+            </if>
+           <if test="costClassify != null">
+                AND costClassify = #{costClassify}
+            </if>
+           <if test="extClassify1 != null">
+                AND extClassify1 = #{extClassify1}
+            </if>
+           <if test="extClassify2 != null">
+                AND extClassify2 = #{extClassify2}
+            </if>
+           <if test="grfName != null">
+                AND grfName = #{grfName}
+            </if>
+           <if test="giftTag != null">
+                AND giftTag = #{giftTag}
+            </if>
+           <if test="labelPrice != null">
+                AND labelPrice = #{labelPrice}
+            </if>
+        </where>
+    </sql>
+    
+    <select id="getById" resultMap="GoodsArchivesMap">
+        SELECT <include refid="columns" />
+        <![CDATA[
+            FROM
+                s_goods_archives
+            WHERE 
+                id=0
+        ]]>
+    </select>
+    
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+        <![CDATA[
+            INSERT INTO s_goods_archives (
+                Id,
+                companyNo,
+                systemCode,
+                name,
+                mainType,
+                mainTypePrefix,
+                goldType,
+                stoneType,
+                categoryType,
+                status,
+                assistCode,
+                remark,
+                createTime,
+                aliasName,
+                goodsClassify,
+                statsClassify,
+                costClassify,
+                extClassify1,
+                extClassify2,
+                grfName,
+                giftTag,
+                labelPrice
+            ) VALUES (
+            	#{id},
+            	#{companyNo},
+            	#{systemCode},
+            	#{name},
+            	#{mainType},
+            	#{mainTypePrefix},
+            	#{goldType},
+            	#{stoneType},
+            	#{categoryType},
+            	#{status},
+            	#{assistCode},
+            	#{remark},
+            	#{createTime},
+            	#{aliasName},
+            	#{goodsClassify},
+            	#{statsClassify},
+            	#{costClassify},
+            	#{extClassify1},
+            	#{extClassify2},
+            	#{grfName},
+            	#{giftTag},
+            	#{labelPrice}
+            )
+        ]]>
+    </insert>
+
+    <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+            INSERT INTO s_goods_archives (
+                companyNo,
+                systemCode,
+                name,
+                mainType,
+                mainTypePrefix,
+                goldType,
+                stoneType,
+                categoryType,
+                status,
+                assistCode,
+                remark,
+                createTime,
+                aliasName,
+                goodsClassify,
+                statsClassify,
+                costClassify,
+                extClassify1,
+                extClassify2,
+                grfName,
+                giftTag,
+                labelPrice
+            ) VALUES
+        ]]>
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.companyNo},#{item.systemCode},#{item.name},#{item.mainType},#{item.mainTypePrefix},#{item.goldType},#{item.stoneType},#{item.categoryType},#{item.status},#{item.assistCode},#{item.remark},#{item.createTime},#{item.aliasName},#{item.goodsClassify},#{item.statsClassify},#{item.costClassify},#{item.extClassify1},#{item.extClassify2},#{item.grfName},#{item.giftTag},#{item.labelPrice})
+        </foreach>
+    </insert>
+    
+    <update id="update">
+        	UPDATE
+                s_goods_archives
+            <set>
+                <![CDATA[ companyNo = #{companyNo} ]]>,
+                <![CDATA[ systemCode = #{systemCode} ]]>,
+                <![CDATA[ name = #{name} ]]>,
+                <![CDATA[ mainType = #{mainType} ]]>,
+                <![CDATA[ mainTypePrefix = #{mainTypePrefix} ]]>,
+                <![CDATA[ goldType = #{goldType} ]]>,
+                <![CDATA[ stoneType = #{stoneType} ]]>,
+                <![CDATA[ categoryType = #{categoryType} ]]>,
+                <![CDATA[ status = #{status} ]]>,
+                <![CDATA[ assistCode = #{assistCode} ]]>,
+                <![CDATA[ remark = #{remark} ]]>,
+                <![CDATA[ createTime = #{createTime} ]]>,
+                <![CDATA[ aliasName = #{aliasName} ]]>,
+                <![CDATA[ goodsClassify = #{goodsClassify} ]]>,
+                <![CDATA[ statsClassify = #{statsClassify} ]]>,
+                <![CDATA[ costClassify = #{costClassify} ]]>,
+                <![CDATA[ extClassify1 = #{extClassify1} ]]>,
+                <![CDATA[ extClassify2 = #{extClassify2} ]]>,
+                <![CDATA[ grfName = #{grfName} ]]>,
+                <![CDATA[ giftTag = #{giftTag} ]]>,
+                <![CDATA[ labelPrice = #{labelPrice} ]]>
+            </set>
+            <where> 
+                Id = #{id}
+                
+            </where>
+    </update>
+    
+    <update id="updatePart">
+            UPDATE
+                s_goods_archives
+            <set>
+                <if test="companyNo != null">
+                	<![CDATA[ companyNo = #{companyNo} ]]>,
+                </if>
+                <if test="systemCode != null">
+                	<![CDATA[ systemCode = #{systemCode} ]]>,
+                </if>
+                <if test="name != null">
+                	<![CDATA[ name = #{name} ]]>,
+                </if>
+                <if test="mainType != null">
+                	<![CDATA[ mainType = #{mainType} ]]>,
+                </if>
+                <if test="mainTypePrefix != null">
+                	<![CDATA[ mainTypePrefix = #{mainTypePrefix} ]]>,
+                </if>
+                <if test="goldType != null">
+                	<![CDATA[ goldType = #{goldType} ]]>,
+                </if>
+                <if test="stoneType != null">
+                	<![CDATA[ stoneType = #{stoneType} ]]>,
+                </if>
+                <if test="categoryType != null">
+                	<![CDATA[ categoryType = #{categoryType} ]]>,
+                </if>
+                <if test="status != null">
+                	<![CDATA[ status = #{status} ]]>,
+                </if>
+                <if test="assistCode != null">
+                	<![CDATA[ assistCode = #{assistCode} ]]>,
+                </if>
+                <if test="remark != null">
+                	<![CDATA[ remark = #{remark} ]]>,
+                </if>
+                <if test="createTime != null">
+                	<![CDATA[ createTime = #{createTime} ]]>,
+                </if>
+                <if test="aliasName != null">
+                	<![CDATA[ aliasName = #{aliasName} ]]>,
+                </if>
+                <if test="goodsClassify != null">
+                	<![CDATA[ goodsClassify = #{goodsClassify} ]]>,
+                </if>
+                <if test="statsClassify != null">
+                	<![CDATA[ statsClassify = #{statsClassify} ]]>,
+                </if>
+                <if test="costClassify != null">
+                	<![CDATA[ costClassify = #{costClassify} ]]>,
+                </if>
+                <if test="extClassify1 != null">
+                	<![CDATA[ extClassify1 = #{extClassify1} ]]>,
+                </if>
+                <if test="extClassify2 != null">
+                	<![CDATA[ extClassify2 = #{extClassify2} ]]>,
+                </if>
+                <if test="grfName != null">
+                	<![CDATA[ grfName = #{grfName} ]]>,
+                </if>
+                <if test="giftTag != null">
+                	<![CDATA[ giftTag = #{giftTag} ]]>,
+                </if>
+                <if test="labelPrice != null">
+                	<![CDATA[ labelPrice = #{labelPrice} ]]>
+                </if>
+            </set>
+            <where>
+                Id = #{id}
+                
+            </where>
+    </update>
+    
+    <delete id="deleteByPk">
+        <![CDATA[
+            DELETE
+            FROM
+                s_goods_archives
+            WHERE
+                id=0
+        ]]>
+    </delete>
+    <delete id="delByCompanyNoAndRemarks">
+        <![CDATA[
+            DELETE
+            FROM
+                s_goods_archives
+            WHERE
+                companyNo = #{companyNo} and remark = #{remark}                
+        ]]>
+    </delete>
+    
+    <delete id="delByIds" parameterType="cn.jiafeng.erp.data.adapter.model.dto.BaseParamters">
+            DELETE
+            FROM
+                s_goods_archives
+            WHERE
+                companyNo = #{companyNo} and id in
+                <foreach collection="ids" index="index" item="id" open="(" separator="," close=")">
+		                #{id}       
+		        </foreach>
+    </delete>
+    
+</mapper> 
+

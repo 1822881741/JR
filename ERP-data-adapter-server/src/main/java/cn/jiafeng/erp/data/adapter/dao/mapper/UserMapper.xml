@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.jiafeng.erp.data.adapter.dao.UserMapper">
+
+    <resultMap id="UserMap" type="cn.jiafeng.erp.data.adapter.dao.entity.User">
+        <result property="id" column="id"/>
+        <result property="companyNo" column="companyNo"/>
+        <result property="loginNo" column="loginNo"/>
+        <result property="userType" column="userType"/>
+        <result property="password" column="password"/>
+        <result property="realName" column="realName"/>
+        <result property="roleId" column="roleId"/>
+        <result property="roleName" column="roleName"/>
+        <result property="sex" column="sex"/>
+        <result property="mobile" column="mobile"/>
+        <result property="photoUrl" column="photoUrl"/>
+        <result property="userSheetNoPrefix" column="userSheetNoPrefix"/>
+        <result property="areaCode" column="areaCode"/>
+        <result property="locked" column="locked"/>
+        <result property="delFlag" column="delFlag"/>
+        <result property="createTime" column="createTime"/>
+        <result property="modifyTime" column="modifyTime"/>
+        <result property="lastLoginTime" column="lastLoginTime"/>
+        <result property="sensitiveRight" column="sensitiveRight"/>
+        <result property="sensitiveFields" column="sensitiveFields"/>
+        <result property="custMgr" column="custMgr"/>
+        <result property="custRightJson" column="custRightJson"/>
+        <result property="modifySheetDate" column="modifySheetDate"/>
+        <result property="modifySheetDate2" column="modifySheetDate2"/>
+        <result property="canLoginType1" column="canLoginType1"/>
+        <result property="dailyReportLimit" column="dailyReportLimit"/>
+        <result property="dailyReportLimitDay" column="dailyReportLimitDay"/>
+    </resultMap>
+    
+    <sql id="columns">
+        <![CDATA[
+        id, companyNo, loginNo, userType, password, realName, roleId, roleName, sex, mobile, photoUrl, userSheetNoPrefix, areaCode, locked, delFlag, createTime, modifyTime, lastLoginTime, sensitiveRight, sensitiveFields, custMgr, custRightJson, modifySheetDate, modifySheetDate2, canLoginType1, dailyReportLimit, dailyReportLimitDay
+        ]]>
+    </sql>
+    
+    <sql id="where">
+        <where>
+           <if test="id != null">
+                AND id = #{id}
+            </if>
+           <if test="companyNo != null">
+                AND companyNo = #{companyNo}
+            </if>
+           <if test="loginNo != null">
+                AND loginNo = #{loginNo}
+            </if>
+           <if test="userType != null">
+                AND userType = #{userType}
+            </if>
+           <if test="password != null">
+                AND password = #{password}
+            </if>
+           <if test="realName != null">
+                AND realName = #{realName}
+            </if>
+           <if test="roleId != null">
+                AND roleId = #{roleId}
+            </if>
+           <if test="roleName != null">
+                AND roleName = #{roleName}
+            </if>
+           <if test="sex != null">
+                AND sex = #{sex}
+            </if>
+           <if test="mobile != null">
+                AND mobile = #{mobile}
+            </if>
+           <if test="photoUrl != null">
+                AND photoUrl = #{photoUrl}
+            </if>
+           <if test="userSheetNoPrefix != null">
+                AND userSheetNoPrefix = #{userSheetNoPrefix}
+            </if>
+           <if test="areaCode != null">
+                AND areaCode = #{areaCode}
+            </if>
+           <if test="locked != null">
+                AND locked = #{locked}
+            </if>
+           <if test="delFlag != null">
+                AND delFlag = #{delFlag}
+            </if>
+           <if test="null != createTimeBegin)">
+                AND createTime >= #{createTimeBegin}
+           </if>
+           <if test="null != (createTimeEnd)">
+                AND createTime &lt;= #{createTimeEnd}
+           </if>
+           <if test="null != modifyTimeBegin)">
+                AND modifyTime >= #{modifyTimeBegin}
+           </if>
+           <if test="null != (modifyTimeEnd)">
+                AND modifyTime &lt;= #{modifyTimeEnd}
+           </if>
+           <if test="null != lastLoginTimeBegin)">
+                AND lastLoginTime >= #{lastLoginTimeBegin}
+           </if>
+           <if test="null != (lastLoginTimeEnd)">
+                AND lastLoginTime &lt;= #{lastLoginTimeEnd}
+           </if>
+           <if test="sensitiveRight != null">
+                AND sensitiveRight = #{sensitiveRight}
+            </if>
+           <if test="sensitiveFields != null">
+                AND sensitiveFields = #{sensitiveFields}
+            </if>
+           <if test="custMgr != null">
+                AND custMgr = #{custMgr}
+            </if>
+           <if test="custRightJson != null">
+                AND custRightJson = #{custRightJson}
+            </if>
+           <if test="modifySheetDate != null">
+                AND modifySheetDate = #{modifySheetDate}
+            </if>
+           <if test="modifySheetDate2 != null">
+                AND modifySheetDate2 = #{modifySheetDate2}
+            </if>
+           <if test="canLoginType1 != null">
+                AND canLoginType1 = #{canLoginType1}
+            </if>
+           <if test="dailyReportLimit != null">
+                AND dailyReportLimit = #{dailyReportLimit}
+            </if>
+           <if test="dailyReportLimitDay != null">
+                AND dailyReportLimitDay = #{dailyReportLimitDay}
+            </if>
+        </where>
+    </sql>
+    
+    <select id="getById" resultMap="UserMap">
+        SELECT <include refid="columns" />
+        <![CDATA[
+            FROM
+                s_user
+            WHERE 
+                id=0
+        ]]>
+    </select>
+    
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+        <![CDATA[
+            INSERT INTO s_user (
+                id,
+                companyNo,
+                loginNo,
+                userType,
+                password,
+                realName,
+                roleId,
+                roleName,
+                sex,
+                mobile,
+                photoUrl,
+                userSheetNoPrefix,
+                areaCode,
+                locked,
+                delFlag,
+                createTime,
+                modifyTime,
+                lastLoginTime,
+                sensitiveRight,
+                sensitiveFields,
+                custMgr,
+                custRightJson,
+                modifySheetDate,
+                modifySheetDate2,
+                canLoginType1,
+                dailyReportLimit,
+                dailyReportLimitDay
+            ) VALUES (
+            	#{id},
+            	#{companyNo},
+            	#{loginNo},
+            	#{userType},
+            	#{password},
+            	#{realName},
+            	#{roleId},
+            	#{roleName},
+            	#{sex},
+            	#{mobile},
+            	#{photoUrl},
+            	#{userSheetNoPrefix},
+            	#{areaCode},
+            	#{locked},
+            	#{delFlag},
+            	#{createTime},
+            	#{modifyTime},
+            	#{lastLoginTime},
+            	#{sensitiveRight},
+            	#{sensitiveFields},
+            	#{custMgr},
+            	#{custRightJson},
+            	#{modifySheetDate},
+            	#{modifySheetDate2},
+            	#{canLoginType1},
+            	#{dailyReportLimit},
+            	#{dailyReportLimitDay}
+            )
+        ]]>
+    </insert>
+
+    <insert id="insertBatch">
+        <![CDATA[
+            INSERT INTO s_user (
+                companyNo,
+                loginNo,
+                userType,
+                password,
+                realName,
+                roleId,
+                roleName,
+                sex,
+                mobile,
+                photoUrl,
+                userSheetNoPrefix,
+                areaCode,
+                locked,
+                delFlag,
+                createTime,
+                modifyTime,
+                lastLoginTime,
+                sensitiveRight,
+                sensitiveFields,
+                custMgr,
+                custRightJson,
+                modifySheetDate,
+                modifySheetDate2,
+                canLoginType1,
+                dailyReportLimit,
+                dailyReportLimitDay
+            ) VALUES
+        ]]>
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.companyNo},#{item.loginNo},#{item.userType},#{item.password},#{item.realName},#{item.roleId},#{item.roleName},#{item.sex},#{item.mobile},#{item.photoUrl},#{item.userSheetNoPrefix},#{item.areaCode},#{item.locked},#{item.delFlag},#{item.createTime},#{item.modifyTime},#{item.lastLoginTime},#{item.sensitiveRight},#{item.sensitiveFields},#{item.custMgr},#{item.custRightJson},#{item.modifySheetDate},#{item.modifySheetDate2},#{item.canLoginType1},#{item.dailyReportLimit},#{item.dailyReportLimitDay})
+        </foreach>
+    </insert>
+    
+    <update id="update">
+        	UPDATE
+                s_user
+            <set>
+                <![CDATA[ companyNo = #{companyNo} ]]>,
+                <![CDATA[ loginNo = #{loginNo} ]]>,
+                <![CDATA[ userType = #{userType} ]]>,
+                <![CDATA[ password = #{password} ]]>,
+                <![CDATA[ realName = #{realName} ]]>,
+                <![CDATA[ roleId = #{roleId} ]]>,
+                <![CDATA[ roleName = #{roleName} ]]>,
+                <![CDATA[ sex = #{sex} ]]>,
+                <![CDATA[ mobile = #{mobile} ]]>,
+                <![CDATA[ photoUrl = #{photoUrl} ]]>,
+                <![CDATA[ userSheetNoPrefix = #{userSheetNoPrefix} ]]>,
+                <![CDATA[ areaCode = #{areaCode} ]]>,
+                <![CDATA[ locked = #{locked} ]]>,
+                <![CDATA[ delFlag = #{delFlag} ]]>,
+                <![CDATA[ createTime = #{createTime} ]]>,
+                <![CDATA[ modifyTime = #{modifyTime} ]]>,
+                <![CDATA[ lastLoginTime = #{lastLoginTime} ]]>,
+                <![CDATA[ sensitiveRight = #{sensitiveRight} ]]>,
+                <![CDATA[ sensitiveFields = #{sensitiveFields} ]]>,
+                <![CDATA[ custMgr = #{custMgr} ]]>,
+                <![CDATA[ custRightJson = #{custRightJson} ]]>,
+                <![CDATA[ modifySheetDate = #{modifySheetDate} ]]>,
+                <![CDATA[ modifySheetDate2 = #{modifySheetDate2} ]]>,
+                <![CDATA[ canLoginType1 = #{canLoginType1} ]]>,
+                <![CDATA[ dailyReportLimit = #{dailyReportLimit} ]]>,
+                <![CDATA[ dailyReportLimitDay = #{dailyReportLimitDay} ]]>
+            </set>
+            <where> 
+                id = #{id}
+                
+            </where>
+    </update>
+    
+    <update id="updatePart">
+            UPDATE
+                s_user
+            <set>
+                <if test="companyNo != null">
+                	<![CDATA[ companyNo = #{companyNo} ]]>,
+                </if>
+                <if test="loginNo != null">
+                	<![CDATA[ loginNo = #{loginNo} ]]>,
+                </if>
+                <if test="userType != null">
+                	<![CDATA[ userType = #{userType} ]]>,
+                </if>
+                <if test="password != null">
+                	<![CDATA[ password = #{password} ]]>,
+                </if>
+                <if test="realName != null">
+                	<![CDATA[ realName = #{realName} ]]>,
+                </if>
+                <if test="roleId != null">
+                	<![CDATA[ roleId = #{roleId} ]]>,
+                </if>
+                <if test="roleName != null">
+                	<![CDATA[ roleName = #{roleName} ]]>,
+                </if>
+                <if test="sex != null">
+                	<![CDATA[ sex = #{sex} ]]>,
+                </if>
+                <if test="mobile != null">
+                	<![CDATA[ mobile = #{mobile} ]]>,
+                </if>
+                <if test="photoUrl != null">
+                	<![CDATA[ photoUrl = #{photoUrl} ]]>,
+                </if>
+                <if test="userSheetNoPrefix != null">
+                	<![CDATA[ userSheetNoPrefix = #{userSheetNoPrefix} ]]>,
+                </if>
+                <if test="areaCode != null">
+                	<![CDATA[ areaCode = #{areaCode} ]]>,
+                </if>
+                <if test="locked != null">
+                	<![CDATA[ locked = #{locked} ]]>,
+                </if>
+                <if test="delFlag != null">
+                	<![CDATA[ delFlag = #{delFlag} ]]>,
+                </if>
+                <if test="createTime != null">
+                	<![CDATA[ createTime = #{createTime} ]]>,
+                </if>
+                <if test="modifyTime != null">
+                	<![CDATA[ modifyTime = #{modifyTime} ]]>,
+                </if>
+                <if test="lastLoginTime != null">
+                	<![CDATA[ lastLoginTime = #{lastLoginTime} ]]>,
+                </if>
+                <if test="sensitiveRight != null">
+                	<![CDATA[ sensitiveRight = #{sensitiveRight} ]]>,
+                </if>
+                <if test="sensitiveFields != null">
+                	<![CDATA[ sensitiveFields = #{sensitiveFields} ]]>,
+                </if>
+                <if test="custMgr != null">
+                	<![CDATA[ custMgr = #{custMgr} ]]>,
+                </if>
+                <if test="custRightJson != null">
+                	<![CDATA[ custRightJson = #{custRightJson} ]]>,
+                </if>
+                <if test="modifySheetDate != null">
+                	<![CDATA[ modifySheetDate = #{modifySheetDate} ]]>,
+                </if>
+                <if test="modifySheetDate2 != null">
+                	<![CDATA[ modifySheetDate2 = #{modifySheetDate2} ]]>,
+                </if>
+                <if test="canLoginType1 != null">
+                	<![CDATA[ canLoginType1 = #{canLoginType1} ]]>,
+                </if>
+                <if test="dailyReportLimit != null">
+                	<![CDATA[ dailyReportLimit = #{dailyReportLimit} ]]>,
+                </if>
+                <if test="dailyReportLimitDay != null">
+                	<![CDATA[ dailyReportLimitDay = #{dailyReportLimitDay} ]]>
+                </if>
+            </set>
+            <where>
+                id = #{id}
+                
+            </where>
+    </update>
+    
+    <delete id="deleteByPk">
+        <![CDATA[
+            DELETE
+            FROM
+                s_user
+            WHERE
+                id=0
+        ]]>
+    </delete>
+</mapper> 
+

@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.jiafeng.erp.data.adapter.dao.ImportsheetMapper">
+
+    <resultMap id="ImportsheetMap" type="cn.jiafeng.erp.data.adapter.dao.entity.Importsheet">
+        <result property="id" column="id"/>
+        <result property="orgSheetId" column="orgSheetId"/>
+        <result property="companyNo" column="companyNo"/>
+        <result property="sheetNo" column="sheetNo"/>
+        <result property="oldSheetNo" column="oldSheetNo"/>
+        <result property="supplierNo" column="supplierNo"/>
+        <result property="supplierName" column="supplierName"/>
+        <result property="customerName" column="customerName"/>
+        <result property="customerPhone" column="customerPhone"/>
+        <result property="saleManId" column="saleManId"/>
+        <result property="salesmanName" column="salesmanName"/>
+        <result property="purchaseSaleMode" column="purchaseSaleMode"/>
+        <result property="sheetType" column="sheetType"/>
+        <result property="deptAreaCode" column="deptAreaCode"/>
+        <result property="deptAreaName" column="deptAreaName"/>
+        <result property="storeId" column="storeId"/>
+        <result property="storeName" column="storeName"/>
+        <result property="createUserId" column="createUserId"/>
+        <result property="createUserName" column="createUserName"/>
+        <result property="totalNum" column="totalNum"/>
+        <result property="totalGoldWeight" column="totalGoldWeight"/>
+        <result property="costPrice" column="costPrice"/>
+        <result property="totalSalePriceAmount" column="totalSalePriceAmount"/>
+        <result property="totalMainStoneWeight" column="totalMainStoneWeight"/>
+        <result property="sheetDate" column="sheetDate"/>
+        <result property="remarks" column="remarks"/>
+        <result property="jtFlag" column="jtFlag"/>
+        <result property="saveFlag" column="saveFlag"/>
+        <result property="daiXiaoFlag" column="daiXiaoFlag"/>
+        <result property="zaiTuFlag" column="zaiTuFlag"/>
+        <result property="brandName" column="brandName"/>
+        <result property="areaCode" column="areaCode"/>
+        <result property="importFlag" column="importFlag"/>
+        <result property="sheetStatus" column="sheetStatus"/>
+        <result property="receiveTime" column="receiveTime"/>
+        <result property="piCi" column="piCi"/>
+        <result property="createTime" column="createTime"/>
+        <result property="blendFlag" column="blendFlag"/>
+        <result property="auditStatus" column="auditStatus"/>
+        <result property="submitAuditUserId" column="submitAuditUserId"/>
+        <result property="submitAuditUserName" column="submitAuditUserName"/>
+        <result property="submitAuditTime" column="submitAuditTime"/>
+        <result property="auditUserId" column="auditUserId"/>
+        <result property="auditUserName" column="auditUserName"/>
+        <result property="auditTime" column="auditTime"/>
+        <result property="auditMsg" column="auditMsg"/>
+    </resultMap>
+    
+    <sql id="columns">
+        <![CDATA[
+        id, orgSheetId, companyNo, sheetNo, oldSheetNo, supplierNo, supplierName, customerName, customerPhone, saleManId, salesmanName, purchaseSaleMode, sheetType, deptAreaCode, deptAreaName, storeId, storeName, createUserId, createUserName, totalNum, totalGoldWeight, costPrice, totalSalePriceAmount, totalMainStoneWeight, sheetDate, remarks, jtFlag, saveFlag, daiXiaoFlag, zaiTuFlag, brandName, areaCode, importFlag, sheetStatus, receiveTime, piCi, createTime, blendFlag, auditStatus, submitAuditUserId, submitAuditUserName, submitAuditTime, auditUserId, auditUserName, auditTime, auditMsg
+        ]]>
+    </sql>
+    
+    <sql id="where">
+        <where>
+           <if test="id != null">
+                AND id = #{id}
+            </if>
+           <if test="orgSheetId != null">
+                AND orgSheetId = #{orgSheetId}
+            </if>
+           <if test="companyNo != null">
+                AND companyNo = #{companyNo}
+            </if>
+           <if test="sheetNo != null">
+                AND sheetNo = #{sheetNo}
+            </if>
+           <if test="oldSheetNo != null">
+                AND oldSheetNo = #{oldSheetNo}
+            </if>
+           <if test="supplierNo != null">
+                AND supplierNo = #{supplierNo}
+            </if>
+           <if test="supplierName != null">
+                AND supplierName = #{supplierName}
+            </if>
+           <if test="customerName != null">
+                AND customerName = #{customerName}
+            </if>
+           <if test="customerPhone != null">
+                AND customerPhone = #{customerPhone}
+            </if>
+           <if test="saleManId != null">
+                AND saleManId = #{saleManId}
+            </if>
+           <if test="salesmanName != null">
+                AND salesmanName = #{salesmanName}
+            </if>
+           <if test="purchaseSaleMode != null">
+                AND purchaseSaleMode = #{purchaseSaleMode}
+            </if>
+           <if test="sheetType != null">
+                AND sheetType = #{sheetType}
+            </if>
+           <if test="deptAreaCode != null">
+                AND deptAreaCode = #{deptAreaCode}
+            </if>
+           <if test="deptAreaName != null">
+                AND deptAreaName = #{deptAreaName}
+            </if>
+           <if test="storeId != null">
+                AND storeId = #{storeId}
+            </if>
+           <if test="storeName != null">
+                AND storeName = #{storeName}
+            </if>
+           <if test="createUserId != null">
+                AND createUserId = #{createUserId}
+            </if>
+           <if test="createUserName != null">
+                AND createUserName = #{createUserName}
+            </if>
+           <if test="totalNum != null">
+                AND totalNum = #{totalNum}
+            </if>
+           <if test="totalGoldWeight != null">
+                AND totalGoldWeight = #{totalGoldWeight}
+            </if>
+           <if test="costPrice != null">
+                AND costPrice = #{costPrice}
+            </if>
+           <if test="totalSalePriceAmount != null">
+                AND totalSalePriceAmount = #{totalSalePriceAmount}
+            </if>
+           <if test="totalMainStoneWeight != null">
+                AND totalMainStoneWeight = #{totalMainStoneWeight}
+            </if>
+           <if test="null != sheetDateBegin)">
+                AND sheetDate >= #{sheetDateBegin}
+           </if>
+           <if test="null != (sheetDateEnd)">
+                AND sheetDate &lt;= #{sheetDateEnd}
+           </if>
+           <if test="remarks != null">
+                AND remarks = #{remarks}
+            </if>
+           <if test="jtFlag != null">
+                AND jtFlag = #{jtFlag}
+            </if>
+           <if test="saveFlag != null">
+                AND saveFlag = #{saveFlag}
+            </if>
+           <if test="daiXiaoFlag != null">
+                AND daiXiaoFlag = #{daiXiaoFlag}
+            </if>
+           <if test="zaiTuFlag != null">
+                AND zaiTuFlag = #{zaiTuFlag}
+            </if>
+           <if test="brandName != null">
+                AND brandName = #{brandName}
+            </if>
+           <if test="areaCode != null">
+                AND areaCode = #{areaCode}
+            </if>
+           <if test="importFlag != null">
+                AND importFlag = #{importFlag}
+            </if>
+           <if test="sheetStatus != null">
+                AND sheetStatus = #{sheetStatus}
+            </if>
+           <if test="null != receiveTimeBegin)">
+                AND receiveTime >= #{receiveTimeBegin}
+           </if>
+           <if test="null != (receiveTimeEnd)">
+                AND receiveTime &lt;= #{receiveTimeEnd}
+           </if>
+           <if test="piCi != null">
+                AND piCi = #{piCi}
+            </if>
+           <if test="null != createTimeBegin)">
+                AND createTime >= #{createTimeBegin}
+           </if>
+           <if test="null != (createTimeEnd)">
+                AND createTime &lt;= #{createTimeEnd}
+           </if>
+           <if test="blendFlag != null">
+                AND blendFlag = #{blendFlag}
+            </if>
+           <if test="auditStatus != null">
+                AND auditStatus = #{auditStatus}
+            </if>
+           <if test="submitAuditUserId != null">
+                AND submitAuditUserId = #{submitAuditUserId}
+            </if>
+           <if test="submitAuditUserName != null">
+                AND submitAuditUserName = #{submitAuditUserName}
+            </if>
+           <if test="null != submitAuditTimeBegin)">
+                AND submitAuditTime >= #{submitAuditTimeBegin}
+           </if>
+           <if test="null != (submitAuditTimeEnd)">
+                AND submitAuditTime &lt;= #{submitAuditTimeEnd}
+           </if>
+           <if test="auditUserId != null">
+                AND auditUserId = #{auditUserId}
+            </if>
+           <if test="auditUserName != null">
+                AND auditUserName = #{auditUserName}
+            </if>
+           <if test="null != auditTimeBegin)">
+                AND auditTime >= #{auditTimeBegin}
+           </if>
+           <if test="null != (auditTimeEnd)">
+                AND auditTime &lt;= #{auditTimeEnd}
+           </if>
+           <if test="auditMsg != null">
+                AND auditMsg = #{auditMsg}
+            </if>
+        </where>
+    </sql>
+    
+    <select id="getById" resultMap="ImportsheetMap">
+        SELECT <include refid="columns" />
+        <![CDATA[
+            FROM
+                b_importsheet
+            WHERE 
+                id=0
+        ]]>
+    </select>
+    
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+        <![CDATA[
+            INSERT INTO b_importsheet (
+                id,
+                orgSheetId,
+                companyNo,
+                sheetNo,
+                oldSheetNo,
+                supplierNo,
+                supplierName,
+                customerName,
+                customerPhone,
+                saleManId,
+                salesmanName,
+                purchaseSaleMode,
+                sheetType,
+                deptAreaCode,
+                deptAreaName,
+                storeId,
+                storeName,
+                createUserId,
+                createUserName,
+                totalNum,
+                totalGoldWeight,
+                costPrice,
+                totalSalePriceAmount,
+                totalMainStoneWeight,
+                sheetDate,
+                remarks,
+                jtFlag,
+                saveFlag,
+                daiXiaoFlag,
+                zaiTuFlag,
+                brandName,
+                areaCode,
+                importFlag,
+                sheetStatus,
+                receiveTime,
+                piCi,
+                createTime,
+                blendFlag,
+                auditStatus,
+                submitAuditUserId,
+                submitAuditUserName,
+                submitAuditTime,
+                auditUserId,
+                auditUserName,
+                auditTime,
+                auditMsg
+            ) VALUES (
+            	#{id},
+            	#{orgSheetId},
+            	#{companyNo},
+            	#{sheetNo},
+            	#{oldSheetNo},
+            	#{supplierNo},
+            	#{supplierName},
+            	#{customerName},
+            	#{customerPhone},
+            	#{saleManId},
+            	#{salesmanName},
+            	#{purchaseSaleMode},
+            	#{sheetType},
+            	#{deptAreaCode},
+            	#{deptAreaName},
+            	#{storeId},
+            	#{storeName},
+            	#{createUserId},
+            	#{createUserName},
+            	#{totalNum},
+            	#{totalGoldWeight},
+            	#{costPrice},
+            	#{totalSalePriceAmount},
+            	#{totalMainStoneWeight},
+            	#{sheetDate},
+            	#{remarks},
+            	#{jtFlag},
+            	#{saveFlag},
+            	#{daiXiaoFlag},
+            	#{zaiTuFlag},
+            	#{brandName},
+            	#{areaCode},
+            	#{importFlag},
+            	#{sheetStatus},
+            	#{receiveTime},
+            	#{piCi},
+            	#{createTime},
+            	#{blendFlag},
+            	#{auditStatus},
+            	#{submitAuditUserId},
+            	#{submitAuditUserName},
+            	#{submitAuditTime},
+            	#{auditUserId},
+            	#{auditUserName},
+            	#{auditTime},
+            	#{auditMsg}
+            )
+        ]]>
+        
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+        	SELECT LAST_INSERT_ID()
+    	</selectKey>
+    </insert>
+
+    <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id" >
+        <![CDATA[
+            INSERT INTO b_importsheet (
+                orgSheetId,
+                companyNo,
+                sheetNo,
+                oldSheetNo,
+                supplierNo,
+                supplierName,
+                customerName,
+                customerPhone,
+                saleManId,
+                salesmanName,
+                purchaseSaleMode,
+                sheetType,
+                deptAreaCode,
+                deptAreaName,
+                storeId,
+                storeName,
+                createUserId,
+                createUserName,
+                totalNum,
+                totalGoldWeight,
+                costPrice,
+                totalSalePriceAmount,
+                totalMainStoneWeight,
+                sheetDate,
+                remarks,
+                jtFlag,
+                saveFlag,
+                daiXiaoFlag,
+                zaiTuFlag,
+                brandName,
+                areaCode,
+                importFlag,
+                sheetStatus,
+                receiveTime,
+                piCi,
+                createTime,
+                blendFlag,
+                auditStatus,
+                submitAuditUserId,
+                submitAuditUserName,
+                submitAuditTime,
+                auditUserId,
+                auditUserName,
+                auditTime,
+                auditMsg
+            ) VALUES
+        ]]>
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.orgSheetId},#{item.companyNo},#{item.sheetNo},#{item.oldSheetNo},#{item.supplierNo},#{item.supplierName},#{item.customerName},#{item.customerPhone},#{item.saleManId},#{item.salesmanName},#{item.purchaseSaleMode},#{item.sheetType},#{item.deptAreaCode},#{item.deptAreaName},#{item.storeId},#{item.storeName},#{item.createUserId},#{item.createUserName},#{item.totalNum},#{item.totalGoldWeight},#{item.costPrice},#{item.totalSalePriceAmount},#{item.totalMainStoneWeight},#{item.sheetDate},#{item.remarks},#{item.jtFlag},#{item.saveFlag},#{item.daiXiaoFlag},#{item.zaiTuFlag},#{item.brandName},#{item.areaCode},#{item.importFlag},#{item.sheetStatus},#{item.receiveTime},#{item.piCi},#{item.createTime},#{item.blendFlag},#{item.auditStatus},#{item.submitAuditUserId},#{item.submitAuditUserName},#{item.submitAuditTime},#{item.auditUserId},#{item.auditUserName},#{item.auditTime},#{item.auditMsg})
+        </foreach>
+    </insert>
+    
+    <update id="update">
+        	UPDATE
+                b_importsheet
+            <set>
+                <![CDATA[ orgSheetId = #{orgSheetId} ]]>,
+                <![CDATA[ companyNo = #{companyNo} ]]>,
+                <![CDATA[ sheetNo = #{sheetNo} ]]>,
+                <![CDATA[ oldSheetNo = #{oldSheetNo} ]]>,
+                <![CDATA[ supplierNo = #{supplierNo} ]]>,
+                <![CDATA[ supplierName = #{supplierName} ]]>,
+                <![CDATA[ customerName = #{customerName} ]]>,
+                <![CDATA[ customerPhone = #{customerPhone} ]]>,
+                <![CDATA[ saleManId = #{saleManId} ]]>,
+                <![CDATA[ salesmanName = #{salesmanName} ]]>,
+                <![CDATA[ purchaseSaleMode = #{purchaseSaleMode} ]]>,
+                <![CDATA[ sheetType = #{sheetType} ]]>,
+                <![CDATA[ deptAreaCode = #{deptAreaCode} ]]>,
+                <![CDATA[ deptAreaName = #{deptAreaName} ]]>,
+                <![CDATA[ storeId = #{storeId} ]]>,
+                <![CDATA[ storeName = #{storeName} ]]>,
+                <![CDATA[ createUserId = #{createUserId} ]]>,
+                <![CDATA[ createUserName = #{createUserName} ]]>,
+                <![CDATA[ totalNum = #{totalNum} ]]>,
+                <![CDATA[ totalGoldWeight = #{totalGoldWeight} ]]>,
+                <![CDATA[ costPrice = #{costPrice} ]]>,
+                <![CDATA[ totalSalePriceAmount = #{totalSalePriceAmount} ]]>,
+                <![CDATA[ totalMainStoneWeight = #{totalMainStoneWeight} ]]>,
+                <![CDATA[ sheetDate = #{sheetDate} ]]>,
+                <![CDATA[ remarks = #{remarks} ]]>,
+                <![CDATA[ jtFlag = #{jtFlag} ]]>,
+                <![CDATA[ saveFlag = #{saveFlag} ]]>,
+                <![CDATA[ daiXiaoFlag = #{daiXiaoFlag} ]]>,
+                <![CDATA[ zaiTuFlag = #{zaiTuFlag} ]]>,
+                <![CDATA[ brandName = #{brandName} ]]>,
+                <![CDATA[ areaCode = #{areaCode} ]]>,
+                <![CDATA[ importFlag = #{importFlag} ]]>,
+                <![CDATA[ sheetStatus = #{sheetStatus} ]]>,
+                <![CDATA[ receiveTime = #{receiveTime} ]]>,
+                <![CDATA[ piCi = #{piCi} ]]>,
+                <![CDATA[ createTime = #{createTime} ]]>,
+                <![CDATA[ blendFlag = #{blendFlag} ]]>,
+                <![CDATA[ auditStatus = #{auditStatus} ]]>,
+                <![CDATA[ submitAuditUserId = #{submitAuditUserId} ]]>,
+                <![CDATA[ submitAuditUserName = #{submitAuditUserName} ]]>,
+                <![CDATA[ submitAuditTime = #{submitAuditTime} ]]>,
+                <![CDATA[ auditUserId = #{auditUserId} ]]>,
+                <![CDATA[ auditUserName = #{auditUserName} ]]>,
+                <![CDATA[ auditTime = #{auditTime} ]]>,
+                <![CDATA[ auditMsg = #{auditMsg} ]]>
+            </set>
+            <where> 
+                id = #{id}
+                
+            </where>
+    </update>
+    
+    <update id="updatePart">
+            UPDATE
+                b_importsheet
+            <set>
+                <if test="orgSheetId != null">
+                	<![CDATA[ orgSheetId = #{orgSheetId} ]]>,
+                </if>
+                <if test="companyNo != null">
+                	<![CDATA[ companyNo = #{companyNo} ]]>,
+                </if>
+                <if test="sheetNo != null">
+                	<![CDATA[ sheetNo = #{sheetNo} ]]>,
+                </if>
+                <if test="oldSheetNo != null">
+                	<![CDATA[ oldSheetNo = #{oldSheetNo} ]]>,
+                </if>
+                <if test="supplierNo != null">
+                	<![CDATA[ supplierNo = #{supplierNo} ]]>,
+                </if>
+                <if test="supplierName != null">
+                	<![CDATA[ supplierName = #{supplierName} ]]>,
+                </if>
+                <if test="customerName != null">
+                	<![CDATA[ customerName = #{customerName} ]]>,
+                </if>
+                <if test="customerPhone != null">
+                	<![CDATA[ customerPhone = #{customerPhone} ]]>,
+                </if>
+                <if test="saleManId != null">
+                	<![CDATA[ saleManId = #{saleManId} ]]>,
+                </if>
+                <if test="salesmanName != null">
+                	<![CDATA[ salesmanName = #{salesmanName} ]]>,
+                </if>
+                <if test="purchaseSaleMode != null">
+                	<![CDATA[ purchaseSaleMode = #{purchaseSaleMode} ]]>,
+                </if>
+                <if test="sheetType != null">
+                	<![CDATA[ sheetType = #{sheetType} ]]>,
+                </if>
+                <if test="deptAreaCode != null">
+                	<![CDATA[ deptAreaCode = #{deptAreaCode} ]]>,
+                </if>
+                <if test="deptAreaName != null">
+                	<![CDATA[ deptAreaName = #{deptAreaName} ]]>,
+                </if>
+                <if test="storeId != null">
+                	<![CDATA[ storeId = #{storeId} ]]>,
+                </if>
+                <if test="storeName != null">
+                	<![CDATA[ storeName = #{storeName} ]]>,
+                </if>
+                <if test="createUserId != null">
+                	<![CDATA[ createUserId = #{createUserId} ]]>,
+                </if>
+                <if test="createUserName != null">
+                	<![CDATA[ createUserName = #{createUserName} ]]>,
+                </if>
+                <if test="totalNum != null">
+                	<![CDATA[ totalNum = #{totalNum} ]]>,
+                </if>
+                <if test="totalGoldWeight != null">
+                	<![CDATA[ totalGoldWeight = #{totalGoldWeight} ]]>,
+                </if>
+                <if test="costPrice != null">
+                	<![CDATA[ costPrice = #{costPrice} ]]>,
+                </if>
+                <if test="totalSalePriceAmount != null">
+                	<![CDATA[ totalSalePriceAmount = #{totalSalePriceAmount} ]]>,
+                </if>
+                <if test="totalMainStoneWeight != null">
+                	<![CDATA[ totalMainStoneWeight = #{totalMainStoneWeight} ]]>,
+                </if>
+                <if test="sheetDate != null">
+                	<![CDATA[ sheetDate = #{sheetDate} ]]>,
+                </if>
+                <if test="remarks != null">
+                	<![CDATA[ remarks = #{remarks} ]]>,
+                </if>
+                <if test="jtFlag != null">
+                	<![CDATA[ jtFlag = #{jtFlag} ]]>,
+                </if>
+                <if test="saveFlag != null">
+                	<![CDATA[ saveFlag = #{saveFlag} ]]>,
+                </if>
+                <if test="daiXiaoFlag != null">
+                	<![CDATA[ daiXiaoFlag = #{daiXiaoFlag} ]]>,
+                </if>
+                <if test="zaiTuFlag != null">
+                	<![CDATA[ zaiTuFlag = #{zaiTuFlag} ]]>,
+                </if>
+                <if test="brandName != null">
+                	<![CDATA[ brandName = #{brandName} ]]>,
+                </if>
+                <if test="areaCode != null">
+                	<![CDATA[ areaCode = #{areaCode} ]]>,
+                </if>
+                <if test="importFlag != null">
+                	<![CDATA[ importFlag = #{importFlag} ]]>,
+                </if>
+                <if test="sheetStatus != null">
+                	<![CDATA[ sheetStatus = #{sheetStatus} ]]>,
+                </if>
+                <if test="receiveTime != null">
+                	<![CDATA[ receiveTime = #{receiveTime} ]]>,
+                </if>
+                <if test="piCi != null">
+                	<![CDATA[ piCi = #{piCi} ]]>,
+                </if>
+                <if test="createTime != null">
+                	<![CDATA[ createTime = #{createTime} ]]>,
+                </if>
+                <if test="blendFlag != null">
+                	<![CDATA[ blendFlag = #{blendFlag} ]]>,
+                </if>
+                <if test="auditStatus != null">
+                	<![CDATA[ auditStatus = #{auditStatus} ]]>,
+                </if>
+                <if test="submitAuditUserId != null">
+                	<![CDATA[ submitAuditUserId = #{submitAuditUserId} ]]>,
+                </if>
+                <if test="submitAuditUserName != null">
+                	<![CDATA[ submitAuditUserName = #{submitAuditUserName} ]]>,
+                </if>
+                <if test="submitAuditTime != null">
+                	<![CDATA[ submitAuditTime = #{submitAuditTime} ]]>,
+                </if>
+                <if test="auditUserId != null">
+                	<![CDATA[ auditUserId = #{auditUserId} ]]>,
+                </if>
+                <if test="auditUserName != null">
+                	<![CDATA[ auditUserName = #{auditUserName} ]]>,
+                </if>
+                <if test="auditTime != null">
+                	<![CDATA[ auditTime = #{auditTime} ]]>,
+                </if>
+                <if test="auditMsg != null">
+                	<![CDATA[ auditMsg = #{auditMsg} ]]>
+                </if>
+            </set>
+            <where>
+                id = #{id}
+                
+            </where>
+    </update>
+    
+    <delete id="deleteByPk">
+        <![CDATA[
+            DELETE
+            FROM
+                b_importsheet
+            WHERE
+                id=0
+        ]]>
+    </delete>
+    
+    <delete id="delByIds" parameterType="cn.jiafeng.erp.data.adapter.model.dto.BaseParamters">
+            DELETE
+            FROM
+                b_importsheet
+            WHERE
+                companyNo = #{companyNo} and id in
+                <foreach collection="ids" index="index" item="id" open="(" separator="," close=")">
+		                #{id}       
+		        </foreach>
+    </delete>
+    
+    <select id="getSheetNumber" resultType="java.lang.Integer">
+        select count(id)  from b_importsheet    
+		WHERE  sheetNo like  CONCAT('%j',DATE_FORMAT(NOW(),'%y%m%d'),'%')
+		and companyNo = #{companyNo}
+		and sheetType = 1
+    </select>
+    
+</mapper> 
+

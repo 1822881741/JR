@@ -376,199 +376,194 @@
 		window.location.href="purchase/editPurchaseBill.do?id="+id;
 	}
 	function showQueryBuilder(){
-		var qb = {
-				view: "querybuilder",
-				id: "querybuilder",
-				fields: [
-					{ id:"fname", value:"First Name", type:"string" },
-					{ id:"lname", value:"Last Name",  type:"string" },
-					{ id:"age",  value:"Age", type:"number" },
-					{ id:"bdate",  value:"Birth Date", type:"date" }
-				],
-				maxLevel: 4
-			};
-		webix.ui({
-			view:"window",
-			position:"center",
-			height:400,
-		    width:800,
-		    move:true,
-			resize: true,
-		    head:"This window can be moved",
-		    body:{
-        		view:"scrollview", body:{
-        			rows:[qb
-        			]
-        		}
-        	}
-		}).show();
+		var index = layer.open({
+			  type: 2,
+			  skin: 'layui-layer-rim', //加上边框
+			  area: ['720px', '540px'], //宽高
+			  fixed: false, //不固定
+			  maxmin: true,
+			  content : "common/queryBuilder.do?module=purchase",
+			  btn : [ '保存', '取消' ],
+			  yes : function(index, layero) {
+					var result = $(layero).find("iframe")[0].contentWindow.submitData();
+					if (result) {
+						$.ajax({
+					        type: "POST",
+					        url: "productStock/queryStockByQueryBuilder.do",
+					        dataType: 'json',
+					        data:"querySql="+result.code,
+					        async: false,
+					        success: function(data) {
+					            if (data.status == '100') {
+					            }else{
+					            	layer.msg("获取柜台失败");
+					            }
+					        },
+					        error: function() {
+					        	layer.alert("连接服务器失败，请稍后重试");
+					        }
+					    });
+					}
+				}
+			});
 	}
 	</script>
 	<script type="text/javascript" charset="utf-8">
 	var context;
 	webix.ready(function(){
-		grid = webix.ui({
-			container:"testA",
-			view:"datatable", 
-			id:"list1",
-			css:"webix_header_border webix_body_border webix_footer_border",
-			leftSplit:1,
-			headermenu:{
-				width:250,
-				autoheight:false,
-				scroll:true
-			},
-			columns:[
-			        {id:"rowNo",header:'#',sort:"int",css:"header",width:50},
-			        {id:"id",header:'id',hidden:true},
-			        {id:"barcode",sort:"string",header:["条码",{ content:"multiSelectFilter" }] , width:120, css:{ "text-align": "center" }, tooltip: "", editor:"text"},
-			        {id:"oldBarcode",sort:"string",header:"原条码"},
-			        {id:"productName",sort:"string",header:["商品名称",{ content:"multiSelectFilter" }] , width:120, css:{ "text-align": "center" }, tooltip: "2222", editor:"text"},
-			        {id:"supplier",sort:"string",header:"供应商名称"},
-			        {id:"brandName",sort:"string",header:"品牌名称"},
-			        {id:"subName",sort:"string",header:"商品子名称"},
-			        {id:"certificateNo",sort:"string",header:"证书号"},
-			        {id:"giaCertificateNo",sort:"string",header:"GIA证书号"},
-			        {id:"style",sort:"string",header:"款式"},
-			        {id:"comStyleNo",sort:"string",header:"公司款号"},
-			        {id:"facStyleNo",sort:"string",header:"工厂款号"},
-			        {id:"handInch",sort:"string",header:"手寸"},
-			        {id:"craft",sort:"string",header:"工艺"},
-			        {id:"img",sort:"string",header:"图片路径"},
-			        {id:"remarks",sort:"string",header:"商品备注信息"},
-			        {id:"bargainName",sort:"string",header:"特价标记"},
-			        {id:"num",sort:"int",header:"数量",footer:{ content:"summColumn" }},
-			        {id:"netGoldWeight",sort:"int",header:"净金重",footer:{ content:"summColumn" }},
-			        {id:"goldLoss",sort:"int",header:"金损"},
-			        {id:"goldPurity",sort:"int",header:"金成色"},
-			        {id:"goldWeight",sort:"int",header:"金重",footer:{ content:"summColumn" }},
-			        {id:"goldPrice",sort:"int",header:"金价"},
-			        {id:"goldMoney",sort:"int",header:"金料额",footer:{ content:"summColumn" }},
-			        {id:"productWeight",sort:"int",header:"货重",footer:{ content:"summColumn" }},
-			        {id:"workFeeKe",sort:"int",header:"克工费"},
-			        {id:"workFeeJian",sort:"int",header:"件工费"},
-			        {id:"workFeeSum",sort:"int",header:"总工费",footer:{ content:"summColumn" }},
-			        {id:"certificateFee",sort:"int",header:"证书费",footer:{ content:"summColumn" }},
-			        {id:"fittingName",sort:"string",header:"配件名称"},
-			        {id:"fittingNum",sort:"string",header:"配件数",footer:{ content:"summColumn" }},
-			        {id:"fittingFee",sort:"int",header:"配件金额",footer:{ content:"summColumn" }},
-			        {id:"sandBlastFee",sort:"int",header:"喷砂镶石费",footer:{ content:"summColumn" }},
-			        {id:"otherFee",sort:"int",header:"其他费用",footer:{ content:"summColumn" }},
-			        {id:"unitPrice",sort:"int",header:"成本单价"},
-			        {id:"costPrice",sort:"int",header:"成本金额",footer:{ content:"summColumn" }},
-			        {id:"labelWorkFeeKe",sort:"int",header:"标签克工费"},
-			        {id:"labelWorkFeeJian",sort:"int",header:"标签件工费"},
-			        {id:"labelWorkFeeSum",sort:"int",header:"标签工费",footer:{ content:"summColumn" }},
-			        {id:"labelRate",sort:"int",header:"加价率"},
-			        {id:"labelPrice",sort:"int",header:"标签价",footer:{ content:"summColumn" }},
-			        {id:"labelPriceSum",sort:"int",header:"标价金额",footer:{ content:"summColumn" }},
-			        {id:"labelRemarks",sort:"string",header:"标签备注"},
-			        {id:"sysCode",sort:"string",header:"商品编码"},
-			        {id:"goldName",sort:"string",header:"金料名"},
-			        {id:"jewelName",sort:"string",header:"石头"},
-			        {id:"categoryName",sort:"string",header:"品名"},
-			        {id:"firstType",sort:"string",header:"大类名称"},
-			        {id:"secondType",sort:"string",header:"中类"},
-			        {id:"productClassify",sort:"string",header:"实际分类"},
-			        {id:"firstClassify",sort:"string",header:"商品分组"},
-			        {id:"secondClassify",sort:"string",header:"统计分类2"},
-			        {id:"labelName",sort:"string",header:"标签显示名称"},
-			        {id:"grfName",sort:"string",header:"模板名称"},
-			        {id:"thirdClassify",sort:"string",header:"统计分类3"},
-			        {id:"mJewelCut",sort:"string",header:"切工"},
-			        {id:"mJewelColor",sort:"string",header:"颜色"},
-			        {id:"mJewelClarity",sort:"string",header:"净度"},
-			        {id:"mJewelFluorescent",sort:"string",header:"荧光"},
-			        {id:"mJewelBurnished",sort:"string",header:"抛光度"},
-			        {id:"mJewelShape",sort:"string",header:"形状"},
-			        {id:"mJewelName",sort:"string",header:"主石名"},
-			        {id:"mJewelNo",sort:"string",header:"主石石号"},
-			        {id:"mJewelSpecifi",sort:"string",header:"主石规格"},
-			        {id:"mJewelNum",sort:"int",header:"主石数",footer:{ content:"summColumn" }},
-			        {id:"mJewelWeight",sort:"int",header:"主石重",footer:{ content:"summColumn" }},
-			        {id:"mJewelPrice",sort:"int",header:"主石价"},
-			        {id:"mJewelFee",sort:"int",header:"主石额",footer:{ content:"summColumn" }},
-			        {id:"sJewel1Name",sort:"string",header:"副石1名"},
-			        {id:"sJewel1No",sort:"string",header:"副石1石号"},
-			        {id:"sJewel1Specifi",sort:"string",header:"副石1规格"},
-			        {id:"sJewel1Num",sort:"int",header:"副石1数",footer:{ content:"summColumn" }},
-			        {id:"sJewel1Weight",sort:"int",header:"副石1重",footer:{ content:"summColumn" }},
-			        {id:"sJewel1Price",sort:"int",header:"副石1价"},
-			        {id:"sJewel1Fee",sort:"int",header:"副石1额",footer:{ content:"summColumn" }},
-			        {id:"sJewel2Name",sort:"string",header:"副石2名"},
-			        {id:"sJewel2No",sort:"string",header:"副石2石号"},
-			        {id:"sJewel2Specifi",sort:"string",header:"副石2规格"},
-			        {id:"sJewel2Num",sort:"int",header:"副石2数",footer:{ content:"summColumn" }},
-			        {id:"sJewel2Weight",sort:"int",header:"副石2重",footer:{ content:"summColumn" }},
-			        {id:"sJewel2Price",sort:"int",header:"副石2价"},
-			        {id:"sJewel2Fee",sort:"int",header:"副石2额",footer:{ content:"summColumn" }},
-			        {id:"sJewel3Name",sort:"string",header:"副石3名"},
-			        {id:"sJewel3No",sort:"string",header:"副石3石号"},
-			        {id:"sJewel3Specifi",sort:"string",header:"副石3规格"},
-			        {id:"sJewel3Num",sort:"int",header:"副石3数",footer:{ content:"summColumn" }},
-			        {id:"sJewel3Weight",sort:"int",header:"副石3重",footer:{ content:"summColumn" }},
-			        {id:"sJewel3Price",sort:"int",header:"副石3价"},
-			        {id:"sJewel3Fee",sort:"int",header:"副石3额",footer:{ content:"summColumn" }},
-			        {id:"sJewel4Name",sort:"string",header:"副石4名"},
-			        {id:"sJewel4No",sort:"string",header:"副石4石号"},
-			        {id:"sJewel4Specifi",sort:"string",header:"副石4规格"},
-			        {id:"sJewel4Num",sort:"int",header:"副石4数",footer:{ content:"summColumn" }},
-			        {id:"sJewel4Weight",sort:"int",header:"副石4重",footer:{ content:"summColumn" }},
-			        {id:"sJewel4Price",sort:"int",header:"副石4价"},
-			        {id:"sJewel4Fee",sort:"int",header:"副石4额",footer:{ content:"summColumn" }},
-			        {id:"sJewel5Name",sort:"string",header:"副石5名"},
-			        {id:"sJewel5No",sort:"string",header:"副石5石号"},
-			        {id:"sJewel5Specifi",sort:"string",header:"副石5规格"},
-			        {id:"sJewel5Num",sort:"int",header:"副石5数",footer:{ content:"summColumn" }},
-			        {id:"sJewel5Weight",sort:"int",header:"副石5重",footer:{ content:"summColumn" }},
-			        {id:"sJewel5Price",sort:"int",header:"副石5价"},
-			        {id:"sJewel5Fee",sort:"int",header:"副石5额",footer:{ content:"summColumn" }},
-			        {id:"priceRange",sort:"string",header:"价格区间"},
-			        {id:"goldRange",sort:"string",header:"金重区间"},
-			        {id:"costRange",sort:"string",header:"成本区间"},
-			        {id:"colorRange",sort:"string",header:"颜色区间"},
-			        {id:"clarityRange",sort:"string",header:"净度区间"}
-             	],
-			footer:true,
-			clipboard:true,
-			footer:true,
-			resizeColumn:true,
-    		height:parent.winHeight-300,
-			dragColumn:true,
-			select: "row", 
-			multiselect: true, 
-			blockselect: true,
-			data:${itemListData},
-			hover:"myhover",
-			on:{
-			    "onItemClick":function(id, e, trg){
-			        //webix.message("Click on row: " + id.row+", column: " + id.column);
-			        },
-			     "data->onStoreUpdated":function(){
-						this.data.each(function(obj, i){
-							obj.rowNo = i+1;
-						})
-					}
-				}
-		})
-		
-		 context=webix.ui({
-	        view:"contextmenu",
-		    id:"cmenu",
-	        data:["Add","Rename","Delete",{ $template:"Separator" },"Info"],
-	        on:{
-	            onItemClick:function(id){
-	                var context = this.getContext();
-	                var list = context.obj;
-	                var listId = context.id;
-	                webix.message("List item: <i>"+grid.getItem(listId).goodsName+"</i> <br/>Context menu item: <i>"+this.getItem(id).value+"</i>");
-	            }
-	        }
-	    });
-		context.attachTo(grid);
-		webix.event(window, "resize", function(){
-			grid.define("width", $("#bootstrap-wizard-1").width()-30);
-			grid.adjust(); })
-		});	
+		webix.i18n.setLocale("zh-CN");
+		var grid = {
+				view:"datatable", 
+				id:"datatable1",
+				select:true,
+				height:parent.winHeight-200,
+				columns:[
+					        {id:"rowNo",header:'#',sort:"int",css:"header",width:50},
+					        {id:"id",header:'id',hidden:true},
+					        {id:"barcode",sort:"string",header:["条码",{ content:"multiSelectFilter" }] , width:120, css:{ "text-align": "center" }, tooltip: "", editor:"text"},
+					        {id:"oldBarcode",sort:"string",header:"原条码"},
+					        {id:"productName",sort:"string",header:["商品名称",{ content:"multiSelectFilter" }] , width:120, css:{ "text-align": "center" }, tooltip: "2222", editor:"text"},
+					        {id:"supplier",sort:"string",header:"供应商名称"},
+					        {id:"brandName",sort:"string",header:"品牌名称"},
+					        {id:"subName",sort:"string",header:"商品子名称"},
+					        {id:"certificateNo",sort:"string",header:"证书号"},
+					        {id:"giaCertificateNo",sort:"string",header:"GIA证书号"},
+					        {id:"style",sort:"string",header:"款式"},
+					        {id:"comStyleNo",sort:"string",header:"公司款号"},
+					        {id:"facStyleNo",sort:"string",header:"工厂款号"},
+					        {id:"handInch",sort:"string",header:"手寸"},
+					        {id:"craft",sort:"string",header:"工艺"},
+					        {id:"img",sort:"string",header:"图片路径"},
+					        {id:"remarks",sort:"string",header:"商品备注信息"},
+					        {id:"bargainName",sort:"string",header:"特价标记"},
+					        {id:"num",sort:"int",header:"数量",footer:{ content:"summColumn" }},
+					        {id:"netGoldWeight",sort:"int",header:"净金重",footer:{ content:"summColumn" }},
+					        {id:"goldLoss",sort:"int",header:"金损"},
+					        {id:"goldPurity",sort:"int",header:"金成色"},
+					        {id:"goldWeight",sort:"int",header:"金重",footer:{ content:"summColumn" }},
+					        {id:"goldPrice",sort:"int",header:"金价"},
+					        {id:"goldMoney",sort:"int",header:"金料额",footer:{ content:"summColumn" }},
+					        {id:"productWeight",sort:"int",header:"货重",footer:{ content:"summColumn" }},
+					        {id:"workFeeKe",sort:"int",header:"克工费"},
+					        {id:"workFeeJian",sort:"int",header:"件工费"},
+					        {id:"workFeeSum",sort:"int",header:"总工费",footer:{ content:"summColumn" }},
+					        {id:"certificateFee",sort:"int",header:"证书费",footer:{ content:"summColumn" }},
+					        {id:"fittingName",sort:"string",header:"配件名称"},
+					        {id:"fittingNum",sort:"string",header:"配件数",footer:{ content:"summColumn" }},
+					        {id:"fittingFee",sort:"int",header:"配件金额",footer:{ content:"summColumn" }},
+					        {id:"sandBlastFee",sort:"int",header:"喷砂镶石费",footer:{ content:"summColumn" }},
+					        {id:"otherFee",sort:"int",header:"其他费用",footer:{ content:"summColumn" }},
+					        {id:"unitPrice",sort:"int",header:"成本单价"},
+					        {id:"costPrice",sort:"int",header:"成本金额",footer:{ content:"summColumn" }},
+					        {id:"labelWorkFeeKe",sort:"int",header:"标签克工费"},
+					        {id:"labelWorkFeeJian",sort:"int",header:"标签件工费"},
+					        {id:"labelWorkFeeSum",sort:"int",header:"标签工费",footer:{ content:"summColumn" }},
+					        {id:"labelRate",sort:"int",header:"加价率"},
+					        {id:"labelPrice",sort:"int",header:"标签价",footer:{ content:"summColumn" }},
+					        {id:"labelPriceSum",sort:"int",header:"标价金额",footer:{ content:"summColumn" }},
+					        {id:"labelRemarks",sort:"string",header:"标签备注"},
+					        {id:"sysCode",sort:"string",header:"商品编码"},
+					        {id:"goldName",sort:"string",header:"金料名"},
+					        {id:"jewelName",sort:"string",header:"石头"},
+					        {id:"categoryName",sort:"string",header:"品名"},
+					        {id:"firstType",sort:"string",header:"大类名称"},
+					        {id:"secondType",sort:"string",header:"中类"},
+					        {id:"productClassify",sort:"string",header:"实际分类"},
+					        {id:"firstClassify",sort:"string",header:"商品分组"},
+					        {id:"secondClassify",sort:"string",header:"统计分类2"},
+					        {id:"labelName",sort:"string",header:"标签显示名称"},
+					        {id:"grfName",sort:"string",header:"模板名称"},
+					        {id:"thirdClassify",sort:"string",header:"统计分类3"},
+					        {id:"mJewelCut",sort:"string",header:"切工"},
+					        {id:"mJewelColor",sort:"string",header:"颜色"},
+					        {id:"mJewelClarity",sort:"string",header:"净度"},
+					        {id:"mJewelFluorescent",sort:"string",header:"荧光"},
+					        {id:"mJewelBurnished",sort:"string",header:"抛光度"},
+					        {id:"mJewelShape",sort:"string",header:"形状"},
+					        {id:"mJewelName",sort:"string",header:"主石名"},
+					        {id:"mJewelNo",sort:"string",header:"主石石号"},
+					        {id:"mJewelSpecifi",sort:"string",header:"主石规格"},
+					        {id:"mJewelNum",sort:"int",header:"主石数",footer:{ content:"summColumn" }},
+					        {id:"mJewelWeight",sort:"int",header:"主石重",footer:{ content:"summColumn" }},
+					        {id:"mJewelPrice",sort:"int",header:"主石价"},
+					        {id:"mJewelFee",sort:"int",header:"主石额",footer:{ content:"summColumn" }},
+					        {id:"sJewel1Name",sort:"string",header:"副石1名"},
+					        {id:"sJewel1No",sort:"string",header:"副石1石号"},
+					        {id:"sJewel1Specifi",sort:"string",header:"副石1规格"},
+					        {id:"sJewel1Num",sort:"int",header:"副石1数",footer:{ content:"summColumn" }},
+					        {id:"sJewel1Weight",sort:"int",header:"副石1重",footer:{ content:"summColumn" }},
+					        {id:"sJewel1Price",sort:"int",header:"副石1价"},
+					        {id:"sJewel1Fee",sort:"int",header:"副石1额",footer:{ content:"summColumn" }},
+					        {id:"sJewel2Name",sort:"string",header:"副石2名"},
+					        {id:"sJewel2No",sort:"string",header:"副石2石号"},
+					        {id:"sJewel2Specifi",sort:"string",header:"副石2规格"},
+					        {id:"sJewel2Num",sort:"int",header:"副石2数",footer:{ content:"summColumn" }},
+					        {id:"sJewel2Weight",sort:"int",header:"副石2重",footer:{ content:"summColumn" }},
+					        {id:"sJewel2Price",sort:"int",header:"副石2价"},
+					        {id:"sJewel2Fee",sort:"int",header:"副石2额",footer:{ content:"summColumn" }},
+					        {id:"sJewel3Name",sort:"string",header:"副石3名"},
+					        {id:"sJewel3No",sort:"string",header:"副石3石号"},
+					        {id:"sJewel3Specifi",sort:"string",header:"副石3规格"},
+					        {id:"sJewel3Num",sort:"int",header:"副石3数",footer:{ content:"summColumn" }},
+					        {id:"sJewel3Weight",sort:"int",header:"副石3重",footer:{ content:"summColumn" }},
+					        {id:"sJewel3Price",sort:"int",header:"副石3价"},
+					        {id:"sJewel3Fee",sort:"int",header:"副石3额",footer:{ content:"summColumn" }},
+					        {id:"sJewel4Name",sort:"string",header:"副石4名"},
+					        {id:"sJewel4No",sort:"string",header:"副石4石号"},
+					        {id:"sJewel4Specifi",sort:"string",header:"副石4规格"},
+					        {id:"sJewel4Num",sort:"int",header:"副石4数",footer:{ content:"summColumn" }},
+					        {id:"sJewel4Weight",sort:"int",header:"副石4重",footer:{ content:"summColumn" }},
+					        {id:"sJewel4Price",sort:"int",header:"副石4价"},
+					        {id:"sJewel4Fee",sort:"int",header:"副石4额",footer:{ content:"summColumn" }},
+					        {id:"sJewel5Name",sort:"string",header:"副石5名"},
+					        {id:"sJewel5No",sort:"string",header:"副石5石号"},
+					        {id:"sJewel5Specifi",sort:"string",header:"副石5规格"},
+					        {id:"sJewel5Num",sort:"int",header:"副石5数",footer:{ content:"summColumn" }},
+					        {id:"sJewel5Weight",sort:"int",header:"副石5重",footer:{ content:"summColumn" }},
+					        {id:"sJewel5Price",sort:"int",header:"副石5价"},
+					        {id:"sJewel5Fee",sort:"int",header:"副石5额",footer:{ content:"summColumn" }},
+					        {id:"priceRange",sort:"string",header:"价格区间"},
+					        {id:"goldRange",sort:"string",header:"金重区间"},
+					        {id:"costRange",sort:"string",header:"成本区间"},
+					        {id:"colorRange",sort:"string",header:"颜色区间"},
+					        {id:"clarityRange",sort:"string",header:"净度区间"}
+		             	],
+				data: [
+					{ id:1, title:"The Shawshank Redemption", start:"Some pretty long text here and there, here and there", end:"Short text" },
+					{ id:2, title:"The Shawshank Redemption", start:"Some pretty long text here and there, here and there", end:"Short text" },
+					{ id:3, title:"The Shawshank Redemption", start:"Some pretty long text here and there, here and there", end:"Short text" },
+					{ id:4, title:"The Shawshank Redemption", start:"Some pretty long text here and there, here and there", end:"Short text" },
+					{ id:5, title:"The Shawshank Redemption", start:"Some pretty long text here and there, here and there", end:"Short text" },
+					{ id:6, title:"The Shawshank Redemption", start:"Some pretty long text here and there, here and there", end:"Short text" },
+					{ id:71, title:"The Shawshank Redemption", start:"Some pretty long text here and there, here and there", end:"Short text" },
+					{ id:18, title:"The Shawshank Redemption", start:"Some pretty long text here and there, here and there", end:"Short text" },
+					{ id:91, title:"The Shawshank Redemption", start:"Some pretty long text here and there, here and there", end:"Short text" },
+					{ id:12, title:"The Shawshank Redemption", start:"Some pretty long text here and there, here and there", end:"Short text" },
+					{ id:22, title:"The Godfather", start:"", end:"" }
+				]
+			};
+
+			var form = {
+				view:"form", id:"form1", scroll:false,
+				elements:[
+					{ view:"text", name:"productName", label:"商品名称",readonly:true },
+					{ view:"text", name:"barcode", label:"条码" },
+					{ view:"text", name:"oldBarcode", label:"原条码" },
+					{ view:"text", name:"outNum", label:"调出数量" },
+					{ view:"text", name:"outGoldWeight", label:"调出金重" },
+					{ view:"text", name:"outMJewelWeight", label:"调出石重" },
+					{ view:"button", value:"保存", click:'$$("form1").save()' }
+				]
+			};
+
+			webix.ui({ 
+				container:"testA",
+				multi:true,
+				view:"accordion",
+				rows:[ {cols:[{body:grid}, {view:"resizer"},{header:"修改调出信息",body:form,maxWidth:300,minHeight:300}]}]
+			});
+
+			$$('form1').bind('datatable1')
+	});
 	</script>
 </html>

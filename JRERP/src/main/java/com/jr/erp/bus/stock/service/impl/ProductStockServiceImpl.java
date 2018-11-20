@@ -1,6 +1,7 @@
 package com.jr.erp.bus.stock.service.impl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,8 @@ import com.jr.erp.bill.purchase.entity.BillPurchase;
 import com.jr.erp.bill.purchase.entity.BillPurchaseItem;
 import com.jr.erp.bus.stock.entity.ProductStock;
 import com.jr.erp.bus.stock.service.IProductStockService;
+
+import ch.qos.logback.core.net.SyslogOutputStream;
 
 /**     
  * 类名称：ProductStockServiceImpl    
@@ -41,5 +44,12 @@ public class ProductStockServiceImpl extends AbstractBaseService<ProductStock> i
             this.insert(stock);
             
         }
+    }
+
+    @Override
+    public void queryStockByQueryBuilder(String querySql)
+    {
+        
+        System.out.println(querySql);
     }
 }

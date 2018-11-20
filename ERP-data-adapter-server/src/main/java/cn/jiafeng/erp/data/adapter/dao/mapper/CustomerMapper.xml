@@ -1,0 +1,796 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.jiafeng.erp.data.adapter.dao.CustomerMapper">
+
+    <resultMap id="CustomerMap" type="cn.jiafeng.erp.data.adapter.dao.entity.Customer">
+        <result property="id" column="Id"/>
+        <result property="companyNo" column="companyNo"/>
+        <result property="cusName" column="cusName"/>
+        <result property="vipCardNo" column="vipCardNo"/>
+        <result property="vipCardLevelId" column="vipCardLevelId"/>
+        <result property="vipCardLevel" column="vipCardLevel"/>
+        <result property="sendDate" column="sendDate"/>
+        <result property="mobile" column="mobile"/>
+        <result property="pointTotal" column="pointTotal"/>
+        <result property="consumpAmountTotal" column="consumpAmountTotal"/>
+        <result property="type" column="type"/>
+        <result property="remarks" column="remarks"/>
+        <result property="createTime" column="createTime"/>
+        <result property="modifyTime" column="modifyTime"/>
+        <result property="birthday" column="birthday"/>
+        <result property="birthdayType" column="birthdayType"/>
+        <result property="weddingAnniversary" column="weddingAnniversary"/>
+        <result property="identityCards" column="identityCards"/>
+        <result property="source" column="source"/>
+        <result property="qq" column="qq"/>
+        <result property="telephone" column="telephone"/>
+        <result property="shopId" column="shopId"/>
+        <result property="shopName" column="shopName"/>
+        <result property="operatorId" column="operatorId"/>
+        <result property="operatorName" column="operatorName"/>
+        <result property="address" column="address"/>
+        <result property="status" column="status"/>
+        <result property="pictureUrl" column="pictureUrl"/>
+        <result property="sex" column="sex"/>
+        <result property="age" column="age"/>
+        <result property="agentId" column="agentId"/>
+        <result property="agentName" column="agentName"/>
+        <result property="purchaPreferences" column="purchaPreferences"/>
+        <result property="hobby" column="hobby"/>
+        <result property="profession" column="profession"/>
+        <result property="province" column="province"/>
+        <result property="city" column="city"/>
+        <result property="area" column="area"/>
+        <result property="weiXinNi" column="weiXinNi"/>
+        <result property="openId" column="openId"/>
+        <result property="wxFocusStatus" column="wxFocusStatus"/>
+        <result property="referencesId" column="referencesId"/>
+        <result property="referencesName" column="referencesName"/>
+        <result property="availablePoints" column="availablePoints"/>
+        <result property="recentBusinessTime" column="recentBusinessTime"/>
+        <result property="businessTimeNum" column="businessTimeNum"/>
+        <result property="recentVisitTime" column="recentVisitTime"/>
+        <result property="lossStatus" column="lossStatus"/>
+        <result property="custStatus" column="custStatus"/>
+        <result property="integralDegree" column="integralDegree"/>
+        <result property="anniversaries1Type" column="anniversaries1Type"/>
+        <result property="anniversaries1Date" column="anniversaries1Date"/>
+        <result property="anniversaries2Type" column="anniversaries2Type"/>
+        <result property="anniversaries2Date" column="anniversaries2Date"/>
+        <result property="anniversaries3Type" column="anniversaries3Type"/>
+        <result property="anniversaries3Date" column="anniversaries3Date"/>
+        <result property="points4Level" column="points4Level"/>
+        <result property="consumAmount4Level" column="consumAmount4Level"/>
+        <result property="areaCode" column="areaCode"/>
+        <result property="nameAbc" column="nameAbc"/>
+        <result property="nameAbcShort" column="nameAbcShort"/>
+        <result property="birthday4Background" column="birthday4Background"/>
+        <result property="fromZkl" column="fromZkl"/>
+    </resultMap>
+    
+    <sql id="columns">
+        <![CDATA[
+        Id, companyNo, cusName, vipCardNo, vipCardLevelId, vipCardLevel, sendDate, mobile, pointTotal, consumpAmountTotal, type, remarks, createTime, modifyTime, birthday, birthdayType, weddingAnniversary, identityCards, source, qq, telephone, shopId, shopName, operatorId, operatorName, address, status, pictureUrl, sex, age, agentId, agentName, purchaPreferences, hobby, profession, province, city, area, weiXinNi, openId, wxFocusStatus, referencesId, referencesName, availablePoints, recentBusinessTime, businessTimeNum, recentVisitTime, lossStatus, custStatus, integralDegree, anniversaries1Type, anniversaries1Date, anniversaries2Type, anniversaries2Date, anniversaries3Type, anniversaries3Date, points4Level, consumAmount4Level, areaCode, nameAbc, nameAbcShort, birthday4Background, fromZkl
+        ]]>
+    </sql>
+    
+    <sql id="where">
+        <where>
+           <if test="id != null">
+                AND Id = #{id}
+            </if>
+           <if test="companyNo != null">
+                AND companyNo = #{companyNo}
+            </if>
+           <if test="cusName != null">
+                AND cusName = #{cusName}
+            </if>
+           <if test="vipCardNo != null">
+                AND vipCardNo = #{vipCardNo}
+            </if>
+           <if test="vipCardLevelId != null">
+                AND vipCardLevelId = #{vipCardLevelId}
+            </if>
+           <if test="vipCardLevel != null">
+                AND vipCardLevel = #{vipCardLevel}
+            </if>
+           <if test="sendDate != null">
+                AND sendDate = #{sendDate}
+            </if>
+           <if test="mobile != null">
+                AND mobile = #{mobile}
+            </if>
+           <if test="pointTotal != null">
+                AND pointTotal = #{pointTotal}
+            </if>
+           <if test="consumpAmountTotal != null">
+                AND consumpAmountTotal = #{consumpAmountTotal}
+            </if>
+           <if test="type != null">
+                AND type = #{type}
+            </if>
+           <if test="remarks != null">
+                AND remarks = #{remarks}
+            </if>
+           <if test="null != createTimeBegin)">
+                AND createTime >= #{createTimeBegin}
+           </if>
+           <if test="null != (createTimeEnd)">
+                AND createTime &lt;= #{createTimeEnd}
+           </if>
+           <if test="null != modifyTimeBegin)">
+                AND modifyTime >= #{modifyTimeBegin}
+           </if>
+           <if test="null != (modifyTimeEnd)">
+                AND modifyTime &lt;= #{modifyTimeEnd}
+           </if>
+           <if test="null != birthdayBegin)">
+                AND birthday >= #{birthdayBegin}
+           </if>
+           <if test="null != (birthdayEnd)">
+                AND birthday &lt;= #{birthdayEnd}
+           </if>
+           <if test="birthdayType != null">
+                AND birthdayType = #{birthdayType}
+            </if>
+           <if test="null != weddingAnniversaryBegin)">
+                AND weddingAnniversary >= #{weddingAnniversaryBegin}
+           </if>
+           <if test="null != (weddingAnniversaryEnd)">
+                AND weddingAnniversary &lt;= #{weddingAnniversaryEnd}
+           </if>
+           <if test="identityCards != null">
+                AND identityCards = #{identityCards}
+            </if>
+           <if test="source != null">
+                AND source = #{source}
+            </if>
+           <if test="qq != null">
+                AND qq = #{qq}
+            </if>
+           <if test="telephone != null">
+                AND telephone = #{telephone}
+            </if>
+           <if test="shopId != null">
+                AND shopId = #{shopId}
+            </if>
+           <if test="shopName != null">
+                AND shopName = #{shopName}
+            </if>
+           <if test="operatorId != null">
+                AND operatorId = #{operatorId}
+            </if>
+           <if test="operatorName != null">
+                AND operatorName = #{operatorName}
+            </if>
+           <if test="address != null">
+                AND address = #{address}
+            </if>
+           <if test="status != null">
+                AND status = #{status}
+            </if>
+           <if test="pictureUrl != null">
+                AND pictureUrl = #{pictureUrl}
+            </if>
+           <if test="sex != null">
+                AND sex = #{sex}
+            </if>
+           <if test="age != null">
+                AND age = #{age}
+            </if>
+           <if test="agentId != null">
+                AND agentId = #{agentId}
+            </if>
+           <if test="agentName != null">
+                AND agentName = #{agentName}
+            </if>
+           <if test="purchaPreferences != null">
+                AND purchaPreferences = #{purchaPreferences}
+            </if>
+           <if test="hobby != null">
+                AND hobby = #{hobby}
+            </if>
+           <if test="profession != null">
+                AND profession = #{profession}
+            </if>
+           <if test="province != null">
+                AND province = #{province}
+            </if>
+           <if test="city != null">
+                AND city = #{city}
+            </if>
+           <if test="area != null">
+                AND area = #{area}
+            </if>
+           <if test="weiXinNi != null">
+                AND weiXinNi = #{weiXinNi}
+            </if>
+           <if test="openId != null">
+                AND openId = #{openId}
+            </if>
+           <if test="wxFocusStatus != null">
+                AND wxFocusStatus = #{wxFocusStatus}
+            </if>
+           <if test="referencesId != null">
+                AND referencesId = #{referencesId}
+            </if>
+           <if test="referencesName != null">
+                AND referencesName = #{referencesName}
+            </if>
+           <if test="availablePoints != null">
+                AND availablePoints = #{availablePoints}
+            </if>
+           <if test="null != recentBusinessTimeBegin)">
+                AND recentBusinessTime >= #{recentBusinessTimeBegin}
+           </if>
+           <if test="null != (recentBusinessTimeEnd)">
+                AND recentBusinessTime &lt;= #{recentBusinessTimeEnd}
+           </if>
+           <if test="businessTimeNum != null">
+                AND businessTimeNum = #{businessTimeNum}
+            </if>
+           <if test="null != recentVisitTimeBegin)">
+                AND recentVisitTime >= #{recentVisitTimeBegin}
+           </if>
+           <if test="null != (recentVisitTimeEnd)">
+                AND recentVisitTime &lt;= #{recentVisitTimeEnd}
+           </if>
+           <if test="lossStatus != null">
+                AND lossStatus = #{lossStatus}
+            </if>
+           <if test="custStatus != null">
+                AND custStatus = #{custStatus}
+            </if>
+           <if test="integralDegree != null">
+                AND integralDegree = #{integralDegree}
+            </if>
+           <if test="anniversaries1Type != null">
+                AND anniversaries1Type = #{anniversaries1Type}
+            </if>
+           <if test="null != anniversaries1DateBegin)">
+                AND anniversaries1Date >= #{anniversaries1DateBegin}
+           </if>
+           <if test="null != (anniversaries1DateEnd)">
+                AND anniversaries1Date &lt;= #{anniversaries1DateEnd}
+           </if>
+           <if test="anniversaries2Type != null">
+                AND anniversaries2Type = #{anniversaries2Type}
+            </if>
+           <if test="null != anniversaries2DateBegin)">
+                AND anniversaries2Date >= #{anniversaries2DateBegin}
+           </if>
+           <if test="null != (anniversaries2DateEnd)">
+                AND anniversaries2Date &lt;= #{anniversaries2DateEnd}
+           </if>
+           <if test="anniversaries3Type != null">
+                AND anniversaries3Type = #{anniversaries3Type}
+            </if>
+           <if test="null != anniversaries3DateBegin)">
+                AND anniversaries3Date >= #{anniversaries3DateBegin}
+           </if>
+           <if test="null != (anniversaries3DateEnd)">
+                AND anniversaries3Date &lt;= #{anniversaries3DateEnd}
+           </if>
+           <if test="points4Level != null">
+                AND points4Level = #{points4Level}
+            </if>
+           <if test="consumAmount4Level != null">
+                AND consumAmount4Level = #{consumAmount4Level}
+            </if>
+           <if test="areaCode != null">
+                AND areaCode = #{areaCode}
+            </if>
+           <if test="nameAbc != null">
+                AND nameAbc = #{nameAbc}
+            </if>
+           <if test="nameAbcShort != null">
+                AND nameAbcShort = #{nameAbcShort}
+            </if>
+           <if test="birthday4Background != null">
+                AND birthday4Background = #{birthday4Background}
+            </if>
+           <if test="fromZkl != null">
+                AND fromZkl = #{fromZkl}
+            </if>
+        </where>
+    </sql>
+    
+    <select id="getById" resultMap="CustomerMap">
+        SELECT <include refid="columns" />
+        <![CDATA[
+            FROM
+                s_customer
+            WHERE 
+                id=0
+        ]]>
+    </select>
+    
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+        <![CDATA[
+            INSERT INTO s_customer (
+                Id,
+                companyNo,
+                cusName,
+                vipCardNo,
+                vipCardLevelId,
+                vipCardLevel,
+                sendDate,
+                mobile,
+                pointTotal,
+                consumpAmountTotal,
+                type,
+                remarks,
+                createTime,
+                modifyTime,
+                birthday,
+                birthdayType,
+                weddingAnniversary,
+                identityCards,
+                source,
+                qq,
+                telephone,
+                shopId,
+                shopName,
+                operatorId,
+                operatorName,
+                address,
+                status,
+                pictureUrl,
+                sex,
+                age,
+                agentId,
+                agentName,
+                purchaPreferences,
+                hobby,
+                profession,
+                province,
+                city,
+                area,
+                weiXinNi,
+                openId,
+                wxFocusStatus,
+                referencesId,
+                referencesName,
+                availablePoints,
+                recentBusinessTime,
+                businessTimeNum,
+                recentVisitTime,
+                lossStatus,
+                custStatus,
+                integralDegree,
+                anniversaries1Type,
+                anniversaries1Date,
+                anniversaries2Type,
+                anniversaries2Date,
+                anniversaries3Type,
+                anniversaries3Date,
+                points4Level,
+                consumAmount4Level,
+                areaCode,
+                nameAbc,
+                nameAbcShort,
+                birthday4Background,
+                fromZkl
+            ) VALUES (
+            	#{id},
+            	#{companyNo},
+            	#{cusName},
+            	#{vipCardNo},
+            	#{vipCardLevelId},
+            	#{vipCardLevel},
+            	#{sendDate},
+            	#{mobile},
+            	#{pointTotal},
+            	#{consumpAmountTotal},
+            	#{type},
+            	#{remarks},
+            	#{createTime},
+            	#{modifyTime},
+            	#{birthday},
+            	#{birthdayType},
+            	#{weddingAnniversary},
+            	#{identityCards},
+            	#{source},
+            	#{qq},
+            	#{telephone},
+            	#{shopId},
+            	#{shopName},
+            	#{operatorId},
+            	#{operatorName},
+            	#{address},
+            	#{status},
+            	#{pictureUrl},
+            	#{sex},
+            	#{age},
+            	#{agentId},
+            	#{agentName},
+            	#{purchaPreferences},
+            	#{hobby},
+            	#{profession},
+            	#{province},
+            	#{city},
+            	#{area},
+            	#{weiXinNi},
+            	#{openId},
+            	#{wxFocusStatus},
+            	#{referencesId},
+            	#{referencesName},
+            	#{availablePoints},
+            	#{recentBusinessTime},
+            	#{businessTimeNum},
+            	#{recentVisitTime},
+            	#{lossStatus},
+            	#{custStatus},
+            	#{integralDegree},
+            	#{anniversaries1Type},
+            	#{anniversaries1Date},
+            	#{anniversaries2Type},
+            	#{anniversaries2Date},
+            	#{anniversaries3Type},
+            	#{anniversaries3Date},
+            	#{points4Level},
+            	#{consumAmount4Level},
+            	#{areaCode},
+            	#{nameAbc},
+            	#{nameAbcShort},
+            	#{birthday4Background},
+            	#{fromZkl}
+            )
+        ]]>
+    </insert>
+
+    <insert id="insertBatch">
+        <![CDATA[
+            INSERT INTO s_customer (
+                companyNo,
+                cusName,
+                vipCardNo,
+                vipCardLevelId,
+                vipCardLevel,
+                sendDate,
+                mobile,
+                pointTotal,
+                consumpAmountTotal,
+                type,
+                remarks,
+                createTime,
+                modifyTime,
+                birthday,
+                birthdayType,
+                weddingAnniversary,
+                identityCards,
+                source,
+                qq,
+                telephone,
+                shopId,
+                shopName,
+                operatorId,
+                operatorName,
+                address,
+                status,
+                pictureUrl,
+                sex,
+                age,
+                agentId,
+                agentName,
+                purchaPreferences,
+                hobby,
+                profession,
+                province,
+                city,
+                area,
+                weiXinNi,
+                openId,
+                wxFocusStatus,
+                referencesId,
+                referencesName,
+                availablePoints,
+                recentBusinessTime,
+                businessTimeNum,
+                recentVisitTime,
+                lossStatus,
+                custStatus,
+                integralDegree,
+                anniversaries1Type,
+                anniversaries1Date,
+                anniversaries2Type,
+                anniversaries2Date,
+                anniversaries3Type,
+                anniversaries3Date,
+                points4Level,
+                consumAmount4Level,
+                areaCode,
+                nameAbc,
+                nameAbcShort,
+                birthday4Background,
+                fromZkl
+            ) VALUES
+        ]]>
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.companyNo},#{item.cusName},#{item.vipCardNo},#{item.vipCardLevelId},#{item.vipCardLevel},#{item.sendDate},#{item.mobile},#{item.pointTotal},#{item.consumpAmountTotal},#{item.type},#{item.remarks},#{item.createTime},#{item.modifyTime},#{item.birthday},#{item.birthdayType},#{item.weddingAnniversary},#{item.identityCards},#{item.source},#{item.qq},#{item.telephone},#{item.shopId},#{item.shopName},#{item.operatorId},#{item.operatorName},#{item.address},#{item.status},#{item.pictureUrl},#{item.sex},#{item.age},#{item.agentId},#{item.agentName},#{item.purchaPreferences},#{item.hobby},#{item.profession},#{item.province},#{item.city},#{item.area},#{item.weiXinNi},#{item.openId},#{item.wxFocusStatus},#{item.referencesId},#{item.referencesName},#{item.availablePoints},#{item.recentBusinessTime},#{item.businessTimeNum},#{item.recentVisitTime},#{item.lossStatus},#{item.custStatus},#{item.integralDegree},#{item.anniversaries1Type},#{item.anniversaries1Date},#{item.anniversaries2Type},#{item.anniversaries2Date},#{item.anniversaries3Type},#{item.anniversaries3Date},#{item.points4Level},#{item.consumAmount4Level},#{item.areaCode},#{item.nameAbc},#{item.nameAbcShort},#{item.birthday4Background},#{item.fromZkl})
+        </foreach>
+    </insert>
+    
+    <update id="update">
+        	UPDATE
+                s_customer
+            <set>
+                <![CDATA[ companyNo = #{companyNo} ]]>,
+                <![CDATA[ cusName = #{cusName} ]]>,
+                <![CDATA[ vipCardNo = #{vipCardNo} ]]>,
+                <![CDATA[ vipCardLevelId = #{vipCardLevelId} ]]>,
+                <![CDATA[ vipCardLevel = #{vipCardLevel} ]]>,
+                <![CDATA[ sendDate = #{sendDate} ]]>,
+                <![CDATA[ mobile = #{mobile} ]]>,
+                <![CDATA[ pointTotal = #{pointTotal} ]]>,
+                <![CDATA[ consumpAmountTotal = #{consumpAmountTotal} ]]>,
+                <![CDATA[ type = #{type} ]]>,
+                <![CDATA[ remarks = #{remarks} ]]>,
+                <![CDATA[ createTime = #{createTime} ]]>,
+                <![CDATA[ modifyTime = #{modifyTime} ]]>,
+                <![CDATA[ birthday = #{birthday} ]]>,
+                <![CDATA[ birthdayType = #{birthdayType} ]]>,
+                <![CDATA[ weddingAnniversary = #{weddingAnniversary} ]]>,
+                <![CDATA[ identityCards = #{identityCards} ]]>,
+                <![CDATA[ source = #{source} ]]>,
+                <![CDATA[ qq = #{qq} ]]>,
+                <![CDATA[ telephone = #{telephone} ]]>,
+                <![CDATA[ shopId = #{shopId} ]]>,
+                <![CDATA[ shopName = #{shopName} ]]>,
+                <![CDATA[ operatorId = #{operatorId} ]]>,
+                <![CDATA[ operatorName = #{operatorName} ]]>,
+                <![CDATA[ address = #{address} ]]>,
+                <![CDATA[ status = #{status} ]]>,
+                <![CDATA[ pictureUrl = #{pictureUrl} ]]>,
+                <![CDATA[ sex = #{sex} ]]>,
+                <![CDATA[ age = #{age} ]]>,
+                <![CDATA[ agentId = #{agentId} ]]>,
+                <![CDATA[ agentName = #{agentName} ]]>,
+                <![CDATA[ purchaPreferences = #{purchaPreferences} ]]>,
+                <![CDATA[ hobby = #{hobby} ]]>,
+                <![CDATA[ profession = #{profession} ]]>,
+                <![CDATA[ province = #{province} ]]>,
+                <![CDATA[ city = #{city} ]]>,
+                <![CDATA[ area = #{area} ]]>,
+                <![CDATA[ weiXinNi = #{weiXinNi} ]]>,
+                <![CDATA[ openId = #{openId} ]]>,
+                <![CDATA[ wxFocusStatus = #{wxFocusStatus} ]]>,
+                <![CDATA[ referencesId = #{referencesId} ]]>,
+                <![CDATA[ referencesName = #{referencesName} ]]>,
+                <![CDATA[ availablePoints = #{availablePoints} ]]>,
+                <![CDATA[ recentBusinessTime = #{recentBusinessTime} ]]>,
+                <![CDATA[ businessTimeNum = #{businessTimeNum} ]]>,
+                <![CDATA[ recentVisitTime = #{recentVisitTime} ]]>,
+                <![CDATA[ lossStatus = #{lossStatus} ]]>,
+                <![CDATA[ custStatus = #{custStatus} ]]>,
+                <![CDATA[ integralDegree = #{integralDegree} ]]>,
+                <![CDATA[ anniversaries1Type = #{anniversaries1Type} ]]>,
+                <![CDATA[ anniversaries1Date = #{anniversaries1Date} ]]>,
+                <![CDATA[ anniversaries2Type = #{anniversaries2Type} ]]>,
+                <![CDATA[ anniversaries2Date = #{anniversaries2Date} ]]>,
+                <![CDATA[ anniversaries3Type = #{anniversaries3Type} ]]>,
+                <![CDATA[ anniversaries3Date = #{anniversaries3Date} ]]>,
+                <![CDATA[ points4Level = #{points4Level} ]]>,
+                <![CDATA[ consumAmount4Level = #{consumAmount4Level} ]]>,
+                <![CDATA[ areaCode = #{areaCode} ]]>,
+                <![CDATA[ nameAbc = #{nameAbc} ]]>,
+                <![CDATA[ nameAbcShort = #{nameAbcShort} ]]>,
+                <![CDATA[ birthday4Background = #{birthday4Background} ]]>,
+                <![CDATA[ fromZkl = #{fromZkl} ]]>
+            </set>
+            <where> 
+                Id = #{id}
+                
+            </where>
+    </update>
+    
+    <update id="updatePart">
+            UPDATE
+                s_customer
+            <set>
+                <if test="companyNo != null">
+                	<![CDATA[ companyNo = #{companyNo} ]]>,
+                </if>
+                <if test="cusName != null">
+                	<![CDATA[ cusName = #{cusName} ]]>,
+                </if>
+                <if test="vipCardNo != null">
+                	<![CDATA[ vipCardNo = #{vipCardNo} ]]>,
+                </if>
+                <if test="vipCardLevelId != null">
+                	<![CDATA[ vipCardLevelId = #{vipCardLevelId} ]]>,
+                </if>
+                <if test="vipCardLevel != null">
+                	<![CDATA[ vipCardLevel = #{vipCardLevel} ]]>,
+                </if>
+                <if test="sendDate != null">
+                	<![CDATA[ sendDate = #{sendDate} ]]>,
+                </if>
+                <if test="mobile != null">
+                	<![CDATA[ mobile = #{mobile} ]]>,
+                </if>
+                <if test="pointTotal != null">
+                	<![CDATA[ pointTotal = #{pointTotal} ]]>,
+                </if>
+                <if test="consumpAmountTotal != null">
+                	<![CDATA[ consumpAmountTotal = #{consumpAmountTotal} ]]>,
+                </if>
+                <if test="type != null">
+                	<![CDATA[ type = #{type} ]]>,
+                </if>
+                <if test="remarks != null">
+                	<![CDATA[ remarks = #{remarks} ]]>,
+                </if>
+                <if test="createTime != null">
+                	<![CDATA[ createTime = #{createTime} ]]>,
+                </if>
+                <if test="modifyTime != null">
+                	<![CDATA[ modifyTime = #{modifyTime} ]]>,
+                </if>
+                <if test="birthday != null">
+                	<![CDATA[ birthday = #{birthday} ]]>,
+                </if>
+                <if test="birthdayType != null">
+                	<![CDATA[ birthdayType = #{birthdayType} ]]>,
+                </if>
+                <if test="weddingAnniversary != null">
+                	<![CDATA[ weddingAnniversary = #{weddingAnniversary} ]]>,
+                </if>
+                <if test="identityCards != null">
+                	<![CDATA[ identityCards = #{identityCards} ]]>,
+                </if>
+                <if test="source != null">
+                	<![CDATA[ source = #{source} ]]>,
+                </if>
+                <if test="qq != null">
+                	<![CDATA[ qq = #{qq} ]]>,
+                </if>
+                <if test="telephone != null">
+                	<![CDATA[ telephone = #{telephone} ]]>,
+                </if>
+                <if test="shopId != null">
+                	<![CDATA[ shopId = #{shopId} ]]>,
+                </if>
+                <if test="shopName != null">
+                	<![CDATA[ shopName = #{shopName} ]]>,
+                </if>
+                <if test="operatorId != null">
+                	<![CDATA[ operatorId = #{operatorId} ]]>,
+                </if>
+                <if test="operatorName != null">
+                	<![CDATA[ operatorName = #{operatorName} ]]>,
+                </if>
+                <if test="address != null">
+                	<![CDATA[ address = #{address} ]]>,
+                </if>
+                <if test="status != null">
+                	<![CDATA[ status = #{status} ]]>,
+                </if>
+                <if test="pictureUrl != null">
+                	<![CDATA[ pictureUrl = #{pictureUrl} ]]>,
+                </if>
+                <if test="sex != null">
+                	<![CDATA[ sex = #{sex} ]]>,
+                </if>
+                <if test="age != null">
+                	<![CDATA[ age = #{age} ]]>,
+                </if>
+                <if test="agentId != null">
+                	<![CDATA[ agentId = #{agentId} ]]>,
+                </if>
+                <if test="agentName != null">
+                	<![CDATA[ agentName = #{agentName} ]]>,
+                </if>
+                <if test="purchaPreferences != null">
+                	<![CDATA[ purchaPreferences = #{purchaPreferences} ]]>,
+                </if>
+                <if test="hobby != null">
+                	<![CDATA[ hobby = #{hobby} ]]>,
+                </if>
+                <if test="profession != null">
+                	<![CDATA[ profession = #{profession} ]]>,
+                </if>
+                <if test="province != null">
+                	<![CDATA[ province = #{province} ]]>,
+                </if>
+                <if test="city != null">
+                	<![CDATA[ city = #{city} ]]>,
+                </if>
+                <if test="area != null">
+                	<![CDATA[ area = #{area} ]]>,
+                </if>
+                <if test="weiXinNi != null">
+                	<![CDATA[ weiXinNi = #{weiXinNi} ]]>,
+                </if>
+                <if test="openId != null">
+                	<![CDATA[ openId = #{openId} ]]>,
+                </if>
+                <if test="wxFocusStatus != null">
+                	<![CDATA[ wxFocusStatus = #{wxFocusStatus} ]]>,
+                </if>
+                <if test="referencesId != null">
+                	<![CDATA[ referencesId = #{referencesId} ]]>,
+                </if>
+                <if test="referencesName != null">
+                	<![CDATA[ referencesName = #{referencesName} ]]>,
+                </if>
+                <if test="availablePoints != null">
+                	<![CDATA[ availablePoints = #{availablePoints} ]]>,
+                </if>
+                <if test="recentBusinessTime != null">
+                	<![CDATA[ recentBusinessTime = #{recentBusinessTime} ]]>,
+                </if>
+                <if test="businessTimeNum != null">
+                	<![CDATA[ businessTimeNum = #{businessTimeNum} ]]>,
+                </if>
+                <if test="recentVisitTime != null">
+                	<![CDATA[ recentVisitTime = #{recentVisitTime} ]]>,
+                </if>
+                <if test="lossStatus != null">
+                	<![CDATA[ lossStatus = #{lossStatus} ]]>,
+                </if>
+                <if test="custStatus != null">
+                	<![CDATA[ custStatus = #{custStatus} ]]>,
+                </if>
+                <if test="integralDegree != null">
+                	<![CDATA[ integralDegree = #{integralDegree} ]]>,
+                </if>
+                <if test="anniversaries1Type != null">
+                	<![CDATA[ anniversaries1Type = #{anniversaries1Type} ]]>,
+                </if>
+                <if test="anniversaries1Date != null">
+                	<![CDATA[ anniversaries1Date = #{anniversaries1Date} ]]>,
+                </if>
+                <if test="anniversaries2Type != null">
+                	<![CDATA[ anniversaries2Type = #{anniversaries2Type} ]]>,
+                </if>
+                <if test="anniversaries2Date != null">
+                	<![CDATA[ anniversaries2Date = #{anniversaries2Date} ]]>,
+                </if>
+                <if test="anniversaries3Type != null">
+                	<![CDATA[ anniversaries3Type = #{anniversaries3Type} ]]>,
+                </if>
+                <if test="anniversaries3Date != null">
+                	<![CDATA[ anniversaries3Date = #{anniversaries3Date} ]]>,
+                </if>
+                <if test="points4Level != null">
+                	<![CDATA[ points4Level = #{points4Level} ]]>,
+                </if>
+                <if test="consumAmount4Level != null">
+                	<![CDATA[ consumAmount4Level = #{consumAmount4Level} ]]>,
+                </if>
+                <if test="areaCode != null">
+                	<![CDATA[ areaCode = #{areaCode} ]]>,
+                </if>
+                <if test="nameAbc != null">
+                	<![CDATA[ nameAbc = #{nameAbc} ]]>,
+                </if>
+                <if test="nameAbcShort != null">
+                	<![CDATA[ nameAbcShort = #{nameAbcShort} ]]>,
+                </if>
+                <if test="birthday4Background != null">
+                	<![CDATA[ birthday4Background = #{birthday4Background} ]]>,
+                </if>
+                <if test="fromZkl != null">
+                	<![CDATA[ fromZkl = #{fromZkl} ]]>
+                </if>
+            </set>
+            <where>
+                Id = #{id}
+                
+            </where>
+    </update>
+    
+    <delete id="deleteByPk">
+        <![CDATA[
+            DELETE
+            FROM
+                s_customer
+            WHERE
+                id=0
+        ]]>
+    </delete>
+</mapper> 
+

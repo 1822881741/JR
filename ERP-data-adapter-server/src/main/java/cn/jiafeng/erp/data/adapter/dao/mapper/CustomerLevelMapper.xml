@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.jiafeng.erp.data.adapter.dao.CustomerLevelMapper">
+
+    <resultMap id="CustomerLevelMap" type="cn.jiafeng.erp.data.adapter.dao.entity.CustomerLevel">
+        <result property="id" column="id"/>
+        <result property="companyNo" column="companyNo"/>
+        <result property="levelName" column="levelName"/>
+        <result property="plowerLimit" column="plowerLimit"/>
+        <result property="pupperLimit" column="pupperLimit"/>
+        <result property="mlowerLimit" column="mlowerLimit"/>
+        <result property="mupperLimit" column="mupperLimit"/>
+        <result property="basedType" column="basedType"/>
+        <result property="useFlag" column="useFlag"/>
+        <result property="orderNo" column="orderNo"/>
+        <result property="createTime" column="createTime"/>
+    </resultMap>
+    
+    <sql id="columns">
+        <![CDATA[
+        id, companyNo, levelName, plowerLimit, pupperLimit, mlowerLimit, mupperLimit, basedType, useFlag, orderNo, createTime
+        ]]>
+    </sql>
+    
+    <sql id="where">
+        <where>
+           <if test="id != null">
+                AND id = #{id}
+            </if>
+           <if test="companyNo != null">
+                AND companyNo = #{companyNo}
+            </if>
+           <if test="levelName != null">
+                AND levelName = #{levelName}
+            </if>
+           <if test="plowerLimit != null">
+                AND plowerLimit = #{plowerLimit}
+            </if>
+           <if test="pupperLimit != null">
+                AND pupperLimit = #{pupperLimit}
+            </if>
+           <if test="mlowerLimit != null">
+                AND mlowerLimit = #{mlowerLimit}
+            </if>
+           <if test="mupperLimit != null">
+                AND mupperLimit = #{mupperLimit}
+            </if>
+           <if test="basedType != null">
+                AND basedType = #{basedType}
+            </if>
+           <if test="useFlag != null">
+                AND useFlag = #{useFlag}
+            </if>
+           <if test="orderNo != null">
+                AND orderNo = #{orderNo}
+            </if>
+           <if test="null != createTimeBegin)">
+                AND createTime >= #{createTimeBegin}
+           </if>
+           <if test="null != (createTimeEnd)">
+                AND createTime &lt;= #{createTimeEnd}
+           </if>
+        </where>
+    </sql>
+    
+    <select id="getById" resultMap="CustomerLevelMap">
+        SELECT <include refid="columns" />
+        <![CDATA[
+            FROM
+                s_customer_level
+            WHERE 
+                id=0
+        ]]>
+    </select>
+    
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+        <![CDATA[
+            INSERT INTO s_customer_level (
+                id,
+                companyNo,
+                levelName,
+                plowerLimit,
+                pupperLimit,
+                mlowerLimit,
+                mupperLimit,
+                basedType,
+                useFlag,
+                orderNo,
+                createTime
+            ) VALUES (
+            	#{id},
+            	#{companyNo},
+            	#{levelName},
+            	#{plowerLimit},
+            	#{pupperLimit},
+            	#{mlowerLimit},
+            	#{mupperLimit},
+            	#{basedType},
+            	#{useFlag},
+            	#{orderNo},
+            	#{createTime}
+            )
+        ]]>
+    </insert>
+
+    <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+            INSERT INTO s_customer_level (
+                companyNo,
+                levelName,
+                plowerLimit,
+                pupperLimit,
+                mlowerLimit,
+                mupperLimit,
+                basedType,
+                useFlag,
+                orderNo,
+                createTime
+            ) VALUES
+        ]]>
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.companyNo},#{item.levelName},#{item.plowerLimit},#{item.pupperLimit},#{item.mlowerLimit},#{item.mupperLimit},#{item.basedType},#{item.useFlag},#{item.orderNo},#{item.createTime})
+        </foreach>
+    </insert>
+    
+    <update id="update">
+        	UPDATE
+                s_customer_level
+            <set>
+                <![CDATA[ companyNo = #{companyNo} ]]>,
+                <![CDATA[ levelName = #{levelName} ]]>,
+                <![CDATA[ plowerLimit = #{plowerLimit} ]]>,
+                <![CDATA[ pupperLimit = #{pupperLimit} ]]>,
+                <![CDATA[ mlowerLimit = #{mlowerLimit} ]]>,
+                <![CDATA[ mupperLimit = #{mupperLimit} ]]>,
+                <![CDATA[ basedType = #{basedType} ]]>,
+                <![CDATA[ useFlag = #{useFlag} ]]>,
+                <![CDATA[ orderNo = #{orderNo} ]]>,
+                <![CDATA[ createTime = #{createTime} ]]>
+            </set>
+            <where> 
+                id = #{id}
+                
+            </where>
+    </update>
+    
+    <update id="updatePart">
+            UPDATE
+                s_customer_level
+            <set>
+                <if test="companyNo != null">
+                	<![CDATA[ companyNo = #{companyNo} ]]>,
+                </if>
+                <if test="levelName != null">
+                	<![CDATA[ levelName = #{levelName} ]]>,
+                </if>
+                <if test="plowerLimit != null">
+                	<![CDATA[ plowerLimit = #{plowerLimit} ]]>,
+                </if>
+                <if test="pupperLimit != null">
+                	<![CDATA[ pupperLimit = #{pupperLimit} ]]>,
+                </if>
+                <if test="mlowerLimit != null">
+                	<![CDATA[ mlowerLimit = #{mlowerLimit} ]]>,
+                </if>
+                <if test="mupperLimit != null">
+                	<![CDATA[ mupperLimit = #{mupperLimit} ]]>,
+                </if>
+                <if test="basedType != null">
+                	<![CDATA[ basedType = #{basedType} ]]>,
+                </if>
+                <if test="useFlag != null">
+                	<![CDATA[ useFlag = #{useFlag} ]]>,
+                </if>
+                <if test="orderNo != null">
+                	<![CDATA[ orderNo = #{orderNo} ]]>,
+                </if>
+                <if test="createTime != null">
+                	<![CDATA[ createTime = #{createTime} ]]>
+                </if>
+            </set>
+            <where>
+                id = #{id}
+                
+            </where>
+    </update>
+    
+    <delete id="deleteByPk">
+        <![CDATA[
+            DELETE
+            FROM
+                s_customer_level
+            WHERE
+                id=0
+        ]]>
+    </delete>
+</mapper> 
+

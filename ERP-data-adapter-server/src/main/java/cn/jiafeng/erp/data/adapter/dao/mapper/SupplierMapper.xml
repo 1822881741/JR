@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.jiafeng.erp.data.adapter.dao.SupplierMapper">
+
+    <resultMap id="SupplierMap" type="cn.jiafeng.erp.data.adapter.dao.entity.Supplier">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="status" column="status"/>
+        <result property="person" column="person"/>
+        <result property="phone" column="phone"/>
+        <result property="companyNo" column="companyNo"/>
+        <result property="createTime" column="createTime"/>
+    </resultMap>
+    
+    <sql id="columns">
+        <![CDATA[
+        id, name, status, person, phone, companyNo, createTime
+        ]]>
+    </sql>
+    
+    <sql id="where">
+        <where>
+           <if test="id != null">
+                AND id = #{id}
+            </if>
+           <if test="name != null">
+                AND name = #{name}
+            </if>
+           <if test="status != null">
+                AND status = #{status}
+            </if>
+           <if test="person != null">
+                AND person = #{person}
+            </if>
+           <if test="phone != null">
+                AND phone = #{phone}
+            </if>
+           <if test="companyNo != null">
+                AND companyNo = #{companyNo}
+            </if>
+           <if test="null != createTimeBegin)">
+                AND createTime >= #{createTimeBegin}
+           </if>
+           <if test="null != (createTimeEnd)">
+                AND createTime &lt;= #{createTimeEnd}
+           </if>
+        </where>
+    </sql>
+    
+    <select id="getById" resultMap="SupplierMap">
+        SELECT <include refid="columns" />
+        <![CDATA[
+            FROM
+                s_supplier
+            WHERE 
+                id=0
+        ]]>
+    </select>
+    
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+        <![CDATA[
+            INSERT INTO s_supplier (
+                id,
+                name,
+                status,
+                person,
+                phone,
+                companyNo,
+                createTime
+            ) VALUES (
+            	#{id},
+            	#{name},
+            	#{status},
+            	#{person},
+            	#{phone},
+            	#{companyNo},
+            	#{createTime}
+            )
+        ]]>
+    </insert>
+
+    <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id">
+        <![CDATA[
+            INSERT INTO s_supplier (
+                name,
+                status,
+                person,
+                phone,
+                companyNo,
+                createTime
+            ) VALUES
+        ]]>
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.name},#{item.status},#{item.person},#{item.phone},#{item.companyNo},#{item.createTime})
+        </foreach>
+    </insert>
+    
+    <update id="update">
+        	UPDATE
+                s_supplier
+            <set>
+                <![CDATA[ name = #{name} ]]>,
+                <![CDATA[ status = #{status} ]]>,
+                <![CDATA[ person = #{person} ]]>,
+                <![CDATA[ phone = #{phone} ]]>,
+                <![CDATA[ companyNo = #{companyNo} ]]>,
+                <![CDATA[ createTime = #{createTime} ]]>
+            </set>
+            <where> 
+                id = #{id}
+                
+            </where>
+    </update>
+    
+    <update id="updatePart">
+            UPDATE
+                s_supplier
+            <set>
+                <if test="name != null">
+                	<![CDATA[ name = #{name} ]]>,
+                </if>
+                <if test="status != null">
+                	<![CDATA[ status = #{status} ]]>,
+                </if>
+                <if test="person != null">
+                	<![CDATA[ person = #{person} ]]>,
+                </if>
+                <if test="phone != null">
+                	<![CDATA[ phone = #{phone} ]]>,
+                </if>
+                <if test="companyNo != null">
+                	<![CDATA[ companyNo = #{companyNo} ]]>,
+                </if>
+                <if test="createTime != null">
+                	<![CDATA[ createTime = #{createTime} ]]>
+                </if>
+            </set>
+            <where>
+                id = #{id}
+                
+            </where>
+    </update>
+    
+    <delete id="deleteByPk">
+        <![CDATA[
+            DELETE
+            FROM
+                s_supplier
+            WHERE
+                id=0
+        ]]>
+    </delete>
+    <delete id="delByCompanyNoAndCreatetime">
+        <![CDATA[
+            DELETE
+            FROM
+                s_supplier
+            WHERE
+                companyNo = #{companyNo} and createTime = #{createTime}
+        ]]>
+    </delete>
+    
+    <delete id="delByIds" parameterType="cn.jiafeng.erp.data.adapter.model.dto.BaseParamters">
+            DELETE
+            FROM
+                s_supplier
+            WHERE
+                companyNo = #{companyNo} and id in
+                <foreach collection="ids" index="index" item="id" open="(" separator="," close=")">
+		                #{id}       
+		        </foreach>
+    </delete>
+    
+</mapper> 
+

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.jiafeng.erp.data.adapter.dao.UniversalclassMapper">
+
+    <resultMap id="UniversalclassMap" type="cn.jiafeng.erp.data.adapter.dao.entity.Universalclass">
+        <result property="id" column="Id"/>
+        <result property="companyNo" column="companyNo"/>
+        <result property="mainType" column="mainType"/>
+        <result property="name" column="name"/>
+        <result property="isSystem" column="isSystem"/>
+        <result property="remarks" column="remarks"/>
+        <result property="sequence" column="sequence"/>
+    </resultMap>
+    
+    <sql id="columns">
+        <![CDATA[
+        Id, companyNo, mainType, name, isSystem, remarks, sequence
+        ]]>
+    </sql>
+    
+    <sql id="where">
+        <where>
+           <if test="id != null">
+                AND Id = #{id}
+            </if>
+           <if test="companyNo != null">
+                AND companyNo = #{companyNo}
+            </if>
+           <if test="mainType != null">
+                AND mainType = #{mainType}
+            </if>
+           <if test="name != null">
+                AND name = #{name}
+            </if>
+           <if test="isSystem != null">
+                AND isSystem = #{isSystem}
+            </if>
+           <if test="remarks != null">
+                AND remarks = #{remarks}
+            </if>
+           <if test="sequence != null">
+                AND sequence = #{sequence}
+            </if>
+        </where>
+    </sql>
+    
+    <select id="getById" resultMap="UniversalclassMap">
+        SELECT <include refid="columns" />
+        <![CDATA[
+            FROM
+                s_universalclass
+            WHERE 
+                id=0
+        ]]>
+    </select>
+    
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+        <![CDATA[
+            INSERT INTO s_universalclass (
+                Id,
+                companyNo,
+                mainType,
+                name,
+                isSystem,
+                remarks,
+                sequence
+            ) VALUES (
+            	#{id},
+            	#{companyNo},
+            	#{mainType},
+            	#{name},
+            	#{isSystem},
+            	#{remarks},
+            	#{sequence}
+            )
+        ]]>
+    </insert>
+
+    <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id" >
+        <![CDATA[
+            INSERT INTO s_universalclass (
+                companyNo,
+                mainType,
+                name,
+                isSystem,
+                remarks,
+                sequence
+            ) VALUES
+        ]]>
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.companyNo},#{item.mainType},#{item.name},#{item.isSystem},#{item.remarks},#{item.sequence})
+        </foreach>
+    </insert>
+    
+    <update id="update">
+        	UPDATE
+                s_universalclass
+            <set>
+                <![CDATA[ companyNo = #{companyNo} ]]>,
+                <![CDATA[ mainType = #{mainType} ]]>,
+                <![CDATA[ name = #{name} ]]>,
+                <![CDATA[ isSystem = #{isSystem} ]]>,
+                <![CDATA[ remarks = #{remarks} ]]>,
+                <![CDATA[ sequence = #{sequence} ]]>
+            </set>
+            <where> 
+                Id = #{id}
+                
+            </where>
+    </update>
+    
+    <update id="updatePart">
+            UPDATE
+                s_universalclass
+            <set>
+                <if test="companyNo != null">
+                	<![CDATA[ companyNo = #{companyNo} ]]>,
+                </if>
+                <if test="mainType != null">
+                	<![CDATA[ mainType = #{mainType} ]]>,
+                </if>
+                <if test="name != null">
+                	<![CDATA[ name = #{name} ]]>,
+                </if>
+                <if test="isSystem != null">
+                	<![CDATA[ isSystem = #{isSystem} ]]>,
+                </if>
+                <if test="remarks != null">
+                	<![CDATA[ remarks = #{remarks} ]]>,
+                </if>
+                <if test="sequence != null">
+                	<![CDATA[ sequence = #{sequence} ]]>
+                </if>
+            </set>
+            <where>
+                Id = #{id}
+                
+            </where>
+    </update>
+    
+    <delete id="deleteByPk">
+        <![CDATA[
+            DELETE
+            FROM
+                s_universalclass
+            WHERE
+                id=0
+        ]]>
+    </delete>
+    
+    <delete id="delByCompanyNoAndRemarks">
+        <![CDATA[
+            DELETE
+            FROM
+                s_universalclass
+            WHERE
+                companyNo = #{companyNo} and remarks = #{remarks}
+        ]]>
+    </delete>
+    
+    <delete id="delByIds" parameterType="cn.jiafeng.erp.data.adapter.model.dto.BaseParamters">
+            DELETE
+            FROM
+                s_universalclass
+            WHERE
+                companyNo = #{companyNo} and id in
+                <foreach collection="ids" index="index" item="id" open="(" separator="," close=")">
+		                #{id}       
+		        </foreach>
+    </delete>
+</mapper> 
+

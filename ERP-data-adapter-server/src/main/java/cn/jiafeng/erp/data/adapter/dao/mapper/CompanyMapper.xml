@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.jiafeng.erp.data.adapter.dao.CompanyMapper">
+
+    <resultMap id="CompanyMap" type="cn.jiafeng.erp.data.adapter.dao.entity.Company">
+        <result property="id" column="id"/>
+        <result property="companyNo" column="companyNo"/>
+        <result property="companyName" column="companyName"/>
+        <result property="linkMan" column="linkMan"/>
+        <result property="mobileNo" column="mobileNo"/>
+        <result property="startTime" column="startTime"/>
+        <result property="endTime" column="endTime"/>
+        <result property="testFlag" column="testFlag"/>
+        <result property="status" column="status"/>
+        <result property="areaCode" column="areaCode"/>
+        <result property="createTime" column="createTime"/>
+        <result property="shopNum" column="shopNum"/>
+        <result property="canSynFlag" column="canSynFlag"/>
+        <result property="autoSynFlag" column="autoSynFlag"/>
+        <result property="startHour" column="startHour"/>
+        <result property="startMinute" column="startMinute"/>
+        <result property="lastSynTime" column="lastSynTime"/>
+        <result property="zklOpenFlag" column="zklOpenFlag"/>
+        <result property="canLoginType1" column="canLoginType1"/>
+        <result property="sheetAuditModel" column="sheetAuditModel"/>
+        <result property="rightModel" column="rightModel"/>
+        <result property="remarks" column="remarks"/>
+        <result property="indexLogoRight" column="indexLogoRight"/>
+        <result property="indexChangeFlag" column="indexChangeFlag"/>
+        <result property="indexName" column="indexName"/>
+        <result property="indexLogo" column="indexLogo"/>
+    </resultMap>
+    
+    <sql id="columns">
+        <![CDATA[
+        id, companyNo, companyName, linkMan, mobileNo, startTime, endTime, testFlag, status, areaCode, createTime, shopNum, canSynFlag, autoSynFlag, startHour, startMinute, lastSynTime, zklOpenFlag, canLoginType1, sheetAuditModel, rightModel, remarks, indexLogoRight, indexChangeFlag, indexName, indexLogo
+        ]]>
+    </sql>
+    
+    <sql id="where">
+        <where>
+           <if test="id != null">
+                AND id = #{id}
+            </if>
+           <if test="companyNo != null">
+                AND companyNo = #{companyNo}
+            </if>
+           <if test="companyName != null">
+                AND companyName = #{companyName}
+            </if>
+           <if test="linkMan != null">
+                AND linkMan = #{linkMan}
+            </if>
+           <if test="mobileNo != null">
+                AND mobileNo = #{mobileNo}
+            </if>
+           <if test="null != startTimeBegin)">
+                AND startTime >= #{startTimeBegin}
+           </if>
+           <if test="null != (startTimeEnd)">
+                AND startTime &lt;= #{startTimeEnd}
+           </if>
+           <if test="null != endTimeBegin)">
+                AND endTime >= #{endTimeBegin}
+           </if>
+           <if test="null != (endTimeEnd)">
+                AND endTime &lt;= #{endTimeEnd}
+           </if>
+           <if test="testFlag != null">
+                AND testFlag = #{testFlag}
+            </if>
+           <if test="status != null">
+                AND status = #{status}
+            </if>
+           <if test="areaCode != null">
+                AND areaCode = #{areaCode}
+            </if>
+           <if test="null != createTimeBegin)">
+                AND createTime >= #{createTimeBegin}
+           </if>
+           <if test="null != (createTimeEnd)">
+                AND createTime &lt;= #{createTimeEnd}
+           </if>
+           <if test="shopNum != null">
+                AND shopNum = #{shopNum}
+            </if>
+           <if test="canSynFlag != null">
+                AND canSynFlag = #{canSynFlag}
+            </if>
+           <if test="autoSynFlag != null">
+                AND autoSynFlag = #{autoSynFlag}
+            </if>
+           <if test="startHour != null">
+                AND startHour = #{startHour}
+            </if>
+           <if test="startMinute != null">
+                AND startMinute = #{startMinute}
+            </if>
+           <if test="null != lastSynTimeBegin)">
+                AND lastSynTime >= #{lastSynTimeBegin}
+           </if>
+           <if test="null != (lastSynTimeEnd)">
+                AND lastSynTime &lt;= #{lastSynTimeEnd}
+           </if>
+           <if test="zklOpenFlag != null">
+                AND zklOpenFlag = #{zklOpenFlag}
+            </if>
+           <if test="canLoginType1 != null">
+                AND canLoginType1 = #{canLoginType1}
+            </if>
+           <if test="sheetAuditModel != null">
+                AND sheetAuditModel = #{sheetAuditModel}
+            </if>
+           <if test="rightModel != null">
+                AND rightModel = #{rightModel}
+            </if>
+           <if test="remarks != null">
+                AND remarks = #{remarks}
+            </if>
+           <if test="indexLogoRight != null">
+                AND indexLogoRight = #{indexLogoRight}
+            </if>
+           <if test="indexChangeFlag != null">
+                AND indexChangeFlag = #{indexChangeFlag}
+            </if>
+           <if test="indexName != null">
+                AND indexName = #{indexName}
+            </if>
+           <if test="indexLogo != null">
+                AND indexLogo = #{indexLogo}
+            </if>
+        </where>
+    </sql>
+    
+    <select id="getById" resultMap="CompanyMap">
+        SELECT <include refid="columns" />
+        <![CDATA[
+            FROM
+                s_company
+            WHERE 
+                id=0
+        ]]>
+    </select>
+    
+    <select id="getByCompanyNo" resultMap="CompanyMap">
+        SELECT <include refid="columns" />
+        <![CDATA[
+            FROM
+                s_company
+            WHERE 
+                companyNo=#{companyNo}
+        ]]>
+    </select>
+    
+    
+    
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+        <![CDATA[
+            INSERT INTO s_company (
+                id,
+                companyNo,
+                companyName,
+                linkMan,
+                mobileNo,
+                startTime,
+                endTime,
+                testFlag,
+                status,
+                areaCode,
+                createTime,
+                shopNum,
+                canSynFlag,
+                autoSynFlag,
+                startHour,
+                startMinute,
+                lastSynTime,
+                zklOpenFlag,
+                canLoginType1,
+                sheetAuditModel,
+                rightModel,
+                remarks,
+                indexLogoRight,
+                indexChangeFlag,
+                indexName,
+                indexLogo
+            ) VALUES (
+            	#{id},
+            	#{companyNo},
+            	#{companyName},
+            	#{linkMan},
+            	#{mobileNo},
+            	#{startTime},
+            	#{endTime},
+            	#{testFlag},
+            	#{status},
+            	#{areaCode},
+            	#{createTime},
+            	#{shopNum},
+            	#{canSynFlag},
+            	#{autoSynFlag},
+            	#{startHour},
+            	#{startMinute},
+            	#{lastSynTime},
+            	#{zklOpenFlag},
+            	#{canLoginType1},
+            	#{sheetAuditModel},
+            	#{rightModel},
+            	#{remarks},
+            	#{indexLogoRight},
+            	#{indexChangeFlag},
+            	#{indexName},
+            	#{indexLogo}
+            )
+        ]]>
+    </insert>
+
+    <insert id="insertBatch">
+        <![CDATA[
+            INSERT INTO s_company (
+                companyNo,
+                companyName,
+                linkMan,
+                mobileNo,
+                startTime,
+                endTime,
+                testFlag,
+                status,
+                areaCode,
+                createTime,
+                shopNum,
+                canSynFlag,
+                autoSynFlag,
+                startHour,
+                startMinute,
+                lastSynTime,
+                zklOpenFlag,
+                canLoginType1,
+                sheetAuditModel,
+                rightModel,
+                remarks,
+                indexLogoRight,
+                indexChangeFlag,
+                indexName,
+                indexLogo
+            ) VALUES
+        ]]>
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.companyNo},#{item.companyName},#{item.linkMan},#{item.mobileNo},#{item.startTime},#{item.endTime},#{item.testFlag},#{item.status},#{item.areaCode},#{item.createTime},#{item.shopNum},#{item.canSynFlag},#{item.autoSynFlag},#{item.startHour},#{item.startMinute},#{item.lastSynTime},#{item.zklOpenFlag},#{item.canLoginType1},#{item.sheetAuditModel},#{item.rightModel},#{item.remarks},#{item.indexLogoRight},#{item.indexChangeFlag},#{item.indexName},#{item.indexLogo})
+        </foreach>
+    </insert>
+    
+    <update id="update">
+        	UPDATE
+                s_company
+            <set>
+                <![CDATA[ companyNo = #{companyNo} ]]>,
+                <![CDATA[ companyName = #{companyName} ]]>,
+                <![CDATA[ linkMan = #{linkMan} ]]>,
+                <![CDATA[ mobileNo = #{mobileNo} ]]>,
+                <![CDATA[ startTime = #{startTime} ]]>,
+                <![CDATA[ endTime = #{endTime} ]]>,
+                <![CDATA[ testFlag = #{testFlag} ]]>,
+                <![CDATA[ status = #{status} ]]>,
+                <![CDATA[ areaCode = #{areaCode} ]]>,
+                <![CDATA[ createTime = #{createTime} ]]>,
+                <![CDATA[ shopNum = #{shopNum} ]]>,
+                <![CDATA[ canSynFlag = #{canSynFlag} ]]>,
+                <![CDATA[ autoSynFlag = #{autoSynFlag} ]]>,
+                <![CDATA[ startHour = #{startHour} ]]>,
+                <![CDATA[ startMinute = #{startMinute} ]]>,
+                <![CDATA[ lastSynTime = #{lastSynTime} ]]>,
+                <![CDATA[ zklOpenFlag = #{zklOpenFlag} ]]>,
+                <![CDATA[ canLoginType1 = #{canLoginType1} ]]>,
+                <![CDATA[ sheetAuditModel = #{sheetAuditModel} ]]>,
+                <![CDATA[ rightModel = #{rightModel} ]]>,
+                <![CDATA[ remarks = #{remarks} ]]>,
+                <![CDATA[ indexLogoRight = #{indexLogoRight} ]]>,
+                <![CDATA[ indexChangeFlag = #{indexChangeFlag} ]]>,
+                <![CDATA[ indexName = #{indexName} ]]>,
+                <![CDATA[ indexLogo = #{indexLogo} ]]>
+            </set>
+            <where> 
+                id = #{id}
+                
+            </where>
+    </update>
+    
+    <update id="updatePart">
+            UPDATE
+                s_company
+            <set>
+                <if test="companyNo != null">
+                	<![CDATA[ companyNo = #{companyNo} ]]>,
+                </if>
+                <if test="companyName != null">
+                	<![CDATA[ companyName = #{companyName} ]]>,
+                </if>
+                <if test="linkMan != null">
+                	<![CDATA[ linkMan = #{linkMan} ]]>,
+                </if>
+                <if test="mobileNo != null">
+                	<![CDATA[ mobileNo = #{mobileNo} ]]>,
+                </if>
+                <if test="startTime != null">
+                	<![CDATA[ startTime = #{startTime} ]]>,
+                </if>
+                <if test="endTime != null">
+                	<![CDATA[ endTime = #{endTime} ]]>,
+                </if>
+                <if test="testFlag != null">
+                	<![CDATA[ testFlag = #{testFlag} ]]>,
+                </if>
+                <if test="status != null">
+                	<![CDATA[ status = #{status} ]]>,
+                </if>
+                <if test="areaCode != null">
+                	<![CDATA[ areaCode = #{areaCode} ]]>,
+                </if>
+                <if test="createTime != null">
+                	<![CDATA[ createTime = #{createTime} ]]>,
+                </if>
+                <if test="shopNum != null">
+                	<![CDATA[ shopNum = #{shopNum} ]]>,
+                </if>
+                <if test="canSynFlag != null">
+                	<![CDATA[ canSynFlag = #{canSynFlag} ]]>,
+                </if>
+                <if test="autoSynFlag != null">
+                	<![CDATA[ autoSynFlag = #{autoSynFlag} ]]>,
+                </if>
+                <if test="startHour != null">
+                	<![CDATA[ startHour = #{startHour} ]]>,
+                </if>
+                <if test="startMinute != null">
+                	<![CDATA[ startMinute = #{startMinute} ]]>,
+                </if>
+                <if test="lastSynTime != null">
+                	<![CDATA[ lastSynTime = #{lastSynTime} ]]>,
+                </if>
+                <if test="zklOpenFlag != null">
+                	<![CDATA[ zklOpenFlag = #{zklOpenFlag} ]]>,
+                </if>
+                <if test="canLoginType1 != null">
+                	<![CDATA[ canLoginType1 = #{canLoginType1} ]]>,
+                </if>
+                <if test="sheetAuditModel != null">
+                	<![CDATA[ sheetAuditModel = #{sheetAuditModel} ]]>,
+                </if>
+                <if test="rightModel != null">
+                	<![CDATA[ rightModel = #{rightModel} ]]>,
+                </if>
+                <if test="remarks != null">
+                	<![CDATA[ remarks = #{remarks} ]]>,
+                </if>
+                <if test="indexLogoRight != null">
+                	<![CDATA[ indexLogoRight = #{indexLogoRight} ]]>,
+                </if>
+                <if test="indexChangeFlag != null">
+                	<![CDATA[ indexChangeFlag = #{indexChangeFlag} ]]>,
+                </if>
+                <if test="indexName != null">
+                	<![CDATA[ indexName = #{indexName} ]]>,
+                </if>
+                <if test="indexLogo != null">
+                	<![CDATA[ indexLogo = #{indexLogo} ]]>
+                </if>
+            </set>
+            <where>
+                id = #{id}
+                
+            </where>
+    </update>
+    
+    <delete id="deleteByPk">
+        <![CDATA[
+            DELETE
+            FROM
+                s_company
+            WHERE
+                id=0
+        ]]>
+    </delete>
+</mapper> 
+

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<base href="${basePath}">
+<link rel="stylesheet" href="static/plugins/webix/codebase/webix.css?v=6.0.7" type="text/css" charset="utf-8">
+<link rel="stylesheet" href="static/plugins/webix/querybuilder/querybuilder.css" type="text/css" charset="utf-8">
+<link rel="stylesheet" href="static/plugins/webix/querybuilder/skins/mini.css" type="text/css" charset="utf-8">
+<style>
+</style>
+<body>
+</body>
+<script src="static/plugins/webix/codebase/webix.js?v=6.0.7"></script>
+<script src="static/plugins/webix/querybuilder/querybuilder.js"></script>
+<script type="text/javascript">
+	var qb = {
+			view: "querybuilder",
+			id: "querybuilder",
+			fields: ${fields},
+			maxLevel: 3
+		};
+	webix.ready(function(){
+		webix.i18n.locales["zh-CN"].dateFormat="%Y-%m-%d";
+		webix.i18n.setLocale("zh-CN");
+		webix.ui({rows: [{cols: [{view:"scrollview", body:{rows: [qb]}}]}]});
+		$$("querybuilder").focus();
+		$$("querybuilder").setValue(
+			[{ glue:"and",rules:[] }]
+		);
+	});
+
+	function submitData(){
+		var res2 = $$("querybuilder").toSQL();
+		return res2
+	}
+	</script>
+</html>

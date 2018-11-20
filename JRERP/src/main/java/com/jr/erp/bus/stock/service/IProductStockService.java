@@ -1,5 +1,7 @@
 package com.jr.erp.bus.stock.service;
 
+import java.util.Map;
+
 import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.mybatis.IBaseService;
 import com.jr.erp.bill.purchase.entity.BillPurchase;
@@ -26,4 +28,13 @@ public interface IProductStockService extends IBaseService<BaseEntity>{
      * @Exception 异常对象
     */
     void addPurchaseStock(BillPurchase billPurchase,String counterCode);
+
+    /**    
+     * queryStockByQueryBuilder(这里用一句话描述这个方法的作用)    
+     * 根据查询条件获取库存明细       
+     * @param @param queryBuilder     
+     * @return void
+     * @Exception 异常对象
+    */
+    void queryStockByQueryBuilder(String querySql);
 }

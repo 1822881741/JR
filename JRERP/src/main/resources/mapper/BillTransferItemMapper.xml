@@ -1,0 +1,1573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jr.erp.bill.transfer.dao.BillTransferItemMapper">
+  <resultMap id="BaseResultMap" type="com.jr.erp.bill.transfer.entity.BillTransferItem">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="companyNo" jdbcType="VARCHAR" property="companyNo" />
+    <result column="billId" jdbcType="INTEGER" property="billId" />
+    <result column="billNo" jdbcType="VARCHAR" property="billNo" />
+    <result column="billType" jdbcType="TINYINT" property="billType" />
+    <result column="billStatus" jdbcType="TINYINT" property="billStatus" />
+    <result column="billDate" jdbcType="VARCHAR" property="billDate" />
+    <result column="sysBillNo" jdbcType="VARCHAR" property="sysBillNo" />
+    <result column="supplier" jdbcType="VARCHAR" property="supplier" />
+    <result column="brandName" jdbcType="VARCHAR" property="brandName" />
+    <result column="barcode" jdbcType="VARCHAR" property="barcode" />
+    <result column="oldBarcode" jdbcType="VARCHAR" property="oldBarcode" />
+    <result column="subName" jdbcType="VARCHAR" property="subName" />
+    <result column="certificateNo" jdbcType="VARCHAR" property="certificateNo" />
+    <result column="giaCertificateNo" jdbcType="VARCHAR" property="giaCertificateNo" />
+    <result column="style" jdbcType="VARCHAR" property="style" />
+    <result column="comStyleNo" jdbcType="VARCHAR" property="comStyleNo" />
+    <result column="facStyleNo" jdbcType="VARCHAR" property="facStyleNo" />
+    <result column="handInch" jdbcType="VARCHAR" property="handInch" />
+    <result column="craft" jdbcType="VARCHAR" property="craft" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="custName" jdbcType="VARCHAR" property="custName" />
+    <result column="custMobile" jdbcType="VARCHAR" property="custMobile" />
+    <result column="createUserId" jdbcType="INTEGER" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="areaCode" jdbcType="VARCHAR" property="areaCode" />
+    <result column="areaName" jdbcType="VARCHAR" property="areaName" />
+    <result column="counterAreaCode" jdbcType="VARCHAR" property="counterAreaCode" />
+    <result column="counterAreaName" jdbcType="VARCHAR" property="counterAreaName" />
+    <result column="purchaseType" jdbcType="VARCHAR" property="purchaseType" />
+    <result column="inType" jdbcType="TINYINT" property="inType" />
+    <result column="bargainName" jdbcType="VARCHAR" property="bargainName" />
+    <result column="jtFlag" jdbcType="TINYINT" property="jtFlag" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="netGoldWeight" jdbcType="DOUBLE" property="netGoldWeight" />
+    <result column="goldLoss" jdbcType="DOUBLE" property="goldLoss" />
+    <result column="goldPurity" jdbcType="DOUBLE" property="goldPurity" />
+    <result column="goldWeight" jdbcType="DOUBLE" property="goldWeight" />
+    <result column="goldPrice" jdbcType="DOUBLE" property="goldPrice" />
+    <result column="goldMoney" jdbcType="DOUBLE" property="goldMoney" />
+    <result column="productWeight" jdbcType="DOUBLE" property="productWeight" />
+    <result column="workFeeKe" jdbcType="DOUBLE" property="workFeeKe" />
+    <result column="workFeeJian" jdbcType="DOUBLE" property="workFeeJian" />
+    <result column="workFeeSum" jdbcType="DOUBLE" property="workFeeSum" />
+    <result column="certificateFee" jdbcType="DOUBLE" property="certificateFee" />
+    <result column="fittingName" jdbcType="VARCHAR" property="fittingName" />
+    <result column="fittingNum" jdbcType="VARCHAR" property="fittingNum" />
+    <result column="fittingFee" jdbcType="DOUBLE" property="fittingFee" />
+    <result column="sandBlastFee" jdbcType="DOUBLE" property="sandBlastFee" />
+    <result column="otherFee" jdbcType="DOUBLE" property="otherFee" />
+    <result column="unitPrice" jdbcType="DOUBLE" property="unitPrice" />
+    <result column="costPrice" jdbcType="DOUBLE" property="costPrice" />
+    <result column="labelWorkFeeKe" jdbcType="DOUBLE" property="labelWorkFeeKe" />
+    <result column="labelWorkFeeJian" jdbcType="DOUBLE" property="labelWorkFeeJian" />
+    <result column="labelWorkFeeSum" jdbcType="DOUBLE" property="labelWorkFeeSum" />
+    <result column="labelRate" jdbcType="DOUBLE" property="labelRate" />
+    <result column="labelPrice" jdbcType="DOUBLE" property="labelPrice" />
+    <result column="labelPriceSum" jdbcType="DOUBLE" property="labelPriceSum" />
+    <result column="labelRemarks" jdbcType="VARCHAR" property="labelRemarks" />
+    <result column="categoryId" jdbcType="INTEGER" property="categoryId" />
+    <result column="sysCode" jdbcType="VARCHAR" property="sysCode" />
+    <result column="productName" jdbcType="VARCHAR" property="productName" />
+    <result column="goldName" jdbcType="VARCHAR" property="goldName" />
+    <result column="jewelName" jdbcType="VARCHAR" property="jewelName" />
+    <result column="categoryName" jdbcType="VARCHAR" property="categoryName" />
+    <result column="firstType" jdbcType="VARCHAR" property="firstType" />
+    <result column="firstTypeName" jdbcType="VARCHAR" property="firstTypeName" />
+    <result column="secondType" jdbcType="VARCHAR" property="secondType" />
+    <result column="secondTypeName" jdbcType="VARCHAR" property="secondTypeName" />
+    <result column="productClassify" jdbcType="VARCHAR" property="productClassify" />
+    <result column="firstClassify" jdbcType="VARCHAR" property="firstClassify" />
+    <result column="secondClassify" jdbcType="VARCHAR" property="secondClassify" />
+    <result column="labelName" jdbcType="VARCHAR" property="labelName" />
+    <result column="grfName" jdbcType="VARCHAR" property="grfName" />
+    <result column="thirdClassify" jdbcType="VARCHAR" property="thirdClassify" />
+    <result column="mJewelCut" jdbcType="VARCHAR" property="mJewelCut" />
+    <result column="mJewelColor" jdbcType="VARCHAR" property="mJewelColor" />
+    <result column="mJewelClarity" jdbcType="VARCHAR" property="mJewelClarity" />
+    <result column="mJewelFluorescent" jdbcType="VARCHAR" property="mJewelFluorescent" />
+    <result column="mJewelBurnished" jdbcType="VARCHAR" property="mJewelBurnished" />
+    <result column="mJewelShape" jdbcType="VARCHAR" property="mJewelShape" />
+    <result column="mJewelName" jdbcType="VARCHAR" property="mJewelName" />
+    <result column="mJewelNo" jdbcType="VARCHAR" property="mJewelNo" />
+    <result column="mJewelSpecifi" jdbcType="VARCHAR" property="mJewelSpecifi" />
+    <result column="mJewelNum" jdbcType="INTEGER" property="mJewelNum" />
+    <result column="mJewelWeight" jdbcType="DOUBLE" property="mJewelWeight" />
+    <result column="mJewelPrice" jdbcType="DOUBLE" property="mJewelPrice" />
+    <result column="mJewelFee" jdbcType="DOUBLE" property="mJewelFee" />
+    <result column="sJewel1Name" jdbcType="VARCHAR" property="sJewel1Name" />
+    <result column="sJewel1No" jdbcType="VARCHAR" property="sJewel1No" />
+    <result column="sJewel1Specifi" jdbcType="VARCHAR" property="sJewel1Specifi" />
+    <result column="sJewel1Num" jdbcType="INTEGER" property="sJewel1Num" />
+    <result column="sJewel1Weight" jdbcType="DOUBLE" property="sJewel1Weight" />
+    <result column="sJewel1Price" jdbcType="DOUBLE" property="sJewel1Price" />
+    <result column="sJewel1Fee" jdbcType="DOUBLE" property="sJewel1Fee" />
+    <result column="sJewel2Name" jdbcType="VARCHAR" property="sJewel2Name" />
+    <result column="sJewel2No" jdbcType="VARCHAR" property="sJewel2No" />
+    <result column="sJewel2Specifi" jdbcType="VARCHAR" property="sJewel2Specifi" />
+    <result column="sJewel2Num" jdbcType="INTEGER" property="sJewel2Num" />
+    <result column="sJewel2Weight" jdbcType="DOUBLE" property="sJewel2Weight" />
+    <result column="sJewel2Price" jdbcType="DOUBLE" property="sJewel2Price" />
+    <result column="sJewel2Fee" jdbcType="DOUBLE" property="sJewel2Fee" />
+    <result column="sJewel3Name" jdbcType="VARCHAR" property="sJewel3Name" />
+    <result column="sJewel3No" jdbcType="VARCHAR" property="sJewel3No" />
+    <result column="sJewel3Specifi" jdbcType="VARCHAR" property="sJewel3Specifi" />
+    <result column="sJewel3Num" jdbcType="INTEGER" property="sJewel3Num" />
+    <result column="sJewel3Weight" jdbcType="DOUBLE" property="sJewel3Weight" />
+    <result column="sJewel3Price" jdbcType="DOUBLE" property="sJewel3Price" />
+    <result column="sJewel3Fee" jdbcType="DOUBLE" property="sJewel3Fee" />
+    <result column="sJewel4Name" jdbcType="VARCHAR" property="sJewel4Name" />
+    <result column="sJewel4No" jdbcType="VARCHAR" property="sJewel4No" />
+    <result column="sJewel4Specifi" jdbcType="VARCHAR" property="sJewel4Specifi" />
+    <result column="sJewel4Num" jdbcType="INTEGER" property="sJewel4Num" />
+    <result column="sJewel4Weight" jdbcType="DOUBLE" property="sJewel4Weight" />
+    <result column="sJewel4Price" jdbcType="DOUBLE" property="sJewel4Price" />
+    <result column="sJewel4Fee" jdbcType="DOUBLE" property="sJewel4Fee" />
+    <result column="sJewel5Name" jdbcType="VARCHAR" property="sJewel5Name" />
+    <result column="sJewel5No" jdbcType="VARCHAR" property="sJewel5No" />
+    <result column="sJewel5Specifi" jdbcType="VARCHAR" property="sJewel5Specifi" />
+    <result column="sJewel5Num" jdbcType="INTEGER" property="sJewel5Num" />
+    <result column="sJewel5Weight" jdbcType="DOUBLE" property="sJewel5Weight" />
+    <result column="sJewel5Price" jdbcType="DOUBLE" property="sJewel5Price" />
+    <result column="sJewel5Fee" jdbcType="DOUBLE" property="sJewel5Fee" />
+    <result column="origin" jdbcType="VARCHAR" property="origin" />
+    <result column="employeeId" jdbcType="INTEGER" property="employeeId" />
+    <result column="employeeName" jdbcType="VARCHAR" property="employeeName" />
+    <result column="hasReturn" jdbcType="TINYINT" property="hasReturn" />
+    <result column="upperMoney" jdbcType="DOUBLE" property="upperMoney" />
+    <result column="purchaseAmount" jdbcType="DOUBLE" property="purchaseAmount" />
+    <result column="refineFee" jdbcType="DOUBLE" property="refineFee" />
+    <result column="refineFeeTotal" jdbcType="DOUBLE" property="refineFeeTotal" />
+    <result column="oldStockId" jdbcType="INTEGER" property="oldStockId" />
+    <result column="receiveTime" jdbcType="VARCHAR" property="receiveTime" />
+    <result column="mutilFlag" jdbcType="TINYINT" property="mutilFlag" />
+    <result column="priceRange" jdbcType="VARCHAR" property="priceRange" />
+    <result column="goldRange" jdbcType="VARCHAR" property="goldRange" />
+    <result column="costRange" jdbcType="VARCHAR" property="costRange" />
+    <result column="colorRange" jdbcType="VARCHAR" property="colorRange" />
+    <result column="clarityRange" jdbcType="VARCHAR" property="clarityRange" />
+    <result column="createTime" jdbcType="VARCHAR" property="createTime" />
+    <result column="outNum" jdbcType="INTEGER" property="outNum" />
+    <result column="outGoldWeight" jdbcType="DOUBLE" property="outGoldWeight" />
+    <result column="outMJewelWeight" jdbcType="DOUBLE" property="outMJewelWeight" />
+    <result column="outCostPrice" jdbcType="DOUBLE" property="outCostPrice" />
+    <result column="outLabelPriceSum" jdbcType="DOUBLE" property="outLabelPriceSum" />
+    <result column="outRemarks" jdbcType="VARCHAR" property="outRemarks" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, companyNo, billId, billNo, billType, billStatus, billDate, sysBillNo, supplier, 
+    brandName, barcode, oldBarcode, subName, certificateNo, giaCertificateNo, style, 
+    comStyleNo, facStyleNo, handInch, craft, img, custName, custMobile, createUserId, 
+    createUserName, remarks, areaCode, areaName, counterAreaCode, counterAreaName, purchaseType, 
+    inType, bargainName, jtFlag, num, netGoldWeight, goldLoss, goldPurity, goldWeight, 
+    goldPrice, goldMoney, productWeight, workFeeKe, workFeeJian, workFeeSum, certificateFee, 
+    fittingName, fittingNum, fittingFee, sandBlastFee, otherFee, unitPrice, costPrice, 
+    labelWorkFeeKe, labelWorkFeeJian, labelWorkFeeSum, labelRate, labelPrice, labelPriceSum, 
+    labelRemarks, categoryId, sysCode, productName, goldName, jewelName, categoryName, 
+    firstType, firstTypeName, secondType, secondTypeName, productClassify, firstClassify, 
+    secondClassify, labelName, grfName, thirdClassify, mJewelCut, mJewelColor, mJewelClarity, 
+    mJewelFluorescent, mJewelBurnished, mJewelShape, mJewelName, mJewelNo, mJewelSpecifi, 
+    mJewelNum, mJewelWeight, mJewelPrice, mJewelFee, sJewel1Name, sJewel1No, sJewel1Specifi, 
+    sJewel1Num, sJewel1Weight, sJewel1Price, sJewel1Fee, sJewel2Name, sJewel2No, sJewel2Specifi, 
+    sJewel2Num, sJewel2Weight, sJewel2Price, sJewel2Fee, sJewel3Name, sJewel3No, sJewel3Specifi, 
+    sJewel3Num, sJewel3Weight, sJewel3Price, sJewel3Fee, sJewel4Name, sJewel4No, sJewel4Specifi, 
+    sJewel4Num, sJewel4Weight, sJewel4Price, sJewel4Fee, sJewel5Name, sJewel5No, sJewel5Specifi, 
+    sJewel5Num, sJewel5Weight, sJewel5Price, sJewel5Fee, origin, employeeId, employeeName, 
+    hasReturn, upperMoney, purchaseAmount, refineFee, refineFeeTotal, oldStockId, receiveTime, 
+    mutilFlag, priceRange, goldRange, costRange, colorRange, clarityRange, createTime, 
+    outNum, outGoldWeight, outMJewelWeight, outCostPrice, outLabelPriceSum, outRemarks
+  </sql>
+  <select id="selectByExample" parameterType="com.jr.erp.bill.transfer.entity.BillTransferItemExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bill_transfer_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="page != null">
+      <if test="limit != null">
+        limit ${(page-1)*limit}, ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from bill_transfer_item
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bill_transfer_item
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jr.erp.bill.transfer.entity.BillTransferItemExample">
+    delete from bill_transfer_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jr.erp.bill.transfer.entity.BillTransferItem">
+    insert into bill_transfer_item (id, companyNo, billId, 
+      billNo, billType, billStatus, 
+      billDate, sysBillNo, supplier, 
+      brandName, barcode, oldBarcode, 
+      subName, certificateNo, giaCertificateNo, 
+      style, comStyleNo, facStyleNo, 
+      handInch, craft, img, 
+      custName, custMobile, createUserId, 
+      createUserName, remarks, areaCode, 
+      areaName, counterAreaCode, counterAreaName, 
+      purchaseType, inType, bargainName, 
+      jtFlag, num, netGoldWeight, 
+      goldLoss, goldPurity, goldWeight, 
+      goldPrice, goldMoney, productWeight, 
+      workFeeKe, workFeeJian, workFeeSum, 
+      certificateFee, fittingName, fittingNum, 
+      fittingFee, sandBlastFee, otherFee, 
+      unitPrice, costPrice, labelWorkFeeKe, 
+      labelWorkFeeJian, labelWorkFeeSum, labelRate, 
+      labelPrice, labelPriceSum, labelRemarks, 
+      categoryId, sysCode, productName, 
+      goldName, jewelName, categoryName, 
+      firstType, firstTypeName, secondType, 
+      secondTypeName, productClassify, firstClassify, 
+      secondClassify, labelName, grfName, 
+      thirdClassify, mJewelCut, mJewelColor, 
+      mJewelClarity, mJewelFluorescent, mJewelBurnished, 
+      mJewelShape, mJewelName, mJewelNo, 
+      mJewelSpecifi, mJewelNum, mJewelWeight, 
+      mJewelPrice, mJewelFee, sJewel1Name, 
+      sJewel1No, sJewel1Specifi, sJewel1Num, 
+      sJewel1Weight, sJewel1Price, sJewel1Fee, 
+      sJewel2Name, sJewel2No, sJewel2Specifi, 
+      sJewel2Num, sJewel2Weight, sJewel2Price, 
+      sJewel2Fee, sJewel3Name, sJewel3No, 
+      sJewel3Specifi, sJewel3Num, sJewel3Weight, 
+      sJewel3Price, sJewel3Fee, sJewel4Name, 
+      sJewel4No, sJewel4Specifi, sJewel4Num, 
+      sJewel4Weight, sJewel4Price, sJewel4Fee, 
+      sJewel5Name, sJewel5No, sJewel5Specifi, 
+      sJewel5Num, sJewel5Weight, sJewel5Price, 
+      sJewel5Fee, origin, employeeId, 
+      employeeName, hasReturn, upperMoney, 
+      purchaseAmount, refineFee, refineFeeTotal, 
+      oldStockId, receiveTime, mutilFlag, 
+      priceRange, goldRange, costRange, 
+      colorRange, clarityRange, createTime, 
+      outNum, outGoldWeight, outMJewelWeight, 
+      outCostPrice, outLabelPriceSum, outRemarks
+      )
+    values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{billId,jdbcType=INTEGER}, 
+      #{billNo,jdbcType=VARCHAR}, #{billType,jdbcType=TINYINT}, #{billStatus,jdbcType=TINYINT}, 
+      #{billDate,jdbcType=VARCHAR}, #{sysBillNo,jdbcType=VARCHAR}, #{supplier,jdbcType=VARCHAR}, 
+      #{brandName,jdbcType=VARCHAR}, #{barcode,jdbcType=VARCHAR}, #{oldBarcode,jdbcType=VARCHAR}, 
+      #{subName,jdbcType=VARCHAR}, #{certificateNo,jdbcType=VARCHAR}, #{giaCertificateNo,jdbcType=VARCHAR}, 
+      #{style,jdbcType=VARCHAR}, #{comStyleNo,jdbcType=VARCHAR}, #{facStyleNo,jdbcType=VARCHAR}, 
+      #{handInch,jdbcType=VARCHAR}, #{craft,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
+      #{custName,jdbcType=VARCHAR}, #{custMobile,jdbcType=VARCHAR}, #{createUserId,jdbcType=INTEGER}, 
+      #{createUserName,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, 
+      #{areaName,jdbcType=VARCHAR}, #{counterAreaCode,jdbcType=VARCHAR}, #{counterAreaName,jdbcType=VARCHAR}, 
+      #{purchaseType,jdbcType=VARCHAR}, #{inType,jdbcType=TINYINT}, #{bargainName,jdbcType=VARCHAR}, 
+      #{jtFlag,jdbcType=TINYINT}, #{num,jdbcType=INTEGER}, #{netGoldWeight,jdbcType=DOUBLE}, 
+      #{goldLoss,jdbcType=DOUBLE}, #{goldPurity,jdbcType=DOUBLE}, #{goldWeight,jdbcType=DOUBLE}, 
+      #{goldPrice,jdbcType=DOUBLE}, #{goldMoney,jdbcType=DOUBLE}, #{productWeight,jdbcType=DOUBLE}, 
+      #{workFeeKe,jdbcType=DOUBLE}, #{workFeeJian,jdbcType=DOUBLE}, #{workFeeSum,jdbcType=DOUBLE}, 
+      #{certificateFee,jdbcType=DOUBLE}, #{fittingName,jdbcType=VARCHAR}, #{fittingNum,jdbcType=VARCHAR}, 
+      #{fittingFee,jdbcType=DOUBLE}, #{sandBlastFee,jdbcType=DOUBLE}, #{otherFee,jdbcType=DOUBLE}, 
+      #{unitPrice,jdbcType=DOUBLE}, #{costPrice,jdbcType=DOUBLE}, #{labelWorkFeeKe,jdbcType=DOUBLE}, 
+      #{labelWorkFeeJian,jdbcType=DOUBLE}, #{labelWorkFeeSum,jdbcType=DOUBLE}, #{labelRate,jdbcType=DOUBLE}, 
+      #{labelPrice,jdbcType=DOUBLE}, #{labelPriceSum,jdbcType=DOUBLE}, #{labelRemarks,jdbcType=VARCHAR}, 
+      #{categoryId,jdbcType=INTEGER}, #{sysCode,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{goldName,jdbcType=VARCHAR}, #{jewelName,jdbcType=VARCHAR}, #{categoryName,jdbcType=VARCHAR}, 
+      #{firstType,jdbcType=VARCHAR}, #{firstTypeName,jdbcType=VARCHAR}, #{secondType,jdbcType=VARCHAR}, 
+      #{secondTypeName,jdbcType=VARCHAR}, #{productClassify,jdbcType=VARCHAR}, #{firstClassify,jdbcType=VARCHAR}, 
+      #{secondClassify,jdbcType=VARCHAR}, #{labelName,jdbcType=VARCHAR}, #{grfName,jdbcType=VARCHAR}, 
+      #{thirdClassify,jdbcType=VARCHAR}, #{mJewelCut,jdbcType=VARCHAR}, #{mJewelColor,jdbcType=VARCHAR}, 
+      #{mJewelClarity,jdbcType=VARCHAR}, #{mJewelFluorescent,jdbcType=VARCHAR}, #{mJewelBurnished,jdbcType=VARCHAR}, 
+      #{mJewelShape,jdbcType=VARCHAR}, #{mJewelName,jdbcType=VARCHAR}, #{mJewelNo,jdbcType=VARCHAR}, 
+      #{mJewelSpecifi,jdbcType=VARCHAR}, #{mJewelNum,jdbcType=INTEGER}, #{mJewelWeight,jdbcType=DOUBLE}, 
+      #{mJewelPrice,jdbcType=DOUBLE}, #{mJewelFee,jdbcType=DOUBLE}, #{sJewel1Name,jdbcType=VARCHAR}, 
+      #{sJewel1No,jdbcType=VARCHAR}, #{sJewel1Specifi,jdbcType=VARCHAR}, #{sJewel1Num,jdbcType=INTEGER}, 
+      #{sJewel1Weight,jdbcType=DOUBLE}, #{sJewel1Price,jdbcType=DOUBLE}, #{sJewel1Fee,jdbcType=DOUBLE}, 
+      #{sJewel2Name,jdbcType=VARCHAR}, #{sJewel2No,jdbcType=VARCHAR}, #{sJewel2Specifi,jdbcType=VARCHAR}, 
+      #{sJewel2Num,jdbcType=INTEGER}, #{sJewel2Weight,jdbcType=DOUBLE}, #{sJewel2Price,jdbcType=DOUBLE}, 
+      #{sJewel2Fee,jdbcType=DOUBLE}, #{sJewel3Name,jdbcType=VARCHAR}, #{sJewel3No,jdbcType=VARCHAR}, 
+      #{sJewel3Specifi,jdbcType=VARCHAR}, #{sJewel3Num,jdbcType=INTEGER}, #{sJewel3Weight,jdbcType=DOUBLE}, 
+      #{sJewel3Price,jdbcType=DOUBLE}, #{sJewel3Fee,jdbcType=DOUBLE}, #{sJewel4Name,jdbcType=VARCHAR}, 
+      #{sJewel4No,jdbcType=VARCHAR}, #{sJewel4Specifi,jdbcType=VARCHAR}, #{sJewel4Num,jdbcType=INTEGER}, 
+      #{sJewel4Weight,jdbcType=DOUBLE}, #{sJewel4Price,jdbcType=DOUBLE}, #{sJewel4Fee,jdbcType=DOUBLE}, 
+      #{sJewel5Name,jdbcType=VARCHAR}, #{sJewel5No,jdbcType=VARCHAR}, #{sJewel5Specifi,jdbcType=VARCHAR}, 
+      #{sJewel5Num,jdbcType=INTEGER}, #{sJewel5Weight,jdbcType=DOUBLE}, #{sJewel5Price,jdbcType=DOUBLE}, 
+      #{sJewel5Fee,jdbcType=DOUBLE}, #{origin,jdbcType=VARCHAR}, #{employeeId,jdbcType=INTEGER}, 
+      #{employeeName,jdbcType=VARCHAR}, #{hasReturn,jdbcType=TINYINT}, #{upperMoney,jdbcType=DOUBLE}, 
+      #{purchaseAmount,jdbcType=DOUBLE}, #{refineFee,jdbcType=DOUBLE}, #{refineFeeTotal,jdbcType=DOUBLE}, 
+      #{oldStockId,jdbcType=INTEGER}, #{receiveTime,jdbcType=VARCHAR}, #{mutilFlag,jdbcType=TINYINT}, 
+      #{priceRange,jdbcType=VARCHAR}, #{goldRange,jdbcType=VARCHAR}, #{costRange,jdbcType=VARCHAR}, 
+      #{colorRange,jdbcType=VARCHAR}, #{clarityRange,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{outNum,jdbcType=INTEGER}, #{outGoldWeight,jdbcType=DOUBLE}, #{outMJewelWeight,jdbcType=DOUBLE}, 
+      #{outCostPrice,jdbcType=DOUBLE}, #{outLabelPriceSum,jdbcType=DOUBLE}, #{outRemarks,jdbcType=VARCHAR}
+      )
+  </insert>
+  <select id="countByExample" parameterType="com.jr.erp.bill.transfer.entity.BillTransferItemExample" resultType="java.lang.Long">
+    select count(*) from bill_transfer_item
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bill_transfer_item
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyNo != null">
+        companyNo = #{record.companyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billId != null">
+        billId = #{record.billId,jdbcType=INTEGER},
+      </if>
+      <if test="record.billNo != null">
+        billNo = #{record.billNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billType != null">
+        billType = #{record.billType,jdbcType=TINYINT},
+      </if>
+      <if test="record.billStatus != null">
+        billStatus = #{record.billStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.billDate != null">
+        billDate = #{record.billDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sysBillNo != null">
+        sysBillNo = #{record.sysBillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplier != null">
+        supplier = #{record.supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brandName != null">
+        brandName = #{record.brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.barcode != null">
+        barcode = #{record.barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oldBarcode != null">
+        oldBarcode = #{record.oldBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subName != null">
+        subName = #{record.subName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certificateNo != null">
+        certificateNo = #{record.certificateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.giaCertificateNo != null">
+        giaCertificateNo = #{record.giaCertificateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.style != null">
+        style = #{record.style,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comStyleNo != null">
+        comStyleNo = #{record.comStyleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.facStyleNo != null">
+        facStyleNo = #{record.facStyleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.handInch != null">
+        handInch = #{record.handInch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.craft != null">
+        craft = #{record.craft,jdbcType=VARCHAR},
+      </if>
+      <if test="record.img != null">
+        img = #{record.img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custName != null">
+        custName = #{record.custName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custMobile != null">
+        custMobile = #{record.custMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUserId != null">
+        createUserId = #{record.createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createUserName != null">
+        createUserName = #{record.createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaCode != null">
+        areaCode = #{record.areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaName != null">
+        areaName = #{record.areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.counterAreaCode != null">
+        counterAreaCode = #{record.counterAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.counterAreaName != null">
+        counterAreaName = #{record.counterAreaName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchaseType != null">
+        purchaseType = #{record.purchaseType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inType != null">
+        inType = #{record.inType,jdbcType=TINYINT},
+      </if>
+      <if test="record.bargainName != null">
+        bargainName = #{record.bargainName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jtFlag != null">
+        jtFlag = #{record.jtFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.num != null">
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.netGoldWeight != null">
+        netGoldWeight = #{record.netGoldWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.goldLoss != null">
+        goldLoss = #{record.goldLoss,jdbcType=DOUBLE},
+      </if>
+      <if test="record.goldPurity != null">
+        goldPurity = #{record.goldPurity,jdbcType=DOUBLE},
+      </if>
+      <if test="record.goldWeight != null">
+        goldWeight = #{record.goldWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.goldPrice != null">
+        goldPrice = #{record.goldPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.goldMoney != null">
+        goldMoney = #{record.goldMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.productWeight != null">
+        productWeight = #{record.productWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.workFeeKe != null">
+        workFeeKe = #{record.workFeeKe,jdbcType=DOUBLE},
+      </if>
+      <if test="record.workFeeJian != null">
+        workFeeJian = #{record.workFeeJian,jdbcType=DOUBLE},
+      </if>
+      <if test="record.workFeeSum != null">
+        workFeeSum = #{record.workFeeSum,jdbcType=DOUBLE},
+      </if>
+      <if test="record.certificateFee != null">
+        certificateFee = #{record.certificateFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.fittingName != null">
+        fittingName = #{record.fittingName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fittingNum != null">
+        fittingNum = #{record.fittingNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fittingFee != null">
+        fittingFee = #{record.fittingFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sandBlastFee != null">
+        sandBlastFee = #{record.sandBlastFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.otherFee != null">
+        otherFee = #{record.otherFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.unitPrice != null">
+        unitPrice = #{record.unitPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.costPrice != null">
+        costPrice = #{record.costPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.labelWorkFeeKe != null">
+        labelWorkFeeKe = #{record.labelWorkFeeKe,jdbcType=DOUBLE},
+      </if>
+      <if test="record.labelWorkFeeJian != null">
+        labelWorkFeeJian = #{record.labelWorkFeeJian,jdbcType=DOUBLE},
+      </if>
+      <if test="record.labelWorkFeeSum != null">
+        labelWorkFeeSum = #{record.labelWorkFeeSum,jdbcType=DOUBLE},
+      </if>
+      <if test="record.labelRate != null">
+        labelRate = #{record.labelRate,jdbcType=DOUBLE},
+      </if>
+      <if test="record.labelPrice != null">
+        labelPrice = #{record.labelPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.labelPriceSum != null">
+        labelPriceSum = #{record.labelPriceSum,jdbcType=DOUBLE},
+      </if>
+      <if test="record.labelRemarks != null">
+        labelRemarks = #{record.labelRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryId != null">
+        categoryId = #{record.categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sysCode != null">
+        sysCode = #{record.sysCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null">
+        productName = #{record.productName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goldName != null">
+        goldName = #{record.goldName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jewelName != null">
+        jewelName = #{record.jewelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryName != null">
+        categoryName = #{record.categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstType != null">
+        firstType = #{record.firstType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstTypeName != null">
+        firstTypeName = #{record.firstTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secondType != null">
+        secondType = #{record.secondType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secondTypeName != null">
+        secondTypeName = #{record.secondTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productClassify != null">
+        productClassify = #{record.productClassify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstClassify != null">
+        firstClassify = #{record.firstClassify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secondClassify != null">
+        secondClassify = #{record.secondClassify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.labelName != null">
+        labelName = #{record.labelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.grfName != null">
+        grfName = #{record.grfName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.thirdClassify != null">
+        thirdClassify = #{record.thirdClassify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mJewelCut != null">
+        mJewelCut = #{record.mJewelCut,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mJewelColor != null">
+        mJewelColor = #{record.mJewelColor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mJewelClarity != null">
+        mJewelClarity = #{record.mJewelClarity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mJewelFluorescent != null">
+        mJewelFluorescent = #{record.mJewelFluorescent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mJewelBurnished != null">
+        mJewelBurnished = #{record.mJewelBurnished,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mJewelShape != null">
+        mJewelShape = #{record.mJewelShape,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mJewelName != null">
+        mJewelName = #{record.mJewelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mJewelNo != null">
+        mJewelNo = #{record.mJewelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mJewelSpecifi != null">
+        mJewelSpecifi = #{record.mJewelSpecifi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mJewelNum != null">
+        mJewelNum = #{record.mJewelNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.mJewelWeight != null">
+        mJewelWeight = #{record.mJewelWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.mJewelPrice != null">
+        mJewelPrice = #{record.mJewelPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.mJewelFee != null">
+        mJewelFee = #{record.mJewelFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sJewel1Name != null">
+        sJewel1Name = #{record.sJewel1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sJewel1No != null">
+        sJewel1No = #{record.sJewel1No,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sJewel1Specifi != null">
+        sJewel1Specifi = #{record.sJewel1Specifi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sJewel1Num != null">
+        sJewel1Num = #{record.sJewel1Num,jdbcType=INTEGER},
+      </if>
+      <if test="record.sJewel1Weight != null">
+        sJewel1Weight = #{record.sJewel1Weight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sJewel1Price != null">
+        sJewel1Price = #{record.sJewel1Price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sJewel1Fee != null">
+        sJewel1Fee = #{record.sJewel1Fee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sJewel2Name != null">
+        sJewel2Name = #{record.sJewel2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sJewel2No != null">
+        sJewel2No = #{record.sJewel2No,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sJewel2Specifi != null">
+        sJewel2Specifi = #{record.sJewel2Specifi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sJewel2Num != null">
+        sJewel2Num = #{record.sJewel2Num,jdbcType=INTEGER},
+      </if>
+      <if test="record.sJewel2Weight != null">
+        sJewel2Weight = #{record.sJewel2Weight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sJewel2Price != null">
+        sJewel2Price = #{record.sJewel2Price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sJewel2Fee != null">
+        sJewel2Fee = #{record.sJewel2Fee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sJewel3Name != null">
+        sJewel3Name = #{record.sJewel3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sJewel3No != null">
+        sJewel3No = #{record.sJewel3No,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sJewel3Specifi != null">
+        sJewel3Specifi = #{record.sJewel3Specifi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sJewel3Num != null">
+        sJewel3Num = #{record.sJewel3Num,jdbcType=INTEGER},
+      </if>
+      <if test="record.sJewel3Weight != null">
+        sJewel3Weight = #{record.sJewel3Weight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sJewel3Price != null">
+        sJewel3Price = #{record.sJewel3Price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sJewel3Fee != null">
+        sJewel3Fee = #{record.sJewel3Fee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sJewel4Name != null">
+        sJewel4Name = #{record.sJewel4Name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sJewel4No != null">
+        sJewel4No = #{record.sJewel4No,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sJewel4Specifi != null">
+        sJewel4Specifi = #{record.sJewel4Specifi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sJewel4Num != null">
+        sJewel4Num = #{record.sJewel4Num,jdbcType=INTEGER},
+      </if>
+      <if test="record.sJewel4Weight != null">
+        sJewel4Weight = #{record.sJewel4Weight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sJewel4Price != null">
+        sJewel4Price = #{record.sJewel4Price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sJewel4Fee != null">
+        sJewel4Fee = #{record.sJewel4Fee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sJewel5Name != null">
+        sJewel5Name = #{record.sJewel5Name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sJewel5No != null">
+        sJewel5No = #{record.sJewel5No,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sJewel5Specifi != null">
+        sJewel5Specifi = #{record.sJewel5Specifi,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sJewel5Num != null">
+        sJewel5Num = #{record.sJewel5Num,jdbcType=INTEGER},
+      </if>
+      <if test="record.sJewel5Weight != null">
+        sJewel5Weight = #{record.sJewel5Weight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sJewel5Price != null">
+        sJewel5Price = #{record.sJewel5Price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.sJewel5Fee != null">
+        sJewel5Fee = #{record.sJewel5Fee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.origin != null">
+        origin = #{record.origin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeId != null">
+        employeeId = #{record.employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.employeeName != null">
+        employeeName = #{record.employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hasReturn != null">
+        hasReturn = #{record.hasReturn,jdbcType=TINYINT},
+      </if>
+      <if test="record.upperMoney != null">
+        upperMoney = #{record.upperMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="record.purchaseAmount != null">
+        purchaseAmount = #{record.purchaseAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="record.refineFee != null">
+        refineFee = #{record.refineFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.refineFeeTotal != null">
+        refineFeeTotal = #{record.refineFeeTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="record.oldStockId != null">
+        oldStockId = #{record.oldStockId,jdbcType=INTEGER},
+      </if>
+      <if test="record.receiveTime != null">
+        receiveTime = #{record.receiveTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mutilFlag != null">
+        mutilFlag = #{record.mutilFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.priceRange != null">
+        priceRange = #{record.priceRange,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goldRange != null">
+        goldRange = #{record.goldRange,jdbcType=VARCHAR},
+      </if>
+      <if test="record.costRange != null">
+        costRange = #{record.costRange,jdbcType=VARCHAR},
+      </if>
+      <if test="record.colorRange != null">
+        colorRange = #{record.colorRange,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clarityRange != null">
+        clarityRange = #{record.clarityRange,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outNum != null">
+        outNum = #{record.outNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.outGoldWeight != null">
+        outGoldWeight = #{record.outGoldWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.outMJewelWeight != null">
+        outMJewelWeight = #{record.outMJewelWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.outCostPrice != null">
+        outCostPrice = #{record.outCostPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.outLabelPriceSum != null">
+        outLabelPriceSum = #{record.outLabelPriceSum,jdbcType=DOUBLE},
+      </if>
+      <if test="record.outRemarks != null">
+        outRemarks = #{record.outRemarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bill_transfer_item
+    set id = #{record.id,jdbcType=INTEGER},
+      companyNo = #{record.companyNo,jdbcType=VARCHAR},
+      billId = #{record.billId,jdbcType=INTEGER},
+      billNo = #{record.billNo,jdbcType=VARCHAR},
+      billType = #{record.billType,jdbcType=TINYINT},
+      billStatus = #{record.billStatus,jdbcType=TINYINT},
+      billDate = #{record.billDate,jdbcType=VARCHAR},
+      sysBillNo = #{record.sysBillNo,jdbcType=VARCHAR},
+      supplier = #{record.supplier,jdbcType=VARCHAR},
+      brandName = #{record.brandName,jdbcType=VARCHAR},
+      barcode = #{record.barcode,jdbcType=VARCHAR},
+      oldBarcode = #{record.oldBarcode,jdbcType=VARCHAR},
+      subName = #{record.subName,jdbcType=VARCHAR},
+      certificateNo = #{record.certificateNo,jdbcType=VARCHAR},
+      giaCertificateNo = #{record.giaCertificateNo,jdbcType=VARCHAR},
+      style = #{record.style,jdbcType=VARCHAR},
+      comStyleNo = #{record.comStyleNo,jdbcType=VARCHAR},
+      facStyleNo = #{record.facStyleNo,jdbcType=VARCHAR},
+      handInch = #{record.handInch,jdbcType=VARCHAR},
+      craft = #{record.craft,jdbcType=VARCHAR},
+      img = #{record.img,jdbcType=VARCHAR},
+      custName = #{record.custName,jdbcType=VARCHAR},
+      custMobile = #{record.custMobile,jdbcType=VARCHAR},
+      createUserId = #{record.createUserId,jdbcType=INTEGER},
+      createUserName = #{record.createUserName,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      areaCode = #{record.areaCode,jdbcType=VARCHAR},
+      areaName = #{record.areaName,jdbcType=VARCHAR},
+      counterAreaCode = #{record.counterAreaCode,jdbcType=VARCHAR},
+      counterAreaName = #{record.counterAreaName,jdbcType=VARCHAR},
+      purchaseType = #{record.purchaseType,jdbcType=VARCHAR},
+      inType = #{record.inType,jdbcType=TINYINT},
+      bargainName = #{record.bargainName,jdbcType=VARCHAR},
+      jtFlag = #{record.jtFlag,jdbcType=TINYINT},
+      num = #{record.num,jdbcType=INTEGER},
+      netGoldWeight = #{record.netGoldWeight,jdbcType=DOUBLE},
+      goldLoss = #{record.goldLoss,jdbcType=DOUBLE},
+      goldPurity = #{record.goldPurity,jdbcType=DOUBLE},
+      goldWeight = #{record.goldWeight,jdbcType=DOUBLE},
+      goldPrice = #{record.goldPrice,jdbcType=DOUBLE},
+      goldMoney = #{record.goldMoney,jdbcType=DOUBLE},
+      productWeight = #{record.productWeight,jdbcType=DOUBLE},
+      workFeeKe = #{record.workFeeKe,jdbcType=DOUBLE},
+      workFeeJian = #{record.workFeeJian,jdbcType=DOUBLE},
+      workFeeSum = #{record.workFeeSum,jdbcType=DOUBLE},
+      certificateFee = #{record.certificateFee,jdbcType=DOUBLE},
+      fittingName = #{record.fittingName,jdbcType=VARCHAR},
+      fittingNum = #{record.fittingNum,jdbcType=VARCHAR},
+      fittingFee = #{record.fittingFee,jdbcType=DOUBLE},
+      sandBlastFee = #{record.sandBlastFee,jdbcType=DOUBLE},
+      otherFee = #{record.otherFee,jdbcType=DOUBLE},
+      unitPrice = #{record.unitPrice,jdbcType=DOUBLE},
+      costPrice = #{record.costPrice,jdbcType=DOUBLE},
+      labelWorkFeeKe = #{record.labelWorkFeeKe,jdbcType=DOUBLE},
+      labelWorkFeeJian = #{record.labelWorkFeeJian,jdbcType=DOUBLE},
+      labelWorkFeeSum = #{record.labelWorkFeeSum,jdbcType=DOUBLE},
+      labelRate = #{record.labelRate,jdbcType=DOUBLE},
+      labelPrice = #{record.labelPrice,jdbcType=DOUBLE},
+      labelPriceSum = #{record.labelPriceSum,jdbcType=DOUBLE},
+      labelRemarks = #{record.labelRemarks,jdbcType=VARCHAR},
+      categoryId = #{record.categoryId,jdbcType=INTEGER},
+      sysCode = #{record.sysCode,jdbcType=VARCHAR},
+      productName = #{record.productName,jdbcType=VARCHAR},
+      goldName = #{record.goldName,jdbcType=VARCHAR},
+      jewelName = #{record.jewelName,jdbcType=VARCHAR},
+      categoryName = #{record.categoryName,jdbcType=VARCHAR},
+      firstType = #{record.firstType,jdbcType=VARCHAR},
+      firstTypeName = #{record.firstTypeName,jdbcType=VARCHAR},
+      secondType = #{record.secondType,jdbcType=VARCHAR},
+      secondTypeName = #{record.secondTypeName,jdbcType=VARCHAR},
+      productClassify = #{record.productClassify,jdbcType=VARCHAR},
+      firstClassify = #{record.firstClassify,jdbcType=VARCHAR},
+      secondClassify = #{record.secondClassify,jdbcType=VARCHAR},
+      labelName = #{record.labelName,jdbcType=VARCHAR},
+      grfName = #{record.grfName,jdbcType=VARCHAR},
+      thirdClassify = #{record.thirdClassify,jdbcType=VARCHAR},
+      mJewelCut = #{record.mJewelCut,jdbcType=VARCHAR},
+      mJewelColor = #{record.mJewelColor,jdbcType=VARCHAR},
+      mJewelClarity = #{record.mJewelClarity,jdbcType=VARCHAR},
+      mJewelFluorescent = #{record.mJewelFluorescent,jdbcType=VARCHAR},
+      mJewelBurnished = #{record.mJewelBurnished,jdbcType=VARCHAR},
+      mJewelShape = #{record.mJewelShape,jdbcType=VARCHAR},
+      mJewelName = #{record.mJewelName,jdbcType=VARCHAR},
+      mJewelNo = #{record.mJewelNo,jdbcType=VARCHAR},
+      mJewelSpecifi = #{record.mJewelSpecifi,jdbcType=VARCHAR},
+      mJewelNum = #{record.mJewelNum,jdbcType=INTEGER},
+      mJewelWeight = #{record.mJewelWeight,jdbcType=DOUBLE},
+      mJewelPrice = #{record.mJewelPrice,jdbcType=DOUBLE},
+      mJewelFee = #{record.mJewelFee,jdbcType=DOUBLE},
+      sJewel1Name = #{record.sJewel1Name,jdbcType=VARCHAR},
+      sJewel1No = #{record.sJewel1No,jdbcType=VARCHAR},
+      sJewel1Specifi = #{record.sJewel1Specifi,jdbcType=VARCHAR},
+      sJewel1Num = #{record.sJewel1Num,jdbcType=INTEGER},
+      sJewel1Weight = #{record.sJewel1Weight,jdbcType=DOUBLE},
+      sJewel1Price = #{record.sJewel1Price,jdbcType=DOUBLE},
+      sJewel1Fee = #{record.sJewel1Fee,jdbcType=DOUBLE},
+      sJewel2Name = #{record.sJewel2Name,jdbcType=VARCHAR},
+      sJewel2No = #{record.sJewel2No,jdbcType=VARCHAR},
+      sJewel2Specifi = #{record.sJewel2Specifi,jdbcType=VARCHAR},
+      sJewel2Num = #{record.sJewel2Num,jdbcType=INTEGER},
+      sJewel2Weight = #{record.sJewel2Weight,jdbcType=DOUBLE},
+      sJewel2Price = #{record.sJewel2Price,jdbcType=DOUBLE},
+      sJewel2Fee = #{record.sJewel2Fee,jdbcType=DOUBLE},
+      sJewel3Name = #{record.sJewel3Name,jdbcType=VARCHAR},
+      sJewel3No = #{record.sJewel3No,jdbcType=VARCHAR},
+      sJewel3Specifi = #{record.sJewel3Specifi,jdbcType=VARCHAR},
+      sJewel3Num = #{record.sJewel3Num,jdbcType=INTEGER},
+      sJewel3Weight = #{record.sJewel3Weight,jdbcType=DOUBLE},
+      sJewel3Price = #{record.sJewel3Price,jdbcType=DOUBLE},
+      sJewel3Fee = #{record.sJewel3Fee,jdbcType=DOUBLE},
+      sJewel4Name = #{record.sJewel4Name,jdbcType=VARCHAR},
+      sJewel4No = #{record.sJewel4No,jdbcType=VARCHAR},
+      sJewel4Specifi = #{record.sJewel4Specifi,jdbcType=VARCHAR},
+      sJewel4Num = #{record.sJewel4Num,jdbcType=INTEGER},
+      sJewel4Weight = #{record.sJewel4Weight,jdbcType=DOUBLE},
+      sJewel4Price = #{record.sJewel4Price,jdbcType=DOUBLE},
+      sJewel4Fee = #{record.sJewel4Fee,jdbcType=DOUBLE},
+      sJewel5Name = #{record.sJewel5Name,jdbcType=VARCHAR},
+      sJewel5No = #{record.sJewel5No,jdbcType=VARCHAR},
+      sJewel5Specifi = #{record.sJewel5Specifi,jdbcType=VARCHAR},
+      sJewel5Num = #{record.sJewel5Num,jdbcType=INTEGER},
+      sJewel5Weight = #{record.sJewel5Weight,jdbcType=DOUBLE},
+      sJewel5Price = #{record.sJewel5Price,jdbcType=DOUBLE},
+      sJewel5Fee = #{record.sJewel5Fee,jdbcType=DOUBLE},
+      origin = #{record.origin,jdbcType=VARCHAR},
+      employeeId = #{record.employeeId,jdbcType=INTEGER},
+      employeeName = #{record.employeeName,jdbcType=VARCHAR},
+      hasReturn = #{record.hasReturn,jdbcType=TINYINT},
+      upperMoney = #{record.upperMoney,jdbcType=DOUBLE},
+      purchaseAmount = #{record.purchaseAmount,jdbcType=DOUBLE},
+      refineFee = #{record.refineFee,jdbcType=DOUBLE},
+      refineFeeTotal = #{record.refineFeeTotal,jdbcType=DOUBLE},
+      oldStockId = #{record.oldStockId,jdbcType=INTEGER},
+      receiveTime = #{record.receiveTime,jdbcType=VARCHAR},
+      mutilFlag = #{record.mutilFlag,jdbcType=TINYINT},
+      priceRange = #{record.priceRange,jdbcType=VARCHAR},
+      goldRange = #{record.goldRange,jdbcType=VARCHAR},
+      costRange = #{record.costRange,jdbcType=VARCHAR},
+      colorRange = #{record.colorRange,jdbcType=VARCHAR},
+      clarityRange = #{record.clarityRange,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=VARCHAR},
+      outNum = #{record.outNum,jdbcType=INTEGER},
+      outGoldWeight = #{record.outGoldWeight,jdbcType=DOUBLE},
+      outMJewelWeight = #{record.outMJewelWeight,jdbcType=DOUBLE},
+      outCostPrice = #{record.outCostPrice,jdbcType=DOUBLE},
+      outLabelPriceSum = #{record.outLabelPriceSum,jdbcType=DOUBLE},
+      outRemarks = #{record.outRemarks,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jr.erp.bill.transfer.entity.BillTransferItem">
+    update bill_transfer_item
+    <set>
+      <if test="companyNo != null">
+        companyNo = #{companyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="billId != null">
+        billId = #{billId,jdbcType=INTEGER},
+      </if>
+      <if test="billNo != null">
+        billNo = #{billNo,jdbcType=VARCHAR},
+      </if>
+      <if test="billType != null">
+        billType = #{billType,jdbcType=TINYINT},
+      </if>
+      <if test="billStatus != null">
+        billStatus = #{billStatus,jdbcType=TINYINT},
+      </if>
+      <if test="billDate != null">
+        billDate = #{billDate,jdbcType=VARCHAR},
+      </if>
+      <if test="sysBillNo != null">
+        sysBillNo = #{sysBillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null">
+        supplier = #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="brandName != null">
+        brandName = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="barcode != null">
+        barcode = #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="oldBarcode != null">
+        oldBarcode = #{oldBarcode,jdbcType=VARCHAR},
+      </if>
+      <if test="subName != null">
+        subName = #{subName,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateNo != null">
+        certificateNo = #{certificateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="giaCertificateNo != null">
+        giaCertificateNo = #{giaCertificateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="style != null">
+        style = #{style,jdbcType=VARCHAR},
+      </if>
+      <if test="comStyleNo != null">
+        comStyleNo = #{comStyleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="facStyleNo != null">
+        facStyleNo = #{facStyleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="handInch != null">
+        handInch = #{handInch,jdbcType=VARCHAR},
+      </if>
+      <if test="craft != null">
+        craft = #{craft,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="custName != null">
+        custName = #{custName,jdbcType=VARCHAR},
+      </if>
+      <if test="custMobile != null">
+        custMobile = #{custMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        createUserId = #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="createUserName != null">
+        createUserName = #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null">
+        areaCode = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null">
+        areaName = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="counterAreaCode != null">
+        counterAreaCode = #{counterAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="counterAreaName != null">
+        counterAreaName = #{counterAreaName,jdbcType=VARCHAR},
+      </if>
+      <if test="purchaseType != null">
+        purchaseType = #{purchaseType,jdbcType=VARCHAR},
+      </if>
+      <if test="inType != null">
+        inType = #{inType,jdbcType=TINYINT},
+      </if>
+      <if test="bargainName != null">
+        bargainName = #{bargainName,jdbcType=VARCHAR},
+      </if>
+      <if test="jtFlag != null">
+        jtFlag = #{jtFlag,jdbcType=TINYINT},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="netGoldWeight != null">
+        netGoldWeight = #{netGoldWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="goldLoss != null">
+        goldLoss = #{goldLoss,jdbcType=DOUBLE},
+      </if>
+      <if test="goldPurity != null">
+        goldPurity = #{goldPurity,jdbcType=DOUBLE},
+      </if>
+      <if test="goldWeight != null">
+        goldWeight = #{goldWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="goldPrice != null">
+        goldPrice = #{goldPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="goldMoney != null">
+        goldMoney = #{goldMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="productWeight != null">
+        productWeight = #{productWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="workFeeKe != null">
+        workFeeKe = #{workFeeKe,jdbcType=DOUBLE},
+      </if>
+      <if test="workFeeJian != null">
+        workFeeJian = #{workFeeJian,jdbcType=DOUBLE},
+      </if>
+      <if test="workFeeSum != null">
+        workFeeSum = #{workFeeSum,jdbcType=DOUBLE},
+      </if>
+      <if test="certificateFee != null">
+        certificateFee = #{certificateFee,jdbcType=DOUBLE},
+      </if>
+      <if test="fittingName != null">
+        fittingName = #{fittingName,jdbcType=VARCHAR},
+      </if>
+      <if test="fittingNum != null">
+        fittingNum = #{fittingNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fittingFee != null">
+        fittingFee = #{fittingFee,jdbcType=DOUBLE},
+      </if>
+      <if test="sandBlastFee != null">
+        sandBlastFee = #{sandBlastFee,jdbcType=DOUBLE},
+      </if>
+      <if test="otherFee != null">
+        otherFee = #{otherFee,jdbcType=DOUBLE},
+      </if>
+      <if test="unitPrice != null">
+        unitPrice = #{unitPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="costPrice != null">
+        costPrice = #{costPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="labelWorkFeeKe != null">
+        labelWorkFeeKe = #{labelWorkFeeKe,jdbcType=DOUBLE},
+      </if>
+      <if test="labelWorkFeeJian != null">
+        labelWorkFeeJian = #{labelWorkFeeJian,jdbcType=DOUBLE},
+      </if>
+      <if test="labelWorkFeeSum != null">
+        labelWorkFeeSum = #{labelWorkFeeSum,jdbcType=DOUBLE},
+      </if>
+      <if test="labelRate != null">
+        labelRate = #{labelRate,jdbcType=DOUBLE},
+      </if>
+      <if test="labelPrice != null">
+        labelPrice = #{labelPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="labelPriceSum != null">
+        labelPriceSum = #{labelPriceSum,jdbcType=DOUBLE},
+      </if>
+      <if test="labelRemarks != null">
+        labelRemarks = #{labelRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        categoryId = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="sysCode != null">
+        sysCode = #{sysCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        productName = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="goldName != null">
+        goldName = #{goldName,jdbcType=VARCHAR},
+      </if>
+      <if test="jewelName != null">
+        jewelName = #{jewelName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryName != null">
+        categoryName = #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="firstType != null">
+        firstType = #{firstType,jdbcType=VARCHAR},
+      </if>
+      <if test="firstTypeName != null">
+        firstTypeName = #{firstTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="secondType != null">
+        secondType = #{secondType,jdbcType=VARCHAR},
+      </if>
+      <if test="secondTypeName != null">
+        secondTypeName = #{secondTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="productClassify != null">
+        productClassify = #{productClassify,jdbcType=VARCHAR},
+      </if>
+      <if test="firstClassify != null">
+        firstClassify = #{firstClassify,jdbcType=VARCHAR},
+      </if>
+      <if test="secondClassify != null">
+        secondClassify = #{secondClassify,jdbcType=VARCHAR},
+      </if>
+      <if test="labelName != null">
+        labelName = #{labelName,jdbcType=VARCHAR},
+      </if>
+      <if test="grfName != null">
+        grfName = #{grfName,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdClassify != null">
+        thirdClassify = #{thirdClassify,jdbcType=VARCHAR},
+      </if>
+      <if test="mJewelCut != null">
+        mJewelCut = #{mJewelCut,jdbcType=VARCHAR},
+      </if>
+      <if test="mJewelColor != null">
+        mJewelColor = #{mJewelColor,jdbcType=VARCHAR},
+      </if>
+      <if test="mJewelClarity != null">
+        mJewelClarity = #{mJewelClarity,jdbcType=VARCHAR},
+      </if>
+      <if test="mJewelFluorescent != null">
+        mJewelFluorescent = #{mJewelFluorescent,jdbcType=VARCHAR},
+      </if>
+      <if test="mJewelBurnished != null">
+        mJewelBurnished = #{mJewelBurnished,jdbcType=VARCHAR},
+      </if>
+      <if test="mJewelShape != null">
+        mJewelShape = #{mJewelShape,jdbcType=VARCHAR},
+      </if>
+      <if test="mJewelName != null">
+        mJewelName = #{mJewelName,jdbcType=VARCHAR},
+      </if>
+      <if test="mJewelNo != null">
+        mJewelNo = #{mJewelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="mJewelSpecifi != null">
+        mJewelSpecifi = #{mJewelSpecifi,jdbcType=VARCHAR},
+      </if>
+      <if test="mJewelNum != null">
+        mJewelNum = #{mJewelNum,jdbcType=INTEGER},
+      </if>
+      <if test="mJewelWeight != null">
+        mJewelWeight = #{mJewelWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="mJewelPrice != null">
+        mJewelPrice = #{mJewelPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="mJewelFee != null">
+        mJewelFee = #{mJewelFee,jdbcType=DOUBLE},
+      </if>
+      <if test="sJewel1Name != null">
+        sJewel1Name = #{sJewel1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="sJewel1No != null">
+        sJewel1No = #{sJewel1No,jdbcType=VARCHAR},
+      </if>
+      <if test="sJewel1Specifi != null">
+        sJewel1Specifi = #{sJewel1Specifi,jdbcType=VARCHAR},
+      </if>
+      <if test="sJewel1Num != null">
+        sJewel1Num = #{sJewel1Num,jdbcType=INTEGER},
+      </if>
+      <if test="sJewel1Weight != null">
+        sJewel1Weight = #{sJewel1Weight,jdbcType=DOUBLE},
+      </if>
+      <if test="sJewel1Price != null">
+        sJewel1Price = #{sJewel1Price,jdbcType=DOUBLE},
+      </if>
+      <if test="sJewel1Fee != null">
+        sJewel1Fee = #{sJewel1Fee,jdbcType=DOUBLE},
+      </if>
+      <if test="sJewel2Name != null">
+        sJewel2Name = #{sJewel2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="sJewel2No != null">
+        sJewel2No = #{sJewel2No,jdbcType=VARCHAR},
+      </if>
+      <if test="sJewel2Specifi != null">
+        sJewel2Specifi = #{sJewel2Specifi,jdbcType=VARCHAR},
+      </if>
+      <if test="sJewel2Num != null">
+        sJewel2Num = #{sJewel2Num,jdbcType=INTEGER},
+      </if>
+      <if test="sJewel2Weight != null">
+        sJewel2Weight = #{sJewel2Weight,jdbcType=DOUBLE},
+      </if>
+      <if test="sJewel2Price != null">
+        sJewel2Price = #{sJewel2Price,jdbcType=DOUBLE},
+      </if>
+      <if test="sJewel2Fee != null">
+        sJewel2Fee = #{sJewel2Fee,jdbcType=DOUBLE},
+      </if>
+      <if test="sJewel3Name != null">
+        sJewel3Name = #{sJewel3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="sJewel3No != null">
+        sJewel3No = #{sJewel3No,jdbcType=VARCHAR},
+      </if>
+      <if test="sJewel3Specifi != null">
+        sJewel3Specifi = #{sJewel3Specifi,jdbcType=VARCHAR},
+      </if>
+      <if test="sJewel3Num != null">
+        sJewel3Num = #{sJewel3Num,jdbcType=INTEGER},
+      </if>
+      <if test="sJewel3Weight != null">
+        sJewel3Weight = #{sJewel3Weight,jdbcType=DOUBLE},
+      </if>
+      <if test="sJewel3Price != null">
+        sJewel3Price = #{sJewel3Price,jdbcType=DOUBLE},
+      </if>
+      <if test="sJewel3Fee != null">
+        sJewel3Fee = #{sJewel3Fee,jdbcType=DOUBLE},
+      </if>
+      <if test="sJewel4Name != null">
+        sJewel4Name = #{sJewel4Name,jdbcType=VARCHAR},
+      </if>
+      <if test="sJewel4No != null">
+        sJewel4No = #{sJewel4No,jdbcType=VARCHAR},
+      </if>
+      <if test="sJewel4Specifi != null">
+        sJewel4Specifi = #{sJewel4Specifi,jdbcType=VARCHAR},
+      </if>
+      <if test="sJewel4Num != null">
+        sJewel4Num = #{sJewel4Num,jdbcType=INTEGER},
+      </if>
+      <if test="sJewel4Weight != null">
+        sJewel4Weight = #{sJewel4Weight,jdbcType=DOUBLE},
+      </if>
+      <if test="sJewel4Price != null">
+        sJewel4Price = #{sJewel4Price,jdbcType=DOUBLE},
+      </if>
+      <if test="sJewel4Fee != null">
+        sJewel4Fee = #{sJewel4Fee,jdbcType=DOUBLE},
+      </if>
+      <if test="sJewel5Name != null">
+        sJewel5Name = #{sJewel5Name,jdbcType=VARCHAR},
+      </if>
+      <if test="sJewel5No != null">
+        sJewel5No = #{sJewel5No,jdbcType=VARCHAR},
+      </if>
+      <if test="sJewel5Specifi != null">
+        sJewel5Specifi = #{sJewel5Specifi,jdbcType=VARCHAR},
+      </if>
+      <if test="sJewel5Num != null">
+        sJewel5Num = #{sJewel5Num,jdbcType=INTEGER},
+      </if>
+      <if test="sJewel5Weight != null">
+        sJewel5Weight = #{sJewel5Weight,jdbcType=DOUBLE},
+      </if>
+      <if test="sJewel5Price != null">
+        sJewel5Price = #{sJewel5Price,jdbcType=DOUBLE},
+      </if>
+      <if test="sJewel5Fee != null">
+        sJewel5Fee = #{sJewel5Fee,jdbcType=DOUBLE},
+      </if>
+      <if test="origin != null">
+        origin = #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null">
+        employeeId = #{employeeId,jdbcType=INTEGER},
+      </if>
+      <if test="employeeName != null">
+        employeeName = #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="hasReturn != null">
+        hasReturn = #{hasReturn,jdbcType=TINYINT},
+      </if>
+      <if test="upperMoney != null">
+        upperMoney = #{upperMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="purchaseAmount != null">
+        purchaseAmount = #{purchaseAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="refineFee != null">
+        refineFee = #{refineFee,jdbcType=DOUBLE},
+      </if>
+      <if test="refineFeeTotal != null">
+        refineFeeTotal = #{refineFeeTotal,jdbcType=DOUBLE},
+      </if>
+      <if test="oldStockId != null">
+        oldStockId = #{oldStockId,jdbcType=INTEGER},
+      </if>
+      <if test="receiveTime != null">
+        receiveTime = #{receiveTime,jdbcType=VARCHAR},
+      </if>
+      <if test="mutilFlag != null">
+        mutilFlag = #{mutilFlag,jdbcType=TINYINT},
+      </if>
+      <if test="priceRange != null">
+        priceRange = #{priceRange,jdbcType=VARCHAR},
+      </if>
+      <if test="goldRange != null">
+        goldRange = #{goldRange,jdbcType=VARCHAR},
+      </if>
+      <if test="costRange != null">
+        costRange = #{costRange,jdbcType=VARCHAR},
+      </if>
+      <if test="colorRange != null">
+        colorRange = #{colorRange,jdbcType=VARCHAR},
+      </if>
+      <if test="clarityRange != null">
+        clarityRange = #{clarityRange,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="outNum != null">
+        outNum = #{outNum,jdbcType=INTEGER},
+      </if>
+      <if test="outGoldWeight != null">
+        outGoldWeight = #{outGoldWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="outMJewelWeight != null">
+        outMJewelWeight = #{outMJewelWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="outCostPrice != null">
+        outCostPrice = #{outCostPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="outLabelPriceSum != null">
+        outLabelPriceSum = #{outLabelPriceSum,jdbcType=DOUBLE},
+      </if>
+      <if test="outRemarks != null">
+        outRemarks = #{outRemarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jr.erp.bill.transfer.entity.BillTransferItem">
+    update bill_transfer_item
+    set companyNo = #{companyNo,jdbcType=VARCHAR},
+      billId = #{billId,jdbcType=INTEGER},
+      billNo = #{billNo,jdbcType=VARCHAR},
+      billType = #{billType,jdbcType=TINYINT},
+      billStatus = #{billStatus,jdbcType=TINYINT},
+      billDate = #{billDate,jdbcType=VARCHAR},
+      sysBillNo = #{sysBillNo,jdbcType=VARCHAR},
+      supplier = #{supplier,jdbcType=VARCHAR},
+      brandName = #{brandName,jdbcType=VARCHAR},
+      barcode = #{barcode,jdbcType=VARCHAR},
+      oldBarcode = #{oldBarcode,jdbcType=VARCHAR},
+      subName = #{subName,jdbcType=VARCHAR},
+      certificateNo = #{certificateNo,jdbcType=VARCHAR},
+      giaCertificateNo = #{giaCertificateNo,jdbcType=VARCHAR},
+      style = #{style,jdbcType=VARCHAR},
+      comStyleNo = #{comStyleNo,jdbcType=VARCHAR},
+      facStyleNo = #{facStyleNo,jdbcType=VARCHAR},
+      handInch = #{handInch,jdbcType=VARCHAR},
+      craft = #{craft,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      custName = #{custName,jdbcType=VARCHAR},
+      custMobile = #{custMobile,jdbcType=VARCHAR},
+      createUserId = #{createUserId,jdbcType=INTEGER},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
+      areaName = #{areaName,jdbcType=VARCHAR},
+      counterAreaCode = #{counterAreaCode,jdbcType=VARCHAR},
+      counterAreaName = #{counterAreaName,jdbcType=VARCHAR},
+      purchaseType = #{purchaseType,jdbcType=VARCHAR},
+      inType = #{inType,jdbcType=TINYINT},
+      bargainName = #{bargainName,jdbcType=VARCHAR},
+      jtFlag = #{jtFlag,jdbcType=TINYINT},
+      num = #{num,jdbcType=INTEGER},
+      netGoldWeight = #{netGoldWeight,jdbcType=DOUBLE},
+      goldLoss = #{goldLoss,jdbcType=DOUBLE},
+      goldPurity = #{goldPurity,jdbcType=DOUBLE},
+      goldWeight = #{goldWeight,jdbcType=DOUBLE},
+      goldPrice = #{goldPrice,jdbcType=DOUBLE},
+      goldMoney = #{goldMoney,jdbcType=DOUBLE},
+      productWeight = #{productWeight,jdbcType=DOUBLE},
+      workFeeKe = #{workFeeKe,jdbcType=DOUBLE},
+      workFeeJian = #{workFeeJian,jdbcType=DOUBLE},
+      workFeeSum = #{workFeeSum,jdbcType=DOUBLE},
+      certificateFee = #{certificateFee,jdbcType=DOUBLE},
+      fittingName = #{fittingName,jdbcType=VARCHAR},
+      fittingNum = #{fittingNum,jdbcType=VARCHAR},
+      fittingFee = #{fittingFee,jdbcType=DOUBLE},
+      sandBlastFee = #{sandBlastFee,jdbcType=DOUBLE},
+      otherFee = #{otherFee,jdbcType=DOUBLE},
+      unitPrice = #{unitPrice,jdbcType=DOUBLE},
+      costPrice = #{costPrice,jdbcType=DOUBLE},
+      labelWorkFeeKe = #{labelWorkFeeKe,jdbcType=DOUBLE},
+      labelWorkFeeJian = #{labelWorkFeeJian,jdbcType=DOUBLE},
+      labelWorkFeeSum = #{labelWorkFeeSum,jdbcType=DOUBLE},
+      labelRate = #{labelRate,jdbcType=DOUBLE},
+      labelPrice = #{labelPrice,jdbcType=DOUBLE},
+      labelPriceSum = #{labelPriceSum,jdbcType=DOUBLE},
+      labelRemarks = #{labelRemarks,jdbcType=VARCHAR},
+      categoryId = #{categoryId,jdbcType=INTEGER},
+      sysCode = #{sysCode,jdbcType=VARCHAR},
+      productName = #{productName,jdbcType=VARCHAR},
+      goldName = #{goldName,jdbcType=VARCHAR},
+      jewelName = #{jewelName,jdbcType=VARCHAR},
+      categoryName = #{categoryName,jdbcType=VARCHAR},
+      firstType = #{firstType,jdbcType=VARCHAR},
+      firstTypeName = #{firstTypeName,jdbcType=VARCHAR},
+      secondType = #{secondType,jdbcType=VARCHAR},
+      secondTypeName = #{secondTypeName,jdbcType=VARCHAR},
+      productClassify = #{productClassify,jdbcType=VARCHAR},
+      firstClassify = #{firstClassify,jdbcType=VARCHAR},
+      secondClassify = #{secondClassify,jdbcType=VARCHAR},
+      labelName = #{labelName,jdbcType=VARCHAR},
+      grfName = #{grfName,jdbcType=VARCHAR},
+      thirdClassify = #{thirdClassify,jdbcType=VARCHAR},
+      mJewelCut = #{mJewelCut,jdbcType=VARCHAR},
+      mJewelColor = #{mJewelColor,jdbcType=VARCHAR},
+      mJewelClarity = #{mJewelClarity,jdbcType=VARCHAR},
+      mJewelFluorescent = #{mJewelFluorescent,jdbcType=VARCHAR},
+      mJewelBurnished = #{mJewelBurnished,jdbcType=VARCHAR},
+      mJewelShape = #{mJewelShape,jdbcType=VARCHAR},
+      mJewelName = #{mJewelName,jdbcType=VARCHAR},
+      mJewelNo = #{mJewelNo,jdbcType=VARCHAR},
+      mJewelSpecifi = #{mJewelSpecifi,jdbcType=VARCHAR},
+      mJewelNum = #{mJewelNum,jdbcType=INTEGER},
+      mJewelWeight = #{mJewelWeight,jdbcType=DOUBLE},
+      mJewelPrice = #{mJewelPrice,jdbcType=DOUBLE},
+      mJewelFee = #{mJewelFee,jdbcType=DOUBLE},
+      sJewel1Name = #{sJewel1Name,jdbcType=VARCHAR},
+      sJewel1No = #{sJewel1No,jdbcType=VARCHAR},
+      sJewel1Specifi = #{sJewel1Specifi,jdbcType=VARCHAR},
+      sJewel1Num = #{sJewel1Num,jdbcType=INTEGER},
+      sJewel1Weight = #{sJewel1Weight,jdbcType=DOUBLE},
+      sJewel1Price = #{sJewel1Price,jdbcType=DOUBLE},
+      sJewel1Fee = #{sJewel1Fee,jdbcType=DOUBLE},
+      sJewel2Name = #{sJewel2Name,jdbcType=VARCHAR},
+      sJewel2No = #{sJewel2No,jdbcType=VARCHAR},
+      sJewel2Specifi = #{sJewel2Specifi,jdbcType=VARCHAR},
+      sJewel2Num = #{sJewel2Num,jdbcType=INTEGER},
+      sJewel2Weight = #{sJewel2Weight,jdbcType=DOUBLE},
+      sJewel2Price = #{sJewel2Price,jdbcType=DOUBLE},
+      sJewel2Fee = #{sJewel2Fee,jdbcType=DOUBLE},
+      sJewel3Name = #{sJewel3Name,jdbcType=VARCHAR},
+      sJewel3No = #{sJewel3No,jdbcType=VARCHAR},
+      sJewel3Specifi = #{sJewel3Specifi,jdbcType=VARCHAR},
+      sJewel3Num = #{sJewel3Num,jdbcType=INTEGER},
+      sJewel3Weight = #{sJewel3Weight,jdbcType=DOUBLE},
+      sJewel3Price = #{sJewel3Price,jdbcType=DOUBLE},
+      sJewel3Fee = #{sJewel3Fee,jdbcType=DOUBLE},
+      sJewel4Name = #{sJewel4Name,jdbcType=VARCHAR},
+      sJewel4No = #{sJewel4No,jdbcType=VARCHAR},
+      sJewel4Specifi = #{sJewel4Specifi,jdbcType=VARCHAR},
+      sJewel4Num = #{sJewel4Num,jdbcType=INTEGER},
+      sJewel4Weight = #{sJewel4Weight,jdbcType=DOUBLE},
+      sJewel4Price = #{sJewel4Price,jdbcType=DOUBLE},
+      sJewel4Fee = #{sJewel4Fee,jdbcType=DOUBLE},
+      sJewel5Name = #{sJewel5Name,jdbcType=VARCHAR},
+      sJewel5No = #{sJewel5No,jdbcType=VARCHAR},
+      sJewel5Specifi = #{sJewel5Specifi,jdbcType=VARCHAR},
+      sJewel5Num = #{sJewel5Num,jdbcType=INTEGER},
+      sJewel5Weight = #{sJewel5Weight,jdbcType=DOUBLE},
+      sJewel5Price = #{sJewel5Price,jdbcType=DOUBLE},
+      sJewel5Fee = #{sJewel5Fee,jdbcType=DOUBLE},
+      origin = #{origin,jdbcType=VARCHAR},
+      employeeId = #{employeeId,jdbcType=INTEGER},
+      employeeName = #{employeeName,jdbcType=VARCHAR},
+      hasReturn = #{hasReturn,jdbcType=TINYINT},
+      upperMoney = #{upperMoney,jdbcType=DOUBLE},
+      purchaseAmount = #{purchaseAmount,jdbcType=DOUBLE},
+      refineFee = #{refineFee,jdbcType=DOUBLE},
+      refineFeeTotal = #{refineFeeTotal,jdbcType=DOUBLE},
+      oldStockId = #{oldStockId,jdbcType=INTEGER},
+      receiveTime = #{receiveTime,jdbcType=VARCHAR},
+      mutilFlag = #{mutilFlag,jdbcType=TINYINT},
+      priceRange = #{priceRange,jdbcType=VARCHAR},
+      goldRange = #{goldRange,jdbcType=VARCHAR},
+      costRange = #{costRange,jdbcType=VARCHAR},
+      colorRange = #{colorRange,jdbcType=VARCHAR},
+      clarityRange = #{clarityRange,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=VARCHAR},
+      outNum = #{outNum,jdbcType=INTEGER},
+      outGoldWeight = #{outGoldWeight,jdbcType=DOUBLE},
+      outMJewelWeight = #{outMJewelWeight,jdbcType=DOUBLE},
+      outCostPrice = #{outCostPrice,jdbcType=DOUBLE},
+      outLabelPriceSum = #{outLabelPriceSum,jdbcType=DOUBLE},
+      outRemarks = #{outRemarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

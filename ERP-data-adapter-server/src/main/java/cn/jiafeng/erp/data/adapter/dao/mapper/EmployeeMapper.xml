@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.jiafeng.erp.data.adapter.dao.EmployeeMapper">
+
+    <resultMap id="EmployeeMap" type="cn.jiafeng.erp.data.adapter.dao.entity.Employee">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
+        <result property="shopId" column="shopId"/>
+        <result property="areaCode" column="areaCode"/>
+        <result property="remark" column="remark"/>
+        <result property="createTime" column="createTime"/>
+    </resultMap>
+    
+    <sql id="columns">
+        <![CDATA[
+        id, name, phone, shopId, areaCode, remark, createTime
+        ]]>
+    </sql>
+    
+    <sql id="where">
+        <where>
+           <if test="id != null">
+                AND id = #{id}
+            </if>
+           <if test="name != null">
+                AND name = #{name}
+            </if>
+           <if test="phone != null">
+                AND phone = #{phone}
+            </if>
+           <if test="shopId != null">
+                AND shopId = #{shopId}
+            </if>
+           <if test="areaCode != null">
+                AND areaCode = #{areaCode}
+            </if>
+           <if test="remark != null">
+                AND remark = #{remark}
+            </if>
+           <if test="null != createTimeBegin)">
+                AND createTime >= #{createTimeBegin}
+           </if>
+           <if test="null != (createTimeEnd)">
+                AND createTime &lt;= #{createTimeEnd}
+           </if>
+        </where>
+    </sql>
+    
+    <select id="getById" resultMap="EmployeeMap">
+        SELECT <include refid="columns" />
+        <![CDATA[
+            FROM
+                s_employee
+            WHERE 
+                id=0
+        ]]>
+    </select>
+    
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+        <![CDATA[
+            INSERT INTO s_employee (
+                id,
+                name,
+                phone,
+                shopId,
+                areaCode,
+                remark,
+                createTime
+            ) VALUES (
+            	#{id},
+            	#{name},
+            	#{phone},
+            	#{shopId},
+            	#{areaCode},
+            	#{remark},
+            	#{createTime}
+            )
+        ]]>
+    </insert>
+
+    <insert id="insertBatch">
+        <![CDATA[
+            INSERT INTO s_employee (
+                name,
+                phone,
+                shopId,
+                areaCode,
+                remark,
+                createTime
+            ) VALUES
+        ]]>
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.name},#{item.phone},#{item.shopId},#{item.areaCode},#{item.remark},#{item.createTime})
+        </foreach>
+    </insert>
+    
+    <update id="update">
+        	UPDATE
+                s_employee
+            <set>
+                <![CDATA[ name = #{name} ]]>,
+                <![CDATA[ phone = #{phone} ]]>,
+                <![CDATA[ shopId = #{shopId} ]]>,
+                <![CDATA[ areaCode = #{areaCode} ]]>,
+                <![CDATA[ remark = #{remark} ]]>,
+                <![CDATA[ createTime = #{createTime} ]]>
+            </set>
+            <where> 
+                id = #{id}
+                
+            </where>
+    </update>
+    
+    <update id="updatePart">
+            UPDATE
+                s_employee
+            <set>
+                <if test="name != null">
+                	<![CDATA[ name = #{name} ]]>,
+                </if>
+                <if test="phone != null">
+                	<![CDATA[ phone = #{phone} ]]>,
+                </if>
+                <if test="shopId != null">
+                	<![CDATA[ shopId = #{shopId} ]]>,
+                </if>
+                <if test="areaCode != null">
+                	<![CDATA[ areaCode = #{areaCode} ]]>,
+                </if>
+                <if test="remark != null">
+                	<![CDATA[ remark = #{remark} ]]>,
+                </if>
+                <if test="createTime != null">
+                	<![CDATA[ createTime = #{createTime} ]]>
+                </if>
+            </set>
+            <where>
+                id = #{id}
+                
+            </where>
+    </update>
+    
+    <delete id="deleteByPk">
+        <![CDATA[
+            DELETE
+            FROM
+                s_employee
+            WHERE
+                id=0
+        ]]>
+    </delete>
+    
+    <select id="getEmployeeByAreaCode" resultMap="EmployeeMap">
+        SELECT <include refid="columns" />
+            FROM
+                s_employee
+            WHERE 
+                areaCode like CONCAT(#{areaCode},'%')
+    </select>
+    
+</mapper> 
+

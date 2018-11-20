@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.jiafeng.erp.data.adapter.dao.StoreMapper">
+
+    <resultMap id="StoreMap" type="cn.jiafeng.erp.data.adapter.dao.entity.Store">
+        <result property="id" column="id"/>
+        <result property="storeName" column="storeName"/>
+        <result property="category" column="category"/>
+        <result property="attri" column="attri"/>
+        <result property="areaCode" column="areaCode"/>
+        <result property="status" column="status"/>
+        <result property="createTime" column="createTime"/>
+    </resultMap>
+    
+    <sql id="columns">
+        <![CDATA[
+        id, storeName, category, attri, areaCode, status, createTime
+        ]]>
+    </sql>
+    
+    <sql id="where">
+        <where>
+           <if test="id != null">
+                AND id = #{id}
+            </if>
+           <if test="storeName != null">
+                AND storeName = #{storeName}
+            </if>
+           <if test="category != null">
+                AND category = #{category}
+            </if>
+           <if test="attri != null">
+                AND attri = #{attri}
+            </if>
+           <if test="areaCode != null">
+                AND areaCode = #{areaCode}
+            </if>
+           <if test="status != null">
+                AND status = #{status}
+            </if>
+           <if test="null != createTimeBegin)">
+                AND createTime >= #{createTimeBegin}
+           </if>
+           <if test="null != (createTimeEnd)">
+                AND createTime &lt;= #{createTimeEnd}
+           </if>
+        </where>
+    </sql>
+    
+    <select id="getById" resultMap="StoreMap">
+        SELECT <include refid="columns" />
+        <![CDATA[
+            FROM
+                s_store
+            WHERE 
+                id=0
+        ]]>
+    </select>
+    
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+        <![CDATA[
+            INSERT INTO s_store (
+                id,
+                storeName,
+                category,
+                attri,
+                areaCode,
+                status,
+                createTime
+            ) VALUES (
+            	#{id},
+            	#{storeName},
+            	#{category},
+            	#{attri},
+            	#{areaCode},
+            	#{status},
+            	#{createTime}
+            )
+        ]]>
+    </insert>
+
+    <insert id="insertBatch">
+        <![CDATA[
+            INSERT INTO s_store (
+                storeName,
+                category,
+                attri,
+                areaCode,
+                status,
+                createTime
+            ) VALUES
+        ]]>
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.storeName},#{item.category},#{item.attri},#{item.areaCode},#{item.status},#{item.createTime})
+        </foreach>
+    </insert>
+    
+    <update id="update">
+        	UPDATE
+                s_store
+            <set>
+                <![CDATA[ storeName = #{storeName} ]]>,
+                <![CDATA[ category = #{category} ]]>,
+                <![CDATA[ attri = #{attri} ]]>,
+                <![CDATA[ areaCode = #{areaCode} ]]>,
+                <![CDATA[ status = #{status} ]]>,
+                <![CDATA[ createTime = #{createTime} ]]>
+            </set>
+            <where> 
+                id = #{id}
+                
+            </where>
+    </update>
+    
+    <update id="updatePart">
+            UPDATE
+                s_store
+            <set>
+                <if test="storeName != null">
+                	<![CDATA[ storeName = #{storeName} ]]>,
+                </if>
+                <if test="category != null">
+                	<![CDATA[ category = #{category} ]]>,
+                </if>
+                <if test="attri != null">
+                	<![CDATA[ attri = #{attri} ]]>,
+                </if>
+                <if test="areaCode != null">
+                	<![CDATA[ areaCode = #{areaCode} ]]>,
+                </if>
+                <if test="status != null">
+                	<![CDATA[ status = #{status} ]]>,
+                </if>
+                <if test="createTime != null">
+                	<![CDATA[ createTime = #{createTime} ]]>
+                </if>
+            </set>
+            <where>
+                id = #{id}
+                
+            </where>
+    </update>
+    
+    <delete id="deleteByPk">
+        <![CDATA[
+            DELETE
+            FROM
+                s_store
+            WHERE
+                id=0
+        ]]>
+    </delete>
+</mapper> 
+

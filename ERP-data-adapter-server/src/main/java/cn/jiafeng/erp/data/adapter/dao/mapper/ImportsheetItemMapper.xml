@@ -1,0 +1,1864 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="cn.jiafeng.erp.data.adapter.dao.ImportsheetItemMapper">
+
+    <resultMap id="ImportsheetItemMap" type="cn.jiafeng.erp.data.adapter.dao.entity.ImportsheetItem">
+        <result property="id" column="id"/>
+        <result property="sheetId" column="sheetId"/>
+        <result property="companyNo" column="companyNo"/>
+        <result property="sheetNo" column="sheetNo"/>
+        <result property="oldSheetNo" column="oldSheetNo"/>
+        <result property="supplierNo" column="supplierNo"/>
+        <result property="supplierName" column="supplierName"/>
+        <result property="customerName" column="customerName"/>
+        <result property="customerPhone" column="customerPhone"/>
+        <result property="barCode" column="barCode"/>
+        <result property="oldBarCode" column="oldBarCode"/>
+        <result property="subGoodsName" column="subGoodsName"/>
+        <result property="certificateNo" column="certificateNo"/>
+        <result property="giaCertificateNo" column="giaCertificateNo"/>
+        <result property="style" column="style"/>
+        <result property="styleNo" column="styleNo"/>
+        <result property="shortCut" column="shortCut"/>
+        <result property="craft" column="craft"/>
+        <result property="measurementMode" column="measurementMode"/>
+        <result property="img" column="img"/>
+        <result property="operUserId" column="operUserId"/>
+        <result property="operUserName" column="operUserName"/>
+        <result property="remarks" column="remarks"/>
+        <result property="deptAreaCode" column="deptAreaCode"/>
+        <result property="deptAreaName" column="deptAreaName"/>
+        <result property="storeId" column="storeId"/>
+        <result property="storeName" column="storeName"/>
+        <result property="purchaseSaleMode" column="purchaseSaleMode"/>
+        <result property="sheetType" column="sheetType"/>
+        <result property="specialOffersFlag" column="specialOffersFlag"/>
+        <result property="sheetDate" column="sheetDate"/>
+        <result property="jtFlag" column="jtFlag"/>
+        <result property="saveFlag" column="saveFlag"/>
+        <result property="daiXiaoFlag" column="daiXiaoFlag"/>
+        <result property="zaiTuFlag" column="zaiTuFlag"/>
+        <result property="num" column="num"/>
+        <result property="goldWeight" column="goldWeight"/>
+        <result property="goldLoss" column="goldLoss"/>
+        <result property="maoGoldWeight" column="maoGoldWeight"/>
+        <result property="totalGoldWeight" column="totalGoldWeight"/>
+        <result property="goodsWeight" column="goodsWeight"/>
+        <result property="goldPrice" column="goldPrice"/>
+        <result property="worksFee4Ke" column="worksFee4Ke"/>
+        <result property="worksFee4Jian" column="worksFee4Jian"/>
+        <result property="worksFeeTotal" column="worksFeeTotal"/>
+        <result property="certificateFee" column="certificateFee"/>
+        <result property="fittingsFee" column="fittingsFee"/>
+        <result property="sandBlastFee" column="sandBlastFee"/>
+        <result property="otherFee" column="otherFee"/>
+        <result property="unitPrice" column="unitPrice"/>
+        <result property="goldCostPrice" column="goldCostPrice"/>
+        <result property="costPrice" column="costPrice"/>
+        <result property="markupRate" column="markupRate"/>
+        <result property="labelPrice" column="labelPrice"/>
+        <result property="salePriceAmount" column="salePriceAmount"/>
+        <result property="labelWorkFee" column="labelWorkFee"/>
+        <result property="labelWorkFee4Ke" column="labelWorkFee4Ke"/>
+        <result property="labelWorkFee4Jian" column="labelWorkFee4Jian"/>
+        <result property="labelRemarks" column="labelRemarks"/>
+        <result property="archivesId" column="archivesId"/>
+        <result property="archivesNo" column="archivesNo"/>
+        <result property="goodsName" column="goodsName"/>
+        <result property="goodsNameEn" column="goodsNameEn"/>
+        <result property="archivesFineness" column="archivesFineness"/>
+        <result property="archivesStone" column="archivesStone"/>
+        <result property="archivesCategory" column="archivesCategory"/>
+        <result property="mainType" column="mainType"/>
+        <result property="mainTypePrefix" column="mainTypePrefix"/>
+        <result property="goodsClassify" column="goodsClassify"/>
+        <result property="costClassify" column="costClassify"/>
+        <result property="statsClassify" column="statsClassify"/>
+        <result property="mainStoneCut" column="mainStoneCut"/>
+        <result property="mainStoneColor" column="mainStoneColor"/>
+        <result property="mainStoneClarity" column="mainStoneClarity"/>
+        <result property="mainStoneFluorescent" column="mainStoneFluorescent"/>
+        <result property="mainStoneBurnished" column="mainStoneBurnished"/>
+        <result property="mainStoneSymmetry" column="mainStoneSymmetry"/>
+        <result property="mainStoneName" column="mainStoneName"/>
+        <result property="mainStoneNo" column="mainStoneNo"/>
+        <result property="mainStoneSpecifi" column="mainStoneSpecifi"/>
+        <result property="mainStoneNum" column="mainStoneNum"/>
+        <result property="mainStoneWeight" column="mainStoneWeight"/>
+        <result property="mainStonePrice" column="mainStonePrice"/>
+        <result property="mainStoneMoney" column="mainStoneMoney"/>
+        <result property="subStone1Name" column="subStone1Name"/>
+        <result property="subStone1No" column="subStone1No"/>
+        <result property="subStone1Specifi" column="subStone1Specifi"/>
+        <result property="subStone1Num" column="subStone1Num"/>
+        <result property="subStone1Weight" column="subStone1Weight"/>
+        <result property="subStone1Price" column="subStone1Price"/>
+        <result property="subStone1Money" column="subStone1Money"/>
+        <result property="subStone2Name" column="subStone2Name"/>
+        <result property="subStone2No" column="subStone2No"/>
+        <result property="subStone2Specifi" column="subStone2Specifi"/>
+        <result property="subStone2Num" column="subStone2Num"/>
+        <result property="subStone2Weight" column="subStone2Weight"/>
+        <result property="subStone2Price" column="subStone2Price"/>
+        <result property="subStone2Money" column="subStone2Money"/>
+        <result property="subStone3Name" column="subStone3Name"/>
+        <result property="subStone3No" column="subStone3No"/>
+        <result property="subStone3Specifi" column="subStone3Specifi"/>
+        <result property="subStone3Num" column="subStone3Num"/>
+        <result property="subStone3Weight" column="subStone3Weight"/>
+        <result property="subStone3Price" column="subStone3Price"/>
+        <result property="subStone3Money" column="subStone3Money"/>
+        <result property="subStone4Name" column="subStone4Name"/>
+        <result property="subStone4No" column="subStone4No"/>
+        <result property="subStone4Specifi" column="subStone4Specifi"/>
+        <result property="subStone4Num" column="subStone4Num"/>
+        <result property="subStone4Weight" column="subStone4Weight"/>
+        <result property="subStone4Price" column="subStone4Price"/>
+        <result property="subStone4Money" column="subStone4Money"/>
+        <result property="subStone5Name" column="subStone5Name"/>
+        <result property="subStone5No" column="subStone5No"/>
+        <result property="subStone5Specifi" column="subStone5Specifi"/>
+        <result property="subStone5Num" column="subStone5Num"/>
+        <result property="subStone5Weight" column="subStone5Weight"/>
+        <result property="subStone5Price" column="subStone5Price"/>
+        <result property="subStone5Money" column="subStone5Money"/>
+        <result property="subStone6Name" column="subStone6Name"/>
+        <result property="subStone6No" column="subStone6No"/>
+        <result property="subStone6Specifi" column="subStone6Specifi"/>
+        <result property="subStone6Num" column="subStone6Num"/>
+        <result property="subStone6Weight" column="subStone6Weight"/>
+        <result property="subStone6Price" column="subStone6Price"/>
+        <result property="subStone6Money" column="subStone6Money"/>
+        <result property="peiShiCostPrice" column="peiShiCostPrice"/>
+        <result property="peiShiRate" column="peiShiRate"/>
+        <result property="peiShiLabelPrice" column="peiShiLabelPrice"/>
+        <result property="netGoldWeight" column="netGoldWeight"/>
+        <result property="oldMaterialQuality" column="oldMaterialQuality"/>
+        <result property="oldMaterialLoss" column="oldMaterialLoss"/>
+        <result property="origin" column="origin"/>
+        <result property="recFlag" column="recFlag"/>
+        <result property="saleManId" column="saleManId"/>
+        <result property="salesmanName" column="salesmanName"/>
+        <result property="hasReturn" column="hasReturn"/>
+        <result property="orgItemId" column="orgItemId"/>
+        <result property="orgLabelPrice" column="orgLabelPrice"/>
+        <result property="orgSettlementPrice" column="orgSettlementPrice"/>
+        <result property="incrementMoney" column="incrementMoney"/>
+        <result property="purchaseAmount" column="purchaseAmount"/>
+        <result property="grfName" column="grfName"/>
+        <result property="refineFee" column="refineFee"/>
+        <result property="refineFeeTotal" column="refineFeeTotal"/>
+        <result property="subType" column="subType"/>
+        <result property="settleUnitPrice" column="settleUnitPrice"/>
+        <result property="settleTotalMoney" column="settleTotalMoney"/>
+        <result property="joinCalculate" column="joinCalculate"/>
+        <result property="pointItem" column="pointItem"/>
+        <result property="oldStockId" column="oldStockId"/>
+        <result property="brandName" column="brandName"/>
+        <result property="recyleGoodsAgio" column="recyleGoodsAgio"/>
+        <result property="exchangeStoreId" column="exchangeStoreId"/>
+        <result property="exchangeStoreName" column="exchangeStoreName"/>
+        <result property="sheetStatus" column="sheetStatus"/>
+        <result property="receiveTime" column="receiveTime"/>
+        <result property="priceRange" column="priceRange"/>
+        <result property="goldRange" column="goldRange"/>
+        <result property="stoneRange" column="stoneRange"/>
+        <result property="dhFlag" column="dhFlag"/>
+    </resultMap>
+    
+    <sql id="columns">
+        <![CDATA[
+        id, sheetId, companyNo, sheetNo, oldSheetNo, supplierNo, supplierName, customerName, customerPhone, barCode, oldBarCode, subGoodsName, certificateNo, giaCertificateNo, style, styleNo, shortCut, craft, measurementMode, img, operUserId, operUserName, remarks, deptAreaCode, deptAreaName, storeId, storeName, purchaseSaleMode, sheetType, specialOffersFlag, sheetDate, jtFlag, saveFlag, daiXiaoFlag, zaiTuFlag, num, goldWeight, goldLoss, maoGoldWeight, totalGoldWeight, goodsWeight, goldPrice, worksFee4Ke, worksFee4Jian, worksFeeTotal, certificateFee, fittingsFee, sandBlastFee, otherFee, unitPrice, goldCostPrice, costPrice, markupRate, labelPrice, salePriceAmount, labelWorkFee, labelWorkFee4Ke, labelWorkFee4Jian, labelRemarks, archivesId, archivesNo, goodsName, goodsNameEn, archivesFineness, archivesStone, archivesCategory, mainType, mainTypePrefix, goodsClassify, costClassify, statsClassify, mainStoneCut, mainStoneColor, mainStoneClarity, mainStoneFluorescent, mainStoneBurnished, mainStoneSymmetry, mainStoneName, mainStoneNo, mainStoneSpecifi, mainStoneNum, mainStoneWeight, mainStonePrice, mainStoneMoney, subStone1Name, subStone1No, subStone1Specifi, subStone1Num, subStone1Weight, subStone1Price, subStone1Money, subStone2Name, subStone2No, subStone2Specifi, subStone2Num, subStone2Weight, subStone2Price, subStone2Money, subStone3Name, subStone3No, subStone3Specifi, subStone3Num, subStone3Weight, subStone3Price, subStone3Money, subStone4Name, subStone4No, subStone4Specifi, subStone4Num, subStone4Weight, subStone4Price, subStone4Money, subStone5Name, subStone5No, subStone5Specifi, subStone5Num, subStone5Weight, subStone5Price, subStone5Money, subStone6Name, subStone6No, subStone6Specifi, subStone6Num, subStone6Weight, subStone6Price, subStone6Money, peiShiCostPrice, peiShiRate, peiShiLabelPrice, netGoldWeight, oldMaterialQuality, oldMaterialLoss, origin, recFlag, saleManId, salesmanName, hasReturn, orgItemId, orgLabelPrice, orgSettlementPrice, incrementMoney, purchaseAmount, grfName, refineFee, refineFeeTotal, subType, settleUnitPrice, settleTotalMoney, joinCalculate, pointItem, oldStockId, brandName, recyleGoodsAgio, exchangeStoreId, exchangeStoreName, sheetStatus, receiveTime, priceRange, goldRange, stoneRange, dhFlag
+        ]]>
+    </sql>
+    
+    <sql id="where">
+        <where>
+           <if test="id != null">
+                AND id = #{id}
+            </if>
+           <if test="sheetId != null">
+                AND sheetId = #{sheetId}
+            </if>
+           <if test="companyNo != null">
+                AND companyNo = #{companyNo}
+            </if>
+           <if test="sheetNo != null">
+                AND sheetNo = #{sheetNo}
+            </if>
+           <if test="oldSheetNo != null">
+                AND oldSheetNo = #{oldSheetNo}
+            </if>
+           <if test="supplierNo != null">
+                AND supplierNo = #{supplierNo}
+            </if>
+           <if test="supplierName != null">
+                AND supplierName = #{supplierName}
+            </if>
+           <if test="customerName != null">
+                AND customerName = #{customerName}
+            </if>
+           <if test="customerPhone != null">
+                AND customerPhone = #{customerPhone}
+            </if>
+           <if test="barCode != null">
+                AND barCode = #{barCode}
+            </if>
+           <if test="oldBarCode != null">
+                AND oldBarCode = #{oldBarCode}
+            </if>
+           <if test="subGoodsName != null">
+                AND subGoodsName = #{subGoodsName}
+            </if>
+           <if test="certificateNo != null">
+                AND certificateNo = #{certificateNo}
+            </if>
+           <if test="giaCertificateNo != null">
+                AND giaCertificateNo = #{giaCertificateNo}
+            </if>
+           <if test="style != null">
+                AND style = #{style}
+            </if>
+           <if test="styleNo != null">
+                AND styleNo = #{styleNo}
+            </if>
+           <if test="shortCut != null">
+                AND shortCut = #{shortCut}
+            </if>
+           <if test="craft != null">
+                AND craft = #{craft}
+            </if>
+           <if test="measurementMode != null">
+                AND measurementMode = #{measurementMode}
+            </if>
+           <if test="img != null">
+                AND img = #{img}
+            </if>
+           <if test="operUserId != null">
+                AND operUserId = #{operUserId}
+            </if>
+           <if test="operUserName != null">
+                AND operUserName = #{operUserName}
+            </if>
+           <if test="remarks != null">
+                AND remarks = #{remarks}
+            </if>
+           <if test="deptAreaCode != null">
+                AND deptAreaCode = #{deptAreaCode}
+            </if>
+           <if test="deptAreaName != null">
+                AND deptAreaName = #{deptAreaName}
+            </if>
+           <if test="storeId != null">
+                AND storeId = #{storeId}
+            </if>
+           <if test="storeName != null">
+                AND storeName = #{storeName}
+            </if>
+           <if test="purchaseSaleMode != null">
+                AND purchaseSaleMode = #{purchaseSaleMode}
+            </if>
+           <if test="sheetType != null">
+                AND sheetType = #{sheetType}
+            </if>
+           <if test="specialOffersFlag != null">
+                AND specialOffersFlag = #{specialOffersFlag}
+            </if>
+           <if test="null != sheetDateBegin)">
+                AND sheetDate >= #{sheetDateBegin}
+           </if>
+           <if test="null != (sheetDateEnd)">
+                AND sheetDate &lt;= #{sheetDateEnd}
+           </if>
+           <if test="jtFlag != null">
+                AND jtFlag = #{jtFlag}
+            </if>
+           <if test="saveFlag != null">
+                AND saveFlag = #{saveFlag}
+            </if>
+           <if test="daiXiaoFlag != null">
+                AND daiXiaoFlag = #{daiXiaoFlag}
+            </if>
+           <if test="zaiTuFlag != null">
+                AND zaiTuFlag = #{zaiTuFlag}
+            </if>
+           <if test="num != null">
+                AND num = #{num}
+            </if>
+           <if test="goldWeight != null">
+                AND goldWeight = #{goldWeight}
+            </if>
+           <if test="goldLoss != null">
+                AND goldLoss = #{goldLoss}
+            </if>
+           <if test="maoGoldWeight != null">
+                AND maoGoldWeight = #{maoGoldWeight}
+            </if>
+           <if test="totalGoldWeight != null">
+                AND totalGoldWeight = #{totalGoldWeight}
+            </if>
+           <if test="goodsWeight != null">
+                AND goodsWeight = #{goodsWeight}
+            </if>
+           <if test="goldPrice != null">
+                AND goldPrice = #{goldPrice}
+            </if>
+           <if test="worksFee4Ke != null">
+                AND worksFee4Ke = #{worksFee4Ke}
+            </if>
+           <if test="worksFee4Jian != null">
+                AND worksFee4Jian = #{worksFee4Jian}
+            </if>
+           <if test="worksFeeTotal != null">
+                AND worksFeeTotal = #{worksFeeTotal}
+            </if>
+           <if test="certificateFee != null">
+                AND certificateFee = #{certificateFee}
+            </if>
+           <if test="fittingsFee != null">
+                AND fittingsFee = #{fittingsFee}
+            </if>
+           <if test="sandBlastFee != null">
+                AND sandBlastFee = #{sandBlastFee}
+            </if>
+           <if test="otherFee != null">
+                AND otherFee = #{otherFee}
+            </if>
+           <if test="unitPrice != null">
+                AND unitPrice = #{unitPrice}
+            </if>
+           <if test="goldCostPrice != null">
+                AND goldCostPrice = #{goldCostPrice}
+            </if>
+           <if test="costPrice != null">
+                AND costPrice = #{costPrice}
+            </if>
+           <if test="markupRate != null">
+                AND markupRate = #{markupRate}
+            </if>
+           <if test="labelPrice != null">
+                AND labelPrice = #{labelPrice}
+            </if>
+           <if test="salePriceAmount != null">
+                AND salePriceAmount = #{salePriceAmount}
+            </if>
+           <if test="labelWorkFee != null">
+                AND labelWorkFee = #{labelWorkFee}
+            </if>
+           <if test="labelWorkFee4Ke != null">
+                AND labelWorkFee4Ke = #{labelWorkFee4Ke}
+            </if>
+           <if test="labelWorkFee4Jian != null">
+                AND labelWorkFee4Jian = #{labelWorkFee4Jian}
+            </if>
+           <if test="labelRemarks != null">
+                AND labelRemarks = #{labelRemarks}
+            </if>
+           <if test="archivesId != null">
+                AND archivesId = #{archivesId}
+            </if>
+           <if test="archivesNo != null">
+                AND archivesNo = #{archivesNo}
+            </if>
+           <if test="goodsName != null">
+                AND goodsName = #{goodsName}
+            </if>
+           <if test="goodsNameEn != null">
+                AND goodsNameEn = #{goodsNameEn}
+            </if>
+           <if test="archivesFineness != null">
+                AND archivesFineness = #{archivesFineness}
+            </if>
+           <if test="archivesStone != null">
+                AND archivesStone = #{archivesStone}
+            </if>
+           <if test="archivesCategory != null">
+                AND archivesCategory = #{archivesCategory}
+            </if>
+           <if test="mainType != null">
+                AND mainType = #{mainType}
+            </if>
+           <if test="mainTypePrefix != null">
+                AND mainTypePrefix = #{mainTypePrefix}
+            </if>
+           <if test="goodsClassify != null">
+                AND goodsClassify = #{goodsClassify}
+            </if>
+           <if test="costClassify != null">
+                AND costClassify = #{costClassify}
+            </if>
+           <if test="statsClassify != null">
+                AND statsClassify = #{statsClassify}
+            </if>
+           <if test="mainStoneCut != null">
+                AND mainStoneCut = #{mainStoneCut}
+            </if>
+           <if test="mainStoneColor != null">
+                AND mainStoneColor = #{mainStoneColor}
+            </if>
+           <if test="mainStoneClarity != null">
+                AND mainStoneClarity = #{mainStoneClarity}
+            </if>
+           <if test="mainStoneFluorescent != null">
+                AND mainStoneFluorescent = #{mainStoneFluorescent}
+            </if>
+           <if test="mainStoneBurnished != null">
+                AND mainStoneBurnished = #{mainStoneBurnished}
+            </if>
+           <if test="mainStoneSymmetry != null">
+                AND mainStoneSymmetry = #{mainStoneSymmetry}
+            </if>
+           <if test="mainStoneName != null">
+                AND mainStoneName = #{mainStoneName}
+            </if>
+           <if test="mainStoneNo != null">
+                AND mainStoneNo = #{mainStoneNo}
+            </if>
+           <if test="mainStoneSpecifi != null">
+                AND mainStoneSpecifi = #{mainStoneSpecifi}
+            </if>
+           <if test="mainStoneNum != null">
+                AND mainStoneNum = #{mainStoneNum}
+            </if>
+           <if test="mainStoneWeight != null">
+                AND mainStoneWeight = #{mainStoneWeight}
+            </if>
+           <if test="mainStonePrice != null">
+                AND mainStonePrice = #{mainStonePrice}
+            </if>
+           <if test="mainStoneMoney != null">
+                AND mainStoneMoney = #{mainStoneMoney}
+            </if>
+           <if test="subStone1Name != null">
+                AND subStone1Name = #{subStone1Name}
+            </if>
+           <if test="subStone1No != null">
+                AND subStone1No = #{subStone1No}
+            </if>
+           <if test="subStone1Specifi != null">
+                AND subStone1Specifi = #{subStone1Specifi}
+            </if>
+           <if test="subStone1Num != null">
+                AND subStone1Num = #{subStone1Num}
+            </if>
+           <if test="subStone1Weight != null">
+                AND subStone1Weight = #{subStone1Weight}
+            </if>
+           <if test="subStone1Price != null">
+                AND subStone1Price = #{subStone1Price}
+            </if>
+           <if test="subStone1Money != null">
+                AND subStone1Money = #{subStone1Money}
+            </if>
+           <if test="subStone2Name != null">
+                AND subStone2Name = #{subStone2Name}
+            </if>
+           <if test="subStone2No != null">
+                AND subStone2No = #{subStone2No}
+            </if>
+           <if test="subStone2Specifi != null">
+                AND subStone2Specifi = #{subStone2Specifi}
+            </if>
+           <if test="subStone2Num != null">
+                AND subStone2Num = #{subStone2Num}
+            </if>
+           <if test="subStone2Weight != null">
+                AND subStone2Weight = #{subStone2Weight}
+            </if>
+           <if test="subStone2Price != null">
+                AND subStone2Price = #{subStone2Price}
+            </if>
+           <if test="subStone2Money != null">
+                AND subStone2Money = #{subStone2Money}
+            </if>
+           <if test="subStone3Name != null">
+                AND subStone3Name = #{subStone3Name}
+            </if>
+           <if test="subStone3No != null">
+                AND subStone3No = #{subStone3No}
+            </if>
+           <if test="subStone3Specifi != null">
+                AND subStone3Specifi = #{subStone3Specifi}
+            </if>
+           <if test="subStone3Num != null">
+                AND subStone3Num = #{subStone3Num}
+            </if>
+           <if test="subStone3Weight != null">
+                AND subStone3Weight = #{subStone3Weight}
+            </if>
+           <if test="subStone3Price != null">
+                AND subStone3Price = #{subStone3Price}
+            </if>
+           <if test="subStone3Money != null">
+                AND subStone3Money = #{subStone3Money}
+            </if>
+           <if test="subStone4Name != null">
+                AND subStone4Name = #{subStone4Name}
+            </if>
+           <if test="subStone4No != null">
+                AND subStone4No = #{subStone4No}
+            </if>
+           <if test="subStone4Specifi != null">
+                AND subStone4Specifi = #{subStone4Specifi}
+            </if>
+           <if test="subStone4Num != null">
+                AND subStone4Num = #{subStone4Num}
+            </if>
+           <if test="subStone4Weight != null">
+                AND subStone4Weight = #{subStone4Weight}
+            </if>
+           <if test="subStone4Price != null">
+                AND subStone4Price = #{subStone4Price}
+            </if>
+           <if test="subStone4Money != null">
+                AND subStone4Money = #{subStone4Money}
+            </if>
+           <if test="subStone5Name != null">
+                AND subStone5Name = #{subStone5Name}
+            </if>
+           <if test="subStone5No != null">
+                AND subStone5No = #{subStone5No}
+            </if>
+           <if test="subStone5Specifi != null">
+                AND subStone5Specifi = #{subStone5Specifi}
+            </if>
+           <if test="subStone5Num != null">
+                AND subStone5Num = #{subStone5Num}
+            </if>
+           <if test="subStone5Weight != null">
+                AND subStone5Weight = #{subStone5Weight}
+            </if>
+           <if test="subStone5Price != null">
+                AND subStone5Price = #{subStone5Price}
+            </if>
+           <if test="subStone5Money != null">
+                AND subStone5Money = #{subStone5Money}
+            </if>
+           <if test="subStone6Name != null">
+                AND subStone6Name = #{subStone6Name}
+            </if>
+           <if test="subStone6No != null">
+                AND subStone6No = #{subStone6No}
+            </if>
+           <if test="subStone6Specifi != null">
+                AND subStone6Specifi = #{subStone6Specifi}
+            </if>
+           <if test="subStone6Num != null">
+                AND subStone6Num = #{subStone6Num}
+            </if>
+           <if test="subStone6Weight != null">
+                AND subStone6Weight = #{subStone6Weight}
+            </if>
+           <if test="subStone6Price != null">
+                AND subStone6Price = #{subStone6Price}
+            </if>
+           <if test="subStone6Money != null">
+                AND subStone6Money = #{subStone6Money}
+            </if>
+           <if test="peiShiCostPrice != null">
+                AND peiShiCostPrice = #{peiShiCostPrice}
+            </if>
+           <if test="peiShiRate != null">
+                AND peiShiRate = #{peiShiRate}
+            </if>
+           <if test="peiShiLabelPrice != null">
+                AND peiShiLabelPrice = #{peiShiLabelPrice}
+            </if>
+           <if test="netGoldWeight != null">
+                AND netGoldWeight = #{netGoldWeight}
+            </if>
+           <if test="oldMaterialQuality != null">
+                AND oldMaterialQuality = #{oldMaterialQuality}
+            </if>
+           <if test="oldMaterialLoss != null">
+                AND oldMaterialLoss = #{oldMaterialLoss}
+            </if>
+           <if test="origin != null">
+                AND origin = #{origin}
+            </if>
+           <if test="recFlag != null">
+                AND recFlag = #{recFlag}
+            </if>
+           <if test="saleManId != null">
+                AND saleManId = #{saleManId}
+            </if>
+           <if test="salesmanName != null">
+                AND salesmanName = #{salesmanName}
+            </if>
+           <if test="hasReturn != null">
+                AND hasReturn = #{hasReturn}
+            </if>
+           <if test="orgItemId != null">
+                AND orgItemId = #{orgItemId}
+            </if>
+           <if test="orgLabelPrice != null">
+                AND orgLabelPrice = #{orgLabelPrice}
+            </if>
+           <if test="orgSettlementPrice != null">
+                AND orgSettlementPrice = #{orgSettlementPrice}
+            </if>
+           <if test="incrementMoney != null">
+                AND incrementMoney = #{incrementMoney}
+            </if>
+           <if test="purchaseAmount != null">
+                AND purchaseAmount = #{purchaseAmount}
+            </if>
+           <if test="grfName != null">
+                AND grfName = #{grfName}
+            </if>
+           <if test="refineFee != null">
+                AND refineFee = #{refineFee}
+            </if>
+           <if test="refineFeeTotal != null">
+                AND refineFeeTotal = #{refineFeeTotal}
+            </if>
+           <if test="subType != null">
+                AND subType = #{subType}
+            </if>
+           <if test="settleUnitPrice != null">
+                AND settleUnitPrice = #{settleUnitPrice}
+            </if>
+           <if test="settleTotalMoney != null">
+                AND settleTotalMoney = #{settleTotalMoney}
+            </if>
+           <if test="joinCalculate != null">
+                AND joinCalculate = #{joinCalculate}
+            </if>
+           <if test="pointItem != null">
+                AND pointItem = #{pointItem}
+            </if>
+           <if test="oldStockId != null">
+                AND oldStockId = #{oldStockId}
+            </if>
+           <if test="brandName != null">
+                AND brandName = #{brandName}
+            </if>
+           <if test="recyleGoodsAgio != null">
+                AND recyleGoodsAgio = #{recyleGoodsAgio}
+            </if>
+           <if test="exchangeStoreId != null">
+                AND exchangeStoreId = #{exchangeStoreId}
+            </if>
+           <if test="exchangeStoreName != null">
+                AND exchangeStoreName = #{exchangeStoreName}
+            </if>
+           <if test="sheetStatus != null">
+                AND sheetStatus = #{sheetStatus}
+            </if>
+           <if test="null != receiveTimeBegin)">
+                AND receiveTime >= #{receiveTimeBegin}
+           </if>
+           <if test="null != (receiveTimeEnd)">
+                AND receiveTime &lt;= #{receiveTimeEnd}
+           </if>
+           <if test="priceRange != null">
+                AND priceRange = #{priceRange}
+            </if>
+           <if test="goldRange != null">
+                AND goldRange = #{goldRange}
+            </if>
+           <if test="stoneRange != null">
+                AND stoneRange = #{stoneRange}
+            </if>
+           <if test="dhFlag != null">
+                AND dhFlag = #{dhFlag}
+            </if>
+        </where>
+    </sql>
+    
+    <select id="getById" resultMap="ImportsheetItemMap">
+        SELECT <include refid="columns" />
+        <![CDATA[
+            FROM
+                b_importsheet_item
+            WHERE 
+                id=0
+        ]]>
+    </select>
+    
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+        <![CDATA[
+            INSERT INTO b_importsheet_item (
+                id,
+                sheetId,
+                companyNo,
+                sheetNo,
+                oldSheetNo,
+                supplierNo,
+                supplierName,
+                customerName,
+                customerPhone,
+                barCode,
+                oldBarCode,
+                subGoodsName,
+                certificateNo,
+                giaCertificateNo,
+                style,
+                styleNo,
+                shortCut,
+                craft,
+                measurementMode,
+                img,
+                operUserId,
+                operUserName,
+                remarks,
+                deptAreaCode,
+                deptAreaName,
+                storeId,
+                storeName,
+                purchaseSaleMode,
+                sheetType,
+                specialOffersFlag,
+                sheetDate,
+                jtFlag,
+                saveFlag,
+                daiXiaoFlag,
+                zaiTuFlag,
+                num,
+                goldWeight,
+                goldLoss,
+                maoGoldWeight,
+                totalGoldWeight,
+                goodsWeight,
+                goldPrice,
+                worksFee4Ke,
+                worksFee4Jian,
+                worksFeeTotal,
+                certificateFee,
+                fittingsFee,
+                sandBlastFee,
+                otherFee,
+                unitPrice,
+                goldCostPrice,
+                costPrice,
+                markupRate,
+                labelPrice,
+                salePriceAmount,
+                labelWorkFee,
+                labelWorkFee4Ke,
+                labelWorkFee4Jian,
+                labelRemarks,
+                archivesId,
+                archivesNo,
+                goodsName,
+                goodsNameEn,
+                archivesFineness,
+                archivesStone,
+                archivesCategory,
+                mainType,
+                mainTypePrefix,
+                goodsClassify,
+                costClassify,
+                statsClassify,
+                mainStoneCut,
+                mainStoneColor,
+                mainStoneClarity,
+                mainStoneFluorescent,
+                mainStoneBurnished,
+                mainStoneSymmetry,
+                mainStoneName,
+                mainStoneNo,
+                mainStoneSpecifi,
+                mainStoneNum,
+                mainStoneWeight,
+                mainStonePrice,
+                mainStoneMoney,
+                subStone1Name,
+                subStone1No,
+                subStone1Specifi,
+                subStone1Num,
+                subStone1Weight,
+                subStone1Price,
+                subStone1Money,
+                subStone2Name,
+                subStone2No,
+                subStone2Specifi,
+                subStone2Num,
+                subStone2Weight,
+                subStone2Price,
+                subStone2Money,
+                subStone3Name,
+                subStone3No,
+                subStone3Specifi,
+                subStone3Num,
+                subStone3Weight,
+                subStone3Price,
+                subStone3Money,
+                subStone4Name,
+                subStone4No,
+                subStone4Specifi,
+                subStone4Num,
+                subStone4Weight,
+                subStone4Price,
+                subStone4Money,
+                subStone5Name,
+                subStone5No,
+                subStone5Specifi,
+                subStone5Num,
+                subStone5Weight,
+                subStone5Price,
+                subStone5Money,
+                subStone6Name,
+                subStone6No,
+                subStone6Specifi,
+                subStone6Num,
+                subStone6Weight,
+                subStone6Price,
+                subStone6Money,
+                peiShiCostPrice,
+                peiShiRate,
+                peiShiLabelPrice,
+                netGoldWeight,
+                oldMaterialQuality,
+                oldMaterialLoss,
+                origin,
+                recFlag,
+                saleManId,
+                salesmanName,
+                hasReturn,
+                orgItemId,
+                orgLabelPrice,
+                orgSettlementPrice,
+                incrementMoney,
+                purchaseAmount,
+                grfName,
+                refineFee,
+                refineFeeTotal,
+                subType,
+                settleUnitPrice,
+                settleTotalMoney,
+                joinCalculate,
+                pointItem,
+                oldStockId,
+                brandName,
+                recyleGoodsAgio,
+                exchangeStoreId,
+                exchangeStoreName,
+                sheetStatus,
+                receiveTime,
+                priceRange,
+                goldRange,
+                stoneRange,
+                dhFlag
+            ) VALUES (
+            	#{id},
+            	#{sheetId},
+            	#{companyNo},
+            	#{sheetNo},
+            	#{oldSheetNo},
+            	#{supplierNo},
+            	#{supplierName},
+            	#{customerName},
+            	#{customerPhone},
+            	#{barCode},
+            	#{oldBarCode},
+            	#{subGoodsName},
+            	#{certificateNo},
+            	#{giaCertificateNo},
+            	#{style},
+            	#{styleNo},
+            	#{shortCut},
+            	#{craft},
+            	#{measurementMode},
+            	#{img},
+            	#{operUserId},
+            	#{operUserName},
+            	#{remarks},
+            	#{deptAreaCode},
+            	#{deptAreaName},
+            	#{storeId},
+            	#{storeName},
+            	#{purchaseSaleMode},
+            	#{sheetType},
+            	#{specialOffersFlag},
+            	#{sheetDate},
+            	#{jtFlag},
+            	#{saveFlag},
+            	#{daiXiaoFlag},
+            	#{zaiTuFlag},
+            	#{num},
+            	#{goldWeight},
+            	#{goldLoss},
+            	#{maoGoldWeight},
+            	#{totalGoldWeight},
+            	#{goodsWeight},
+            	#{goldPrice},
+            	#{worksFee4Ke},
+            	#{worksFee4Jian},
+            	#{worksFeeTotal},
+            	#{certificateFee},
+            	#{fittingsFee},
+            	#{sandBlastFee},
+            	#{otherFee},
+            	#{unitPrice},
+            	#{goldCostPrice},
+            	#{costPrice},
+            	#{markupRate},
+            	#{labelPrice},
+            	#{salePriceAmount},
+            	#{labelWorkFee},
+            	#{labelWorkFee4Ke},
+            	#{labelWorkFee4Jian},
+            	#{labelRemarks},
+            	#{archivesId},
+            	#{archivesNo},
+            	#{goodsName},
+            	#{goodsNameEn},
+            	#{archivesFineness},
+            	#{archivesStone},
+            	#{archivesCategory},
+            	#{mainType},
+            	#{mainTypePrefix},
+            	#{goodsClassify},
+            	#{costClassify},
+            	#{statsClassify},
+            	#{mainStoneCut},
+            	#{mainStoneColor},
+            	#{mainStoneClarity},
+            	#{mainStoneFluorescent},
+            	#{mainStoneBurnished},
+            	#{mainStoneSymmetry},
+            	#{mainStoneName},
+            	#{mainStoneNo},
+            	#{mainStoneSpecifi},
+            	#{mainStoneNum},
+            	#{mainStoneWeight},
+            	#{mainStonePrice},
+            	#{mainStoneMoney},
+            	#{subStone1Name},
+            	#{subStone1No},
+            	#{subStone1Specifi},
+            	#{subStone1Num},
+            	#{subStone1Weight},
+            	#{subStone1Price},
+            	#{subStone1Money},
+            	#{subStone2Name},
+            	#{subStone2No},
+            	#{subStone2Specifi},
+            	#{subStone2Num},
+            	#{subStone2Weight},
+            	#{subStone2Price},
+            	#{subStone2Money},
+            	#{subStone3Name},
+            	#{subStone3No},
+            	#{subStone3Specifi},
+            	#{subStone3Num},
+            	#{subStone3Weight},
+            	#{subStone3Price},
+            	#{subStone3Money},
+            	#{subStone4Name},
+            	#{subStone4No},
+            	#{subStone4Specifi},
+            	#{subStone4Num},
+            	#{subStone4Weight},
+            	#{subStone4Price},
+            	#{subStone4Money},
+            	#{subStone5Name},
+            	#{subStone5No},
+            	#{subStone5Specifi},
+            	#{subStone5Num},
+            	#{subStone5Weight},
+            	#{subStone5Price},
+            	#{subStone5Money},
+            	#{subStone6Name},
+            	#{subStone6No},
+            	#{subStone6Specifi},
+            	#{subStone6Num},
+            	#{subStone6Weight},
+            	#{subStone6Price},
+            	#{subStone6Money},
+            	#{peiShiCostPrice},
+            	#{peiShiRate},
+            	#{peiShiLabelPrice},
+            	#{netGoldWeight},
+            	#{oldMaterialQuality},
+            	#{oldMaterialLoss},
+            	#{origin},
+            	#{recFlag},
+            	#{saleManId},
+            	#{salesmanName},
+            	#{hasReturn},
+            	#{orgItemId},
+            	#{orgLabelPrice},
+            	#{orgSettlementPrice},
+            	#{incrementMoney},
+            	#{purchaseAmount},
+            	#{grfName},
+            	#{refineFee},
+            	#{refineFeeTotal},
+            	#{subType},
+            	#{settleUnitPrice},
+            	#{settleTotalMoney},
+            	#{joinCalculate},
+            	#{pointItem},
+            	#{oldStockId},
+            	#{brandName},
+            	#{recyleGoodsAgio},
+            	#{exchangeStoreId},
+            	#{exchangeStoreName},
+            	#{sheetStatus},
+            	#{receiveTime},
+            	#{priceRange},
+            	#{goldRange},
+            	#{stoneRange},
+            	#{dhFlag}
+            )
+        ]]>
+    </insert>
+
+    <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id" >
+        <![CDATA[
+            INSERT INTO b_importsheet_item (
+                sheetId,
+                companyNo,
+                sheetNo,
+                oldSheetNo,
+                supplierNo,
+                supplierName,
+                customerName,
+                customerPhone,
+                barCode,
+                oldBarCode,
+                subGoodsName,
+                certificateNo,
+                giaCertificateNo,
+                style,
+                styleNo,
+                shortCut,
+                craft,
+                measurementMode,
+                img,
+                operUserId,
+                operUserName,
+                remarks,
+                deptAreaCode,
+                deptAreaName,
+                storeId,
+                storeName,
+                purchaseSaleMode,
+                sheetType,
+                specialOffersFlag,
+                sheetDate,
+                jtFlag,
+                saveFlag,
+                daiXiaoFlag,
+                zaiTuFlag,
+                num,
+                goldWeight,
+                goldLoss,
+                maoGoldWeight,
+                totalGoldWeight,
+                goodsWeight,
+                goldPrice,
+                worksFee4Ke,
+                worksFee4Jian,
+                worksFeeTotal,
+                certificateFee,
+                fittingsFee,
+                sandBlastFee,
+                otherFee,
+                unitPrice,
+                goldCostPrice,
+                costPrice,
+                markupRate,
+                labelPrice,
+                salePriceAmount,
+                labelWorkFee,
+                labelWorkFee4Ke,
+                labelWorkFee4Jian,
+                labelRemarks,
+                archivesId,
+                archivesNo,
+                goodsName,
+                goodsNameEn,
+                archivesFineness,
+                archivesStone,
+                archivesCategory,
+                mainType,
+                mainTypePrefix,
+                goodsClassify,
+                costClassify,
+                statsClassify,
+                mainStoneCut,
+                mainStoneColor,
+                mainStoneClarity,
+                mainStoneFluorescent,
+                mainStoneBurnished,
+                mainStoneSymmetry,
+                mainStoneName,
+                mainStoneNo,
+                mainStoneSpecifi,
+                mainStoneNum,
+                mainStoneWeight,
+                mainStonePrice,
+                mainStoneMoney,
+                subStone1Name,
+                subStone1No,
+                subStone1Specifi,
+                subStone1Num,
+                subStone1Weight,
+                subStone1Price,
+                subStone1Money,
+                subStone2Name,
+                subStone2No,
+                subStone2Specifi,
+                subStone2Num,
+                subStone2Weight,
+                subStone2Price,
+                subStone2Money,
+                subStone3Name,
+                subStone3No,
+                subStone3Specifi,
+                subStone3Num,
+                subStone3Weight,
+                subStone3Price,
+                subStone3Money,
+                subStone4Name,
+                subStone4No,
+                subStone4Specifi,
+                subStone4Num,
+                subStone4Weight,
+                subStone4Price,
+                subStone4Money,
+                subStone5Name,
+                subStone5No,
+                subStone5Specifi,
+                subStone5Num,
+                subStone5Weight,
+                subStone5Price,
+                subStone5Money,
+                subStone6Name,
+                subStone6No,
+                subStone6Specifi,
+                subStone6Num,
+                subStone6Weight,
+                subStone6Price,
+                subStone6Money,
+                peiShiCostPrice,
+                peiShiRate,
+                peiShiLabelPrice,
+                netGoldWeight,
+                oldMaterialQuality,
+                oldMaterialLoss,
+                origin,
+                recFlag,
+                saleManId,
+                salesmanName,
+                hasReturn,
+                orgItemId,
+                orgLabelPrice,
+                orgSettlementPrice,
+                incrementMoney,
+                purchaseAmount,
+                grfName,
+                refineFee,
+                refineFeeTotal,
+                subType,
+                settleUnitPrice,
+                settleTotalMoney,
+                joinCalculate,
+                pointItem,
+                oldStockId,
+                brandName,
+                recyleGoodsAgio,
+                exchangeStoreId,
+                exchangeStoreName,
+                sheetStatus,
+                receiveTime,
+                priceRange,
+                goldRange,
+                stoneRange,
+                dhFlag
+            ) VALUES
+        ]]>
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.sheetId},#{item.companyNo},#{item.sheetNo},#{item.oldSheetNo},#{item.supplierNo},#{item.supplierName},#{item.customerName},#{item.customerPhone},#{item.barCode},#{item.oldBarCode},#{item.subGoodsName},#{item.certificateNo},#{item.giaCertificateNo},#{item.style},#{item.styleNo},#{item.shortCut},#{item.craft},#{item.measurementMode},#{item.img},#{item.operUserId},#{item.operUserName},#{item.remarks},#{item.deptAreaCode},#{item.deptAreaName},#{item.storeId},#{item.storeName},#{item.purchaseSaleMode},#{item.sheetType},#{item.specialOffersFlag},#{item.sheetDate},#{item.jtFlag},#{item.saveFlag},#{item.daiXiaoFlag},#{item.zaiTuFlag},#{item.num},#{item.goldWeight},#{item.goldLoss},#{item.maoGoldWeight},#{item.totalGoldWeight},#{item.goodsWeight},#{item.goldPrice},#{item.worksFee4Ke},#{item.worksFee4Jian},#{item.worksFeeTotal},#{item.certificateFee},#{item.fittingsFee},#{item.sandBlastFee},#{item.otherFee},#{item.unitPrice},#{item.goldCostPrice},#{item.costPrice},#{item.markupRate},#{item.labelPrice},#{item.salePriceAmount},#{item.labelWorkFee},#{item.labelWorkFee4Ke},#{item.labelWorkFee4Jian},#{item.labelRemarks},#{item.archivesId},#{item.archivesNo},#{item.goodsName},#{item.goodsNameEn},#{item.archivesFineness},#{item.archivesStone},#{item.archivesCategory},#{item.mainType},#{item.mainTypePrefix},#{item.goodsClassify},#{item.costClassify},#{item.statsClassify},#{item.mainStoneCut},#{item.mainStoneColor},#{item.mainStoneClarity},#{item.mainStoneFluorescent},#{item.mainStoneBurnished},#{item.mainStoneSymmetry},#{item.mainStoneName},#{item.mainStoneNo},#{item.mainStoneSpecifi},#{item.mainStoneNum},#{item.mainStoneWeight},#{item.mainStonePrice},#{item.mainStoneMoney},#{item.subStone1Name},#{item.subStone1No},#{item.subStone1Specifi},#{item.subStone1Num},#{item.subStone1Weight},#{item.subStone1Price},#{item.subStone1Money},#{item.subStone2Name},#{item.subStone2No},#{item.subStone2Specifi},#{item.subStone2Num},#{item.subStone2Weight},#{item.subStone2Price},#{item.subStone2Money},#{item.subStone3Name},#{item.subStone3No},#{item.subStone3Specifi},#{item.subStone3Num},#{item.subStone3Weight},#{item.subStone3Price},#{item.subStone3Money},#{item.subStone4Name},#{item.subStone4No},#{item.subStone4Specifi},#{item.subStone4Num},#{item.subStone4Weight},#{item.subStone4Price},#{item.subStone4Money},#{item.subStone5Name},#{item.subStone5No},#{item.subStone5Specifi},#{item.subStone5Num},#{item.subStone5Weight},#{item.subStone5Price},#{item.subStone5Money},#{item.subStone6Name},#{item.subStone6No},#{item.subStone6Specifi},#{item.subStone6Num},#{item.subStone6Weight},#{item.subStone6Price},#{item.subStone6Money},#{item.peiShiCostPrice},#{item.peiShiRate},#{item.peiShiLabelPrice},#{item.netGoldWeight},#{item.oldMaterialQuality},#{item.oldMaterialLoss},#{item.origin},#{item.recFlag},#{item.saleManId},#{item.salesmanName},#{item.hasReturn},#{item.orgItemId},#{item.orgLabelPrice},#{item.orgSettlementPrice},#{item.incrementMoney},#{item.purchaseAmount},#{item.grfName},#{item.refineFee},#{item.refineFeeTotal},#{item.subType},#{item.settleUnitPrice},#{item.settleTotalMoney},#{item.joinCalculate},#{item.pointItem},#{item.oldStockId},#{item.brandName},#{item.recyleGoodsAgio},#{item.exchangeStoreId},#{item.exchangeStoreName},#{item.sheetStatus},#{item.receiveTime},#{item.priceRange},#{item.goldRange},#{item.stoneRange},#{item.dhFlag})
+        </foreach>
+    </insert>
+    
+    <update id="update">
+        	UPDATE
+                b_importsheet_item
+            <set>
+                <![CDATA[ sheetId = #{sheetId} ]]>,
+                <![CDATA[ companyNo = #{companyNo} ]]>,
+                <![CDATA[ sheetNo = #{sheetNo} ]]>,
+                <![CDATA[ oldSheetNo = #{oldSheetNo} ]]>,
+                <![CDATA[ supplierNo = #{supplierNo} ]]>,
+                <![CDATA[ supplierName = #{supplierName} ]]>,
+                <![CDATA[ customerName = #{customerName} ]]>,
+                <![CDATA[ customerPhone = #{customerPhone} ]]>,
+                <![CDATA[ barCode = #{barCode} ]]>,
+                <![CDATA[ oldBarCode = #{oldBarCode} ]]>,
+                <![CDATA[ subGoodsName = #{subGoodsName} ]]>,
+                <![CDATA[ certificateNo = #{certificateNo} ]]>,
+                <![CDATA[ giaCertificateNo = #{giaCertificateNo} ]]>,
+                <![CDATA[ style = #{style} ]]>,
+                <![CDATA[ styleNo = #{styleNo} ]]>,
+                <![CDATA[ shortCut = #{shortCut} ]]>,
+                <![CDATA[ craft = #{craft} ]]>,
+                <![CDATA[ measurementMode = #{measurementMode} ]]>,
+                <![CDATA[ img = #{img} ]]>,
+                <![CDATA[ operUserId = #{operUserId} ]]>,
+                <![CDATA[ operUserName = #{operUserName} ]]>,
+                <![CDATA[ remarks = #{remarks} ]]>,
+                <![CDATA[ deptAreaCode = #{deptAreaCode} ]]>,
+                <![CDATA[ deptAreaName = #{deptAreaName} ]]>,
+                <![CDATA[ storeId = #{storeId} ]]>,
+                <![CDATA[ storeName = #{storeName} ]]>,
+                <![CDATA[ purchaseSaleMode = #{purchaseSaleMode} ]]>,
+                <![CDATA[ sheetType = #{sheetType} ]]>,
+                <![CDATA[ specialOffersFlag = #{specialOffersFlag} ]]>,
+                <![CDATA[ sheetDate = #{sheetDate} ]]>,
+                <![CDATA[ jtFlag = #{jtFlag} ]]>,
+                <![CDATA[ saveFlag = #{saveFlag} ]]>,
+                <![CDATA[ daiXiaoFlag = #{daiXiaoFlag} ]]>,
+                <![CDATA[ zaiTuFlag = #{zaiTuFlag} ]]>,
+                <![CDATA[ num = #{num} ]]>,
+                <![CDATA[ goldWeight = #{goldWeight} ]]>,
+                <![CDATA[ goldLoss = #{goldLoss} ]]>,
+                <![CDATA[ maoGoldWeight = #{maoGoldWeight} ]]>,
+                <![CDATA[ totalGoldWeight = #{totalGoldWeight} ]]>,
+                <![CDATA[ goodsWeight = #{goodsWeight} ]]>,
+                <![CDATA[ goldPrice = #{goldPrice} ]]>,
+                <![CDATA[ worksFee4Ke = #{worksFee4Ke} ]]>,
+                <![CDATA[ worksFee4Jian = #{worksFee4Jian} ]]>,
+                <![CDATA[ worksFeeTotal = #{worksFeeTotal} ]]>,
+                <![CDATA[ certificateFee = #{certificateFee} ]]>,
+                <![CDATA[ fittingsFee = #{fittingsFee} ]]>,
+                <![CDATA[ sandBlastFee = #{sandBlastFee} ]]>,
+                <![CDATA[ otherFee = #{otherFee} ]]>,
+                <![CDATA[ unitPrice = #{unitPrice} ]]>,
+                <![CDATA[ goldCostPrice = #{goldCostPrice} ]]>,
+                <![CDATA[ costPrice = #{costPrice} ]]>,
+                <![CDATA[ markupRate = #{markupRate} ]]>,
+                <![CDATA[ labelPrice = #{labelPrice} ]]>,
+                <![CDATA[ salePriceAmount = #{salePriceAmount} ]]>,
+                <![CDATA[ labelWorkFee = #{labelWorkFee} ]]>,
+                <![CDATA[ labelWorkFee4Ke = #{labelWorkFee4Ke} ]]>,
+                <![CDATA[ labelWorkFee4Jian = #{labelWorkFee4Jian} ]]>,
+                <![CDATA[ labelRemarks = #{labelRemarks} ]]>,
+                <![CDATA[ archivesId = #{archivesId} ]]>,
+                <![CDATA[ archivesNo = #{archivesNo} ]]>,
+                <![CDATA[ goodsName = #{goodsName} ]]>,
+                <![CDATA[ goodsNameEn = #{goodsNameEn} ]]>,
+                <![CDATA[ archivesFineness = #{archivesFineness} ]]>,
+                <![CDATA[ archivesStone = #{archivesStone} ]]>,
+                <![CDATA[ archivesCategory = #{archivesCategory} ]]>,
+                <![CDATA[ mainType = #{mainType} ]]>,
+                <![CDATA[ mainTypePrefix = #{mainTypePrefix} ]]>,
+                <![CDATA[ goodsClassify = #{goodsClassify} ]]>,
+                <![CDATA[ costClassify = #{costClassify} ]]>,
+                <![CDATA[ statsClassify = #{statsClassify} ]]>,
+                <![CDATA[ mainStoneCut = #{mainStoneCut} ]]>,
+                <![CDATA[ mainStoneColor = #{mainStoneColor} ]]>,
+                <![CDATA[ mainStoneClarity = #{mainStoneClarity} ]]>,
+                <![CDATA[ mainStoneFluorescent = #{mainStoneFluorescent} ]]>,
+                <![CDATA[ mainStoneBurnished = #{mainStoneBurnished} ]]>,
+                <![CDATA[ mainStoneSymmetry = #{mainStoneSymmetry} ]]>,
+                <![CDATA[ mainStoneName = #{mainStoneName} ]]>,
+                <![CDATA[ mainStoneNo = #{mainStoneNo} ]]>,
+                <![CDATA[ mainStoneSpecifi = #{mainStoneSpecifi} ]]>,
+                <![CDATA[ mainStoneNum = #{mainStoneNum} ]]>,
+                <![CDATA[ mainStoneWeight = #{mainStoneWeight} ]]>,
+                <![CDATA[ mainStonePrice = #{mainStonePrice} ]]>,
+                <![CDATA[ mainStoneMoney = #{mainStoneMoney} ]]>,
+                <![CDATA[ subStone1Name = #{subStone1Name} ]]>,
+                <![CDATA[ subStone1No = #{subStone1No} ]]>,
+                <![CDATA[ subStone1Specifi = #{subStone1Specifi} ]]>,
+                <![CDATA[ subStone1Num = #{subStone1Num} ]]>,
+                <![CDATA[ subStone1Weight = #{subStone1Weight} ]]>,
+                <![CDATA[ subStone1Price = #{subStone1Price} ]]>,
+                <![CDATA[ subStone1Money = #{subStone1Money} ]]>,
+                <![CDATA[ subStone2Name = #{subStone2Name} ]]>,
+                <![CDATA[ subStone2No = #{subStone2No} ]]>,
+                <![CDATA[ subStone2Specifi = #{subStone2Specifi} ]]>,
+                <![CDATA[ subStone2Num = #{subStone2Num} ]]>,
+                <![CDATA[ subStone2Weight = #{subStone2Weight} ]]>,
+                <![CDATA[ subStone2Price = #{subStone2Price} ]]>,
+                <![CDATA[ subStone2Money = #{subStone2Money} ]]>,
+                <![CDATA[ subStone3Name = #{subStone3Name} ]]>,
+                <![CDATA[ subStone3No = #{subStone3No} ]]>,
+                <![CDATA[ subStone3Specifi = #{subStone3Specifi} ]]>,
+                <![CDATA[ subStone3Num = #{subStone3Num} ]]>,
+                <![CDATA[ subStone3Weight = #{subStone3Weight} ]]>,
+                <![CDATA[ subStone3Price = #{subStone3Price} ]]>,
+                <![CDATA[ subStone3Money = #{subStone3Money} ]]>,
+                <![CDATA[ subStone4Name = #{subStone4Name} ]]>,
+                <![CDATA[ subStone4No = #{subStone4No} ]]>,
+                <![CDATA[ subStone4Specifi = #{subStone4Specifi} ]]>,
+                <![CDATA[ subStone4Num = #{subStone4Num} ]]>,
+                <![CDATA[ subStone4Weight = #{subStone4Weight} ]]>,
+                <![CDATA[ subStone4Price = #{subStone4Price} ]]>,
+                <![CDATA[ subStone4Money = #{subStone4Money} ]]>,
+                <![CDATA[ subStone5Name = #{subStone5Name} ]]>,
+                <![CDATA[ subStone5No = #{subStone5No} ]]>,
+                <![CDATA[ subStone5Specifi = #{subStone5Specifi} ]]>,
+                <![CDATA[ subStone5Num = #{subStone5Num} ]]>,
+                <![CDATA[ subStone5Weight = #{subStone5Weight} ]]>,
+                <![CDATA[ subStone5Price = #{subStone5Price} ]]>,
+                <![CDATA[ subStone5Money = #{subStone5Money} ]]>,
+                <![CDATA[ subStone6Name = #{subStone6Name} ]]>,
+                <![CDATA[ subStone6No = #{subStone6No} ]]>,
+                <![CDATA[ subStone6Specifi = #{subStone6Specifi} ]]>,
+                <![CDATA[ subStone6Num = #{subStone6Num} ]]>,
+                <![CDATA[ subStone6Weight = #{subStone6Weight} ]]>,
+                <![CDATA[ subStone6Price = #{subStone6Price} ]]>,
+                <![CDATA[ subStone6Money = #{subStone6Money} ]]>,
+                <![CDATA[ peiShiCostPrice = #{peiShiCostPrice} ]]>,
+                <![CDATA[ peiShiRate = #{peiShiRate} ]]>,
+                <![CDATA[ peiShiLabelPrice = #{peiShiLabelPrice} ]]>,
+                <![CDATA[ netGoldWeight = #{netGoldWeight} ]]>,
+                <![CDATA[ oldMaterialQuality = #{oldMaterialQuality} ]]>,
+                <![CDATA[ oldMaterialLoss = #{oldMaterialLoss} ]]>,
+                <![CDATA[ origin = #{origin} ]]>,
+                <![CDATA[ recFlag = #{recFlag} ]]>,
+                <![CDATA[ saleManId = #{saleManId} ]]>,
+                <![CDATA[ salesmanName = #{salesmanName} ]]>,
+                <![CDATA[ hasReturn = #{hasReturn} ]]>,
+                <![CDATA[ orgItemId = #{orgItemId} ]]>,
+                <![CDATA[ orgLabelPrice = #{orgLabelPrice} ]]>,
+                <![CDATA[ orgSettlementPrice = #{orgSettlementPrice} ]]>,
+                <![CDATA[ incrementMoney = #{incrementMoney} ]]>,
+                <![CDATA[ purchaseAmount = #{purchaseAmount} ]]>,
+                <![CDATA[ grfName = #{grfName} ]]>,
+                <![CDATA[ refineFee = #{refineFee} ]]>,
+                <![CDATA[ refineFeeTotal = #{refineFeeTotal} ]]>,
+                <![CDATA[ subType = #{subType} ]]>,
+                <![CDATA[ settleUnitPrice = #{settleUnitPrice} ]]>,
+                <![CDATA[ settleTotalMoney = #{settleTotalMoney} ]]>,
+                <![CDATA[ joinCalculate = #{joinCalculate} ]]>,
+                <![CDATA[ pointItem = #{pointItem} ]]>,
+                <![CDATA[ oldStockId = #{oldStockId} ]]>,
+                <![CDATA[ brandName = #{brandName} ]]>,
+                <![CDATA[ recyleGoodsAgio = #{recyleGoodsAgio} ]]>,
+                <![CDATA[ exchangeStoreId = #{exchangeStoreId} ]]>,
+                <![CDATA[ exchangeStoreName = #{exchangeStoreName} ]]>,
+                <![CDATA[ sheetStatus = #{sheetStatus} ]]>,
+                <![CDATA[ receiveTime = #{receiveTime} ]]>,
+                <![CDATA[ priceRange = #{priceRange} ]]>,
+                <![CDATA[ goldRange = #{goldRange} ]]>,
+                <![CDATA[ stoneRange = #{stoneRange} ]]>,
+                <![CDATA[ dhFlag = #{dhFlag} ]]>
+            </set>
+            <where> 
+                id = #{id}
+                
+            </where>
+    </update>
+    
+    <update id="updatePart">
+            UPDATE
+                b_importsheet_item
+            <set>
+                <if test="sheetId != null">
+                	<![CDATA[ sheetId = #{sheetId} ]]>,
+                </if>
+                <if test="companyNo != null">
+                	<![CDATA[ companyNo = #{companyNo} ]]>,
+                </if>
+                <if test="sheetNo != null">
+                	<![CDATA[ sheetNo = #{sheetNo} ]]>,
+                </if>
+                <if test="oldSheetNo != null">
+                	<![CDATA[ oldSheetNo = #{oldSheetNo} ]]>,
+                </if>
+                <if test="supplierNo != null">
+                	<![CDATA[ supplierNo = #{supplierNo} ]]>,
+                </if>
+                <if test="supplierName != null">
+                	<![CDATA[ supplierName = #{supplierName} ]]>,
+                </if>
+                <if test="customerName != null">
+                	<![CDATA[ customerName = #{customerName} ]]>,
+                </if>
+                <if test="customerPhone != null">
+                	<![CDATA[ customerPhone = #{customerPhone} ]]>,
+                </if>
+                <if test="barCode != null">
+                	<![CDATA[ barCode = #{barCode} ]]>,
+                </if>
+                <if test="oldBarCode != null">
+                	<![CDATA[ oldBarCode = #{oldBarCode} ]]>,
+                </if>
+                <if test="subGoodsName != null">
+                	<![CDATA[ subGoodsName = #{subGoodsName} ]]>,
+                </if>
+                <if test="certificateNo != null">
+                	<![CDATA[ certificateNo = #{certificateNo} ]]>,
+                </if>
+                <if test="giaCertificateNo != null">
+                	<![CDATA[ giaCertificateNo = #{giaCertificateNo} ]]>,
+                </if>
+                <if test="style != null">
+                	<![CDATA[ style = #{style} ]]>,
+                </if>
+                <if test="styleNo != null">
+                	<![CDATA[ styleNo = #{styleNo} ]]>,
+                </if>
+                <if test="shortCut != null">
+                	<![CDATA[ shortCut = #{shortCut} ]]>,
+                </if>
+                <if test="craft != null">
+                	<![CDATA[ craft = #{craft} ]]>,
+                </if>
+                <if test="measurementMode != null">
+                	<![CDATA[ measurementMode = #{measurementMode} ]]>,
+                </if>
+                <if test="img != null">
+                	<![CDATA[ img = #{img} ]]>,
+                </if>
+                <if test="operUserId != null">
+                	<![CDATA[ operUserId = #{operUserId} ]]>,
+                </if>
+                <if test="operUserName != null">
+                	<![CDATA[ operUserName = #{operUserName} ]]>,
+                </if>
+                <if test="remarks != null">
+                	<![CDATA[ remarks = #{remarks} ]]>,
+                </if>
+                <if test="deptAreaCode != null">
+                	<![CDATA[ deptAreaCode = #{deptAreaCode} ]]>,
+                </if>
+                <if test="deptAreaName != null">
+                	<![CDATA[ deptAreaName = #{deptAreaName} ]]>,
+                </if>
+                <if test="storeId != null">
+                	<![CDATA[ storeId = #{storeId} ]]>,
+                </if>
+                <if test="storeName != null">
+                	<![CDATA[ storeName = #{storeName} ]]>,
+                </if>
+                <if test="purchaseSaleMode != null">
+                	<![CDATA[ purchaseSaleMode = #{purchaseSaleMode} ]]>,
+                </if>
+                <if test="sheetType != null">
+                	<![CDATA[ sheetType = #{sheetType} ]]>,
+                </if>
+                <if test="specialOffersFlag != null">
+                	<![CDATA[ specialOffersFlag = #{specialOffersFlag} ]]>,
+                </if>
+                <if test="sheetDate != null">
+                	<![CDATA[ sheetDate = #{sheetDate} ]]>,
+                </if>
+                <if test="jtFlag != null">
+                	<![CDATA[ jtFlag = #{jtFlag} ]]>,
+                </if>
+                <if test="saveFlag != null">
+                	<![CDATA[ saveFlag = #{saveFlag} ]]>,
+                </if>
+                <if test="daiXiaoFlag != null">
+                	<![CDATA[ daiXiaoFlag = #{daiXiaoFlag} ]]>,
+                </if>
+                <if test="zaiTuFlag != null">
+                	<![CDATA[ zaiTuFlag = #{zaiTuFlag} ]]>,
+                </if>
+                <if test="num != null">
+                	<![CDATA[ num = #{num} ]]>,
+                </if>
+                <if test="goldWeight != null">
+                	<![CDATA[ goldWeight = #{goldWeight} ]]>,
+                </if>
+                <if test="goldLoss != null">
+                	<![CDATA[ goldLoss = #{goldLoss} ]]>,
+                </if>
+                <if test="maoGoldWeight != null">
+                	<![CDATA[ maoGoldWeight = #{maoGoldWeight} ]]>,
+                </if>
+                <if test="totalGoldWeight != null">
+                	<![CDATA[ totalGoldWeight = #{totalGoldWeight} ]]>,
+                </if>
+                <if test="goodsWeight != null">
+                	<![CDATA[ goodsWeight = #{goodsWeight} ]]>,
+                </if>
+                <if test="goldPrice != null">
+                	<![CDATA[ goldPrice = #{goldPrice} ]]>,
+                </if>
+                <if test="worksFee4Ke != null">
+                	<![CDATA[ worksFee4Ke = #{worksFee4Ke} ]]>,
+                </if>
+                <if test="worksFee4Jian != null">
+                	<![CDATA[ worksFee4Jian = #{worksFee4Jian} ]]>,
+                </if>
+                <if test="worksFeeTotal != null">
+                	<![CDATA[ worksFeeTotal = #{worksFeeTotal} ]]>,
+                </if>
+                <if test="certificateFee != null">
+                	<![CDATA[ certificateFee = #{certificateFee} ]]>,
+                </if>
+                <if test="fittingsFee != null">
+                	<![CDATA[ fittingsFee = #{fittingsFee} ]]>,
+                </if>
+                <if test="sandBlastFee != null">
+                	<![CDATA[ sandBlastFee = #{sandBlastFee} ]]>,
+                </if>
+                <if test="otherFee != null">
+                	<![CDATA[ otherFee = #{otherFee} ]]>,
+                </if>
+                <if test="unitPrice != null">
+                	<![CDATA[ unitPrice = #{unitPrice} ]]>,
+                </if>
+                <if test="goldCostPrice != null">
+                	<![CDATA[ goldCostPrice = #{goldCostPrice} ]]>,
+                </if>
+                <if test="costPrice != null">
+                	<![CDATA[ costPrice = #{costPrice} ]]>,
+                </if>
+                <if test="markupRate != null">
+                	<![CDATA[ markupRate = #{markupRate} ]]>,
+                </if>
+                <if test="labelPrice != null">
+                	<![CDATA[ labelPrice = #{labelPrice} ]]>,
+                </if>
+                <if test="salePriceAmount != null">
+                	<![CDATA[ salePriceAmount = #{salePriceAmount} ]]>,
+                </if>
+                <if test="labelWorkFee != null">
+                	<![CDATA[ labelWorkFee = #{labelWorkFee} ]]>,
+                </if>
+                <if test="labelWorkFee4Ke != null">
+                	<![CDATA[ labelWorkFee4Ke = #{labelWorkFee4Ke} ]]>,
+                </if>
+                <if test="labelWorkFee4Jian != null">
+                	<![CDATA[ labelWorkFee4Jian = #{labelWorkFee4Jian} ]]>,
+                </if>
+                <if test="labelRemarks != null">
+                	<![CDATA[ labelRemarks = #{labelRemarks} ]]>,
+                </if>
+                <if test="archivesId != null">
+                	<![CDATA[ archivesId = #{archivesId} ]]>,
+                </if>
+                <if test="archivesNo != null">
+                	<![CDATA[ archivesNo = #{archivesNo} ]]>,
+                </if>
+                <if test="goodsName != null">
+                	<![CDATA[ goodsName = #{goodsName} ]]>,
+                </if>
+                <if test="goodsNameEn != null">
+                	<![CDATA[ goodsNameEn = #{goodsNameEn} ]]>,
+                </if>
+                <if test="archivesFineness != null">
+                	<![CDATA[ archivesFineness = #{archivesFineness} ]]>,
+                </if>
+                <if test="archivesStone != null">
+                	<![CDATA[ archivesStone = #{archivesStone} ]]>,
+                </if>
+                <if test="archivesCategory != null">
+                	<![CDATA[ archivesCategory = #{archivesCategory} ]]>,
+                </if>
+                <if test="mainType != null">
+                	<![CDATA[ mainType = #{mainType} ]]>,
+                </if>
+                <if test="mainTypePrefix != null">
+                	<![CDATA[ mainTypePrefix = #{mainTypePrefix} ]]>,
+                </if>
+                <if test="goodsClassify != null">
+                	<![CDATA[ goodsClassify = #{goodsClassify} ]]>,
+                </if>
+                <if test="costClassify != null">
+                	<![CDATA[ costClassify = #{costClassify} ]]>,
+                </if>
+                <if test="statsClassify != null">
+                	<![CDATA[ statsClassify = #{statsClassify} ]]>,
+                </if>
+                <if test="mainStoneCut != null">
+                	<![CDATA[ mainStoneCut = #{mainStoneCut} ]]>,
+                </if>
+                <if test="mainStoneColor != null">
+                	<![CDATA[ mainStoneColor = #{mainStoneColor} ]]>,
+                </if>
+                <if test="mainStoneClarity != null">
+                	<![CDATA[ mainStoneClarity = #{mainStoneClarity} ]]>,
+                </if>
+                <if test="mainStoneFluorescent != null">
+                	<![CDATA[ mainStoneFluorescent = #{mainStoneFluorescent} ]]>,
+                </if>
+                <if test="mainStoneBurnished != null">
+                	<![CDATA[ mainStoneBurnished = #{mainStoneBurnished} ]]>,
+                </if>
+                <if test="mainStoneSymmetry != null">
+                	<![CDATA[ mainStoneSymmetry = #{mainStoneSymmetry} ]]>,
+                </if>
+                <if test="mainStoneName != null">
+                	<![CDATA[ mainStoneName = #{mainStoneName} ]]>,
+                </if>
+                <if test="mainStoneNo != null">
+                	<![CDATA[ mainStoneNo = #{mainStoneNo} ]]>,
+                </if>
+                <if test="mainStoneSpecifi != null">
+                	<![CDATA[ mainStoneSpecifi = #{mainStoneSpecifi} ]]>,
+                </if>
+                <if test="mainStoneNum != null">
+                	<![CDATA[ mainStoneNum = #{mainStoneNum} ]]>,
+                </if>
+                <if test="mainStoneWeight != null">
+                	<![CDATA[ mainStoneWeight = #{mainStoneWeight} ]]>,
+                </if>
+                <if test="mainStonePrice != null">
+                	<![CDATA[ mainStonePrice = #{mainStonePrice} ]]>,
+                </if>
+                <if test="mainStoneMoney != null">
+                	<![CDATA[ mainStoneMoney = #{mainStoneMoney} ]]>,
+                </if>
+                <if test="subStone1Name != null">
+                	<![CDATA[ subStone1Name = #{subStone1Name} ]]>,
+                </if>
+                <if test="subStone1No != null">
+                	<![CDATA[ subStone1No = #{subStone1No} ]]>,
+                </if>
+                <if test="subStone1Specifi != null">
+                	<![CDATA[ subStone1Specifi = #{subStone1Specifi} ]]>,
+                </if>
+                <if test="subStone1Num != null">
+                	<![CDATA[ subStone1Num = #{subStone1Num} ]]>,
+                </if>
+                <if test="subStone1Weight != null">
+                	<![CDATA[ subStone1Weight = #{subStone1Weight} ]]>,
+                </if>
+                <if test="subStone1Price != null">
+                	<![CDATA[ subStone1Price = #{subStone1Price} ]]>,
+                </if>
+                <if test="subStone1Money != null">
+                	<![CDATA[ subStone1Money = #{subStone1Money} ]]>,
+                </if>
+                <if test="subStone2Name != null">
+                	<![CDATA[ subStone2Name = #{subStone2Name} ]]>,
+                </if>
+                <if test="subStone2No != null">
+                	<![CDATA[ subStone2No = #{subStone2No} ]]>,
+                </if>
+                <if test="subStone2Specifi != null">
+                	<![CDATA[ subStone2Specifi = #{subStone2Specifi} ]]>,
+                </if>
+                <if test="subStone2Num != null">
+                	<![CDATA[ subStone2Num = #{subStone2Num} ]]>,
+                </if>
+                <if test="subStone2Weight != null">
+                	<![CDATA[ subStone2Weight = #{subStone2Weight} ]]>,
+                </if>
+                <if test="subStone2Price != null">
+                	<![CDATA[ subStone2Price = #{subStone2Price} ]]>,
+                </if>
+                <if test="subStone2Money != null">
+                	<![CDATA[ subStone2Money = #{subStone2Money} ]]>,
+                </if>
+                <if test="subStone3Name != null">
+                	<![CDATA[ subStone3Name = #{subStone3Name} ]]>,
+                </if>
+                <if test="subStone3No != null">
+                	<![CDATA[ subStone3No = #{subStone3No} ]]>,
+                </if>
+                <if test="subStone3Specifi != null">
+                	<![CDATA[ subStone3Specifi = #{subStone3Specifi} ]]>,
+                </if>
+                <if test="subStone3Num != null">
+                	<![CDATA[ subStone3Num = #{subStone3Num} ]]>,
+                </if>
+                <if test="subStone3Weight != null">
+                	<![CDATA[ subStone3Weight = #{subStone3Weight} ]]>,
+                </if>
+                <if test="subStone3Price != null">
+                	<![CDATA[ subStone3Price = #{subStone3Price} ]]>,
+                </if>
+                <if test="subStone3Money != null">
+                	<![CDATA[ subStone3Money = #{subStone3Money} ]]>,
+                </if>
+                <if test="subStone4Name != null">
+                	<![CDATA[ subStone4Name = #{subStone4Name} ]]>,
+                </if>
+                <if test="subStone4No != null">
+                	<![CDATA[ subStone4No = #{subStone4No} ]]>,
+                </if>
+                <if test="subStone4Specifi != null">
+                	<![CDATA[ subStone4Specifi = #{subStone4Specifi} ]]>,
+                </if>
+                <if test="subStone4Num != null">
+                	<![CDATA[ subStone4Num = #{subStone4Num} ]]>,
+                </if>
+                <if test="subStone4Weight != null">
+                	<![CDATA[ subStone4Weight = #{subStone4Weight} ]]>,
+                </if>
+                <if test="subStone4Price != null">
+                	<![CDATA[ subStone4Price = #{subStone4Price} ]]>,
+                </if>
+                <if test="subStone4Money != null">
+                	<![CDATA[ subStone4Money = #{subStone4Money} ]]>,
+                </if>
+                <if test="subStone5Name != null">
+                	<![CDATA[ subStone5Name = #{subStone5Name} ]]>,
+                </if>
+                <if test="subStone5No != null">
+                	<![CDATA[ subStone5No = #{subStone5No} ]]>,
+                </if>
+                <if test="subStone5Specifi != null">
+                	<![CDATA[ subStone5Specifi = #{subStone5Specifi} ]]>,
+                </if>
+                <if test="subStone5Num != null">
+                	<![CDATA[ subStone5Num = #{subStone5Num} ]]>,
+                </if>
+                <if test="subStone5Weight != null">
+                	<![CDATA[ subStone5Weight = #{subStone5Weight} ]]>,
+                </if>
+                <if test="subStone5Price != null">
+                	<![CDATA[ subStone5Price = #{subStone5Price} ]]>,
+                </if>
+                <if test="subStone5Money != null">
+                	<![CDATA[ subStone5Money = #{subStone5Money} ]]>,
+                </if>
+                <if test="subStone6Name != null">
+                	<![CDATA[ subStone6Name = #{subStone6Name} ]]>,
+                </if>
+                <if test="subStone6No != null">
+                	<![CDATA[ subStone6No = #{subStone6No} ]]>,
+                </if>
+                <if test="subStone6Specifi != null">
+                	<![CDATA[ subStone6Specifi = #{subStone6Specifi} ]]>,
+                </if>
+                <if test="subStone6Num != null">
+                	<![CDATA[ subStone6Num = #{subStone6Num} ]]>,
+                </if>
+                <if test="subStone6Weight != null">
+                	<![CDATA[ subStone6Weight = #{subStone6Weight} ]]>,
+                </if>
+                <if test="subStone6Price != null">
+                	<![CDATA[ subStone6Price = #{subStone6Price} ]]>,
+                </if>
+                <if test="subStone6Money != null">
+                	<![CDATA[ subStone6Money = #{subStone6Money} ]]>,
+                </if>
+                <if test="peiShiCostPrice != null">
+                	<![CDATA[ peiShiCostPrice = #{peiShiCostPrice} ]]>,
+                </if>
+                <if test="peiShiRate != null">
+                	<![CDATA[ peiShiRate = #{peiShiRate} ]]>,
+                </if>
+                <if test="peiShiLabelPrice != null">
+                	<![CDATA[ peiShiLabelPrice = #{peiShiLabelPrice} ]]>,
+                </if>
+                <if test="netGoldWeight != null">
+                	<![CDATA[ netGoldWeight = #{netGoldWeight} ]]>,
+                </if>
+                <if test="oldMaterialQuality != null">
+                	<![CDATA[ oldMaterialQuality = #{oldMaterialQuality} ]]>,
+                </if>
+                <if test="oldMaterialLoss != null">
+                	<![CDATA[ oldMaterialLoss = #{oldMaterialLoss} ]]>,
+                </if>
+                <if test="origin != null">
+                	<![CDATA[ origin = #{origin} ]]>,
+                </if>
+                <if test="recFlag != null">
+                	<![CDATA[ recFlag = #{recFlag} ]]>,
+                </if>
+                <if test="saleManId != null">
+                	<![CDATA[ saleManId = #{saleManId} ]]>,
+                </if>
+                <if test="salesmanName != null">
+                	<![CDATA[ salesmanName = #{salesmanName} ]]>,
+                </if>
+                <if test="hasReturn != null">
+                	<![CDATA[ hasReturn = #{hasReturn} ]]>,
+                </if>
+                <if test="orgItemId != null">
+                	<![CDATA[ orgItemId = #{orgItemId} ]]>,
+                </if>
+                <if test="orgLabelPrice != null">
+                	<![CDATA[ orgLabelPrice = #{orgLabelPrice} ]]>,
+                </if>
+                <if test="orgSettlementPrice != null">
+                	<![CDATA[ orgSettlementPrice = #{orgSettlementPrice} ]]>,
+                </if>
+                <if test="incrementMoney != null">
+                	<![CDATA[ incrementMoney = #{incrementMoney} ]]>,
+                </if>
+                <if test="purchaseAmount != null">
+                	<![CDATA[ purchaseAmount = #{purchaseAmount} ]]>,
+                </if>
+                <if test="grfName != null">
+                	<![CDATA[ grfName = #{grfName} ]]>,
+                </if>
+                <if test="refineFee != null">
+                	<![CDATA[ refineFee = #{refineFee} ]]>,
+                </if>
+                <if test="refineFeeTotal != null">
+                	<![CDATA[ refineFeeTotal = #{refineFeeTotal} ]]>,
+                </if>
+                <if test="subType != null">
+                	<![CDATA[ subType = #{subType} ]]>,
+                </if>
+                <if test="settleUnitPrice != null">
+                	<![CDATA[ settleUnitPrice = #{settleUnitPrice} ]]>,
+                </if>
+                <if test="settleTotalMoney != null">
+                	<![CDATA[ settleTotalMoney = #{settleTotalMoney} ]]>,
+                </if>
+                <if test="joinCalculate != null">
+                	<![CDATA[ joinCalculate = #{joinCalculate} ]]>,
+                </if>
+                <if test="pointItem != null">
+                	<![CDATA[ pointItem = #{pointItem} ]]>,
+                </if>
+                <if test="oldStockId != null">
+                	<![CDATA[ oldStockId = #{oldStockId} ]]>,
+                </if>
+                <if test="brandName != null">
+                	<![CDATA[ brandName = #{brandName} ]]>,
+                </if>
+                <if test="recyleGoodsAgio != null">
+                	<![CDATA[ recyleGoodsAgio = #{recyleGoodsAgio} ]]>,
+                </if>
+                <if test="exchangeStoreId != null">
+                	<![CDATA[ exchangeStoreId = #{exchangeStoreId} ]]>,
+                </if>
+                <if test="exchangeStoreName != null">
+                	<![CDATA[ exchangeStoreName = #{exchangeStoreName} ]]>,
+                </if>
+                <if test="sheetStatus != null">
+                	<![CDATA[ sheetStatus = #{sheetStatus} ]]>,
+                </if>
+                <if test="receiveTime != null">
+                	<![CDATA[ receiveTime = #{receiveTime} ]]>,
+                </if>
+                <if test="priceRange != null">
+                	<![CDATA[ priceRange = #{priceRange} ]]>,
+                </if>
+                <if test="goldRange != null">
+                	<![CDATA[ goldRange = #{goldRange} ]]>,
+                </if>
+                <if test="stoneRange != null">
+                	<![CDATA[ stoneRange = #{stoneRange} ]]>,
+                </if>
+                <if test="dhFlag != null">
+                	<![CDATA[ dhFlag = #{dhFlag} ]]>
+                </if>
+            </set>
+            <where>
+                id = #{id}
+                
+            </where>
+    </update>
+    
+    <delete id="deleteByPk">
+        <![CDATA[
+            DELETE
+            FROM
+                b_importsheet_item
+            WHERE
+                id=0
+        ]]>
+    </delete>
+    
+    <delete id="delBySheetIds" parameterType="cn.jiafeng.erp.data.adapter.model.dto.BaseParamters">
+            DELETE
+            FROM
+                b_importsheet_item
+            WHERE
+                companyNo = #{companyNo} and sheetId in
+                <foreach collection="ids" index="index" item="id" open="(" separator="," close=")">
+		                #{id}       
+		        </foreach>
+    </delete>
+</mapper> 
+
