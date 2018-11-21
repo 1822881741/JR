@@ -5,6 +5,9 @@ public class Constance
     // 单据类型 1：进货
     public static final int BILL_TYPE_PURCHASE=1;
     public static final int BILL_TYPE_PURCHAS_RETURN=1;
+    
+    //调拨单 20
+    public static final int BILL_TYPE_TRANSFER=20;
 
     //0：新建状态；10：待审核  15 ：审核驳回  20：待接受  25：接收驳回  100：全部完成
     public static final int BILL_STATUS_NEW = 0;

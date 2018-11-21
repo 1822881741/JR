@@ -31,10 +31,11 @@ public class ParamServiceImpl extends AbstractBaseService<Param> implements IPar
     {
         if (paramMap != null)
         {
+            Param param = new Param();
+            Param param2 = new Param();
             switch (module)
             {
             case "purchase":
-                Param param = new Param();
                 param.setAreaCode(areaCode);
                 param.setCompanyNo(companyNo);
                 param.setModule(module);
@@ -44,7 +45,7 @@ public class ParamServiceImpl extends AbstractBaseService<Param> implements IPar
                 param.setRemarks("是否需要审核");
                 this.insert(param);
 
-                Param param2 = new Param();
+               
                 param2.setAreaCode(areaCode);
                 param2.setCompanyNo(companyNo);
                 param2.setModule(module);
@@ -52,6 +53,25 @@ public class ParamServiceImpl extends AbstractBaseService<Param> implements IPar
                 param2.setParamName("isAransit");
                 param2.setParamValue(paramMap.get("isAransit").toString());
                 param2.setRemarks("进货是否开启在途");
+                this.insert(param2);
+                break;
+            case "transfer":
+                param.setAreaCode(areaCode);
+                param.setCompanyNo(companyNo);
+                param.setModule(module);
+                param.setMustSet(1);
+                param.setParamName("isAudit");
+                param.setParamValue(paramMap.get("isAudit").toString());
+                param.setRemarks("是否需要审核");
+                this.insert(param);
+
+                param2.setAreaCode(areaCode);
+                param2.setCompanyNo(companyNo);
+                param2.setModule(module);
+                param2.setMustSet(1);
+                param2.setParamName("isAransit");
+                param2.setParamValue(paramMap.get("isAransit").toString());
+                param2.setRemarks("调拨是否开启在途");
                 this.insert(param2);
                 break;
             default:

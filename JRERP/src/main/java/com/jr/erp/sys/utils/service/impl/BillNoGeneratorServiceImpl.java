@@ -8,6 +8,7 @@ import com.jr.erp.base.mybatis.AbstractBaseService;
 import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.utils.JodaUtils;
 import com.jr.erp.bill.purchase.dao.BillPurchaseMapper;
+import com.jr.erp.bill.transfer.dao.BillTransferMapper;
 import com.jr.erp.sys.utils.service.IBillNoGeneratorService;
 
 /**     
@@ -27,6 +28,8 @@ public class BillNoGeneratorServiceImpl implements IBillNoGeneratorService
     @Autowired
     BillPurchaseMapper billPurchaseMapper;
     
+    @Autowired
+    BillTransferMapper billTransferMapper;
     @Override
     public String getNextBillNo(String companyNo, Integer billType, String userPrefix)
     {
@@ -37,6 +40,10 @@ public class BillNoGeneratorServiceImpl implements IBillNoGeneratorService
         case 1:
             prefix = "J" + userPrefix + JodaUtils.getBillNoDate();
             maxBillNo = billPurchaseMapper.selectMaxBillNo("bill_purchase",companyNo, prefix);
+            break;
+        case 20:
+            prefix = "T" + userPrefix + JodaUtils.getBillNoDate();
+            maxBillNo = billTransferMapper.selectMaxBillNo("bill_transfer",companyNo, prefix);
             break;
         default:
             break;

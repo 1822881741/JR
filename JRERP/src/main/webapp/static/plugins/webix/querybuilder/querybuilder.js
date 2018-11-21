@@ -15,7 +15,7 @@ function(e,t,i){},"./sources/locales.ts":/*!****************************!*\
   \****************************/
 /*! no static exports found */
 /***/
-function(e,t,i){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.locale={or:"or",and:"and",delete_rule:"Delete rule",add_rule:"Add rule",add_group:"Add group",less:"less",less_or_equal:"less or equal",greater:"greater",greater_or_equal:"greater or equal",between:"between",not_between:"not between",begins_with:"begins with",not_begins_with:"not begins with",contains:"contains",not_contains:"not contains",ends_with:"ends with",not_ends_with:"not ends with",is_empty:"is empty",is_not_empty:"is not empty",equal:"equal",not_equal:"not equal",is_null:"is null",is_not_null:"is not null",default_option:"---",cancel:"Cancel",filter:"Filter",sort:"Sort"}},"./sources/qbfilter.ts":/*!*****************************!*\
+function(e,t,i){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.locale={or:"或者",and:"并且",delete_rule:"删除子条件",add_rule:"添加子条件",add_group:"添加条件",less:"小于",less_or_equal:"小于等于",greater:"大于",greater_or_equal:"大于等于",between:"范围",not_between:"不在范围",begins_with:"开头",not_begins_with:"非开头",contains:"包含",not_contains:"不包含",ends_with:"结尾",not_ends_with:"非结尾",is_empty:"空字符",is_not_empty:"不是空字符",equal:"等于",not_equal:"不等于",is_null:"为null",is_not_null:"不为null",default_option:"---",cancel:"取消",filter:"过滤",sort:"排序"}},"./sources/qbfilter.ts":/*!*****************************!*\
   !*** ./sources/qbfilter.ts ***!
   \*****************************/
 /*! no static exports found */

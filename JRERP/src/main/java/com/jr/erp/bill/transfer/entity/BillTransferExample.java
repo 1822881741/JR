@@ -600,52 +600,62 @@ public class BillTransferExample extends BaseExample {
             return (Criteria) this;
         }
 
-        public Criteria andCounterAreaCodeEqualTo(Integer value) {
+        public Criteria andCounterAreaCodeEqualTo(String value) {
             addCriterion("counterAreaCode =", value, "counterAreaCode");
             return (Criteria) this;
         }
 
-        public Criteria andCounterAreaCodeNotEqualTo(Integer value) {
+        public Criteria andCounterAreaCodeNotEqualTo(String value) {
             addCriterion("counterAreaCode <>", value, "counterAreaCode");
             return (Criteria) this;
         }
 
-        public Criteria andCounterAreaCodeGreaterThan(Integer value) {
+        public Criteria andCounterAreaCodeGreaterThan(String value) {
             addCriterion("counterAreaCode >", value, "counterAreaCode");
             return (Criteria) this;
         }
 
-        public Criteria andCounterAreaCodeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andCounterAreaCodeGreaterThanOrEqualTo(String value) {
             addCriterion("counterAreaCode >=", value, "counterAreaCode");
             return (Criteria) this;
         }
 
-        public Criteria andCounterAreaCodeLessThan(Integer value) {
+        public Criteria andCounterAreaCodeLessThan(String value) {
             addCriterion("counterAreaCode <", value, "counterAreaCode");
             return (Criteria) this;
         }
 
-        public Criteria andCounterAreaCodeLessThanOrEqualTo(Integer value) {
+        public Criteria andCounterAreaCodeLessThanOrEqualTo(String value) {
             addCriterion("counterAreaCode <=", value, "counterAreaCode");
             return (Criteria) this;
         }
 
-        public Criteria andCounterAreaCodeIn(List<Integer> values) {
+        public Criteria andCounterAreaCodeLike(String value) {
+            addCriterion("counterAreaCode like", value, "counterAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCounterAreaCodeNotLike(String value) {
+            addCriterion("counterAreaCode not like", value, "counterAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andCounterAreaCodeIn(List<String> values) {
             addCriterion("counterAreaCode in", values, "counterAreaCode");
             return (Criteria) this;
         }
 
-        public Criteria andCounterAreaCodeNotIn(List<Integer> values) {
+        public Criteria andCounterAreaCodeNotIn(List<String> values) {
             addCriterion("counterAreaCode not in", values, "counterAreaCode");
             return (Criteria) this;
         }
 
-        public Criteria andCounterAreaCodeBetween(Integer value1, Integer value2) {
+        public Criteria andCounterAreaCodeBetween(String value1, String value2) {
             addCriterion("counterAreaCode between", value1, value2, "counterAreaCode");
             return (Criteria) this;
         }
 
-        public Criteria andCounterAreaCodeNotBetween(Integer value1, Integer value2) {
+        public Criteria andCounterAreaCodeNotBetween(String value1, String value2) {
             addCriterion("counterAreaCode not between", value1, value2, "counterAreaCode");
             return (Criteria) this;
         }
@@ -870,123 +880,133 @@ public class BillTransferExample extends BaseExample {
             return (Criteria) this;
         }
 
-        public Criteria andInCounterAreaCodeEqualTo(Integer value) {
+        public Criteria andInCounterAreaCodeEqualTo(String value) {
             addCriterion("inCounterAreaCode =", value, "inCounterAreaCode");
             return (Criteria) this;
         }
 
-        public Criteria andInCounterAreaCodeNotEqualTo(Integer value) {
+        public Criteria andInCounterAreaCodeNotEqualTo(String value) {
             addCriterion("inCounterAreaCode <>", value, "inCounterAreaCode");
             return (Criteria) this;
         }
 
-        public Criteria andInCounterAreaCodeGreaterThan(Integer value) {
+        public Criteria andInCounterAreaCodeGreaterThan(String value) {
             addCriterion("inCounterAreaCode >", value, "inCounterAreaCode");
             return (Criteria) this;
         }
 
-        public Criteria andInCounterAreaCodeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andInCounterAreaCodeGreaterThanOrEqualTo(String value) {
             addCriterion("inCounterAreaCode >=", value, "inCounterAreaCode");
             return (Criteria) this;
         }
 
-        public Criteria andInCounterAreaCodeLessThan(Integer value) {
+        public Criteria andInCounterAreaCodeLessThan(String value) {
             addCriterion("inCounterAreaCode <", value, "inCounterAreaCode");
             return (Criteria) this;
         }
 
-        public Criteria andInCounterAreaCodeLessThanOrEqualTo(Integer value) {
+        public Criteria andInCounterAreaCodeLessThanOrEqualTo(String value) {
             addCriterion("inCounterAreaCode <=", value, "inCounterAreaCode");
             return (Criteria) this;
         }
 
-        public Criteria andInCounterAreaCodeIn(List<Integer> values) {
+        public Criteria andInCounterAreaCodeLike(String value) {
+            addCriterion("inCounterAreaCode like", value, "inCounterAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaCodeNotLike(String value) {
+            addCriterion("inCounterAreaCode not like", value, "inCounterAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaCodeIn(List<String> values) {
             addCriterion("inCounterAreaCode in", values, "inCounterAreaCode");
             return (Criteria) this;
         }
 
-        public Criteria andInCounterAreaCodeNotIn(List<Integer> values) {
+        public Criteria andInCounterAreaCodeNotIn(List<String> values) {
             addCriterion("inCounterAreaCode not in", values, "inCounterAreaCode");
             return (Criteria) this;
         }
 
-        public Criteria andInCounterAreaCodeBetween(Integer value1, Integer value2) {
+        public Criteria andInCounterAreaCodeBetween(String value1, String value2) {
             addCriterion("inCounterAreaCode between", value1, value2, "inCounterAreaCode");
             return (Criteria) this;
         }
 
-        public Criteria andInCounterAreaCodeNotBetween(Integer value1, Integer value2) {
+        public Criteria andInCounterAreaCodeNotBetween(String value1, String value2) {
             addCriterion("inCounterAreaCode not between", value1, value2, "inCounterAreaCode");
             return (Criteria) this;
         }
 
-        public Criteria andCinCunterAreaNameIsNull() {
-            addCriterion("cinCunterAreaName is null");
+        public Criteria andInCounterAreaNameIsNull() {
+            addCriterion("inCounterAreaName is null");
             return (Criteria) this;
         }
 
-        public Criteria andCinCunterAreaNameIsNotNull() {
-            addCriterion("cinCunterAreaName is not null");
+        public Criteria andInCounterAreaNameIsNotNull() {
+            addCriterion("inCounterAreaName is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCinCunterAreaNameEqualTo(String value) {
-            addCriterion("cinCunterAreaName =", value, "cinCunterAreaName");
+        public Criteria andInCounterAreaNameEqualTo(String value) {
+            addCriterion("inCounterAreaName =", value, "inCounterAreaName");
             return (Criteria) this;
         }
 
-        public Criteria andCinCunterAreaNameNotEqualTo(String value) {
-            addCriterion("cinCunterAreaName <>", value, "cinCunterAreaName");
+        public Criteria andInCounterAreaNameNotEqualTo(String value) {
+            addCriterion("inCounterAreaName <>", value, "inCounterAreaName");
             return (Criteria) this;
         }
 
-        public Criteria andCinCunterAreaNameGreaterThan(String value) {
-            addCriterion("cinCunterAreaName >", value, "cinCunterAreaName");
+        public Criteria andInCounterAreaNameGreaterThan(String value) {
+            addCriterion("inCounterAreaName >", value, "inCounterAreaName");
             return (Criteria) this;
         }
 
-        public Criteria andCinCunterAreaNameGreaterThanOrEqualTo(String value) {
-            addCriterion("cinCunterAreaName >=", value, "cinCunterAreaName");
+        public Criteria andInCounterAreaNameGreaterThanOrEqualTo(String value) {
+            addCriterion("inCounterAreaName >=", value, "inCounterAreaName");
             return (Criteria) this;
         }
 
-        public Criteria andCinCunterAreaNameLessThan(String value) {
-            addCriterion("cinCunterAreaName <", value, "cinCunterAreaName");
+        public Criteria andInCounterAreaNameLessThan(String value) {
+            addCriterion("inCounterAreaName <", value, "inCounterAreaName");
             return (Criteria) this;
         }
 
-        public Criteria andCinCunterAreaNameLessThanOrEqualTo(String value) {
-            addCriterion("cinCunterAreaName <=", value, "cinCunterAreaName");
+        public Criteria andInCounterAreaNameLessThanOrEqualTo(String value) {
+            addCriterion("inCounterAreaName <=", value, "inCounterAreaName");
             return (Criteria) this;
         }
 
-        public Criteria andCinCunterAreaNameLike(String value) {
-            addCriterion("cinCunterAreaName like", value, "cinCunterAreaName");
+        public Criteria andInCounterAreaNameLike(String value) {
+            addCriterion("inCounterAreaName like", value, "inCounterAreaName");
             return (Criteria) this;
         }
 
-        public Criteria andCinCunterAreaNameNotLike(String value) {
-            addCriterion("cinCunterAreaName not like", value, "cinCunterAreaName");
+        public Criteria andInCounterAreaNameNotLike(String value) {
+            addCriterion("inCounterAreaName not like", value, "inCounterAreaName");
             return (Criteria) this;
         }
 
-        public Criteria andCinCunterAreaNameIn(List<String> values) {
-            addCriterion("cinCunterAreaName in", values, "cinCunterAreaName");
+        public Criteria andInCounterAreaNameIn(List<String> values) {
+            addCriterion("inCounterAreaName in", values, "inCounterAreaName");
             return (Criteria) this;
         }
 
-        public Criteria andCinCunterAreaNameNotIn(List<String> values) {
-            addCriterion("cinCunterAreaName not in", values, "cinCunterAreaName");
+        public Criteria andInCounterAreaNameNotIn(List<String> values) {
+            addCriterion("inCounterAreaName not in", values, "inCounterAreaName");
             return (Criteria) this;
         }
 
-        public Criteria andCinCunterAreaNameBetween(String value1, String value2) {
-            addCriterion("cinCunterAreaName between", value1, value2, "cinCunterAreaName");
+        public Criteria andInCounterAreaNameBetween(String value1, String value2) {
+            addCriterion("inCounterAreaName between", value1, value2, "inCounterAreaName");
             return (Criteria) this;
         }
 
-        public Criteria andCinCunterAreaNameNotBetween(String value1, String value2) {
-            addCriterion("cinCunterAreaName not between", value1, value2, "cinCunterAreaName");
+        public Criteria andInCounterAreaNameNotBetween(String value1, String value2) {
+            addCriterion("inCounterAreaName not between", value1, value2, "inCounterAreaName");
             return (Criteria) this;
         }
 
@@ -1570,183 +1590,243 @@ public class BillTransferExample extends BaseExample {
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostPriceIsNull() {
-            addCriterion("totalCostPrice is null");
+        public Criteria andTotalCostIsNull() {
+            addCriterion("totalCost is null");
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostPriceIsNotNull() {
-            addCriterion("totalCostPrice is not null");
+        public Criteria andTotalCostIsNotNull() {
+            addCriterion("totalCost is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostPriceEqualTo(Double value) {
-            addCriterion("totalCostPrice =", value, "totalCostPrice");
+        public Criteria andTotalCostEqualTo(Double value) {
+            addCriterion("totalCost =", value, "totalCost");
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostPriceNotEqualTo(Double value) {
-            addCriterion("totalCostPrice <>", value, "totalCostPrice");
+        public Criteria andTotalCostNotEqualTo(Double value) {
+            addCriterion("totalCost <>", value, "totalCost");
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostPriceGreaterThan(Double value) {
-            addCriterion("totalCostPrice >", value, "totalCostPrice");
+        public Criteria andTotalCostGreaterThan(Double value) {
+            addCriterion("totalCost >", value, "totalCost");
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostPriceGreaterThanOrEqualTo(Double value) {
-            addCriterion("totalCostPrice >=", value, "totalCostPrice");
+        public Criteria andTotalCostGreaterThanOrEqualTo(Double value) {
+            addCriterion("totalCost >=", value, "totalCost");
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostPriceLessThan(Double value) {
-            addCriterion("totalCostPrice <", value, "totalCostPrice");
+        public Criteria andTotalCostLessThan(Double value) {
+            addCriterion("totalCost <", value, "totalCost");
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostPriceLessThanOrEqualTo(Double value) {
-            addCriterion("totalCostPrice <=", value, "totalCostPrice");
+        public Criteria andTotalCostLessThanOrEqualTo(Double value) {
+            addCriterion("totalCost <=", value, "totalCost");
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostPriceIn(List<Double> values) {
-            addCriterion("totalCostPrice in", values, "totalCostPrice");
+        public Criteria andTotalCostIn(List<Double> values) {
+            addCriterion("totalCost in", values, "totalCost");
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostPriceNotIn(List<Double> values) {
-            addCriterion("totalCostPrice not in", values, "totalCostPrice");
+        public Criteria andTotalCostNotIn(List<Double> values) {
+            addCriterion("totalCost not in", values, "totalCost");
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostPriceBetween(Double value1, Double value2) {
-            addCriterion("totalCostPrice between", value1, value2, "totalCostPrice");
+        public Criteria andTotalCostBetween(Double value1, Double value2) {
+            addCriterion("totalCost between", value1, value2, "totalCost");
             return (Criteria) this;
         }
 
-        public Criteria andTotalCostPriceNotBetween(Double value1, Double value2) {
-            addCriterion("totalCostPrice not between", value1, value2, "totalCostPrice");
+        public Criteria andTotalCostNotBetween(Double value1, Double value2) {
+            addCriterion("totalCost not between", value1, value2, "totalCost");
             return (Criteria) this;
         }
 
-        public Criteria andTotalSalePriceAmountIsNull() {
-            addCriterion("totalSalePriceAmount is null");
+        public Criteria andTotalLabelPriceIsNull() {
+            addCriterion("totalLabelPrice is null");
             return (Criteria) this;
         }
 
-        public Criteria andTotalSalePriceAmountIsNotNull() {
-            addCriterion("totalSalePriceAmount is not null");
+        public Criteria andTotalLabelPriceIsNotNull() {
+            addCriterion("totalLabelPrice is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTotalSalePriceAmountEqualTo(Double value) {
-            addCriterion("totalSalePriceAmount =", value, "totalSalePriceAmount");
+        public Criteria andTotalLabelPriceEqualTo(Double value) {
+            addCriterion("totalLabelPrice =", value, "totalLabelPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTotalSalePriceAmountNotEqualTo(Double value) {
-            addCriterion("totalSalePriceAmount <>", value, "totalSalePriceAmount");
+        public Criteria andTotalLabelPriceNotEqualTo(Double value) {
+            addCriterion("totalLabelPrice <>", value, "totalLabelPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTotalSalePriceAmountGreaterThan(Double value) {
-            addCriterion("totalSalePriceAmount >", value, "totalSalePriceAmount");
+        public Criteria andTotalLabelPriceGreaterThan(Double value) {
+            addCriterion("totalLabelPrice >", value, "totalLabelPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTotalSalePriceAmountGreaterThanOrEqualTo(Double value) {
-            addCriterion("totalSalePriceAmount >=", value, "totalSalePriceAmount");
+        public Criteria andTotalLabelPriceGreaterThanOrEqualTo(Double value) {
+            addCriterion("totalLabelPrice >=", value, "totalLabelPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTotalSalePriceAmountLessThan(Double value) {
-            addCriterion("totalSalePriceAmount <", value, "totalSalePriceAmount");
+        public Criteria andTotalLabelPriceLessThan(Double value) {
+            addCriterion("totalLabelPrice <", value, "totalLabelPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTotalSalePriceAmountLessThanOrEqualTo(Double value) {
-            addCriterion("totalSalePriceAmount <=", value, "totalSalePriceAmount");
+        public Criteria andTotalLabelPriceLessThanOrEqualTo(Double value) {
+            addCriterion("totalLabelPrice <=", value, "totalLabelPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTotalSalePriceAmountIn(List<Double> values) {
-            addCriterion("totalSalePriceAmount in", values, "totalSalePriceAmount");
+        public Criteria andTotalLabelPriceIn(List<Double> values) {
+            addCriterion("totalLabelPrice in", values, "totalLabelPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTotalSalePriceAmountNotIn(List<Double> values) {
-            addCriterion("totalSalePriceAmount not in", values, "totalSalePriceAmount");
+        public Criteria andTotalLabelPriceNotIn(List<Double> values) {
+            addCriterion("totalLabelPrice not in", values, "totalLabelPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTotalSalePriceAmountBetween(Double value1, Double value2) {
-            addCriterion("totalSalePriceAmount between", value1, value2, "totalSalePriceAmount");
+        public Criteria andTotalLabelPriceBetween(Double value1, Double value2) {
+            addCriterion("totalLabelPrice between", value1, value2, "totalLabelPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTotalSalePriceAmountNotBetween(Double value1, Double value2) {
-            addCriterion("totalSalePriceAmount not between", value1, value2, "totalSalePriceAmount");
+        public Criteria andTotalLabelPriceNotBetween(Double value1, Double value2) {
+            addCriterion("totalLabelPrice not between", value1, value2, "totalLabelPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMainStoneWeightIsNull() {
-            addCriterion("totalMainStoneWeight is null");
+        public Criteria andTotalWorkFeeIsNull() {
+            addCriterion("totalWorkFee is null");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMainStoneWeightIsNotNull() {
-            addCriterion("totalMainStoneWeight is not null");
+        public Criteria andTotalWorkFeeIsNotNull() {
+            addCriterion("totalWorkFee is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMainStoneWeightEqualTo(Double value) {
-            addCriterion("totalMainStoneWeight =", value, "totalMainStoneWeight");
+        public Criteria andTotalWorkFeeEqualTo(Double value) {
+            addCriterion("totalWorkFee =", value, "totalWorkFee");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMainStoneWeightNotEqualTo(Double value) {
-            addCriterion("totalMainStoneWeight <>", value, "totalMainStoneWeight");
+        public Criteria andTotalWorkFeeNotEqualTo(Double value) {
+            addCriterion("totalWorkFee <>", value, "totalWorkFee");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMainStoneWeightGreaterThan(Double value) {
-            addCriterion("totalMainStoneWeight >", value, "totalMainStoneWeight");
+        public Criteria andTotalWorkFeeGreaterThan(Double value) {
+            addCriterion("totalWorkFee >", value, "totalWorkFee");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMainStoneWeightGreaterThanOrEqualTo(Double value) {
-            addCriterion("totalMainStoneWeight >=", value, "totalMainStoneWeight");
+        public Criteria andTotalWorkFeeGreaterThanOrEqualTo(Double value) {
+            addCriterion("totalWorkFee >=", value, "totalWorkFee");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMainStoneWeightLessThan(Double value) {
-            addCriterion("totalMainStoneWeight <", value, "totalMainStoneWeight");
+        public Criteria andTotalWorkFeeLessThan(Double value) {
+            addCriterion("totalWorkFee <", value, "totalWorkFee");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMainStoneWeightLessThanOrEqualTo(Double value) {
-            addCriterion("totalMainStoneWeight <=", value, "totalMainStoneWeight");
+        public Criteria andTotalWorkFeeLessThanOrEqualTo(Double value) {
+            addCriterion("totalWorkFee <=", value, "totalWorkFee");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMainStoneWeightIn(List<Double> values) {
-            addCriterion("totalMainStoneWeight in", values, "totalMainStoneWeight");
+        public Criteria andTotalWorkFeeIn(List<Double> values) {
+            addCriterion("totalWorkFee in", values, "totalWorkFee");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMainStoneWeightNotIn(List<Double> values) {
-            addCriterion("totalMainStoneWeight not in", values, "totalMainStoneWeight");
+        public Criteria andTotalWorkFeeNotIn(List<Double> values) {
+            addCriterion("totalWorkFee not in", values, "totalWorkFee");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMainStoneWeightBetween(Double value1, Double value2) {
-            addCriterion("totalMainStoneWeight between", value1, value2, "totalMainStoneWeight");
+        public Criteria andTotalWorkFeeBetween(Double value1, Double value2) {
+            addCriterion("totalWorkFee between", value1, value2, "totalWorkFee");
             return (Criteria) this;
         }
 
-        public Criteria andTotalMainStoneWeightNotBetween(Double value1, Double value2) {
-            addCriterion("totalMainStoneWeight not between", value1, value2, "totalMainStoneWeight");
+        public Criteria andTotalWorkFeeNotBetween(Double value1, Double value2) {
+            addCriterion("totalWorkFee not between", value1, value2, "totalWorkFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalMJewelWeightIsNull() {
+            addCriterion("totalMJewelWeight is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalMJewelWeightIsNotNull() {
+            addCriterion("totalMJewelWeight is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalMJewelWeightEqualTo(Double value) {
+            addCriterion("totalMJewelWeight =", value, "totalMJewelWeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalMJewelWeightNotEqualTo(Double value) {
+            addCriterion("totalMJewelWeight <>", value, "totalMJewelWeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalMJewelWeightGreaterThan(Double value) {
+            addCriterion("totalMJewelWeight >", value, "totalMJewelWeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalMJewelWeightGreaterThanOrEqualTo(Double value) {
+            addCriterion("totalMJewelWeight >=", value, "totalMJewelWeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalMJewelWeightLessThan(Double value) {
+            addCriterion("totalMJewelWeight <", value, "totalMJewelWeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalMJewelWeightLessThanOrEqualTo(Double value) {
+            addCriterion("totalMJewelWeight <=", value, "totalMJewelWeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalMJewelWeightIn(List<Double> values) {
+            addCriterion("totalMJewelWeight in", values, "totalMJewelWeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalMJewelWeightNotIn(List<Double> values) {
+            addCriterion("totalMJewelWeight not in", values, "totalMJewelWeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalMJewelWeightBetween(Double value1, Double value2) {
+            addCriterion("totalMJewelWeight between", value1, value2, "totalMJewelWeight");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalMJewelWeightNotBetween(Double value1, Double value2) {
+            addCriterion("totalMJewelWeight not between", value1, value2, "totalMJewelWeight");
             return (Criteria) this;
         }
 

@@ -2169,6 +2169,286 @@ public class BillTransferItemExample extends BaseExample {
             return (Criteria) this;
         }
 
+        public Criteria andInAreaCodeIsNull() {
+            addCriterion("inAreaCode is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaCodeIsNotNull() {
+            addCriterion("inAreaCode is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaCodeEqualTo(String value) {
+            addCriterion("inAreaCode =", value, "inAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaCodeNotEqualTo(String value) {
+            addCriterion("inAreaCode <>", value, "inAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaCodeGreaterThan(String value) {
+            addCriterion("inAreaCode >", value, "inAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("inAreaCode >=", value, "inAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaCodeLessThan(String value) {
+            addCriterion("inAreaCode <", value, "inAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaCodeLessThanOrEqualTo(String value) {
+            addCriterion("inAreaCode <=", value, "inAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaCodeLike(String value) {
+            addCriterion("inAreaCode like", value, "inAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaCodeNotLike(String value) {
+            addCriterion("inAreaCode not like", value, "inAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaCodeIn(List<String> values) {
+            addCriterion("inAreaCode in", values, "inAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaCodeNotIn(List<String> values) {
+            addCriterion("inAreaCode not in", values, "inAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaCodeBetween(String value1, String value2) {
+            addCriterion("inAreaCode between", value1, value2, "inAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaCodeNotBetween(String value1, String value2) {
+            addCriterion("inAreaCode not between", value1, value2, "inAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaNameIsNull() {
+            addCriterion("inAreaName is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaNameIsNotNull() {
+            addCriterion("inAreaName is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaNameEqualTo(String value) {
+            addCriterion("inAreaName =", value, "inAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaNameNotEqualTo(String value) {
+            addCriterion("inAreaName <>", value, "inAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaNameGreaterThan(String value) {
+            addCriterion("inAreaName >", value, "inAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaNameGreaterThanOrEqualTo(String value) {
+            addCriterion("inAreaName >=", value, "inAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaNameLessThan(String value) {
+            addCriterion("inAreaName <", value, "inAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaNameLessThanOrEqualTo(String value) {
+            addCriterion("inAreaName <=", value, "inAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaNameLike(String value) {
+            addCriterion("inAreaName like", value, "inAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaNameNotLike(String value) {
+            addCriterion("inAreaName not like", value, "inAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaNameIn(List<String> values) {
+            addCriterion("inAreaName in", values, "inAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaNameNotIn(List<String> values) {
+            addCriterion("inAreaName not in", values, "inAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaNameBetween(String value1, String value2) {
+            addCriterion("inAreaName between", value1, value2, "inAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInAreaNameNotBetween(String value1, String value2) {
+            addCriterion("inAreaName not between", value1, value2, "inAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaCodeIsNull() {
+            addCriterion("inCounterAreaCode is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaCodeIsNotNull() {
+            addCriterion("inCounterAreaCode is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaCodeEqualTo(String value) {
+            addCriterion("inCounterAreaCode =", value, "inCounterAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaCodeNotEqualTo(String value) {
+            addCriterion("inCounterAreaCode <>", value, "inCounterAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaCodeGreaterThan(String value) {
+            addCriterion("inCounterAreaCode >", value, "inCounterAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("inCounterAreaCode >=", value, "inCounterAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaCodeLessThan(String value) {
+            addCriterion("inCounterAreaCode <", value, "inCounterAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaCodeLessThanOrEqualTo(String value) {
+            addCriterion("inCounterAreaCode <=", value, "inCounterAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaCodeLike(String value) {
+            addCriterion("inCounterAreaCode like", value, "inCounterAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaCodeNotLike(String value) {
+            addCriterion("inCounterAreaCode not like", value, "inCounterAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaCodeIn(List<String> values) {
+            addCriterion("inCounterAreaCode in", values, "inCounterAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaCodeNotIn(List<String> values) {
+            addCriterion("inCounterAreaCode not in", values, "inCounterAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaCodeBetween(String value1, String value2) {
+            addCriterion("inCounterAreaCode between", value1, value2, "inCounterAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaCodeNotBetween(String value1, String value2) {
+            addCriterion("inCounterAreaCode not between", value1, value2, "inCounterAreaCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaNameIsNull() {
+            addCriterion("inCounterAreaName is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaNameIsNotNull() {
+            addCriterion("inCounterAreaName is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaNameEqualTo(String value) {
+            addCriterion("inCounterAreaName =", value, "inCounterAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaNameNotEqualTo(String value) {
+            addCriterion("inCounterAreaName <>", value, "inCounterAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaNameGreaterThan(String value) {
+            addCriterion("inCounterAreaName >", value, "inCounterAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaNameGreaterThanOrEqualTo(String value) {
+            addCriterion("inCounterAreaName >=", value, "inCounterAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaNameLessThan(String value) {
+            addCriterion("inCounterAreaName <", value, "inCounterAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaNameLessThanOrEqualTo(String value) {
+            addCriterion("inCounterAreaName <=", value, "inCounterAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaNameLike(String value) {
+            addCriterion("inCounterAreaName like", value, "inCounterAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaNameNotLike(String value) {
+            addCriterion("inCounterAreaName not like", value, "inCounterAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaNameIn(List<String> values) {
+            addCriterion("inCounterAreaName in", values, "inCounterAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaNameNotIn(List<String> values) {
+            addCriterion("inCounterAreaName not in", values, "inCounterAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaNameBetween(String value1, String value2) {
+            addCriterion("inCounterAreaName between", value1, value2, "inCounterAreaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInCounterAreaNameNotBetween(String value1, String value2) {
+            addCriterion("inCounterAreaName not between", value1, value2, "inCounterAreaName");
+            return (Criteria) this;
+        }
+
         public Criteria andPurchaseTypeIsNull() {
             addCriterion("purchaseType is null");
             return (Criteria) this;

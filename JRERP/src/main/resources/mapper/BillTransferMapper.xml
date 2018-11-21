@@ -9,12 +9,12 @@
     <result column="sysBillNo" jdbcType="VARCHAR" property="sysBillNo" />
     <result column="areaCode" jdbcType="VARCHAR" property="areaCode" />
     <result column="areaName" jdbcType="VARCHAR" property="areaName" />
-    <result column="counterAreaCode" jdbcType="INTEGER" property="counterAreaCode" />
+    <result column="counterAreaCode" jdbcType="VARCHAR" property="counterAreaCode" />
     <result column="counterAreaName" jdbcType="VARCHAR" property="counterAreaName" />
     <result column="inAreaCode" jdbcType="VARCHAR" property="inAreaCode" />
     <result column="inAreaName" jdbcType="VARCHAR" property="inAreaName" />
-    <result column="inCounterAreaCode" jdbcType="INTEGER" property="inCounterAreaCode" />
-    <result column="cinCunterAreaName" jdbcType="VARCHAR" property="cinCunterAreaName" />
+    <result column="inCounterAreaCode" jdbcType="VARCHAR" property="inCounterAreaCode" />
+    <result column="inCounterAreaName" jdbcType="VARCHAR" property="inCounterAreaName" />
     <result column="createUserId" jdbcType="INTEGER" property="createUserId" />
     <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
     <result column="employeeId" jdbcType="INTEGER" property="employeeId" />
@@ -24,9 +24,10 @@
     <result column="createTime" jdbcType="VARCHAR" property="createTime" />
     <result column="totalNum" jdbcType="INTEGER" property="totalNum" />
     <result column="totalGoldWeight" jdbcType="DOUBLE" property="totalGoldWeight" />
-    <result column="totalCostPrice" jdbcType="DOUBLE" property="totalCostPrice" />
-    <result column="totalSalePriceAmount" jdbcType="DOUBLE" property="totalSalePriceAmount" />
-    <result column="totalMainStoneWeight" jdbcType="DOUBLE" property="totalMainStoneWeight" />
+    <result column="totalCost" jdbcType="DOUBLE" property="totalCost" />
+    <result column="totalLabelPrice" jdbcType="DOUBLE" property="totalLabelPrice" />
+    <result column="totalWorkFee" jdbcType="DOUBLE" property="totalWorkFee" />
+    <result column="totalMJewelWeight" jdbcType="DOUBLE" property="totalMJewelWeight" />
     <result column="submitAuditUserId" jdbcType="INTEGER" property="submitAuditUserId" />
     <result column="submitAuditUserName" jdbcType="VARCHAR" property="submitAuditUserName" />
     <result column="submitAuditTime" jdbcType="TIMESTAMP" property="submitAuditTime" />
@@ -96,9 +97,9 @@
   </sql>
   <sql id="Base_Column_List">
     id, companyNo, billNo, billStatus, sysBillNo, areaCode, areaName, counterAreaCode, 
-    counterAreaName, inAreaCode, inAreaName, inCounterAreaCode, cinCunterAreaName, createUserId, 
+    counterAreaName, inAreaCode, inAreaName, inCounterAreaCode, inCounterAreaName, createUserId, 
     createUserName, employeeId, employeeName, billDate, receiveTime, createTime, totalNum, 
-    totalGoldWeight, totalCostPrice, totalSalePriceAmount, totalMainStoneWeight, submitAuditUserId, 
+    totalGoldWeight, totalCost, totalLabelPrice, totalWorkFee, totalMJewelWeight, submitAuditUserId, 
     submitAuditUserName, submitAuditTime, auditUserId, auditUserName, auditTime, auditMsg, 
     remarks
   </sql>
@@ -144,24 +145,24 @@
     insert into bill_transfer (companyNo, billNo, billStatus, 
       sysBillNo, areaCode, areaName, 
       counterAreaCode, counterAreaName, inAreaCode, 
-      inAreaName, inCounterAreaCode, cinCunterAreaName, 
+      inAreaName, inCounterAreaCode, inCounterAreaName, 
       createUserId, createUserName, employeeId, 
       employeeName, billDate, receiveTime, 
       createTime, totalNum, totalGoldWeight, 
-      totalCostPrice, totalSalePriceAmount, totalMainStoneWeight, 
-      submitAuditUserId, submitAuditUserName, 
+      totalCost, totalLabelPrice, totalWorkFee, 
+      totalMJewelWeight, submitAuditUserId, submitAuditUserName, 
       submitAuditTime, auditUserId, auditUserName, 
       auditTime, auditMsg, remarks
       )
     values (#{companyNo,jdbcType=VARCHAR}, #{billNo,jdbcType=VARCHAR}, #{billStatus,jdbcType=TINYINT}, 
       #{sysBillNo,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{areaName,jdbcType=VARCHAR}, 
-      #{counterAreaCode,jdbcType=INTEGER}, #{counterAreaName,jdbcType=VARCHAR}, #{inAreaCode,jdbcType=VARCHAR}, 
-      #{inAreaName,jdbcType=VARCHAR}, #{inCounterAreaCode,jdbcType=INTEGER}, #{cinCunterAreaName,jdbcType=VARCHAR}, 
+      #{counterAreaCode,jdbcType=VARCHAR}, #{counterAreaName,jdbcType=VARCHAR}, #{inAreaCode,jdbcType=VARCHAR}, 
+      #{inAreaName,jdbcType=VARCHAR}, #{inCounterAreaCode,jdbcType=VARCHAR}, #{inCounterAreaName,jdbcType=VARCHAR}, 
       #{createUserId,jdbcType=INTEGER}, #{createUserName,jdbcType=VARCHAR}, #{employeeId,jdbcType=INTEGER}, 
       #{employeeName,jdbcType=VARCHAR}, #{billDate,jdbcType=VARCHAR}, #{receiveTime,jdbcType=TIMESTAMP}, 
       #{createTime,jdbcType=VARCHAR}, #{totalNum,jdbcType=INTEGER}, #{totalGoldWeight,jdbcType=DOUBLE}, 
-      #{totalCostPrice,jdbcType=DOUBLE}, #{totalSalePriceAmount,jdbcType=DOUBLE}, #{totalMainStoneWeight,jdbcType=DOUBLE}, 
-      #{submitAuditUserId,jdbcType=INTEGER}, #{submitAuditUserName,jdbcType=VARCHAR}, 
+      #{totalCost,jdbcType=DOUBLE}, #{totalLabelPrice,jdbcType=DOUBLE}, #{totalWorkFee,jdbcType=DOUBLE}, 
+      #{totalMJewelWeight,jdbcType=DOUBLE}, #{submitAuditUserId,jdbcType=INTEGER}, #{submitAuditUserName,jdbcType=VARCHAR}, 
       #{submitAuditTime,jdbcType=TIMESTAMP}, #{auditUserId,jdbcType=INTEGER}, #{auditUserName,jdbcType=VARCHAR}, 
       #{auditTime,jdbcType=VARCHAR}, #{auditMsg,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}
       )
@@ -197,7 +198,7 @@
         areaName = #{record.areaName,jdbcType=VARCHAR},
       </if>
       <if test="record.counterAreaCode != null">
-        counterAreaCode = #{record.counterAreaCode,jdbcType=INTEGER},
+        counterAreaCode = #{record.counterAreaCode,jdbcType=VARCHAR},
       </if>
       <if test="record.counterAreaName != null">
         counterAreaName = #{record.counterAreaName,jdbcType=VARCHAR},
@@ -209,10 +210,10 @@
         inAreaName = #{record.inAreaName,jdbcType=VARCHAR},
       </if>
       <if test="record.inCounterAreaCode != null">
-        inCounterAreaCode = #{record.inCounterAreaCode,jdbcType=INTEGER},
+        inCounterAreaCode = #{record.inCounterAreaCode,jdbcType=VARCHAR},
       </if>
-      <if test="record.cinCunterAreaName != null">
-        cinCunterAreaName = #{record.cinCunterAreaName,jdbcType=VARCHAR},
+      <if test="record.inCounterAreaName != null">
+        inCounterAreaName = #{record.inCounterAreaName,jdbcType=VARCHAR},
       </if>
       <if test="record.createUserId != null">
         createUserId = #{record.createUserId,jdbcType=INTEGER},
@@ -241,14 +242,17 @@
       <if test="record.totalGoldWeight != null">
         totalGoldWeight = #{record.totalGoldWeight,jdbcType=DOUBLE},
       </if>
-      <if test="record.totalCostPrice != null">
-        totalCostPrice = #{record.totalCostPrice,jdbcType=DOUBLE},
+      <if test="record.totalCost != null">
+        totalCost = #{record.totalCost,jdbcType=DOUBLE},
       </if>
-      <if test="record.totalSalePriceAmount != null">
-        totalSalePriceAmount = #{record.totalSalePriceAmount,jdbcType=DOUBLE},
+      <if test="record.totalLabelPrice != null">
+        totalLabelPrice = #{record.totalLabelPrice,jdbcType=DOUBLE},
       </if>
-      <if test="record.totalMainStoneWeight != null">
-        totalMainStoneWeight = #{record.totalMainStoneWeight,jdbcType=DOUBLE},
+      <if test="record.totalWorkFee != null">
+        totalWorkFee = #{record.totalWorkFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.totalMJewelWeight != null">
+        totalMJewelWeight = #{record.totalMJewelWeight,jdbcType=DOUBLE},
       </if>
       <if test="record.submitAuditUserId != null">
         submitAuditUserId = #{record.submitAuditUserId,jdbcType=INTEGER},
@@ -288,12 +292,12 @@
       sysBillNo = #{record.sysBillNo,jdbcType=VARCHAR},
       areaCode = #{record.areaCode,jdbcType=VARCHAR},
       areaName = #{record.areaName,jdbcType=VARCHAR},
-      counterAreaCode = #{record.counterAreaCode,jdbcType=INTEGER},
+      counterAreaCode = #{record.counterAreaCode,jdbcType=VARCHAR},
       counterAreaName = #{record.counterAreaName,jdbcType=VARCHAR},
       inAreaCode = #{record.inAreaCode,jdbcType=VARCHAR},
       inAreaName = #{record.inAreaName,jdbcType=VARCHAR},
-      inCounterAreaCode = #{record.inCounterAreaCode,jdbcType=INTEGER},
-      cinCunterAreaName = #{record.cinCunterAreaName,jdbcType=VARCHAR},
+      inCounterAreaCode = #{record.inCounterAreaCode,jdbcType=VARCHAR},
+      inCounterAreaName = #{record.inCounterAreaName,jdbcType=VARCHAR},
       createUserId = #{record.createUserId,jdbcType=INTEGER},
       createUserName = #{record.createUserName,jdbcType=VARCHAR},
       employeeId = #{record.employeeId,jdbcType=INTEGER},
@@ -303,9 +307,10 @@
       createTime = #{record.createTime,jdbcType=VARCHAR},
       totalNum = #{record.totalNum,jdbcType=INTEGER},
       totalGoldWeight = #{record.totalGoldWeight,jdbcType=DOUBLE},
-      totalCostPrice = #{record.totalCostPrice,jdbcType=DOUBLE},
-      totalSalePriceAmount = #{record.totalSalePriceAmount,jdbcType=DOUBLE},
-      totalMainStoneWeight = #{record.totalMainStoneWeight,jdbcType=DOUBLE},
+      totalCost = #{record.totalCost,jdbcType=DOUBLE},
+      totalLabelPrice = #{record.totalLabelPrice,jdbcType=DOUBLE},
+      totalWorkFee = #{record.totalWorkFee,jdbcType=DOUBLE},
+      totalMJewelWeight = #{record.totalMJewelWeight,jdbcType=DOUBLE},
       submitAuditUserId = #{record.submitAuditUserId,jdbcType=INTEGER},
       submitAuditUserName = #{record.submitAuditUserName,jdbcType=VARCHAR},
       submitAuditTime = #{record.submitAuditTime,jdbcType=TIMESTAMP},
@@ -340,7 +345,7 @@
         areaName = #{areaName,jdbcType=VARCHAR},
       </if>
       <if test="counterAreaCode != null">
-        counterAreaCode = #{counterAreaCode,jdbcType=INTEGER},
+        counterAreaCode = #{counterAreaCode,jdbcType=VARCHAR},
       </if>
       <if test="counterAreaName != null">
         counterAreaName = #{counterAreaName,jdbcType=VARCHAR},
@@ -352,10 +357,10 @@
         inAreaName = #{inAreaName,jdbcType=VARCHAR},
       </if>
       <if test="inCounterAreaCode != null">
-        inCounterAreaCode = #{inCounterAreaCode,jdbcType=INTEGER},
+        inCounterAreaCode = #{inCounterAreaCode,jdbcType=VARCHAR},
       </if>
-      <if test="cinCunterAreaName != null">
-        cinCunterAreaName = #{cinCunterAreaName,jdbcType=VARCHAR},
+      <if test="inCounterAreaName != null">
+        inCounterAreaName = #{inCounterAreaName,jdbcType=VARCHAR},
       </if>
       <if test="createUserId != null">
         createUserId = #{createUserId,jdbcType=INTEGER},
@@ -384,14 +389,17 @@
       <if test="totalGoldWeight != null">
         totalGoldWeight = #{totalGoldWeight,jdbcType=DOUBLE},
       </if>
-      <if test="totalCostPrice != null">
-        totalCostPrice = #{totalCostPrice,jdbcType=DOUBLE},
+      <if test="totalCost != null">
+        totalCost = #{totalCost,jdbcType=DOUBLE},
       </if>
-      <if test="totalSalePriceAmount != null">
-        totalSalePriceAmount = #{totalSalePriceAmount,jdbcType=DOUBLE},
+      <if test="totalLabelPrice != null">
+        totalLabelPrice = #{totalLabelPrice,jdbcType=DOUBLE},
       </if>
-      <if test="totalMainStoneWeight != null">
-        totalMainStoneWeight = #{totalMainStoneWeight,jdbcType=DOUBLE},
+      <if test="totalWorkFee != null">
+        totalWorkFee = #{totalWorkFee,jdbcType=DOUBLE},
+      </if>
+      <if test="totalMJewelWeight != null">
+        totalMJewelWeight = #{totalMJewelWeight,jdbcType=DOUBLE},
       </if>
       <if test="submitAuditUserId != null">
         submitAuditUserId = #{submitAuditUserId,jdbcType=INTEGER},
@@ -428,12 +436,12 @@
       sysBillNo = #{sysBillNo,jdbcType=VARCHAR},
       areaCode = #{areaCode,jdbcType=VARCHAR},
       areaName = #{areaName,jdbcType=VARCHAR},
-      counterAreaCode = #{counterAreaCode,jdbcType=INTEGER},
+      counterAreaCode = #{counterAreaCode,jdbcType=VARCHAR},
       counterAreaName = #{counterAreaName,jdbcType=VARCHAR},
       inAreaCode = #{inAreaCode,jdbcType=VARCHAR},
       inAreaName = #{inAreaName,jdbcType=VARCHAR},
-      inCounterAreaCode = #{inCounterAreaCode,jdbcType=INTEGER},
-      cinCunterAreaName = #{cinCunterAreaName,jdbcType=VARCHAR},
+      inCounterAreaCode = #{inCounterAreaCode,jdbcType=VARCHAR},
+      inCounterAreaName = #{inCounterAreaName,jdbcType=VARCHAR},
       createUserId = #{createUserId,jdbcType=INTEGER},
       createUserName = #{createUserName,jdbcType=VARCHAR},
       employeeId = #{employeeId,jdbcType=INTEGER},
@@ -443,9 +451,10 @@
       createTime = #{createTime,jdbcType=VARCHAR},
       totalNum = #{totalNum,jdbcType=INTEGER},
       totalGoldWeight = #{totalGoldWeight,jdbcType=DOUBLE},
-      totalCostPrice = #{totalCostPrice,jdbcType=DOUBLE},
-      totalSalePriceAmount = #{totalSalePriceAmount,jdbcType=DOUBLE},
-      totalMainStoneWeight = #{totalMainStoneWeight,jdbcType=DOUBLE},
+      totalCost = #{totalCost,jdbcType=DOUBLE},
+      totalLabelPrice = #{totalLabelPrice,jdbcType=DOUBLE},
+      totalWorkFee = #{totalWorkFee,jdbcType=DOUBLE},
+      totalMJewelWeight = #{totalMJewelWeight,jdbcType=DOUBLE},
       submitAuditUserId = #{submitAuditUserId,jdbcType=INTEGER},
       submitAuditUserName = #{submitAuditUserName,jdbcType=VARCHAR},
       submitAuditTime = #{submitAuditTime,jdbcType=TIMESTAMP},

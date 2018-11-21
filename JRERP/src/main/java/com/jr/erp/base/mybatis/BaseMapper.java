@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import com.jr.erp.bus.stock.entity.ProductStock;
+
 @Mapper
 public interface BaseMapper<T extends BaseEntity>
 {

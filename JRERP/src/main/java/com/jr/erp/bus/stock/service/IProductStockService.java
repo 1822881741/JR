@@ -1,10 +1,12 @@
 package com.jr.erp.bus.stock.service;
 
-import java.util.Map;
+import java.util.List;
 
 import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.mybatis.IBaseService;
 import com.jr.erp.bill.purchase.entity.BillPurchase;
+import com.jr.erp.bill.transfer.entity.BillTransfer;
+import com.jr.erp.bus.stock.entity.ProductStock;
 
 /**     
  * 类名称：IProductStockService    
@@ -36,5 +38,7 @@ public interface IProductStockService extends IBaseService<BaseEntity>{
      * @return void
      * @Exception 异常对象
     */
-    void queryStockByQueryBuilder(String querySql);
+    List<ProductStock> queryStockByQueryBuilder(String querySql);
+
+    void addPurchaseStock(BillTransfer billTransfer, String counterCode);
 }

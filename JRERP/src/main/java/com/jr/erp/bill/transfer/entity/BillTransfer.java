@@ -2,6 +2,7 @@ package com.jr.erp.bill.transfer.entity;
 
 import com.jr.erp.base.mybatis.BaseEntity;
 import java.util.Date;
+import java.util.List;
 
 public class BillTransfer extends BaseEntity {
     /**
@@ -32,7 +33,7 @@ public class BillTransfer extends BaseEntity {
     /**
      * 调出柜台
      */
-    private Integer counterAreaCode;
+    private String counterAreaCode;
 
     /**
      * 发出仓库名称
@@ -52,12 +53,12 @@ public class BillTransfer extends BaseEntity {
     /**
      * 调入柜台
      */
-    private Integer inCounterAreaCode;
+    private String inCounterAreaCode;
 
     /**
      * 
      */
-    private String cinCunterAreaName;
+    private String inCounterAreaName;
 
     /**
      * 建单人ID
@@ -102,17 +103,22 @@ public class BillTransfer extends BaseEntity {
     /**
      * 总成本
      */
-    private Double totalCostPrice;
+    private Double totalCost;
 
     /**
      * 总标价金额
      */
-    private Double totalSalePriceAmount;
+    private Double totalLabelPrice;
+
+    /**
+     * 
+     */
+    private Double totalWorkFee;
 
     /**
      * 主石重
      */
-    private Double totalMainStoneWeight;
+    private Double totalMJewelWeight;
 
     /**
      * 提交审核的人ID
@@ -154,6 +160,7 @@ public class BillTransfer extends BaseEntity {
      */
     private String remarks;
 
+    private List<BillTransferItem> itemList;
     /**
      * 单号
      * @return billNo 单号
@@ -238,7 +245,7 @@ public class BillTransfer extends BaseEntity {
      * 调出柜台
      * @return counterAreaCode 调出柜台
      */
-    public Integer getCounterAreaCode() {
+    public String getCounterAreaCode() {
         return counterAreaCode;
     }
 
@@ -246,8 +253,8 @@ public class BillTransfer extends BaseEntity {
      * 调出柜台
      * @param counterAreaCode 调出柜台
      */
-    public void setCounterAreaCode(Integer counterAreaCode) {
-        this.counterAreaCode = counterAreaCode;
+    public void setCounterAreaCode(String counterAreaCode) {
+        this.counterAreaCode = counterAreaCode == null ? null : counterAreaCode.trim();
     }
 
     /**
@@ -302,7 +309,7 @@ public class BillTransfer extends BaseEntity {
      * 调入柜台
      * @return inCounterAreaCode 调入柜台
      */
-    public Integer getInCounterAreaCode() {
+    public String getInCounterAreaCode() {
         return inCounterAreaCode;
     }
 
@@ -310,24 +317,24 @@ public class BillTransfer extends BaseEntity {
      * 调入柜台
      * @param inCounterAreaCode 调入柜台
      */
-    public void setInCounterAreaCode(Integer inCounterAreaCode) {
-        this.inCounterAreaCode = inCounterAreaCode;
+    public void setInCounterAreaCode(String inCounterAreaCode) {
+        this.inCounterAreaCode = inCounterAreaCode == null ? null : inCounterAreaCode.trim();
     }
 
     /**
      * 
-     * @return cinCunterAreaName 
+     * @return inCounterAreaName 
      */
-    public String getCinCunterAreaName() {
-        return cinCunterAreaName;
+    public String getInCounterAreaName() {
+        return inCounterAreaName;
     }
 
     /**
      * 
-     * @param cinCunterAreaName 
+     * @param inCounterAreaName 
      */
-    public void setCinCunterAreaName(String cinCunterAreaName) {
-        this.cinCunterAreaName = cinCunterAreaName == null ? null : cinCunterAreaName.trim();
+    public void setInCounterAreaName(String inCounterAreaName) {
+        this.inCounterAreaName = inCounterAreaName == null ? null : inCounterAreaName.trim();
     }
 
     /**
@@ -460,50 +467,66 @@ public class BillTransfer extends BaseEntity {
 
     /**
      * 总成本
-     * @return totalCostPrice 总成本
+     * @return totalCost 总成本
      */
-    public Double getTotalCostPrice() {
-        return totalCostPrice;
+    public Double getTotalCost() {
+        return totalCost;
     }
 
     /**
      * 总成本
-     * @param totalCostPrice 总成本
+     * @param totalCost 总成本
      */
-    public void setTotalCostPrice(Double totalCostPrice) {
-        this.totalCostPrice = totalCostPrice;
+    public void setTotalCost(Double totalCost) {
+        this.totalCost = totalCost;
     }
 
     /**
      * 总标价金额
-     * @return totalSalePriceAmount 总标价金额
+     * @return totalLabelPrice 总标价金额
      */
-    public Double getTotalSalePriceAmount() {
-        return totalSalePriceAmount;
+    public Double getTotalLabelPrice() {
+        return totalLabelPrice;
     }
 
     /**
      * 总标价金额
-     * @param totalSalePriceAmount 总标价金额
+     * @param totalLabelPrice 总标价金额
      */
-    public void setTotalSalePriceAmount(Double totalSalePriceAmount) {
-        this.totalSalePriceAmount = totalSalePriceAmount;
+    public void setTotalLabelPrice(Double totalLabelPrice) {
+        this.totalLabelPrice = totalLabelPrice;
+    }
+
+    /**
+     * 
+     * @return totalWorkFee 
+     */
+    public Double getTotalWorkFee() {
+        return totalWorkFee;
+    }
+
+    /**
+     * 
+     * @param totalWorkFee 
+     */
+    public void setTotalWorkFee(Double totalWorkFee) {
+        this.totalWorkFee = totalWorkFee;
     }
 
     /**
      * 主石重
-     * @return totalMainStoneWeight 主石重
+     * @return totalMJewelWeight 主石重
      */
-    public Double getTotalMainStoneWeight() {
-        return totalMainStoneWeight;
+    public Double getTotalMJewelWeight() {
+        return totalMJewelWeight;
     }
 
     /**
      * 主石重
-     * @param totalMainStoneWeight 主石重
+     * @param totalMJewelWeight 主石重
      */
-    public void setTotalMainStoneWeight(Double totalMainStoneWeight) {
-        this.totalMainStoneWeight = totalMainStoneWeight;
+    public void setTotalMJewelWeight(Double totalMJewelWeight) {
+        this.totalMJewelWeight = totalMJewelWeight;
     }
 
     /**
@@ -632,5 +655,15 @@ public class BillTransfer extends BaseEntity {
      */
     public void setRemarks(String remarks) {
         this.remarks = remarks == null ? null : remarks.trim();
+    }
+
+    public List<BillTransferItem> getItemList()
+    {
+        return itemList;
+    }
+
+    public void setItemList(List<BillTransferItem> itemList)
+    {
+        this.itemList = itemList;
     }
 }

@@ -144,6 +144,26 @@ public class BillTransferItem extends BaseEntity {
     private String counterAreaName;
 
     /**
+     * 
+     */
+    private String inAreaCode;
+
+    /**
+     * 
+     */
+    private String inAreaName;
+
+    /**
+     * 
+     */
+    private String inCounterAreaCode;
+
+    /**
+     * 
+     */
+    private String inCounterAreaName;
+
+    /**
      * 采购方式
      */
     private String purchaseType;
@@ -1169,6 +1189,70 @@ public class BillTransferItem extends BaseEntity {
      */
     public void setCounterAreaName(String counterAreaName) {
         this.counterAreaName = counterAreaName == null ? null : counterAreaName.trim();
+    }
+
+    /**
+     * 
+     * @return inAreaCode 
+     */
+    public String getInAreaCode() {
+        return inAreaCode;
+    }
+
+    /**
+     * 
+     * @param inAreaCode 
+     */
+    public void setInAreaCode(String inAreaCode) {
+        this.inAreaCode = inAreaCode == null ? null : inAreaCode.trim();
+    }
+
+    /**
+     * 
+     * @return inAreaName 
+     */
+    public String getInAreaName() {
+        return inAreaName;
+    }
+
+    /**
+     * 
+     * @param inAreaName 
+     */
+    public void setInAreaName(String inAreaName) {
+        this.inAreaName = inAreaName == null ? null : inAreaName.trim();
+    }
+
+    /**
+     * 
+     * @return inCounterAreaCode 
+     */
+    public String getInCounterAreaCode() {
+        return inCounterAreaCode;
+    }
+
+    /**
+     * 
+     * @param inCounterAreaCode 
+     */
+    public void setInCounterAreaCode(String inCounterAreaCode) {
+        this.inCounterAreaCode = inCounterAreaCode == null ? null : inCounterAreaCode.trim();
+    }
+
+    /**
+     * 
+     * @return inCounterAreaName 
+     */
+    public String getInCounterAreaName() {
+        return inCounterAreaName;
+    }
+
+    /**
+     * 
+     * @param inCounterAreaName 
+     */
+    public void setInCounterAreaName(String inCounterAreaName) {
+        this.inCounterAreaName = inCounterAreaName == null ? null : inCounterAreaName.trim();
     }
 
     /**

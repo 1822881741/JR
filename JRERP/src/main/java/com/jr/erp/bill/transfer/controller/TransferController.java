@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
@@ -19,13 +20,12 @@ import com.jr.erp.base.service.impl.IFileUploadService;
 import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.base.utils.JodaUtils;
 import com.jr.erp.base.utils.Ret;
-import com.jr.erp.bill.purchase.entity.BillPurchase;
-import com.jr.erp.bill.purchase.service.IBillPurchaseService;
+import com.jr.erp.bill.transfer.entity.BillTransfer;
+import com.jr.erp.bill.transfer.service.IBillTransferService;
+import com.jr.erp.bill.utils.Constance;
 import com.jr.erp.sys.entity.SysAreaInfoExample;
 import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.service.ISysAreaInfoService;
-import com.jr.erp.sys.set.base.service.IBaseTypeService;
-import com.jr.erp.sys.set.purchase.service.IPurchaseSechemeService;
 import com.jr.erp.sys.utils.service.IBillNoGeneratorService;
 
 @Controller
@@ -33,19 +33,13 @@ import com.jr.erp.sys.utils.service.IBillNoGeneratorService;
 public class TransferController
 {
     @Autowired
-    private IPurchaseSechemeService sysPurchaseSechemeService;
-    
-    @Autowired
-    private IBaseTypeService baseTypeService;
-    
-    @Autowired
     private ISysAreaInfoService sysAreaInfoService;
     
     @Autowired
     IFileUploadService fileUploadService;
     
     @Autowired
-    IBillPurchaseService billPurchaseService;
+    IBillTransferService billTransfenService;
     
     @Autowired
     IBillNoGeneratorService billNoGeneratorService;
@@ -64,22 +58,22 @@ public class TransferController
         
         if(id!=null)
         {
-            BillPurchase purchase = (BillPurchase) billPurchaseService.getBillWithItem(id);
-            model.addAttribute("billPurchase",purchase);
-            model.addAttribute("itemListData",JSONArray.toJSON(purchase.getItemList()).toString());
+            BillTransfer billTransfer = (BillTransfer) billTransfenService.getBillWithItem(id);
+            model.addAttribute("billTransfer",billTransfer);
+            model.addAttribute("itemListData",JSONArray.toJSON(billTransfer.getItemList()).toString());
         }else
         {
             //自动创建一个新的
-            BillPurchase purchase = new BillPurchase();
-            purchase.setBillDate(JodaUtils.getShortDate());
-            purchase.setSysBillNo(billNoGeneratorService.getNextBillNo(ShiroUtils.getCompanyNo(),1,ShiroUtils.getSysUser().getUserSheetNoPrefix()));
-            purchase.setBillNo(purchase.getSysBillNo());
-            model.addAttribute("billPurchase",purchase);
+            BillTransfer billTransfer = new BillTransfer();
+            billTransfer.setBillDate(JodaUtils.getShortDate());
+            billTransfer.setSysBillNo(billNoGeneratorService.getNextBillNo(ShiroUtils.getCompanyNo(),Constance.BILL_TYPE_TRANSFER,ShiroUtils.getSysUser().getUserSheetNoPrefix()));
+            billTransfer.setBillNo(billTransfer.getSysBillNo());
+            model.addAttribute("billTransfer",billTransfer);
             model.addAttribute("itemListData","[]");
         }
         
         //获取各种状态的单据
-        Map<String,Object> desktopMap = billPurchaseService.getDesktopBill();
+        Map<String,Object> desktopMap = billTransfenService.getDesktopBill();
         model.addAttribute("desktopMap",desktopMap);
         
         return "bill/transfer/editTransferBill";
@@ -96,13 +90,39 @@ public class TransferController
      * @Exception 异常对象
     */
     @ResponseBody
-    @RequestMapping(value = "/saveBillAudit.do")
-    public Ret saveBillAudit(BillPurchase billPurchase,HttpServletRequest request, HttpServletResponse response){
+    @RequestMapping(value = "/addTransferItemBatch.do")
+    public Ret addTransferItemBatch(BillTransfer billTransfer,@RequestParam String querySql ,HttpServletRequest request, HttpServletResponse response){
         SysUser user= ShiroUtils.getSysUser();
         try
         {
-            billPurchase.setCompanyNo(ShiroUtils.getCompanyNo());
-            billPurchaseService.saveBillAudit(billPurchase);
+            billTransfer.setCompanyNo(ShiroUtils.getCompanyNo());
+            BillTransfer newBillTransfer = billTransfenService.addTransferItemBatch(billTransfer,querySql);
+            return Ret.ok("保存成功",newBillTransfer);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return Ret.error(e.getMessage());
+        }
+    }
+    
+    /**    
+     * saveBillAudit(这里用一句话描述这个方法的作用)    
+     * 保存成功       
+     * @param @param billPurchase
+     * @param @param request
+     * @param @param response
+     * @param @return     
+     * @return Ret
+     * @Exception 异常对象
+    */
+    @ResponseBody
+    @RequestMapping(value = "/saveBillAudit.do")
+    public Ret saveBillAudit(BillTransfer billTransfer,HttpServletRequest request, HttpServletResponse response){
+        SysUser user= ShiroUtils.getSysUser();
+        try
+        {
+            billTransfer.setCompanyNo(ShiroUtils.getCompanyNo());
+            billTransfenService.saveBillAudit(billTransfer);
             return Ret.ok("保存成功");
         } catch (Exception e)
         {

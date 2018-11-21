@@ -48,14 +48,34 @@ public class ParamController
                 .andModuleEqualTo(module);
         List<Param> paramList = (List) paramService.selectByExample(example);
 
+        List<Param> allParam = new ArrayList<Param>();
+        boolean hasSet = false;
         switch (module)
         {
         case "purchase":
-            List<Param> allParam = new ArrayList<Param>();
             allParam.add(new Param("purchase", "isAudit", "0", "是否需要审核"));
             allParam.add(new Param("purchase", "isAransit", "0", "进货是否开启在途"));
-
-            boolean hasSet = false;
+            for (Param param : allParam)
+            {
+                for (Param exist : paramList)
+                {
+                    if (StringUtils.equals(param.getParamName(), exist.getParamName()))
+                    {
+                        hasSet = true;
+                        break;
+                    }
+                }
+            }
+            if (hasSet)
+            {
+                return Ret.ok("已经设置参数");
+            } else
+            {
+                return Ret.warn("未设置参数", allParam);
+            }
+        case "transfer":
+            allParam.add(new Param("transfer", "isAudit", "0", "是否需要审核"));
+            allParam.add(new Param("transfer", "isAransit", "0", "调拨是否开启在途"));
             for (Param param : allParam)
             {
                 for (Param exist : paramList)
@@ -85,10 +105,13 @@ public class ParamController
     @ResponseBody
     public Ret updateBillFlowParam(@RequestBody Map<String,Object> paramMap,String module,String areaCode,HttpServletRequest request, Model model)
     {
+        List<Param> allParam = new ArrayList<Param>();
         switch (module)
         {
         case "purchase":
-            List<Param> allParam = new ArrayList<Param>();
+            paramService.updateBillFlowParam(ShiroUtils.getCompanyNo(),areaCode,module,paramMap);
+            return Ret.ok("已经设置参数");
+        case "transfer":
             paramService.updateBillFlowParam(ShiroUtils.getCompanyNo(),areaCode,module,paramMap);
             return Ret.ok("已经设置参数");
         default:

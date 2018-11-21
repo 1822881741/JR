@@ -26,6 +26,7 @@ import com.jr.erp.base.utils.JodaUtils;
 import com.jr.erp.base.utils.Ret;
 import com.jr.erp.bill.purchase.entity.BillPurchase;
 import com.jr.erp.bill.purchase.service.IBillPurchaseService;
+import com.jr.erp.bill.utils.Constance;
 import com.jr.erp.sys.entity.SysAreaInfoExample;
 import com.jr.erp.sys.entity.SysUser;
 import com.jr.erp.sys.service.ISysAreaInfoService;
@@ -91,7 +92,7 @@ public class PurchaseController {
             //自动创建一个新的
             BillPurchase purchase = new BillPurchase();
             purchase.setBillDate(JodaUtils.getShortDate());
-            purchase.setSysBillNo(billNoGeneratorService.getNextBillNo(ShiroUtils.getCompanyNo(),1,ShiroUtils.getSysUser().getUserSheetNoPrefix()));
+            purchase.setSysBillNo(billNoGeneratorService.getNextBillNo(ShiroUtils.getCompanyNo(),Constance.BILL_TYPE_PURCHASE,ShiroUtils.getSysUser().getUserSheetNoPrefix()));
             purchase.setBillNo(purchase.getSysBillNo());
             model.addAttribute("billPurchase",purchase);
             model.addAttribute("itemListData","[]");

@@ -75,4 +75,9 @@ public class ShiroUtils {
 	{
 	    return getSysUser().getUserSheetNoPrefix();
 	}
+
+    public static String getUserName()
+    {
+        return getSysUser().getRealName();
+    }
 }
