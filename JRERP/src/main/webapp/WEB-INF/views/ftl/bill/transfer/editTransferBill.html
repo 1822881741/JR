@@ -549,26 +549,55 @@
 			};
 
 			var form = {
-				view:"form", id:"form1", scroll:false,
+				view:"form", 
+				id:"form1", 
+				scroll:true,
+				width:250,
+				minHeight:200,
 				elements:[
-					{ view:"text", name:"productName", label:"商品名称",disabled:true },
-					{ view:"text", name:"barcode", label:"条码" ,disabled:true},
-					{ view:"text", name:"oldBarcode", label:"原条码" ,disabled:true},
-					{ view:"counter", name:"outNum", label:"调出数量" },
-					{ view:"text", name:"outGoldWeight", label:"调出金重" },
-					{ view:"text", name:"outMJewelWeight", label:"调出石重" },
-					{ view:"text", name:"outRemarks", label:"备注" },
-					{ view:"button", value:"保存", click:function(){
-						$$("form1").save();
-					} }
-				]
+					{ view:"text", name:"productName", label:"商品名称",readonly:true },
+					{ view:"text", name:"barcode", label:"条码" ,readonly:true},
+					{ view:"text", name:"oldBarcode", label:"原条码号" ,readonly:true,},
+					{ view:"counter", name:"outNum",required:true, label:"调出数量"},
+					{ view:"text", name:"outGoldWeight", label:"调出金重",format:"1111.00"},
+					{ view:"text", name:"outMJewelWeight",label:"调出石重",format:"1111.00"},
+					{ view:"text", name:"outRemarks", label:"调拨备注"},
+					{ view:"button", value:"保存", type:"form", click:function(){
+						if (this.getFormView().validate()){
+							$$("form1").save();
+						}else{
+							webix.message({ type:"error", text:"输入错误，请重新输入" });
+						}
+					}}
+				],
+				rules:{
+					$obj:function(){
+						var data = this.getValues();
+
+						if (!webix.rules.isEmail( data.outNum )) {
+							return false;	
+						}
+						if (data.outGoldWeight == ""){
+							return false;
+						} 
+						return true;
+					}
+ 				 },
+ 				elementsConfig:{
+ 					labelPosition:"right",
+ 					labelAlign:'right',
+ 					labelWidth:75,
+ 					marginBottom:1
+ 				}
 			};
 
 			webix.ui({ 
 				container:"testA",
-				multi:true,
-				view:"accordion",
-				rows:[ {cols:[{body:grid}, {view:"resizer"},{header:"修改调出信息",body:form,width:200,minHeight:250}]}]
+				rows:[{cols:[{body:grid}, 
+				             {view:"resizer"},
+				             {header:"修改调出信息",body:form}
+					 ]}
+				]
 			});
 			$$('form1').bind('itemDatatable')
 	});
