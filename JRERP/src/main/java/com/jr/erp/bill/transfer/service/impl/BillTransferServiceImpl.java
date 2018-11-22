@@ -18,13 +18,12 @@ import com.jr.erp.base.mybatis.AbstractBaseService;
 import com.jr.erp.base.service.impl.IFileUploadService;
 import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.base.utils.NumberUtils;
-import com.jr.erp.bill.purchase.entity.BillPurchase;
 import com.jr.erp.bill.purchase.entity.BillPurchaseItemExample;
-import com.jr.erp.bill.transfer.dao.BillTransferItemMapper;
 import com.jr.erp.bill.transfer.entity.BillTransfer;
 import com.jr.erp.bill.transfer.entity.BillTransferExample;
 import com.jr.erp.bill.transfer.entity.BillTransferItem;
 import com.jr.erp.bill.transfer.entity.BillTransferItemExample;
+import com.jr.erp.bill.transfer.service.IBillTransferItemService;
 import com.jr.erp.bill.transfer.service.IBillTransferService;
 import com.jr.erp.bill.utils.Constance;
 import com.jr.erp.bus.stock.entity.ProductStock;
@@ -38,7 +37,7 @@ public class BillTransferServiceImpl extends AbstractBaseService<BillTransfer> i
 {
 
     @Autowired
-    private  BillTransferItemMapper itemMapper;
+    private  IBillTransferItemService billTransferItemService;
     
     @Autowired
     IPurchaseSechemeService sysPurchaseSechemeService;
@@ -78,7 +77,7 @@ public class BillTransferServiceImpl extends AbstractBaseService<BillTransfer> i
         BillPurchaseItemExample itemExample = new BillPurchaseItemExample();
         itemExample.createCriteria().andCompanyNoEqualTo(billTransfer.getCompanyNo())
                 .andBillIdEqualTo(billTransfer.getId());
-        List<BillTransferItem> itemList = (List) itemMapper.selectByExample(itemExample);
+        List<BillTransferItem> itemList = (List) billTransferItemService.selectByExample(itemExample);
 
         //同步单据信息到明细中
         // 修改明细中的信息，与主单一致
@@ -97,11 +96,10 @@ public class BillTransferServiceImpl extends AbstractBaseService<BillTransfer> i
         recordTpl.setEmployeeName(billTransfer.getEmployeeName());
         recordTpl.setCreateUserId(billTransfer.getCreateUserId());
         recordTpl.setCreateUserName(billTransfer.getCreateUserName());
-//        recordTpl.setBillType(billTransfer.getBillType());
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("record", recordTpl);
         map.put("example", example);
-        itemMapper.updateByExampleSelective(map);
+        billTransferItemService.updateByExampleSelective(map);
         // 修改单据状态
         if (StringUtils.equals(isAransit.getParamValue(), "1"))
         {
@@ -180,7 +178,7 @@ public class BillTransferServiceImpl extends AbstractBaseService<BillTransfer> i
         BillTransfer billPurchase = (BillTransfer) this.selectByPrimaryKey(id);
         BillTransferItemExample example = new BillTransferItemExample();
         example.createCriteria().andCompanyNoEqualTo(billPurchase.getCompanyNo()).andBillIdEqualTo(billPurchase.getId());
-        List<BillTransferItem> itemList = itemMapper.selectByExample(example);
+        List<BillTransferItem> itemList = (List)billTransferItemService.selectByExample(example);
         billPurchase.setItemList(itemList);
         return billPurchase;
     }
@@ -236,10 +234,74 @@ public class BillTransferServiceImpl extends AbstractBaseService<BillTransfer> i
                     item.setOutGoldWeight(item.getGoldWeight());
                     item.setOutLabelPriceSum(item.getLabelPriceSum());
                     item.setOutMJewelWeight(item.getmJewelWeight());
-                    itemMapper.insert(item);
+                    billTransferItemService.insert(item);
                 }
             }
         }
         return this.getBillWithItem(billTransfer.getId());
+    }
+
+    @Override
+    public BillTransfer addByStockId(BillTransfer billTransfer, Integer stockId)
+    {
+        if (billTransfer.getId() == null)
+        {
+            billTransfer.setCompanyNo(ShiroUtils.getCompanyNo());
+            billTransfer.setBillStatus(Constance.BILL_STATUS_NEW);
+            billTransfer.setCreateUserId(ShiroUtils.getUserId());
+            billTransfer.setCreateUserName(ShiroUtils.getSysUser().getRealName());
+            this.insert(billTransfer);
+        } else
+        {
+         // 检查单据状态
+            String statusString = this.getBillCanEdit("bill_transfer", ShiroUtils.getCompanyNo(), billTransfer.getId());
+            if (StringUtils.isNotEmpty(statusString))
+            {
+                throw new ServiceAccessException(statusString);
+            }
+//            this.updateByPrimaryKey(billTransfer);
+        }
+        ProductStock productStock = (ProductStock) productStockService.selectByPrimaryKey(stockId);
+        BillTransferItem item = new BillTransferItem();
+        item.setBillId(billTransfer.getId());
+        BeanUtils.copyProperties(productStock, item);
+        item.setId(null);
+        item.setBillId(billTransfer.getId());
+        item.setSysBillNo(billTransfer.getSysBillNo());
+        item.setBillNo(billTransfer.getBillNo());
+        item.setOutNum(item.getNum());
+        item.setOutCostPrice(item.getCostPrice());
+        item.setOutGoldWeight(item.getGoldWeight());
+        item.setOutLabelPriceSum(item.getLabelPriceSum());
+        item.setOutMJewelWeight(item.getmJewelWeight());
+        billTransferItemService.insert(item);
+        BillTransfer newBillTransfer = (BillTransfer) this.selectByPrimaryKey(billTransfer.getId());
+        List<BillTransferItem> itemList = new ArrayList<BillTransferItem>(1);
+        itemList.add(item);
+        newBillTransfer.setItemList(itemList);
+        return newBillTransfer;
+    }
+
+    @Override
+    public void updateItemById(BillTransferItem item)
+    {
+        if (item.getBillId() != null)
+        {
+            // 检查单据状态
+            String statusString = this.getBillCanEdit("bill_transfer", ShiroUtils.getCompanyNo(), item.getBillId());
+            if (StringUtils.isNotEmpty(statusString))
+            {
+                throw new ServiceAccessException(statusString);
+            }
+            BillTransferItem newItem = new BillTransferItem();
+            newItem.setId(item.getId());
+            newItem.setOutNum(item.getNum());
+            newItem.setOutCostPrice(item.getCostPrice());
+            newItem.setOutGoldWeight(item.getGoldWeight());
+            newItem.setOutLabelPriceSum(item.getLabelPriceSum());
+            newItem.setOutMJewelWeight(item.getmJewelWeight());
+            newItem.setOutRemarks(item.getOutRemarks());
+            billTransferItemService.updateByPrimaryKeySelective(newItem);
+        }
     }
 }

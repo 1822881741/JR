@@ -276,7 +276,7 @@
 			        success: function(data) {
 			            if (data.status == '100') {
 			            	if(data.data.length==1){
-				            	$$("itemDatatable").add(data.data[0])
+			            		addItemByStockId(data.data[0].id);
 			            	}else{
 			            		layer.msg("多条记录，请选择");
 			            	}
@@ -288,11 +288,44 @@
 			        	layer.alert("连接服务器失败，请稍后重试");
 			        }
 			    });
-				$$("itemDatatable").select(32366)
-				$$("itemDatatable").showItem(32366)
 			  };
 		})
 	});
+	
+	function addItemByStockId(stockId){
+		if(stockId!=null && stockId!=''){
+			var data = {};
+			var billForm = $("#billForm").serializeArray();
+			for(var index=0;index<billForm.length;index++){
+				var tmp=billForm[index];
+				data[tmp.name]=tmp.value;
+			}
+			data.areaName= $("#areaCode").find(":selected").html();
+			data.counterAreaName= $("#counterAreaCode").find(":selected").html()
+			$.ajax({
+		        type: "POST",
+		        url: "transfer/addItemByStockId.do?stockId="+stockId,
+		        dataType: 'json',
+		        data: JSON.stringify(data),
+				contentType:"application/json",
+		        async: false,
+		        success: function(data) {
+		            if (data.status == '100') {
+		            	var itemId = data.data.itemList[0].id;
+		            	$$("itemDatatable").add(data.data.itemList[0]);
+		            	$("#id").val(data.data.id);
+		            	$$("itemDatatable").select(itemId)
+						$$("itemDatatable").showItem(itemId)
+		            }else{
+		            	layer.msg(data.msg);
+		            }
+		        },
+		        error: function() {
+		        	layer.alert("连接服务器失败，请稍后重试");
+		        }
+		    });
+		}
+	}
 	
 	function showDropdown(obj){
 		$(obj).parent().find("label").removeClass("active");
@@ -605,8 +638,28 @@
 						    if(!this.getFormView().validate()){
 						    	webix.message({ type:"error", text:"输入错误，请重新输入" });
 						    }else{
-						    	alert(3)
-								$$("form1").save();
+						    	debugger
+						    	alert(JSON.stringify(this.getFormView().getValues()),)
+								$.ajax({
+							        type: "POST",
+							        url: "transfer/updateItemById.do",
+							        dataType: 'json',
+							        data: JSON.stringify(this.getFormView().getValues()),
+							        contentType:"application/json",
+							        async: false,
+							        success: function(data) {
+							            if (data.status == '100') {
+							            	debugger
+							            	alert(2);
+							            	$$("form1").save();
+							            }else{
+							            	layer.msg(data.msg);
+							            }
+							        },
+							        error: function() {
+							        	layer.alert("连接服务器失败，请稍后重试");
+							        }
+							    });
 						    }
 						};
 						

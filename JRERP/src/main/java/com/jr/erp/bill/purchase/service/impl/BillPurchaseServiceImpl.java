@@ -18,11 +18,11 @@ import com.jr.erp.base.mybatis.AbstractBaseService;
 import com.jr.erp.base.service.impl.IFileUploadService;
 import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.base.utils.NumberUtils;
-import com.jr.erp.bill.purchase.dao.BillPurchaseItemMapper;
 import com.jr.erp.bill.purchase.entity.BillPurchase;
 import com.jr.erp.bill.purchase.entity.BillPurchaseExample;
 import com.jr.erp.bill.purchase.entity.BillPurchaseItem;
 import com.jr.erp.bill.purchase.entity.BillPurchaseItemExample;
+import com.jr.erp.bill.purchase.service.IBillPurchaseItemService;
 import com.jr.erp.bill.purchase.service.IBillPurchaseService;
 import com.jr.erp.bill.utils.Constance;
 import com.jr.erp.bus.stock.service.IProductStockService;
@@ -38,7 +38,7 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
 {
 
     @Autowired
-    private  BillPurchaseItemMapper itemMapper;
+    private  IBillPurchaseItemService billPurchaseItemService;
     
     @Autowired
     IPurchaseSechemeService sysPurchaseSechemeService;
@@ -180,13 +180,13 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
                 temp.setCompanyNo(billPurchase.getCompanyNo());
                 temp.setBillId(billPurchase.getId());
                 temp.setBarcode(barcodeList.get(i));
-                itemMapper.insert(temp);
+                billPurchaseItemService.insert(temp);
             }
         }
         BillPurchase newPurchase = (BillPurchase) this.selectByPrimaryKey(billPurchase.getId());
         BillPurchaseItemExample example = new BillPurchaseItemExample();
         example.createCriteria().andCompanyNoEqualTo(billPurchase.getCompanyNo()).andBillIdEqualTo(billPurchase.getId());
-        List<BillPurchaseItem> itemList = itemMapper.selectByExample(example);
+        List<BillPurchaseItem> itemList = (List)billPurchaseItemService.selectByExample(example);
         newPurchase.setItemList(itemList);
         return newPurchase;
     }
@@ -218,7 +218,7 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
         BillPurchaseItemExample itemExample = new BillPurchaseItemExample();
         itemExample.createCriteria().andCompanyNoEqualTo(billPurchase.getCompanyNo())
                 .andBillIdEqualTo(billPurchase.getId());
-        List<BillPurchaseItem> itemList = (List) itemMapper.selectByExample(itemExample);
+        List<BillPurchaseItem> itemList = (List) billPurchaseItemService.selectByExample(itemExample);
 
         //同步单据信息到明细中
         // 修改明细中的信息，与主单一致
@@ -244,7 +244,7 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("record", recordTpl);
         map.put("example", example);
-        itemMapper.updateByExampleSelective(map);
+        billPurchaseItemService.updateByExampleSelective(map);
         // 修改单据状态
         if (StringUtils.equals(isAransit.getParamValue(), "1"))
         {
@@ -325,7 +325,7 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
         BillPurchase billPurchase = (BillPurchase) this.selectByPrimaryKey(id);
         BillPurchaseItemExample example = new BillPurchaseItemExample();
         example.createCriteria().andCompanyNoEqualTo(billPurchase.getCompanyNo()).andBillIdEqualTo(billPurchase.getId());
-        List<BillPurchaseItem> itemList = itemMapper.selectByExample(example);
+        List<BillPurchaseItem> itemList = (List)billPurchaseItemService.selectByExample(example);
         billPurchase.setItemList(itemList);
         return billPurchase;
     }

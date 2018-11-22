@@ -1,6 +1,7 @@
 package com.jr.erp.base.mybatis;
 
 import java.util.List;
+import java.util.Map;
 
 import com.jr.erp.base.utils.RetPage;
 
@@ -23,6 +24,8 @@ public interface IBaseService <T extends BaseEntity>{
 	void updateByPrimaryKey(T t);
 	
     void updateByPrimaryKeySelective(T t);
+    
+    void updateByExampleSelective(Map t);
     
     void deleteByExample(Object example);
     

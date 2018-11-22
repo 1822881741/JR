@@ -272,6 +272,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jr.erp.bill.transfer.entity.BillTransferItem">
+      <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into bill_transfer_item (id, companyNo, billId, 
       billNo, billType, billStatus, 
       billDate, sysBillNo, supplier, 

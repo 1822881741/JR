@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +22,7 @@ import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.base.utils.JodaUtils;
 import com.jr.erp.base.utils.Ret;
 import com.jr.erp.bill.transfer.entity.BillTransfer;
+import com.jr.erp.bill.transfer.entity.BillTransferItem;
 import com.jr.erp.bill.transfer.service.IBillTransferService;
 import com.jr.erp.bill.utils.Constance;
 import com.jr.erp.sys.entity.SysAreaInfoExample;
@@ -98,6 +100,34 @@ public class TransferController
             billTransfer.setCompanyNo(ShiroUtils.getCompanyNo());
             BillTransfer newBillTransfer = billTransfenService.addTransferItemBatch(billTransfer,querySql);
             return Ret.ok("保存成功",newBillTransfer);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return Ret.error(e.getMessage());
+        }
+    }
+    
+    @ResponseBody
+    @RequestMapping(value = "/addItemByStockId.do")
+    public Ret addItemByStockId(@RequestBody BillTransfer billTransfer,Integer stockId,HttpServletRequest request, HttpServletResponse response){
+        try
+        {
+            BillTransfer newBillTransfer = billTransfenService.addByStockId(billTransfer,stockId);
+            return Ret.ok("保存成功",newBillTransfer);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return Ret.error(e.getMessage());
+        }
+    }
+    
+    @ResponseBody
+    @RequestMapping(value = "/updateItemById.do")
+    public Ret updateItemById(@RequestBody BillTransferItem billTransferItem,HttpServletRequest request, HttpServletResponse response){
+        try
+        {
+            billTransfenService.updateItemById(billTransferItem);
+            return Ret.ok("保存成功");
         } catch (Exception e)
         {
             e.printStackTrace();

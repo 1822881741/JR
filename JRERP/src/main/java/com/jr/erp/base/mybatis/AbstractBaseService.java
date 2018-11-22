@@ -1,6 +1,7 @@
 package com.jr.erp.base.mybatis;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -73,7 +74,19 @@ public class AbstractBaseService<T extends BaseEntity> implements IBaseService<B
         t.setUpdateTime(JodaUtils.getFullDate());
         mapper.updateByPrimaryKeySelective((T) t);
     }
-
+    public void updateByExampleSelective(Map t)
+    {
+        if(t.containsKey("record"))
+        {
+            Object obj = t.get("record");
+            if (obj instanceof BaseEntity)
+            {
+                BaseEntity entity = (BaseEntity) obj;
+                entity.setUpdateTime(JodaUtils.getFullDate());
+            }
+        }
+        mapper.updateByExampleSelective(t);
+    }
     @Override
     public void deleteByExample(Object example)
     {

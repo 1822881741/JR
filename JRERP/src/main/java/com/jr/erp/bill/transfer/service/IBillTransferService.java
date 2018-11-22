@@ -6,6 +6,7 @@ import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.mybatis.IBaseService;
 import com.jr.erp.bill.purchase.entity.BillPurchase;
 import com.jr.erp.bill.transfer.entity.BillTransfer;
+import com.jr.erp.bill.transfer.entity.BillTransferItem;
 
 public interface IBillTransferService extends IBaseService<BaseEntity>
 {
@@ -46,4 +47,23 @@ public interface IBillTransferService extends IBaseService<BaseEntity>
      * @Exception 异常对象
     */
     BillTransfer addTransferItemBatch(BillTransfer billTransfer,String sql);
+
+    /**    
+     * addByStockId(这里用一句话描述这个方法的作用)    
+     * 根据库存id添加
+     * @param @param billTransfer
+     * @param @param stockId     
+     * @return void
+     * @Exception 异常对象
+    */
+    BillTransfer addByStockId(BillTransfer billTransfer, Integer stockId);
+
+    /**    
+     * updateItemById(这里用一句话描述这个方法的作用)    
+     * 修改调拨明细
+     * @param @param billTransfer     
+     * @return void
+     * @Exception 异常对象
+    */
+    void updateItemById(BillTransferItem item);
 }
