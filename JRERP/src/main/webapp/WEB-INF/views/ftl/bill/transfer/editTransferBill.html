@@ -12,9 +12,9 @@
     .myhover{
         background: #F4F5F9;
     }
-     .header{
-            background-color: #edf7fe;
-        }
+    .header{
+           background-color: #edf7fe;
+       }
 </style>
 <body>
 	<section id="widget-grid">
@@ -172,7 +172,7 @@
 											</label>
 											<div class="col-md-8 col-sm-6 no-padding">
 												<div class="input-group">
-													<input type="text" class="form-control">
+													<input id='searchValue' type="text" class="form-control">
 													<div class="input-group-btn">
 														<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="-1">导入 <i class="fa fa-angle-down"></i></button>
 														<ul class="dropdown-menu pull-right" role="menu">
@@ -210,7 +210,6 @@
 <script src="static/zmodel/common/js/validate.js?v=1"></script>
 <script src="static/plugins/data.js"></script>
 <script type="text/javascript">
-	var hot1;
 	var grid;
 	$(document).ready(function() {
 		pageSetUp();
@@ -255,6 +254,13 @@
 		$("#counterAreaCode").selectpicker('val',"${billTransfer.counterAreaCode}");
 		$("#saveAudit").on("click",function(){
 			saveBillAudit();
+		})
+		
+		$("#searchValue").on("keydown",function(e){
+			if(e.which == 13){
+				$$("itemDatatable").select(32366)
+				$$("itemDatatable").showItem(32366)
+			  };
 		})
 	});
 	
@@ -402,7 +408,6 @@
 					        data:encodeURI(param),
 					        async: false,
 					        success: function(data) {
-					        		debugger
 					            if (data.status == '100') {
 					            	reloadData(data.data);
 					            	layer.close(index);
@@ -425,12 +430,14 @@
 		webix.i18n.setLocale("zh-CN");
 		grid = {
 				view:"datatable", 
+				css:"webix_header_border webix_body_border webix_footer_border",
+				leftSplit:4,
 				id:"itemDatatable",
 				select:true,
 				height:parent.winHeight-300,
 				columns:[
 					        {id:"rowNo",header:'#',sort:"int",css:"header",width:50},
-					        {id:"id",header:'id',hidden:true},
+					        {id:"id",header:'id'},
 					        {id:"barcode",sort:"string",header:["条码",{ content:"multiSelectFilter" }] , width:120, css:{ "text-align": "center" },  editor:"text"},
 					        {id:"oldBarcode",sort:"string",header:"原条码"},
 					        {id:"productName",sort:"string",header:["商品名称",{ content:"multiSelectFilter" }] , width:120, css:{ "text-align": "center" },  editor:"text"},
@@ -447,12 +454,12 @@
 					        {id:"img",sort:"string",header:"图片路径"},
 					        {id:"remarks",sort:"string",header:"商品备注信息"},
 					        {id:"bargainName",sort:"string",header:"特价标记"},
-					        {id:"outNum",sort:"int",header:"出库数",footer:{ content:"summColumn" }},
-					        {id:"outGoldWeight",sort:"int",header:"出库金重",footer:{ content:"summColumn" }},
-					        {id:"outMJewelWeight",sort:"int",header:"出库石重",footer:{ content:"summColumn" }},
-					        {id:"outCostPrice",sort:"int",header:"出库成本",footer:{ content:"summColumn" }},
-					        {id:"outLabelPriceSum",sort:"int",header:"出库标价金额",footer:{ content:"summColumn" }},
-					        {id:"outRemarks",sort:"int",header:"出库备注",footer:{ content:"summColumn" }},
+					        {id:"outNum",sort:"int",header:["出库数"],footer:{ content:"summColumn" },css:{"color":"red"}},
+					        {id:"outGoldWeight",sort:"int",header:["出库金重"],footer:{ content:"summColumn" },css:{"color":"red"}},
+					        {id:"outMJewelWeight",sort:"int",header:["出库石重"],footer:{ content:"summColumn" },css:{"color":"red"}},
+					        {id:"outCostPrice",sort:"int",header:["出库成本"],footer:{ content:"summColumn" },css:{"color":"red"}},
+					        {id:"outLabelPriceSum",sort:"int",header:["出库标价金额"],footer:{ content:"summColumn" },css:{"color":"red"}},
+					        {id:"outRemarks",sort:"int",header:{text:"出库备注",css:{"color":"red"}},footer:{ content:"summColumn" },css:{"color":"red"}},
 					        {id:"num",sort:"int",header:"数量",footer:{ content:"summColumn" }},
 					        {id:"netGoldWeight",sort:"int",header:"净金重",footer:{ content:"summColumn" }},
 					        {id:"goldLoss",sort:"int",header:"金损"},
@@ -560,26 +567,30 @@
 					{ view:"text", name:"oldBarcode", label:"原条码号" ,readonly:true,},
 					{ view:"counter", name:"outNum",required:true, label:"调出数量"},
 					{ view:"text", name:"outGoldWeight", label:"调出金重",format:"1111.00"},
-					{ view:"text", name:"outMJewelWeight",label:"调出石重",format:"1111.00"},
+					{ view:"text", name:"outMJewelWeight",label:"调出石重",format:"1111.0000"},
 					{ view:"text", name:"outRemarks", label:"调拨备注"},
 					{ view:"button", value:"保存", type:"form", click:function(){
-						if (this.getFormView().validate()){
-							$$("form1").save();
-						}else{
-							webix.message({ type:"error", text:"输入错误，请重新输入" });
-						}
+						//数据有变动
+						if(this.getFormView().isDirty()){
+						    if(!this.getFormView().validate()){
+						    	webix.message({ type:"error", text:"输入错误，请重新输入" });
+						    }else{
+						    	alert(3)
+								$$("form1").save();
+						    }
+						};
+						
 					}}
 				],
 				rules:{
 					$obj:function(){
-						var data = this.getValues();
-
+						/*var data = this.getValues();
 						if (!webix.rules.isEmail( data.outNum )) {
 							return false;	
 						}
 						if (data.outGoldWeight == ""){
 							return false;
-						} 
+						} */
 						return true;
 					}
  				 },
@@ -599,7 +610,13 @@
 					 ]}
 				]
 			});
-			$$('form1').bind('itemDatatable')
+			$$('form1').bind('itemDatatable');
+			$$('form1').attachEvent("onBeforeLoad", function(){
+			   alert(2)
+			});
+			$$('form1').attachEvent("onAfterLoad", function(){
+			    alert("zzz")
+			});
 	});
 	</script>
 </html>
