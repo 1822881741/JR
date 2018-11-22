@@ -128,7 +128,10 @@ public class ProductStockExample extends BaseExample {
             addCriterion("id is not null");
             return (Criteria) this;
         }
-
+        public Criteria andHasStockEqualTo(Integer value) {
+            addCriterion("hasStock =", value, "hasStock");
+            return (Criteria) this;
+        }
         public Criteria andIdEqualTo(Integer value) {
             addCriterion("id =", value, "id");
             return (Criteria) this;

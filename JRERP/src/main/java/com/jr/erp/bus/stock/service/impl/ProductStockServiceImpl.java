@@ -2,17 +2,21 @@ package com.jr.erp.bus.stock.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jr.erp.base.mybatis.AbstractBaseService;
+import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.bill.purchase.entity.BillPurchase;
 import com.jr.erp.bill.purchase.entity.BillPurchaseItem;
 import com.jr.erp.bill.transfer.entity.BillTransfer;
 import com.jr.erp.bill.transfer.entity.BillTransferItem;
 import com.jr.erp.bus.stock.dao.ProductStockMapper;
+import com.jr.erp.bus.stock.dto.StockQueryDTO;
 import com.jr.erp.bus.stock.entity.ProductStock;
+import com.jr.erp.bus.stock.entity.ProductStockExample;
 import com.jr.erp.bus.stock.service.IProductStockService;
 
 /**     
@@ -67,5 +71,39 @@ public class ProductStockServiceImpl extends AbstractBaseService<ProductStock> i
             stock.setLabelPriceSum(item.getOutLabelPriceSum());
             this.insert(stock);
         }
+    }
+
+    @Override
+    public List<ProductStock> queryStock(StockQueryDTO dto)
+    {
+        ProductStockExample example = new ProductStockExample();
+        ProductStockExample.Criteria criteria = example.createCriteria();
+        criteria.andCompanyNoEqualTo(ShiroUtils.getCompanyNo()).andHasStockEqualTo(1);
+        if(StringUtils.isNotEmpty(dto.getAreaCode()))
+        {
+            criteria.andAreaCodeEqualTo(dto.getAreaCode());
+        }
+        if(StringUtils.isNotEmpty(dto.getCounterAreaCode()))
+        {
+            criteria.andCounterAreaCodeEqualTo(dto.getCounterAreaCode());
+        }
+        switch (dto.getQueryType())
+        {
+        case "0":
+            criteria.andBarcodeEqualTo(dto.getQueryValue());
+            break;
+        case "1":
+            criteria.andOldBarcodeEqualTo(dto.getQueryValue());
+            break;
+        case "2":
+            criteria.andCertificateNoEqualTo(dto.getQueryValue());
+            break;
+        case "3":
+            criteria.andComStyleNoEqualTo(dto.getQueryValue());
+            break;
+        default:
+            break;
+        }
+        return (List)this.selectByExample(example);
     }
 }

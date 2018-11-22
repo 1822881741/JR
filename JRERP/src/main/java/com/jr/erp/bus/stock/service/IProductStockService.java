@@ -6,6 +6,7 @@ import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.mybatis.IBaseService;
 import com.jr.erp.bill.purchase.entity.BillPurchase;
 import com.jr.erp.bill.transfer.entity.BillTransfer;
+import com.jr.erp.bus.stock.dto.StockQueryDTO;
 import com.jr.erp.bus.stock.entity.ProductStock;
 
 /**     
@@ -40,5 +41,23 @@ public interface IProductStockService extends IBaseService<BaseEntity>{
     */
     List<ProductStock> queryStockByQueryBuilder(String querySql);
 
+    /**    
+     * addPurchaseStock(这里用一句话描述这个方法的作用)    
+     * 添加调拨单的库存信息       
+     * @param @param billTransfer
+     * @param @param counterCode     
+     * @return void
+     * @Exception 异常对象
+    */
     void addPurchaseStock(BillTransfer billTransfer, String counterCode);
+
+    /**    
+     * queryStock(这里用一句话描述这个方法的作用)    
+     * 根据查下条件查下库存       
+     * @param @param dto
+     * @param @return     
+     * @return List<ProductStock>
+     * @Exception 异常对象
+    */
+    List<ProductStock> queryStock(StockQueryDTO dto);
 }

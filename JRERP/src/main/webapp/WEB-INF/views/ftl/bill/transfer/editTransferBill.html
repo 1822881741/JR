@@ -164,15 +164,16 @@
 										</div>
 										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
 											<label class="col-md-4 col-sm-6 control-label no-padding-top">
-												<select id="searchType" class="form-control no-padding" title="请选择柜台" data-live-search="true">
-													<option>条码号</option>
-													<option>原条码</option>
-													<option>证书号</option>
+												<select id="queryType" class="form-control no-padding" title="请选择柜台" data-live-search="true">
+													<option value="0">条码号</option>
+													<option value="1">原条码</option>
+													<option value="2">证书号</option>
+													<option value="3">款号</option>
 												</select>
 											</label>
 											<div class="col-md-8 col-sm-6 no-padding">
 												<div class="input-group">
-													<input id='searchValue' type="text" class="form-control">
+													<input id='queryValue' type="text" class="form-control">
 													<div class="input-group-btn">
 														<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="-1">导入 <i class="fa fa-angle-down"></i></button>
 														<ul class="dropdown-menu pull-right" role="menu">
@@ -256,8 +257,37 @@
 			saveBillAudit();
 		})
 		
-		$("#searchValue").on("keydown",function(e){
+		$("#queryValue").on("keydown",function(e){
 			if(e.which == 13){
+				if($("#areaCode").val()=='' ||$("#counterAreaCode").val()==''){
+					layer.msg("请先选择调出门店和柜台");
+					return;
+				}
+				if($.trim($("#queryValue").val())==''){
+					layer.msg("请先选择调出门店和柜台");
+					return;
+				}
+				$.ajax({
+			        type: "POST",
+			        url: "productStock/queryStock.do",
+			        dataType: 'json',
+			        data:{queryType:$("#queryType").val(),queryValue:$.trim($("#queryValue").val()),areaCode:$("#areaCode").val(),counterAreaCode:$("#counterAreaCode").val()},
+			        async: false,
+			        success: function(data) {
+			            if (data.status == '100') {
+			            	if(data.data.length==1){
+				            	$$("itemDatatable").add(data.data[0])
+			            	}else{
+			            		layer.msg("多条记录，请选择");
+			            	}
+			            }else{
+			            	layer.msg(data.msg);
+			            }
+			        },
+			        error: function() {
+			        	layer.alert("连接服务器失败，请稍后重试");
+			        }
+			    });
 				$$("itemDatatable").select(32366)
 				$$("itemDatatable").showItem(32366)
 			  };
