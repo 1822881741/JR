@@ -206,7 +206,7 @@
 <script src="static/plugins/laydate/laydate.js"></script>
 <script src="static/plugins/webix/codebase/webix.js?v=6.0.7"></script>
 <script src="static/plugins/webix/querybuilder/querybuilder.js?v=1"></script>
-<script src="static/zmodel/transfer/transferBill.js?v=1"></script>
+<script src="static/zmodel/transfer/transferBill.js"></script>
 <script src="static/zmodel/common/js/validate.js?v=1"></script>
 <script src="static/zmodel/common/js/billFlow.js"></script>
 <script src="static/plugins/data.js"></script>
@@ -427,13 +427,24 @@
 				leftSplit:4,
 				id:"itemDatatable",
 				select:true,
-				height:parent.winHeight-300,
+				headermenu:{
+					width:250,
+					autoheight:false,
+					scroll:true
+				},
+	    		height:parent.winHeight-300,
+				columns:getColumn(),
+				clipboard:true,
+				resizeColumn:true,
+				footer:true,
+				dragColumn:true,
+				select: "row", 
 				columns:getColumn(),
 				data: ${itemListData},
 				on:{
 				    "onItemClick":function(id, e, trg){
 				        //webix.message("Click on row: " + id.row+", column: " + id.column);
-				        },
+				     },
 				     "data->onStoreUpdated":function(){
 							this.data.each(function(obj, i){
 								obj.rowNo = i+1;
@@ -456,14 +467,12 @@
 					{ view:"text", name:"outGoldWeight", label:"调出金重",format:"1111.00"},
 					{ view:"text", name:"outMJewelWeight",label:"调出石重",format:"1111.0000"},
 					{ view:"text", name:"outRemarks", label:"调拨备注"},
-					{ view:"button", value:"保存", type:"form", click:function(){
+					{ view:"button",name:"saveBtn", value:"保存", type:"form", click:function(){
 						//数据有变动
 						if(this.getFormView().isDirty()){
 						    if(!this.getFormView().validate()){
 						    	webix.message({ type:"error", text:"输入错误，请重新输入" });
 						    }else{
-						    	debugger
-						    	alert(JSON.stringify(this.getFormView().getValues()),)
 								$.ajax({
 							        type: "POST",
 							        url: "transfer/updateItemById.do",
@@ -473,8 +482,6 @@
 							        async: false,
 							        success: function(data) {
 							            if (data.status == '100') {
-							            	debugger
-							            	alert(2);
 							            	$$("form1").save();
 							            }else{
 							            	layer.msg(data.msg);
@@ -486,7 +493,6 @@
 							    });
 						    }
 						};
-						
 					}}
 				],
 				rules:{
@@ -518,12 +524,31 @@
 				]
 			});
 			$$('form1').bind('itemDatatable');
-			$$('form1').attachEvent("onBeforeLoad", function(){
-			   alert(2)
-			});
-			$$('form1').attachEvent("onAfterLoad", function(){
-			    alert("zzz")
-			});
+			
+			$$("form1").elements["outNum"].attachEvent("onKeyPress", function(code, e) {
+		        if(code === 13){
+		        	$$("form1").getChildViews()[4].focus();
+					$$("form1").getChildViews()[4].getInputNode().select();
+		        }
+			})
+			$$("form1").elements["outGoldWeight"].attachEvent("onKeyPress", function(code, e) {
+		        if(code === 13){
+		        	$$("form1").getChildViews()[5].focus();
+					$$("form1").getChildViews()[5].getInputNode().select();
+		        }
+			})
+			$$("form1").elements["outMJewelWeight"].attachEvent("onKeyPress", function(code, e) {
+		        if(code === 13){
+		        	$$("form1").getChildViews()[6].focus();
+					$$("form1").getChildViews()[6].getInputNode().select();
+		        }
+			})
+			$$("form1").elements["outRemarks"].attachEvent("onKeyPress", function(code, e) {
+		        if(code === 13){
+		        	$$("form1").getChildViews()[7].focus();
+					$$("form1").getChildViews()[7].getInputNode().select();
+		        }
+			})
 	});
 	</script>
 </html>
