@@ -2,6 +2,7 @@ eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
 encoding//src/main/resources/prop/freemarker.properties=UTF-8
+encoding//src/main/webapp/WEB-INF/views/ftl/macro/billMacro.html=UTF-8
 encoding//src/main/webapp/resource/css/positionFix.css=UTF-8
 encoding//src/main/webapp/static/plugins/webix/codebase/webix.js=UTF-8
 encoding/<project>=UTF-8

@@ -1,4 +1,22 @@
-<#macro billNoFininsh desktopMap>     
+<#macro layout>
+	<section id="widget-grid">
+		<div class="row no-margin">
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div class="jarviswidget no-margin-top" id="wid-id-5" data-widget-colorbutton="false" data-widget-editbutton="false"
+					data-widget-togglebutton="false" data-widget-deletebutton="false"
+					data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
+					<div class="padding-top-5">
+						<div class="widget-body">
+						 <#nested>
+						</div>
+					</div>
+				</div>
+			</article>
+		</div>
+	</section>
+</#macro>
+
+<#macro billType desktopMap>     
 	<li><a href="javascript:void(0);" id="activity" class="activity-dropdown btn  btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 未完成 <em class="badge bg-color-red">${desktopMap.totalNum}</em></a>
 	<div class="ajax-dropdown">
 		<div class="btn-group btn-group-justified" >

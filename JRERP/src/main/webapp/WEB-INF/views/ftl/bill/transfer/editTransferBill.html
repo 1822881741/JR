@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"> 
 <#include "/header-smart.html" />
-<#import "/macro/billMacro.html" as billNoFininsh>
+<#import "/macro/billMacro.html" as bill>
 <base href="${basePath}">
 <link rel="stylesheet" href="static/plugins/webix/codebase/webix.css?v=6.0.7" type="text/css" charset="utf-8">
 <link rel="stylesheet" href="static/plugins/webix/codebase/skins/mini.css" type="text/css" charset="utf-8">
@@ -18,122 +18,108 @@
        }
 </style>
 <body>
-	<section id="widget-grid">
-		<!-- row -->
-		
-		<div class="row no-margin">
-			<article class="col-sm-12 col-md-12 col-lg-12">
-				<div class="jarviswidget no-margin-top" id="wid-id-5" data-widget-colorbutton="false" data-widget-editbutton="false"
-					data-widget-togglebutton="false" data-widget-deletebutton="false"
-					data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
-					<div class="padding-top-5">
-						<div class="widget-body">
-							<div class="row">
-								<div class="row margin-left-10">
-									<div class="col-sm-12 col-md-12 col-lg-12">
-										<ul class="demo-btns" style="height: 30px;">
-											<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 新增</a></li>
-											<li><a id="saveAudit" href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 保存</a></li>
-											<@billNoFininsh.billNoFininsh desktopMap=desktopMap> </@billNoFininsh.billNoFininsh> 
-											<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 打印</a></li>
-											<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 预览</a></li>
-										</ul>
-									</div>
-								</div>
-								<hr class="simple margin-5">
-								<form id="billForm" class="form-horizontal" role="form">
-									<input type="hidden" id="id" name="id" value="${billTransfer.id}">
-									<input type="hidden" id="sysBillNo" name="sysBillNo" value="${billTransfer.sysBillNo}">
-									<div class="row no-margin margin-bottom-5 padding-right-5">
-										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
-											<label class="col-md-4 col-sm-6 control-label">调出门店</label>
-											<div class="col-md-8 col-sm-6 no-padding">
-												<select id="areaCode" name="areaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择门店/部门" data-live-search="true">
-													<#list areaList as p>
-														<option value='${p.areaCode}' <#if p.areaType == 0>data-icon="fa fa-bank" data-subtext="总公司"</#if> <#if p.areaType == 1>data-icon="fa fa-cubes" data-subtext="区域"</#if> <#if p.areaType == 2>data-icon="fa fa-cab" data-subtext="门店"</#if> <#if p.areaCode == billTransfer.areaCode> selected </#if> >${p.areaName}</option>
-													</#list>
-												</select>
-											</div>
-										</div>
-										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
-											<label class="col-md-4 col-sm-6 control-label">调出柜台</label>
-											<div class="col-md-8 col-sm-6 no-padding">
-												<select id="counterAreaCode" name="counterAreaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择柜台" data-live-search="true">
-												</select>
-											</div>
-										</div>
-										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
-											<label class="col-md-4 col-sm-6 control-label">调拨日期</label>
-											<div class="col-md-8 col-sm-6 no-padding">
-												<input type="text" class="form-control"  data-validate="required" id="billDate" name="billDate" value="${billTransfer.billDate}">
-											</div>
-										</div>
-										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
-											<label class="col-md-4 col-sm-6 control-label">调拨单号</label>
-											<div class="col-md-8 col-sm-6 no-padding">
-												<input type="text" class="form-control" id="billNo" name="billNo"  data-validate="required"  value="${billTransfer.billNo}" placeholder="请输入名字">
-											</div>
-										</div>										
-									</div>
-									<div class="row no-margin margin-bottom-5 padding-right-5">
-										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
-											<label class="col-md-4 col-sm-6 control-label">调入门店</label>
-											<div class="col-md-8 col-sm-6 no-padding">
-												<select id="inAreaCode" name="inAreaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择门店/部门" data-live-search="true">
-													<#list areaList as p>
-														<option value='${p.areaCode}' <#if p.areaType == 0>data-icon="fa fa-bank" data-subtext="总公司"</#if> <#if p.areaType == 1>data-icon="fa fa-cubes" data-subtext="区域"</#if> <#if p.areaType == 2>data-icon="fa fa-cab" data-subtext="门店"</#if> <#if p.areaCode == billTransfer.areaCode> selected </#if> >${p.areaName}</option>
-													</#list>
-												</select>
-											</div>
-										</div>
-										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
-											<label class="col-md-4 col-sm-6 control-label">调入柜台</label>
-											<div class="col-md-8 col-sm-6 no-padding">
-												<select id="inCounterAreaCode" name="inCounterAreaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择柜台" data-live-search="true">
-												</select>
-											</div>
-										</div>
-										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
-											<label class="col-md-4 col-sm-6 control-label">备注</label>
-											<div class="col-md-8 col-sm-6 no-padding">
-												<input type="text" id="remarks" name="remarks" class="form-control"  placeholder="请输入名字" value="${billTransfer.remarks}" >
-											</div>
-										</div>
-										<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
-											<label class="col-md-4 col-sm-6 control-label no-padding-top">
-												<select id="queryType" class="form-control no-padding" title="请选择柜台" data-live-search="true">
-													<option value="0">条码号</option>
-													<option value="1">原条码</option>
-													<option value="2">证书号</option>
-													<option value="3">款号</option>
-												</select>
-											</label>
-											<div class="col-md-8 col-sm-6 no-padding">
-												<div class="input-group">
-													<input id='queryValue' type="text" class="form-control">
-													<div class="input-group-btn">
-														<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="-1">导入 <i class="fa fa-angle-down"></i></button>
-														<ul class="dropdown-menu pull-right" role="menu">
-															<li><a href="javascript:void(0);">按柜台导入</a></li>
-															<li><a href="javascript:void(0);">按入库单导入</a></li>
-															<li><a href="javascript:void(0);" onclick="showQueryBuilder()">按条件导入</a></li>
-															<li class="divider"></li>
-															<li><a href="javascript:void(0);">按输入导入</a></li>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</form>
+<@bill.layout>
+	<div class="row">
+		<div class="row margin-left-10">
+			<div class="col-sm-12 col-md-12 col-lg-12">
+				<ul class="demo-btns" style="height: 30px;">
+					<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 新增</a></li>
+					<li><a id="saveAudit" href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 保存</a></li>
+					<@bill.billType desktopMap=desktopMap />
+					<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 打印</a></li>
+					<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 预览</a></li>
+				</ul>
+			</div>
+		</div>
+		<hr class="simple margin-5">
+		<form id="billForm" class="form-horizontal" role="form">
+			<input type="hidden" id="id" name="id" value="${billTransfer.id}">
+			<input type="hidden" id="sysBillNo" name="sysBillNo" value="${billTransfer.sysBillNo}">
+			<div class="row no-margin margin-bottom-5 padding-right-5">
+				<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
+					<label class="col-md-4 col-sm-6 control-label">调出门店</label>
+					<div class="col-md-8 col-sm-6 no-padding">
+						<select id="areaCode" name="areaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择门店/部门" data-live-search="true">
+							<#list areaList as p>
+								<option value='${p.areaCode}' <#if p.areaType == 0>data-icon="fa fa-bank" data-subtext="总公司"</#if> <#if p.areaType == 1>data-icon="fa fa-cubes" data-subtext="区域"</#if> <#if p.areaType == 2>data-icon="fa fa-cab" data-subtext="门店"</#if> <#if p.areaCode == billTransfer.areaCode> selected </#if> >${p.areaName}</option>
+							</#list>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
+					<label class="col-md-4 col-sm-6 control-label">调出柜台</label>
+					<div class="col-md-8 col-sm-6 no-padding">
+						<select id="counterAreaCode" name="counterAreaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择柜台" data-live-search="true">
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
+					<label class="col-md-4 col-sm-6 control-label">调拨日期</label>
+					<div class="col-md-8 col-sm-6 no-padding">
+						<input type="text" class="form-control"  data-validate="required" id="billDate" name="billDate" value="${billTransfer.billDate}">
+					</div>
+				</div>
+				<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
+					<label class="col-md-4 col-sm-6 control-label">调拨单号</label>
+					<div class="col-md-8 col-sm-6 no-padding">
+						<input type="text" class="form-control" id="billNo" name="billNo"  data-validate="required"  value="${billTransfer.billNo}" placeholder="请输入名字">
+					</div>
+				</div>										
+			</div>
+			<div class="row no-margin margin-bottom-5 padding-right-5">
+				<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
+					<label class="col-md-4 col-sm-6 control-label">调入门店</label>
+					<div class="col-md-8 col-sm-6 no-padding">
+						<select id="inAreaCode" name="inAreaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择门店/部门" data-live-search="true">
+							<#list areaList as p>
+								<option value='${p.areaCode}' <#if p.areaType == 0>data-icon="fa fa-bank" data-subtext="总公司"</#if> <#if p.areaType == 1>data-icon="fa fa-cubes" data-subtext="区域"</#if> <#if p.areaType == 2>data-icon="fa fa-cab" data-subtext="门店"</#if> <#if p.areaCode == billTransfer.areaCode> selected </#if> >${p.areaName}</option>
+							</#list>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
+					<label class="col-md-4 col-sm-6 control-label">调入柜台</label>
+					<div class="col-md-8 col-sm-6 no-padding">
+						<select id="inCounterAreaCode" name="inCounterAreaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择柜台" data-live-search="true">
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
+					<label class="col-md-4 col-sm-6 control-label">备注</label>
+					<div class="col-md-8 col-sm-6 no-padding">
+						<input type="text" id="remarks" name="remarks" class="form-control"  placeholder="请输入名字" value="${billTransfer.remarks}" >
+					</div>
+				</div>
+				<div class="col-sm-3 col-md-3 col-lg-3 no-padding">
+					<label class="col-md-4 col-sm-6 control-label no-padding-top">
+						<select id="queryType" class="form-control no-padding" title="请选择柜台" data-live-search="true">
+							<option value="0">条码号</option>
+							<option value="1">原条码</option>
+							<option value="2">证书号</option>
+							<option value="3">款号</option>
+						</select>
+					</label>
+					<div class="col-md-8 col-sm-6 no-padding">
+						<div class="input-group">
+							<input id='queryValue' type="text" class="form-control">
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="-1">导入 <i class="fa fa-angle-down"></i></button>
+								<ul class="dropdown-menu pull-right" role="menu">
+									<li><a href="javascript:void(0);">按柜台导入</a></li>
+									<li><a href="javascript:void(0);">按入库单导入</a></li>
+									<li><a href="javascript:void(0);" onclick="showQueryBuilder()">按条件导入</a></li>
+									<li class="divider"></li>
+									<li><a href="javascript:void(0);">按输入导入</a></li>
+								</ul>
 							</div>
-							<div id="testA"></div>
 						</div>
 					</div>
 				</div>
-			</article>
-		</div>
-	</section>
+			</div>
+		</form>
+	</div>
+	<div id="testA"></div>
+</@bill.layout>
 </body>
 <script src="static/js/libs/jquery-3.2.1.min.js"></script>
 <script src="static/js/app.config.js"></script>
