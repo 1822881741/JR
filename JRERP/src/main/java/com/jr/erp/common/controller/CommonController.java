@@ -64,6 +64,50 @@ public class CommonController
             ja.add(a7);
 
             break;
+        case "transfer":
+            JSONObject at1 = new JSONObject();
+            at1.put("id", "barcode");
+            at1.put("value", "条码");
+            at1.put("type", "string");
+            ja.add(at1);
+
+            JSONObject at2 = new JSONObject();
+            at2.put("id", "goldWeight");
+            at2.put("value", "金重");
+            at2.put("type", "number");
+            ja.add(at2);
+
+            JSONObject at3 = new JSONObject();
+            at3.put("id", "billDate");
+            at3.put("value", "入库时间");
+            at3.put("type", "date");
+            ja.add(at3);
+
+            JSONObject at4 = new JSONObject();
+            at4.put("id", "certificateNo");
+            at4.put("value", "证书号");
+            at4.put("type", "string");
+            ja.add(at4);
+
+            JSONObject at5 = new JSONObject();
+            at5.put("id", "brandName");
+            at5.put("value", "品牌");
+            at5.put("type", "string");
+            ja.add(at5);
+
+            JSONObject at6 = new JSONObject();
+            at6.put("id", "productName");
+            at6.put("value", "商品名称");
+            at6.put("type", "string");
+            ja.add(at6);
+
+            JSONObject at7 = new JSONObject();
+            at7.put("id", "num");
+            at7.put("value", "数量");
+            at7.put("type", "number");
+            ja.add(at7);
+
+            break;
         default:
             break;
         }

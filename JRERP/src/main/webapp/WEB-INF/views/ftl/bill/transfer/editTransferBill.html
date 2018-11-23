@@ -21,16 +21,14 @@
 		<!-- row -->
 		<div class="row no-margin">
 			<article class="col-sm-12 col-md-12 col-lg-12">
-				<div class="jarviswidget no-margin-top" id="wid-id-5"
-					data-widget-colorbutton="false" data-widget-editbutton="false"
+				<div class="jarviswidget no-margin-top" id="wid-id-5" data-widget-colorbutton="false" data-widget-editbutton="false"
 					data-widget-togglebutton="false" data-widget-deletebutton="false"
-					data-widget-fullscreenbutton="false"
-					data-widget-custombutton="false" data-widget-sortable="false">
+					data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
 					<div class="padding-top-5">
 						<div class="widget-body">
 							<div class="row">
 								<div class="row margin-left-10">
-									<div class="col-sm-6 col-md-6 col-lg-6">
+									<div class="col-sm-12 col-md-12 col-lg-12">
 										<ul class="demo-btns" style="height: 30px;">
 											<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 新增</a></li>
 											<li><a id="saveAudit" href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 保存</a></li>
@@ -113,7 +111,7 @@
 											<div class="col-md-8 col-sm-6 no-padding">
 												<select id="areaCode" name="areaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择门店/部门" data-live-search="true">
 													<#list areaList as p>
-														<option value='${p.areaCode}' <#if p.areaType == 0>data-icon="fa fa-bank" data-subtext="总公司"</#if> <#if p.areaType == 1>data-icon="fa fa-cubes" data-subtext="区域"</#if> <#if p.areaType == 2>data-icon="fa fa-cab" data-subtext="门店"</#if> <#if p.areaCode == billPurchase.areaCode> selected </#if> >${p.areaName}</option>
+														<option value='${p.areaCode}' <#if p.areaType == 0>data-icon="fa fa-bank" data-subtext="总公司"</#if> <#if p.areaType == 1>data-icon="fa fa-cubes" data-subtext="区域"</#if> <#if p.areaType == 2>data-icon="fa fa-cab" data-subtext="门店"</#if> <#if p.areaCode == billTransfer.areaCode> selected </#if> >${p.areaName}</option>
 													</#list>
 												</select>
 											</div>
@@ -144,7 +142,7 @@
 											<div class="col-md-8 col-sm-6 no-padding">
 												<select id="inAreaCode" name="inAreaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择门店/部门" data-live-search="true">
 													<#list areaList as p>
-														<option value='${p.areaCode}' <#if p.areaType == 0>data-icon="fa fa-bank" data-subtext="总公司"</#if> <#if p.areaType == 1>data-icon="fa fa-cubes" data-subtext="区域"</#if> <#if p.areaType == 2>data-icon="fa fa-cab" data-subtext="门店"</#if> <#if p.areaCode == billPurchase.areaCode> selected </#if> >${p.areaName}</option>
+														<option value='${p.areaCode}' <#if p.areaType == 0>data-icon="fa fa-bank" data-subtext="总公司"</#if> <#if p.areaType == 1>data-icon="fa fa-cubes" data-subtext="区域"</#if> <#if p.areaType == 2>data-icon="fa fa-cab" data-subtext="门店"</#if> <#if p.areaCode == billTransfer.areaCode> selected </#if> >${p.areaName}</option>
 													</#list>
 												</select>
 											</div>
@@ -208,8 +206,7 @@
 <script src="static/plugins/laydate/laydate.js"></script>
 <script src="static/plugins/webix/codebase/webix.js?v=6.0.7"></script>
 <script src="static/plugins/webix/querybuilder/querybuilder.js?v=1"></script>
-<script src="static/zmodel/transfer/js/transferBill.js"></script>
-<script src="static/zmodel/transfer/transferBill.js"></script>
+<script src="static/zmodel/transfer/transferBill.js?v=1"></script>
 <script src="static/zmodel/common/js/validate.js?v=1"></script>
 <script src="static/zmodel/common/js/billFlow.js"></script>
 <script src="static/plugins/data.js"></script>
@@ -314,11 +311,15 @@
 		        async: false,
 		        success: function(data) {
 		            if (data.status == '100') {
-		            	var itemId = data.data.itemList[0].id;
-		            	$$("itemDatatable").add(data.data.itemList[0]);
-		            	$("#id").val(data.data.id);
-		            	$$("itemDatatable").select(itemId)
-						$$("itemDatatable").showItem(itemId)
+		            	var itemData = data.data.itemList[0];
+		            	var itemId = itemData.id;
+		            	$$("itemDatatable").add(itemData);
+		            	$("#id").val(itemData.billId);
+		            	$$("itemDatatable").select(itemId);
+						$$("itemDatatable").showItem(itemId);
+						//定位到数量输入框
+						$$("form1").getChildViews()[3].focus();
+						$$("form1").getChildViews()[3].getInputNode().select();
 		            }else{
 		            	layer.msg(data.msg);
 		            }
@@ -383,10 +384,10 @@
 		var index = layer.open({
 			  type: 2,
 			  skin: 'layui-layer-rim', //加上边框
-			  area: ['720px', '540px'], //宽高
+			  area: ['720px', '500px'], //宽高
 			  fixed: false, //不固定
 			  maxmin: true,
-			  content : "common/queryBuilder.do?module=purchase",
+			  content : "common/queryBuilder.do?module=transfer",
 			  btn : [ '保存', '取消' ],
 			  yes : function(index, layero) {
 					var result = $(layero).find("iframe")[0].contentWindow.submitData();
