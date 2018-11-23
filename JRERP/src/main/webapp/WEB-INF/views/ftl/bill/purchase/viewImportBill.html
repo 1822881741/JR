@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="static/plugins/layui/css/layui.css" media="all">
 <link href="static/plugins/handsontable-select2/select2.css" rel="stylesheet" />
 <link rel="stylesheet" href="static/plugins/webix/codebase/webix.css?v=6.0.7" type="text/css" charset="utf-8">
+<link rel="stylesheet" href="static/plugins/webix/codebase/skins/mini.css" type="text/css" charset="utf-8">
 <style>
     .myhover{
         background: #F4F5F9;
@@ -241,6 +242,7 @@
 	function numRules(value){ return value > 0; }
 	function goodsNameRules(value){ return !(value==null || value=='');}
 	function generalTable(){
+		webix.i18n.setLocale("zh-CN");
 		if(grid){
 			grid.$view.remove();
 		}
@@ -265,7 +267,7 @@
 			blockselect: true,
 			rules:{
 				//"num":numRules,
-				"productName":goodsNameRules
+				//"productName":goodsNameRules
 			},
 			ready:function(){
 				this.validate();

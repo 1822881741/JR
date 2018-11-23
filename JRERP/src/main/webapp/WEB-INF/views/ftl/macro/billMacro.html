@@ -1,0 +1,66 @@
+<#macro billNoFininsh desktopMap>     
+	<li><a href="javascript:void(0);" id="activity" class="activity-dropdown btn  btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 未完成 <em class="badge bg-color-red">${desktopMap.totalNum}</em></a>
+	<div class="ajax-dropdown">
+		<div class="btn-group btn-group-justified" >
+			<label class="btn btn-default active" data-id='noSave' onclick="showDropdown(this)">未完成(${desktopMap["noSave"]?size})</label>
+			<label class="btn btn-default" data-id='waiting' onclick="showDropdown(this)">待审核 (${desktopMap["waiting"]?size})</label>
+			<label class="btn btn-default" data-id='reject' onclick="showDropdown(this)">驳回 (${desktopMap["reject"]?size})</label>
+		</div>
+		<div class="ajax-notifications custom-scroll">
+			<div class="alert alert-transparent no-margin no-padding">
+				<ul id='noSave' class="notification-body">
+					<#list desktopMap["noSave"] as tmp>
+					<li>
+						<span class="unread">
+							<em class="badge padding-5 no-border-radius bg-color-yellow pull-left margin-right-5">
+								<i class="fa fa-edit fa-fw fa-2x"></i>
+							</em>
+							<span>
+								 ${tmp.billNo} <span class="text-primary">${tmp.totalNum}</span> and <span class="text-primary">kevin.reliey</span>
+								 <br>
+								 <span class="font-xs text-muted"><i>${tmp.billDate}</i></span>
+								 <button class="btn btn-xs btn-primary pull-right" onclick="continueEdit(${tmp.id})">编辑</button>
+							</span>
+						</span>
+					</li>
+					</#list>
+				</ul>
+				<ul id='waiting' class="notification-body" style="display: none;">
+					<#list desktopMap["waiting"] as tmp>
+					<li>
+						<span class="unread">
+							<em class="badge padding-5 no-border-radius bg-color-green pull-left margin-right-5">
+								<i class="fa fa-send fa-fw fa-2x"></i>
+							</em>
+							<span>
+								 ${tmp.billNo} <span class="text-primary">${tmp.totalNum}</span> and <span class="text-primary">kevin.reliey</span>
+								 <br>
+								 <span class="font-xs text-muted"><i>${tmp.billDate}</i></span>
+								 <button class="btn btn-xs btn-primary pull-right" onclick="continueEdit(${tmp.id})">查看</button>
+							</span>
+						</span>
+					</li>
+					</#list>
+				</ul>
+				<ul id='reject' class="notification-body" style="display: none;">
+					<#list desktopMap["reject"] as tmp>
+					<li>
+						<span class="unread">
+							<em class="badge padding-5 no-border-radius bg-color-red pull-left margin-right-5">
+								<i class="fa fa-warning fa-fw fa-2x"></i>
+							</em>
+							<span>
+								 ${tmp.billNo} <span class="text-primary">${tmp.totalNum}</span> and <span class="text-primary">kevin.reliey</span>
+								 <br>
+								 <span class="font-xs text-muted"><i>${tmp.billDate}</i></span>
+								 <button class="btn btn-xs btn-primary pull-right" onclick="continueEdit(${tmp.id})">查看</button>
+							</span>
+						</span>
+					</li>
+					</#list>
+				</ul>																														
+			</div>
+		</div>
+	</div>
+</li>
+</#macro>  

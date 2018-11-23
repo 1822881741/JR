@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8"> 
 <#include "/header-smart.html" />
+<#import "/macro/billMacro.html" as billNoFininsh>
 <base href="${basePath}">
 <link rel="stylesheet" href="static/plugins/webix/codebase/webix.css?v=6.0.7" type="text/css" charset="utf-8">
+<link rel="stylesheet" href="static/plugins/webix/codebase/skins/mini.css" type="text/css" charset="utf-8">
 <!--link rel="stylesheet" type="text/css" href="static/plugins/webix/codebase/skins/mini.min.css"-->
 <style>
     .myhover{
@@ -32,70 +34,7 @@
 										<ul class="demo-btns" style="height: 30px;">
 											<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 新增</a></li>
 											<li><a id="saveAudit" href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 保存</a></li>
-											<li><a href="javascript:void(0);" id="activity" class="activity-dropdown btn  btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 未完成 <em class="badge bg-color-red">${desktopMap.totalNum}</em></a>
-												<div class="ajax-dropdown">
-													<div class="btn-group btn-group-justified" >
-														<label class="btn btn-default active" data-id='noSave' onclick="showDropdown(this)">未完成(${desktopMap["noSave"]?size})</label>
-														<label class="btn btn-default" data-id='waiting' onclick="showDropdown(this)">待审核 (${desktopMap["waiting"]?size})</label>
-														<label class="btn btn-default" data-id='reject' onclick="showDropdown(this)">驳回 (${desktopMap["reject"]?size})</label>
-													</div>
-													<div class="ajax-notifications custom-scroll">
-														<div class="alert alert-transparent no-margin no-padding">
-															<ul id='noSave' class="notification-body">
-																<#list desktopMap["noSave"] as tmp>
-																<li>
-																	<span class="unread">
-																		<em class="badge padding-5 no-border-radius bg-color-yellow pull-left margin-right-5">
-																			<i class="fa fa-edit fa-fw fa-2x"></i>
-																		</em>
-																		<span>
-																			 ${tmp.billNo} <span class="text-primary">${tmp.totalNum}</span> and <span class="text-primary">kevin.reliey</span>
-																			 <br>
-																			 <span class="font-xs text-muted"><i>${tmp.billDate}</i></span>
-																			 <button class="btn btn-xs btn-primary pull-right" onclick="continueEdit(${tmp.id})">编辑</button>
-																		</span>
-																	</span>
-																</li>
-																</#list>
-															</ul>
-															<ul id='waiting' class="notification-body" style="display: none;">
-																<#list desktopMap["waiting"] as tmp>
-																<li>
-																	<span class="unread">
-																		<em class="badge padding-5 no-border-radius bg-color-green pull-left margin-right-5">
-																			<i class="fa fa-send fa-fw fa-2x"></i>
-																		</em>
-																		<span>
-																			 ${tmp.billNo} <span class="text-primary">${tmp.totalNum}</span> and <span class="text-primary">kevin.reliey</span>
-																			 <br>
-																			 <span class="font-xs text-muted"><i>${tmp.billDate}</i></span>
-																			 <button class="btn btn-xs btn-primary pull-right" onclick="continueEdit(${tmp.id})">查看</button>
-																		</span>
-																	</span>
-																</li>
-																</#list>
-															</ul>
-															<ul id='reject' class="notification-body" style="display: none;">
-																<#list desktopMap["reject"] as tmp>
-																<li>
-																	<span class="unread">
-																		<em class="badge padding-5 no-border-radius bg-color-red pull-left margin-right-5">
-																			<i class="fa fa-warning fa-fw fa-2x"></i>
-																		</em>
-																		<span>
-																			 ${tmp.billNo} <span class="text-primary">${tmp.totalNum}</span> and <span class="text-primary">kevin.reliey</span>
-																			 <br>
-																			 <span class="font-xs text-muted"><i>${tmp.billDate}</i></span>
-																			 <button class="btn btn-xs btn-primary pull-right" onclick="continueEdit(${tmp.id})">查看</button>
-																		</span>
-																	</span>
-																</li>
-																</#list>
-															</ul>																														
-														</div>
-													</div>
-												</div>
-											</li>
+											<@billNoFininsh.billNoFininsh desktopMap=desktopMap> </@billNoFininsh.billNoFininsh>
 											<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 打印</a></li>
 											<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 预览</a></li>
 										</ul>
@@ -199,7 +138,7 @@
 <script src="static/plugins/layer/layer.js"></script>
 <script src="static/plugins/laydate/laydate.js"></script>
 <script src="static/plugins/webix/codebase/webix.js?v=6.0.7"></script>
-<script src="static/zmodel/purchase/purchaseBill.js"></script>
+<script src="static/zmodel/purchase/purchaseBill.js?v=23222"></script>
 <script src="static/zmodel/common/js/validate.js?v=1"></script>
 <script src="static/zmodel/common/js/billFlow.js"></script>
 <script type="text/javascript">
@@ -332,6 +271,7 @@
 	<script type="text/javascript" charset="utf-8">
 	var context;
 	webix.ready(function(){
+		webix.i18n.setLocale("zh-CN");
 		grid = webix.ui({
 			container:"testA",
 			view:"datatable", 
