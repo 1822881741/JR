@@ -121,20 +121,9 @@
 	<div id="testA"></div>
 </@bill.layout>
 </body>
-<script src="static/js/libs/jquery-3.2.1.min.js"></script>
-<script src="static/js/app.config.js"></script>
-<script src="static/js/bootstrap/bootstrap.min.js"></script>
-<script src="static/js/smartwidgets/jarvis.widget.min.js"></script>
-<script src="static/js/app.js?v=3"></script>
-<script src="static/plugins/bootstrap-select/js/bootstrap-select.js"></script>
-<script src="static/plugins/layer/layer.js"></script>
-<script src="static/plugins/laydate/laydate.js"></script>
-<script src="static/plugins/webix/codebase/webix.js?v=6.0.7"></script>
+<@bill.js/>
 <script src="static/plugins/webix/querybuilder/querybuilder.js?v=1"></script>
 <script src="static/zmodel/transfer/transferBill.js?v=22"></script>
-<script src="static/zmodel/common/js/validate.js?v=1"></script>
-<script src="static/zmodel/common/js/billFlow.js"></script>
-<script src="static/plugins/data.js"></script>
 <script type="text/javascript">
 	var grid;
 	$(document).ready(function() {
@@ -375,92 +364,92 @@
 					}
 			};
 
-			var form = {
-				view:"form", 
-				id:"form1", 
-				scroll:true,
-				width:250,
-				minHeight:200,
-				elements:[
-					{ view:"text", name:"productName", label:"商品名称",readonly:true },
-					{ view:"text", name:"barcode", label:"条码" ,readonly:true},
-					{ view:"text", name:"oldBarcode", label:"原条码号" ,readonly:true,},
-					{ view:"counter", name:"outNum",required:true, label:"调出数量"},
-					{ view:"text", name:"outGoldWeight", label:"调出金重",format:"1111.00"},
-					{ view:"text", name:"outMJewelWeight",label:"调出石重",format:"1111.0000"},
-					{ view:"text", name:"outRemarks", label:"调拨备注"},
-					{ view:"button",name:"saveBtn", value:"保存", type:"form", click:function(){
-						//数据有变动
-						if(this.getFormView().isDirty()){
-							//数据校验
-							this.getValues();
-						    if(!this.getFormView().validate()){
-						    	webix.message({ type:"error", text:"输入错误，请重新输入" });
-						    }else{
-								$.ajax({
-							        type: "POST",
-							        url: "transfer/updateItemById.do",
-							        dataType: 'json',
-							        data: JSON.stringify(this.getFormView().getValues()),
-							        contentType:"application/json",
-							        async: false,
-							        success: function(data) {
-							            if (data.status == '100') {
-							            	$$("form1").save();
-							            }else{
-							            	layer.msg(data.msg);
-							            }
-							        },
-							        error: function() {
-							        	layer.alert("连接服务器失败，请稍后重试");
-							        }
-							    });
-						    }
-						};
-					}}
-				],
- 				elementsConfig:{
- 					labelPosition:"right",
- 					labelAlign:'right',
- 					labelWidth:75,
- 					marginBottom:1
- 				}
-			};
+		var form = {
+			view:"form", 
+			id:"form1", 
+			scroll:true,
+			width:250,
+			minHeight:200,
+			elements:[
+				{ view:"text", name:"productName", label:"商品名称",readonly:true },
+				{ view:"text", name:"barcode", label:"条码" ,readonly:true},
+				{ view:"text", name:"oldBarcode", label:"原条码号" ,readonly:true,},
+				{ view:"counter", name:"outNum",required:true, label:"调出数量"},
+				{ view:"text", name:"outGoldWeight", label:"调出金重",format:"1111.00"},
+				{ view:"text", name:"outMJewelWeight",label:"调出石重",format:"1111.0000"},
+				{ view:"text", name:"outRemarks", label:"调拨备注"},
+				{ view:"button",name:"saveBtn", value:"保存", type:"form", click:function(){
+					//数据有变动
+					if(this.getFormView().isDirty()){
+						//数据校验
+						this.getValues();
+					    if(!this.getFormView().validate()){
+					    	webix.message({ type:"error", text:"输入错误，请重新输入" });
+					    }else{
+							$.ajax({
+						        type: "POST",
+						        url: "transfer/updateItemById.do",
+						        dataType: 'json',
+						        data: JSON.stringify(this.getFormView().getValues()),
+						        contentType:"application/json",
+						        async: false,
+						        success: function(data) {
+						            if (data.status == '100') {
+						            	$$("form1").save();
+						            }else{
+						            	layer.msg(data.msg);
+						            }
+						        },
+						        error: function() {
+						        	layer.alert("连接服务器失败，请稍后重试");
+						        }
+						    });
+					    }
+					};
+				}}
+			],
+				elementsConfig:{
+					labelPosition:"right",
+					labelAlign:'right',
+					labelWidth:75,
+					marginBottom:1
+				}
+		};
 
-			webix.ui({ 
-				container:"testA",
-				rows:[{cols:[{body:grid}, 
-				             {view:"resizer"},
-				             {header:"修改调出信息",body:form}
-					 ]}
-				]
-			});
-			$$('form1').bind('itemDatatable');
-			
-			$$("form1").elements["outNum"].attachEvent("onKeyPress", function(code, e) {
-		        if(code === 13){
-		        	$$("form1").getChildViews()[4].focus();
-					$$("form1").getChildViews()[4].getInputNode().select();
-		        }
-			})
-			$$("form1").elements["outGoldWeight"].attachEvent("onKeyPress", function(code, e) {
-		        if(code === 13){
-		        	$$("form1").getChildViews()[5].focus();
-					$$("form1").getChildViews()[5].getInputNode().select();
-		        }
-			})
-			$$("form1").elements["outMJewelWeight"].attachEvent("onKeyPress", function(code, e) {
-		        if(code === 13){
-		        	$$("form1").getChildViews()[6].focus();
-					$$("form1").getChildViews()[6].getInputNode().select();
-		        }
-			})
-			$$("form1").elements["outRemarks"].attachEvent("onKeyPress", function(code, e) {
-		        if(code === 13){
-		        	$$("form1").getChildViews()[7].focus();
-					$$("form1").getChildViews()[7].getInputNode().select();
-		        }
-			})
+		webix.ui({ 
+			container:"testA",
+			rows:[{cols:[{body:grid}, 
+			             {view:"resizer"},
+			             {header:"修改调出信息",body:form}
+				 ]}
+			]
+		});
+		$$('form1').bind('itemDatatable');
+		
+		$$("form1").elements["outNum"].attachEvent("onKeyPress", function(code, e) {
+	        if(code === 13){
+	        	$$("form1").getChildViews()[4].focus();
+				$$("form1").getChildViews()[4].getInputNode().select();
+	        }
+		})
+		$$("form1").elements["outGoldWeight"].attachEvent("onKeyPress", function(code, e) {
+	        if(code === 13){
+	        	$$("form1").getChildViews()[5].focus();
+				$$("form1").getChildViews()[5].getInputNode().select();
+	        }
+		})
+		$$("form1").elements["outMJewelWeight"].attachEvent("onKeyPress", function(code, e) {
+	        if(code === 13){
+	        	$$("form1").getChildViews()[6].focus();
+				$$("form1").getChildViews()[6].getInputNode().select();
+	        }
+		})
+		$$("form1").elements["outRemarks"].attachEvent("onKeyPress", function(code, e) {
+	        if(code === 13){
+	        	$$("form1").getChildViews()[7].focus();
+				$$("form1").getChildViews()[7].getInputNode().select();
+	        }
+		})
 	});
 	</script>
 </html>

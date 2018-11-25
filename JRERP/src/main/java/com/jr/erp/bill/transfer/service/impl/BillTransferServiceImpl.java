@@ -60,7 +60,7 @@ public class BillTransferServiceImpl extends AbstractBaseService<BillTransfer> i
             throw new ServiceAccessException("单号为空，不能保存，请刷新重试");
         }
         // 检查单据是否存在，并检查是不是本公司的
-        boolean exist = this.getBillExist("bill_purchase", billTransfer.getCompanyNo(), billTransfer.getId());
+        boolean exist = this.getBillExist("bill_transfer", billTransfer.getCompanyNo(), billTransfer.getId());
         if (!exist)
         {
             throw new ServiceAccessException("您要保存的单据不存在，或无权操作，请刷新重试");
