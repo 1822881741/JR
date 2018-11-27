@@ -18,12 +18,6 @@ function getColumn(){
      {id:"img",sort:"string",header:"图片路径"},
      {id:"remarks",sort:"string",header:"商品备注信息"},
      {id:"bargainName",sort:"string",header:"特价标记"},
-     {id:"outNum",sort:"int",header:{text:"出库数",css:{"color":"red"}},footer:{ content:"summColumn" },css:{"color":"red"}},
-     {id:"outGoldWeight",sort:"int",header:{text:"出库金重",css:{"color":"red"}},footer:{ content:"summColumn" },css:{"color":"red"}},
-     {id:"outMJewelWeight",sort:"int",header:{text:"出库石重",css:{"color":"red"}},footer:{ content:"summColumn" },css:{"color":"red"}},
-     {id:"outCostPrice",sort:"int",header:{text:"出库成本",css:{"color":"red"}},footer:{ content:"summColumn" },css:{"color":"red"}},
-     {id:"outLabelPriceSum",sort:"int",header:{text:"出库标价金额",css:{"color":"red"}},footer:{ content:"summColumn" },css:{"color":"red"}},
-     {id:"outRemarks",sort:"int",header:{text:"出库备注",css:{"color":"red"}},footer:{ content:"summColumn" },css:{"color":"red"}},
      {id:"num",sort:"int",header:"数量",footer:{ content:"summColumn" }},
      {id:"netGoldWeight",sort:"int",header:"净金重",footer:{ content:"summColumn" }},
      {id:"goldLoss",sort:"int",header:"金损"},
@@ -114,7 +108,13 @@ function getColumn(){
      {id:"goldRange",sort:"string",header:"金重区间"},
      {id:"costRange",sort:"string",header:"成本区间"},
      {id:"colorRange",sort:"string",header:"颜色区间"},
-     {id:"clarityRange",sort:"string",header:"净度区间"}
+     {id:"clarityRange",sort:"string",header:"净度区间"},
+     {id:"outNum",sort:"int",header:{text:"出库数",css:{"color":"red"}},footer:{ content:"summColumn" },css:{"color":"red"}},
+     {id:"outGoldWeight",sort:"int",header:{text:"出库金重",css:{"color":"red"}},footer:{ content:"summColumn" },css:{"color":"red"}},
+     {id:"outMJewelWeight",sort:"int",header:{text:"出库石重",css:{"color":"red"}},footer:{ content:"summColumn" },css:{"color":"red"}},
+     {id:"outCostPrice",sort:"int",header:{text:"出库成本",css:{"color":"red"}},footer:{ content:"summColumn" },css:{"color":"red"}},
+     {id:"outLabelPriceSum",sort:"int",header:{text:"出库标价金额",css:{"color":"red"}},footer:{ content:"summColumn" },css:{"color":"red"}},
+     {id:"outRemarks",sort:"int",header:{text:"出库备注",css:{"color":"red"}},footer:{ content:"summColumn" },css:{"color":"red"}}
 	]
 }
 

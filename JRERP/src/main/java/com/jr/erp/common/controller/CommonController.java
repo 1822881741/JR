@@ -106,6 +106,12 @@ public class CommonController
             at7.put("value", "数量");
             at7.put("type", "number");
             ja.add(at7);
+            
+            JSONObject at8 = new JSONObject();
+            at8.put("id", "billNo");
+            at8.put("value", "入库单号");
+            at8.put("type", "string");
+            ja.add(at8);
 
             break;
         default:
