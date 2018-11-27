@@ -2,9 +2,10 @@ package com.jr.erp.bus.stock.vo;
 
 public class StockOperVo
 {
+    private Integer oldStockId;
 
-    private Integer stockId;
-
+    private Integer newStockId;
+    
     private Integer numAlt;
     
     private Double mJewelWeightAlt;
@@ -15,22 +16,30 @@ public class StockOperVo
 
     private Double labelPriceSumAlt;
 
+    private String secondType;
     
-    private String companyNo;
-
-    private String areaCode;
-
-    private String counterAreaCode;
-
-    private String barcode;
-    public Integer getStockId()
+    public StockOperVo(Integer oldStockId,Integer newStockId,String secondType, Integer numAlt, Double mJewelWeightAlt, Double goldWeightAlt,
+            Double costPriceAlt, Double labelPriceSumAlt)
     {
-        return stockId;
+        super();
+        this.oldStockId=oldStockId;
+        this.newStockId = newStockId;
+        this.secondType = secondType;
+        this.numAlt = numAlt;
+        this.mJewelWeightAlt=mJewelWeightAlt;
+        this.goldWeightAlt = goldWeightAlt;
+        this.costPriceAlt = costPriceAlt;
+        this.labelPriceSumAlt = labelPriceSumAlt;
     }
 
-    public void setStockId(Integer stockId)
+    public Integer getOldStockId()
     {
-        this.stockId = stockId;
+        return oldStockId;
+    }
+
+    public Integer getNewStockId()
+    {
+        return newStockId;
     }
 
     public Integer getNumAlt()
@@ -38,29 +47,9 @@ public class StockOperVo
         return numAlt;
     }
 
-    public void setNumAlt(Integer numAlt)
+    public Double getmJewelWeightAlt()
     {
-        this.numAlt = numAlt;
-    }
-
-    public Double getCostPriceAlt()
-    {
-        return costPriceAlt;
-    }
-
-    public void setCostPriceAlt(Double costPriceAlt)
-    {
-        this.costPriceAlt = costPriceAlt;
-    }
-
-    public Double getLabelPriceSumAlt()
-    {
-        return labelPriceSumAlt;
-    }
-
-    public void setLabelPriceSumAlt(Double labelPriceSumAlt)
-    {
-        this.labelPriceSumAlt = labelPriceSumAlt;
+        return mJewelWeightAlt;
     }
 
     public Double getGoldWeightAlt()
@@ -68,14 +57,34 @@ public class StockOperVo
         return goldWeightAlt;
     }
 
-    public void setGoldWeightAlt(Double goldWeightAlt)
+    public Double getCostPriceAlt()
     {
-        this.goldWeightAlt = goldWeightAlt;
+        return costPriceAlt;
     }
 
-    public Double getmJewelWeightAlt()
+    public Double getLabelPriceSumAlt()
     {
-        return mJewelWeightAlt;
+        return labelPriceSumAlt;
+    }
+
+    public String getSecondType()
+    {
+        return secondType;
+    }
+
+    public void setOldStockId(Integer oldStockId)
+    {
+        this.oldStockId = oldStockId;
+    }
+
+    public void setNewStockId(Integer newStockId)
+    {
+        this.newStockId = newStockId;
+    }
+
+    public void setNumAlt(Integer numAlt)
+    {
+        this.numAlt = numAlt;
     }
 
     public void setmJewelWeightAlt(Double mJewelWeightAlt)
@@ -83,32 +92,23 @@ public class StockOperVo
         this.mJewelWeightAlt = mJewelWeightAlt;
     }
 
-    public StockOperVo(Integer stockId, Integer numAlt, Double mJewelWeightAlt, Double goldWeightAlt,
-            Double costPriceAlt, Double labelPriceSumAlt)
+    public void setGoldWeightAlt(Double goldWeightAlt)
     {
-        super();
-        this.stockId = stockId;
-        this.numAlt = numAlt;
-        this.setmJewelWeightAlt(mJewelWeightAlt);
         this.goldWeightAlt = goldWeightAlt;
+    }
+
+    public void setCostPriceAlt(Double costPriceAlt)
+    {
         this.costPriceAlt = costPriceAlt;
+    }
+
+    public void setLabelPriceSumAlt(Double labelPriceSumAlt)
+    {
         this.labelPriceSumAlt = labelPriceSumAlt;
     }
-    
-    public StockOperVo(String companyNo, String areaCode, String counterAreaCode,
-            String barcode,Integer numAlt, Double mJewelWeightAlt, Double goldWeightAlt,
-            Double costPriceAlt, Double labelPriceSumAlt)
+
+    public void setSecondType(String secondType)
     {
-        super();
-        this.companyNo = companyNo;
-        this.areaCode = areaCode;
-        this.counterAreaCode = counterAreaCode;
-        this.barcode = barcode;
-        this.numAlt = numAlt;
-        this.mJewelWeightAlt = mJewelWeightAlt;
-        this.goldWeightAlt = goldWeightAlt;
-        this.costPriceAlt = costPriceAlt;
-        this.labelPriceSumAlt = labelPriceSumAlt;
+        this.secondType = secondType;
     }
-    
 }

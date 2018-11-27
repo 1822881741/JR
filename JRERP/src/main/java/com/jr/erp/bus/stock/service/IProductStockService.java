@@ -2,12 +2,16 @@ package com.jr.erp.bus.stock.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.jr.erp.base.exception.ServiceAccessException;
 import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.mybatis.IBaseService;
 import com.jr.erp.bill.purchase.entity.BillPurchase;
 import com.jr.erp.bill.transfer.entity.BillTransfer;
 import com.jr.erp.bus.stock.dto.StockQueryDTO;
 import com.jr.erp.bus.stock.entity.ProductStock;
+import com.jr.erp.bus.stock.vo.StockOperVo;
 
 /**     
  * 类名称：IProductStockService    
@@ -60,4 +64,8 @@ public interface IProductStockService extends IBaseService<BaseEntity>{
      * @Exception 异常对象
     */
     List<ProductStock> queryStock(StockQueryDTO dto);
+    
+    void stockAdd(StockOperVo vo);
+    
+    void stockSub(StockOperVo vo) throws ServiceAccessException;
 }

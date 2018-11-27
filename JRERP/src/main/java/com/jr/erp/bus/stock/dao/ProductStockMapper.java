@@ -59,20 +59,4 @@ public interface ProductStockMapper extends BaseMapper<ProductStock> {
             + "where id=#{vo.stockId}"
             })
     void stockPlus(@Param("vo") StockOperVo vo);
-    
-    /**    
-     * stockMinus(这里用一句话描述这个方法的作用)    
-     * 减库存       
-     * @param @param vo     
-     * @return void
-     * @Exception 异常对象
-    */
-    @Update({"update bus_product_stock "
-            + "set num=IFNULL(num,0)-#{vo.numAlt},"
-            + "costPrice=IFNULL(costPrice,0)-#{vo.costPriceAlt},"
-            + "labelPriceSum=IFNULL(labelPriceSum,0)-#{vo.labelPriceSumAlt},"
-            + "goldWeight=IFNULL(goldWeight,0)-#{vo.goldWeightAlt} "
-            + "where companyNo=#{vo.companyNo} and areaCode=#{vo.areaCode} and counterAreaCode=#{vo.counterAreaCode} and barcode=#{vo.barcode}"
-            })
-    void stockMinus(@Param("vo") StockOperVo vo);
 }
