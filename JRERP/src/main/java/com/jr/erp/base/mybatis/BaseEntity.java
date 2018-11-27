@@ -116,6 +116,10 @@ public class BaseEntity implements Serializable
      * @param createTime 创建时间
      */
     public String getCreateTimeShort() {
-        return StringUtils.isNotEmpty(this.createTime)?this.createTime.substring(0, 11):"";
+        return StringUtils.left(this.createTime, 11);
+    }
+    
+    public String getUpdateTimeShort() {
+        return StringUtils.left(this.updateTime, 11);
     }
 }

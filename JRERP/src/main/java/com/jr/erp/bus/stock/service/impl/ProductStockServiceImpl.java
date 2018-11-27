@@ -23,6 +23,8 @@ import com.jr.erp.bus.stock.entity.ProductStock;
 import com.jr.erp.bus.stock.entity.ProductStockExample;
 import com.jr.erp.bus.stock.service.IProductStockService;
 import com.jr.erp.bus.stock.vo.StockOperVo;
+import com.jr.erp.sys.entity.SysAreaInfo;
+import com.jr.erp.sys.service.ISysAreaInfoService;
 
 /**     
  * 类名称：ProductStockServiceImpl    
@@ -41,6 +43,8 @@ public class ProductStockServiceImpl extends AbstractBaseService<ProductStock> i
     @Autowired
     ProductStockMapper thisMappper;
     
+    @Autowired
+    ISysAreaInfoService sysAreaInfoService;
     @Override
     public void addPurchaseStock(BillPurchase billPurchase, String counterCode)
     {
@@ -48,6 +52,7 @@ public class ProductStockServiceImpl extends AbstractBaseService<ProductStock> i
         {
             ProductStock stock = new ProductStock() ;
             BeanUtils.copyProperties(item,stock);
+            stock.setHasStock(1);
             this.insert(stock);
             
         }
@@ -65,6 +70,10 @@ public class ProductStockServiceImpl extends AbstractBaseService<ProductStock> i
         List<BillTransferItem> itemList = billTransfer.getItemList();
         if(CollectionUtils.isNotEmpty(itemList))
         {
+            SysAreaInfo storeInfo = sysAreaInfoService.selectByAreaCode(billTransfer.getCompanyNo(), billTransfer.getInAreaCode());
+            SysAreaInfo counterInfo = sysAreaInfoService.selectByAreaCode(billTransfer.getCompanyNo(), counterCode);
+            
+            
             //获取本单的条码列表
             List<String> barcode = itemList.stream().map(BillTransferItem::getBarcode).collect(Collectors.toList());
             
@@ -84,25 +93,30 @@ public class ProductStockServiceImpl extends AbstractBaseService<ProductStock> i
                 {
                     // 已经存在了
                     System.out.println("---------已经存在了-------------" + item.getBarcode());
-                    StockOperVo vo = new StockOperVo(1, resultMap.get(item.getBarcode()), 1, 300.87, 83882.92, 14.2223);
+                    StockOperVo vo = new StockOperVo(resultMap.get(item.getBarcode()), item.getOutNum(),item.getOutMJewelWeight(),item.getOutGoldWeight(), item.getOutCostPrice(), item.getOutLabelPriceSum());
                     thisMappper.stockPlus(vo);
-
                 }else
                 {
                     //不存在，直接插入
                     ProductStock stock = new ProductStock() ;
                     BeanUtils.copyProperties(item,stock);
                     stock.setId(null);
-                    stock.setAreaCode(billTransfer.getInAreaCode());
-                    stock.setAreaName(billTransfer.getInAreaName());
-                    stock.setCounterAreaCode(counterCode);
-                    stock.setCounterAreaName(billTransfer.getCounterAreaName());
+                    stock.setAreaCode(storeInfo.getAreaCode());
+                    stock.setAreaName(storeInfo.getAreaName());
+                    stock.setCounterAreaCode(counterInfo.getAreaCode());
+                    stock.setCounterAreaName(counterInfo.getAreaName());
                     stock.setNum(item.getOutNum());
                     stock.setGoldWeight(item.getOutGoldWeight());
                     stock.setmJewelWeight(item.getOutMJewelWeight());
                     stock.setLabelPriceSum(item.getOutLabelPriceSum());
+                    
+                    stock.setHasStock(1);
                     this.insert(stock);
                 }
+                //减库存
+                
+                StockOperVo vo = new StockOperVo(item.getCompanyNo(),item.getAreaCode(),item.getCounterAreaCode(),item.getBarcode(), item.getOutNum(),item.getOutMJewelWeight(),item.getOutGoldWeight(), item.getOutCostPrice(), item.getOutLabelPriceSum());
+                thisMappper.stockMinus(vo);
             }
         }
     }

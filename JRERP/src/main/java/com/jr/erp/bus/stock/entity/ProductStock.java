@@ -38,6 +38,10 @@ public class ProductStock extends BaseEntity {
      */
     private String giaCertificateNo;
 
+    /**    
+     * 是否有库存 1：有库存 0没库存    
+     */    
+    private Integer hasStock;
     /**
      * 款式
      */
@@ -2437,5 +2441,15 @@ public class ProductStock extends BaseEntity {
      */
     public void setClarityRange(String clarityRange) {
         this.clarityRange = clarityRange == null ? null : clarityRange.trim();
+    }
+
+    public Integer getHasStock()
+    {
+        return hasStock;
+    }
+
+    public void setHasStock(Integer hasStock)
+    {
+        this.hasStock = hasStock;
     }
 }

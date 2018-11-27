@@ -24,6 +24,7 @@
     <result column="counterAreaName" jdbcType="VARCHAR" property="counterAreaName" />
     <result column="bargainName" jdbcType="VARCHAR" property="bargainName" />
     <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="hasStock" jdbcType="INTEGER" property="num" />
     <result column="netGoldWeight" jdbcType="DOUBLE" property="netGoldWeight" />
     <result column="goldLoss" jdbcType="DOUBLE" property="goldLoss" />
     <result column="goldPurity" jdbcType="DOUBLE" property="goldPurity" />
@@ -154,7 +155,7 @@
   <sql id="Base_Column_List">
     id, companyNo, supplier, brandName, barcode, oldBarcode, subName, certificateNo, 
     giaCertificateNo, style, comStyleNo, facStyleNo, handInch, craft, img, remarks, areaCode, 
-    areaName, counterAreaCode, counterAreaName, bargainName, num, netGoldWeight, goldLoss, 
+    areaName, counterAreaCode, counterAreaName, bargainName, num,hasStock, netGoldWeight, goldLoss, 
     goldPurity, goldWeight, goldPrice, goldMoney, productWeight, workFeeKe, workFeeJian, 
     workFeeSum, certificateFee, fittingName, fittingNum, fittingFee, sandBlastFee, otherFee, 
     unitPrice, costPrice, labelWorkFeeKe, labelWorkFeeJian, labelWorkFeeSum, labelRate, 
@@ -213,7 +214,7 @@
       handInch, craft, img, 
       remarks, areaCode, areaName, 
       counterAreaCode, counterAreaName, bargainName, 
-      num, netGoldWeight, goldLoss, 
+      num,hasStock, netGoldWeight, goldLoss, 
       goldPurity, goldWeight, goldPrice, 
       goldMoney, productWeight, workFeeKe, 
       workFeeJian, workFeeSum, certificateFee, 
@@ -253,7 +254,7 @@
       #{handInch,jdbcType=VARCHAR}, #{craft,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR}, 
       #{remarks,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{areaName,jdbcType=VARCHAR}, 
       #{counterAreaCode,jdbcType=VARCHAR}, #{counterAreaName,jdbcType=VARCHAR}, #{bargainName,jdbcType=VARCHAR}, 
-      #{num,jdbcType=INTEGER}, #{netGoldWeight,jdbcType=DOUBLE}, #{goldLoss,jdbcType=DOUBLE}, 
+      #{num,jdbcType=INTEGER},#{hasStock,jdbcType=INTEGER}, #{netGoldWeight,jdbcType=DOUBLE}, #{goldLoss,jdbcType=DOUBLE}, 
       #{goldPurity,jdbcType=DOUBLE}, #{goldWeight,jdbcType=DOUBLE}, #{goldPrice,jdbcType=DOUBLE}, 
       #{goldMoney,jdbcType=DOUBLE}, #{productWeight,jdbcType=DOUBLE}, #{workFeeKe,jdbcType=DOUBLE}, 
       #{workFeeJian,jdbcType=DOUBLE}, #{workFeeSum,jdbcType=DOUBLE}, #{certificateFee,jdbcType=DOUBLE}, 
@@ -358,6 +359,9 @@
       </if>
       <if test="num != null">
         num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="hasStock != null">
+        hasStock = #{hasStock,jdbcType=INTEGER},
       </if>
       <if test="netGoldWeight != null">
         netGoldWeight = #{netGoldWeight,jdbcType=DOUBLE},
@@ -676,6 +680,7 @@
       counterAreaName = #{counterAreaName,jdbcType=VARCHAR},
       bargainName = #{bargainName,jdbcType=VARCHAR},
       num = #{num,jdbcType=INTEGER},
+      hasStock = #{hasStock,jdbcType=INTEGER},
       netGoldWeight = #{netGoldWeight,jdbcType=DOUBLE},
       goldLoss = #{goldLoss,jdbcType=DOUBLE},
       goldPurity = #{goldPurity,jdbcType=DOUBLE},

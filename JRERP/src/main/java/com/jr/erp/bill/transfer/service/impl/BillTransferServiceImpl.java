@@ -11,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.jr.erp.base.exception.ServiceAccessException;
 import com.jr.erp.base.mybatis.AbstractBaseService;
@@ -125,7 +124,7 @@ public class BillTransferServiceImpl extends AbstractBaseService<BillTransfer> i
                 billTransfer.setBillStatus(Constance.BILL_STATUS_FINISH);
                 processBillAndItem(billTransfer, itemList);
                 this.updateByPrimaryKeySelective(billTransfer);
-                productStockService.addPurchaseStock(billTransfer, billTransfer.getCounterAreaCode());
+                productStockService.addPurchaseStock(billTransfer, billTransfer.getInCounterAreaCode());
             }
 
         }
@@ -134,7 +133,6 @@ public class BillTransferServiceImpl extends AbstractBaseService<BillTransfer> i
     }
 
     @Override
-    @Transactional(readOnly=true)
     public Map<String, Object> getDesktopBill()
     {
         BillTransferExample example = new BillTransferExample();

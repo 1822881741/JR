@@ -117,3 +117,130 @@ function getColumn(){
      {id:"clarityRange",sort:"string",header:"净度区间"}
 	]
 }
+
+
+
+function addItemByStockId(stockId){
+	if(stockId!=null && stockId!=''){
+		var data = {};
+		var billForm = $("#billForm").serializeArray();
+		for(var index=0;index<billForm.length;index++){
+			var tmp=billForm[index];
+			data[tmp.name]=tmp.value;
+		}
+		data.areaName= $("#areaCode").find(":selected").html();
+		data.counterAreaName= $("#counterAreaCode").find(":selected").html()
+		$.ajax({
+	        type: "POST",
+	        url: "transfer/addItemByStockId.do?stockId="+stockId,
+	        dataType: 'json',
+	        data: JSON.stringify(data),
+			contentType:"application/json",
+	        async: false,
+	        success: function(data) {
+	            if (data.status == '100') {
+	            	var itemData = data.data.itemList[0];
+	            	var itemId = itemData.id;
+	            	$$("itemDatatable").add(itemData);
+	            	$("#id").val(itemData.billId);
+	            	$$("itemDatatable").select(itemId);
+					$$("itemDatatable").showItem(itemId);
+					//定位到数量输入框
+					$$("form1").getChildViews()[3].focus();
+					$$("form1").getChildViews()[3].getInputNode().select();
+	            }else{
+	            	layer.msg(data.msg);
+	            }
+	        },
+	        error: function() {
+	        	layer.alert("连接服务器失败，请稍后重试");
+	        }
+	    });
+	}
+}
+
+function showDropdown(obj){
+	$(obj).parent().find("label").removeClass("active");
+	$(obj).addClass('active');
+	$(".notification-body").hide();
+	$("#"+$(obj).data("id")).show();
+}
+function saveBillAudit(){
+	if(!validateForm("billForm")){
+		return;
+	}else{
+		if(checkBillFlow($("#areaCode").val(),"transfer")){
+			var billInfo = $("#billForm").serialize();
+			billInfo+="&areaName="+$("#areaCode").find(":selected").html();
+			billInfo+="&counterAreaName="+$("#counterAreaCode").find(":selected").html()
+			$.ajax({
+		        type: "POST",
+		        url: "transfer/saveBillAudit.do",
+		        dataType: 'json',
+		        data:billInfo,
+		        async: false,
+		        success: function(data) {
+		            if (data.status == '100') {
+		            	layer.msg("保存成功！");
+		            }else{
+		            	layer.msg(data.msg);
+		            }
+		        },
+		        error: function() {
+		        	layer.alert("连接服务器失败，请稍后重试");
+		        }
+		    });
+		};
+	}
+	
+}
+function reloadData(billInfo){
+	if(billInfo){
+		$$("itemDatatable").clearAll();
+		$$("itemDatatable").parse(billInfo.itemList);
+		$("#id").val(billInfo.id);
+	}
+}
+function continueEdit(id){
+	window.location.href="transfer/editTransferBill.do?id="+id;
+}
+function showQueryBuilder(){
+	if($("#areaCode").val() =='' || $("#counterAreaCode").val() ==''){
+		layer.msg("请先选择调出门店和柜台");
+		return;
+	}
+	var index = layer.open({
+		  type: 2,
+		  skin: 'layui-layer-rim', //加上边框
+		  area: ['720px', '500px'], //宽高
+		  fixed: false, //不固定
+		  maxmin: true,
+		  content : "common/queryBuilder.do?module=transfer",
+		  btn : [ '保存', '取消' ],
+		  yes : function(index, layero) {
+				var result = $(layero).find("iframe")[0].contentWindow.submitData();
+				if (result) {
+					var param = $("#billForm").serialize();
+					param +="&querySql="+result.code;
+					$.ajax({
+				        type: "POST",
+				        url: "transfer/addTransferItemBatch.do",
+				        dataType: 'json',
+				        data:encodeURI(param),
+				        async: false,
+				        success: function(data) {
+				            if (data.status == '100') {
+				            	reloadData(data.data);
+				            	layer.close(index);
+				            }else{
+				            	layer.msg("导入符合条件的内容失败");
+				            }
+				        },
+				        error: function() {
+				        	layer.alert("连接服务器失败，请稍后重试");
+				        }
+				    });
+				}
+		}
+	});
+}
