@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.jr.erp.base.exception.ServiceAccessException;
 import com.jr.erp.base.mybatis.AbstractBaseService;
+import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.service.impl.IFileUploadService;
 import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.base.utils.NumberUtils;
@@ -26,6 +27,7 @@ import com.jr.erp.bill.transfer.service.IBillTransferItemService;
 import com.jr.erp.bill.transfer.service.IBillTransferService;
 import com.jr.erp.bill.utils.Constance;
 import com.jr.erp.bus.stock.entity.ProductStock;
+import com.jr.erp.bus.stock.entity.ProductStockExample;
 import com.jr.erp.bus.stock.service.IProductStockService;
 import com.jr.erp.sys.set.base.entity.Param;
 import com.jr.erp.sys.set.base.service.IParamService;
@@ -224,9 +226,12 @@ public class BillTransferServiceImpl extends AbstractBaseService<BillTransfer> i
                 for (ProductStock productStock : stockList)
                 {
                     BillTransferItem item = new BillTransferItem();
-                    item.setBillId(billTransfer.getId());
                     BeanUtils.copyProperties(productStock, item);
                     item.setId(null);
+                    item.setOldStockId(productStock.getId());
+                    item.setBillId(billTransfer.getId());
+                    item.setSysBillNo(billTransfer.getSysBillNo());
+                    item.setBillNo(billTransfer.getBillNo());
                     item.setOutNum(item.getNum());
                     item.setOutCostPrice(item.getCostPrice());
                     item.setOutGoldWeight(item.getGoldWeight());
@@ -257,13 +262,14 @@ public class BillTransferServiceImpl extends AbstractBaseService<BillTransfer> i
             {
                 throw new ServiceAccessException(statusString);
             }
-//            this.updateByPrimaryKey(billTransfer);
         }
+        
         ProductStock productStock = (ProductStock) productStockService.selectByPrimaryKey(stockId);
         BillTransferItem item = new BillTransferItem();
-        item.setBillId(billTransfer.getId());
         BeanUtils.copyProperties(productStock, item);
         item.setId(null);
+        item.setBillId(billTransfer.getId());
+        item.setOldStockId(productStock.getId());
         item.setBillId(billTransfer.getId());
         item.setSysBillNo(billTransfer.getSysBillNo());
         item.setBillNo(billTransfer.getBillNo());
@@ -301,5 +307,38 @@ public class BillTransferServiceImpl extends AbstractBaseService<BillTransfer> i
             newItem.setOutRemarks(item.getOutRemarks());
             billTransferItemService.updateByPrimaryKeySelective(newItem);
         }
+    }
+
+    @Override
+    public void deleteBill(Integer billId)
+    {
+     // 检查单据状态
+        String statusString = this.getBillCanEdit("bill_transfer", ShiroUtils.getCompanyNo(), billId);
+        if (StringUtils.isNotEmpty(statusString))
+        {
+            throw new ServiceAccessException(statusString);
+        }
+        
+        //删除主单
+        this.deleteByPrimaryKey(billId);
+        
+        //删除明细
+        BillTransferItemExample itemExample = new BillTransferItemExample();
+        itemExample.createCriteria().andCompanyNoEqualTo(ShiroUtils.getCompanyNo()).andCreateUserIdEqualTo(ShiroUtils.getUserId()).andBillIdEqualTo(billId);
+        billTransferItemService.deleteByExample(itemExample);
+    }
+
+    @Override
+    public void deleteBillItem(Integer billId, Integer itemId)
+    {
+        // 检查单据状态
+        String statusString = this.getBillCanEdit("bill_transfer", ShiroUtils.getCompanyNo(), billId);
+        if (StringUtils.isNotEmpty(statusString))
+        {
+            throw new ServiceAccessException(statusString);
+        }
+
+        // 删除明细
+        billTransferItemService.deleteByPrimaryKey(itemId);
     }
 }

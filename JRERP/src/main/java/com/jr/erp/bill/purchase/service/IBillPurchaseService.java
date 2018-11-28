@@ -35,7 +35,7 @@ public interface IBillPurchaseService extends IBaseService<BaseEntity>
      * @return void
      * @Exception 异常对象
     */
-    BillPurchase saveImportBill(BillPurchase billPurchase);
+    BillPurchase saveImportBill(Integer sechemeId,BillPurchase billPurchase);
 
     /**    
      * saveBillAudit(这里用一句话描述这个方法的作用)    

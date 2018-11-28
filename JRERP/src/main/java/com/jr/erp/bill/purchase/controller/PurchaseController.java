@@ -181,7 +181,7 @@ public class PurchaseController {
         try
         {
             billPurchase.setCompanyNo(companyNo);
-            BillPurchase newBillPurchase = billPurchaseService.saveImportBill(billPurchase);
+            BillPurchase newBillPurchase = billPurchaseService.saveImportBill(sechemeId,billPurchase);
             return Ret.ok("",newBillPurchase);
         } catch (Exception e)
         {

@@ -67,9 +67,11 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils
      *            加数
      * @return 两个参数的和
      */
-    public static double add(double v1, double v2) {
-        BigDecimal b1 = new BigDecimal(Double.toString(v1));
-        BigDecimal b2 = new BigDecimal(Double.toString(v2));
+    public static double add(Double v1, Double v2) {
+        double d1 = toDouble(v1);
+        double d2 = toDouble(v2);
+        BigDecimal b1 = new BigDecimal(Double.toString(d1));
+        BigDecimal b2 = new BigDecimal(Double.toString(d2));
         return b1.add(b2).doubleValue();
     }
  
@@ -82,12 +84,14 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils
      *            减数
      * @return 两个参数的差
      */
-    public static double sub(double v1, double v2) {
-        BigDecimal b1 = new BigDecimal(Double.toString(v1));
-        BigDecimal b2 = new BigDecimal(Double.toString(v2));
+ 
+    public static double sub(Double v1, Double v2) {
+        double d1 = toDouble(v1);
+        double d2 = toDouble(v2);
+        BigDecimal b1 = new BigDecimal(Double.toString(d1));
+        BigDecimal b2 = new BigDecimal(Double.toString(d2));
         return b1.subtract(b2).doubleValue();
     }
- 
     /**
      * 提供精确的乘法运算。
      * 
@@ -102,7 +106,13 @@ public class NumberUtils extends org.apache.commons.lang3.math.NumberUtils
         BigDecimal b2 = new BigDecimal(Double.toString(v2));
         return b1.multiply(b2).doubleValue();
     }
- 
+    public static double mul(Double v1, Double v2) {
+        double d1 = toDouble(v1);
+        double d2 = toDouble(v2);
+        BigDecimal b1 = new BigDecimal(Double.toString(d1));
+        BigDecimal b2 = new BigDecimal(Double.toString(d2));
+        return b1.multiply(b2).doubleValue();
+    }
     /**
      * 提供（相对）精确的除法运算，当发生除不尽的情况时，精确到 小数点以后10位，以后的数字四舍五入。
      * 

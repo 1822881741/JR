@@ -1,7 +1,7 @@
 function getColumn(){
 	return [
      {id:"rowNo",header:'#',sort:"int",css:"header",width:50},
-     {id:"id",header:'id',hidden:true},
+     {id:"id",header:'操作',template:"<input class='delbtn' type='button' value='Delete'>"},
      {id:"barcode",sort:"string",header:"条码"},
      {id:"oldBarcode",sort:"string",header:"原条码"},
      {id:"productName",sort:"string",header:"商品名称"},
@@ -180,6 +180,7 @@ function saveBillAudit(){
 		        data:billInfo,
 		        async: false,
 		        success: function(data) {
+		        	debugger
 		            if (data.status == '100') {
 		            	layer.msg("保存成功！");
 		            }else{

@@ -24,7 +24,7 @@
     <result column="counterAreaName" jdbcType="VARCHAR" property="counterAreaName" />
     <result column="bargainName" jdbcType="VARCHAR" property="bargainName" />
     <result column="num" jdbcType="INTEGER" property="num" />
-    <result column="hasStock" jdbcType="INTEGER" property="num" />
+    <result column="hasStock" jdbcType="INTEGER" property="hasStock" />
     <result column="netGoldWeight" jdbcType="DOUBLE" property="netGoldWeight" />
     <result column="goldLoss" jdbcType="DOUBLE" property="goldLoss" />
     <result column="goldPurity" jdbcType="DOUBLE" property="goldPurity" />

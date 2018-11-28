@@ -93,8 +93,6 @@ public class ProductStockServiceImpl extends AbstractBaseService<ProductStock> i
             {
                 if(resultMap.containsKey(item.getBarcode()))
                 {
-                    // 已经存在了
-                    System.out.println("---------已经存在了-------------" + item.getBarcode());
                     //加库存
                     StockOperVo vo = new StockOperVo(null,resultMap.get(item.getBarcode()),item.getSecondType(), item.getOutNum(),item.getOutMJewelWeight(),item.getOutGoldWeight(), item.getOutCostPrice(), item.getOutLabelPriceSum());
                     this.stockAdd(vo);
@@ -108,7 +106,7 @@ public class ProductStockServiceImpl extends AbstractBaseService<ProductStock> i
                     stock.setAreaName(storeInfo.getAreaName());
                     stock.setCounterAreaCode(counterInfo.getAreaCode());
                     stock.setCounterAreaName(counterInfo.getAreaName());
-                    stock.setNum(item.getOutNum());
+//                    stock.setNum(item.getOutNum());
                     stock.setGoldWeight(item.getOutGoldWeight());
                     stock.setmJewelWeight(item.getOutMJewelWeight());
                     stock.setLabelPriceSum(item.getOutLabelPriceSum());
@@ -162,71 +160,76 @@ public class ProductStockServiceImpl extends AbstractBaseService<ProductStock> i
     public void stockAdd(StockOperVo vo)
     {
         /*
+         * 镶嵌： 变动字段：数量、成本金额、标价金额
+         * K金： 变动字段：数量，货重、成本金额、标价金额 
          * 素金： 变动字段：数量、货重、成本金额，金重、 
-         * K 金： 变动字段：数量，货重、成本金额、标价金额 
-         * 镶嵌： 变动字段：数量、成本金额、标价金额 
          * 玉器： 变动字段：数量、 成本金额、标价金额 
          * 裸石： 变动字段：数量、 成本金额、标价金额、 石重,主石数 
          * 金镶： 变动字段：数量、 成本金额、标价金额
          * 旧料： 变动字段：金重、货重、成本金额
          */
         ProductStock stock = (ProductStock) selectByPrimaryKey(vo.getOldStockId());
-        //判断当前 库存数和要减少的库存数，是否够 扣的
-        switch (vo.getSecondType())
+        switch (stock.getSecondType())
         {
         case "inlay":
-            stock.setNum(0);
-            stock.setCostPrice(0.0);
-            stock.setLabelPriceSum(0.0);
+            stock.setNum(1);
+            stock.setCostPrice(stock.getUnitPrice());
+            stock.setLabelPriceSum(stock.getLabelPrice());
+            stock.setHasStock(1);
             updateByPrimaryKeySelective(stock);
             break;
         case "kGold":
             stock.setNum(stock.getNum() + vo.getNumAlt());
-            stock.setProductWeight(NumberUtils.add(stock.getProductWeight(), stock.getGoldWeight() * vo.getNumAlt()));
-            stock.setCostPrice(NumberUtils.add(stock.getCostPrice(), vo.getCostPriceAlt()));
-            stock.setLabelPriceSum(NumberUtils.add(stock.getLabelPriceSum(), stock.getLabelPrice() * vo.getNumAlt()));
+            stock.setProductWeight(NumberUtils.add(stock.getProductWeight(), NumberUtils.mul(stock.getGoldWeight() , vo.getNumAlt())));
+            stock.setCostPrice(NumberUtils.add(stock.getCostPrice(), NumberUtils.mul( stock.getUnitPrice(),vo.getNumAlt())));
+            stock.setLabelPriceSum(NumberUtils.add(stock.getLabelPriceSum(), NumberUtils.mul(stock.getLabelPrice() , vo.getNumAlt())));
+            stock.setHasStock(1);
             updateByPrimaryKeySelective(stock);
             break;
         case "gold":
             stock.setNum(stock.getNum() + vo.getNumAlt());
-            stock.setProductWeight(NumberUtils.add(stock.getProductWeight(), stock.getGoldWeight() * vo.getNumAlt()));
+            stock.setProductWeight(NumberUtils.add(stock.getProductWeight(), vo.getGoldWeightAlt()));
             stock.setCostPrice(NumberUtils.add(stock.getCostPrice(), vo.getCostPriceAlt()));
             stock.setGoldWeight(NumberUtils.add(stock.getGoldWeight(), vo.getGoldWeightAlt()));
+            stock.setHasStock(1);
             updateByPrimaryKeySelective(stock);
             break;
         case "jade":
             stock.setNum(stock.getNum() + vo.getNumAlt());
-            stock.setProductWeight(NumberUtils.add(stock.getProductWeight(), stock.getGoldWeight() * vo.getNumAlt()));
-            stock.setCostPrice(NumberUtils.add(stock.getCostPrice(), vo.getCostPriceAlt()));
-            stock.setLabelPriceSum(NumberUtils.add(stock.getLabelPriceSum(), stock.getLabelPrice() * vo.getNumAlt()));
+            stock.setCostPrice(NumberUtils.add(stock.getCostPrice(), NumberUtils.mul( stock.getUnitPrice(),vo.getNumAlt())));
+            stock.setLabelPriceSum(NumberUtils.add(stock.getLabelPriceSum(), NumberUtils.mul(stock.getLabelPrice() , vo.getNumAlt())));
+            stock.setHasStock(1);
             updateByPrimaryKeySelective(stock);
             break;
         case "jewel":
             stock.setNum(stock.getNum() + vo.getNumAlt());
             stock.setmJewelNum(stock.getmJewelNum() - vo.getNumAlt());
-            stock.setCostPrice(NumberUtils.add(stock.getCostPrice(), vo.getCostPriceAlt()));
-            stock.setLabelPriceSum(NumberUtils.add(stock.getLabelPriceSum(), stock.getLabelPrice() * vo.getNumAlt()));
             stock.setmJewelWeight(NumberUtils.add(stock.getmJewelWeight(), vo.getmJewelWeightAlt()));
+            stock.setCostPrice(NumberUtils.add(stock.getCostPrice(), NumberUtils.mul( stock.getUnitPrice(),vo.getNumAlt())));
+            stock.setLabelPriceSum(NumberUtils.add(stock.getLabelPriceSum(), NumberUtils.mul(stock.getLabelPrice() , vo.getNumAlt())));
+            stock.setHasStock(1);
             updateByPrimaryKeySelective(stock);
             break;
         case "goldJade":
-            stock.setNum(stock.getNum() + vo.getNumAlt());
-            stock.setProductWeight(NumberUtils.add(stock.getProductWeight(), stock.getGoldWeight() * vo.getNumAlt()));
-            stock.setCostPrice(NumberUtils.add(stock.getCostPrice(), vo.getCostPriceAlt()));
-            stock.setLabelPriceSum(NumberUtils.add(stock.getLabelPriceSum(), stock.getLabelPrice() * vo.getNumAlt()));
+            stock.setNum(1);
+            stock.setCostPrice(stock.getUnitPrice());
+            stock.setLabelPriceSum(stock.getLabelPrice());
             updateByPrimaryKeySelective(stock);
             break;
         case "material":
-            stock.setProductWeight(NumberUtils.add(stock.getProductWeight(), stock.getGoldWeight() * vo.getNumAlt()));
+            stock.setProductWeight(NumberUtils.add(stock.getProductWeight(), vo.getGoldWeightAlt()));
             stock.setCostPrice(NumberUtils.add(stock.getCostPrice(), vo.getCostPriceAlt()));
             stock.setGoldWeight(NumberUtils.add(stock.getGoldWeight(), vo.getGoldWeightAlt()));
+            stock.setHasStock(1);
+            //单价重新核算
             updateByPrimaryKeySelective(stock);
             break;
         case "gift":
             stock.setNum(stock.getNum() + vo.getNumAlt());
-            stock.setProductWeight(NumberUtils.add(stock.getProductWeight(), stock.getGoldWeight() * vo.getNumAlt()));
-            stock.setCostPrice(NumberUtils.add(stock.getCostPrice(), vo.getCostPriceAlt()));
-            stock.setGoldWeight(NumberUtils.add(stock.getGoldWeight(), vo.getGoldWeightAlt()));
+            stock.setLabelPriceSum(NumberUtils.add(stock.getLabelPriceSum(), NumberUtils.mul(stock.getLabelPrice() , vo.getNumAlt())));
+            stock.setCostPrice(NumberUtils.add(stock.getCostPrice(), NumberUtils.mul(stock.getUnitPrice() , vo.getNumAlt())));
+            stock.setHasStock(1);
+            //单价重新核算
             updateByPrimaryKeySelective(stock);
             break;
         default:
@@ -238,7 +241,7 @@ public class ProductStockServiceImpl extends AbstractBaseService<ProductStock> i
     {
         /*
          * 素金： 变动字段：数量、货重、成本金额，金重、 
-         * K 金： 变动字段：数量，货重、成本金额、标价金额 
+         * K 金：变动字段：数量，货重、成本金额、标价金额 
          * 镶嵌： 变动字段：数量、成本金额、标价金额 
          * 玉器： 变动字段：数量、 成本金额、标价金额 
          * 裸石： 变动字段：数量、 成本金额、标价金额、 石重,主石数 
@@ -246,6 +249,11 @@ public class ProductStockServiceImpl extends AbstractBaseService<ProductStock> i
          * 旧料： 变动字段：金重、货重、成本金额
          */
         ProductStock stock = (ProductStock) selectByPrimaryKey(vo.getOldStockId());
+        boolean canSub = checkCanUseStock(stock, vo);
+        if(!canSub)
+        {
+            throw new ServiceAccessException("条码为【"+stock.getBarcode()+"】的当前库存小于扣减量");
+        }
         //判断当前 库存数和要减少的库存数，是否够 扣的
         switch (vo.getSecondType())
         {
@@ -253,59 +261,151 @@ public class ProductStockServiceImpl extends AbstractBaseService<ProductStock> i
             stock.setNum(0);
             stock.setCostPrice(0.0);
             stock.setLabelPriceSum(0.0);
+            stock.setHasStock(0);
             updateByPrimaryKeySelective(stock);
             break;
         case "kGold":
             stock.setNum(stock.getNum() - vo.getNumAlt());
-            stock.setProductWeight(NumberUtils.sub(stock.getProductWeight(), stock.getGoldWeight() * vo.getNumAlt()));
-            stock.setCostPrice(NumberUtils.sub(stock.getCostPrice(), vo.getCostPriceAlt()));
-            stock.setLabelPriceSum(NumberUtils.sub(stock.getLabelPriceSum(), stock.getLabelPrice() * vo.getNumAlt()));
+            stock.setProductWeight(NumberUtils.sub(stock.getProductWeight(), NumberUtils.mul(stock.getGoldWeight() , vo.getNumAlt())));
+            stock.setCostPrice(NumberUtils.sub(stock.getCostPrice(), NumberUtils.mul( stock.getUnitPrice(),vo.getNumAlt())));
+            stock.setLabelPriceSum(NumberUtils.sub(stock.getLabelPriceSum(), NumberUtils.mul(stock.getLabelPrice() , vo.getNumAlt())));
+            if(stock.getNum() == 0)
+            {
+                stock.setHasStock(0); 
+            }else
+            {
+                stock.setHasStock(1); 
+            }
             updateByPrimaryKeySelective(stock);
             break;
         case "gold":
             stock.setNum(stock.getNum() - vo.getNumAlt());
-            stock.setProductWeight(NumberUtils.sub(stock.getProductWeight(), stock.getGoldWeight() * vo.getNumAlt()));
+            stock.setProductWeight(NumberUtils.sub(stock.getProductWeight(), vo.getGoldWeightAlt()));
             stock.setCostPrice(NumberUtils.sub(stock.getCostPrice(), vo.getCostPriceAlt()));
             stock.setGoldWeight(NumberUtils.sub(stock.getGoldWeight(), vo.getGoldWeightAlt()));
+            if(stock.getNum() == 0)
+            {
+                stock.setHasStock(0); 
+            }else
+            {
+                stock.setHasStock(1); 
+            }
             updateByPrimaryKeySelective(stock);
             break;
         case "jade":
             stock.setNum(stock.getNum() - vo.getNumAlt());
-            stock.setProductWeight(NumberUtils.sub(stock.getProductWeight(), stock.getGoldWeight() * vo.getNumAlt()));
-            stock.setCostPrice(NumberUtils.sub(stock.getCostPrice(), vo.getCostPriceAlt()));
-            stock.setLabelPriceSum(NumberUtils.sub(stock.getLabelPriceSum(), stock.getLabelPrice() * vo.getNumAlt()));
+            stock.setCostPrice(NumberUtils.sub(stock.getCostPrice(), NumberUtils.mul( stock.getUnitPrice(),vo.getNumAlt())));
+            stock.setLabelPriceSum(NumberUtils.sub(stock.getLabelPriceSum(), NumberUtils.mul(stock.getLabelPrice() , vo.getNumAlt())));
+            stock.setHasStock(0);
             updateByPrimaryKeySelective(stock);
             break;
         case "jewel":
             stock.setNum(stock.getNum() - vo.getNumAlt());
             stock.setmJewelNum(stock.getmJewelNum() - vo.getNumAlt());
-            stock.setCostPrice(NumberUtils.sub(stock.getCostPrice(), vo.getCostPriceAlt()));
-            stock.setLabelPriceSum(NumberUtils.sub(stock.getLabelPriceSum(), stock.getLabelPrice() * vo.getNumAlt()));
             stock.setmJewelWeight(NumberUtils.sub(stock.getmJewelWeight(), vo.getmJewelWeightAlt()));
+            stock.setCostPrice(NumberUtils.sub(stock.getCostPrice(), NumberUtils.mul( stock.getUnitPrice(),vo.getNumAlt())));
+            stock.setLabelPriceSum(NumberUtils.sub(stock.getLabelPriceSum(), NumberUtils.mul(stock.getLabelPrice() , vo.getNumAlt())));
+            if(stock.getNum() == 0)
+            {
+                stock.setHasStock(0); 
+            }else
+            {
+                stock.setHasStock(1); 
+            }
             updateByPrimaryKeySelective(stock);
             break;
         case "goldJade":
-            stock.setNum(stock.getNum() - vo.getNumAlt());
-            stock.setProductWeight(NumberUtils.sub(stock.getProductWeight(), stock.getGoldWeight() * vo.getNumAlt()));
-            stock.setCostPrice(NumberUtils.sub(stock.getCostPrice(), vo.getCostPriceAlt()));
-            stock.setLabelPriceSum(NumberUtils.sub(stock.getLabelPriceSum(), stock.getLabelPrice() * vo.getNumAlt()));
+            stock.setNum(0);
+            stock.setCostPrice(0.0);
+            stock.setLabelPriceSum(0.0);
+            if(stock.getNum() == 0)
+            {
+                stock.setHasStock(0); 
+            }else
+            {
+                stock.setHasStock(1); 
+            }
             updateByPrimaryKeySelective(stock);
             break;
         case "material":
-            stock.setProductWeight(NumberUtils.sub(stock.getProductWeight(), stock.getGoldWeight() * vo.getNumAlt()));
+            stock.setProductWeight(NumberUtils.sub(stock.getProductWeight(), vo.getGoldWeightAlt()));
             stock.setCostPrice(NumberUtils.sub(stock.getCostPrice(), vo.getCostPriceAlt()));
             stock.setGoldWeight(NumberUtils.sub(stock.getGoldWeight(), vo.getGoldWeightAlt()));
+            if(stock.getProductWeight() <= 0)
+            {
+                stock.setHasStock(0); 
+            }else
+            {
+                stock.setHasStock(1); 
+            }
+            //单价重新核算
             updateByPrimaryKeySelective(stock);
             break;
         case "gift":
             stock.setNum(stock.getNum() - vo.getNumAlt());
-            stock.setProductWeight(NumberUtils.sub(stock.getProductWeight(), stock.getGoldWeight() * vo.getNumAlt()));
-            stock.setCostPrice(NumberUtils.sub(stock.getCostPrice(), vo.getCostPriceAlt()));
-            stock.setGoldWeight(NumberUtils.sub(stock.getGoldWeight(), vo.getGoldWeightAlt()));
+            stock.setLabelPriceSum(NumberUtils.sub(stock.getLabelPriceSum(), NumberUtils.mul(stock.getLabelPrice() , vo.getNumAlt())));
+            stock.setCostPrice(NumberUtils.sub(stock.getCostPrice(), NumberUtils.mul(stock.getUnitPrice() , vo.getNumAlt())));
+            if(stock.getNum() == 0)
+            {
+                stock.setHasStock(0); 
+            }else
+            {
+                stock.setHasStock(1); 
+            }
+            //单价重新核算
             updateByPrimaryKeySelective(stock);
             break;
         default:
             break;
+        }
+    }
+    
+    /**    
+     * checkCanUseStock(这里用一句话描述这个方法的作用)    
+     * 检查当前库存是否够扣减       
+     * @param @param stock
+     * @param @param vo
+     * @param @return     
+     * @return boolean
+     * @Exception 异常对象
+    */
+    private boolean checkCanUseStock(ProductStock stock,StockOperVo vo)
+    {
+        switch (stock.getSecondType())
+        {
+        case "inlay":
+            return stock.getNum() - 1 >= 0;
+        case "kGold":
+            return (stock.getNum() - vo.getNumAlt() >= 0)
+                    && (NumberUtils.sub(stock.getProductWeight(),NumberUtils.mul(stock.getGoldWeight(), vo.getNumAlt())) >= 0)
+                    && (NumberUtils.sub(stock.getCostPrice(),NumberUtils.mul(stock.getUnitPrice(), vo.getNumAlt())) >= 0)
+                    && (NumberUtils.sub(stock.getLabelPriceSum(),NumberUtils.mul(stock.getLabelPrice(), vo.getNumAlt())) >= 0);
+        case "gold":
+            return (stock.getNum() - vo.getNumAlt() >= 0)
+                    && (NumberUtils.sub(stock.getProductWeight(), vo.getGoldWeightAlt()) >= 0)
+                    && (NumberUtils.sub(stock.getCostPrice(), vo.getCostPriceAlt()) >= 0)
+                    && (NumberUtils.sub(stock.getGoldWeight(), vo.getGoldWeightAlt()) >= 0);
+        case "jade":
+            return (stock.getNum() - vo.getNumAlt() >= 0)
+                    && (NumberUtils.sub(stock.getCostPrice(),NumberUtils.mul(stock.getUnitPrice(), vo.getNumAlt())) >= 0)
+                    && (NumberUtils.sub(stock.getLabelPriceSum(),NumberUtils.mul(stock.getLabelPrice(), vo.getNumAlt())) >= 0);
+        case "jewel":
+            return (stock.getNum() - vo.getNumAlt() >= 0) && (stock.getmJewelNum() - vo.getNumAlt() >= 0)
+                    && (NumberUtils.sub(stock.getmJewelWeight(), vo.getmJewelWeightAlt()) >= 0)
+                    && (NumberUtils.sub(stock.getCostPrice(),NumberUtils.mul(stock.getUnitPrice(), vo.getNumAlt())) >= 0)
+                    && (NumberUtils.sub(stock.getLabelPriceSum(),NumberUtils.mul(stock.getLabelPrice(), vo.getNumAlt())) >= 0);
+        case "goldJade":
+            return stock.getNum() - 1 >= 0;
+        case "material":
+            return (NumberUtils.sub(stock.getProductWeight(), vo.getGoldWeightAlt()) >= 0)
+                    && (NumberUtils.sub(stock.getCostPrice(), vo.getCostPriceAlt()) >= 0)
+                    && (NumberUtils.sub(stock.getGoldWeight(), vo.getGoldWeightAlt()) >= 0);
+        case "gift":
+            return (stock.getNum() - vo.getNumAlt() >= 0)
+                    && (NumberUtils.sub(stock.getLabelPriceSum(),NumberUtils.mul(stock.getLabelPrice(), vo.getNumAlt())) >= 0)
+                    && (NumberUtils.sub(stock.getCostPrice(),NumberUtils.mul(stock.getUnitPrice(), vo.getNumAlt())) >= 0);
+        default:
+            return true;
         }
     }
 }

@@ -160,4 +160,34 @@ public class TransferController
             return Ret.error(e.getMessage());
         }
     }
+    
+    @ResponseBody
+    @RequestMapping(value = "/deleteBill.do")
+    public Ret deleteBill(Integer billId,HttpServletRequest request, HttpServletResponse response){
+        SysUser user= ShiroUtils.getSysUser();
+        try
+        {
+            billTransfenService.deleteBill(billId);
+            return Ret.ok("删除成功成功");
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return Ret.error(e.getMessage());
+        }
+    }
+    
+    @ResponseBody
+    @RequestMapping(value = "/deleteBillItem.do")
+    public Ret deleteBillItem(Integer billId,Integer itemId,HttpServletRequest request, HttpServletResponse response){
+        SysUser user= ShiroUtils.getSysUser();
+        try
+        {
+            billTransfenService.deleteBillItem(billId,itemId);
+            return Ret.ok("删除成功");
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            return Ret.error(e.getMessage());
+        }
+    }
 }

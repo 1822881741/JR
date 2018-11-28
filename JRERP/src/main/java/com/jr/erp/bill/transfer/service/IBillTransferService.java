@@ -66,4 +66,23 @@ public interface IBillTransferService extends IBaseService<BaseEntity>
      * @Exception 异常对象
     */
     void updateItemById(BillTransferItem item);
+
+    /**    
+     * deleteBill(这里用一句话描述这个方法的作用)    
+     * 删除单据       
+     * @param @param billId     
+     * @return void
+     * @Exception 异常对象
+    */
+    void deleteBill(Integer billId);
+
+    /**    
+     * deleteBillItem(这里用一句话描述这个方法的作用)    
+     * 删除明细       
+     * @param @param billId
+     * @param @param itemId     
+     * @return void
+     * @Exception 异常对象
+    */
+    void deleteBillItem(Integer billId, Integer itemId);
 }

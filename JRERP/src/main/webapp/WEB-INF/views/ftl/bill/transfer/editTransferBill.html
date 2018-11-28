@@ -25,6 +25,7 @@
 				<ul class="demo-btns" style="height: 30px;">
 					<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 新增</a></li>
 					<li><a id="saveAudit" href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 保存</a></li>
+					<li><a id="deleteBill" href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 刪除</a></li>
 					<@bill.billType desktopMap=desktopMap />
 					<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 打印</a></li>
 					<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 预览</a></li>
@@ -124,7 +125,7 @@
 </body>
 <@bill.js/>
 <script src="static/plugins/webix/querybuilder/querybuilder.js?v=1"></script>
-<script src="static/zmodel/transfer/transferBill.js?v=5"></script>
+<script src="static/zmodel/transfer/transferBill.js?v=110"></script>
 <script type="text/javascript">
 	var grid;
 	var context;
@@ -170,10 +171,14 @@
 		})
 		$("#areaCode").change();
 		$("#inAreaCode").change();
+		
 		$("#counterAreaCode").selectpicker('val',"${billTransfer.counterAreaCode}");
 		$("#inCounterAreaCode").selectpicker('val',"${billTransfer.inCounterAreaCode}");
 		$("#saveAudit").on("click",function(){
 			saveBillAudit();
+		})
+		$("#deleteBill").on("click",function(){
+			deleteBill();
 		})
 		$("#exportExcel").on("click",function(){
 			webix.toExcel($$("itemDatatable"), 
@@ -246,9 +251,8 @@
 								obj.rowNo = i+1;
 							})
 						}
-					}
+				}
 			};
-
 		var form = {
 			view:"form", 
 			id:"form1", 
@@ -308,6 +312,13 @@
 				 ]}
 			]
 		});
+		$$("itemDatatable").on_click.delbtn=function(e, id, trg){
+			var flag=deleteBillItem(id);
+			if(flag){
+				$$("itemDatatable").remove(id);
+			}
+			return true;
+		};
 		$$('form1').bind('itemDatatable');
 		
 		$$("form1").elements["outNum"].attachEvent("onKeyPress", function(code, e) {
@@ -357,6 +368,62 @@
 	        	layer.alert("连接服务器失败，请稍后重试");
 	        }
 	    });
+	}
+	
+	function deleteBill(){
+		if($("#id").val()=='' || !$("#id").val()){
+			layer.msg("该单尚未创建，无需删除");
+		}else{
+			layer.confirm("确定要删除该单吗？",function(index){
+				$.ajax({
+			        type: "POST",
+			        url: "transfer/deleteBill.do?billId="+$("#id").val(),
+			        dataType: 'json',
+			        async: false,
+			        success: function(data) {
+			            if (data.status == '100') {
+			            	layer.alert("删除成功",function(innerIndex){
+			            		layer.close(innerIndex);
+			            		window.location.href="transfer/editTransferBill.do";
+			            	})
+			            }else{
+			            	layer.msg(data.msg);
+			            }
+			            layer.close(index);
+			        },
+			        error: function() {
+			        	layer.alert("连接服务器失败，请稍后重试");
+			        }
+			    });
+				
+			})
+		}
+	}
+	
+	function deleteBillItem(itemId){
+		var delFlag =false;
+		if($("#id").val()=='' || !$("#id").val()){
+			layer.msg("该单尚未创建，无需删除");
+		}else{
+			$.ajax({
+		        type: "POST",
+		        url: "transfer/deleteBillItem.do?billId="+$("#id").val()+"&itemId="+itemId,
+		        dataType: 'json',
+		        async: false,
+		        success: function(data) {
+		            if (data.status == '100') {
+		            	layer.msg("删除成功")
+		            	delFlag=true;
+		            }else{
+		            	layer.msg(data.msg);
+		            }
+		        },
+		        error: function() {
+		        	layer.alert("连接服务器失败，请稍后重试");
+		        }
+		    });
+		}
+		return delFlag;
 	}
 </script>
 </html>

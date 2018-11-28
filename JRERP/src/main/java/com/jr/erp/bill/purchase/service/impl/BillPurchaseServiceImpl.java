@@ -163,7 +163,7 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
     }
 
     @Override
-    public BillPurchase saveImportBill(BillPurchase billPurchase)
+    public BillPurchase saveImportBill(Integer sechemeId,BillPurchase billPurchase)
     {
         billPurchase.setBillStatus(Constance.BILL_STATUS_NEW);
         billPurchase.setBillType(Constance.BILL_TYPE_PURCHASE);
@@ -172,6 +172,8 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
         this.insert(billPurchase);
         if(CollectionUtils.isNotEmpty(billPurchase.getItemList()))
         {
+            PurchaseSecheme secheme = (PurchaseSecheme)sysPurchaseSechemeService.getById(sechemeId);
+            
             List<BillPurchaseItem> itemList = billPurchase.getItemList();
             List<String> barcodeList = barcodeService.getBarcode(itemList.size());
             for (int i = 0; i < billPurchase.getItemList().size(); i++)
@@ -180,6 +182,8 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
                 temp.setCompanyNo(billPurchase.getCompanyNo());
                 temp.setBillId(billPurchase.getId());
                 temp.setBarcode(barcodeList.get(i));
+                temp.setFirstType(secheme.getFirstType());
+                temp.setSecondType(secheme.getSecondType());
                 billPurchaseItemService.insert(temp);
             }
         }
