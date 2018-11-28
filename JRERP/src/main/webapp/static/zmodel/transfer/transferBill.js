@@ -1,7 +1,7 @@
 function getColumn(){
 	return [
      {id:"rowNo",header:'#',sort:"int",css:"header",width:50},
-     {id:"id",header:'操作',template:"<input class='delbtn' type='button' value='Delete'>"},
+     {id:"id",header:'操作',template:"<a href='javascript:void(0)' class='btn btn-xs btn-danger delbtn'><i class='fa fa-trash-o'></i> 删除</a>"},
      {id:"barcode",sort:"string",header:"条码"},
      {id:"oldBarcode",sort:"string",header:"原条码"},
      {id:"productName",sort:"string",header:"商品名称"},
