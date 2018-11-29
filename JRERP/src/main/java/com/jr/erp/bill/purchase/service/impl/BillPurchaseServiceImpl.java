@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.socket.TextMessage;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jr.erp.base.exception.ServiceAccessException;
@@ -26,6 +27,7 @@ import com.jr.erp.bill.purchase.service.IBillPurchaseItemService;
 import com.jr.erp.bill.purchase.service.IBillPurchaseService;
 import com.jr.erp.bill.utils.Constance;
 import com.jr.erp.bus.stock.service.IProductStockService;
+import com.jr.erp.msg.websocket.WebSocketHandler;
 import com.jr.erp.sys.set.base.entity.Param;
 import com.jr.erp.sys.set.base.service.IBarcodeService;
 import com.jr.erp.sys.set.base.service.IParamService;
@@ -54,6 +56,9 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
     
     @Autowired
     IBarcodeService  barcodeService;
+
+    @Autowired
+    WebSocketHandler webSocketHandler;
     
     @Override
     public List<JSONObject> parseImportExcel(String companyNo, Integer sechemeId, MultipartFile file)
@@ -257,6 +262,8 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
             processBillAndItem(billPurchase, itemList);
             this.updateByPrimaryKeySelective(billPurchase);
           
+            //审核发送信息
+            webSocketHandler.sendMessageToUser(ShiroUtils.getUserName(), new TextMessage("您有新的进货单需审核"));
         } else
         {
             // 不需要审核
@@ -268,6 +275,9 @@ public class BillPurchaseServiceImpl extends AbstractBaseService<BillPurchase> i
                 this.updateByPrimaryKeySelective(billPurchase);
                 String counterCode = billPurchase.getAreaCode() + "000";
                 productStockService.addPurchaseStock(billPurchase, counterCode);
+                
+                //在途发送信息
+                webSocketHandler.sendMessageToUser(ShiroUtils.getUserName(), new TextMessage("您有新的在途单需处理"));
             } else
             {
                 // 需要审核

@@ -254,8 +254,7 @@
 			</ul>
 		</div>
 		<!-- END SHORTCUT AREA -->
-		<script src="http://code.jquery.com/jquery-1.11.3.js"></script>
-		
+		<script src="resource/js/jquery2.2.4/jquery.js"></script>
 		<script src="static/js/app.config.js"></script>
 		<script src="static/js/bootstrap/bootstrap.min.js"></script>
 		<script src="static/js/smartwidgets/jarvis.widget.min.js"></script>
@@ -263,8 +262,8 @@
 		<script src="static/js/demo.min.js?v=1"></script>
 		<script src="static/js/app.js?v=2"></script>
 		<script src="static/plugins/bootStrap-addTabs/bootstrap.addtabs.js?v=21"></script>
-		<script src="static/plugins/jquery-iframe-auto-height-master/dist/jquery-iframe-auto-height.js?v=42"></script>
-		<script src="static/plugins/jquery-iframe-auto-height-master/vendor/jquery.browser.js"></script>
+		<script src="static/plugins/websocket/sockjs-0.3.min.js"></script>
+		<script src="static/plugins/layer/layer.js"></script>
 	</body>
 
 	<script type="text/javascript">
@@ -275,17 +274,36 @@
 		var winHeight=$(window.parent.document).height()-100;
 		$(window).on("resize",function(){
 			winHeight=$(window.parent.document).height()-100;
-			/*var cc=$('iframe').iframeAutoHeight({
-		          debug: true,
-		          minHeight: 350,
-		          diagnostics: true
-		    });*/
-			console.log("==============ccc====="+JSON.stringify(cc))
 		})
-			var cc=$('iframe').iframeAutoHeight({
-		          debug: true,
-		          minHeight: 100,
-		          diagnostics: true
-		    });
+		
+		 var websocket;  
+      
+        if ('WebSocket' in window) {  
+            websocket = new WebSocket("${webSocketPath}");  
+        } else if ('MozWebSocket' in window) {  
+            websocket = new MozWebSocket("${webSocketPath}");  
+        } else {  
+            websocket = new SockJS("${webSocketPath2}");  
+        }  
+      
+        websocket.onopen = function(evnt) {};  
+        websocket.onmessage = function(evnt) {  
+        	//边缘弹出
+        	layer.open({
+        	  type: 1,
+        	  offset: 'rb', //具体配置参考：offset参数项
+        	  skin: 'layui-layer-lan', //样式类名
+        	  content: '<div style="padding: 20px 80px;">'+evnt.data+'</div>',
+        	  btn: '关闭',
+        	  btnAlign: 'c',
+        	  shade: 0 ,
+        	  yes: function(){
+        	    layer.closeAll();
+        	  }
+        	});
+        };  
+      
+        websocket.onerror = function(evnt) {};  
+        websocket.onclose = function(evnt) {}  
 	</script>
 </html>

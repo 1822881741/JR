@@ -29,6 +29,7 @@ import com.jr.erp.bill.utils.Constance;
 import com.jr.erp.bus.stock.entity.ProductStock;
 import com.jr.erp.bus.stock.entity.ProductStockExample;
 import com.jr.erp.bus.stock.service.IProductStockService;
+import com.jr.erp.msg.websocket.WebSocketHandler;
 import com.jr.erp.sys.set.base.entity.Param;
 import com.jr.erp.sys.set.base.service.IParamService;
 import com.jr.erp.sys.set.purchase.service.IPurchaseSechemeService;
@@ -52,6 +53,9 @@ public class BillTransferServiceImpl extends AbstractBaseService<BillTransfer> i
     @Autowired
     IProductStockService productStockService;
 
+    @Autowired
+    WebSocketHandler webSocketHandler;
+    
     @Override
     public void saveBillAudit(BillTransfer billTransfer)
     {

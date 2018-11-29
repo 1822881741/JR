@@ -14,5 +14,7 @@ public class FreeMarkerViewExtend extends FreeMarkerView {
 		}
 		model.put("basePath", request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/");//base目录。
 		model.put("contextPath", request.getContextPath());//base目录。
+		model.put("webSocketPath",  "ws://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/webSocketServer");//base目录。
+		model.put("webSocketPath2",  request.getScheme()+"://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/sockjs/webSocketServer");//base目录。
 	}
 }
