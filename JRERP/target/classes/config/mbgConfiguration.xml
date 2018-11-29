@@ -28,8 +28,8 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		</javaTypeResolver>
 
 		<!-- 数据表对应的model 层 嘎嘎嘎嘎嘎过过过过过过过过过过过过过过过过过过过过过过过-->
-		<javaModelGenerator targetPackage="com.jr.erp.bill.transfer.entity"
-			targetProject="G:\gitworkspace\JR\JRERP\src\main\java">
+		<javaModelGenerator targetPackage="com.jr.erp.bill.stocktake.entity"
+			targetProject="G:\gitworkspace\JR\JR\JRERP\src\main\java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 			<property name="rootClass" value="com.jr.erp.base.mybatis.BaseEntity" />
@@ -37,25 +37,18 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 
 		<!-- sql mapper 隐射配置文件 xml 文件 -->
 		<sqlMapGenerator targetPackage="mapper"
-			targetProject="G:\gitworkspace\JR\JRERP\src\main\resources">
+			targetProject="G:\gitworkspace\JR\JR\JRERP\src\main\resources">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<!-- 在ibatis2 中是dao层，但在mybatis3中，其实就是mapper接口 嘎嘎嘎嘎嘎过过过过过过过过过过过过过过过过过过过过过过过-->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.jr.erp.bill.transfer.dao" targetProject="G:\gitworkspace\JR\JRERP\src\main\java">
+			targetPackage="com.jr.erp.bill.stocktake.dao" targetProject="G:\gitworkspace\JR\JRERP\src\main\java">
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 		
 		<!-- 要对那些数据表进行生成操作，必须要有一个. -->
-		<table schema="mybatis" tableName="bill_transfer" domainObjectName="BillTransfer"  delimitIdentifiers="false"
-			selectByPrimaryKeyQueryId="true" enableDeleteByPrimaryKey="true"
-			enableCountByExample="true" enableUpdateByPrimaryKey="true" enableUpdateByExample="true" >
-			<property name="useActualColumnNames" value="true" />
-			<generatedKey column="id" sqlStatement="MySql" identity="true"/>
-			</table> 
-		<!-- 要对那些数据表进行生成操作，必须要有一个. -->
-		<table schema="mybatis" tableName="bill_transfer_item" domainObjectName="BillTransferItem"  delimitIdentifiers="false"
+		<table schema="mybatis" tableName="bill_stocktake" domainObjectName="BillStocktake"  delimitIdentifiers="false"
 			selectByPrimaryKeyQueryId="true" enableDeleteByPrimaryKey="true"
 			enableCountByExample="true" enableUpdateByPrimaryKey="true" enableUpdateByExample="true" >
 			<property name="useActualColumnNames" value="true" />
