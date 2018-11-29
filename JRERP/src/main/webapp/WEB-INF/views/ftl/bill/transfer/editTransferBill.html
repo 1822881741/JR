@@ -132,6 +132,12 @@
 	$(document).ready(function() {
 		webix.i18n.setLocale("zh-CN");
 		pageSetUp();
+		laydate.render({
+		  elem: '#billDate',
+		  theme: 'grid',
+		  trigger: 'click',
+		  calendar: true
+		});
 		$("#areaCode,#inAreaCode").on("change",function(){
 			var tmp = $(this).attr("id");
 			if(tmp =='counterAreaCode'){

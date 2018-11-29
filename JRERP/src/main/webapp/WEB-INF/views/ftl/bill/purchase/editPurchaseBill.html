@@ -148,6 +148,11 @@
 		$("#saveAudit").on("click",function(){
 			saveBillAudit();
 		})
+		
+		laydate.render({
+		  elem: '#billDate',
+		  theme: '#393D49'
+		});
 	});
 	
 	function showDropdown(obj){
@@ -225,6 +230,7 @@
 			}
 		});
 		layer.full(index);
+		layer.iframeAuto(index)
 	}
 	
 	function reloadData(billInfo){

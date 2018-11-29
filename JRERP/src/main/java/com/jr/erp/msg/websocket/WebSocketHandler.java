@@ -29,8 +29,8 @@ public class WebSocketHandler extends TextWebSocketHandler {
         System.out.println("connect to the websocket success......");  
         users.add(session);  
         // 这块会实现自己业务，比如，当用户登录后，会把离线消息推送给用户  
-//         TextMessage returnMessage = new TextMessage("你将收到的离线");  
-//         session.sendMessage(returnMessage);  
+         TextMessage returnMessage = new TextMessage("你将收到的离线");  
+         session.sendMessage(returnMessage);  
     }  
   
     /** 
