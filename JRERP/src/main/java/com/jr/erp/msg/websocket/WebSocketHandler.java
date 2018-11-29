@@ -58,7 +58,6 @@ public class WebSocketHandler extends TextWebSocketHandler {
                 } catch (IOException e) {  
                     e.printStackTrace();  
                 }  
-                break;  
             }  
         }  
     }  
