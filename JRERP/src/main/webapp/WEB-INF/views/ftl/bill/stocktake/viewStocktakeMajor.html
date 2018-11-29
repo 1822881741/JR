@@ -18,8 +18,7 @@
 		<div class="row margin-left-10">
 			<div class="col-sm-6 col-md-6 col-lg-6">
 				<ul class="demo-btns" style="height: 30px;">
-					<li><a href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 新增</a></li>
-					<li><a id="saveAudit" href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 保存</a></li>
+					<li><a id="addStocktake" href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 新增</a></li>
 				</ul>
 			</div>
 		</div>
@@ -47,9 +46,47 @@
 <script src="static/testdata.js"></script>
 <script type="text/javascript">
 	var u1,u2;
+	var addIndex;
 	$(document).ready(function() {
 		pageSetUp();
-		 webix.i18n.setLocale("zh-CN");
+		
+		$("#addStocktake").on("click",function(){
+			addIndex = layer.open({
+				  type: 2,
+				  skin: 'layui-layer-lan', //加上边框
+				  area: ['600px', '400px'], //宽高
+				  fixed: false, //不固定
+				  content : "stocktake/addStocktakeMajor.do",
+				  btn : [ '保存', '取消' ],
+				  yes : function(index, layero) {
+						var result = $(layero).find("iframe")[0].contentWindow.submitData();
+						if (result) {
+							var param = $("#billForm").serialize();
+							param +="&querySql="+result.code;
+							$.ajax({
+						        type: "POST",
+						        url: "transfer/addTransferItemBatch.do",
+						        dataType: 'json',
+						        data:encodeURI(param),
+						        async: false,
+						        success: function(data) {
+						            if (data.status == '100') {
+						            	reloadData(data.data);
+						            	layer.close(index);
+						            }else{
+						            	layer.msg("导入符合条件的内容失败");
+						            }
+						        },
+						        error: function() {
+						        	layer.alert("连接服务器失败，请稍后重试");
+						        }
+						    });
+						}
+				}
+			});
+		})
+		
+		webix.i18n.setLocale("zh-CN");
 		  u1=webix.ui({
 				view:"dataview",
 				container:"nofinish",
@@ -62,7 +99,7 @@
 	                template:"<span class='webix_strong'>Rating: </span> #rating#<br/><span class='webix_strong'>Votes: </span> #votes#"
 	            },
 	            xCount:2,
-	            height:parent.winHeight-300,
+	            height:parent.winHeight-240,
 	            data:big_film_set
 		});
 		u2= webix.ui({
@@ -77,7 +114,7 @@
 	                template:"<span class='webix_strong'>Rating: </span> #rating#<br/><span class='webix_strong'>Votes: </span> #votes#"
 	            },
 	            xCount:2,
-	            height:parent.winHeight-300,
+	            height:parent.winHeight-240,
 	            data:big_film_set
 		});
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {

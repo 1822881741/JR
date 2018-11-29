@@ -5,9 +5,11 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="companyNo" jdbcType="VARCHAR" property="companyNo" />
     <result column="billNo" jdbcType="VARCHAR" property="billNo" />
-    <result column="billDate" jdbcType="DATE" property="billDate" />
+    <result column="sysBillNo" jdbcType="VARCHAR" property="sysBillNo" />
+    <result column="billDate" jdbcType="VARCHAR" property="billDate" />
     <result column="areaCode" jdbcType="VARCHAR" property="areaCode" />
     <result column="areaName" jdbcType="VARCHAR" property="areaName" />
+    <result column="canViewAll" jdbcType="TINYINT" property="canViewAll" />
     <result column="counterAreaCode" jdbcType="VARCHAR" property="counterAreaCode" />
     <result column="counterAreaName" jdbcType="VARCHAR" property="counterAreaName" />
     <result column="productName" jdbcType="VARCHAR" property="productName" />
@@ -82,9 +84,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, companyNo, billNo, billDate, areaCode, areaName, counterAreaCode, counterAreaName, 
-    productName, assignTaker, bookNum, checkNum, billStatus, createUserId, createUserName, 
-    createTime, finishTime
+    id, companyNo, billNo, sysBillNo, billDate, areaCode, areaName, canViewAll, counterAreaCode, 
+    counterAreaName, productName, assignTaker, bookNum, checkNum, billStatus, createUserId, 
+    createUserName, createTime, finishTime
   </sql>
   <sql id="Blob_Column_List">
     remarks
@@ -144,19 +146,19 @@
   </delete>
   <insert id="insert" parameterType="com.jr.erp.bill.stocktake.entity.BillStocktake">
     insert into bill_stocktake (id, companyNo, billNo, 
-      billDate, areaCode, areaName, 
-      counterAreaCode, counterAreaName, productName, 
-      assignTaker, bookNum, checkNum, 
-      billStatus, createUserId, createUserName, 
-      createTime, finishTime, remarks
-      )
+      sysBillNo, billDate, areaCode, 
+      areaName, canViewAll, counterAreaCode, 
+      counterAreaName, productName, assignTaker, 
+      bookNum, checkNum, billStatus, 
+      createUserId, createUserName, createTime, 
+      finishTime, remarks)
     values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{billNo,jdbcType=VARCHAR}, 
-      #{billDate,jdbcType=DATE}, #{areaCode,jdbcType=VARCHAR}, #{areaName,jdbcType=VARCHAR}, 
-      #{counterAreaCode,jdbcType=VARCHAR}, #{counterAreaName,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
-      #{assignTaker,jdbcType=TINYINT}, #{bookNum,jdbcType=INTEGER}, #{checkNum,jdbcType=INTEGER}, 
-      #{billStatus,jdbcType=TINYINT}, #{createUserId,jdbcType=INTEGER}, #{createUserName,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=VARCHAR}, #{finishTime,jdbcType=VARCHAR}, #{remarks,jdbcType=LONGVARCHAR}
-      )
+      #{sysBillNo,jdbcType=VARCHAR}, #{billDate,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, 
+      #{areaName,jdbcType=VARCHAR}, #{canViewAll,jdbcType=TINYINT}, #{counterAreaCode,jdbcType=VARCHAR}, 
+      #{counterAreaName,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, #{assignTaker,jdbcType=TINYINT}, 
+      #{bookNum,jdbcType=INTEGER}, #{checkNum,jdbcType=INTEGER}, #{billStatus,jdbcType=TINYINT}, 
+      #{createUserId,jdbcType=INTEGER}, #{createUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{finishTime,jdbcType=VARCHAR}, #{remarks,jdbcType=LONGVARCHAR})
   </insert>
   <select id="countByExample" parameterType="com.jr.erp.bill.stocktake.entity.BillStocktakeExample" resultType="java.lang.Long">
     select count(*) from bill_stocktake
@@ -176,14 +178,20 @@
       <if test="record.billNo != null">
         billNo = #{record.billNo,jdbcType=VARCHAR},
       </if>
+      <if test="record.sysBillNo != null">
+        sysBillNo = #{record.sysBillNo,jdbcType=VARCHAR},
+      </if>
       <if test="record.billDate != null">
-        billDate = #{record.billDate,jdbcType=DATE},
+        billDate = #{record.billDate,jdbcType=VARCHAR},
       </if>
       <if test="record.areaCode != null">
         areaCode = #{record.areaCode,jdbcType=VARCHAR},
       </if>
       <if test="record.areaName != null">
         areaName = #{record.areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.canViewAll != null">
+        canViewAll = #{record.canViewAll,jdbcType=TINYINT},
       </if>
       <if test="record.counterAreaCode != null">
         counterAreaCode = #{record.counterAreaCode,jdbcType=VARCHAR},
@@ -231,9 +239,11 @@
     set id = #{record.id,jdbcType=INTEGER},
       companyNo = #{record.companyNo,jdbcType=VARCHAR},
       billNo = #{record.billNo,jdbcType=VARCHAR},
-      billDate = #{record.billDate,jdbcType=DATE},
+      sysBillNo = #{record.sysBillNo,jdbcType=VARCHAR},
+      billDate = #{record.billDate,jdbcType=VARCHAR},
       areaCode = #{record.areaCode,jdbcType=VARCHAR},
       areaName = #{record.areaName,jdbcType=VARCHAR},
+      canViewAll = #{record.canViewAll,jdbcType=TINYINT},
       counterAreaCode = #{record.counterAreaCode,jdbcType=VARCHAR},
       counterAreaName = #{record.counterAreaName,jdbcType=VARCHAR},
       productName = #{record.productName,jdbcType=VARCHAR},
@@ -255,9 +265,11 @@
     set id = #{record.id,jdbcType=INTEGER},
       companyNo = #{record.companyNo,jdbcType=VARCHAR},
       billNo = #{record.billNo,jdbcType=VARCHAR},
-      billDate = #{record.billDate,jdbcType=DATE},
+      sysBillNo = #{record.sysBillNo,jdbcType=VARCHAR},
+      billDate = #{record.billDate,jdbcType=VARCHAR},
       areaCode = #{record.areaCode,jdbcType=VARCHAR},
       areaName = #{record.areaName,jdbcType=VARCHAR},
+      canViewAll = #{record.canViewAll,jdbcType=TINYINT},
       counterAreaCode = #{record.counterAreaCode,jdbcType=VARCHAR},
       counterAreaName = #{record.counterAreaName,jdbcType=VARCHAR},
       productName = #{record.productName,jdbcType=VARCHAR},
@@ -282,14 +294,20 @@
       <if test="billNo != null">
         billNo = #{billNo,jdbcType=VARCHAR},
       </if>
+      <if test="sysBillNo != null">
+        sysBillNo = #{sysBillNo,jdbcType=VARCHAR},
+      </if>
       <if test="billDate != null">
-        billDate = #{billDate,jdbcType=DATE},
+        billDate = #{billDate,jdbcType=VARCHAR},
       </if>
       <if test="areaCode != null">
         areaCode = #{areaCode,jdbcType=VARCHAR},
       </if>
       <if test="areaName != null">
         areaName = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="canViewAll != null">
+        canViewAll = #{canViewAll,jdbcType=TINYINT},
       </if>
       <if test="counterAreaCode != null">
         counterAreaCode = #{counterAreaCode,jdbcType=VARCHAR},
@@ -334,9 +352,11 @@
     update bill_stocktake
     set companyNo = #{companyNo,jdbcType=VARCHAR},
       billNo = #{billNo,jdbcType=VARCHAR},
-      billDate = #{billDate,jdbcType=DATE},
+      sysBillNo = #{sysBillNo,jdbcType=VARCHAR},
+      billDate = #{billDate,jdbcType=VARCHAR},
       areaCode = #{areaCode,jdbcType=VARCHAR},
       areaName = #{areaName,jdbcType=VARCHAR},
+      canViewAll = #{canViewAll,jdbcType=TINYINT},
       counterAreaCode = #{counterAreaCode,jdbcType=VARCHAR},
       counterAreaName = #{counterAreaName,jdbcType=VARCHAR},
       productName = #{productName,jdbcType=VARCHAR},
@@ -355,9 +375,11 @@
     update bill_stocktake
     set companyNo = #{companyNo,jdbcType=VARCHAR},
       billNo = #{billNo,jdbcType=VARCHAR},
-      billDate = #{billDate,jdbcType=DATE},
+      sysBillNo = #{sysBillNo,jdbcType=VARCHAR},
+      billDate = #{billDate,jdbcType=VARCHAR},
       areaCode = #{areaCode,jdbcType=VARCHAR},
       areaName = #{areaName,jdbcType=VARCHAR},
+      canViewAll = #{canViewAll,jdbcType=TINYINT},
       counterAreaCode = #{counterAreaCode,jdbcType=VARCHAR},
       counterAreaName = #{counterAreaName,jdbcType=VARCHAR},
       productName = #{productName,jdbcType=VARCHAR},

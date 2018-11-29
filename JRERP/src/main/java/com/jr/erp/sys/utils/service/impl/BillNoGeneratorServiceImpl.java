@@ -9,6 +9,7 @@ import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.utils.JodaUtils;
 import com.jr.erp.bill.purchase.dao.BillPurchaseMapper;
 import com.jr.erp.bill.transfer.dao.BillTransferMapper;
+import com.jr.erp.bill.utils.Constance;
 import com.jr.erp.sys.utils.service.IBillNoGeneratorService;
 
 /**     
@@ -37,13 +38,17 @@ public class BillNoGeneratorServiceImpl implements IBillNoGeneratorService
         String prefix = null;
         switch (billType)
         {
-        case 1:
+        case Constance.BILL_TYPE_PURCHASE:
             prefix = "J" + userPrefix + JodaUtils.getBillNoDate();
             maxBillNo = billPurchaseMapper.selectMaxBillNo("bill_purchase",companyNo, prefix);
             break;
-        case 20:
+        case Constance.BILL_TYPE_TRANSFER:
             prefix = "T" + userPrefix + JodaUtils.getBillNoDate();
             maxBillNo = billTransferMapper.selectMaxBillNo("bill_transfer",companyNo, prefix);
+            break;
+        case Constance.BILL_TYPE_STOCKTAKE:
+            prefix = "P" + userPrefix + JodaUtils.getBillNoDate();
+            maxBillNo = billTransferMapper.selectMaxBillNo("bill_stocktake",companyNo, prefix);
             break;
         default:
             break;

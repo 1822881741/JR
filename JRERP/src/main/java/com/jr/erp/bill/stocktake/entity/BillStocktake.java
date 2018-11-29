@@ -1,7 +1,6 @@
 package com.jr.erp.bill.stocktake.entity;
 
 import com.jr.erp.base.mybatis.BaseEntity;
-import java.util.Date;
 
 public class BillStocktake extends BaseEntity {
     /**
@@ -10,9 +9,14 @@ public class BillStocktake extends BaseEntity {
     private String billNo;
 
     /**
+     * 
+     */
+    private String sysBillNo;
+
+    /**
      * 单据日期：使用创建单子的日期
      */
-    private Date billDate;
+    private String billDate;
 
     /**
      * 门店
@@ -23,6 +27,11 @@ public class BillStocktake extends BaseEntity {
      * 门店名称
      */
     private String areaName;
+
+    /**
+     * 是否能查看所有待盘点 1：可以 ，0不可以
+     */
+    private Integer canViewAll;
 
     /**
      * 柜台地区码，多个
@@ -96,10 +105,26 @@ public class BillStocktake extends BaseEntity {
     }
 
     /**
+     * 
+     * @return sysBillNo 
+     */
+    public String getSysBillNo() {
+        return sysBillNo;
+    }
+
+    /**
+     * 
+     * @param sysBillNo 
+     */
+    public void setSysBillNo(String sysBillNo) {
+        this.sysBillNo = sysBillNo == null ? null : sysBillNo.trim();
+    }
+
+    /**
      * 单据日期：使用创建单子的日期
      * @return billDate 单据日期：使用创建单子的日期
      */
-    public Date getBillDate() {
+    public String getBillDate() {
         return billDate;
     }
 
@@ -107,8 +132,8 @@ public class BillStocktake extends BaseEntity {
      * 单据日期：使用创建单子的日期
      * @param billDate 单据日期：使用创建单子的日期
      */
-    public void setBillDate(Date billDate) {
-        this.billDate = billDate;
+    public void setBillDate(String billDate) {
+        this.billDate = billDate == null ? null : billDate.trim();
     }
 
     /**
@@ -141,6 +166,22 @@ public class BillStocktake extends BaseEntity {
      */
     public void setAreaName(String areaName) {
         this.areaName = areaName == null ? null : areaName.trim();
+    }
+
+    /**
+     * 是否能查看所有待盘点 1：可以 ，0不可以
+     * @return canViewAll 是否能查看所有待盘点 1：可以 ，0不可以
+     */
+    public Integer getCanViewAll() {
+        return canViewAll;
+    }
+
+    /**
+     * 是否能查看所有待盘点 1：可以 ，0不可以
+     * @param canViewAll 是否能查看所有待盘点 1：可以 ，0不可以
+     */
+    public void setCanViewAll(Integer canViewAll) {
+        this.canViewAll = canViewAll;
     }
 
     /**

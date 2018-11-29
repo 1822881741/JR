@@ -2,8 +2,6 @@ package com.jr.erp.bill.stocktake.entity;
 
 import com.jr.erp.base.mybatis.BaseExample;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class BillStocktakeExample extends BaseExample {
@@ -119,32 +117,6 @@ public class BillStocktakeExample extends BaseExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value.getTime()), property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
-            if (values == null || values.size() == 0) {
-                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
-            }
-            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
-            Iterator<Date> iter = values.iterator();
-            while (iter.hasNext()) {
-                dateList.add(new java.sql.Date(iter.next().getTime()));
-            }
-            addCriterion(condition, dateList, property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andIdIsNull() {
@@ -347,6 +319,76 @@ public class BillStocktakeExample extends BaseExample {
             return (Criteria) this;
         }
 
+        public Criteria andSysBillNoIsNull() {
+            addCriterion("sysBillNo is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysBillNoIsNotNull() {
+            addCriterion("sysBillNo is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysBillNoEqualTo(String value) {
+            addCriterion("sysBillNo =", value, "sysBillNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysBillNoNotEqualTo(String value) {
+            addCriterion("sysBillNo <>", value, "sysBillNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysBillNoGreaterThan(String value) {
+            addCriterion("sysBillNo >", value, "sysBillNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysBillNoGreaterThanOrEqualTo(String value) {
+            addCriterion("sysBillNo >=", value, "sysBillNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysBillNoLessThan(String value) {
+            addCriterion("sysBillNo <", value, "sysBillNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysBillNoLessThanOrEqualTo(String value) {
+            addCriterion("sysBillNo <=", value, "sysBillNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysBillNoLike(String value) {
+            addCriterion("sysBillNo like", value, "sysBillNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysBillNoNotLike(String value) {
+            addCriterion("sysBillNo not like", value, "sysBillNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysBillNoIn(List<String> values) {
+            addCriterion("sysBillNo in", values, "sysBillNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysBillNoNotIn(List<String> values) {
+            addCriterion("sysBillNo not in", values, "sysBillNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysBillNoBetween(String value1, String value2) {
+            addCriterion("sysBillNo between", value1, value2, "sysBillNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andSysBillNoNotBetween(String value1, String value2) {
+            addCriterion("sysBillNo not between", value1, value2, "sysBillNo");
+            return (Criteria) this;
+        }
+
         public Criteria andBillDateIsNull() {
             addCriterion("billDate is null");
             return (Criteria) this;
@@ -357,53 +399,63 @@ public class BillStocktakeExample extends BaseExample {
             return (Criteria) this;
         }
 
-        public Criteria andBillDateEqualTo(Date value) {
-            addCriterionForJDBCDate("billDate =", value, "billDate");
+        public Criteria andBillDateEqualTo(String value) {
+            addCriterion("billDate =", value, "billDate");
             return (Criteria) this;
         }
 
-        public Criteria andBillDateNotEqualTo(Date value) {
-            addCriterionForJDBCDate("billDate <>", value, "billDate");
+        public Criteria andBillDateNotEqualTo(String value) {
+            addCriterion("billDate <>", value, "billDate");
             return (Criteria) this;
         }
 
-        public Criteria andBillDateGreaterThan(Date value) {
-            addCriterionForJDBCDate("billDate >", value, "billDate");
+        public Criteria andBillDateGreaterThan(String value) {
+            addCriterion("billDate >", value, "billDate");
             return (Criteria) this;
         }
 
-        public Criteria andBillDateGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("billDate >=", value, "billDate");
+        public Criteria andBillDateGreaterThanOrEqualTo(String value) {
+            addCriterion("billDate >=", value, "billDate");
             return (Criteria) this;
         }
 
-        public Criteria andBillDateLessThan(Date value) {
-            addCriterionForJDBCDate("billDate <", value, "billDate");
+        public Criteria andBillDateLessThan(String value) {
+            addCriterion("billDate <", value, "billDate");
             return (Criteria) this;
         }
 
-        public Criteria andBillDateLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("billDate <=", value, "billDate");
+        public Criteria andBillDateLessThanOrEqualTo(String value) {
+            addCriterion("billDate <=", value, "billDate");
             return (Criteria) this;
         }
 
-        public Criteria andBillDateIn(List<Date> values) {
-            addCriterionForJDBCDate("billDate in", values, "billDate");
+        public Criteria andBillDateLike(String value) {
+            addCriterion("billDate like", value, "billDate");
             return (Criteria) this;
         }
 
-        public Criteria andBillDateNotIn(List<Date> values) {
-            addCriterionForJDBCDate("billDate not in", values, "billDate");
+        public Criteria andBillDateNotLike(String value) {
+            addCriterion("billDate not like", value, "billDate");
             return (Criteria) this;
         }
 
-        public Criteria andBillDateBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("billDate between", value1, value2, "billDate");
+        public Criteria andBillDateIn(List<String> values) {
+            addCriterion("billDate in", values, "billDate");
             return (Criteria) this;
         }
 
-        public Criteria andBillDateNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("billDate not between", value1, value2, "billDate");
+        public Criteria andBillDateNotIn(List<String> values) {
+            addCriterion("billDate not in", values, "billDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillDateBetween(String value1, String value2) {
+            addCriterion("billDate between", value1, value2, "billDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillDateNotBetween(String value1, String value2) {
+            addCriterion("billDate not between", value1, value2, "billDate");
             return (Criteria) this;
         }
 
@@ -544,6 +596,66 @@ public class BillStocktakeExample extends BaseExample {
 
         public Criteria andAreaNameNotBetween(String value1, String value2) {
             addCriterion("areaName not between", value1, value2, "areaName");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanViewAllIsNull() {
+            addCriterion("canViewAll is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanViewAllIsNotNull() {
+            addCriterion("canViewAll is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanViewAllEqualTo(Integer value) {
+            addCriterion("canViewAll =", value, "canViewAll");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanViewAllNotEqualTo(Integer value) {
+            addCriterion("canViewAll <>", value, "canViewAll");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanViewAllGreaterThan(Integer value) {
+            addCriterion("canViewAll >", value, "canViewAll");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanViewAllGreaterThanOrEqualTo(Integer value) {
+            addCriterion("canViewAll >=", value, "canViewAll");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanViewAllLessThan(Integer value) {
+            addCriterion("canViewAll <", value, "canViewAll");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanViewAllLessThanOrEqualTo(Integer value) {
+            addCriterion("canViewAll <=", value, "canViewAll");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanViewAllIn(List<Integer> values) {
+            addCriterion("canViewAll in", values, "canViewAll");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanViewAllNotIn(List<Integer> values) {
+            addCriterion("canViewAll not in", values, "canViewAll");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanViewAllBetween(Integer value1, Integer value2) {
+            addCriterion("canViewAll between", value1, value2, "canViewAll");
+            return (Criteria) this;
+        }
+
+        public Criteria andCanViewAllNotBetween(Integer value1, Integer value2) {
+            addCriterion("canViewAll not between", value1, value2, "canViewAll");
             return (Criteria) this;
         }
 

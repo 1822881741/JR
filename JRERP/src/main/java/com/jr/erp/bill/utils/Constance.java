@@ -8,7 +8,10 @@ public class Constance
     
     //调拨单 20
     public static final int BILL_TYPE_TRANSFER=20;
-
+    
+    //盘点单
+    public static final int BILL_TYPE_STOCKTAKE=30;
+    
     //0：新建状态；10：待审核  15 ：审核驳回  20：待接受  25：接收驳回  100：全部完成
     public static final int BILL_STATUS_NEW = 0;
     public static final int BILL_STATUS_AUDIT_WAIT = 10;
