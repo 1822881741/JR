@@ -18,11 +18,6 @@
 
 		<!-- SmartAdmin RTL Support -->
 		<link rel="stylesheet" type="text/css" media="screen" href="static/css/smartadmin-rtl.min.css"> 
-		<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
-		<link rel="stylesheet" type="text/css" media="screen" href="static/css/demo.min.css">
-		<!-- #FAVICONS -->
-		<link rel="shortcut icon" href="static/img/favicon/favicon.ico" type="image/x-icon">
-		<link rel="icon" href="static/img/favicon/favicon.ico" type="image/x-icon">
 	</head>
 	<body class="animated fadeInDown">
 
@@ -31,7 +26,6 @@
 			<div id="logo-group">
 				<span id="logo"> <img src="img/logo.png" alt="SmartAdmin"> </span>
 			</div>
-
 			<span id="extr-page-header-space"> <span class="hidden-mobile hidden-xs">Need an account?</span> <a href="register.html" class="btn btn-danger">Create account</a> </span>
 
 		</header>
@@ -60,7 +54,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
 						<div class="well no-padding">
-							<form action="index.html#ajax/dashboard.html" id="login-form" class="smart-form client-form">
+							<div class="smart-form client-form">
 								<header>
 									Sign In
 								</header>
@@ -83,11 +77,11 @@
 									</section>
 								</fieldset>
 								<footer>
-									<button type="submit" id="submit" class="btn btn-primary">
+									<button type="button" id="submit" class="btn btn-primary">
 										Sign in
 									</button>
 								</footer>
-							</form>
+							</div>
 
 						</div>
 						<h5 class="text-center"> - Or sign in using -</h5>
@@ -108,7 +102,6 @@
 			        	type:"post",
 			        	dataType:"json",
 			        	success:function(result,e,t){
-			        		alert(result.status)
 				    		if(result && result.status == 100){
 				    			window.location.href="${basePath}/main";
 				    		}else{

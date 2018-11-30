@@ -8,11 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSONArray;
 import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.base.utils.JodaUtils;
+import com.jr.erp.base.utils.NumberUtils;
+import com.jr.erp.base.utils.Ret;
 import com.jr.erp.bill.purchase.service.IBillPurchaseService;
 import com.jr.erp.bill.stocktake.entity.BillStocktake;
 import com.jr.erp.bill.stocktake.service.IBillStocktakeService;
@@ -41,9 +46,6 @@ public class StocktakeController
     private ISysAreaInfoService sysAreaInfoService;
 
     @Autowired
-    IBillPurchaseService billPurchaseService;
-
-    @Autowired
     IBillNoGeneratorService billNoGeneratorService;
 
     @Autowired
@@ -52,10 +54,12 @@ public class StocktakeController
     @Autowired
     ISysUserService sysUserService;
     
-    @RequestMapping(value = "/viewStocktakeMajor.do")
-    public String viewStocktakeMajorList(HttpServletRequest request, Model model)
+    @RequestMapping(value = "/viewStocktakeBillMajor.do")
+    public String viewStocktakeBillMajor(HttpServletRequest request, Model model)
     {
-        SysUser user = ShiroUtils.getSysUser();
+        List<BillStocktake> list = billStocktakeService.getBillStocktakeList();
+        JSONArray ja = new JSONArray((List)list);
+        model.addAttribute("billStocktakeList",ja.toJSONString());
         return "bill/stocktake/viewStocktakeMajor";
     }
 
@@ -99,5 +103,23 @@ public class StocktakeController
         List<SysUser> userList = (List)sysUserService.selectByExample(userExample);
         model.addAttribute("userList", userList);
         return "bill/stocktake/addStocktakeMajor";
+    }
+    
+    /**    
+     * saveStocktakeMajor(这里用一句话描述这个方法的作用)    
+     * 保存盘点主方案
+     * @param @param billStocktake
+     * @param @param request
+     * @param @param model
+     * @param @return     
+     * @return Ret
+     * @Exception 异常对象
+    */
+    @RequestMapping(value = "/saveStocktakeMajor.do")
+    @ResponseBody
+    public Ret saveStocktakeMajor(BillStocktake billStocktake, HttpServletRequest request, Model model)
+    {
+        billStocktakeService.saveStocktakeMajor(billStocktake);
+        return Ret.ok("保存成功");
     }
 }

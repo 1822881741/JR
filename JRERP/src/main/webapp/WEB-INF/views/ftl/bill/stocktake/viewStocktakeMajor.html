@@ -61,46 +61,26 @@
 				  yes : function(index, layero) {
 						var result = $(layero).find("iframe")[0].contentWindow.submitData();
 						if (result) {
-							var param = $("#billForm").serialize();
-							param +="&querySql="+result.code;
-							$.ajax({
-						        type: "POST",
-						        url: "transfer/addTransferItemBatch.do",
-						        dataType: 'json',
-						        data:encodeURI(param),
-						        async: false,
-						        success: function(data) {
-						            if (data.status == '100') {
-						            	reloadData(data.data);
-						            	layer.close(index);
-						            }else{
-						            	layer.msg("导入符合条件的内容失败");
-						            }
-						        },
-						        error: function() {
-						        	layer.alert("连接服务器失败，请稍后重试");
-						        }
-						    });
+							
 						}
 				}
 			});
 		})
-		
 		webix.i18n.setLocale("zh-CN");
 		  u1=webix.ui({
 				view:"dataview",
 				container:"nofinish",
-	            css: "movies",
 	            type:{
 	            	width: "auto",
-	                template:"<div class='overall'><div class='rank'>#rank#.</div><div class='title'>#title#</div><div class='year'>#year# year</div> </div>"
+	            	height:90,
+	                template:"<div class='overall'><div class='rank'>#id#.</div><div class='title'>#billNo#</div><div class='title'>#areaName# </div><div >#counterAreaName#</div> </div> </div>"
 	            },
 	            tooltip:{
 	                template:"<span class='webix_strong'>Rating: </span> #rating#<br/><span class='webix_strong'>Votes: </span> #votes#"
 	            },
 	            xCount:2,
 	            height:parent.winHeight-240,
-	            data:big_film_set
+	            data:'${billStocktakeList}'
 		});
 		u2= webix.ui({
 				view:"dataview",
@@ -115,7 +95,7 @@
 	            },
 	            xCount:2,
 	            height:parent.winHeight-240,
-	            data:big_film_set
+	            data:'${billStocktakeList}'
 		});
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 		  u1.adjust();
