@@ -62,7 +62,7 @@ var bathPath = "${basePath}";
 				<div class="col-xs-6 no-padding">
 					<label class="col-xs-4  control-label">商品名称</label>
 					<div class="col-xs-8 no-padding">
-						<select id="productName" name="productName" data-validate="required" class="form-control selectpicker show-tick" title="请选择盘点商品名称" data-live-search="true" multiple="multiple">
+						<select id="productName" name="productName" class="form-control selectpicker show-tick" title="请选择盘点商品名称" data-live-search="true" multiple="multiple">
 							<#list productNameList as p>
 								<option value='${p}'>${p}</option>
 							</#list>
@@ -72,7 +72,7 @@ var bathPath = "${basePath}";
 				<div class="col-xs-6 no-padding">
 					<label class="col-xs-4  control-label">品类</label>
 					<div class="col-xs-8 no-padding">
-						<select id="areaCode" name="areaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择品类" data-live-search="true" multiple="multiple">
+						<select id="categoryName" name="categoryName" class="form-control selectpicker show-tick" title="请选择品类" data-live-search="true" multiple="multiple">
 							<#list categoryNameList as p>
 								<option value='${p}'>${p}</option>
 							</#list>
@@ -85,7 +85,7 @@ var bathPath = "${basePath}";
 				<div class="col-xs-12 no-padding">
 					<label class="col-xs-2  control-label">盘点人<i class="fa fa-warning txt-color-red" id='assignUser'></i></label>
 					<div class="col-xs-10 no-padding">
-						<select id="assignTaker" name="assignTaker" data-validate="required" class="form-control selectpicker show-tick" title="请选择盘点人" data-live-search="true" multiple="multiple">
+						<select id="assignTaker" name="assignTaker"  class="form-control selectpicker show-tick" title="请选择盘点人" data-live-search="true" multiple="multiple">
 							<#list userList as p>
 								<option value='${p.id}'>${p.realName}</option>
 							</#list>
