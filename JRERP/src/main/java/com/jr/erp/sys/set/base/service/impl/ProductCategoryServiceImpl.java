@@ -192,4 +192,17 @@ public class ProductCategoryServiceImpl extends AbstractBaseService<ProductCateg
         example.createCriteria().andCompanyNoEqualTo(companyNo).andIdIn(Arrays.asList(ids));
         this.deleteByExample(example);
     }
+    @Override
+    public List<String> getProductName(String companyNo)
+    {
+        List<String> productNameList = new ArrayList<String>();
+        ProductCategoryExample example = new ProductCategoryExample();
+        example.createCriteria().andCompanyNoEqualTo(companyNo);
+        List<ProductCategory> listProductCategory = (List)this.selectByExample(example);
+        for (ProductCategory productCategory : listProductCategory)
+        {
+            productNameList.add(productCategory.getProductName());
+        }
+        return productNameList;
+    }
 }

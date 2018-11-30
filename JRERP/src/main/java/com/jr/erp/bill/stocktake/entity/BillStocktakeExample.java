@@ -249,76 +249,6 @@ public class BillStocktakeExample extends BaseExample {
             return (Criteria) this;
         }
 
-        public Criteria andBillNoIsNull() {
-            addCriterion("billNo is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBillNoIsNotNull() {
-            addCriterion("billNo is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andBillNoEqualTo(String value) {
-            addCriterion("billNo =", value, "billNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andBillNoNotEqualTo(String value) {
-            addCriterion("billNo <>", value, "billNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andBillNoGreaterThan(String value) {
-            addCriterion("billNo >", value, "billNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andBillNoGreaterThanOrEqualTo(String value) {
-            addCriterion("billNo >=", value, "billNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andBillNoLessThan(String value) {
-            addCriterion("billNo <", value, "billNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andBillNoLessThanOrEqualTo(String value) {
-            addCriterion("billNo <=", value, "billNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andBillNoLike(String value) {
-            addCriterion("billNo like", value, "billNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andBillNoNotLike(String value) {
-            addCriterion("billNo not like", value, "billNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andBillNoIn(List<String> values) {
-            addCriterion("billNo in", values, "billNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andBillNoNotIn(List<String> values) {
-            addCriterion("billNo not in", values, "billNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andBillNoBetween(String value1, String value2) {
-            addCriterion("billNo between", value1, value2, "billNo");
-            return (Criteria) this;
-        }
-
-        public Criteria andBillNoNotBetween(String value1, String value2) {
-            addCriterion("billNo not between", value1, value2, "billNo");
-            return (Criteria) this;
-        }
-
         public Criteria andSysBillNoIsNull() {
             addCriterion("sysBillNo is null");
             return (Criteria) this;
@@ -386,6 +316,76 @@ public class BillStocktakeExample extends BaseExample {
 
         public Criteria andSysBillNoNotBetween(String value1, String value2) {
             addCriterion("sysBillNo not between", value1, value2, "sysBillNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillNoIsNull() {
+            addCriterion("billNo is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillNoIsNotNull() {
+            addCriterion("billNo is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillNoEqualTo(String value) {
+            addCriterion("billNo =", value, "billNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillNoNotEqualTo(String value) {
+            addCriterion("billNo <>", value, "billNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillNoGreaterThan(String value) {
+            addCriterion("billNo >", value, "billNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillNoGreaterThanOrEqualTo(String value) {
+            addCriterion("billNo >=", value, "billNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillNoLessThan(String value) {
+            addCriterion("billNo <", value, "billNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillNoLessThanOrEqualTo(String value) {
+            addCriterion("billNo <=", value, "billNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillNoLike(String value) {
+            addCriterion("billNo like", value, "billNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillNoNotLike(String value) {
+            addCriterion("billNo not like", value, "billNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillNoIn(List<String> values) {
+            addCriterion("billNo in", values, "billNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillNoNotIn(List<String> values) {
+            addCriterion("billNo not in", values, "billNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillNoBetween(String value1, String value2) {
+            addCriterion("billNo between", value1, value2, "billNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andBillNoNotBetween(String value1, String value2) {
+            addCriterion("billNo not between", value1, value2, "billNo");
             return (Criteria) this;
         }
 
@@ -1376,6 +1376,76 @@ public class BillStocktakeExample extends BaseExample {
 
         public Criteria andFinishTimeNotBetween(String value1, String value2) {
             addCriterion("finishTime not between", value1, value2, "finishTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksIsNull() {
+            addCriterion("remarks is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksIsNotNull() {
+            addCriterion("remarks is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksEqualTo(String value) {
+            addCriterion("remarks =", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksNotEqualTo(String value) {
+            addCriterion("remarks <>", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksGreaterThan(String value) {
+            addCriterion("remarks >", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksGreaterThanOrEqualTo(String value) {
+            addCriterion("remarks >=", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksLessThan(String value) {
+            addCriterion("remarks <", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksLessThanOrEqualTo(String value) {
+            addCriterion("remarks <=", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksLike(String value) {
+            addCriterion("remarks like", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksNotLike(String value) {
+            addCriterion("remarks not like", value, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksIn(List<String> values) {
+            addCriterion("remarks in", values, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksNotIn(List<String> values) {
+            addCriterion("remarks not in", values, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksBetween(String value1, String value2) {
+            addCriterion("remarks between", value1, value2, "remarks");
+            return (Criteria) this;
+        }
+
+        public Criteria andRemarksNotBetween(String value1, String value2) {
+            addCriterion("remarks not between", value1, value2, "remarks");
             return (Criteria) this;
         }
     }

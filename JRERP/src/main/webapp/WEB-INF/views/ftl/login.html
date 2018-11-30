@@ -1,56 +1,118 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>登入 - layuiAdmin</title>
-<meta name="renderer" content="webkit">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-<link rel="stylesheet" href="${basePath}resource/login/admin.css" media="all">
-<link rel="stylesheet" href="${basePath}resource/layui/css/layui.css" media="all">
-<link rel="stylesheet" href="${basePath}resource/login/login.css" media="all">
-</head>
-<body>
-	<p>layui 官方出品的单页面后台管理模aaaa板系统</p>
-	<div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
-		<div class="layadmin-user-login-main">
-			<div class="layadmin-user-login-box layadmin-user-login-header">
-				<h2>layuiAdmin</h2>
+<html lang="en-us" id="extr-page">
+	<head>
+		<meta charset="utf-8">
+		<title> SmartAdmin</title>
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<!-- #CSS Links -->
+		<!-- Basic Styles -->
+		<link rel="stylesheet" type="text/css" media="screen" href="static/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="static/css/font-awesome.min.css">
+
+		<!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+		<link rel="stylesheet" type="text/css" media="screen" href="static/css/smartadmin-production-plugins.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="static/css/smartadmin-production.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="static/css/smartadmin-skins.min.css">
+
+		<!-- SmartAdmin RTL Support -->
+		<link rel="stylesheet" type="text/css" media="screen" href="static/css/smartadmin-rtl.min.css"> 
+		<!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+		<link rel="stylesheet" type="text/css" media="screen" href="static/css/demo.min.css">
+		<!-- #FAVICONS -->
+		<link rel="shortcut icon" href="static/img/favicon/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="static/img/favicon/favicon.ico" type="image/x-icon">
+	</head>
+	<body class="animated fadeInDown">
+
+		<header id="header">
+
+			<div id="logo-group">
+				<span id="logo"> <img src="img/logo.png" alt="SmartAdmin"> </span>
 			</div>
-			<div >
-				<div class="layui-form-item">
-					<label class="layadmin-user-login-icon layui-icon layui-icon-username"></label> 
-						<input type="text" id="username" name="username" id="LAY-user-login-username" lay-verify="required" value='gxh' placeholder="用户名" class="layui-input">
-				</div>
-				<div class="layui-form-item">
-					<label class="layadmin-user-login-icon layui-icon layui-icon-password"></label> 
-						<input type="text" id="password" name="password" lay-verify="required" placeholder="密码" value='123' class="layui-input">
-				</div>
-				<div class="layui-form-item">
-					<button class="layui-btn layui-btn-fluid" id="submit">登 入</button>
+
+			<span id="extr-page-header-space"> <span class="hidden-mobile hidden-xs">Need an account?</span> <a href="register.html" class="btn btn-danger">Create account</a> </span>
+
+		</header>
+
+		<div id="main" role="main">
+
+			<!-- MAIN CONTENT -->
+			<div id="content" class="container">
+
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+						<h1 class="txt-color-red login-header-big">SmartAdmin</h1>
+						<div class="hero">
+
+							<div class="pull-left login-desc-box-l">
+								<h4 class="paragraph-header">It's Okay to be Smart. Experience the simplicity of SmartAdmin, everywhere you go!</h4>
+								<div class="login-app-icons">
+									<a href="javascript:void(0);" class="btn btn-danger btn-sm">Frontend Template</a>
+									<a href="javascript:void(0);" class="btn btn-danger btn-sm">Find out more</a>
+								</div>
+							</div>
+							
+							<img src="img/demo/iphoneview.png" class="pull-right display-image" alt="" style="width:210px">
+
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+						<div class="well no-padding">
+							<form action="index.html#ajax/dashboard.html" id="login-form" class="smart-form client-form">
+								<header>
+									Sign In
+								</header>
+								<fieldset>
+									
+									<section>
+										<label class="label">账号</label>
+										<label class="input"> <i class="icon-append fa fa-user"></i>
+											<input type="text" id="username" name="username" value="gxh">
+											<b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> 请输入登录账号</b></label>
+									</section>
+									<section>
+										<label class="label">密码</label>
+										<label class="input"> <i class="icon-append fa fa-lock"></i>
+											<input type="password" name="password" id="password" value="123">
+											<b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> 请输入密码</b> </label>
+										<div class="note">
+											<a href="forgotpassword.html">Forgot password?</a>
+										</div>
+									</section>
+								</fieldset>
+								<footer>
+									<button type="submit" id="submit" class="btn btn-primary">
+										Sign in
+									</button>
+								</footer>
+							</form>
+
+						</div>
+						<h5 class="text-center"> - Or sign in using -</h5>
+															
+						
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<script src="${basePath}resource/layui/layui.all.js"></script>
+
+	</body>
+	<script src="static/js/libs/jquery-3.2.1.min.js"></script>
 	<script>
-		//一般直接写在一个js文件中
-		layui.use([ 'layer', 'form' ], function() {
-			var layer = layui.layer, form = layui.form;
-			 var $ = layui.jquery;
+		$(function() {
 			 $("#submit").on("click",function(){
 			 	 $.ajax({
 			        	url:"${basePath}/checkLogin?loginNo="+$("#username").val()+"&password="+$("#password").val(),
 			        	type:"post",
 			        	dataType:"json",
-			        	beforeSend:function(){
-			        		layer.msg('开始登录，请注意后台控制台。');
-			        	},
 			        	success:function(result,e,t){
+			        		alert(result.status)
 				    		if(result && result.status == 100){
-				    			window.location.href="main";
+				    			window.location.href="${basePath}/main";
 				    		}else{
-				    			layer.alert(result.msg)
+				    			alert(result.msg)
 				    		}
 			        	},
 			        	error:function(e){
@@ -60,5 +122,4 @@
 			 })
 		});
 	</script>
-</body>
 </html>

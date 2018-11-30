@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="com.jr.erp.bill.stocktake.entity.BillStocktake">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="companyNo" jdbcType="VARCHAR" property="companyNo" />
-    <result column="billNo" jdbcType="VARCHAR" property="billNo" />
     <result column="sysBillNo" jdbcType="VARCHAR" property="sysBillNo" />
+    <result column="billNo" jdbcType="VARCHAR" property="billNo" />
     <result column="billDate" jdbcType="VARCHAR" property="billDate" />
     <result column="areaCode" jdbcType="VARCHAR" property="areaCode" />
     <result column="areaName" jdbcType="VARCHAR" property="areaName" />
@@ -21,9 +21,7 @@
     <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
     <result column="createTime" jdbcType="VARCHAR" property="createTime" />
     <result column="finishTime" jdbcType="VARCHAR" property="finishTime" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.jr.erp.bill.stocktake.entity.BillStocktake">
-    <result column="remarks" jdbcType="LONGVARCHAR" property="remarks" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -84,29 +82,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, companyNo, billNo, sysBillNo, billDate, areaCode, areaName, canViewAll, counterAreaCode, 
+    id, companyNo, sysBillNo, billNo, billDate, areaCode, areaName, canViewAll, counterAreaCode, 
     counterAreaName, productName, assignTaker, bookNum, checkNum, billStatus, createUserId, 
-    createUserName, createTime, finishTime
+    createUserName, createTime, finishTime, remarks
   </sql>
-  <sql id="Blob_Column_List">
-    remarks
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.jr.erp.bill.stocktake.entity.BillStocktakeExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from bill_stocktake
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="com.jr.erp.bill.stocktake.entity.BillStocktakeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -126,11 +105,9 @@
       </if>
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 'true' as QUERYID,
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from bill_stocktake
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -145,20 +122,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jr.erp.bill.stocktake.entity.BillStocktake">
-    insert into bill_stocktake (id, companyNo, billNo, 
-      sysBillNo, billDate, areaCode, 
+    insert into bill_stocktake (id, companyNo, sysBillNo, 
+      billNo, billDate, areaCode, 
       areaName, canViewAll, counterAreaCode, 
       counterAreaName, productName, assignTaker, 
       bookNum, checkNum, billStatus, 
       createUserId, createUserName, createTime, 
       finishTime, remarks)
-    values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{billNo,jdbcType=VARCHAR}, 
-      #{sysBillNo,jdbcType=VARCHAR}, #{billDate,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{sysBillNo,jdbcType=VARCHAR}, 
+      #{billNo,jdbcType=VARCHAR}, #{billDate,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, 
       #{areaName,jdbcType=VARCHAR}, #{canViewAll,jdbcType=TINYINT}, #{counterAreaCode,jdbcType=VARCHAR}, 
       #{counterAreaName,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, #{assignTaker,jdbcType=TINYINT}, 
       #{bookNum,jdbcType=INTEGER}, #{checkNum,jdbcType=INTEGER}, #{billStatus,jdbcType=TINYINT}, 
       #{createUserId,jdbcType=INTEGER}, #{createUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
-      #{finishTime,jdbcType=VARCHAR}, #{remarks,jdbcType=LONGVARCHAR})
+      #{finishTime,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
   </insert>
   <select id="countByExample" parameterType="com.jr.erp.bill.stocktake.entity.BillStocktakeExample" resultType="java.lang.Long">
     select count(*) from bill_stocktake
@@ -175,11 +152,11 @@
       <if test="record.companyNo != null">
         companyNo = #{record.companyNo,jdbcType=VARCHAR},
       </if>
-      <if test="record.billNo != null">
-        billNo = #{record.billNo,jdbcType=VARCHAR},
-      </if>
       <if test="record.sysBillNo != null">
         sysBillNo = #{record.sysBillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billNo != null">
+        billNo = #{record.billNo,jdbcType=VARCHAR},
       </if>
       <if test="record.billDate != null">
         billDate = #{record.billDate,jdbcType=VARCHAR},
@@ -227,19 +204,19 @@
         finishTime = #{record.finishTime,jdbcType=VARCHAR},
       </if>
       <if test="record.remarks != null">
-        remarks = #{record.remarks,jdbcType=LONGVARCHAR},
+        remarks = #{record.remarks,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
+  <update id="updateByExample" parameterType="map">
     update bill_stocktake
     set id = #{record.id,jdbcType=INTEGER},
       companyNo = #{record.companyNo,jdbcType=VARCHAR},
-      billNo = #{record.billNo,jdbcType=VARCHAR},
       sysBillNo = #{record.sysBillNo,jdbcType=VARCHAR},
+      billNo = #{record.billNo,jdbcType=VARCHAR},
       billDate = #{record.billDate,jdbcType=VARCHAR},
       areaCode = #{record.areaCode,jdbcType=VARCHAR},
       areaName = #{record.areaName,jdbcType=VARCHAR},
@@ -255,32 +232,7 @@
       createUserName = #{record.createUserName,jdbcType=VARCHAR},
       createTime = #{record.createTime,jdbcType=VARCHAR},
       finishTime = #{record.finishTime,jdbcType=VARCHAR},
-      remarks = #{record.remarks,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update bill_stocktake
-    set id = #{record.id,jdbcType=INTEGER},
-      companyNo = #{record.companyNo,jdbcType=VARCHAR},
-      billNo = #{record.billNo,jdbcType=VARCHAR},
-      sysBillNo = #{record.sysBillNo,jdbcType=VARCHAR},
-      billDate = #{record.billDate,jdbcType=VARCHAR},
-      areaCode = #{record.areaCode,jdbcType=VARCHAR},
-      areaName = #{record.areaName,jdbcType=VARCHAR},
-      canViewAll = #{record.canViewAll,jdbcType=TINYINT},
-      counterAreaCode = #{record.counterAreaCode,jdbcType=VARCHAR},
-      counterAreaName = #{record.counterAreaName,jdbcType=VARCHAR},
-      productName = #{record.productName,jdbcType=VARCHAR},
-      assignTaker = #{record.assignTaker,jdbcType=TINYINT},
-      bookNum = #{record.bookNum,jdbcType=INTEGER},
-      checkNum = #{record.checkNum,jdbcType=INTEGER},
-      billStatus = #{record.billStatus,jdbcType=TINYINT},
-      createUserId = #{record.createUserId,jdbcType=INTEGER},
-      createUserName = #{record.createUserName,jdbcType=VARCHAR},
-      createTime = #{record.createTime,jdbcType=VARCHAR},
-      finishTime = #{record.finishTime,jdbcType=VARCHAR}
+      remarks = #{record.remarks,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -291,11 +243,11 @@
       <if test="companyNo != null">
         companyNo = #{companyNo,jdbcType=VARCHAR},
       </if>
-      <if test="billNo != null">
-        billNo = #{billNo,jdbcType=VARCHAR},
-      </if>
       <if test="sysBillNo != null">
         sysBillNo = #{sysBillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="billNo != null">
+        billNo = #{billNo,jdbcType=VARCHAR},
       </if>
       <if test="billDate != null">
         billDate = #{billDate,jdbcType=VARCHAR},
@@ -343,16 +295,16 @@
         finishTime = #{finishTime,jdbcType=VARCHAR},
       </if>
       <if test="remarks != null">
-        remarks = #{remarks,jdbcType=LONGVARCHAR},
+        remarks = #{remarks,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jr.erp.bill.stocktake.entity.BillStocktake">
+  <update id="updateByPrimaryKey" parameterType="com.jr.erp.bill.stocktake.entity.BillStocktake">
     update bill_stocktake
     set companyNo = #{companyNo,jdbcType=VARCHAR},
-      billNo = #{billNo,jdbcType=VARCHAR},
       sysBillNo = #{sysBillNo,jdbcType=VARCHAR},
+      billNo = #{billNo,jdbcType=VARCHAR},
       billDate = #{billDate,jdbcType=VARCHAR},
       areaCode = #{areaCode,jdbcType=VARCHAR},
       areaName = #{areaName,jdbcType=VARCHAR},
@@ -368,29 +320,7 @@
       createUserName = #{createUserName,jdbcType=VARCHAR},
       createTime = #{createTime,jdbcType=VARCHAR},
       finishTime = #{finishTime,jdbcType=VARCHAR},
-      remarks = #{remarks,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.jr.erp.bill.stocktake.entity.BillStocktake">
-    update bill_stocktake
-    set companyNo = #{companyNo,jdbcType=VARCHAR},
-      billNo = #{billNo,jdbcType=VARCHAR},
-      sysBillNo = #{sysBillNo,jdbcType=VARCHAR},
-      billDate = #{billDate,jdbcType=VARCHAR},
-      areaCode = #{areaCode,jdbcType=VARCHAR},
-      areaName = #{areaName,jdbcType=VARCHAR},
-      canViewAll = #{canViewAll,jdbcType=TINYINT},
-      counterAreaCode = #{counterAreaCode,jdbcType=VARCHAR},
-      counterAreaName = #{counterAreaName,jdbcType=VARCHAR},
-      productName = #{productName,jdbcType=VARCHAR},
-      assignTaker = #{assignTaker,jdbcType=TINYINT},
-      bookNum = #{bookNum,jdbcType=INTEGER},
-      checkNum = #{checkNum,jdbcType=INTEGER},
-      billStatus = #{billStatus,jdbcType=TINYINT},
-      createUserId = #{createUserId,jdbcType=INTEGER},
-      createUserName = #{createUserName,jdbcType=VARCHAR},
-      createTime = #{createTime,jdbcType=VARCHAR},
-      finishTime = #{finishTime,jdbcType=VARCHAR}
+      remarks = #{remarks,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

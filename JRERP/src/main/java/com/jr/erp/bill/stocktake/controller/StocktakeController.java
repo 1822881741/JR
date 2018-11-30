@@ -4,28 +4,26 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jr.erp.base.mybatis.BaseEntity;
 import com.jr.erp.base.shiro.ShiroUtils;
 import com.jr.erp.base.utils.JodaUtils;
-import com.jr.erp.base.utils.Ret;
-import com.jr.erp.bill.purchase.entity.BillPurchase;
 import com.jr.erp.bill.purchase.service.IBillPurchaseService;
 import com.jr.erp.bill.stocktake.entity.BillStocktake;
 import com.jr.erp.bill.stocktake.service.IBillStocktakeService;
 import com.jr.erp.bill.utils.Constance;
 import com.jr.erp.sys.entity.SysAreaInfoExample;
 import com.jr.erp.sys.entity.SysUser;
+import com.jr.erp.sys.entity.SysUserExample;
 import com.jr.erp.sys.service.ISysAreaInfoService;
+import com.jr.erp.sys.service.ISysUserService;
 import com.jr.erp.sys.set.base.service.IBaseTypeService;
+import com.jr.erp.sys.set.base.service.IProductCategoryService;
 import com.jr.erp.sys.utils.service.IBillNoGeneratorService;
 
 @Controller
@@ -48,6 +46,12 @@ public class StocktakeController
     @Autowired
     IBillNoGeneratorService billNoGeneratorService;
 
+    @Autowired
+    IProductCategoryService productCategoryService;
+    
+    @Autowired
+    ISysUserService sysUserService;
+    
     @RequestMapping(value = "/viewStocktakeMajor.do")
     public String viewStocktakeMajorList(HttpServletRequest request, Model model)
     {
@@ -83,6 +87,17 @@ public class StocktakeController
         billStocktake.setBillNo(billStocktake.getSysBillNo());
         model.addAttribute("billStocktake", billStocktake);
         
+        
+        List<String> categoryNameList= baseTypeService.getNameList(user.getCompanyNo(),"categoryName");
+        model.addAttribute("categoryNameList", categoryNameList);
+        
+        List<String> productNameList = productCategoryService.getProductName(ShiroUtils.getCompanyNo());
+        model.addAttribute("productNameList", productNameList);
+        
+        SysUserExample userExample = new SysUserExample();
+        userExample.createCriteria().andCompanyNoEqualTo(user.getCompanyNo()).andAreaCodeEqualTo(user.getAreaCode());
+        List<SysUser> userList = (List)sysUserService.selectByExample(userExample);
+        model.addAttribute("userList", userList);
         return "bill/stocktake/addStocktakeMajor";
     }
 }

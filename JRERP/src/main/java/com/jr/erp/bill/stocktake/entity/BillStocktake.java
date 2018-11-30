@@ -4,14 +4,14 @@ import com.jr.erp.base.mybatis.BaseEntity;
 
 public class BillStocktake extends BaseEntity {
     /**
+     * 系统单号
+     */
+    private String sysBillNo;
+
+    /**
      * 单号
      */
     private String billNo;
-
-    /**
-     * 
-     */
-    private String sysBillNo;
 
     /**
      * 单据日期：使用创建单子的日期
@@ -89,6 +89,22 @@ public class BillStocktake extends BaseEntity {
     private String remarks;
 
     /**
+     * 系统单号
+     * @return sysBillNo 系统单号
+     */
+    public String getSysBillNo() {
+        return sysBillNo;
+    }
+
+    /**
+     * 系统单号
+     * @param sysBillNo 系统单号
+     */
+    public void setSysBillNo(String sysBillNo) {
+        this.sysBillNo = sysBillNo == null ? null : sysBillNo.trim();
+    }
+
+    /**
      * 单号
      * @return billNo 单号
      */
@@ -102,22 +118,6 @@ public class BillStocktake extends BaseEntity {
      */
     public void setBillNo(String billNo) {
         this.billNo = billNo == null ? null : billNo.trim();
-    }
-
-    /**
-     * 
-     * @return sysBillNo 
-     */
-    public String getSysBillNo() {
-        return sysBillNo;
-    }
-
-    /**
-     * 
-     * @param sysBillNo 
-     */
-    public void setSysBillNo(String sysBillNo) {
-        this.sysBillNo = sysBillNo == null ? null : sysBillNo.trim();
     }
 
     /**
