@@ -57,9 +57,13 @@ public class StocktakeController
     @RequestMapping(value = "/viewStocktakeBillMajor.do")
     public String viewStocktakeBillMajor(HttpServletRequest request, Model model)
     {
-        List<BillStocktake> list = billStocktakeService.getBillStocktakeList();
-        JSONArray ja = new JSONArray((List)list);
-        model.addAttribute("billStocktakeList",ja.toJSONString());
+        List<BillStocktake> noFinishList = billStocktakeService.getBillStocktakeList(Constance.BILL_STATUS_NEW);
+        JSONArray ja = new JSONArray((List)noFinishList);
+        model.addAttribute("noFinishList",ja.toJSONString());
+        
+        List<BillStocktake> finishList = billStocktakeService.getBillStocktakeList(Constance.BILL_STATUS_FINISH);
+        JSONArray jas = new JSONArray((List)finishList);
+        model.addAttribute("finishList",jas.toJSONString());
         return "bill/stocktake/viewStocktakeMajor";
     }
 

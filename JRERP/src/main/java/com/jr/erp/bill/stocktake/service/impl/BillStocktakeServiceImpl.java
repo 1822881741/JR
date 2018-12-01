@@ -2,6 +2,9 @@ package com.jr.erp.bill.stocktake.service.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jr.erp.base.mybatis.AbstractBaseService;
@@ -11,17 +14,21 @@ import com.jr.erp.base.utils.NumberUtils;
 import com.jr.erp.bill.stocktake.entity.BillStocktake;
 import com.jr.erp.bill.stocktake.entity.BillStocktakeExample;
 import com.jr.erp.bill.stocktake.service.IBillStocktakeService;
+import com.jr.erp.bill.stocktake.service.IBillStocktakeStockService;
 import com.jr.erp.bill.utils.Constance;
 import com.jr.erp.sys.entity.SysUser;
 
 @Service(value="billStocktakeService")
 public class BillStocktakeServiceImpl extends AbstractBaseService<BillStocktake> implements IBillStocktakeService
 {
+    @Autowired
+    IBillStocktakeStockService billStocktakeStockService;
+    
     @Override
-    public List<BillStocktake> getBillStocktakeList()
+    public List<BillStocktake> getBillStocktakeList(Integer status)
     {
         BillStocktakeExample example = new BillStocktakeExample();
-        example.createCriteria().andCompanyNoEqualTo(ShiroUtils.getCompanyNo()).andAreaCodeLike(ShiroUtils.getUserAreaCode()+"%");
+        example.createCriteria().andCompanyNoEqualTo(ShiroUtils.getCompanyNo()).andAreaCodeLike(ShiroUtils.getUserAreaCode()+"%").andBillStatusEqualTo(status);
         return (List)this.selectByExample(example);
     }
     
@@ -38,7 +45,9 @@ public class BillStocktakeServiceImpl extends AbstractBaseService<BillStocktake>
         this.insert(billStocktake);
         
         //copy库存
+        int count = billStocktakeStockService.copyStock(billStocktake);
         
-        
+        billStocktake.setBookNum(count);
+        this.updateByPrimaryKeySelective(billStocktake);
     }
 }

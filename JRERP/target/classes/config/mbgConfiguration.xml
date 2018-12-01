@@ -48,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 		</javaClientGenerator>
 		
 		<!-- 要对那些数据表进行生成操作，必须要有一个. -->
-		<table schema="mybatis" tableName="bill_stocktake" domainObjectName="BillStocktake"  delimitIdentifiers="false"
+		<table schema="mybatis" tableName="bill_stocktake_stock" domainObjectName="BillStocktakeStock"  delimitIdentifiers="false"
 			selectByPrimaryKeyQueryId="true" enableDeleteByPrimaryKey="true"
 			enableCountByExample="true" enableUpdateByPrimaryKey="true" enableUpdateByExample="true" >
 			<property name="useActualColumnNames" value="true" />

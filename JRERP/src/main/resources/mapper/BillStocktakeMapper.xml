@@ -122,6 +122,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jr.erp.bill.stocktake.entity.BillStocktake">
+     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into bill_stocktake (id, companyNo, sysBillNo, 
       billNo, billDate, areaCode, 
       areaName, canViewAll, counterAreaCode, 

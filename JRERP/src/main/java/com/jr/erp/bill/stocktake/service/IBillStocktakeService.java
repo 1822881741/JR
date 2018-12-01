@@ -16,7 +16,7 @@ public interface IBillStocktakeService extends IBaseService<BaseEntity>
      * @return List<BillStocktake>
      * @Exception 异常对象
      */
-    List<BillStocktake> getBillStocktakeList();
+    List<BillStocktake> getBillStocktakeList(Integer status);
     
     /**    
      * saveStocktakeMajor(这里用一句话描述这个方法的作用)    

@@ -43,7 +43,7 @@ var bathPath = "${basePath}";
 				<div class="col-xs-6 no-padding">
 					<label class="col-xs-4  control-label">盘点单位</label>
 					<div class="col-xs-8 no-padding">
-						<select id="areaCode" name="areaCode" data-validate="required" class="form-control selectpicker show-tick" title="请选择门店/部门" data-live-search="true">
+						<select id="areaCode" name="areaCode" data-validate="required" class="form-control selectpicker" title="请选择门店/部门" data-live-search="true">
 							<#list areaList as p>
 								<option value='${p.areaCode}' <#if p.areaType == 0>data-icon="fa fa-bank" data-subtext="总公司"</#if> <#if p.areaType == 1>data-icon="fa fa-cubes" data-subtext="区域"</#if> <#if p.areaType == 2>data-icon="fa fa-cab" data-subtext="门店"</#if> <#if p.areaCode == billTransfer.areaCode> selected </#if> >${p.areaName}</option>
 							</#list>
@@ -182,7 +182,6 @@ function submitData(){
 	        error: function() {
 	        }
 	    });
-		
 	}
 }
 </script>

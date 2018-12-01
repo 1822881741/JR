@@ -5,11 +5,13 @@
 <#include "/header-smart.html" />
 <#import "/macro/billMacro.html" as bill>
 <base href="${basePath}">
-<link rel="stylesheet" href="static/dataview_styles.css" type="text/css" charset="utf-8">
 <@bill.webixcss/>
 <style>
     .myhover{
         background: #F4F5F9;
+    }
+    dl li{
+    	font-size:17px
     }
 </style>
 <body>
@@ -33,10 +35,10 @@
 		</li>
 	</ul>
 	<div class="tab-content">
-		<div class="tab-pane active" id="tab-nofinish">
+		<div class="tab-pane active padding-top-5" id="tab-nofinish">
 			<div id="nofinish" style="width: 100%"></div>
 		</div>
-		<div class="tab-pane" id="tab-finish">
+		<div class="tab-pane padding-top-5" id="tab-finish">
 			<div id="finish"></div>
 		</div>
 	</div>
@@ -70,17 +72,23 @@
 		  u1=webix.ui({
 				view:"dataview",
 				container:"nofinish",
+				select:true,
 	            type:{
 	            	width: "auto",
-	            	height:90,
-	                template:"<div class='overall'><div class='rank'>#id#.</div><div class='title'>#billNo#</div><div class='title'>#areaName# </div><div >#counterAreaName#</div> </div> </div>"
+                  	height:"auto",
+	                template:"<div class='padding-10'><h4 class='font-md'><strong>盘点单号 </strong>#billNo#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>创建时间 </strong>#createTimeShort#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>建单人 </strong>#createUserName#</h4>"+
+	                			"<ul class='padding-top-5'><li><strong>盘点范围</strong><dl class='dl-horizontal '><dt style='width: 80px;'>盘点门店</dt><dd style='margin-left: 100px;'>#areaName#</dd><dt style='width: 80px;'>盘点柜台</dt><dd style='margin-left: 100px;'>#counterAreaName#</dd><dt style='width: 80px;'>盘点类型</dt><dd style='margin-left: 100px;'>#productName#</dd></dl></li>"+
+	                			"<li><strong>盘点结果</strong><dl class='dl-horizontal padding-top-5'><dt style='width: 80px;'>应盘信息</dt><dd style='margin-left: 100px;'>#areaName#</dd><dt style='width: 80px;'>已盘信息</dt><dd style='margin-left: 100px;'>#counterAreaName#</dd><dt style='width: 80px;'>盘盈信息</dt><dd style='margin-left: 100px;'>#productName#</dd></dl></li>"+
+	                			"<li><strong>子盘点单</strong><dl class='dl-horizontal padding-top-5'><dt style='width: 80px;'>子单号</dt><dd style='margin-left: 100px;'>PZ1000001</dd></dl></li>"+
+	                			"<li><strong>其他信息</strong><dl class='dl-horizontal padding-top-5'><dt style='width: 80px;'>盘点人员</dt><dd style='margin-left: 100px;'>#assignTaker#</dd><dt style='width: 80px;'>备注信息</dt><dd style='margin-left: 100px;'>#remarks#</dd></dl></li>"+
+	                			"</ul></div>"
 	            },
-	            tooltip:{
-	                template:"<span class='webix_strong'>Rating: </span> #rating#<br/><span class='webix_strong'>Votes: </span> #votes#"
-	            },
+	            //tooltip:{
+	                //template:"<span class='webix_strong'>Rating: </span> #rating#<br/><span class='webix_strong'>Votes: </span> #votes#"
+	            //},
 	            xCount:2,
 	            height:parent.winHeight-240,
-	            data:'${billStocktakeList}'
+	            data:'${noFinishList}'
 		});
 		u2= webix.ui({
 				view:"dataview",
@@ -88,14 +96,20 @@
 				css: "movies",
 	            type:{
 	            	width: "auto",
-	                template:"<div class='overall'><div class='rank'>#rank#.</div><div class='title'>#title#</div><div class='year'>#year# year</div> </div>"
+                  	height:"auto",
+	                template:"<div class='padding-10'><h4 class='font-md'><strong>盘点单号 </strong>#billNo#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>创建时间 </strong>#createTimeShort#&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>建单人 </strong>#createUserName#</h4>"+
+		        			"<ul class='padding-top-5'><li><strong>盘点范围</strong><dl class='dl-horizontal '><dt style='width: 80px;'>盘点门店</dt><dd style='margin-left: 100px;'>#areaName#</dd><dt style='width: 80px;'>盘点柜台</dt><dd style='margin-left: 100px;'>#counterAreaName#</dd><dt style='width: 80px;'>盘点类型</dt><dd style='margin-left: 100px;'>#productName#</dd></dl></li>"+
+		        			"<li><strong>盘点结果</strong><dl class='dl-horizontal padding-top-5'><dt style='width: 80px;'>应盘信息</dt><dd style='margin-left: 100px;'>#areaName#</dd><dt style='width: 80px;'>已盘信息</dt><dd style='margin-left: 100px;'>#counterAreaName#</dd><dt style='width: 80px;'>盘盈信息</dt><dd style='margin-left: 100px;'>#productName#</dd></dl></li>"+
+		        			"<li><strong>子盘点单</strong><dl class='dl-horizontal padding-top-5'><dt style='width: 80px;'>子单号</dt><dd style='margin-left: 100px;'>PZ1000001</dd></dl></li>"+
+		        			"<li><strong>其他信息</strong><dl class='dl-horizontal padding-top-5'><dt style='width: 80px;'>盘点人员</dt><dd style='margin-left: 100px;'>#assignTaker#</dd><dt style='width: 80px;'>备注信息</dt><dd style='margin-left: 100px;'>#remarks#</dd></dl></li>"+
+		        			"</ul></div>"
 	            },
-	            tooltip:{
-	                template:"<span class='webix_strong'>Rating: </span> #rating#<br/><span class='webix_strong'>Votes: </span> #votes#"
-	            },
+	           // tooltip:{
+	                //template:"<span class='webix_strong'>Rating: </span> #rating#<br/><span class='webix_strong'>Votes: </span> #votes#"
+	           // },
 	            xCount:2,
 	            height:parent.winHeight-240,
-	            data:'${billStocktakeList}'
+	            data:'${finishList}'
 		});
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 		  u1.adjust();
