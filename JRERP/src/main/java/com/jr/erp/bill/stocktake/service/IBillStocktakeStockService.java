@@ -24,4 +24,13 @@ public interface IBillStocktakeStockService extends IBaseService<BaseEntity>
      * @return void
      * @Exception 异常对象
     */
-    Integer copyStock(BillStocktake billStocktake);}
+    Integer copyStock(BillStocktake billStocktake);
+
+    /**    
+     * deleteByMajorId(这里用一句话描述这个方法的作用)    
+     * 根据主单id删除保留的库存       
+     * @param @param id     
+     * @return void
+     * @Exception 异常对象
+    */
+    void deleteByMajorId(Integer id);}

@@ -163,7 +163,12 @@ function submitData(){
 		$("#counterAreaCode").find(":selected").each(function(){
 			counterName.push($(this).html());
 		})
-		param+="&counterAreaName="+counterName.join();
+		var assignName = [];
+		$("#assignTaker").find(":selected").each(function(){
+			assignName.push($(this).html());
+		})
+		
+		param+="&counterAreaName="+counterName.join()+"&assignTakerName="+assignName.join();
 		$.ajax({
 	        type: "POST",
 	        url: "stocktake/saveStocktakeMajor.do",

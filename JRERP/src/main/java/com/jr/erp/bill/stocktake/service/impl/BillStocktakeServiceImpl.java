@@ -29,6 +29,7 @@ public class BillStocktakeServiceImpl extends AbstractBaseService<BillStocktake>
     {
         BillStocktakeExample example = new BillStocktakeExample();
         example.createCriteria().andCompanyNoEqualTo(ShiroUtils.getCompanyNo()).andAreaCodeLike(ShiroUtils.getUserAreaCode()+"%").andBillStatusEqualTo(status);
+        example.setOrderByClause(" billDate desc");
         return (List)this.selectByExample(example);
     }
     
@@ -49,5 +50,12 @@ public class BillStocktakeServiceImpl extends AbstractBaseService<BillStocktake>
         
         billStocktake.setBookNum(count);
         this.updateByPrimaryKeySelective(billStocktake);
+    }
+
+    @Override
+    public void deleteStocktakeMajor(Integer id)
+    {
+        billStocktakeStockService.deleteByMajorId(id);
+        this.deleteByPrimaryKey(id);
     }
 }

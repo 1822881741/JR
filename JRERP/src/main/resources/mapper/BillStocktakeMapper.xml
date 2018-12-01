@@ -13,7 +13,8 @@
     <result column="counterAreaCode" jdbcType="VARCHAR" property="counterAreaCode" />
     <result column="counterAreaName" jdbcType="VARCHAR" property="counterAreaName" />
     <result column="productName" jdbcType="VARCHAR" property="productName" />
-    <result column="assignTaker" jdbcType="TINYINT" property="assignTaker" />
+    <result column="assignTaker" jdbcType="VARCHAR" property="assignTaker" />
+    <result column="assignTakerName" jdbcType="VARCHAR" property="assignTakerName" />
     <result column="bookNum" jdbcType="INTEGER" property="bookNum" />
     <result column="checkNum" jdbcType="INTEGER" property="checkNum" />
     <result column="billStatus" jdbcType="TINYINT" property="billStatus" />
@@ -83,8 +84,8 @@
   </sql>
   <sql id="Base_Column_List">
     id, companyNo, sysBillNo, billNo, billDate, areaCode, areaName, canViewAll, counterAreaCode, 
-    counterAreaName, productName, assignTaker, bookNum, checkNum, billStatus, createUserId, 
-    createUserName, createTime, finishTime, remarks
+    counterAreaName, productName, assignTaker, assignTakerName, bookNum, checkNum, billStatus, 
+    createUserId, createUserName, createTime, finishTime, remarks
   </sql>
   <select id="selectByExample" parameterType="com.jr.erp.bill.stocktake.entity.BillStocktakeExample" resultMap="BaseResultMap">
     select
@@ -122,20 +123,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.jr.erp.bill.stocktake.entity.BillStocktake">
-     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into bill_stocktake (id, companyNo, sysBillNo, 
-      billNo, billDate, areaCode, 
-      areaName, canViewAll, counterAreaCode, 
-      counterAreaName, productName, assignTaker, 
+    insert into bill_stocktake (companyNo, sysBillNo, billNo, 
+      billDate, areaCode, areaName, 
+      canViewAll, counterAreaCode, counterAreaName, 
+      productName, assignTaker, assignTakerName, 
       bookNum, checkNum, billStatus, 
       createUserId, createUserName, createTime, 
       finishTime, remarks)
-    values (#{id,jdbcType=INTEGER}, #{companyNo,jdbcType=VARCHAR}, #{sysBillNo,jdbcType=VARCHAR}, 
-      #{billNo,jdbcType=VARCHAR}, #{billDate,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, 
-      #{areaName,jdbcType=VARCHAR}, #{canViewAll,jdbcType=TINYINT}, #{counterAreaCode,jdbcType=VARCHAR}, 
-      #{counterAreaName,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, #{assignTaker,jdbcType=TINYINT}, 
+    values (#{companyNo,jdbcType=VARCHAR}, #{sysBillNo,jdbcType=VARCHAR}, #{billNo,jdbcType=VARCHAR}, 
+      #{billDate,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{areaName,jdbcType=VARCHAR}, 
+      #{canViewAll,jdbcType=TINYINT}, #{counterAreaCode,jdbcType=VARCHAR}, #{counterAreaName,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{assignTaker,jdbcType=VARCHAR}, #{assignTakerName,jdbcType=VARCHAR}, 
       #{bookNum,jdbcType=INTEGER}, #{checkNum,jdbcType=INTEGER}, #{billStatus,jdbcType=TINYINT}, 
       #{createUserId,jdbcType=INTEGER}, #{createUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
       #{finishTime,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
@@ -183,7 +184,10 @@
         productName = #{record.productName,jdbcType=VARCHAR},
       </if>
       <if test="record.assignTaker != null">
-        assignTaker = #{record.assignTaker,jdbcType=TINYINT},
+        assignTaker = #{record.assignTaker,jdbcType=VARCHAR},
+      </if>
+      <if test="record.assignTakerName != null">
+        assignTakerName = #{record.assignTakerName,jdbcType=VARCHAR},
       </if>
       <if test="record.bookNum != null">
         bookNum = #{record.bookNum,jdbcType=INTEGER},
@@ -227,7 +231,8 @@
       counterAreaCode = #{record.counterAreaCode,jdbcType=VARCHAR},
       counterAreaName = #{record.counterAreaName,jdbcType=VARCHAR},
       productName = #{record.productName,jdbcType=VARCHAR},
-      assignTaker = #{record.assignTaker,jdbcType=TINYINT},
+      assignTaker = #{record.assignTaker,jdbcType=VARCHAR},
+      assignTakerName = #{record.assignTakerName,jdbcType=VARCHAR},
       bookNum = #{record.bookNum,jdbcType=INTEGER},
       checkNum = #{record.checkNum,jdbcType=INTEGER},
       billStatus = #{record.billStatus,jdbcType=TINYINT},
@@ -274,7 +279,10 @@
         productName = #{productName,jdbcType=VARCHAR},
       </if>
       <if test="assignTaker != null">
-        assignTaker = #{assignTaker,jdbcType=TINYINT},
+        assignTaker = #{assignTaker,jdbcType=VARCHAR},
+      </if>
+      <if test="assignTakerName != null">
+        assignTakerName = #{assignTakerName,jdbcType=VARCHAR},
       </if>
       <if test="bookNum != null">
         bookNum = #{bookNum,jdbcType=INTEGER},
@@ -315,7 +323,8 @@
       counterAreaCode = #{counterAreaCode,jdbcType=VARCHAR},
       counterAreaName = #{counterAreaName,jdbcType=VARCHAR},
       productName = #{productName,jdbcType=VARCHAR},
-      assignTaker = #{assignTaker,jdbcType=TINYINT},
+      assignTaker = #{assignTaker,jdbcType=VARCHAR},
+      assignTakerName = #{assignTakerName,jdbcType=VARCHAR},
       bookNum = #{bookNum,jdbcType=INTEGER},
       checkNum = #{checkNum,jdbcType=INTEGER},
       billStatus = #{billStatus,jdbcType=TINYINT},

@@ -879,53 +879,133 @@ public class BillStocktakeExample extends BaseExample {
             return (Criteria) this;
         }
 
-        public Criteria andAssignTakerEqualTo(Integer value) {
+        public Criteria andAssignTakerEqualTo(String value) {
             addCriterion("assignTaker =", value, "assignTaker");
             return (Criteria) this;
         }
 
-        public Criteria andAssignTakerNotEqualTo(Integer value) {
+        public Criteria andAssignTakerNotEqualTo(String value) {
             addCriterion("assignTaker <>", value, "assignTaker");
             return (Criteria) this;
         }
 
-        public Criteria andAssignTakerGreaterThan(Integer value) {
+        public Criteria andAssignTakerGreaterThan(String value) {
             addCriterion("assignTaker >", value, "assignTaker");
             return (Criteria) this;
         }
 
-        public Criteria andAssignTakerGreaterThanOrEqualTo(Integer value) {
+        public Criteria andAssignTakerGreaterThanOrEqualTo(String value) {
             addCriterion("assignTaker >=", value, "assignTaker");
             return (Criteria) this;
         }
 
-        public Criteria andAssignTakerLessThan(Integer value) {
+        public Criteria andAssignTakerLessThan(String value) {
             addCriterion("assignTaker <", value, "assignTaker");
             return (Criteria) this;
         }
 
-        public Criteria andAssignTakerLessThanOrEqualTo(Integer value) {
+        public Criteria andAssignTakerLessThanOrEqualTo(String value) {
             addCriterion("assignTaker <=", value, "assignTaker");
             return (Criteria) this;
         }
 
-        public Criteria andAssignTakerIn(List<Integer> values) {
+        public Criteria andAssignTakerLike(String value) {
+            addCriterion("assignTaker like", value, "assignTaker");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssignTakerNotLike(String value) {
+            addCriterion("assignTaker not like", value, "assignTaker");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssignTakerIn(List<String> values) {
             addCriterion("assignTaker in", values, "assignTaker");
             return (Criteria) this;
         }
 
-        public Criteria andAssignTakerNotIn(List<Integer> values) {
+        public Criteria andAssignTakerNotIn(List<String> values) {
             addCriterion("assignTaker not in", values, "assignTaker");
             return (Criteria) this;
         }
 
-        public Criteria andAssignTakerBetween(Integer value1, Integer value2) {
+        public Criteria andAssignTakerBetween(String value1, String value2) {
             addCriterion("assignTaker between", value1, value2, "assignTaker");
             return (Criteria) this;
         }
 
-        public Criteria andAssignTakerNotBetween(Integer value1, Integer value2) {
+        public Criteria andAssignTakerNotBetween(String value1, String value2) {
             addCriterion("assignTaker not between", value1, value2, "assignTaker");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssignTakerNameIsNull() {
+            addCriterion("assignTakerName is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssignTakerNameIsNotNull() {
+            addCriterion("assignTakerName is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssignTakerNameEqualTo(String value) {
+            addCriterion("assignTakerName =", value, "assignTakerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssignTakerNameNotEqualTo(String value) {
+            addCriterion("assignTakerName <>", value, "assignTakerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssignTakerNameGreaterThan(String value) {
+            addCriterion("assignTakerName >", value, "assignTakerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssignTakerNameGreaterThanOrEqualTo(String value) {
+            addCriterion("assignTakerName >=", value, "assignTakerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssignTakerNameLessThan(String value) {
+            addCriterion("assignTakerName <", value, "assignTakerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssignTakerNameLessThanOrEqualTo(String value) {
+            addCriterion("assignTakerName <=", value, "assignTakerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssignTakerNameLike(String value) {
+            addCriterion("assignTakerName like", value, "assignTakerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssignTakerNameNotLike(String value) {
+            addCriterion("assignTakerName not like", value, "assignTakerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssignTakerNameIn(List<String> values) {
+            addCriterion("assignTakerName in", values, "assignTakerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssignTakerNameNotIn(List<String> values) {
+            addCriterion("assignTakerName not in", values, "assignTakerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssignTakerNameBetween(String value1, String value2) {
+            addCriterion("assignTakerName between", value1, value2, "assignTakerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAssignTakerNameNotBetween(String value1, String value2) {
+            addCriterion("assignTakerName not between", value1, value2, "assignTakerName");
             return (Criteria) this;
         }
 

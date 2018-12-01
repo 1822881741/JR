@@ -126,4 +126,12 @@ public class StocktakeController
         billStocktakeService.saveStocktakeMajor(billStocktake);
         return Ret.ok("保存成功");
     }
+    
+    @RequestMapping(value = "/deleteStocktakeMajor.do")
+    @ResponseBody
+    public Ret deleteStocktakeMajor(Integer id, HttpServletRequest request, Model model)
+    {
+        billStocktakeService.deleteStocktakeMajor(id);
+        return Ret.ok("保存成功");
+    }
 }

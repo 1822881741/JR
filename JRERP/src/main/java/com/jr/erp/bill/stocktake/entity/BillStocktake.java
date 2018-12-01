@@ -49,9 +49,14 @@ public class BillStocktake extends BaseEntity {
     private String productName;
 
     /**
-     * 指定人员盘点：0：不指定；1：指定盘点人
+     * 盘点人列表
      */
-    private Integer assignTaker;
+    private String assignTaker;
+
+    /**
+     * 
+     */
+    private String assignTakerName;
 
     /**
      * 应盘数量
@@ -233,19 +238,35 @@ public class BillStocktake extends BaseEntity {
     }
 
     /**
-     * 指定人员盘点：0：不指定；1：指定盘点人
-     * @return assignTaker 指定人员盘点：0：不指定；1：指定盘点人
+     * 盘点人列表
+     * @return assignTaker 盘点人列表
      */
-    public Integer getAssignTaker() {
+    public String getAssignTaker() {
         return assignTaker;
     }
 
     /**
-     * 指定人员盘点：0：不指定；1：指定盘点人
-     * @param assignTaker 指定人员盘点：0：不指定；1：指定盘点人
+     * 盘点人列表
+     * @param assignTaker 盘点人列表
      */
-    public void setAssignTaker(Integer assignTaker) {
-        this.assignTaker = assignTaker;
+    public void setAssignTaker(String assignTaker) {
+        this.assignTaker = assignTaker == null ? null : assignTaker.trim();
+    }
+
+    /**
+     * 
+     * @return assignTakerName 
+     */
+    public String getAssignTakerName() {
+        return assignTakerName;
+    }
+
+    /**
+     * 
+     * @param assignTakerName 
+     */
+    public void setAssignTakerName(String assignTakerName) {
+        this.assignTakerName = assignTakerName == null ? null : assignTakerName.trim();
     }
 
     /**

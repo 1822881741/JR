@@ -27,6 +27,15 @@ public interface IBillStocktakeService extends IBaseService<BaseEntity>
     */
     void saveStocktakeMajor(BillStocktake billStocktake);
 
+    /**    
+     * deleteStocktakeMajor(这里用一句话描述这个方法的作用)    
+     * 删除盘点单       
+     * @param @param id     
+     * @return void
+     * @Exception 异常对象
+    */
+    void deleteStocktakeMajor(Integer id);
+
 
     
 }
