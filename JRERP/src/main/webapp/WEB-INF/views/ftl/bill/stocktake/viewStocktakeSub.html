@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<#include "/header-smart.html" />
+<#import "/macro/billMacro.html" as bill>
+<base href="${basePath}">
+<@bill.webixcss/>
+<style>
+    .myhover{
+        background: #F4F5F9;
+    }
+    dl li{
+    	font-size:17px
+    }
+</style>
+<body>
+<@bill.layout>
+	<div class="row">
+		<div class="row margin-left-10">
+			<div class="col-sm-6 col-md-6 col-lg-6">
+				<ul class="demo-btns" style="height: 30px;">
+					<li><a id="addStocktake" href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 新增</a></li>
+				</ul>
+			</div>
+		</div>
+		<hr class="simple margin-5">
+	</div>
+	<div id='grid'></div>
+	<div id="paging_here"></div>
+</@bill.layout>
+</body>
+<@bill.js/>
+<script type="text/javascript">
+	var grid;
+	var addIndex;
+	$(document).ready(function() {
+		pageSetUp();
+		webix.i18n.setLocale("zh-CN");
+		
+		$("#addStocktake").on("click",function(){
+			addIndex = layer.open({
+				  type: 2,
+				  skin: 'layui-layer-lan', //加上边框
+				  area: ['600px', '400px'], //宽高
+				  fixed: false, //不固定
+				  content : "stocktake/addStocktakeMajor.do",
+				  btn : [ '保存', '取消' ],
+				  yes : function(index, layero) {
+						var result = $(layero).find("iframe")[0].contentWindow.submitData();
+						if (result) {
+							
+						}
+				}
+			});
+		})
+		
+		//表格
+		grid = webix.ui({
+			container:"grid",
+			view:"datatable", 
+			id:"gridTable",
+			css:"webix_header_border webix_body_border webix_footer_border",
+			leftSplit:1,
+			columns:[{id:"rowNo",header:'#',sort:"int",css:"header",width:50},
+				     {id:"id",header:'操作',template:"<a href='javascript:void(0)' class='btn btn-xs btn-danger delbtn'><i class='fa fa-trash-o'></i> 删除</a>"},
+				     {id:"barcode",sort:"string",header:"主单号"},
+				     {id:"barcode",sort:"string",header:"子单号"},
+				     {id:"oldBarcode",sort:"string",header:"门店"},
+				     {id:"productName",sort:"string",header:"柜台"},
+				     {id:"supplier",sort:"string",header:"商品名称"},
+				     {id:"brandName",sort:"string",header:"实盘数量"},
+				     {id:"subName",sort:"string",header:"金重"},
+				     {id:"certificateNo",sort:"string",header:"石重"},
+				     {id:"giaCertificateNo",sort:"string",header:"成本"},
+				     {id:"style",sort:"string",header:"标价"},
+				     {id:"comStyleNo",sort:"string",header:"盘点人"},
+				     {id:"facStyleNo",sort:"string",header:"备注"},
+				     {id:"handInch",sort:"string",header:"状态"}
+				     ],
+			footer:false,
+			resizeColumn:true,
+    		height:parent.winHeight-300,
+			dragColumn:true,
+			select: "row", 
+			multiselect: true, 
+			blockselect: true,
+			//datafetch:3,暂时不明白，动态分页加载还不会呢
+			//loadahead:7,
+			pager:{
+				container:"paging_here",
+                group: 6, //数据按钮的个数默认最多5个
+                size: 5,
+				template: '{common.first()} {common.prev()} {common.pages()} {common.next()} {common.last()} {common.count()} '
+			},
+			url:"stocktake/getStocktakeSubData.do",
+			hover:"myhover",
+			on:{
+			    "onItemClick":function(id, e, trg){
+			        //webix.message("Click on row: " + id.row+", column: " + id.column);
+			        },
+			     "data->onStoreUpdated":function(){
+						this.data.each(function(obj, i){
+							obj.rowNo = i+1;
+						})
+					}
+				}
+		})
+	});
+	
+	function deleteMajor(id){
+		layer.confirm("确定要删除该盘点单吗？",function(index){
+			$.ajax({
+		        type: "POST",
+		        url: "stocktake/deleteStocktakeMajor.do",
+		        dataType: 'json',
+		        async: false,
+		        data: "id="+id,
+		        success: function(data) {
+		            if (data.status == '100') {
+		            	layer.alert("删除成功");
+		            }else{
+		            	layer.alert("获取基础信息失败");
+		            }
+		        },
+		        error: function() {
+		        }
+		    });
+		})
+	}
+</script>
+</html>

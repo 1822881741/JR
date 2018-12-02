@@ -33,7 +33,7 @@ import com.jr.erp.sys.utils.service.IBillNoGeneratorService;
 
 @Controller
 @RequestMapping("/stocktake")
-public class StocktakeController
+public class StocktakeMajorController
 {
 
     @Autowired
@@ -54,8 +54,8 @@ public class StocktakeController
     @Autowired
     ISysUserService sysUserService;
     
-    @RequestMapping(value = "/viewStocktakeBillMajor.do")
-    public String viewStocktakeBillMajor(HttpServletRequest request, Model model)
+    @RequestMapping(value = "/viewStocktakeMajor.do")
+    public String viewStocktakeMajor(HttpServletRequest request, Model model)
     {
         List<BillStocktake> noFinishList = billStocktakeService.getBillStocktakeList(Constance.BILL_STATUS_NEW);
         JSONArray ja = new JSONArray((List)noFinishList);

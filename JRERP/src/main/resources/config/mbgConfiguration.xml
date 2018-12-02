@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
 	<!-- 配置mysql 驱动jar包路径.用了绝对路径 -->
-	<classPathEntry location="H:/repository/org/mybatis/mybatis/3.4.5/mybatis-3.4.5.jar" />
+	<classPathEntry location="F:/repository/org/mybatis/mybatis/3.4.5/mybatis-3.4.5.jar" />
 	<context id="mysql_tables" targetRuntime="MyBatis3">
 		<plugin type="com.maven.web.util.BaseMapperGeneratorPlugin" />
 		<!-- 为了防止生成的代码中有很多注释，比较难看，加入下面的配置控制 -->
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 
 		<!-- 数据表对应的model 层 嘎嘎嘎嘎嘎过过过过过过过过过过过过过过过过过过过过过过过-->
 		<javaModelGenerator targetPackage="com.jr.erp.bill.stocktake.entity"
-			targetProject="G:\gitworkspace\JR\JR\JRERP\src\main\java">
+			targetProject="E:\gitworkspace\JR\JRERP\src\main\java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 			<property name="rootClass" value="com.jr.erp.base.mybatis.BaseEntity" />
@@ -37,18 +37,25 @@ PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
 
 		<!-- sql mapper 隐射配置文件 xml 文件其实就是mapper接口 嘎嘎嘎嘎嘎过过过过过过过过过过过过过过过过过过过过过过过 -->
 		<sqlMapGenerator targetPackage="mapper"
-			targetProject="G:\gitworkspace\JR\JR\JRERP\src\main\resources">
+			targetProject="E:\gitworkspace\JR\JRERP\src\main\resources">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<!-- 在ibatis2 中是dao层，但在mybatis3中，其实就是mapper接口 嘎嘎嘎嘎嘎过过过过过过过过过过过过过过过过过过过过过过过-->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.jr.erp.bill.stocktake.dao" targetProject="G:\gitworkspace\JR\JR\JRERP\src\main\java">
+			targetPackage="com.jr.erp.bill.stocktake.dao" targetProject="E:\gitworkspace\JR\JRERP\src\main\java">
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 		
 		<!-- 要对那些数据表进行生成操作，必须要有一个. -->
-		<table schema="mybatis" tableName="bill_stocktake" domainObjectName="BillStocktake"  delimitIdentifiers="false"
+		<table schema="mybatis" tableName="bill_stocktake_sub" domainObjectName="BillStocktakeSub"  delimitIdentifiers="false"
+			selectByPrimaryKeyQueryId="true" enableDeleteByPrimaryKey="true"
+			enableCountByExample="true" enableUpdateByPrimaryKey="true" enableUpdateByExample="true" >
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="id" sqlStatement="MySql" identity="true"/>
+			</table> 
+			
+		<table schema="mybatis" tableName="bill_stocktake_sub_item" domainObjectName="BillStocktakeSubItem"  delimitIdentifiers="false"
 			selectByPrimaryKeyQueryId="true" enableDeleteByPrimaryKey="true"
 			enableCountByExample="true" enableUpdateByPrimaryKey="true" enableUpdateByExample="true" >
 			<property name="useActualColumnNames" value="true" />

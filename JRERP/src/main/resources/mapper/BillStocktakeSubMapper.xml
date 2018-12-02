@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jr.erp.bill.stocktake.dao.BillStocktakeSubMapper">
+  <resultMap id="BaseResultMap" type="com.jr.erp.bill.stocktake.entity.BillStocktakeSub">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="companyNo" jdbcType="VARCHAR" property="companyNo" />
+    <result column="billId" jdbcType="INTEGER" property="billId" />
+    <result column="billNo" jdbcType="VARCHAR" property="billNo" />
+    <result column="sysBillNo" jdbcType="VARCHAR" property="sysBillNo" />
+    <result column="majorBillNo" jdbcType="VARCHAR" property="majorBillNo" />
+    <result column="billStatus" jdbcType="INTEGER" property="billStatus" />
+    <result column="areaCode" jdbcType="VARCHAR" property="areaCode" />
+    <result column="areaName" jdbcType="VARCHAR" property="areaName" />
+    <result column="counterAreaCode" jdbcType="VARCHAR" property="counterAreaCode" />
+    <result column="counterAreaName" jdbcType="VARCHAR" property="counterAreaName" />
+    <result column="createUserId" jdbcType="INTEGER" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="takeNum" jdbcType="INTEGER" property="takeNum" />
+    <result column="takeGoldWeight" jdbcType="DOUBLE" property="takeGoldWeight" />
+    <result column="takeJewelWeight" jdbcType="DOUBLE" property="takeJewelWeight" />
+    <result column="takeCostPrice" jdbcType="DOUBLE" property="takeCostPrice" />
+    <result column="takeLabelPriceSum" jdbcType="DOUBLE" property="takeLabelPriceSum" />
+    <result column="createTime" jdbcType="VARCHAR" property="createTime" />
+    <result column="updateTime" jdbcType="VARCHAR" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.jr.erp.bill.stocktake.entity.BillStocktakeSub">
+    <result column="productName" jdbcType="LONGVARCHAR" property="productName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, companyNo, billId, billNo, sysBillNo, majorBillNo, billStatus, areaCode, areaName, 
+    counterAreaCode, counterAreaName, createUserId, createUserName, remarks, takeNum, 
+    takeGoldWeight, takeJewelWeight, takeCostPrice, takeLabelPriceSum, createTime, updateTime
+  </sql>
+  <sql id="Blob_Column_List">
+    productName
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.jr.erp.bill.stocktake.entity.BillStocktakeSubExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bill_stocktake_sub
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.jr.erp.bill.stocktake.entity.BillStocktakeSubExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bill_stocktake_sub
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="page != null">
+      <if test="limit != null">
+        limit ${(page-1)*limit}, ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bill_stocktake_sub
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bill_stocktake_sub
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jr.erp.bill.stocktake.entity.BillStocktakeSubExample">
+    delete from bill_stocktake_sub
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jr.erp.bill.stocktake.entity.BillStocktakeSub">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bill_stocktake_sub (companyNo, billId, billNo, 
+      sysBillNo, majorBillNo, billStatus, 
+      areaCode, areaName, counterAreaCode, 
+      counterAreaName, createUserId, createUserName, 
+      remarks, takeNum, takeGoldWeight, 
+      takeJewelWeight, takeCostPrice, takeLabelPriceSum, 
+      createTime, updateTime, productName
+      )
+    values (#{companyNo,jdbcType=VARCHAR}, #{billId,jdbcType=INTEGER}, #{billNo,jdbcType=VARCHAR}, 
+      #{sysBillNo,jdbcType=VARCHAR}, #{majorBillNo,jdbcType=VARCHAR}, #{billStatus,jdbcType=INTEGER}, 
+      #{areaCode,jdbcType=VARCHAR}, #{areaName,jdbcType=VARCHAR}, #{counterAreaCode,jdbcType=VARCHAR}, 
+      #{counterAreaName,jdbcType=VARCHAR}, #{createUserId,jdbcType=INTEGER}, #{createUserName,jdbcType=VARCHAR}, 
+      #{remarks,jdbcType=VARCHAR}, #{takeNum,jdbcType=INTEGER}, #{takeGoldWeight,jdbcType=DOUBLE}, 
+      #{takeJewelWeight,jdbcType=DOUBLE}, #{takeCostPrice,jdbcType=DOUBLE}, #{takeLabelPriceSum,jdbcType=DOUBLE}, 
+      #{createTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{productName,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <select id="countByExample" parameterType="com.jr.erp.bill.stocktake.entity.BillStocktakeSubExample" resultType="java.lang.Long">
+    select count(*) from bill_stocktake_sub
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bill_stocktake_sub
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyNo != null">
+        companyNo = #{record.companyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billId != null">
+        billId = #{record.billId,jdbcType=INTEGER},
+      </if>
+      <if test="record.billNo != null">
+        billNo = #{record.billNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sysBillNo != null">
+        sysBillNo = #{record.sysBillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.majorBillNo != null">
+        majorBillNo = #{record.majorBillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.billStatus != null">
+        billStatus = #{record.billStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.areaCode != null">
+        areaCode = #{record.areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaName != null">
+        areaName = #{record.areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.counterAreaCode != null">
+        counterAreaCode = #{record.counterAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.counterAreaName != null">
+        counterAreaName = #{record.counterAreaName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUserId != null">
+        createUserId = #{record.createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createUserName != null">
+        createUserName = #{record.createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.takeNum != null">
+        takeNum = #{record.takeNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.takeGoldWeight != null">
+        takeGoldWeight = #{record.takeGoldWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.takeJewelWeight != null">
+        takeJewelWeight = #{record.takeJewelWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="record.takeCostPrice != null">
+        takeCostPrice = #{record.takeCostPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.takeLabelPriceSum != null">
+        takeLabelPriceSum = #{record.takeLabelPriceSum,jdbcType=DOUBLE},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        updateTime = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productName != null">
+        productName = #{record.productName,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update bill_stocktake_sub
+    set id = #{record.id,jdbcType=INTEGER},
+      companyNo = #{record.companyNo,jdbcType=VARCHAR},
+      billId = #{record.billId,jdbcType=INTEGER},
+      billNo = #{record.billNo,jdbcType=VARCHAR},
+      sysBillNo = #{record.sysBillNo,jdbcType=VARCHAR},
+      majorBillNo = #{record.majorBillNo,jdbcType=VARCHAR},
+      billStatus = #{record.billStatus,jdbcType=INTEGER},
+      areaCode = #{record.areaCode,jdbcType=VARCHAR},
+      areaName = #{record.areaName,jdbcType=VARCHAR},
+      counterAreaCode = #{record.counterAreaCode,jdbcType=VARCHAR},
+      counterAreaName = #{record.counterAreaName,jdbcType=VARCHAR},
+      createUserId = #{record.createUserId,jdbcType=INTEGER},
+      createUserName = #{record.createUserName,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      takeNum = #{record.takeNum,jdbcType=INTEGER},
+      takeGoldWeight = #{record.takeGoldWeight,jdbcType=DOUBLE},
+      takeJewelWeight = #{record.takeJewelWeight,jdbcType=DOUBLE},
+      takeCostPrice = #{record.takeCostPrice,jdbcType=DOUBLE},
+      takeLabelPriceSum = #{record.takeLabelPriceSum,jdbcType=DOUBLE},
+      createTime = #{record.createTime,jdbcType=VARCHAR},
+      updateTime = #{record.updateTime,jdbcType=VARCHAR},
+      productName = #{record.productName,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bill_stocktake_sub
+    set id = #{record.id,jdbcType=INTEGER},
+      companyNo = #{record.companyNo,jdbcType=VARCHAR},
+      billId = #{record.billId,jdbcType=INTEGER},
+      billNo = #{record.billNo,jdbcType=VARCHAR},
+      sysBillNo = #{record.sysBillNo,jdbcType=VARCHAR},
+      majorBillNo = #{record.majorBillNo,jdbcType=VARCHAR},
+      billStatus = #{record.billStatus,jdbcType=INTEGER},
+      areaCode = #{record.areaCode,jdbcType=VARCHAR},
+      areaName = #{record.areaName,jdbcType=VARCHAR},
+      counterAreaCode = #{record.counterAreaCode,jdbcType=VARCHAR},
+      counterAreaName = #{record.counterAreaName,jdbcType=VARCHAR},
+      createUserId = #{record.createUserId,jdbcType=INTEGER},
+      createUserName = #{record.createUserName,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR},
+      takeNum = #{record.takeNum,jdbcType=INTEGER},
+      takeGoldWeight = #{record.takeGoldWeight,jdbcType=DOUBLE},
+      takeJewelWeight = #{record.takeJewelWeight,jdbcType=DOUBLE},
+      takeCostPrice = #{record.takeCostPrice,jdbcType=DOUBLE},
+      takeLabelPriceSum = #{record.takeLabelPriceSum,jdbcType=DOUBLE},
+      createTime = #{record.createTime,jdbcType=VARCHAR},
+      updateTime = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jr.erp.bill.stocktake.entity.BillStocktakeSub">
+    update bill_stocktake_sub
+    <set>
+      <if test="companyNo != null">
+        companyNo = #{companyNo,jdbcType=VARCHAR},
+      </if>
+      <if test="billId != null">
+        billId = #{billId,jdbcType=INTEGER},
+      </if>
+      <if test="billNo != null">
+        billNo = #{billNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sysBillNo != null">
+        sysBillNo = #{sysBillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="majorBillNo != null">
+        majorBillNo = #{majorBillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="billStatus != null">
+        billStatus = #{billStatus,jdbcType=INTEGER},
+      </if>
+      <if test="areaCode != null">
+        areaCode = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null">
+        areaName = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="counterAreaCode != null">
+        counterAreaCode = #{counterAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="counterAreaName != null">
+        counterAreaName = #{counterAreaName,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserId != null">
+        createUserId = #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="createUserName != null">
+        createUserName = #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="takeNum != null">
+        takeNum = #{takeNum,jdbcType=INTEGER},
+      </if>
+      <if test="takeGoldWeight != null">
+        takeGoldWeight = #{takeGoldWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="takeJewelWeight != null">
+        takeJewelWeight = #{takeJewelWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="takeCostPrice != null">
+        takeCostPrice = #{takeCostPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="takeLabelPriceSum != null">
+        takeLabelPriceSum = #{takeLabelPriceSum,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        updateTime = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        productName = #{productName,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.jr.erp.bill.stocktake.entity.BillStocktakeSub">
+    update bill_stocktake_sub
+    set companyNo = #{companyNo,jdbcType=VARCHAR},
+      billId = #{billId,jdbcType=INTEGER},
+      billNo = #{billNo,jdbcType=VARCHAR},
+      sysBillNo = #{sysBillNo,jdbcType=VARCHAR},
+      majorBillNo = #{majorBillNo,jdbcType=VARCHAR},
+      billStatus = #{billStatus,jdbcType=INTEGER},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
+      areaName = #{areaName,jdbcType=VARCHAR},
+      counterAreaCode = #{counterAreaCode,jdbcType=VARCHAR},
+      counterAreaName = #{counterAreaName,jdbcType=VARCHAR},
+      createUserId = #{createUserId,jdbcType=INTEGER},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      takeNum = #{takeNum,jdbcType=INTEGER},
+      takeGoldWeight = #{takeGoldWeight,jdbcType=DOUBLE},
+      takeJewelWeight = #{takeJewelWeight,jdbcType=DOUBLE},
+      takeCostPrice = #{takeCostPrice,jdbcType=DOUBLE},
+      takeLabelPriceSum = #{takeLabelPriceSum,jdbcType=DOUBLE},
+      createTime = #{createTime,jdbcType=VARCHAR},
+      updateTime = #{updateTime,jdbcType=VARCHAR},
+      productName = #{productName,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jr.erp.bill.stocktake.entity.BillStocktakeSub">
+    update bill_stocktake_sub
+    set companyNo = #{companyNo,jdbcType=VARCHAR},
+      billId = #{billId,jdbcType=INTEGER},
+      billNo = #{billNo,jdbcType=VARCHAR},
+      sysBillNo = #{sysBillNo,jdbcType=VARCHAR},
+      majorBillNo = #{majorBillNo,jdbcType=VARCHAR},
+      billStatus = #{billStatus,jdbcType=INTEGER},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
+      areaName = #{areaName,jdbcType=VARCHAR},
+      counterAreaCode = #{counterAreaCode,jdbcType=VARCHAR},
+      counterAreaName = #{counterAreaName,jdbcType=VARCHAR},
+      createUserId = #{createUserId,jdbcType=INTEGER},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      takeNum = #{takeNum,jdbcType=INTEGER},
+      takeGoldWeight = #{takeGoldWeight,jdbcType=DOUBLE},
+      takeJewelWeight = #{takeJewelWeight,jdbcType=DOUBLE},
+      takeCostPrice = #{takeCostPrice,jdbcType=DOUBLE},
+      takeLabelPriceSum = #{takeLabelPriceSum,jdbcType=DOUBLE},
+      createTime = #{createTime,jdbcType=VARCHAR},
+      updateTime = #{updateTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
