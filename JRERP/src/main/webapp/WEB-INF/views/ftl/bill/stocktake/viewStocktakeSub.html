@@ -20,7 +20,7 @@
 		<div class="row margin-left-10">
 			<div class="col-sm-6 col-md-6 col-lg-6">
 				<ul class="demo-btns" style="height: 30px;">
-					<li><a id="addStocktake" href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 新增</a></li>
+					<li><a id="addStocktakeSub" href="javascript:void(0);" class="btn btn-sm btn-default"><i class="fa fa-gear fa-lg"></i> 新增</a></li>
 				</ul>
 			</div>
 		</div>
@@ -38,13 +38,14 @@
 		pageSetUp();
 		webix.i18n.setLocale("zh-CN");
 		
-		$("#addStocktake").on("click",function(){
+		$("#addStocktakeSub").on("click",function(){
 			addIndex = layer.open({
 				  type: 2,
 				  skin: 'layui-layer-lan', //加上边框
 				  area: ['600px', '400px'], //宽高
 				  fixed: false, //不固定
-				  content : "stocktake/addStocktakeMajor.do",
+				  title:"请选择盘点主单",
+				  content : "stocktake/viewCanTakeMajor.do",
 				  btn : [ '保存', '取消' ],
 				  yes : function(index, layero) {
 						var result = $(layero).find("iframe")[0].contentWindow.submitData();
@@ -64,25 +65,27 @@
 			leftSplit:1,
 			columns:[{id:"rowNo",header:'#',sort:"int",css:"header",width:50},
 				     {id:"id",header:'操作',template:"<a href='javascript:void(0)' class='btn btn-xs btn-danger delbtn'><i class='fa fa-trash-o'></i> 删除</a>"},
-				     {id:"barcode",sort:"string",header:"主单号"},
-				     {id:"barcode",sort:"string",header:"子单号"},
-				     {id:"oldBarcode",sort:"string",header:"门店"},
-				     {id:"productName",sort:"string",header:"柜台"},
-				     {id:"supplier",sort:"string",header:"商品名称"},
-				     {id:"brandName",sort:"string",header:"实盘数量"},
-				     {id:"subName",sort:"string",header:"金重"},
-				     {id:"certificateNo",sort:"string",header:"石重"},
-				     {id:"giaCertificateNo",sort:"string",header:"成本"},
-				     {id:"style",sort:"string",header:"标价"},
-				     {id:"comStyleNo",sort:"string",header:"盘点人"},
-				     {id:"facStyleNo",sort:"string",header:"备注"},
-				     {id:"handInch",sort:"string",header:"状态"}
+				     {id:"majorBillNo",sort:"string",header:"主单号"},
+				     {id:"billNo",sort:"string",header:"子单号"},
+				     {id:"areaName",sort:"string",header:"门店"},
+				     {id:"counterAreaCode",sort:"string",header:"柜台"},
+				     {id:"productName",sort:"string",header:"盘点商品名称"},
+				     {id:"createUserName",sort:"string",header:"建单人"},
+				     {id:"takeNum",sort:"int",header:"实盘数量"},
+				     {id:"takeGoldWeight",sort:"int",header:"盘点金重"},
+				     {id:"takeJewelWeight",sort:"int",header:"盘点石重"},
+				     {id:"takeCostPrice",sort:"int",header:"盘点成本"},
+				     {id:"takeLabelPriceSum",sort:"int",header:"盘点总标价"},
+				     {id:"createUserName",sort:"string",header:"盘点人"},
+				     {id:"createTimeShort",sort:"string",header:"建单时间"},
+				     {id:"remarks",sort:"string",header:"备注"},
+				     {id:"billStatus",sort:"int",header:"状态"}
 				     ],
 			footer:false,
 			resizeColumn:true,
     		height:parent.winHeight-300,
 			dragColumn:true,
-			select: "row", 
+			select: "column", 
 			multiselect: true, 
 			blockselect: true,
 			//datafetch:3,暂时不明白，动态分页加载还不会呢

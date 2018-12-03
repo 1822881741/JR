@@ -64,6 +64,7 @@ public class StocktakeSubController
         JSONObject j1= new JSONObject();
         j1.put("id", 1);
         j1.put("barcode", "barcode");
+        j1.put("areaName", "1233333333333333333333333333333333333333333333333333333333333333333333333");
         j1.put("oldBarcode", "oldBarcode");
         ja.add(j1);
         
@@ -71,44 +72,6 @@ public class StocktakeSubController
         j2.put("id", 2);
         j2.put("barcode", "barcode");
         j2.put("oldBarcode", "oldBarcode");
-        ja.add(j2);
-        ja.add(j2);
-        ja.add(j2);
-        ja.add(j2);
-        
-        ja.add(j2);
-        ja.add(j2);
-        ja.add(j2);
-        
-        ja.add(j2);
-        ja.add(j2);
-        ja.add(j2);
-        
-        ja.add(j2);
-        ja.add(j2);
-        ja.add(j2);
-        
-        ja.add(j2);
-        ja.add(j2);
-        ja.add(j2);
-        
-        ja.add(j2);
-        ja.add(j2);
-        ja.add(j2);
-        
-        ja.add(j2);
-        ja.add(j2);
-        ja.add(j2);
-        ja.add(j2);
-        
-        ja.add(j2);
-        ja.add(j2);
-        ja.add(j2);
-        ja.add(j2);
-        
-        ja.add(j2);
-        ja.add(j2);
-        
         return ja;
     }
 }

@@ -58,4 +58,17 @@ public class BillStocktakeServiceImpl extends AbstractBaseService<BillStocktake>
         billStocktakeStockService.deleteByMajorId(id);
         this.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public List<BillStocktake> getCanTakeMajor()
+    {
+        BillStocktakeExample example = new BillStocktakeExample();
+        example.createCriteria().andCompanyNoEqualTo(ShiroUtils.getCompanyNo()).andAreaCodeLike(ShiroUtils.getUserAreaCode()+"%").andBillStatusEqualTo(Constance.BILL_STATUS_NEW)
+        .andAssignTakerIsNull();
+        
+        BillStocktakeExample.Criteria orCriteria = example.createCriteria();
+        example.or().andCompanyNoEqualTo(ShiroUtils.getCompanyNo()).andAreaCodeLike(ShiroUtils.getUserAreaCode()+"%").andBillStatusEqualTo(Constance.BILL_STATUS_NEW).andAssignTakerNameLike("%"+ShiroUtils.getUserId().toString()+"%");
+        
+        return (List) this.selectByExample(example);
+    }
 }

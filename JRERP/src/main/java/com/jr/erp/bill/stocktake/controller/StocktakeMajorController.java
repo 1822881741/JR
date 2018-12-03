@@ -134,4 +134,23 @@ public class StocktakeMajorController
         billStocktakeService.deleteStocktakeMajor(id);
         return Ret.ok("保存成功");
     }
+    
+    
+    /**    
+     * getCanTakeMajor(这里用一句话描述这个方法的作用)    
+     * 获取可盘点主单列表       
+     * @param @param request
+     * @param @param model
+     * @param @return     
+     * @return String
+     * @Exception 异常对象
+    */
+    @RequestMapping(value = "/viewCanTakeMajor.do")
+    public String viewCanTakeMajor(HttpServletRequest request, Model model)
+    {
+        List<BillStocktake> canTakeMajorList = billStocktakeService.getCanTakeMajor();
+        
+        model.addAttribute("takeMajorList", canTakeMajorList);
+        return "bill/stocktake/viewCanTakeMajor";
+    }
 }

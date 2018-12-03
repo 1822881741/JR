@@ -36,6 +36,15 @@ public interface IBillStocktakeService extends IBaseService<BaseEntity>
     */
     void deleteStocktakeMajor(Integer id);
 
+    /**    
+     * getCanTakeMajor(这里用一句话描述这个方法的作用)    
+     * 获取可盘点主单列表       
+     * @param @return     
+     * @return List<BillStocktake>
+     * @Exception 异常对象
+    */
+    List<BillStocktake> getCanTakeMajor();
+
 
     
 }
